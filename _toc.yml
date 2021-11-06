@@ -2,7 +2,9 @@
 # Learn more at https://jupyterbook.org/customize/toc.html
 
 format: jb-book
-root: 00_00_intro.ipynb
+root: index.ipynb
+options:
+  numbered: true
 chapters:
 - file: ch01/01_00_Python.ipynb
 - file: ch02/02_00_SQL.ipynb
