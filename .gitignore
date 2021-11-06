@@ -130,4 +130,4 @@ dmypy.json
 
 
 # my
-data_analysis/_build/
+_build/

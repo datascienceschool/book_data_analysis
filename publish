@@ -1,2 +1,2 @@
-jupyter-book build data_analysis
-ghp-import -n -p -f data_analysis/_build/html
+jupyter-book build .
+ghp-import -n -p -f _build/html
