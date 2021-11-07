@@ -319,15 +319,35 @@ commentsRunWhenDOMLoaded(addUtterances);
 </ol>
 <div class="section" id="id3">
 <h3><span class="section-number">1.1.1.1. </span>파이썬 언어 환경<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
-<p>소규모의 데이터 분석을 하거나 머신러닝을 하기위한 가장 좋은 언어 도구가 파이썬이다. 또한 이후에 설명할 데이터 파이프라인 도구나 BI 시각화 도구도 파이썬으로 구현된 것들이 많으므로 파이썬의 설치는 필수적이다.</p>
+<p>소규모의 데이터 분석을 하거나 머신러닝을 하기위한 가장 좋은 언어 도구가 파이썬(Python)이다. 또한 이후에 설명할 데이터 파이프라인 도구나 BI 시각화 도구 등도 파이썬으로 구현된 것들이 많으므로 파이썬의 설치는 필수적이다.
+데이터 분석을 하는데는 파이썬 언어를 그대로 이용하지 않고 각각의 목적에 알맞은 여러가지 패키지를 사용하게 된다. 이 책에서 주로 사용할 데이터 분석 패키지들은 다음과 같다.</p>
+<ul class="simple">
+<li><p>주피터랩(Jupyter-Lab): 웹 기반의 파이썬 개발 환경 패키지</p></li>
+<li><p>판다스(Pandas) : 파이썬 기반의 데이터 분석 패키지</p></li>
+<li><p>에스큐엘알케미(SqlAlchemy) : 파이썬에서 데이터베이스를 사용하기 위한 ORM 패키지</p></li>
+<li><p>댁스터(Dagster) : 파이썬 기반의 데이터 파이프라인 패키지</p></li>
+<li><p>수퍼셋(Superset) : 파이썬 기반의 BI 시각화 도구 패키지</p></li>
+</ul>
 </div>
 <div class="section" id="id4">
 <h3><span class="section-number">1.1.1.2. </span>관계형 데이터베이스<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
-<p>컴퓨터 한 대의 메모리 크기를 넘는 크기의 데이터는 파이썬으로 다루기 어렵다. 이 경우에는 파일 기반의 관계형 데이터베이스(Relational Database Management System; RDBMS)가 필요하다.</p>
+<p>컴퓨터 한 대의 메모리 크기를 넘는 크기의 데이터는 파이썬으로 다루기 어렵다. 이 경우에는 파일 기반의 데이터베이스(Database Management System; DBMS)가 필요하다. 데이터베이스는 수 기가바이트에서 테라바이트 정도에 이루는 중규모의 데이터 분석을 하기위한 전용의 시스템이다. 데이터베이스 중 가장 기본이 되는 것은 관계형 데이터베이스(Relational DBMS; RDBMS)로 다음과 같은 다양한 관계형 데이터베이스 시스템이 존재한다.</p>
+<ul class="simple">
+<li><p>오라클(Oracle)</p></li>
+<li><p>마이에스큐엘(MySQL), 마리아(Maria)</p></li>
+<li><p>포스트그레스(Postgresql)</p></li>
+</ul>
+<p>이 중 이 책에서는 무료 오픈 소스 데이터베이스 중 가장 역사가 깊고 많이 사용되는 포스트그레스 데이터베이스를 사용하는 법을 설명한다. 한 종류의 데이터베이스 시스템 사용법을 제대로 익히면 다른 데이터베이스 시스템도 어렵지 않게 사용할 수 있다.</p>
 </div>
 <div class="section" id="id5">
 <h3><span class="section-number">1.1.1.3. </span>데이터 파이프라인 도구<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
-<p>데이터 분석이 1회성으로 끝나는 경우가 아니라 일정간격으로 혹은 연속적으로 데이터 분석을 실시해야 하는 경우라면 여러가지 데이터 처리 작업을 일정과 순서에 맞게 실시할 수 있도록 도와주는 데이터 파이프라인 도구가 필요하다.</p>
+<p>데이터 분석이 1회성으로 끝나는 경우가 아니라 일정간격(예: 매일)으로 혹은 연속적으로 데이터 분석을 실시해야 하는 경우라면 여러가지 데이터 처리 작업을 일정과 순서에 맞게 실시할 수 있도록 도와주는 데이터 파이프라인(data pipeline) 도구가 필요하다. 다양한 파이썬 기반의 데이터 파이프라인 도구들이 있다. 일부만 예를 들면 다음과 같다.</p>
+<ul class="simple">
+<li><p>에어플로우(Airflow)</p></li>
+<li><p>댁스터(Dagster)</p></li>
+<li><p>루이지(Luigi)</p></li>
+</ul>
+<p>이 책에서는 가장 최근에 나왔지만 개발이 활발하고 범용성 및 다른 도구와의 결합이 용이한 댁스터라는 파이썬 기반의 데이터 파이프라인 도구에 대해 설명한다.</p>
 </div>
 <div class="section" id="bi">
 <h3><span class="section-number">1.1.1.4. </span>BI 시각화 도구<a class="headerlink" href="#bi" title="Permalink to this headline">¶</a></h3>
@@ -341,9 +361,16 @@ commentsRunWhenDOMLoaded(addUtterances);
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.anaconda.com/">https://www.anaconda.com/</a></p></li>
 </ul>
-<p>다음 그림에서 보듯이 페이지의 상단 메뉴에서 “Products &gt; Individual Edition”을 클릭하면 다양한 운영환경에 대한 아나콘다 설치 프로그램 목록이 나온다. 이 중 자신이 사용하는 운영환경을 선택하여 아나콘다 설치 프로그램을 다운받고 설치하면 된다.</p>
-<p><img alt="아나콘다 홈페이지" src="../_images/fig_01_01_001.png" /></p>
-<p><img alt="아나콘다 다운로드" src="../_images/fig_01_01_002.png" /></p>
+<p>페이지의 상단 메뉴에서 “Products &gt; Individual Edition”을 클릭하면 다양한 운영환경에 대한 아나콘다 설치 프로그램 목록이 나온다. 이 중 자신이 사용하는 운영환경을 선택하여 아나콘다 설치 프로그램을 다운받고 설치하면 된다.</p>
+<p>파이썬을 설치한 후에는 파이썬 개발 환경을 설치해야 한다. 가장 많이 사용되는 파이썬 개발환경은 주피터 랩(Jupyter-Lab)과 파이참(PyCharm)이다.</p>
+<p>주피터 랩은 노트북과 같은 형식으로 파이썬 코드의 작성 및 실행과 문서화를 동시에 할 수 있어서 간단한 데이터 분석에 많이 사용된다. 만일 아나콘다를 설치했다면 이미 주피터 랩이 설치되어 있다. 만약 주피터 랩이 설치되어 있지 않는 환경이라면 커맨드라인 윈도우에서 pip 명령으로 주피터 랩을 설치할 수 있다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install jupyterlab
+</pre></div>
+</div>
+<p>파이참은 파이썬 패키지를 개발하거나 복수의 파이썬 코드 파일을 다루어야 할 때 유용하다. 다음 홈페이지에서 무료 커뮤니티 버전을 다운로드 받아 사용할 수 있다.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.jetbrains.com/ko-kr/pycharm/">https://www.jetbrains.com/ko-kr/pycharm/</a></p></li>
+</ul>
 </div>
 <div class="section" id="id7">
 <h2><span class="section-number">1.1.3. </span>관계형 데이터베이스의 설치<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h2>
