@@ -6,5 +6,8 @@ root: index.ipynb
 options:
   numbered: true
 chapters:
-- file: ch01/01_00_Python.ipynb
-- file: ch02/02_00_SQL.ipynb
+- file: ch01/01_00.ipynb
+  sections:
+  - file: ch01/01_01.ipynb
+  - file: ch01/01_02.ipynb
+- file: ch02/02_00.ipynb
