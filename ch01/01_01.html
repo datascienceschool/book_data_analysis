@@ -306,14 +306,26 @@ commentsRunWhenDOMLoaded(addUtterances);
   <a class="reference internal nav-link" href="#id11">
    1.1.4. 관계형 데이터베이스 시스템의 설치
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     1.1.4.1. 포스트그레스 설치 및 사용
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     1.1.4.2. 디비버 설치
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id12">
+  <a class="reference internal nav-link" href="#id14">
    1.1.5. 데이터 파이프라인 도구의 설치
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id13">
+  <a class="reference internal nav-link" href="#id15">
    1.1.6. BI 시각화 도구의 설치
   </a>
  </li>
@@ -391,7 +403,9 @@ commentsRunWhenDOMLoaded(addUtterances);
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.anaconda.com/">https://www.anaconda.com/</a></p></li>
 </ul>
+<p><img alt="아나콘다1" src="../_images/fig_anaconda_01.png" /></p>
 <p>페이지의 상단 메뉴에서 “Products &gt; Individual Edition”을 클릭하면 다양한 운영환경에 대한 아나콘다 설치 프로그램 목록이 나온다. 이 중 자신이 사용하는 운영환경 및 파이썬 버전을 선택하여 아나콘다 설치 프로그램을 다운받고 설치하면 된다. 이 책에서는 64비트 아나콘다 파이썬 3.8 버전을 기준으로 설명한다.</p>
+<p><img alt="아나콘다2" src="../_images/fig_anaconda_02.png" /></p>
 <p>파이썬을 설치한 후에는 파이썬 개발 환경을 설치해야 한다. 가장 많이 사용되는 파이썬 개발환경은 주피터랩(Jupyter-Lab)과 파이참(PyCharm)이다.</p>
 <div class="section" id="id8">
 <h3><span class="section-number">1.1.2.1. </span>주피터 랩의 설치와 실행<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
@@ -403,11 +417,26 @@ commentsRunWhenDOMLoaded(addUtterances);
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">lab</span>
 </pre></div>
 </div>
-<p>정상적으로 실행되었다면 주피터랩 서버 프로그램이 실행되면서 웹 브라우저에 다음 주소를 가진 웹페이지가 나타날 것이다.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8888</span><span class="o">/</span>
+<p>정상적으로 실행되었다면 다음처럼 주피터랩 서버 프로그램이 실행된다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...(생략)
+Jupyter Server 1.4.1 is running at:                                                                                                                             
+http://localhost:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                                
+or http://127.0.0.1:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                            
+Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+    To access the server, open this file in a browser:                                                                                                                       
+        file:///Users/joelkim/Library/Jupyter/runtime/jpserver-61565-open.html                                                                                               
+    Or copy and paste one of these URLs:                                                                                                                                     
+        http://localhost:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                                     
+     or http://127.0.0.1:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                                     
 </pre></div>
 </div>
+<p>이 때 웹 브라우저에 다음 주소를 가진 웹페이지가 나타날 것이다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8888</span><span class="o">/</span><span class="n">lab</span>
+</pre></div>
+</div>
+<p><img alt="주피터랩1" src="../_images/fig_jupyterlab_01.png" /></p>
 <p>이 웹페이지의 상단 메뉴에서 “File &gt; New &gt; Notebook”을 실행하면 새로운 노트북이 나타나면서 코드를 실행하거나 문서를 작성할 수 있다.</p>
+<p><img alt="주피터랩2" src="../_images/fig_jupyterlab_02.png" /></p>
 <p>주피터랩의 보다 자세한 설치 및 사용법에 대해서는 다음 웹페이지를 참조한다.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://jupyterlab.readthedocs.io/en/latest/">https://jupyterlab.readthedocs.io/en/latest/</a></p></li>
@@ -415,8 +444,15 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 <div class="section" id="id9">
 <h3><span class="section-number">1.1.2.2. </span>파이참 통합개발환경<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
-<p>파이참 통합개발환경은 파이썬 패키지를 개발하거나 복수의 파이썬 코드 파일을 다루어야 할 때 유용하다. 다음 홈페이지에서 무료 커뮤니티 버전을 다운로드 받아 사용할 수 있다.</p>
+<p>파이참 통합개발환경은 파이썬 패키지를 개발하거나 복수의 파이썬 코드 파일을 다루어야 할 때 유용하다. 다음 홈페이지에서 무료 커뮤니티(community) 버전을 다운로드 받아 사용할 수 있다.</p>
 <p><a class="reference external" href="https://www.jetbrains.com/ko-kr/pycharm/">https://www.jetbrains.com/ko-kr/pycharm/</a></p>
+<p><img alt="파이참1" src="../_images/fig_pycharm_01.png" /></p>
+<p>다음은 파이참 실행화면의 예다.</p>
+<p><img alt="파이참2" src="../_images/fig_pycharm_02.png" /></p>
+<p>파이참의 자세한 설치 및 사용법에 대해서는 다음 웹 사이트를 참조한다.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.jetbrains.com/help/pycharm/2021.3/installation-guide.html">https://www.jetbrains.com/help/pycharm/2021.3/installation-guide.html</a></p></li>
+</ul>
 </div>
 </div>
 <div class="section" id="id10">
@@ -425,12 +461,14 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 <div class="section" id="id11">
 <h2><span class="section-number">1.1.4. </span>관계형 데이터베이스 시스템의 설치<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id12">
+<h3><span class="section-number">1.1.4.1. </span>포스트그레스 설치 및 사용<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h3>
 <p>이 책에서는 관계형 데이터베이스 시스템으로 무료 오픈소스인 포스트그레스를 사용한다. 설치를 위해서 다음 웹사이트를 방문한다.</p>
 <ul class="simple">
 <li><p><a class="reference external" href="https://www.postgresql.org/download/">https://www.postgresql.org/download/</a></p></li>
 </ul>
 <p>해당 웹사이트로 가면 운영체제별로 자세한 설치 방법이 나온다. 윈도우즈나 맥의 경우는 인스톨러를 지원하므로 해당 인스톨러를 다운로드 받아서 실행하기만 하면 된다.</p>
-<p>포스트그레스가 정상적으로 설치되었다면 커맨드라인 윈도우에서 다음과 같이 실행하여 포스트그레스 클라이언트를 사용할 수 있다.</p>
+<p>포스트그레스가 정상적으로 설치되었다면 커맨드라인 윈도우에서 다음과 같이 실행하여 <code class="docutils literal notranslate"><span class="pre">psql</span></code> 포스트그레스 콘솔 클라이언트를 사용할 수 있다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">psql</span> <span class="o">-</span><span class="n">U</span> <span class="n">postgres</span>
 </pre></div>
 </div>
@@ -443,11 +481,20 @@ commentsRunWhenDOMLoaded(addUtterances);
 </div>
 <p>이 화면에서 데이터베이스 시스템의 제어 및 SQL문의 사용이 가능하다. <code class="docutils literal notranslate"><span class="pre">\q</span></code> 명령으로 나갈 수 있다.</p>
 </div>
-<div class="section" id="id12">
-<h2><span class="section-number">1.1.5. </span>데이터 파이프라인 도구의 설치<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h2>
-</div>
 <div class="section" id="id13">
-<h2><span class="section-number">1.1.6. </span>BI 시각화 도구의 설치<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h2>
+<h3><span class="section-number">1.1.4.2. </span>디비버 설치<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h3>
+<p><code class="docutils literal notranslate"><span class="pre">psql</span></code> 콘솔 클라이언트로도 데이터베이스를 다루는 것이 가능하지만 디비버(DBeaver)와 같은 통합 데이터베이스 클라이언트를 사용하면 좀 더 편리하게 데이터베이스를 다룰 수 있다.
+디비버를 설치하려면 다음 웹사이트를 방문하여 원하는 운영체제의 인스톨러를 다운로드 받아서 실행한다.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://dbeaver.io/download/">https://dbeaver.io/download/</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id14">
+<h2><span class="section-number">1.1.5. </span>데이터 파이프라인 도구의 설치<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h2>
+</div>
+<div class="section" id="id15">
+<h2><span class="section-number">1.1.6. </span>BI 시각화 도구의 설치<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h2>
 </div>
 </div>
 
