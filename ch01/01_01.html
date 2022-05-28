@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1.1. 데이터 분석을 위한 도구의 소개 &#8212; 데이터 사이언스 스쿨&lt;/h1&gt;&lt;h1 class=&#34;site-logo&#34;&gt;데이터 분석 편</title>
+    <title>1.1. 데이터 분석을 위한 도구의 소개 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -77,16 +77,15 @@ commentsRunWhenDOMLoaded(addUtterances);
 </script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.2. 샘플 데이터" href="01_02.html" />
+    <link rel="next" title="2. 데이터의 신뢰성을 알아보는 검정" href="../ch02/02_00.html" />
     <link rel="prev" title="1. 데이터 분석의 소개" href="01_00.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -108,7 +107,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <h1 class="site-logo" id="site-title">데이터 사이언스 스쿨</h1><h1 class="site-logo">데이터 분석 편</h1>
+      <h1 class="site-logo" id="site-title">데이터 사이언스 스쿨 - 데이터 분석 편</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -139,45 +138,30 @@ commentsRunWhenDOMLoaded(addUtterances);
      1.1. 데이터 분석을 위한 도구의 소개
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="01_02.html">
-     1.2. 샘플 데이터
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch02/02_00.html">
-   2. 파이썬을 사용한 소규모 데이터 분석
+   2. 데이터의 신뢰성을 알아보는 검정
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch02/02_01.html">
-     2.1. 파이썬 개발 환경의 설치
-    </a>
-   </li>
+  <ul class="simple">
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch03/03_00.html">
-   3. 관계형 데이터베이스를 사용한 중규모 데이터 분석
+   3. 데이터간의 상관관계를 알아보는 회귀분석
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
-   <li class="toctree-l2">
-    <a class="reference internal" href="../ch03/03_01.html">
-     3.1. 관계형 데이터베이스의 설치
-    </a>
-   </li>
+  <ul class="simple">
   </ul>
  </li>
 </ul>
@@ -331,9 +315,11 @@ commentsRunWhenDOMLoaded(addUtterances);
 <h2><span class="section-number">1.1.2. </span>데이터 분석용 파이썬 패키지<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <p>데이터 분석을 하는데는 파이썬 언어를 그대로 이용하지 않고 각각의 목적에 알맞은 여러가지 패키지를 사용하게 된다. 이 책에서 주로 사용할 데이터 분석 패키지들은 다음과 같다.</p>
 <ul class="simple">
+<li><p>넘파이(NumPy) : 행렬연산을 위한 패키지</p></li>
+<li><p>사이파이(SciPy) : 과학기술용 연산 패키지</p></li>
 <li><p>판다스(Pandas) : 파이썬 기반의 데이터 분석 패키지</p></li>
+<li><p>스탯츠모델즈(Statsmodels) : 통계, 회귀분석, 시계열 분석 패키지</p></li>
 <li><p>사이킷런(Scikit-Learn): 머신러닝 데이터 분석 패키지</p></li>
-<li><p>프로핏(Prophet): 시계열 예측 분석 패키지</p></li>
 </ul>
 </div>
 <div class="section" id="id4">
@@ -408,10 +394,10 @@ commentsRunWhenDOMLoaded(addUtterances);
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="01_02.html" title="next page">
+        <a class="right-next" href="../ch02/02_00.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">1.2. </span>샘플 데이터</p>
+                <p class="prevnext-title"><span class="section-number">2. </span>데이터의 신뢰성을 알아보는 검정</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>

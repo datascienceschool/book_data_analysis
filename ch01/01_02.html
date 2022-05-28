@@ -5,7 +5,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>1.2. 샘플 데이터 &#8212; 데이터 사이언스 스쿨&lt;/h1&gt;&lt;h1 class=&#34;site-logo&#34;&gt;데이터 분석 편</title>
+    <title>파이썬 개발 환경의 설치 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <link href="../_static/css/theme.css" rel="stylesheet" />
   <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
@@ -77,17 +77,14 @@ commentsRunWhenDOMLoaded(addUtterances);
 </script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
     <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
-    <script async="async" src="https://unpkg.com/thebe@0.5.1/lib/index.js"></script>
-    <script>
-        const thebe_selector = ".thebe"
-        const thebe_selector_input = "pre"
-        const thebe_selector_output = ".output"
-    </script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2. 파이썬을 사용한 소규모 데이터 분석" href="../ch02/02_00.html" />
-    <link rel="prev" title="1.1. 데이터 분석을 위한 도구의 소개와 설치" href="01_01.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
     
@@ -108,7 +105,7 @@ commentsRunWhenDOMLoaded(addUtterances);
       
       
       
-      <h1 class="site-logo" id="site-title">데이터 사이언스 스쿨</h1><h1 class="site-logo">데이터 분석 편</h1>
+      <h1 class="site-logo" id="site-title">데이터 사이언스 스쿨 - 데이터 분석 편</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -123,33 +120,47 @@ commentsRunWhenDOMLoaded(addUtterances);
   </a>
  </li>
 </ul>
-<ul class="current nav bd-sidenav">
- <li class="toctree-l1 current active has-children">
+<ul class="nav bd-sidenav">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="01_00.html">
    1. 데이터 분석의 소개
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
   <label for="toctree-checkbox-1">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul class="current">
+  <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="01_01.html">
-     1.1. 데이터 분석을 위한 도구의 소개와 설치
-    </a>
-   </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
-     1.2. 샘플 데이터
+     1.1. 데이터 분석을 위한 도구의 소개
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch02/02_00.html">
-   2. 파이썬을 사용한 소규모 데이터 분석
+   2. 데이터의 신뢰성을 알아보는 검정
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
+ </li>
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../ch03/03_00.html">
+   3. 데이터간의 상관관계를 알아보는 회귀분석
+  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="simple">
+  </ul>
  </li>
 </ul>
 
@@ -243,6 +254,34 @@ commentsRunWhenDOMLoaded(addUtterances);
         <!-- Table of contents -->
         <div class="d-none d-md-block col-md-2 bd-toc show">
             
+            <div class="tocsection onthispage pt-5 pb-3">
+                <i class="fas fa-list"></i> 내용
+            </div>
+            <nav id="bd-toc-nav" aria-label="Page">
+                <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   아나콘다 설치
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   주피터 랩
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   파이참 통합개발환경
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   파이썬 패키지의 확인 및 설치
+  </a>
+ </li>
+</ul>
+
+            </nav>
         </div>
     </div>
 </div>
@@ -252,7 +291,99 @@ commentsRunWhenDOMLoaded(addUtterances);
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1><span class="section-number">1.2. </span>샘플 데이터<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1>파이썬 개발 환경의 설치<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id2">
+<h2>아나콘다 설치<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>파이썬 개발 환경은 다양한 방법으로 설치할 수 있지만 이 책에서는 가장 손쉬운 방법인 아나콘다(Anaconda) 패키지를 사용하는 방법을 추천한다. 아나콘다를 설치하기 위해서는 우선 다음 웹사이트에 접속한다.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.anaconda.com/">https://www.anaconda.com/</a></p></li>
+</ul>
+<p><img alt="아나콘다1" src="../_images/fig_anaconda_01.png" /></p>
+<p>페이지의 상단 메뉴에서 “Products &gt; Individual Edition”을 클릭하면 다양한 운영환경에 대한 아나콘다 설치 프로그램 목록이 나온다. 이 중 자신이 사용하는 운영환경 및 파이썬 버전을 선택하여 아나콘다 설치 프로그램을 다운받고 설치하면 된다. 이 책에서는 64비트 아나콘다 파이썬 3.8 버전을 기준으로 설명한다.</p>
+<p><img alt="아나콘다2" src="../_images/fig_anaconda_02.png" /></p>
+<p>파이썬을 설치한 후에는 파이썬 개발 환경을 설치해야 한다. 가장 많이 사용되는 파이썬 개발환경은 주피터랩(Jupyter-Lab)과 파이참(PyCharm)이다.</p>
+</div>
+<div class="section" id="id3">
+<h2>주피터 랩<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>주피터랩은 노트북과 같은 형식으로 파이썬 코드의 작성 및 실행과 문서화를 동시에 할 수 있어서 간단한 데이터 분석에 많이 사용된다. 만일 아나콘다를 설치했다면 이미 주피터 랩이 설치되어 있다. 만약 주피터 랩이 설치되어 있지 않는 환경이라면 커맨드라인 윈도우에서 pip 명령으로 주피터 랩을 설치할 수 있다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyterlab</span>
+</pre></div>
+</div>
+<p>설치가 완료되었으면 커맨드라인 윈도우에서 다음 명령어로 주피터랩을 실행시킨다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">lab</span>
+</pre></div>
+</div>
+<p>정상적으로 실행되었다면 다음처럼 주피터랩 서버 프로그램이 실행된다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...(생략)
+Jupyter Server 1.4.1 is running at:                                                                                                                             
+http://localhost:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                                
+or http://127.0.0.1:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                            
+Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+    To access the server, open this file in a browser:                                                                                                                       
+        file:///Users/joelkim/Library/Jupyter/runtime/jpserver-61565-open.html                                                                                               
+    Or copy and paste one of these URLs:                                                                                                                                     
+        http://localhost:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                                     
+     or http://127.0.0.1:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                                     
+</pre></div>
+</div>
+<p>이 때 웹 브라우저에 다음 주소를 가진 웹페이지가 나타날 것이다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8888</span><span class="o">/</span><span class="n">lab</span>
+</pre></div>
+</div>
+<p><img alt="주피터랩1" src="../_images/fig_jupyterlab_01.png" /></p>
+<p>이 웹페이지의 상단 메뉴에서 “File &gt; New &gt; Notebook”을 실행하면 새로운 노트북이 나타나면서 코드를 실행하거나 문서를 작성할 수 있다.</p>
+<p><img alt="주피터랩2" src="../_images/fig_jupyterlab_02.png" /></p>
+<p>주피터랩의 보다 자세한 설치 및 사용법에 대해서는 다음 웹페이지를 참조한다.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyterlab.readthedocs.io/en/latest/">https://jupyterlab.readthedocs.io/en/latest/</a></p></li>
+</ul>
+</div>
+<div class="section" id="id4">
+<h2>파이참 통합개발환경<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>파이참 통합개발환경은 파이썬 패키지를 개발하거나 복수의 파이썬 코드 파일을 다루어야 할 때 유용하다. 다음 홈페이지에서 무료 커뮤니티(community) 버전을 다운로드 받아 사용할 수 있다.</p>
+<p><a class="reference external" href="https://www.jetbrains.com/ko-kr/pycharm/">https://www.jetbrains.com/ko-kr/pycharm/</a></p>
+<p><img alt="파이참1" src="../_images/fig_pycharm_01.png" /></p>
+<p>다음은 파이참 실행화면의 예다.</p>
+<p><img alt="파이참2" src="../_images/fig_pycharm_02.png" /></p>
+<p>파이참의 자세한 설치 및 사용법에 대해서는 다음 웹 사이트를 참조한다.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.jetbrains.com/help/pycharm/2021.3/installation-guide.html">https://www.jetbrains.com/help/pycharm/2021.3/installation-guide.html</a></p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h2>파이썬 패키지의 확인 및 설치<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<p>위에서 설명한 대로 아나콘다 시스템을 설치했다면 이 책에서 소개하는 대부분의 데이터 분석용 파이썬 패키지가 설치되어 있을 것이다. 다음과 같이 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">list</span></code> 명령으로 설치된 파이썬 패키지를 확인할 수 있다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip list
+
+Package                            Version
+---------------------------------- -------------------------
+alabaster                          0.7.12
+anaconda-client                    1.7.2
+anaconda-navigator                 2.1.2
+anaconda-project                   0.9.1
+anyio                              3.6.1
+appdirs                            1.4.4
+applaunchservices                  0.2.1
+appnope                            0.1.2
+appscript                          1.1.2
+argh                               0.26.2
+argon2-cffi                        20.1.0
+asn1crypto                         1.4.0
+(이하 생략$ )
+</pre></div>
+</div>
+<p>만약 원하는 패키지가 설치되어 있지 않거나 최신 버전으로 업그레이드하고 싶은 경우에는 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span></code> 명령을 사용한다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U numpy scipy pandas statsmodels scikit-learn
+
+
+Requirement already satisfied: numpy in /Users/joelkim/opt/anaconda3/lib/python3.8/site-packages (1.20.1)
+Collecting numpy
+  Downloading numpy-1.22.4-cp38-cp38-macosx_10_15_x86_64.whl (17.6 MB)
+     |████████████████████████████████| 17.6 MB 4.9 MB/s 
+(이하생략)
+</pre></div>
+</div>
+</div>
 </div>
 
     <script type="text/x-thebe-config">
@@ -284,24 +415,6 @@ commentsRunWhenDOMLoaded(addUtterances);
 
 <div class='prev-next-bottom'>
     
-    <div id="prev">
-        <a class="left-prev" href="01_01.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">1.1. </span>데이터 분석을 위한 도구의 소개와 설치</p>
-            </div>
-        </a>
-    </div>
-     <div id="next">
-        <a class="right-next" href="../ch02/02_00.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">2. </span>파이썬을 사용한 소규모 데이터 분석</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
 
 </div>
         
