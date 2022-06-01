@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>1.2. 데이터 분석을 위한 도구의 소개 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,10 +19,6 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -31,7 +28,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -88,10 +86,13 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="2. 데이터의 신뢰성을 분석한다" href="../ch02/02_00.html" />
     <link rel="prev" title="1.1. 이 책에서 다루는 데이터 분석이란?" href="01_01.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -157,7 +158,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch02/02_01.html">
-     2.1. 데이터의 신뢰도는 확률로 표시한다.
+     2.1. 확률적 데이터
     </a>
    </li>
   </ul>
@@ -303,7 +304,7 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1><span class="section-number">1.2. </span>데이터 분석을 위한 도구의 소개<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">1.2. </span>데이터 분석을 위한 도구의 소개<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>데이터 분석을 하자면 일단 데이터 분석을 하기 위한 도구를 갖추어야 한다. 이 책에서는 다음과 같은 도구를 사용한다.</p>
 <ol class="simple">
 <li><p>파이썬 프로그래밍 언어</p></li>
@@ -311,7 +312,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>데이터 분석용 파이썬 패키지</p></li>
 </ol>
 <div class="section" id="id2">
-<h2><span class="section-number">1.2.1. </span>파이썬 언어<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2.1. </span>파이썬 언어<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>소규모의 데이터 분석을 하기위한 가장 좋은 프로그래밍 언어 중 하나가 파이썬(Python)이다. 물론 R, SAS, Julia 등 여러가지 데이터 분석용 언어들이 있으나 이 책에서는 파이썬을 기반으로 데이터 분석 방법과 도구들을 설명한다.</p>
 <p>파이썬 언어를 설치하는 방법으로는 가장 손쉬운 방법인 아나콘다(Anaconda) 배포판을 사용하는 방법을 추천한다. 아나콘다 배포판을 설치하기 위해서는 우선 다음 웹사이트에 접속한다.</p>
 <ul class="simple">
@@ -322,10 +323,10 @@ const thebe_selector_output = ".output, .cell_output"
 <p><img alt="아나콘다2" src="../_images/fig_anaconda_02.png" /></p>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">1.2.2. </span>파이썬 개발 환경<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2.2. </span>파이썬 개발 환경<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 <p>파이썬을 설치한 후에는 파이썬 개발 환경을 설치해야 한다. 가장 많이 사용되는 파이썬 개발환경은 주피터랩(Jupyter-Lab)과 파이참(PyCharm)이다.</p>
 <div class="section" id="id4">
-<h3><span class="section-number">1.2.2.1. </span>주피터랩<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.2.1. </span>주피터랩<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>주피터랩은 노트북과 같은 형식으로 파이썬 코드의 작성 및 실행과 문서화를 동시에 할 수 있어서 간단한 데이터 분석에 많이 사용된다. 이 책의 모든 코드는 주피터랩으로 실행하는 것을 가정하여 만들었다. (이 책 자체도 주피터랩을 사용하여 제작되었다)</p>
 <p>만일 아나콘다를 설치했다면 이미 주피터 랩이 설치되어 있다. 만약 주피터 랩이 설치되어 있지 않는 환경이라면 커맨드라인 윈도우에서 pip 명령으로 주피터 랩을 설치할 수 있다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyterlab</span>
@@ -361,7 +362,7 @@ Use Control-C to stop this server and shut down all kernels (twice to skip confi
 </ul>
 </div>
 <div class="section" id="id5">
-<h3><span class="section-number">1.2.2.2. </span>파이참 통합개발환경<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.2.2.2. </span>파이참 통합개발환경<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <p>파이참 통합개발환경(IDE: Integreated Development Environment)은 파이썬 패키지를 개발하거나 복수의 파이썬 코드 파일을 다루어야 할 때 유용하다. 다음 홈페이지에서 무료 커뮤니티(community) 버전을 다운로드 받아 사용할 수 있다.</p>
 <p><a class="reference external" href="https://www.jetbrains.com/ko-kr/pycharm/">https://www.jetbrains.com/ko-kr/pycharm/</a></p>
 <p><img alt="파이참1" src="../_images/fig_pycharm_01.png" /></p>
@@ -374,7 +375,7 @@ Use Control-C to stop this server and shut down all kernels (twice to skip confi
 </div>
 </div>
 <div class="section" id="id6">
-<h2><span class="section-number">1.2.3. </span>데이터 분석용 파이썬 패키지<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2.3. </span>데이터 분석용 파이썬 패키지<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
 <p>데이터 분석을 하는데는 파이썬 언어를 그대로 이용하지 않고 각각의 목적에 알맞은 여러가지 패키지를 사용하게 된다. 이 책에서 주로 사용할 데이터 분석 패키지들은 다음과 같다.</p>
 <ul class="simple">
 <li><p>넘파이(NumPy) : 행렬연산을 위한 패키지</p></li>
@@ -486,8 +487,8 @@ Collecting numpy
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  
   </body>
 </html>

@@ -7,8 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>1.1. 이 책에서 다루는 데이터 분석이란? &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
-  <link href="../_static/css/theme.css" rel="stylesheet" />
-  <link href="../_static/css/index.c5995385ac14fb8791e8eb36b4908be2.css" rel="stylesheet" />
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
@@ -18,10 +19,6 @@
   <link rel="preload" as="font" type="font/woff2" crossorigin
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    
-      
-
-    
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
@@ -31,7 +28,8 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.1c5a1a01449ed65a7b51.js">
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
     <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -88,10 +86,13 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="next" title="1.2. 데이터 분석을 위한 도구의 소개" href="01_02.html" />
     <link rel="prev" title="1. 데이터 분석의 소개" href="01_00.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="docsearch:language" content="en" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
     
   </head>
-  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
     
     <div class="container-fluid" id="banner"></div>
 
@@ -157,7 +158,7 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch02/02_01.html">
-     2.1. 데이터의 신뢰도는 확률로 표시한다.
+     2.1. 확률적 데이터
     </a>
    </li>
   </ul>
@@ -308,13 +309,13 @@ const thebe_selector_output = ".output, .cell_output"
               <div>
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="id1">
-<h1><span class="section-number">1.1. </span>이 책에서 다루는 데이터 분석이란?<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">1.1. </span>이 책에서 다루는 데이터 분석이란?<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>본 절에서는 이 책에서 소개할 다양한 데이터 분석의 종류와 구체적으로 어떤 일을 하는지를 소개한다.</p>
 <div class="section" id="id2">
-<h2><span class="section-number">1.1.1. </span>데이터는 어떤 형태로 존재하는가<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1.1. </span>데이터는 어떤 형태로 존재하는가<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>모든 종류의 데이터를 데이터 분석에 사용할 수 있는 것은 아니다. 데이터 분석 방법론은 특정한 형식을 가진 데이터를 가정하고 만들어진 것이므로 해당 형식을 가진 데이터만 분석에 쓰일 수 있다. 이 책에서 소개할 데이터 분석에 사용될 수 있는 데이터는 일반적으로 정형 데이터에 한정된다.</p>
 <div class="section" id="id3">
-<h3><span class="section-number">1.1.1.1. </span>정형 데이터 - 표로 표현가능한 데이터<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.1.1.1. </span>정형 데이터 - 표로 표현가능한 데이터<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>정형 데이터는 완전히 같은 형식을 가진 데이터 묶음이 여러개 존재하는 경우를 말한다. 하나하나의 데이터 묶음을 <b>레코드(record)</b>라고 하고 하나의 레코드 안에 포함된 특정 데이터를 <b>필드(field)</b>라고 한다. 기본적으로 모든 레코드는 같은 필드를 가지고 있어야 한다. 이러한 데이터 레코드의 집합을 <b>테이블(table)</b>이라고 한다. 예를 들어 학생들의 성적을 나타내는 다음 데이터가 있다고 하자.</p>
 <ul class="simple">
 <li><p>성춘향은 여자이고 수학성적이 50점, 국어성적은 60점이다. 이몽룡은 남자이고 수학성적은 90점이며 국어성적은 80점이다.</p></li>
@@ -329,13 +330,13 @@ const thebe_selector_output = ".output, .cell_output"
 <p>테이블은 이름 그대로 표 형식으로 나타낼 수 있다.</p>
 </div>
 <div class="section" id="id4">
-<h3><span class="section-number">1.1.1.2. </span>데이터 값의 종류 - 수치형과 범주형<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.1.1.2. </span>데이터 값의 종류 - 수치형과 범주형<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>각 필드 데이터는 그 특성에 따라 수치형, 범주형 등으로 구분할 수 있다. 수학성적, 국어성적과 같이 숫자로 표현할 수 있는 데이터를 <strong>수치형(numerical)</strong> 데이터라 하고 성별과 같이 몇 가지 가능한 값 중 하나를 선택해야만 하는 값을 <strong>범주형(categorical)</strong> 데이터라고 한다. 모든 데이터를 이 두가지 종류로 명확히 나눌 수 있는 것은 아니며 같은 값이라도 경우에 따라 어떤 때는 수치형으로 취급하기도 하고 어떤 경우에는 범주형으로 취급하기도 한다.</p>
 <p>수치형과 범주형 이외에도 다양한 형태의 값이 존재한다. 예를 들어 위 테이블 중 이름 필드는 텍스트형이라고 한다. 텍스트형은 경우에 따라 범주형으로 취급하기도 한다.</p>
 </div>
 </div>
 <div class="section" id="id5">
-<h2><span class="section-number">1.1.2. </span>데이터 분석이란<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.1.2. </span>데이터 분석이란<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <p>데이터 분석이라는 말은 우리가 현재 가지고 있는 정보(데이터)로 부터 우리가 원하는 새로운 정보를 이끌어내는 과정을 말한다. 그런데 우리가 원하는 분석작업은 주어진 수치들의 단순한 합계와 평균을 구하는 아주 단순한 것부터 각 복잡한 데이터간의 연관관계를 구하는 고도의 작업까지 다양하다. 다음은 모두 데이터 분석이라고 부르는 작업의 예들이다. 여기에서 예로 든 데이터 분석 작업이외도 다양한 작업이 있을 수 있다.</p>
 <ul class="simple">
 <li><p>데이터의 조작</p></li>
@@ -344,7 +345,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>데이터의 군집화와 대표 데이터 추출</p></li>
 </ul>
 <div class="section" id="id6">
-<h3><span class="section-number">1.1.2.1. </span>데이터의 조작<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.1.2.1. </span>데이터의 조작<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p><b>데이터의 조작(manipulation)</b>은 여러가지 데이터 분석 중 가장 단순한 작업이자 고급 데이터 분석을 위한 준비 작업이기도 한다. 사실 실무에서 쓰이는 대부분의 데이터 분석 작업은 이 수준에서 끝나는 경우가 많다. 데이터의 조작은 기본적으로 다음 작업의 조합이다.</p>
 <ul class="simple">
 <li><p>테이블 생성 : 원본 데이터로부터 원하는 데이터 테이블을 만든다.</p></li>
@@ -359,12 +360,12 @@ const thebe_selector_output = ".output, .cell_output"
 <p>예를 들어 첫번째 질문에 답하기 위해 우리는 모든 레코드를 방문일자에 따라 그룹화한 후 각 그룹에 속한 레코드의 수를 세어(개수 계산) 그 평균값을 계산한다(평균 계산). 두번째 질문의 경우에는 레코드를 방문일자에 따라 그룹화한 후 각 그룹에 속한 레코드의 매출 필드의 값에 대한 총합을 구하고(합계 계산) 그 평균값을 구한다(평균 계산).</p>
 </div>
 <div class="section" id="id7">
-<h3><span class="section-number">1.1.2.2. </span>값의 신뢰도와 확률모형<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.1.2.2. </span>값의 신뢰도와 확률모형<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>이러한 데이터의 조작을 통해 우리는 계산결과를 얻게 되고 이 결과값을 우리가 데이터 조작을 통해 얻고자하던 질문의 답으로 받아들인다. 그러나 대부분의 질문들에는 100% 정확한 답이라는 것이 존재하지 않는 경우가 많다. 예를 들어 하루 방문객의 숫자는 매일 달라질 수 있다. 이 질문에 대해 하나의 숫자로 대답한다는 것이 의미가 있는가? 만약 의미가 없다면 우리는 어떤 방식으로 이 질문에 대답해야 할까? 한 가지 방법은 계산된 숫자에 대해 그 진실성의 정도 즉 신뢰도를 같이 나타내는 것이다.</p>
 <p>데이터 분석에서는 이러한 값의 신뢰도를 표현하기 위해 모든 값들에 대해 <b>확률모형(probabilistic model)</b>이라는 것을 가정한다. 확률모형은 쉽게 풀이하면 각각의 값이 가질 수 있는 가능성, 신뢰도를 수치화하여 표현한 것이다. 예를 들어 하루 방문객이 100명일 확률이 200명일 확률의 두 배라면 100이라는 값이 200이라는 값에 비해 두 배의 가능성 혹은 신뢰도를 가진다는 뜻이다.</p>
 </div>
 <div class="section" id="id8">
-<h3><span class="section-number">1.1.2.3. </span>데이터의 연관관계 분석<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.1.2.3. </span>데이터의 연관관계 분석<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
 <p>때로는 데이터의 각 필드간의 <b>연관관계(relationship)</b>에 주목하기도 한다. 연관관계를 안다는 것은 어떤 필드 값이 특정한 값이 되거나 변화하였을 때 다른 필드의 값의 어떻게 변하는지를 알아내는 것이다. 예를 들어 위에서 예를 든 식당 데이터를 기반으로 다음과 같은 질문을 한다고 가정하자.</p>
 <ul class="simple">
 <li><p>어느 요일에 가장 매출이 높은가?</p></li>
@@ -378,7 +379,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>또한 연관관계와 인과관계의 차이를 파악하는 것도 중요하다. 두 데이터 필드간에 상관관계가 있다는 것이 꼭 원인과 결과로 볼 수 있는 인과관계가 있다는 뜻은 아니다. 따라서 인과관계를 판단할 수 있는 추가적인 분석이 필요할 수 있다.</p>
 </div>
 <div class="section" id="id9">
-<h3><span class="section-number">1.1.2.4. </span>데이터의 예측<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.1.2.4. </span>데이터의 예측<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <p>데이터의 연관관계를 알고 있다면 어떤 필드의 값이 주어졌을 때 다른 필드의 값이 어느정도의 값을 가질지 짐작할 수 있다. 이를 <b>예측(prediction)</b>이라고 한다. 즉 요일과 매출의 상관관계를 알고 있다면 다음과 같은 질문에 답할 수 있다.</p>
 <ul class="simple">
 <li><p>다음 주 수요일에는 매출이 어느 정도일까?</p></li>
@@ -389,7 +390,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>때로는 알아내고자 하는 값과 그 기반 정보가 되는 값이 같은 필드인 경우도 있다. 예를 들어 그저께의 매출, 어제의 매출, 오늘의 매출을 입력으로 하여 내일의 매출을 알고 싶은 경우도 있다. 이 때는 데이티의 순서에 따라 독립변수와 종속변수를 구분하는 <b>시계열분석(time series analysis)</b>이라는 방법을 사용한다.</p>
 </div>
 <div class="section" id="id10">
-<h3><span class="section-number">1.1.2.5. </span>데이터 군집화와 대표 데이터 추출<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<h3><span class="section-number">1.1.2.5. </span>데이터 군집화와 대표 데이터 추출<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <p>예측은 데이터의 여러가지 필드간의 관계를 분석하는 작업이다. 하지만 때로는 필드간의 관계보다 레코드 간의 관계를 중요하게 볼 수도 있다. 즉 어떤 레코드와 어떤 레코드는 서로 닮았지만 어떤 레코드는 다른 레코드들과 닮지 않았다는 방식으로 레코드간의 유사성을 판단할 필요가 있다. 레코드 간의 유사성을 수치적으로 판단할 수 있다면 비슷한 레코드만을 그룹별로 모아서 여러개의 데이터 그룹을 만들 수 있다. 이러한 데이터 그룹을 군집(cluster)이라고 하고 이러한 군집을 만드는 작업을 <b>군집화(clustering)</b>라고 한다.</p>
 <p>군집화를 통해 많은 수의 레코드를 몇가지 대표적인 데이터로 나타낼 수 있으므로 데이터의 특성을 파악하는데 도움이 된다. 대표 데이터는 군집화라는 방법 이외에도 레코드간의 관계를 분석하는 다양한 방법으로 찾아낼 수 있다.</p>
 <p><b>아웃라이어(outlier)</b>는 대표적이고 전형적이지 않은 레코드를 말한다. 데이터 내에 아웃라이어가 있다는 것은 잘못된 방법으로 데이터가 수집되었거나 데이터 처리과정에서 오류가 발생한 것을 의미할 수도 있다. 만약 이러한 오류가 없다면 신용카드의 부정사용 등 비정상적인 상황이 발생한 것을 탐지하는데 사용될 수도 있다.</p>
@@ -465,8 +466,8 @@ const thebe_selector_output = ".output, .cell_output"
       </div>
     </div>
   
-  <script src="../_static/js/index.1c5a1a01449ed65a7b51.js"></script>
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
-  
   </body>
 </html>
