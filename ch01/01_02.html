@@ -85,7 +85,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="1.3. 파이썬 개발 환경의 설치" href="01_03.html" />
+    <link rel="next" title="2. 데이터의 신뢰성을 분석한다" href="../ch02/02_00.html" />
     <link rel="prev" title="1.1. 이 책에서 다루는 데이터 분석이란?" href="01_01.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="en" />
@@ -143,17 +143,24 @@ const thebe_selector_output = ".output, .cell_output"
      1.2. 데이터 분석을 위한 도구의 소개
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="01_03.html">
-     1.3. 파이썬 개발 환경의 설치
-    </a>
-   </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch02/02_00.html">
    2. 데이터의 신뢰성을 분석한다
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch02/02_01.html">
+     2.1. 데이터의 신뢰도는 확률로 표시한다.
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../ch03/03_00.html">
@@ -259,27 +266,29 @@ const thebe_selector_output = ".output, .cell_output"
                 <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   1.2.1. 파이썬 언어 환경
+   1.2.1. 파이썬 언어
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   1.2.2. 데이터 분석용 파이썬 패키지
+   1.2.2. 파이썬 개발 환경
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     1.2.2.1. 주피터랩
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     1.2.2.2. 파이참 통합개발환경
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   1.2.3. 관계형 데이터베이스 시스템
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   1.2.4. 데이터 파이프라인 도구
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#bi">
-   1.2.5. BI 시각화 도구
+  <a class="reference internal nav-link" href="#id6">
+   1.2.3. 데이터 분석용 파이썬 패키지
   </a>
  </li>
 </ul>
@@ -295,20 +304,77 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="id1">
 <h1><span class="section-number">1.2. </span>데이터 분석을 위한 도구의 소개<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
-<p>데이터 분석을 하자면 일단 데이터 분석을 하기 위한 도구를 갖추어야 한다. 기본적인 도구들은 다음과 같다</p>
+<p>데이터 분석을 하자면 일단 데이터 분석을 하기 위한 도구를 갖추어야 한다. 이 책에서는 다음과 같은 도구를 사용한다.</p>
 <ol class="simple">
-<li><p>파이썬 언어 환경</p></li>
+<li><p>파이썬 프로그래밍 언어</p></li>
+<li><p>파이썬 개발 환경</p></li>
 <li><p>데이터 분석용 파이썬 패키지</p></li>
-<li><p>관계형 데이터베이스</p></li>
-<li><p>데이터 파이프라인 도구</p></li>
-<li><p>BI 시각화 도구</p></li>
 </ol>
 <div class="section" id="id2">
-<h2><span class="section-number">1.2.1. </span>파이썬 언어 환경<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<p>소규모의 데이터 분석을 하거나 머신러닝을 하기위한 가장 좋은 언어 도구가 파이썬(Python)이다. 또한 이후에 설명할 데이터 분석이나 데이터 파이프라인 도구, BI 시각화 도구 등도 파이썬으로 구현된 것들이 많으므로 파이썬의 설치는 데이터 분석에 필수적이다. 특히 주피터랩(Jupyter-Lab)은 웹 기반의 파이썬 개발 환경으로 코드와 시각화 결과를 한 번에 볼 수 있을 뿐 아니라 마크다운(markdown) 언어를 사용하여 문서화도 같이 할 수 있기 때문에 데이터 분석시 가장 많이 사용되는 파이썬 언어 개발 환경이다.</p>
+<h2><span class="section-number">1.2.1. </span>파이썬 언어<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>소규모의 데이터 분석을 하기위한 가장 좋은 프로그래밍 언어 중 하나가 파이썬(Python)이다. 물론 R, SAS, Julia 등 여러가지 데이터 분석용 언어들이 있으나 이 책에서는 파이썬을 기반으로 데이터 분석 방법과 도구들을 설명한다.</p>
+<p>파이썬 언어를 설치하는 방법으로는 가장 손쉬운 방법인 아나콘다(Anaconda) 배포판을 사용하는 방법을 추천한다. 아나콘다 배포판을 설치하기 위해서는 우선 다음 웹사이트에 접속한다.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.anaconda.com/">https://www.anaconda.com/</a></p></li>
+</ul>
+<p><img alt="아나콘다1" src="../_images/fig_anaconda_01.png" /></p>
+<p>페이지의 상단 메뉴에서 “Products &gt; Individual Edition”을 클릭하면 다양한 운영환경에 대한 아나콘다 설치 프로그램 목록이 나온다. 이 중 자신이 사용하는 운영환경 및 파이썬 버전을 선택하여 아나콘다 설치 프로그램을 다운받고 설치하면 된다. 이 책에서는 64비트 아나콘다 파이썬 3.8 버전을 기준으로 설명한다.</p>
+<p><img alt="아나콘다2" src="../_images/fig_anaconda_02.png" /></p>
 </div>
 <div class="section" id="id3">
-<h2><span class="section-number">1.2.2. </span>데이터 분석용 파이썬 패키지<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">1.2.2. </span>파이썬 개발 환경<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>파이썬을 설치한 후에는 파이썬 개발 환경을 설치해야 한다. 가장 많이 사용되는 파이썬 개발환경은 주피터랩(Jupyter-Lab)과 파이참(PyCharm)이다.</p>
+<div class="section" id="id4">
+<h3><span class="section-number">1.2.2.1. </span>주피터랩<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>주피터랩은 노트북과 같은 형식으로 파이썬 코드의 작성 및 실행과 문서화를 동시에 할 수 있어서 간단한 데이터 분석에 많이 사용된다. 이 책의 모든 코드는 주피터랩으로 실행하는 것을 가정하여 만들었다. (이 책 자체도 주피터랩을 사용하여 제작되었다)</p>
+<p>만일 아나콘다를 설치했다면 이미 주피터 랩이 설치되어 있다. 만약 주피터 랩이 설치되어 있지 않는 환경이라면 커맨드라인 윈도우에서 pip 명령으로 주피터 랩을 설치할 수 있다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">jupyterlab</span>
+</pre></div>
+</div>
+<p>설치가 완료되었으면 커맨드라인 윈도우에서 다음 명령어로 주피터랩을 실행시킨다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">jupyter</span><span class="o">-</span><span class="n">lab</span>
+</pre></div>
+</div>
+<p>정상적으로 실행되었다면 다음처럼 주피터랩 서버 프로그램이 실행된다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>...(생략)
+Jupyter Server 1.4.1 is running at:                                                                                                                             
+http://localhost:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                                
+or http://127.0.0.1:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                            
+Use Control-C to stop this server and shut down all kernels (twice to skip confirmation).
+    To access the server, open this file in a browser:                                                                                                                       
+        file:///Users/joelkim/Library/Jupyter/runtime/jpserver-61565-open.html                                                                                               
+    Or copy and paste one of these URLs:                                                                                                                                     
+        http://localhost:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                                     
+     or http://127.0.0.1:8888/lab?token=b79bcbaeaedce1c2d2fc20a2a20d88fb43b9bc8b7cec5be1                                                                                     
+</pre></div>
+</div>
+<p>이 때 웹 브라우저에 다음 주소를 가진 웹페이지가 나타날 것이다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">localhost</span><span class="p">:</span><span class="mi">8888</span><span class="o">/</span><span class="n">lab</span>
+</pre></div>
+</div>
+<p><img alt="주피터랩1" src="../_images/fig_jupyterlab_01.png" /></p>
+<p>이 웹페이지의 상단 메뉴에서 “File &gt; New &gt; Notebook”을 실행하면 새로운 노트북이 나타나면서 코드를 실행하거나 문서를 작성할 수 있다.</p>
+<p><img alt="주피터랩2" src="../_images/fig_jupyterlab_02.png" /></p>
+<p>주피터랩의 보다 자세한 설치 및 사용법에 대해서는 다음 웹페이지를 참조한다.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://jupyterlab.readthedocs.io/en/latest/">https://jupyterlab.readthedocs.io/en/latest/</a></p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h3><span class="section-number">1.2.2.2. </span>파이참 통합개발환경<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>파이참 통합개발환경(IDE: Integreated Development Environment)은 파이썬 패키지를 개발하거나 복수의 파이썬 코드 파일을 다루어야 할 때 유용하다. 다음 홈페이지에서 무료 커뮤니티(community) 버전을 다운로드 받아 사용할 수 있다.</p>
+<p><a class="reference external" href="https://www.jetbrains.com/ko-kr/pycharm/">https://www.jetbrains.com/ko-kr/pycharm/</a></p>
+<p><img alt="파이참1" src="../_images/fig_pycharm_01.png" /></p>
+<p>다음은 파이참 실행화면의 예다.</p>
+<p><img alt="파이참2" src="../_images/fig_pycharm_02.png" /></p>
+<p>파이참의 자세한 설치 및 사용법에 대해서는 다음 웹 사이트를 참조한다.</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://www.jetbrains.com/help/pycharm/2021.3/installation-guide.html">https://www.jetbrains.com/help/pycharm/2021.3/installation-guide.html</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id6">
+<h2><span class="section-number">1.2.3. </span>데이터 분석용 파이썬 패키지<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <p>데이터 분석을 하는데는 파이썬 언어를 그대로 이용하지 않고 각각의 목적에 알맞은 여러가지 패키지를 사용하게 된다. 이 책에서 주로 사용할 데이터 분석 패키지들은 다음과 같다.</p>
 <ul class="simple">
 <li><p>넘파이(NumPy) : 행렬연산을 위한 패키지</p></li>
@@ -317,37 +383,38 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>스탯츠모델즈(Statsmodels) : 통계, 회귀분석, 시계열 분석 패키지</p></li>
 <li><p>사이킷런(Scikit-Learn): 머신러닝 데이터 분석 패키지</p></li>
 </ul>
+<p>각 패키지에 대한 자세한 설명은 해당 분석에 대한 장에서 다루도록 한다.</p>
+<p>위에서 설명한 대로 아나콘다 시스템을 설치했다면 이 책에서 소개하는 대부분의 데이터 분석용 파이썬 패키지가 설치되어 있을 것이다. 다음과 같이 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">list</span></code> 명령으로 설치된 파이썬 패키지를 확인할 수 있다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip list
+
+Package                            Version
+---------------------------------- -------------------------
+alabaster                          0.7.12
+anaconda-client                    1.7.2
+anaconda-navigator                 2.1.2
+anaconda-project                   0.9.1
+anyio                              3.6.1
+appdirs                            1.4.4
+applaunchservices                  0.2.1
+appnope                            0.1.2
+appscript                          1.1.2
+argh                               0.26.2
+argon2-cffi                        20.1.0
+asn1crypto                         1.4.0
+(이하 생략$ )
+</pre></div>
 </div>
-<div class="section" id="id4">
-<h2><span class="section-number">1.2.3. </span>관계형 데이터베이스 시스템<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<p>컴퓨터 한 대의 메모리 크기를 넘는 크기의 데이터는 파이썬으로 다루기 어렵다. 이 경우에는 파일 기반의 데이터베이스(Database Management System; DBMS)가 필요하다. 데이터베이스는 수 기가바이트에서 테라바이트 정도에 이루는 중규모의 데이터 분석을 하기위한 전용의 시스템이다. 데이터베이스 중 가장 기본이 되는 것은 관계형 데이터베이스(Relational DBMS; RDBMS)로 다음과 같은 다양한 관계형 데이터베이스 시스템이 존재한다.</p>
-<ul class="simple">
-<li><p>오라클(Oracle)</p></li>
-<li><p>마이에스큐엘(MySQL), 마리아(Maria)</p></li>
-<li><p>포스트그레스(Postgresql)</p></li>
-</ul>
-<p>이 중 이 책에서는 무료 오픈소스 데이터베이스 중 가장 역사가 깊고 많이 사용되는 포스트그레스 데이터베이스를 사용하는 법을 설명한다. 한 종류의 데이터베이스 시스템 사용법을 제대로 익히면 다른 데이터베이스 시스템도 어렵지 않게 사용할 수 있다.</p>
-<p>파이썬에서는 SQL문을 직접 사용하여 데이터베이스를 사용할 수도 있지만 ORM(Object-Relation Model) 패키지라는 것을 사용하여 하나의 테이블을 하나의 클래스로 대응하여 객체지향적으로 프로그래밍할 수도 있다. 이 책에서는 여러가지 ORM 도구 중에서 에스큐엘알케미(SqlAlchemy)를 사용하는 법도 설명한다.</p>
+<p>만약 원하는 패키지가 설치되어 있지 않거나 이미 설치되어 있더라도 최신 버전으로 업그레이드하고 싶은 경우에는 <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">-U</span></code> 명령을 사용한다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>$ pip install -U numpy scipy pandas statsmodels scikit-learn
+
+
+Requirement already satisfied: numpy in /Users/joelkim/opt/anaconda3/lib/python3.8/site-packages (1.20.1)
+Collecting numpy
+  Downloading numpy-1.22.4-cp38-cp38-macosx_10_15_x86_64.whl (17.6 MB)
+     |████████████████████████████████| 17.6 MB 4.9 MB/s 
+(이하생략)
+</pre></div>
 </div>
-<div class="section" id="id5">
-<h2><span class="section-number">1.2.4. </span>데이터 파이프라인 도구<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
-<p>데이터 분석이 1회성으로 끝나는 경우가 아니라 일정간격(예: 매일)으로 혹은 연속적으로 데이터 분석을 실시해야 하는 경우라면 여러가지 데이터 처리 작업을 일정과 순서에 맞게 실시할 수 있도록 도와주는 데이터 파이프라인(data pipeline) 도구가 필요하다. 다양한 파이썬 기반의 데이터 파이프라인 도구들이 있다. 일부만 예를 들면 다음과 같다.</p>
-<ul class="simple">
-<li><p>에어플로우(Airflow)</p></li>
-<li><p>댁스터(Dagster)</p></li>
-<li><p>루이지(Luigi)</p></li>
-</ul>
-<p>이 책에서는 가장 최근에 나왔지만 개발이 활발하고 범용성 및 다른 도구와의 결합이 용이한 댁스터(Dagster)라는 파이썬 기반의 데이터 파이프라인 도구에 대해 설명한다.</p>
-</div>
-<div class="section" id="bi">
-<h2><span class="section-number">1.2.5. </span>BI 시각화 도구<a class="headerlink" href="#bi" title="Permalink to this headline">¶</a></h2>
-<p>데이터를 분석한 결과를 사용자에게 직관적으로 이해시킬 수 있도록 하는 시각화는 데이터 분석의 마지막 단계다. BI(Business Intelligence) 시각화 도구는 분석 결과를 시각화하기 위한 도구이다. 많이 사용되는 BI 도구로는 다음과 같은 것들이 있다.</p>
-<ul class="simple">
-<li><p>파워BI(Power BI)</p></li>
-<li><p>마이크로스트레터지(MicroStrategy)</p></li>
-<li><p>수퍼셋(Superset)</p></li>
-</ul>
-<p>이 책에서는 파이썬 기반의 무료 오픈소스 BI 도구인 수퍼셋 사용법을 설명한다.</p>
 </div>
 </div>
 
@@ -390,10 +457,10 @@ const thebe_selector_output = ".output, .cell_output"
         </a>
     </div>
      <div id="next">
-        <a class="right-next" href="01_03.html" title="next page">
+        <a class="right-next" href="../ch02/02_00.html" title="next page">
             <div class="prevnext-info">
                 <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">1.3. </span>파이썬 개발 환경의 설치</p>
+                <p class="prevnext-title"><span class="section-number">2. </span>데이터의 신뢰성을 분석한다</p>
             </div>
             <i class="prevnext-label fas fa-angle-right"></i>
         </a>
