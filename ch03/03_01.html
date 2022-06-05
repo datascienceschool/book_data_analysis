@@ -288,11 +288,132 @@ const thebe_selector_output = ".output, .cell_output"
                 
   <div class="tex2jax_ignore mathjax_ignore section" id="id1">
 <h1><span class="section-number">3.1. </span>회귀분석<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>어떤 수치형 변수의 값이 다른 변수의 값에 의해 어떻게 영향을 받는지를 분석하는 방법을 <b>회귀분석(regression analysis)</b>이라고 한다. 이 때 분석이 목적이자 대상이 되는 수치형 변수를 <b>종속변수(independent variable)</b>라 하고 그 종속변수에 영향을 주는 다른 변수들을 <b>독립변수(dependent variable)</b>라 한다. 보통 종속변수는 <span class="math notranslate nohighlight">\(y\)</span> 기호로 나타내고 독립변수는 <span class="math notranslate nohighlight">\(x\)</span> 기호로 나타낸다. 독립변수가 여러개 있을 때는 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 등으로 아랫첨자를 이용하여 표시한다.</p>
-<p>종속변수와 독립변수의 관계는 다음과 같은 다이어그램으로 표현할 수 있다.</p>
+<p>어떤 수치형 변수의 값이 다른 변수의 값에 의해 어떻게 영향을 받는지를 분석하는 방법을 <b>회귀분석(regression analysis)</b>이라고 한다.</p>
+<p>예를 들어 다음 데이터는 1940년부터 1950년까지의 미국 전체의 소득(income)과 지출(expenditure) 데이터이다. 테이블에서 하나의 레코드는 하나의 연도(year)를 나타낸다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;USConsump1950&quot;</span><span class="p">,</span> <span class="s2">&quot;AER&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>income</th>
+      <th>expenditure</th>
+      <th>war</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>241</td>
+      <td>226</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>280</td>
+      <td>240</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>319</td>
+      <td>235</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>331</td>
+      <td>245</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>345</td>
+      <td>255</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>340</td>
+      <td>265</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>332</td>
+      <td>295</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>320</td>
+      <td>300</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>339</td>
+      <td>305</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>338</td>
+      <td>315</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>371</td>
+      <td>325</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이 데이터를 다음과 같이 소득을 가로축으로 지출을 세로축으로 한 스캐터플롯(scatter plot)으로 표시한다. 이 그래프에서는 하나의 점이 하나의 연도 즉, 하나의 레코드를 표시한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;income&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;expenditure&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_5_0.png" src="../_images/03_01_5_0.png" />
+</div>
+</div>
+<p>이 그래프를 보면 소득이 증가한 경우에는 지출도 같이 증가하는 것처럼 보인다.</p>
+<p>회귀분석에서 분석의 대상이 되는 수치형 변수를 <b>종속변수(independent variable)</b>라 하고 그 종속변수에 영향을 주는 다른 변수들을 <b>독립변수(dependent variable)</b>라 한다. 보통 종속변수는 <span class="math notranslate nohighlight">\(y\)</span> 기호로 나타내고 독립변수는 <span class="math notranslate nohighlight">\(x\)</span> 기호로 나타낸다. 독립변수가 여러개 있을 때는 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 등으로 아랫첨자를 이용하여 표시한다.</p>
+<p>회귀분석에서 종속변수와 독립변수의 관계는 다음과 같은 다이어그램으로 표현할 수 있다. 화살표는 변수간의 관계를 나타내는 것으로 독립변수에서 종속변수를 향하는 방향으로 그린다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/03_01_3_0.png" src="../_images/03_01_3_0.png" />
+<img alt="../_images/03_01_8_0.png" src="../_images/03_01_8_0.png" />
 </div>
 </div>
 <p>회귀분석은 복수의 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>와 하나의 종속변수 <span class="math notranslate nohighlight">\(y\)</span>간의 관계를 분석하는 것이다. 회귀분석을 하려면 독립변수와 종속변수의 관계를 수식으로 정해놓아야 한다. 이 수식을 회귀분석 모형(regression model)이라고 한다. 가장 많이 사용되는 회귀분석 모형은 선형 회귀분석 모형(linear regression model)이다. 선형 회귀분석 모형은 다음과 같은 수식으로 표현한다.</p>
