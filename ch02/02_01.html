@@ -168,10 +168,22 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1">
+ <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch03/03_00.html">
    3. 수치형 데이터의 상관관계를 분석한다
   </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <label for="toctree-checkbox-3">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch03/03_01.html">
+     3.1. 회귀분석
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -378,7 +390,7 @@ const thebe_selector_output = ".output, .cell_output"
 <p>이 때 쓸 수 있는 방법이 확률분포를 사용하는 것이다. <b>확률분포(probability distribution)</b>는 데이터가 가질 수 있는 모든 값과 각각의 값에 대한 확률을 나타낸 것이다. 이때 확률은 특정한 값이 나올 수 있는 가능성, 혹은 그 값이 가지는 신뢰도를 뜻한다.</p>
 <div class="section" id="id6">
 <h3><span class="section-number">2.1.4.1. </span>확률질량함수<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
-<p>확률분포는 어러가지 방법으로 표시할 수 있다. 데이터의 값이 범주형일 경우에는 표를 이용할 수 있다. 우선 데이터가 가질 수 있는 값을 모두 표시한 후에 그 값의 확률을 해당 값 옆에 표시한다. 예를 들어 위에서 말한 식당의 일매출액이 10, 20, 30, 40, 50의 다섯가지 경우만 가능하고 다른 값은 나올 수 없다고 가정하자. 그러면 일매출액의 값은 다섯 종류의 값만 가질수 있는 범주형 데이터라고 할 수 있다.
+<p>확률분포는 여러가지 방법으로 표시할 수 있다. 데이터의 값이 범주형일 경우에는 표를 이용할 수 있다. 우선 데이터가 가질 수 있는 값을 모두 표시한 후에 그 값의 확률을 해당 값 옆에 표시한다. 예를 들어 위에서 말한 식당의 일매출액이 10, 20, 30, 40, 50의 다섯가지 경우만 가능하고 다른 값은 나올 수 없다고 가정하자. 그러면 일매출액의 값은 다섯 종류의 값만 가질수 있는 범주형 데이터라고 할 수 있다.
 따라서 다음과 같은 표의 형태로 확률분포 표를 만들 수 있다.</p>
 <table class="colwidths-auto table">
 <thead>
