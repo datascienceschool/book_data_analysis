@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3. 수치형 데이터의 상관관계를 분석한다 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.2. 회귀분석을 위한 데이터 준비 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -87,8 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.1. 회귀분석이란" href="03_01.html" />
-    <link rel="prev" title="2.1. 확률적 데이터" href="../ch02/02_01.html" />
+    <link rel="next" title="3.3. 선형 회귀분석 모형" href="03_03.html" />
+    <link rel="prev" title="3.1. 회귀분석이란" href="03_01.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -189,7 +189,7 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
-  <a class="current reference internal" href="#">
+  <a class="reference internal" href="03_00.html">
    3. 수치형 데이터의 상관관계를 분석한다
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
@@ -197,14 +197,14 @@ const thebe_selector_output = ".output, .cell_output"
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="03_01.html">
      3.1. 회귀분석이란
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="03_02.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      3.2. 회귀분석을 위한 데이터 준비
     </a>
    </li>
@@ -270,7 +270,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch03/03_00.ipynb"
+        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch03/03_02.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -326,7 +326,7 @@ title="Source repository"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/ch03/03_00.ipynb"
+        <a href="../_sources/ch03/03_02.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -375,7 +375,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>수치형 데이터의 상관관계를 분석한다</h1>
+                <h1>회귀분석을 위한 데이터 준비</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -388,14 +388,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3. </span>수치형 데이터의 상관관계를 분석한다<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="03_01.html">3.1. 회귀분석이란</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_02.html">3.2. 회귀분석을 위한 데이터 준비</a></li>
-<li class="toctree-l1"><a class="reference internal" href="03_03.html">3.3. 선형 회귀분석 모형</a></li>
-</ul>
-</div>
+<h1><span class="section-number">3.2. </span>회귀분석을 위한 데이터 준비<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -425,17 +418,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../ch02/02_01.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="03_01.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2.1. </span>확률적 데이터</p>
+            <p class="prev-next-title"><span class="section-number">3.1. </span>회귀분석이란</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="03_01.html" title="next page">
+    <a class='right-next' id="next-link" href="03_03.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.1. </span>회귀분석이란</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>선형 회귀분석 모형</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
