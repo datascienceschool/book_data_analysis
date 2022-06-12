@@ -616,30 +616,7 @@ title="Print to PDF"
 <section id="id8">
 <h2><span class="section-number">2.1.5. </span>데이터 분석의 기본 문제<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
 <p>데이터 분석을 할 때 가장 기본적인 문제는 측정한 표본값으로부터 확률변수의 확률분포를 찾아내는 것이다. 다음 절부터는 이 문제를 푸는 방법을 설명한다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -l shapes.symbols -p kotex -e utf-8
-
-\node[draw] (v) at (0,3) {확률변수};
-\node[draw, cloud, minimum height=3cm, minimum width=5cm] (d) at (0,0) {};
-\node[draw, circle] (d1) at (-1,0) {값1};
-\node[draw, circle] (d2) at (0,0) {값2};
-\node[draw, circle] (d3) at (1,0) {값3};
-\draw[-&gt;] (v) -- (d);
-\node () at (-1.5,1.5) {표본값};
-
-\node[draw] (pd) at (3,3) {확률분포};
-\draw (v) -- (pd);
-
-\node (c1) at (5,-1) {눈으로 볼 수 있다.};
-\draw[-&gt;, dotted] (c1) -- (d);
-\node (c2) at (5,1) {눈으로 볼 수 없다.};
-\draw[-&gt;, dotted] (c2) -- (pd);
-
-\draw[-&gt;, line width=1mm] (d) -- (pd);
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/02_01_23_0.png" src="../_images/02_01_23_0.png" />
 </div>
