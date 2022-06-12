@@ -536,22 +536,7 @@ title="Print to PDF"
 <h2><span class="section-number">2.1.4. </span>확률분포<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <p>확률적 데이터를 만들어내는 확률변수는 아무렇게나 값을 생성하는 것이 아니라 특정한 규칙에 의해 데이터를 생성해 낸다. 확률변수가 값을 생성하는 규칙을 <b>확률분포(probability distribution)</b>라고 한다. 확률분포는 데이터가 가질 수 있는 모든 값과 각각의 값에 대한 확률을 나타낸 것이다.</p>
 <p>데이터 분석에서는 모든 확률변수에 확률분포가 정해져있다고 가정한다. 다만 이 확률분포는 사람이 직접 볼 수는 없고 값으로부터 추측할 수 있을 뿐이다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -l shapes.symbols -p kotex -e utf-8
-
-\node[draw] (v) at (0,3) {변수};
-\node[draw, cloud, minimum height=3cm, minimum width=5cm] (d) at (0,0) {};
-\node[draw, circle] (d1) at (-1,0) {값1};
-\node[draw, circle] (d2) at (0,0) {값2};
-\node[draw, circle] (d3) at (1,0) {값3};
-\draw[-&gt;] (v) -- (d);
-
-\node[draw] (pd) at (3,3) {확률분포};
-\draw (v) -- (pd);
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/02_01_11_0.png" src="../_images/02_01_11_0.png" />
 </div>
