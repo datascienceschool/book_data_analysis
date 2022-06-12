@@ -473,49 +473,105 @@ title="Print to PDF"
 <section id="id2">
 <h2><span class="section-number">2.1.1. </span>측정과 추론<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>데이터는 처음부터 그냥 존재하는 것이 아니라 사람의 행위에 의해 얻어지는 것이다. 우리가 데이터를 얻는 과정은 크게 두 가지로 나누어진다. 하나가 현실세계에서 데이터를 얻는 <b>측정(measure)</b>이고 또 하나는 이미 얻어진 데이터를 기반으로 다른 데이터를 도출하는 <b>추론(inference)</b>이다. 예를 들어 어떤 식당의 일일 매출액이라는 데이터를 얻어내는 과정은 측정이라고 할 수 있다. 대부분의 경우 반복하여 측정을 실시할 수 있기 때문에 데이터는 복수의 값을 가지게 된다. 다음은 열흘동안 어떤 식당의 일매출액을 측정한 값이다. 이 데이터는 10개의 값을 가진다. (여기에서 매출액의 단위는 만원이고 매출액이 10만원 단위의 값만 가진다고 가정한다.)</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>날짜</p></th>
-<th class="head"><p>일매출액</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>2022.1.1</p></td>
-<td><p>30</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.2</p></td>
-<td><p>10</p></td>
-</tr>
-<tr class="row-even"><td><p>2022.1.3</p></td>
-<td><p>30</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.4</p></td>
-<td><p>20</p></td>
-</tr>
-<tr class="row-even"><td><p>2022.1.5</p></td>
-<td><p>40</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.6</p></td>
-<td><p>30</p></td>
-</tr>
-<tr class="row-even"><td><p>2022.1.7</p></td>
-<td><p>20</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.8</p></td>
-<td><p>50</p></td>
-</tr>
-<tr class="row-even"><td><p>2022.1.9</p></td>
-<td><p>30</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.10</p></td>
-<td><p>40</p></td>
-</tr>
-</tbody>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;날짜&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;2022.1.1&quot;</span><span class="p">,</span> <span class="s2">&quot;2022.1.2&quot;</span><span class="p">,</span> <span class="s2">&quot;2022.1.3&quot;</span><span class="p">,</span> <span class="s2">&quot;2022.1.4&quot;</span><span class="p">,</span> <span class="s2">&quot;2022.1.5&quot;</span><span class="p">,</span> <span class="s2">&quot;2022.1.6&quot;</span><span class="p">,</span> <span class="s2">&quot;2022.1.7&quot;</span><span class="p">,</span> <span class="s2">&quot;2022.1.8&quot;</span><span class="p">,</span> <span class="s2">&quot;2022.1.9&quot;</span><span class="p">,</span> <span class="s2">&quot;2022.1.10&quot;</span><span class="p">],</span>
+    <span class="s2">&quot;일매출액&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">30</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">40</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">20</span><span class="p">,</span> <span class="mi">50</span><span class="p">,</span> <span class="mi">30</span><span class="p">,</span> <span class="mi">40</span><span class="p">]</span>
+<span class="p">})</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>날짜</th>
+      <th>일매출액</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2022.1.1</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2022.1.2</td>
+      <td>10</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2022.1.3</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2022.1.4</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2022.1.5</td>
+      <td>40</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>2022.1.6</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>2022.1.7</td>
+      <td>20</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>2022.1.8</td>
+      <td>50</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2022.1.9</td>
+      <td>30</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>2022.1.10</td>
+      <td>40</td>
+    </tr>
+  </tbody>
 </table>
+</div></div></div>
+</div>
 </section>
 <section id="id3">
 <h2><span class="section-number">2.1.2. </span>변수와 값<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 <p>측정을 통해 데이터를 얻어내는 과정은 자판기에서 물건이 나오는 것에 비유할 수 있다. 자판기의 버튼을 누를 때마다 상품이 하나씩 나오는 것처럼 우리가 측정행위를 하면 <b>값(value)</b>이 하나씩 나오게 된다. 이 때 우리가 관심을 가져야 할 것은 자판기로부터 나오는 상품 즉, 데이터의 값 뿐아니라 그 값을 만들어내는 자판기다. 자판기는 일종의 데이터 값 생성기(value-generator)라고 부를 수 있다. 데이터 과학에서는 이러한 데이터 생성기를 <b>변수(variable)</b>라고 부른다. 다른 수학 분야나 프로그래밍 등에서는 변수가 특정한 하나의 값을 대표하는 것이지만 데이터 과학에서는 변수를 여러가지 값을 만들어내는 생성기로 취급한다. 측정행위로 얻어진 값은 해당 변수가 만들어낸 값이라고 볼 수 있다. 데이터를 다룰 때는 변수와 그 변수가 만들어낼 수 있는 값을 구분하여 생각해야 한다. 위의 예에서 “일매출액”은 변수이고 10, 20 등의 숫자는 그 변수가 생성한 값이다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02_01_7_0.png" src="../_images/02_01_7_0.png" />
+</div>
+</div>
 </section>
 <section id="id4">
 <h2><span class="section-number">2.1.3. </span>확률적 데이터<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
@@ -535,31 +591,46 @@ title="Print to PDF"
 <h3><span class="section-number">2.1.4.1. </span>확률질량함수<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p>확률분포는 여러가지 방법으로 표시할 수 있다. 데이터의 값이 범주형일 경우에는 표를 이용할 수 있다. 우선 데이터가 가질 수 있는 값을 모두 표시한 후에 그 값의 확률을 해당 값 옆에 표시한다. 예를 들어 위에서 말한 식당의 일매출액이 10, 20, 30, 40, 50의 다섯가지 경우만 가능하고 다른 값은 나올 수 없다고 가정하자. 그러면 일매출액의 값은 다섯 종류의 값만 가질수 있는 범주형 데이터라고 할 수 있다.
 따라서 다음과 같은 표의 형태로 확률분포 표를 만들 수 있다.</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>값</p></th>
-<th class="head"><p>확률</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>10</p></td>
-<td><p>0.1</p></td>
-</tr>
-<tr class="row-odd"><td><p>20</p></td>
-<td><p>0.2</p></td>
-</tr>
-<tr class="row-even"><td><p>30</p></td>
-<td><p>0.4</p></td>
-</tr>
-<tr class="row-odd"><td><p>40</p></td>
-<td><p>0.2</p></td>
-</tr>
-<tr class="row-even"><td><p>50</p></td>
-<td><p>0.1</p></td>
-</tr>
-</tbody>
-</table>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pmf</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="s2">&quot;일매출액&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span><span class="o">.</span><span class="n">sort_index</span><span class="p">()</span>
+<span class="n">df_pmf</span> <span class="o">=</span> <span class="n">df_pmf</span> <span class="o">/</span> <span class="n">df_pmf</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">df_pmf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>10    0.1
+20    0.2
+30    0.4
+40    0.2
+50    0.1
+Name: 일매출액, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
 <p>이 표는 일매출액의 값을 입력으로 가지고 확률을 출력으로 가지는 함수라고 할 수 있다. 이러한 함수를 <b>확률질량함수(probability mass function)</b>라고 한다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02_01_16_0.png" src="../_images/02_01_16_0.png" />
+</div>
+</div>
+<p>이 함수를 그래프로 표시하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pmf</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;확률질량함수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;일매출액&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;확률&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_01_18_0.png" src="../_images/02_01_18_0.png" />
+</div>
+</div>
 </section>
 <section id="id7">
 <h3><span class="section-number">2.1.4.2. </span>확률밀도함수<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
