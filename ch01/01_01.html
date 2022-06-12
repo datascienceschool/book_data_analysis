@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>1.1. 이 책에서 다루는 데이터 분석이란? &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,13 +21,12 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -35,9 +35,13 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script kind="utterances">
 
@@ -74,7 +78,7 @@ var addUtterances = () => {
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -93,6 +97,20 @@ const thebe_selector_output = ".output, .cell_output"
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -101,9 +119,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
@@ -113,17 +132,18 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="이 책 검색 ..." aria-label="이 책 검색 ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../index.html">
-   데이터 사이언스 스쿨 - 데이터 분석 편
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    데이터 사이언스 스쿨 - 데이터 분석 편
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="01_00.html">
    1. 데이터 분석의 소개
@@ -188,100 +208,173 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
-</div>
-
-
-          
-
-
-          
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
-    
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
             
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="탐색 전환" aria-controls="site-navigation"
-                title="탐색 전환" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="이 페이지 다운로드"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
-        
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/ch01/01_01.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="소스 파일 다운로드" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="PDF로 인쇄"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
-    </div>
-</div>
-
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/datascienceschool/book_data_analysis"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="소스 저장소"><i
-                    class="fab fa-github"></i>저장소</button></a>
-        
-        
-    </div>
-</div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="전체 화면으로보기"
-        title="전체 화면으로보기"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch01/01_01.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="시작하다 Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
-    </div>
-</div>
-
         </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
 
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-            <div class="tocsection onthispage pt-5 pb-3">
-                <i class="fas fa-list"></i> 내용
-            </div>
-            <nav id="bd-toc-nav" aria-label="Page">
-                <ul class="visible nav section-nav flex-column">
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch01/01_01.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/datascienceschool/book_data_analysis"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/ch01/01_01.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
    1.1.1. 데이터는 어떤 형태로 존재하는가
@@ -333,22 +426,89 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
 </ul>
 
-            </nav>
-        </div>
-    </div>
+    </nav>
 </div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>이 책에서 다루는 데이터 분석이란?</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   1.1.1. 데이터는 어떤 형태로 존재하는가
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     1.1.1.1. 정형 데이터 - 표로 표현가능한 데이터
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     1.1.1.2. 데이터 값의 종류 - 수치형과 범주형
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   1.1.2. 데이터 분석이란
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     1.1.2.1. 데이터의 조작
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     1.1.2.2. 값의 신뢰도와 확률모형
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     1.1.2.3. 데이터의 연관관계 분석
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     1.1.2.4. 데이터의 예측
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     1.1.2.5. 데이터 군집화와 대표 데이터 추출
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">1.1. </span>이 책에서 다루는 데이터 분석이란?<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>본 절에서는 이 책에서 소개할 다양한 데이터 분석의 종류와 구체적으로 어떤 일을 하는지를 소개한다.</p>
-<div class="section" id="id2">
+<section id="id2">
 <h2><span class="section-number">1.1.1. </span>데이터는 어떤 형태로 존재하는가<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>모든 종류의 데이터를 데이터 분석에 사용할 수 있는 것은 아니다. 데이터 분석 방법론은 특정한 형식을 가진 데이터를 가정하고 만들어진 것이므로 해당 형식을 가진 데이터만 분석에 쓰일 수 있다. 이 책에서 소개할 데이터 분석에 사용될 수 있는 데이터는 일반적으로 정형 데이터에 한정된다.</p>
-<div class="section" id="id3">
+<section id="id3">
 <h3><span class="section-number">1.1.1.1. </span>정형 데이터 - 표로 표현가능한 데이터<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>정형 데이터는 완전히 같은 형식을 가진 데이터 묶음이 여러개 존재하는 경우를 말한다. 하나하나의 데이터 묶음을 <b>레코드(record)</b>라고 하고 하나의 레코드 안에 포함된 특정 데이터를 <b>필드(field)</b>라고 한다. 기본적으로 모든 레코드는 같은 필드를 가지고 있어야 한다. 이러한 데이터 레코드의 집합을 <b>테이블(table)</b>이라고 한다. 예를 들어 학생들의 성적을 나타내는 다음 데이터가 있다고 하자.</p>
 <ul class="simple">
@@ -362,14 +522,14 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>국어성적</p></li>
 </ul>
 <p>테이블은 이름 그대로 표 형식으로 나타낼 수 있다.</p>
-</div>
-<div class="section" id="id4">
+</section>
+<section id="id4">
 <h3><span class="section-number">1.1.1.2. </span>데이터 값의 종류 - 수치형과 범주형<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>각 필드 데이터는 그 특성에 따라 수치형, 범주형 등으로 구분할 수 있다. 수학성적, 국어성적과 같이 숫자로 표현할 수 있는 데이터를 <strong>수치형(numerical)</strong> 데이터라 하고 성별과 같이 몇 가지 가능한 값 중 하나를 선택해야만 하는 값을 <strong>범주형(categorical)</strong> 데이터라고 한다. 모든 데이터를 이 두가지 종류로 명확히 나눌 수 있는 것은 아니며 같은 값이라도 경우에 따라 어떤 때는 수치형으로 취급하기도 하고 어떤 경우에는 범주형으로 취급하기도 한다.</p>
 <p>수치형과 범주형 이외에도 다양한 형태의 값이 존재한다. 예를 들어 위 테이블 중 이름 필드는 텍스트형이라고 한다. 텍스트형은 경우에 따라 범주형으로 취급하기도 한다.</p>
-</div>
-</div>
-<div class="section" id="id5">
+</section>
+</section>
+<section id="id5">
 <h2><span class="section-number">1.1.2. </span>데이터 분석이란<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <p>데이터 분석이라는 말은 우리가 현재 가지고 있는 정보(데이터)로 부터 우리가 원하는 새로운 정보를 이끌어내는 과정을 말한다. 그런데 우리가 원하는 분석작업은 주어진 수치들의 단순한 합계와 평균을 구하는 아주 단순한 것부터 각 복잡한 데이터간의 연관관계를 구하는 고도의 작업까지 다양하다. 다음은 모두 데이터 분석이라고 부르는 작업의 예들이다. 여기에서 예로 든 데이터 분석 작업이외도 다양한 작업이 있을 수 있다.</p>
 <ul class="simple">
@@ -378,7 +538,7 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>데이터의 예측</p></li>
 <li><p>데이터의 군집화와 대표 데이터 추출</p></li>
 </ul>
-<div class="section" id="id6">
+<section id="id6">
 <h3><span class="section-number">1.1.2.1. </span>데이터의 조작<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p><b>데이터의 조작(manipulation)</b>은 여러가지 데이터 분석 중 가장 단순한 작업이자 고급 데이터 분석을 위한 준비 작업이기도 한다. 사실 실무에서 쓰이는 대부분의 데이터 분석 작업은 이 수준에서 끝나는 경우가 많다. 데이터의 조작은 기본적으로 다음 작업의 조합이다.</p>
 <ul class="simple">
@@ -392,13 +552,13 @@ const thebe_selector_output = ".output, .cell_output"
 <li><p>매일 어느 정도의 매출이 나오는가?</p></li>
 </ul>
 <p>예를 들어 첫번째 질문에 답하기 위해 우리는 모든 레코드를 방문일자에 따라 그룹화한 후 각 그룹에 속한 레코드의 수를 세어(개수 계산) 그 평균값을 계산한다(평균 계산). 두번째 질문의 경우에는 레코드를 방문일자에 따라 그룹화한 후 각 그룹에 속한 레코드의 매출 필드의 값에 대한 총합을 구하고(합계 계산) 그 평균값을 구한다(평균 계산).</p>
-</div>
-<div class="section" id="id7">
+</section>
+<section id="id7">
 <h3><span class="section-number">1.1.2.2. </span>값의 신뢰도와 확률모형<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>이러한 데이터의 조작을 통해 우리는 계산결과를 얻게 되고 이 결과값을 우리가 데이터 조작을 통해 얻고자하던 질문의 답으로 받아들인다. 그러나 대부분의 질문들에는 100% 정확한 답이라는 것이 존재하지 않는 경우가 많다. 예를 들어 하루 방문객의 숫자는 매일 달라질 수 있다. 이 질문에 대해 하나의 숫자로 대답한다는 것이 의미가 있는가? 만약 의미가 없다면 우리는 어떤 방식으로 이 질문에 대답해야 할까? 한 가지 방법은 계산된 숫자에 대해 그 진실성의 정도 즉 신뢰도를 같이 나타내는 것이다.</p>
 <p>데이터 분석에서는 이러한 값의 신뢰도를 표현하기 위해 모든 값들에 대해 <b>확률모형(probabilistic model)</b>이라는 것을 가정한다. 확률모형은 쉽게 풀이하면 각각의 값이 가질 수 있는 가능성, 신뢰도를 수치화하여 표현한 것이다. 예를 들어 하루 방문객이 100명일 확률이 200명일 확률의 두 배라면 100이라는 값이 200이라는 값에 비해 두 배의 가능성 혹은 신뢰도를 가진다는 뜻이다.</p>
-</div>
-<div class="section" id="id8">
+</section>
+<section id="id8">
 <h3><span class="section-number">1.1.2.3. </span>데이터의 연관관계 분석<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
 <p>때로는 데이터의 각 필드간의 <b>연관관계(relationship)</b>에 주목하기도 한다. 연관관계를 안다는 것은 어떤 필드 값이 특정한 값이 되거나 변화하였을 때 다른 필드의 값의 어떻게 변하는지를 알아내는 것이다. 예를 들어 위에서 예를 든 식당 데이터를 기반으로 다음과 같은 질문을 한다고 가정하자.</p>
 <ul class="simple">
@@ -411,8 +571,8 @@ const thebe_selector_output = ".output, .cell_output"
 <p>결국 이 질문은 방문요일이라는 필드의 값이 달라질 때 매출이라는 필드의 값이 어떻게 달라지는지 즉, 방문요일과 매출간의 연관관계를 묻는 질문이다.</p>
 <p>데이터의 연관관계를 분석할 때 중요한 점은 연관관계의 신뢰성을 판단하는 것이다. 이 부분이 중요한 이유는 현실세계에서 대부분의 필드들은 미약하게나마 어느 정도의 연관관계를 가지는 경우가 많기 때문이다. 따라서 연관관계의 강도가 수치적으로 어느 정도인지를 계산하여 해당 연관관계가 실제로 존재하는지를 판단할 필요가 있다.</p>
 <p>또한 연관관계와 인과관계의 차이를 파악하는 것도 중요하다. 두 데이터 필드간에 상관관계가 있다는 것이 꼭 원인과 결과로 볼 수 있는 인과관계가 있다는 뜻은 아니다. 따라서 인과관계를 판단할 수 있는 추가적인 분석이 필요할 수 있다.</p>
-</div>
-<div class="section" id="id9">
+</section>
+<section id="id9">
 <h3><span class="section-number">1.1.2.4. </span>데이터의 예측<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <p>데이터의 연관관계를 알고 있다면 어떤 필드의 값이 주어졌을 때 다른 필드의 값이 어느정도의 값을 가질지 짐작할 수 있다. 이를 <b>예측(prediction)</b>이라고 한다. 즉 요일과 매출의 상관관계를 알고 있다면 다음과 같은 질문에 답할 수 있다.</p>
 <ul class="simple">
@@ -422,15 +582,15 @@ const thebe_selector_output = ".output, .cell_output"
 <p>일반적으로는 예측을 할 때는 우리가 이미 알고 있는 필드와 알아내고자 하는 필드가 다른 경우가 많다. 예측에 사용하려는 정보이자 이미 알고 있다고 가정하는 필드, 즉 입력값이 되는 필드를 <b>독립변수</b>라고 부르고 알고자 하는 필드 즉, 출력필드를 <b>종속변수</b>라고 부른다. 위의 예제에서는 요일이 독립변수이고 매출이 종속변수다.</p>
 <p>종속변수의 값이 매출과 같이 수치형인 경우와 요일과 같이 범주형이 경우에 각각 사용하는 예측 방법론이 다르다. 종속변수의 값이 수치형인 경우에는 <b>회귀분석(regression analysis)</b>라는 예측 방법을 사용하고 범주형인 경우에는 <b>분류(classification)</b>이라는 예측 방법을 사용한다.</p>
 <p>때로는 알아내고자 하는 값과 그 기반 정보가 되는 값이 같은 필드인 경우도 있다. 예를 들어 그저께의 매출, 어제의 매출, 오늘의 매출을 입력으로 하여 내일의 매출을 알고 싶은 경우도 있다. 이 때는 데이티의 순서에 따라 독립변수와 종속변수를 구분하는 <b>시계열분석(time series analysis)</b>이라는 방법을 사용한다.</p>
-</div>
-<div class="section" id="id10">
+</section>
+<section id="id10">
 <h3><span class="section-number">1.1.2.5. </span>데이터 군집화와 대표 데이터 추출<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <p>예측은 데이터의 여러가지 필드간의 관계를 분석하는 작업이다. 하지만 때로는 필드간의 관계보다 레코드 간의 관계를 중요하게 볼 수도 있다. 즉 어떤 레코드와 어떤 레코드는 서로 닮았지만 어떤 레코드는 다른 레코드들과 닮지 않았다는 방식으로 레코드간의 유사성을 판단할 필요가 있다. 레코드 간의 유사성을 수치적으로 판단할 수 있다면 비슷한 레코드만을 그룹별로 모아서 여러개의 데이터 그룹을 만들 수 있다. 이러한 데이터 그룹을 군집(cluster)이라고 하고 이러한 군집을 만드는 작업을 <b>군집화(clustering)</b>라고 한다.</p>
 <p>군집화를 통해 많은 수의 레코드를 몇가지 대표적인 데이터로 나타낼 수 있으므로 데이터의 특성을 파악하는데 도움이 된다. 대표 데이터는 군집화라는 방법 이외에도 레코드간의 관계를 분석하는 다양한 방법으로 찾아낼 수 있다.</p>
 <p><b>아웃라이어(outlier)</b>는 대표적이고 전형적이지 않은 레코드를 말한다. 데이터 내에 아웃라이어가 있다는 것은 잘못된 방법으로 데이터가 수집되었거나 데이터 처리과정에서 오류가 발생한 것을 의미할 수도 있다. 만약 이러한 오류가 없다면 신용카드의 부정사용 등 비정상적인 상황이 발생한 것을 탐지하는데 사용될 수도 있다.</p>
-</div>
-</div>
-</div>
+</section>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -454,47 +614,40 @@ const thebe_selector_output = ".output, .cell_output"
 
               </div>
               
-        
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="01_00.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">1. </span>데이터 분석의 소개</p>
-            </div>
-        </a>
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="01_00.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">1. </span>데이터 분석의 소개</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="01_02.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">1.2. </span>데이터 분석을 위한 도구의 소개</p>
     </div>
-     <div id="next">
-        <a class="right-next" href="01_02.html" title="next page">
-            <div class="prevnext-info">
-                <p class="prevnext-label">next</p>
-                <p class="prevnext-title"><span class="section-number">1.2. </span>데이터 분석을 위한 도구의 소개</p>
-            </div>
-            <i class="prevnext-label fas fa-angle-right"></i>
-        </a>
-     </div>
-
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
-        
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-          으로 김도형<br/>
-        
-            &copy; 저작권 2021.<br/>
-      </p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 김도형<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
     </div>
-  </footer>
-</main>
+    
+</div>
 
 
       </div>
@@ -502,6 +655,7 @@ const thebe_selector_output = ".output, .cell_output"
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
   <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>

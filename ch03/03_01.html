@@ -4,7 +4,8 @@
 <html>
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
     <title>3.1. 회귀분석 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
@@ -20,13 +21,12 @@
     href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
     <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/sphinx-book-theme.css?digest=c3fdc42140077d1ad13ad2f1588a4309" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
     <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
     <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
     <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
-    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
   <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
@@ -35,9 +35,13 @@
     <script src="../_static/jquery.js"></script>
     <script src="../_static/underscore.js"></script>
     <script src="../_static/doctools.js"></script>
-    <script src="../_static/togglebutton.js"></script>
     <script src="../_static/clipboard.min.js"></script>
     <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script kind="utterances">
 
@@ -74,7 +78,7 @@ var addUtterances = () => {
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="../_static/sphinx-book-theme.12a9622fbb08dcb3a2a40b2c02b83a57.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
@@ -94,6 +98,20 @@ const thebe_selector_output = ".output, .cell_output"
     
   </head>
   <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
     
     <div class="container-fluid" id="banner"></div>
 
@@ -102,9 +120,10 @@ const thebe_selector_output = ".output, .cell_output"
     <div class="container-xl">
       <div class="row">
           
-<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
-    
-        <div class="navbar-brand-box">
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
     <a class="navbar-brand text-wrap" href="../index.html">
       
       
@@ -114,17 +133,18 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
-  <input type="search" class="form-control" name="q" id="search-input" placeholder="이 책 검색 ..." aria-label="이 책 검색 ..." autocomplete="off" >
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
-        <ul class="nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../index.html">
-   데이터 사이언스 스쿨 - 데이터 분석 편
-  </a>
- </li>
-</ul>
-<ul class="current nav bd-sidenav">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
+                    데이터 사이언스 스쿨 - 데이터 분석 편
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch01/01_00.html">
    1. 데이터 분석의 소개
@@ -189,8 +209,13 @@ const thebe_selector_output = ".output, .cell_output"
 </ul>
 
     </div>
-</nav> <!-- To handle the deprecated key -->
-
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
 </div>
 
 
@@ -198,98 +223,510 @@ const thebe_selector_output = ".output, .cell_output"
 
 
           
-<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
     
-    <div class="topbar container-xl fixed-top">
-    <div class="topbar-contents row">
-        <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show"></div>
-        <div class="col pl-md-4 topbar-main">
-            
-            <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
-                data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
-                aria-expanded="true" aria-label="탐색 전환" aria-controls="site-navigation"
-                title="탐색 전환" data-toggle="tooltip" data-placement="left">
-                <i class="fas fa-bars"></i>
-                <i class="fas fa-arrow-left"></i>
-                <i class="fas fa-arrow-up"></i>
-            </button>
-            
-            
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="이 페이지 다운로드"><i
-            class="fas fa-download"></i></button>
-
-    <div class="dropdown-buttons">
-        <!-- ipynb file if we had a myst markdown file -->
+    <div class="header-article row sticky-top noprint">
         
-        <!-- Download raw file -->
-        <a class="dropdown-buttons" href="../_sources/ch03/03_01.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="소스 파일 다운로드" data-toggle="tooltip"
-                data-placement="left">.ipynb</button></a>
-        <!-- Download PDF via print -->
-        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="PDF로 인쇄"
-            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch03/03_01.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+<a href="https://github.com/datascienceschool/book_data_analysis"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="bottom"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+
+</a>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/ch03/03_01.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
     </div>
 </div>
 
-            <!-- Source interaction buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Connect with source repository"><i class="fab fa-github"></i></button>
-    <div class="dropdown-buttons sourcebuttons">
-        <a class="repository-button"
-            href="https://github.com/datascienceschool/book_data_analysis"><button type="button" class="btn btn-secondary topbarbtn"
-                data-toggle="tooltip" data-placement="left" title="소스 저장소"><i
-                    class="fab fa-github"></i>저장소</button></a>
-        
-        
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
     </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.1.1. 회귀분석 문제의 예
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.1.2. 회귀분석 모형
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.1.3. 선형 회귀분석
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
-
-            <!-- Full screen (wrap in <a> to have style consistency -->
-
-<a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
-        data-placement="bottom" onclick="toggleFullScreen()" aria-label="전체 화면으로보기"
-        title="전체 화면으로보기"><i
-            class="fas fa-expand"></i></button></a>
-
-            <!-- Launch buttons -->
-
-<div class="dropdown-buttons-trigger">
-    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn"
-        aria-label="Launch interactive content"><i class="fas fa-rocket"></i></button>
-    <div class="dropdown-buttons">
-        
-        <a class="binder-button" href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch03/03_01.ipynb"><button type="button"
-                class="btn btn-secondary topbarbtn" title="시작하다 Binder" data-toggle="tooltip"
-                data-placement="left"><img class="binder-button-logo"
-                    src="../_static/images/logo_binder.svg"
-                    alt="Interact on binder">Binder</button></a>
-        
-        
-        
-        
     </div>
-</div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>회귀분석</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.1.1. 회귀분석 문제의 예
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.1.2. 회귀분석 모형
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.1.3. 선형 회귀분석
+  </a>
+ </li>
+</ul>
 
-        </div>
-
-        <!-- Table of contents -->
-        <div class="d-none d-md-block col-md-2 bd-toc show">
-            
-        </div>
-    </div>
-</div>
-    <div id="main-content" class="row">
-        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
-        
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
               <div>
                 
-  <div class="tex2jax_ignore mathjax_ignore section" id="id1">
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.1. </span>회귀분석<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>어떤 수치형 변수의 값이 다른 변수의 값에 의해 어떻게 영향을 받는지를 분석하는 방법을 <b>회귀분석(regression analysis)</b>이라고 한다.</p>
-<p>예를 들어 다음 데이터는 1940년부터 1950년까지의 미국 전체의 소득(income)과 지출(expenditure) 데이터이다. 테이블에서 하나의 레코드는 하나의 연도(year)를 나타낸다.</p>
+<p>회귀분석을 하려면 영향을 주는 변수들과 영향을 받는 변수가 무엇인지를 결정해야 한다. 회귀분석에서 분석의 대상이 되는 수치형 변수를 <b>종속변수(independent variable)</b>라 하고 그 종속변수에 영향을 주는 다른 변수들을 <b>독립변수(dependent variable)</b>라 한다. 보통 종속변수는 <span class="math notranslate nohighlight">\(y\)</span> 기호로 나타내고 독립변수는 <span class="math notranslate nohighlight">\(x\)</span> 기호로 나타낸다. 독립변수가 여러개 있을 때는 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 등으로 아랫첨자를 이용하여 표시한다.</p>
+<p>회귀분석에서 종속변수와 독립변수의 관계는 다음과 같은 다이어그램으로 표현할 수 있다. 화살표는 변수간의 관계를 나타내는 것으로 독립변수에서 종속변수를 향하는 방향으로 그린다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_3_0.png" src="../_images/03_01_3_0.png" />
+</div>
+</div>
+<section id="id2">
+<h2><span class="section-number">3.1.1. </span>회귀분석 문제의 예<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>다음 데이터는 1940년부터 1950년까지의 미국 전체의 소득(income)과 지출(expenditure) 데이터다. 테이블에서 하나의 레코드는 하나의 연도(year)를 나타낸다. war 열은 전쟁이 있던 연도에는 1, 그렇지 않은 연도에는 0인 값이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;http://www.stern.nyu.edu/~wgreene/Text/Edition7/TableF1-1.csv&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">SSLCertVerificationError</span><span class="g g-Whitespace">                  </span>Traceback (most recent call last)
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1353</span>             <span class="k">try</span><span class="p">:</span>
+<span class="ne">-&gt; </span><span class="mi">1354</span>                 <span class="n">h</span><span class="o">.</span><span class="n">request</span><span class="p">(</span><span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">(),</span> <span class="n">req</span><span class="o">.</span><span class="n">selector</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1355</span>                           <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/http/client.py</span> in <span class="ni">request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1254</span>         <span class="sd">&quot;&quot;&quot;Send a complete request to the server.&quot;&quot;&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1255</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_request</span><span class="p">(</span><span class="n">method</span><span class="p">,</span> <span class="n">url</span><span class="p">,</span> <span class="n">body</span><span class="p">,</span> <span class="n">headers</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1256</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/http/client.py</span> in <span class="ni">_send_request</span><span class="nt">(self, method, url, body, headers, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1300</span>             <span class="n">body</span> <span class="o">=</span> <span class="n">_encode</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="s1">&#39;body&#39;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1301</span>         <span class="bp">self</span><span class="o">.</span><span class="n">endheaders</span><span class="p">(</span><span class="n">body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1302</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/http/client.py</span> in <span class="ni">endheaders</span><span class="nt">(self, message_body, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1249</span>             <span class="k">raise</span> <span class="n">CannotSendHeader</span><span class="p">()</span>
+<span class="ne">-&gt; </span><span class="mi">1250</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_send_output</span><span class="p">(</span><span class="n">message_body</span><span class="p">,</span> <span class="n">encode_chunked</span><span class="o">=</span><span class="n">encode_chunked</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1251</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/http/client.py</span> in <span class="ni">_send_output</span><span class="nt">(self, message_body, encode_chunked)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1009</span>         <span class="k">del</span> <span class="bp">self</span><span class="o">.</span><span class="n">_buffer</span><span class="p">[:]</span>
+<span class="ne">-&gt; </span><span class="mi">1010</span>         <span class="bp">self</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1011</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/http/client.py</span> in <span class="ni">send</span><span class="nt">(self, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">949</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">auto_open</span><span class="p">:</span>
+<span class="ne">--&gt; </span><span class="mi">950</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">connect</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">951</span>             <span class="k">else</span><span class="p">:</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/http/client.py</span> in <span class="ni">connect</span><span class="nt">(self)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1423</span> 
+<span class="ne">-&gt; </span><span class="mi">1424</span>             <span class="bp">self</span><span class="o">.</span><span class="n">sock</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="o">.</span><span class="n">wrap_socket</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">sock</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1425</span>                                                   <span class="n">server_hostname</span><span class="o">=</span><span class="n">server_hostname</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/ssl.py</span> in <span class="ni">wrap_socket</span><span class="nt">(self, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, session)</span>
+<span class="g g-Whitespace">    </span><span class="mi">499</span>         <span class="c1"># ctx._wrap_socket()</span>
+<span class="ne">--&gt; </span><span class="mi">500</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">sslsocket_class</span><span class="o">.</span><span class="n">_create</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span>             <span class="n">sock</span><span class="o">=</span><span class="n">sock</span><span class="p">,</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/ssl.py</span> in <span class="ni">_create</span><span class="nt">(cls, sock, server_side, do_handshake_on_connect, suppress_ragged_eofs, server_hostname, context, session)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1039</span>                         <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">&quot;do_handshake_on_connect should not be specified for non-blocking sockets&quot;</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1040</span>                     <span class="bp">self</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1041</span>             <span class="k">except</span> <span class="p">(</span><span class="ne">OSError</span><span class="p">,</span> <span class="ne">ValueError</span><span class="p">):</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/ssl.py</span> in <span class="ni">do_handshake</span><span class="nt">(self, block)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1308</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">settimeout</span><span class="p">(</span><span class="kc">None</span><span class="p">)</span>
+<span class="ne">-&gt; </span><span class="mi">1309</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_sslobj</span><span class="o">.</span><span class="n">do_handshake</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1310</span>         <span class="k">finally</span><span class="p">:</span>
+
+<span class="ne">SSLCertVerificationError</span>: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1125)
+
+<span class="n">During</span> <span class="n">handling</span> <span class="n">of</span> <span class="n">the</span> <span class="n">above</span> <span class="n">exception</span><span class="p">,</span> <span class="n">another</span> <span class="n">exception</span> <span class="n">occurred</span><span class="p">:</span>
+
+<span class="ne">URLError</span><span class="g g-Whitespace">                                  </span>Traceback (most recent call last)
+<span class="o">&lt;</span><span class="n">ipython</span><span class="o">-</span><span class="nb">input</span><span class="o">-</span><span class="mi">1</span><span class="o">-</span><span class="mi">13</span><span class="n">ea58c78e0a</span><span class="o">&gt;</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
+<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="g g-Whitespace">      </span><span class="mi">2</span> 
+<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;http://www.stern.nyu.edu/~wgreene/Text/Edition7/TableF1-1.csv&quot;</span><span class="p">)</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/util/_decorators.py</span> in <span class="ni">wrapper</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">309</span>                     <span class="n">stacklevel</span><span class="o">=</span><span class="n">stacklevel</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">310</span>                 <span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">311</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">312</span> 
+<span class="g g-Whitespace">    </span><span class="mi">313</span>         <span class="k">return</span> <span class="n">wrapper</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">read_csv</span><span class="nt">(filepath_or_buffer, sep, delimiter, header, names, index_col, usecols, squeeze, prefix, mangle_dupe_cols, dtype, engine, converters, true_values, false_values, skipinitialspace, skiprows, skipfooter, nrows, na_values, keep_default_na, na_filter, verbose, skip_blank_lines, parse_dates, infer_datetime_format, keep_date_col, date_parser, dayfirst, cache_dates, iterator, chunksize, compression, thousands, decimal, lineterminator, quotechar, quoting, doublequote, escapechar, comment, encoding, encoding_errors, dialect, error_bad_lines, warn_bad_lines, on_bad_lines, delim_whitespace, low_memory, memory_map, float_precision, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">678</span>     <span class="n">kwds</span><span class="o">.</span><span class="n">update</span><span class="p">(</span><span class="n">kwds_defaults</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">679</span> 
+<span class="ne">--&gt; </span><span class="mi">680</span>     <span class="k">return</span> <span class="n">_read</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">681</span> 
+<span class="g g-Whitespace">    </span><span class="mi">682</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_read</span><span class="nt">(filepath_or_buffer, kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">573</span> 
+<span class="g g-Whitespace">    </span><span class="mi">574</span>     <span class="c1"># Create the parser.</span>
+<span class="ne">--&gt; </span><span class="mi">575</span>     <span class="n">parser</span> <span class="o">=</span> <span class="n">TextFileReader</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="o">**</span><span class="n">kwds</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">576</span> 
+<span class="g g-Whitespace">    </span><span class="mi">577</span>     <span class="k">if</span> <span class="n">chunksize</span> <span class="ow">or</span> <span class="n">iterator</span><span class="p">:</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">__init__</span><span class="nt">(self, f, engine, **kwds)</span>
+<span class="g g-Whitespace">    </span><span class="mi">931</span> 
+<span class="g g-Whitespace">    </span><span class="mi">932</span>         <span class="bp">self</span><span class="o">.</span><span class="n">handles</span><span class="p">:</span> <span class="n">IOHandles</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span>
+<span class="ne">--&gt; </span><span class="mi">933</span>         <span class="bp">self</span><span class="o">.</span><span class="n">_engine</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_make_engine</span><span class="p">(</span><span class="n">f</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">engine</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">934</span> 
+<span class="g g-Whitespace">    </span><span class="mi">935</span>     <span class="k">def</span> <span class="nf">close</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/io/parsers/readers.py</span> in <span class="ni">_make_engine</span><span class="nt">(self, f, engine)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1215</span>             <span class="c1"># &quot;Union[str, PathLike[str], ReadCsvBuffer[bytes], ReadCsvBuffer[str]]&quot;</span>
+<span class="g g-Whitespace">   </span><span class="mi">1216</span>             <span class="c1"># , &quot;str&quot;, &quot;bool&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;, &quot;Any&quot;</span>
+<span class="ne">-&gt; </span><span class="mi">1217</span>             <span class="bp">self</span><span class="o">.</span><span class="n">handles</span> <span class="o">=</span> <span class="n">get_handle</span><span class="p">(</span>  <span class="c1"># type: ignore[call-overload]</span>
+<span class="g g-Whitespace">   </span><span class="mi">1218</span>                 <span class="n">f</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1219</span>                 <span class="n">mode</span><span class="p">,</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">get_handle</span><span class="nt">(path_or_buf, mode, encoding, compression, memory_map, is_text, errors, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">668</span> 
+<span class="g g-Whitespace">    </span><span class="mi">669</span>     <span class="c1"># open URLs</span>
+<span class="ne">--&gt; </span><span class="mi">670</span>     <span class="n">ioargs</span> <span class="o">=</span> <span class="n">_get_filepath_or_buffer</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">671</span>         <span class="n">path_or_buf</span><span class="p">,</span>
+<span class="g g-Whitespace">    </span><span class="mi">672</span>         <span class="n">encoding</span><span class="o">=</span><span class="n">encoding</span><span class="p">,</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">_get_filepath_or_buffer</span><span class="nt">(filepath_or_buffer, encoding, compression, mode, storage_options)</span>
+<span class="g g-Whitespace">    </span><span class="mi">337</span>         <span class="c1"># assuming storage_options is to be interpreted as headers</span>
+<span class="g g-Whitespace">    </span><span class="mi">338</span>         <span class="n">req_info</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">Request</span><span class="p">(</span><span class="n">filepath_or_buffer</span><span class="p">,</span> <span class="n">headers</span><span class="o">=</span><span class="n">storage_options</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">339</span>         <span class="k">with</span> <span class="n">urlopen</span><span class="p">(</span><span class="n">req_info</span><span class="p">)</span> <span class="k">as</span> <span class="n">req</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">340</span>             <span class="n">content_encoding</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;Content-Encoding&quot;</span><span class="p">,</span> <span class="kc">None</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">341</span>             <span class="k">if</span> <span class="n">content_encoding</span> <span class="o">==</span> <span class="s2">&quot;gzip&quot;</span><span class="p">:</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/site-packages/pandas/io/common.py</span> in <span class="ni">urlopen</span><span class="nt">(*args, **kwargs)</span>
+<span class="g g-Whitespace">    </span><span class="mi">237</span>     <span class="kn">import</span> <span class="nn">urllib.request</span>
+<span class="g g-Whitespace">    </span><span class="mi">238</span> 
+<span class="ne">--&gt; </span><span class="mi">239</span>     <span class="k">return</span> <span class="n">urllib</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">urlopen</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">240</span> 
+<span class="g g-Whitespace">    </span><span class="mi">241</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">urlopen</span><span class="nt">(url, data, timeout, cafile, capath, cadefault, context)</span>
+<span class="g g-Whitespace">    </span><span class="mi">220</span>     <span class="k">else</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">221</span>         <span class="n">opener</span> <span class="o">=</span> <span class="n">_opener</span>
+<span class="ne">--&gt; </span><span class="mi">222</span>     <span class="k">return</span> <span class="n">opener</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">data</span><span class="p">,</span> <span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">223</span> 
+<span class="g g-Whitespace">    </span><span class="mi">224</span> <span class="k">def</span> <span class="nf">install_opener</span><span class="p">(</span><span class="n">opener</span><span class="p">):</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">open</span><span class="nt">(self, fullurl, data, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span>         <span class="k">for</span> <span class="n">processor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[]):</span>
+<span class="g g-Whitespace">    </span><span class="mi">530</span>             <span class="n">meth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">processor</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">531</span>             <span class="n">response</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">532</span> 
+<span class="g g-Whitespace">    </span><span class="mi">533</span>         <span class="k">return</span> <span class="n">response</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">http_response</span><span class="nt">(self, request, response)</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span>         <span class="c1"># request was successfully received, understood, and accepted.</span>
+<span class="g g-Whitespace">    </span><span class="mi">639</span>         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">200</span> <span class="o">&lt;=</span> <span class="n">code</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">640</span>             <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">641</span>                 <span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">hdrs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">642</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">error</span><span class="nt">(self, proto, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span>             <span class="n">http_err</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span>         <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span> <span class="o">+</span> <span class="n">args</span>
+<span class="ne">--&gt; </span><span class="mi">563</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span>         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span>             <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">_call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">500</span>         <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span>             <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">502</span>             <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>             <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span>                 <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">http_error_302</span><span class="nt">(self, req, fp, code, msg, headers)</span>
+<span class="g g-Whitespace">    </span><span class="mi">753</span>         <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">754</span> 
+<span class="ne">--&gt; </span><span class="mi">755</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">756</span> 
+<span class="g g-Whitespace">    </span><span class="mi">757</span>     <span class="n">http_error_301</span> <span class="o">=</span> <span class="n">http_error_303</span> <span class="o">=</span> <span class="n">http_error_307</span> <span class="o">=</span> <span class="n">http_error_302</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">open</span><span class="nt">(self, fullurl, data, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span>         <span class="k">for</span> <span class="n">processor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[]):</span>
+<span class="g g-Whitespace">    </span><span class="mi">530</span>             <span class="n">meth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">processor</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">531</span>             <span class="n">response</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">532</span> 
+<span class="g g-Whitespace">    </span><span class="mi">533</span>         <span class="k">return</span> <span class="n">response</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">http_response</span><span class="nt">(self, request, response)</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span>         <span class="c1"># request was successfully received, understood, and accepted.</span>
+<span class="g g-Whitespace">    </span><span class="mi">639</span>         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">200</span> <span class="o">&lt;=</span> <span class="n">code</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">640</span>             <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">641</span>                 <span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">hdrs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">642</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">error</span><span class="nt">(self, proto, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span>             <span class="n">http_err</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span>         <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span> <span class="o">+</span> <span class="n">args</span>
+<span class="ne">--&gt; </span><span class="mi">563</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span>         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span>             <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">_call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">500</span>         <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span>             <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">502</span>             <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>             <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span>                 <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">http_error_302</span><span class="nt">(self, req, fp, code, msg, headers)</span>
+<span class="g g-Whitespace">    </span><span class="mi">753</span>         <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">754</span> 
+<span class="ne">--&gt; </span><span class="mi">755</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">756</span> 
+<span class="g g-Whitespace">    </span><span class="mi">757</span>     <span class="n">http_error_301</span> <span class="o">=</span> <span class="n">http_error_303</span> <span class="o">=</span> <span class="n">http_error_307</span> <span class="o">=</span> <span class="n">http_error_302</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">open</span><span class="nt">(self, fullurl, data, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">529</span>         <span class="k">for</span> <span class="n">processor</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">process_response</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">protocol</span><span class="p">,</span> <span class="p">[]):</span>
+<span class="g g-Whitespace">    </span><span class="mi">530</span>             <span class="n">meth</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">processor</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">531</span>             <span class="n">response</span> <span class="o">=</span> <span class="n">meth</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">response</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">532</span> 
+<span class="g g-Whitespace">    </span><span class="mi">533</span>         <span class="k">return</span> <span class="n">response</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">http_response</span><span class="nt">(self, request, response)</span>
+<span class="g g-Whitespace">    </span><span class="mi">638</span>         <span class="c1"># request was successfully received, understood, and accepted.</span>
+<span class="g g-Whitespace">    </span><span class="mi">639</span>         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="mi">200</span> <span class="o">&lt;=</span> <span class="n">code</span> <span class="o">&lt;</span> <span class="mi">300</span><span class="p">):</span>
+<span class="ne">--&gt; </span><span class="mi">640</span>             <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">error</span><span class="p">(</span>
+<span class="g g-Whitespace">    </span><span class="mi">641</span>                 <span class="s1">&#39;http&#39;</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">,</span> <span class="n">code</span><span class="p">,</span> <span class="n">msg</span><span class="p">,</span> <span class="n">hdrs</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">642</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">error</span><span class="nt">(self, proto, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">561</span>             <span class="n">http_err</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="g g-Whitespace">    </span><span class="mi">562</span>         <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="nb">dict</span><span class="p">,</span> <span class="n">proto</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span> <span class="o">+</span> <span class="n">args</span>
+<span class="ne">--&gt; </span><span class="mi">563</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">564</span>         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">565</span>             <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">_call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">500</span>         <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span>             <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">502</span>             <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>             <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span>                 <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">http_error_302</span><span class="nt">(self, req, fp, code, msg, headers)</span>
+<span class="g g-Whitespace">    </span><span class="mi">753</span>         <span class="n">fp</span><span class="o">.</span><span class="n">close</span><span class="p">()</span>
+<span class="g g-Whitespace">    </span><span class="mi">754</span> 
+<span class="ne">--&gt; </span><span class="mi">755</span>         <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">parent</span><span class="o">.</span><span class="n">open</span><span class="p">(</span><span class="n">new</span><span class="p">,</span> <span class="n">timeout</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">timeout</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">756</span> 
+<span class="g g-Whitespace">    </span><span class="mi">757</span>     <span class="n">http_error_301</span> <span class="o">=</span> <span class="n">http_error_303</span> <span class="o">=</span> <span class="n">http_error_307</span> <span class="o">=</span> <span class="n">http_error_302</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">open</span><span class="nt">(self, fullurl, data, timeout)</span>
+<span class="g g-Whitespace">    </span><span class="mi">523</span> 
+<span class="g g-Whitespace">    </span><span class="mi">524</span>         <span class="n">sys</span><span class="o">.</span><span class="n">audit</span><span class="p">(</span><span class="s1">&#39;urllib.Request&#39;</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">full_url</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">data</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">headers</span><span class="p">,</span> <span class="n">req</span><span class="o">.</span><span class="n">get_method</span><span class="p">())</span>
+<span class="ne">--&gt; </span><span class="mi">525</span>         <span class="n">response</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_open</span><span class="p">(</span><span class="n">req</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">526</span> 
+<span class="g g-Whitespace">    </span><span class="mi">527</span>         <span class="c1"># post-process response</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">_open</span><span class="nt">(self, req, data)</span>
+<span class="g g-Whitespace">    </span><span class="mi">540</span> 
+<span class="g g-Whitespace">    </span><span class="mi">541</span>         <span class="n">protocol</span> <span class="o">=</span> <span class="n">req</span><span class="o">.</span><span class="n">type</span>
+<span class="ne">--&gt; </span><span class="mi">542</span>         <span class="n">result</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">_call_chain</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">handle_open</span><span class="p">,</span> <span class="n">protocol</span><span class="p">,</span> <span class="n">protocol</span> <span class="o">+</span>
+<span class="g g-Whitespace">    </span><span class="mi">543</span>                                   <span class="s1">&#39;_open&#39;</span><span class="p">,</span> <span class="n">req</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">544</span>         <span class="k">if</span> <span class="n">result</span><span class="p">:</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">_call_chain</span><span class="nt">(self, chain, kind, meth_name, *args)</span>
+<span class="g g-Whitespace">    </span><span class="mi">500</span>         <span class="k">for</span> <span class="n">handler</span> <span class="ow">in</span> <span class="n">handlers</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">501</span>             <span class="n">func</span> <span class="o">=</span> <span class="nb">getattr</span><span class="p">(</span><span class="n">handler</span><span class="p">,</span> <span class="n">meth_name</span><span class="p">)</span>
+<span class="ne">--&gt; </span><span class="mi">502</span>             <span class="n">result</span> <span class="o">=</span> <span class="n">func</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">)</span>
+<span class="g g-Whitespace">    </span><span class="mi">503</span>             <span class="k">if</span> <span class="n">result</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
+<span class="g g-Whitespace">    </span><span class="mi">504</span>                 <span class="k">return</span> <span class="n">result</span>
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">https_open</span><span class="nt">(self, req)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1395</span> 
+<span class="g g-Whitespace">   </span><span class="mi">1396</span>         <span class="k">def</span> <span class="nf">https_open</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">req</span><span class="p">):</span>
+<span class="ne">-&gt; </span><span class="mi">1397</span>             <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">do_open</span><span class="p">(</span><span class="n">http</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">HTTPSConnection</span><span class="p">,</span> <span class="n">req</span><span class="p">,</span>
+<span class="g g-Whitespace">   </span><span class="mi">1398</span>                 <span class="n">context</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_context</span><span class="p">,</span> <span class="n">check_hostname</span><span class="o">=</span><span class="bp">self</span><span class="o">.</span><span class="n">_check_hostname</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1399</span> 
+
+<span class="nn">~/opt/anaconda3/lib/python3.8/urllib/request.py</span> in <span class="ni">do_open</span><span class="nt">(self, http_class, req, **http_conn_args)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1355</span>                           <span class="n">encode_chunked</span><span class="o">=</span><span class="n">req</span><span class="o">.</span><span class="n">has_header</span><span class="p">(</span><span class="s1">&#39;Transfer-encoding&#39;</span><span class="p">))</span>
+<span class="g g-Whitespace">   </span><span class="mi">1356</span>             <span class="k">except</span> <span class="ne">OSError</span> <span class="k">as</span> <span class="n">err</span><span class="p">:</span> <span class="c1"># timeout error</span>
+<span class="ne">-&gt; </span><span class="mi">1357</span>                 <span class="k">raise</span> <span class="n">URLError</span><span class="p">(</span><span class="n">err</span><span class="p">)</span>
+<span class="g g-Whitespace">   </span><span class="mi">1358</span>             <span class="n">r</span> <span class="o">=</span> <span class="n">h</span><span class="o">.</span><span class="n">getresponse</span><span class="p">()</span>
+<span class="g g-Whitespace">   </span><span class="mi">1359</span>         <span class="k">except</span><span class="p">:</span>
+
+<span class="ne">URLError</span>: &lt;urlopen error [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1125)&gt;
+</pre></div>
+</div>
+</div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
@@ -394,7 +831,7 @@ const thebe_selector_output = ".output, .cell_output"
 </table>
 </div></div></div>
 </div>
-<p>이 데이터를 다음과 같이 소득을 가로축으로 지출을 세로축으로 한 스캐터플롯(scatter plot)으로 표시한다. 이 그래프에서는 하나의 점이 하나의 연도 즉, 하나의 레코드를 표시한다.</p>
+<p>이 데이터를 다음과 같이 소득을 가로축으로 하고 지출을 세로축으로 한 스캐터플롯(scatter plot)으로 표시하자. 이 그래프에서는 하나의 점이 하나의 연도 즉, 하나의 레코드를 표시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -405,21 +842,32 @@ const thebe_selector_output = ".output, .cell_output"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_01_5_0.png" src="../_images/03_01_5_0.png" />
+<img alt="../_images/03_01_9_0.png" src="../_images/03_01_9_0.png" />
 </div>
 </div>
-<p>이 그래프를 보면 소득이 증가한 경우에는 지출도 같이 증가하는 것처럼 보인다.</p>
-<p>회귀분석에서 분석의 대상이 되는 수치형 변수를 <b>종속변수(independent variable)</b>라 하고 그 종속변수에 영향을 주는 다른 변수들을 <b>독립변수(dependent variable)</b>라 한다. 보통 종속변수는 <span class="math notranslate nohighlight">\(y\)</span> 기호로 나타내고 독립변수는 <span class="math notranslate nohighlight">\(x\)</span> 기호로 나타낸다. 독립변수가 여러개 있을 때는 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 등으로 아랫첨자를 이용하여 표시한다.</p>
-<p>회귀분석에서 종속변수와 독립변수의 관계는 다음과 같은 다이어그램으로 표현할 수 있다. 화살표는 변수간의 관계를 나타내는 것으로 독립변수에서 종속변수를 향하는 방향으로 그린다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/03_01_8_0.png" src="../_images/03_01_8_0.png" />
-</div>
-</div>
-<p>회귀분석은 복수의 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>와 하나의 종속변수 <span class="math notranslate nohighlight">\(y\)</span>간의 관계를 분석하는 것이다. 회귀분석을 하려면 독립변수와 종속변수의 관계를 수식으로 정해놓아야 한다. 이 수식을 회귀분석 모형(regression model)이라고 한다. 가장 많이 사용되는 회귀분석 모형은 선형 회귀분석 모형(linear regression model)이다. 선형 회귀분석 모형은 다음과 같은 수식으로 표현한다.</p>
+<p>이 그래프를 보면 소득이 증가한 경우에는 지출도 같이 증가하는 것처럼 보인다. 따라서 이 데이터에 대해 다음과 같은 질문을 할 수 있다.</p>
+<ul class="simple">
+<li><p>소득이 증가할 때 정말 지출이 증가하는가?</p></li>
+<li><p>소득이 단위소득(1)만큼 증가할 때 지출은 어느정도 증가하는가?</p></li>
+</ul>
+<p>우리는 회귀분석을 통해 이러한 질문에 대한 답을 얻을 수 있다.</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.1.2. </span>회귀분석 모형<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>회귀분석은 복수의 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>와 하나의 종속변수 <span class="math notranslate nohighlight">\(y\)</span>간의 관계를 분석하는 것이다. 회귀분석을 하려면 독립변수와 종속변수의 관계를 수식으로 정해놓아야 한다. 이 수식을 <b>회귀분석 모형(regression model)</b>이라고 한다. 회귀분석 모형은 일반적으로 다음과 같은 수식으로 표현한다.</p>
+<div class="math notranslate nohighlight">
+\[ y = f(x_1, x_2, x_3, \ldots, x_K) + \varepsilon \]</div>
+<p>이 수식에서 <span class="math notranslate nohighlight">\(f\)</span>는 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>와 종속변수 <span class="math notranslate nohighlight">\(y\)</span>간의 결정론적 관계를 나타내는 함수이다. 우리가 회귀분석 문제를 푼다는 것은 이 함수 <span class="math notranslate nohighlight">\(f\)</span>를 찾아내는 것이라고 할 수 있다.</p>
+<p>그런데 현실의 데이터에서는 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>만으로 정확히 종속변수 <span class="math notranslate nohighlight">\(y\)</span>의 값을 결정할 수 있는 함수가 존재하는 경우는 없으며 항상 어느 정도의 오차가 존재한다. <span class="math notranslate nohighlight">\(\varepsilon\)</span> 항은 바로 이 오차를 나타내는 항으로 <b>교란항(disturbance)</b>이라고 한다. 교란항은 우리가 예측할 수 없는 랜덤 변수다.</p>
+<p>교란항이 발생하는 이유는 여러가지가 있으나 가장 쉬운 설명 중의 하나는 현실에서 종속변수 <span class="math notranslate nohighlight">\(y\)</span>에 영향을 미치는 변수가 우리가 정해놓은 <span class="math notranslate nohighlight">\(K\)</span>개의 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>이외에도 휠씬 더 많이 존재하기 때문이다.</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.1.3. </span>선형 회귀분석<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>가장 많이 사용되는 회귀분석 모형은 선형 회귀분석 모형(linear regression model)이다. 선형 회귀분석 모형은 다음과 같은 수식으로 표현한다.</p>
 <div class="math notranslate nohighlight">
 \[ y = w_0 + w_1 x_1 + w_2 x_2 + \cdots + w_K x_K + \epsilon \]</div>
-</div>
+</section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -443,38 +891,33 @@ const thebe_selector_output = ".output, .cell_output"
 
               </div>
               
-        
-            
-
-
-
-<div class='prev-next-bottom'>
-    
-    <div id="prev">
-        <a class="left-prev" href="03_00.html" title="previous page">
-            <i class="prevnext-label fas fa-angle-left"></i>
-            <div class="prevnext-info">
-                <p class="prevnext-label">previous</p>
-                <p class="prevnext-title"><span class="section-number">3. </span>수치형 데이터의 상관관계를 분석한다</p>
-            </div>
-        </a>
-    </div>
-
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="03_00.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>수치형 데이터의 상관관계를 분석한다</p>
+        </div>
+    </a>
 </div>
-        
+            </footer>
         </div>
     </div>
-    <footer class="footer">
-    <div class="container">
-      <p>
-        
-          으로 김도형<br/>
-        
-            &copy; 저작권 2021.<br/>
-      </p>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By 김도형<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
     </div>
-  </footer>
-</main>
+    
+</div>
 
 
       </div>
@@ -482,6 +925,7 @@ const thebe_selector_output = ".output, .cell_output"
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
   <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
 
   </body>
 </html>
