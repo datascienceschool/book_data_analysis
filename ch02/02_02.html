@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.1. 확률적 데이터 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>2.2. 시각적 확률분포추정 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -87,8 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.2. 시각적 확률분포추정" href="02_02.html" />
-    <link rel="prev" title="2. 데이터의 신뢰성을 분석한다" href="02_00.html" />
+    <link rel="next" title="2.3. 이론적 확률분포추정" href="02_03.html" />
+    <link rel="prev" title="2.1. 확률적 데이터" href="02_01.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -181,13 +181,13 @@ const thebe_selector_output = ".output, .cell_output"
    </i>
   </label>
   <ul class="current">
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_01.html">
      2.1. 확률적 데이터
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_02.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      2.2. 시각적 확률분포추정
     </a>
    </li>
@@ -280,7 +280,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch02/02_01.ipynb"
+        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch02/02_02.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -336,7 +336,7 @@ title="Source repository"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/ch02/02_01.ipynb"
+        <a href="../_sources/ch02/02_02.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -396,46 +396,26 @@ title="Print to PDF"
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seaborn">
+   2.2.1. seaborn 패키지
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   2.1.1. 측정과 추론
+   2.2.2. 범주형 데이터의 확률분포 시각화
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   2.1.2. 변수와 값
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   2.1.3. 확률적 데이터
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   2.1.4. 확률분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id6">
-   2.1.5. 확률분포함수
+   2.2.3. 수치형 데이터의 확률분포 시각화
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     2.1.5.1. 확률질량함수
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     2.1.5.2. 확률밀도함수
+    <a class="reference internal nav-link" href="#id4">
+     2.2.3.1. 러그플롯
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id9">
-   2.1.6. 데이터 분석의 기본 문제
-  </a>
  </li>
 </ul>
 
@@ -446,7 +426,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>확률적 데이터</h1>
+                <h1>시각적 확률분포추정</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -457,46 +437,26 @@ title="Print to PDF"
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#seaborn">
+   2.2.1. seaborn 패키지
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   2.1.1. 측정과 추론
+   2.2.2. 범주형 데이터의 확률분포 시각화
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   2.1.2. 변수와 값
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   2.1.3. 확률적 데이터
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   2.1.4. 확률분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id6">
-   2.1.5. 확률분포함수
+   2.2.3. 수치형 데이터의 확률분포 시각화
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     2.1.5.1. 확률질량함수
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     2.1.5.2. 확률밀도함수
+    <a class="reference internal nav-link" href="#id4">
+     2.2.3.1. 러그플롯
     </a>
    </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id9">
-   2.1.6. 데이터 분석의 기본 문제
-  </a>
  </li>
 </ul>
 
@@ -509,158 +469,245 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.1. </span>확률적 데이터<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<section id="id2">
-<h2><span class="section-number">2.1.1. </span>측정과 추론<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>데이터는 처음부터 그냥 존재하는 것이 아니라 사람의 행위에 의해 얻어지는 것이다. 현실세계에서 데이터를 얻는 <b>측정(measure)</b>이라고 한다. 예를 들어 어떤 식당의 일일 매출액이라는 데이터를 얻어내는 과정은 측정이라고 할 수 있다. 대부분의 경우 반복하여 측정을 실시할 수 있기 때문에 데이터는 복수의 값을 가지게 된다. 다음은 열흘동안 어떤 식당의 일매출액을 측정한 값이다. 이 데이터는 10개의 값을 가진다. (여기에서 매출액의 단위는 만원이고 매출액이 10만원 단위의 값만 가진다고 가정한다.)</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>날짜</p></th>
-<th class="head"><p>일매출액</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>2022.1.1</p></td>
-<td><p>30</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.2</p></td>
-<td><p>10</p></td>
-</tr>
-<tr class="row-even"><td><p>2022.1.3</p></td>
-<td><p>30</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.4</p></td>
-<td><p>20</p></td>
-</tr>
-<tr class="row-even"><td><p>2022.1.5</p></td>
-<td><p>40</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.6</p></td>
-<td><p>30</p></td>
-</tr>
-<tr class="row-even"><td><p>2022.1.7</p></td>
-<td><p>20</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.8</p></td>
-<td><p>50</p></td>
-</tr>
-<tr class="row-even"><td><p>2022.1.9</p></td>
-<td><p>30</p></td>
-</tr>
-<tr class="row-odd"><td><p>2022.1.10</p></td>
-<td><p>40</p></td>
-</tr>
-</tbody>
+<h1><span class="section-number">2.2. </span>시각적 확률분포추정<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>앞 절에서 데이터 분석의 가장 기본적인 문제는 데이터의 표본값으로부터 해당 데이터의 확률분포함수를 찾아내는 확률분포추정 문제라고 하였다. 이 절에서는 이러한 확률분포추정 문제를 푸는 방법을 설명한다. 확률분포를 추정하는 방법은 간단하고 직관적인 시각적 확률분포추정 방법과 보다 논리적인 이론적 확률분포추정 방법이 있다. 이 절에서는 우선 시각적인 확률분포추정 방법을 설명한다.</p>
+<p>시각적 확률분포추정 방법은 다양한 차트/그래프로 확률분포의 모양을 추정하는 것이다. 데이터의 유형에 따라 다음과 같은 방법을 사용할 수 있다.</p>
+<ul class="simple">
+<li><p>범주형 데이터의 경우:</p>
+<ul>
+<li><p>카운트플롯(count plot)</p></li>
+</ul>
+</li>
+<li><p>수치형 데이터의 경우:</p>
+<ul>
+<li><p>러그플롯(rug plot)</p></li>
+<li><p>히스토그램(histogram)</p></li>
+<li><p>커널밀도추정법(KDE: Kernel Density Estimation)</p></li>
+</ul>
+</li>
+</ul>
+<section id="seaborn">
+<h2><span class="section-number">2.2.1. </span>seaborn 패키지<a class="headerlink" href="#seaborn" title="Permalink to this headline">#</a></h2>
+<p>이러한 기능은 여러가지 파이썬 패키지에서 제공하지만 여기에서는 seaborn 패키지에서 제공하는 기능에 대해 설명한다. seaborn 패키지는 파이썬의 기본 그래프 패키지인 matplotlib 패키지상에서 구현된 통계용 시각화 패키지다. 다음 명령으로 설치할 수 있다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">U</span> <span class="n">seaborn</span>
+</pre></div>
+</div>
+<p>seaborn 패키지는 보통 <code class="docutils literal notranslate"><span class="pre">sns</span></code>라는 별칭으로 임포트한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>seaborn 패키지에서는 몇가지 예제 데이터도 제공한다. 예를 들어 <code class="docutils literal notranslate"><span class="pre">load_dataset</span></code> 명령으로 식당의 고객 및 팁 데이터를 로드할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+<span class="n">tips</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>29.03</td>
+      <td>5.92</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>27.18</td>
+      <td>2.00</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>241</th>
+      <td>22.67</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>17.82</td>
+      <td>1.75</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>18.78</td>
+      <td>3.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Thur</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+  </tbody>
 </table>
+<p>244 rows × 7 columns</p>
+</div></div></div>
+</div>
+<p>위 데이터에서 하나의 레코드 행은 한 그룹의 고객을 나타낸다. 각 열 필드의 의미는 다음과 같다.</p>
+<ul class="simple">
+<li><p>total_bill : 고객이 지불한 금액</p></li>
+<li><p>tip : 고객이 낸 팁 금액</p></li>
+<li><p>sex : 지불한 고객의 성별</p></li>
+<li><p>smoker: 흡연유무</p></li>
+<li><p>day : 요일</p></li>
+<li><p>time : 중식 및 석식 여부</p></li>
+<li><p>size : 그룹의 인원수</p></li>
+</ul>
+</section>
+<section id="id2">
+<h2><span class="section-number">2.2.2. </span>범주형 데이터의 확률분포 시각화<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>범주형 데이터의 경우에는 각각의 값이 나온 횟수를 바차트로 표시하는 카운트플롯을 사용한다. 팁 데이터에서 <code class="docutils literal notranslate"><span class="pre">sex</span></code>, <code class="docutils literal notranslate"><span class="pre">smoker</span></code>, <code class="docutils literal notranslate"><span class="pre">day</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>는 범주형 데이터다.</p>
+<p>seaborn 패키지는 카운트플롯을 그리는 <code class="docutils literal notranslate"><span class="pre">countplot</span></code> 함수를 제공한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_02_12_0.png" src="../_images/02_02_12_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_02_13_0.png" src="../_images/02_02_13_0.png" />
+</div>
+</div>
 </section>
 <section id="id3">
-<h2><span class="section-number">2.1.2. </span>변수와 값<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>측정을 통해 데이터를 얻어내는 과정은 자판기에서 물건이 나오는 것에 비유할 수 있다. 자판기의 버튼을 누를 때마다 상품이 하나씩 나오는 것처럼 우리가 측정행위를 하면 <b>값(value)</b>이 하나씩 나오게 된다. 이 때 우리가 관심을 가져야 할 것은 자판기로부터 나오는 상품 즉, 데이터의 값 뿐아니라 그 값을 만들어내는 자판기다. 자판기는 일종의 데이터 값 생성기(value-generator)라고 부를 수 있다. 데이터 과학에서는 이러한 데이터 생성기를 <b>변수(variable)</b>라고 부른다. 다른 수학 분야나 프로그래밍 등에서는 변수가 특정한 하나의 값을 대표하는 것이지만 데이터 과학에서는 변수를 여러가지 값을 만들어내는 생성기로 취급한다. 측정행위로 얻어진 값은 해당 변수가 만들어낸 값이라고 볼 수 있다. 데이터를 다룰 때는 변수와 그 변수가 만들어낼 수 있는 값을 구분하여 생각해야 한다. 위의 예에서 “일매출액”은 변수이고 10, 20 등의 숫자는 그 변수가 생성한 값이다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_01_6_0.png" src="../_images/02_01_6_0.png" />
-</div>
-</div>
-</section>
+<h2><span class="section-number">2.2.3. </span>수치형 데이터의 확률분포 시각화<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>수치형 데이터의 경우에는 러그플롯, 히스토그램, 커널밀도추정법 등을 사용한다. 팁 데이터에서 total_bill, tip은 수치형 데이터다.</p>
 <section id="id4">
-<h2><span class="section-number">2.1.3. </span>확률적 데이터<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<p>측정에 의해 얻어지는 데이터의 대부분은 다음과 같은 특징을 가진다. (사실 다음 특성은 측정에 의해 얻지는 데이터 뿐 아니라 추론에 의해 도출되는 데이터도 마찬가지이다. 그러나 이 절에서는 우선 설명을 단순화화기 위해 측정에 의해 얻어지는 데이터로 국한하여 생각하자.)</p>
-<ul class="simple">
-<li><p>반복적으로 얻을 수 있다.</p></li>
-<li><p>측정할 때마다 얻어지는 값이 바뀌는 경우가 대부분이다.</p></li>
-<li><p>다음번에 다시 측정할 때 어떤 값이 나올지 정확히는 알 수 없다.</p></li>
-</ul>
-<p>위에서 예로 든 식당의 일매출액도 같은 특징을 가진다. 매일 매일 반복적으로 값이 나오며 이 값은 어제와 오늘이 다른 경우가 대부분이다. 또한 내일의 일매출액에 대해서도 정확한 값을 예측할 수 없다. 이러한 특징을 가지는 데이터를 <b>확률적 데이터(probabilistic data, random data)</b>라고 한다. 사실 데이터 분석의 대상이 되는 모든 데이터가 확률적 데이터라고 해도 무방할 것이다. 데이터가 확률적 데이터이면 그 데이터의 변수는 <b>확률변수(random variable)</b>라고 부른다.</p>
-<p>확률변수에서 값을 측정하는 과정을 <b>샘플링(sampling)</b> 혹은 <b>표본화</b>라고 하고 확률변수에서 측정한 데이터를 <b>표본값(sample value)</b>라 한다.</p>
-</section>
-<section id="id5">
-<h2><span class="section-number">2.1.4. </span>확률분포<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>데이터 분석을 위한 가장 기본적인 가정은 다음의 확률분포 가정이다.</p>
-<ul class="simple">
-<li><p>확률변수는 <b>확률분포(probability distribution)</b>라는 규칙에 의해 데이터를 생성해 낸다. 다만 이 확률분포는 사람이 직접 볼 수는 없고 측정으로 얻어낸 값으로부터 추측할 수 있을 뿐이다.</p></li>
-</ul>
-<div class="cell tag_remove-input docutils container">
+<h3><span class="section-number">2.2.3.1. </span>러그플롯<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>러그플롯은 데이터위 위치를 작은 선분(rug)으로 표시하는 방법이다. seaborn 패키지는 러그플롯을 그리는 <code class="docutils literal notranslate"><span class="pre">rugplot</span></code> 함수를 제공한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_01_11_0.png" src="../_images/02_01_11_0.png" />
+<img alt="../_images/02_02_18_0.png" src="../_images/02_02_18_0.png" />
 </div>
 </div>
 </section>
-<section id="id6">
-<h2><span class="section-number">2.1.5. </span>확률분포함수<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
-<p>확률분포는 데이터가 가질 수 있는 모든 값에 대해 그 값이 발생할 가능성을 표현한 것이다. 즉 다음과 같이 함수로 표현할 수 있다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_01_14_0.png" src="../_images/02_01_14_0.png" />
-</div>
-</div>
-<p>이 “값에 대응하는 가능성”을 확률 또는 확률밀도라고 부른다. 값의 유형이 범주형일 경우에는 확률이라고 하고 값의 유형이 수치형일 때는 확률밀도라고 한다. 따라서 데이터의 유형에 따라 확률분포함수는 다음과 같이 두가지 종류가 있을 수 있다.</p>
-<ul class="simple">
-<li><p>데이터가 범주형인 경우 : 확률질량함수</p></li>
-<li><p>데이터가 수치형인 경우 : 확률밀도함수</p></li>
-</ul>
-<section id="id7">
-<h3><span class="section-number">2.1.5.1. </span>확률질량함수<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
-<p>예를 들어 위에서 말한 식당의 일매출액이 10, 20, 30, 40, 50의 다섯가지 경우만 가능하고 다른 값은 나올 수 없다고 가정하자. 그러면 일매출액의 값은 다섯 종류의 값만 가질수 있는 범주형 데이터라고 할 수 있다. 이러한 범주형 데이터의 확률분포함수는 다음과 같은 표의 형태로 만들 수 있다.</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p>일매출액</p></th>
-<th class="head"><p>확률</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>10</p></td>
-<td><p>0.1</p></td>
-</tr>
-<tr class="row-odd"><td><p>20</p></td>
-<td><p>0.2</p></td>
-</tr>
-<tr class="row-even"><td><p>30</p></td>
-<td><p>0.4</p></td>
-</tr>
-<tr class="row-odd"><td><p>40</p></td>
-<td><p>0.2</p></td>
-</tr>
-<tr class="row-even"><td><p>50</p></td>
-<td><p>0.1</p></td>
-</tr>
-</tbody>
-</table>
-<p>이 표는 일매출액의 값을 입력으로 가지고 확률을 출력으로 가지는 함수라고 할 수 있다. 이러한 함수를 <b>확률질량함수(probability mass function)</b>라고 한다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_01_19_0.png" src="../_images/02_01_19_0.png" />
-</div>
-</div>
-<p>이 함수를 그래프로 표시하면 다음과 같다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_01_21_0.png" src="../_images/02_01_21_0.png" />
-</div>
-</div>
-</section>
-<section id="id8">
-<h3><span class="section-number">2.1.5.2. </span>확률밀도함수<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
-<p>데이터가 수치형인 경우에는 나올 수 있는 값의 종류가 무한하게 많으므로 위와 같이 표로 표시할 수 없다. 이 경우에는 <b>확률밀도함수(probability density function)</b>라는 것을 사용한다. 확률밀도함수는 확률질량함수처럼 데이터가 가질 수 있는 값을 입력으로 받지만 출력은 확률이 아니라 <b>확률밀도(probability density)</b>다. 확률이 범주형 값의 신뢰도를 나타내는 것처럼 확률밀도는 수치형 값의 신뢰도를 나타내는 값이지만 확률과는 다음과 같은 점이 다르다.</p>
-<ul class="simple">
-<li><p>확률은 0과 1사이의 값만을 가질 수 있지만 확률밀도는 0 이상인 임의의 양수값을 가질 수 있다.</p></li>
-<li><p>특정 구간의 확률밀도값을 적분하면 해당 구간의 값이 나올 확률이 된다.</p></li>
-<li><p>음의 무한대부터 양의 무한대까지의 모든 확률밀도를 적분하면 1이 된다.</p></li>
-</ul>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_01_24_0.png" src="../_images/02_01_24_0.png" />
-</div>
-</div>
-</section>
-</section>
-<section id="id9">
-<h2><span class="section-number">2.1.6. </span>데이터 분석의 기본 문제<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
-<p>데이터 분석을 할 때 가장 기본적인 문제는 측정한 표본값으로부터 확률변수의 확률분포를 찾아내는 것이다. 이를 <b>확률분포추정(estimation of probability distribution)</b> 문제라고 한다. 다음 절부터는 이 문제를 푸는 방법을 설명한다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_01_27_0.png" src="../_images/02_01_27_0.png" />
-</div>
-</div>
 </section>
 </section>
 
@@ -691,17 +738,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02_00.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="02_01.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2. </span>데이터의 신뢰성을 분석한다</p>
+            <p class="prev-next-title"><span class="section-number">2.1. </span>확률적 데이터</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="02_02.html" title="next page">
+    <a class='right-next' id="next-link" href="02_03.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.2. </span>시각적 확률분포추정</p>
+        <p class="prev-next-title"><span class="section-number">2.3. </span>이론적 확률분포추정</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
