@@ -200,7 +200,17 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_01.html">
-     3.1. 회귀분석
+     3.1. 회귀분석이란
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch03/03_02.html">
+     3.2. 회귀분석을 위한 준비
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch03/03_03.html">
+     3.3. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -394,22 +404,27 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id5">
    2.1.4. 확률분포
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   2.1.5. 확률분포함수
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     2.1.4.1. 확률질량함수
+    <a class="reference internal nav-link" href="#id7">
+     2.1.5.1. 확률질량함수
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     2.1.4.2. 확률밀도함수
+    <a class="reference internal nav-link" href="#id8">
+     2.1.5.2. 확률밀도함수
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   2.1.5. 데이터 분석의 기본 문제
+  <a class="reference internal nav-link" href="#id9">
+   2.1.6. 데이터 분석의 기본 문제
   </a>
  </li>
 </ul>
@@ -450,22 +465,27 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id5">
    2.1.4. 확률분포
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   2.1.5. 확률분포함수
+  </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     2.1.4.1. 확률질량함수
+    <a class="reference internal nav-link" href="#id7">
+     2.1.5.1. 확률질량함수
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     2.1.4.2. 확률밀도함수
+    <a class="reference internal nav-link" href="#id8">
+     2.1.5.2. 확률밀도함수
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   2.1.5. 데이터 분석의 기본 문제
+  <a class="reference internal nav-link" href="#id9">
+   2.1.6. 데이터 분석의 기본 문제
   </a>
  </li>
 </ul>
@@ -545,22 +565,32 @@ title="Print to PDF"
 </section>
 <section id="id5">
 <h2><span class="section-number">2.1.4. </span>확률분포<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>확률적 데이터를 만들어내는 확률변수는 아무렇게나 값을 생성하는 것이 아니라 특정한 규칙에 의해 데이터를 생성해 낸다. 확률변수가 값을 생성하는 규칙을 <b>확률분포(probability distribution)</b>라고 한다. 확률분포는 데이터가 가질 수 있는 모든 값과 각각의 값에 대한 확률을 나타낸 것이다.</p>
-<p>데이터 분석에서는 모든 확률변수에 확률분포가 정해져있다고 가정한다. 다만 이 확률분포는 사람이 직접 볼 수는 없고 측정으로 얻어낸 값으로부터 추측할 수 있을 뿐이다.</p>
-<p>확률분포는 데이터의 유형에 따라 다음과 같이 두가지 종류가 있을 수 있다.</p>
+<p>데이터 분석을 위한 가장 기본적인 가정은 다음의 확률분포 가정이다.</p>
 <ul class="simple">
-<li><p>데이터가 범주형인 경우 : 확률질량함수</p></li>
-<li><p>데이터가 수치형인 경우 : 확률밀도함수</p></li>
+<li><p>확률변수는 <b>확률분포(probability distribution)</b>라는 규칙에 의해 데이터를 생성해 낸다. 다만 이 확률분포는 사람이 직접 볼 수는 없고 측정으로 얻어낸 값으로부터 추측할 수 있을 뿐이다.</p></li>
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/02_01_11_0.png" src="../_images/02_01_11_0.png" />
 </div>
 </div>
+</section>
 <section id="id6">
-<h3><span class="section-number">2.1.4.1. </span>확률질량함수<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
-<p>확률분포는 여러가지 방법으로 표시할 수 있다. 데이터의 값이 범주형일 경우에는 표를 이용할 수 있다. 우선 데이터가 가질 수 있는 값을 모두 표시한 후에 그 값의 확률을 해당 값 옆에 표시한다. 예를 들어 위에서 말한 식당의 일매출액이 10, 20, 30, 40, 50의 다섯가지 경우만 가능하고 다른 값은 나올 수 없다고 가정하자. 그러면 일매출액의 값은 다섯 종류의 값만 가질수 있는 범주형 데이터라고 할 수 있다.
-따라서 다음과 같은 표의 형태로 확률분포 표를 만들 수 있다.</p>
+<h2><span class="section-number">2.1.5. </span>확률분포함수<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p>확률분포는 데이터가 가질 수 있는 모든 값에 대해 그 값이 발생할 가능성을 표현한 것이다. 즉 다음과 같이 함수로 표현할 수 있다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02_01_14_0.png" src="../_images/02_01_14_0.png" />
+</div>
+</div>
+<p>이 “값에 대응하는 가능성”을 확률 또는 확률밀도라고 부른다. 값의 유형이 범주형일 경우에는 확률이라고 하고 값의 유형이 수치형일 때는 확률밀도라고 한다. 따라서 데이터의 유형에 따라 확률분포함수는 다음과 같이 두가지 종류가 있을 수 있다.</p>
+<ul class="simple">
+<li><p>데이터가 범주형인 경우 : 확률질량함수</p></li>
+<li><p>데이터가 수치형인 경우 : 확률밀도함수</p></li>
+</ul>
+<section id="id7">
+<h3><span class="section-number">2.1.5.1. </span>확률질량함수<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>예를 들어 위에서 말한 식당의 일매출액이 10, 20, 30, 40, 50의 다섯가지 경우만 가능하고 다른 값은 나올 수 없다고 가정하자. 그러면 일매출액의 값은 다섯 종류의 값만 가질수 있는 범주형 데이터라고 할 수 있다. 이러한 범주형 데이터의 확률분포함수는 다음과 같은 표의 형태로 만들 수 있다.</p>
 <table class="colwidths-auto table">
 <thead>
 <tr class="row-odd"><th class="head"><p>일매출액</p></th>
@@ -588,18 +618,18 @@ title="Print to PDF"
 <p>이 표는 일매출액의 값을 입력으로 가지고 확률을 출력으로 가지는 함수라고 할 수 있다. 이러한 함수를 <b>확률질량함수(probability mass function)</b>라고 한다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/02_01_15_0.png" src="../_images/02_01_15_0.png" />
+<img alt="../_images/02_01_19_0.png" src="../_images/02_01_19_0.png" />
 </div>
 </div>
 <p>이 함수를 그래프로 표시하면 다음과 같다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/02_01_17_0.png" src="../_images/02_01_17_0.png" />
+<img alt="../_images/02_01_21_0.png" src="../_images/02_01_21_0.png" />
 </div>
 </div>
 </section>
-<section id="id7">
-<h3><span class="section-number">2.1.4.2. </span>확률밀도함수<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<section id="id8">
+<h3><span class="section-number">2.1.5.2. </span>확률밀도함수<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
 <p>데이터가 수치형인 경우에는 나올 수 있는 값의 종류가 무한하게 많으므로 위와 같이 표로 표시할 수 없다. 이 경우에는 <b>확률밀도함수(probability density function)</b>라는 것을 사용한다. 확률밀도함수는 확률질량함수처럼 데이터가 가질 수 있는 값을 입력으로 받지만 출력은 확률이 아니라 <b>확률밀도(probability density)</b>다. 확률이 범주형 값의 신뢰도를 나타내는 것처럼 확률밀도는 수치형 값의 신뢰도를 나타내는 값이지만 확률과는 다음과 같은 점이 다르다.</p>
 <ul class="simple">
 <li><p>확률은 0과 1사이의 값만을 가질 수 있지만 확률밀도는 0 이상인 임의의 양수값을 가질 수 있다.</p></li>
@@ -608,17 +638,17 @@ title="Print to PDF"
 </ul>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/02_01_20_0.png" src="../_images/02_01_20_0.png" />
+<img alt="../_images/02_01_24_0.png" src="../_images/02_01_24_0.png" />
 </div>
 </div>
 </section>
 </section>
-<section id="id8">
-<h2><span class="section-number">2.1.5. </span>데이터 분석의 기본 문제<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<section id="id9">
+<h2><span class="section-number">2.1.6. </span>데이터 분석의 기본 문제<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
 <p>데이터 분석을 할 때 가장 기본적인 문제는 측정한 표본값으로부터 확률변수의 확률분포를 찾아내는 것이다. 다음 절부터는 이 문제를 푸는 방법을 설명한다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
-<img alt="../_images/02_01_23_0.png" src="../_images/02_01_23_0.png" />
+<img alt="../_images/02_01_27_0.png" src="../_images/02_01_27_0.png" />
 </div>
 </div>
 </section>
