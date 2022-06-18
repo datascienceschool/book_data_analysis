@@ -415,6 +415,16 @@ title="Print to PDF"
      2.2.3.1. 러그플롯
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     2.2.3.2. 히스토그램
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     2.2.3.3. 커널밀도추정법
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -454,6 +464,16 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
      2.2.3.1. 러그플롯
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     2.2.3.2. 히스토그램
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     2.2.3.3. 커널밀도추정법
     </a>
    </li>
   </ul>
@@ -695,7 +715,7 @@ title="Print to PDF"
 <p>수치형 데이터의 경우에는 러그플롯, 히스토그램, 커널밀도추정법 등을 사용한다. 팁 데이터에서 total_bill, tip은 수치형 데이터다.</p>
 <section id="id4">
 <h3><span class="section-number">2.2.3.1. </span>러그플롯<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
-<p>러그플롯은 데이터위 위치를 작은 선분(rug)으로 표시하는 방법이다. seaborn 패키지는 러그플롯을 그리는 <code class="docutils literal notranslate"><span class="pre">rugplot</span></code> 함수를 제공한다.</p>
+<p>러그플롯은 데이터의 위치를 작은 선분(rug)으로 표시하는 방법이다. seaborn 패키지는 러그플롯을 그리는 <code class="docutils literal notranslate"><span class="pre">rugplot</span></code> 함수를 제공한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
@@ -705,6 +725,69 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/02_02_18_0.png" src="../_images/02_02_18_0.png" />
+</div>
+</div>
+<p>두가지 수치형 데이터의 분포를 동시에 나타낼 수도 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_02_20_0.png" src="../_images/02_02_20_0.png" />
+</div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">2.2.3.2. </span>히스토그램<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>히스토그램은 수치형 데이터를 그 범위에 따라 분류하여 범주형 데이터로 바꾼 후 카운트플롯을 그린 것이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_02_23_0.png" src="../_images/02_02_23_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">bins</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_02_25_0.png" src="../_images/02_02_25_0.png" />
+</div>
+</div>
+</section>
+<section id="id6">
+<h3><span class="section-number">2.2.3.3. </span>커널밀도추정법<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_02_27_0.png" src="../_images/02_02_27_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">kdeplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">bw</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_02_29_0.png" src="../_images/02_02_29_0.png" />
 </div>
 </div>
 </section>
