@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.3. 확률분포모형을 사용한 확률분포추정 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>2.5. 최대사후확률 모수추정법 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -85,12 +85,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.4. 최대가능도 모수추정법" href="02_04.html" />
-    <link rel="prev" title="2.2. 시각적 확률분포추정" href="02_02.html" />
+    <link rel="next" title="3. 수치형 데이터의 상관관계를 분석한다" href="../ch03/03_00.html" />
+    <link rel="prev" title="2.4. 최대가능도 모수추정법" href="02_04.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -193,8 +191,8 @@ const thebe_selector_output = ".output, .cell_output"
      2.2. 시각적 확률분포추정
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_03.html">
      2.3. 확률분포모형을 사용한 확률분포추정
     </a>
    </li>
@@ -203,8 +201,8 @@ const thebe_selector_output = ".output, .cell_output"
      2.4. 최대가능도 모수추정법
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_05.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      2.5. 최대사후확률 모수추정법
     </a>
    </li>
@@ -292,7 +290,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch02/02_03.ipynb"
+        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch02/02_05.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -348,7 +346,7 @@ title="Source repository"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/ch02/02_03.ipynb"
+        <a href="../_sources/ch02/02_05.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -385,80 +383,23 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
-<label for="__page-toc"
-  class="headerbtn headerbtn-page-toc"
-  
->
-  
-
-<span class="headerbtn__icon-container">
-  <i class="fas fa-list"></i>
-  </span>
-
-</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
-    <div class="tocsection onthispage pt-5 pb-3">
-        <i class="fas fa-list"></i> Contents
-    </div>
-    <nav id="bd-toc-nav" aria-label="Page">
-        <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   2.3.1. 모형
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   2.3.2. 확률분포모형
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   2.3.3. 확률분포모형의 수식과 모수
-  </a>
- </li>
-</ul>
-
-    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>확률분포모형을 사용한 확률분포추정</h1>
+                <h1>최대사후확률 모수추정법</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
-                        <div>
-                            <h2> Contents </h2>
-                        </div>
-                        <nav aria-label="Page">
-                            <ul class="visible nav section-nav flex-column">
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id2">
-   2.3.1. 모형
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   2.3.2. 확률분포모형
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   2.3.3. 확률분포모형의 수식과 모수
-  </a>
- </li>
-</ul>
-
-                        </nav>
                     </div>
                 </div>
             </div>
@@ -467,50 +408,8 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.3. </span>확률분포모형을 사용한 확률분포추정<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>앞서 시각적인 방법을 사용한 확률분포추정 방법을 알아보았다. 시각적인 방법을 사용하게되면 직관적이고 수학을 사용할 필요가 없다는 장점이 있지만 이렇게 구한 확률분포가 가장 그럴듯한 확률분포라는 근거를 댈 수 없다는 단점이 있다. 따라서 이제부터는 수학적인 기준에 따라 가장 올바르다고 생각되는 확률분포를 찾는 방법을 설명한다.</p>
-<section id="id2">
-<h2><span class="section-number">2.3.1. </span>모형<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>모형이라고 하는 것은 현실의 부정확한 존재를 가상의 이상적 존재라고 가정하는 것이다. 예를 들어 다음 그림을 보자</p>
-<p><img alt="도형의 모형" src="../_images/model01.png" /></p>
-<p>이 그림을 보면 모든 사람이 원, 사각형, 삼각형이라고 할 것이다. 하지만 정확한 원, 사각형, 삼각형은 다음과 같은 이상적이고 완벽한 모양을 가져야 한다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_03_5_0.png" src="../_images/02_03_5_0.png" />
-</div>
-</div>
-<p>사실은 위 그림도 정확한 원, 사각형, 삼각형은 아니다. 수학적인 원, 사각형, 삼각형에서는 선의 두께가 존재하지 않고 0이기 때문잊다.</p>
-<p>어쨌든 이런 식으로 현실에서는 정확하게 표현되지 않는 현실의 존재를 이상적인 수학적 존재라고 가정하는 것을 모형이라고 한다.</p>
-</section>
-<section id="id3">
-<h2><span class="section-number">2.3.2. </span>확률분포모형<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>데이터 분석에서도 모형이 많이 사용된다. 수학적인 확률분포추정시에는 우리가 찾고자 하는 확률변수의 확률분포가 미리 정해놓은 특정한 함수 중 하나라고 가정하는데 이렇게 확률분포의 모양을 미리 함수로 정해놓은 것를 확률분포모형이라고 한다.</p>
-<p>확률분포모형에는 수십가지의 다양한 것을이 존재하지만 가장 기본적인 4개의 확률분포는 다음과 같다.</p>
-<ul class="simple">
-<li><p>범주형 확률분포</p>
-<ul>
-<li><p>베르누이분포</p></li>
-<li><p>이항분포</p></li>
-</ul>
-</li>
-<li><p>수치형 확률분포</p>
-<ul>
-<li><p>정규분포</p></li>
-<li><p>스튜던트t분포</p></li>
-</ul>
-</li>
-</ul>
-<p>다음 그림은 위 기본 확률분포모형의 대략적인 분포 모양을 그린 것이다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_03_9_0.png" src="../_images/02_03_9_0.png" />
-</div>
-</div>
-</section>
-<section id="id4">
-<h2><span class="section-number">2.3.3. </span>확률분포모형의 수식과 모수<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<p>확률분포모형의 공통점은 확률질량함수(pmf)나 확률밀도함수(pdf)가 정확한 수식으로 표현된다는 점이다. 이 수식에는 확률변수가 가질 수 있는 값을 나타내는 <span class="math notranslate nohighlight">\(x\)</span>라는 기호이외에 몇가지 상수기호가 있는데 이 상수기호들을 <b>모수(parameter)</b>라고 부른다. 확률분포모형의 가장 큰 특징은 이 모수의 값만 알고 있으면 정확히 같은 확률분포함수를 재현할 수 있다는 점이다.</p>
-</section>
+<h1><span class="section-number">2.5. </span>최대사후확률 모수추정법<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>MAP(Maximum A Posteria)</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -540,17 +439,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02_02.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="02_04.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2.2. </span>시각적 확률분포추정</p>
+            <p class="prev-next-title"><span class="section-number">2.4. </span>최대가능도 모수추정법</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="02_04.html" title="next page">
+    <a class='right-next' id="next-link" href="../ch03/03_00.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.4. </span>최대가능도 모수추정법</p>
+        <p class="prev-next-title"><span class="section-number">3. </span>수치형 데이터의 상관관계를 분석한다</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
