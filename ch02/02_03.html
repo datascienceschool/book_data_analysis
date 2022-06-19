@@ -429,17 +429,22 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
-   2.3.5. 이항분포
+   2.3.5. 카테고리분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id7">
-   2.3.6. 정규분포
+   2.3.6. 이항분포
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   2.3.7. 정규분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#t">
-   2.3.7. 스튜던트t분포
+   2.3.8. 스튜던트t분포
   </a>
  </li>
 </ul>
@@ -483,17 +488,22 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
-   2.3.5. 이항분포
+   2.3.5. 카테고리분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id7">
-   2.3.6. 정규분포
+   2.3.6. 이항분포
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id8">
+   2.3.7. 정규분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#t">
-   2.3.7. 스튜던트t분포
+   2.3.8. 스튜던트t분포
   </a>
  </li>
 </ul>
@@ -530,6 +540,7 @@ title="Print to PDF"
 <li><p>범주형 확률분포</p>
 <ul>
 <li><p>베르누이분포</p></li>
+<li><p>카테고리분포</p></li>
 <li><p>이항분포</p></li>
 </ul>
 </li>
@@ -563,15 +574,19 @@ title="Print to PDF"
 <td><p><span class="math notranslate nohighlight">\( \text{Bern}(x;\mu) = \mu^x(1-\mu)^{1-x} \)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\mu\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>이항분포</p></td>
+<tr class="row-odd"><td><p>카테고리분포</p></td>
+<td><p><span class="math notranslate nohighlight">\( \text{Cat}(x;\mu_1, \ldots, \mu_K) = \prod_{k=1}^K \mu_k^{x_k} \)</span></p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu_1,\ldots,\mu_K\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>이항분포</p></td>
 <td><p><span class="math notranslate nohighlight">\( \text{Bin}(x;\mu, N) = \binom N x \; \mu^x(1-\mu)^{N-x} \)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(N\)</span></p></td>
 </tr>
-<tr class="row-even"><td><p>정규분포</p></td>
+<tr class="row-odd"><td><p>정규분포</p></td>
 <td><p><span class="math notranslate nohighlight">\( \mathcal{N}(x; \mu, \sigma^2) = \dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right) \)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\mu\)</span></p></td>
 </tr>
-<tr class="row-odd"><td><p>스튜던트t분포</p></td>
+<tr class="row-even"><td><p>스튜던트t분포</p></td>
 <td><p><span class="math notranslate nohighlight">\( t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\frac{\nu+1}{2}\right)} {\Gamma\left(\frac{\nu}{2}\right)} \left(1+\lambda\frac{(x-\mu)^2}{\nu} \right)^{-\frac{\nu+1}{2}} \)</span></p></td>
 <td><p><span class="math notranslate nohighlight">\(\mu, \lambda, \nu\)</span></p></td>
 </tr>
@@ -582,13 +597,16 @@ title="Print to PDF"
 <h2><span class="section-number">2.3.4. </span>베르누이분포<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id6">
-<h2><span class="section-number">2.3.5. </span>이항분포<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.5. </span>카테고리분포<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id7">
-<h2><span class="section-number">2.3.6. </span>정규분포<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.6. </span>이항분포<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="id8">
+<h2><span class="section-number">2.3.7. </span>정규분포<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="t">
-<h2><span class="section-number">2.3.7. </span>스튜던트t분포<a class="headerlink" href="#t" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.8. </span>스튜던트t분포<a class="headerlink" href="#t" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
