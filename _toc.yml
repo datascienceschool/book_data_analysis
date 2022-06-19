@@ -14,6 +14,10 @@ chapters:
   - file: ch02/02_00.ipynb
     sections:
       - file: ch02/02_01.ipynb
+      - file: ch02/02_02.ipynb
+      - file: ch02/02_03.ipynb
+      - file: ch02/02_04.ipynb
+      - file: ch02/02_05.ipynb
   - file: ch03/03_00.ipynb
     sections:
       - file: ch03/03_01.ipynb
