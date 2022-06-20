@@ -598,20 +598,7 @@ title="Print to PDF"
 <div class="math notranslate nohighlight">
 \[ \hat{\mu} = \dfrac{N_1}{N_1 + N_0} \]</div>
 <p>이 식에서 수학기호 <span class="math notranslate nohighlight">\(\hat{\mu}\)</span>는 모수 <span class="math notranslate nohighlight">\(\mu\)</span>의 추정치를 말한다. <span class="math notranslate nohighlight">\(N_0\)</span>는 데이터 값이 0인 횟수, <span class="math notranslate nohighlight">\(N_1\)</span>은 데이터 값이 1인 횟수다. 즉, 전체 데이터 중 1이 나온 횟수의 비율이 모수 <span class="math notranslate nohighlight">\(\mu\)</span>의 추정치 <span class="math notranslate nohighlight">\(\hat{\mu}\)</span>가 된다.</p>
-<p>실제로 sex 데이터의 모수를 추정해보자. 여기에서는 남자(Male)인 경우를 <span class="math notranslate nohighlight">\(x=1\)</span>인 경우라고 가정한다. 전체 레코드 개수는 다음 코드에서 보듯이 244개다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>244
-</pre></div>
-</div>
-</div>
-</div>
-<p>다음 코드로는 <span class="math notranslate nohighlight">\(N_1=157, N_0=87\)</span>이라는 것을 알 수 있다.</p>
+<p>실제로 sex 데이터의 모수를 추정해보자. 여기에서는 남자(Male)인 경우를 <span class="math notranslate nohighlight">\(x=1\)</span>인 경우라고 가정한다. 다음 코드로 <span class="math notranslate nohighlight">\(N_1=157, N_0=87\)</span>이라는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vc</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
