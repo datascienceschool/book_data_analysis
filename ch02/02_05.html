@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.5. 카테고리분포 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>2.5. 카테고리분포와 다항분포 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -89,8 +89,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.6. 이항분포" href="02_06.html" />
-    <link rel="prev" title="2.4. 베르누이분포" href="02_04.html" />
+    <link rel="next" title="2.6. 정규분포, 로그정규분포, 스튜던트t분포" href="02_06.html" />
+    <link rel="prev" title="2.4. 베르누이분포와 이항분포" href="02_04.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -200,22 +200,22 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_04.html">
-     2.4. 베르누이분포
+     2.4. 베르누이분포와 이항분포
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.5. 카테고리분포
+     2.5. 카테고리분포와 다항분포
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_06.html">
-     2.6. 이항분포
+     2.6. 정규분포, 로그정규분포, 스튜던트t분포
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_07.html">
-     2.7. 다항분포
+     2.7. F분포와 카이제곱분포
     </a>
    </li>
    <li class="toctree-l2">
@@ -226,21 +226,6 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="02_09.html">
      2.9. 스튜던트t분포
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_10.html">
-     2.10. 로그정규분포
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_11.html">
-     2.11. 최대가능도 모수추정법
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_12.html">
-     2.12. 최대사후확률 모수추정법
     </a>
    </li>
   </ul>
@@ -420,23 +405,60 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.5.1. 카테고리분포
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>카테고리분포</h1>
+                <h1>카테고리분포와 다항분포</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.5.1. 카테고리분포
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -445,7 +467,9 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.5. </span>카테고리분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">2.5. </span>카테고리분포와 다항분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<section id="id2">
+<h2><span class="section-number">2.5.1. </span>카테고리분포<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>카테고리분포는 베르누이분포의 확장판이다. 베르누이분포는 두 가지의 값만 가질 수 있지만 카테고리분포는 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>까지 <span class="math notranslate nohighlight">\(K\)</span>(<span class="math notranslate nohighlight">\(K&gt;0\)</span>)개의 값을 가질 수 있다. 예를 들어 주사위를 던져 나오는 숫자 데이터는 <span class="math notranslate nohighlight">\(K=6\)</span>인 카테고리분포를 따른다고 할 수 있다.</p>
 <p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 카테고리분포를 따르는 경우 다음과 같이 표시한다.</p>
 <div class="math notranslate nohighlight">
@@ -493,6 +517,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 <div class="math notranslate nohighlight">
 \[ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) = \mu_1^{x_1} \mu_2^{x_2}  \cdots \mu_K^{x_K}  =  \prod_{k=1}^K \mu_k^{x_k} \]</div>
 </section>
+</section>
 
     <script type="text/x-thebe-config">
     {
@@ -525,13 +550,13 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2.4. </span>베르누이분포</p>
+            <p class="prev-next-title"><span class="section-number">2.4. </span>베르누이분포와 이항분포</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="02_06.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.6. </span>이항분포</p>
+        <p class="prev-next-title"><span class="section-number">2.6. </span>정규분포, 로그정규분포, 스튜던트t분포</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.4. 베르누이분포 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>2.4. 베르누이분포와 이항분포 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -89,7 +89,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.5. 카테고리분포" href="02_05.html" />
+    <link rel="next" title="2.5. 카테고리분포와 다항분포" href="02_05.html" />
     <link rel="prev" title="2.3. 확률분포모형을 사용한 확률분포추정" href="02_03.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -200,22 +200,22 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.4. 베르누이분포
+     2.4. 베르누이분포와 이항분포
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_05.html">
-     2.5. 카테고리분포
+     2.5. 카테고리분포와 다항분포
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_06.html">
-     2.6. 이항분포
+     2.6. 정규분포, 로그정규분포, 스튜던트t분포
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_07.html">
-     2.7. 다항분포
+     2.7. F분포와 카이제곱분포
     </a>
    </li>
    <li class="toctree-l2">
@@ -226,21 +226,6 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="02_09.html">
      2.9. 스튜던트t분포
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_10.html">
-     2.10. 로그정규분포
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_11.html">
-     2.11. 최대가능도 모수추정법
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_12.html">
-     2.12. 최대사후확률 모수추정법
     </a>
    </li>
   </ul>
@@ -444,17 +429,29 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   2.4.1. 베르누이분포의 확률분포함수
+   2.4.1. 베르누이분포
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     2.4.1.1. 베르누이분포의 확률분포함수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     2.4.1.2. 베르누이분포의 예
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     2.4.1.3. 베르누이분포의 모수추정
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   2.4.2. 베르누이분포의 예
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   2.4.3. 베르누이분포의 모수추정
+  <a class="reference internal nav-link" href="#id6">
+   2.4.2. 이항분포
   </a>
  </li>
 </ul>
@@ -466,7 +463,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>베르누이분포</h1>
+                <h1>베르누이분포와 이항분포</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -478,17 +475,29 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   2.4.1. 베르누이분포의 확률분포함수
+   2.4.1. 베르누이분포
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     2.4.1.1. 베르누이분포의 확률분포함수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     2.4.1.2. 베르누이분포의 예
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     2.4.1.3. 베르누이분포의 모수추정
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   2.4.2. 베르누이분포의 예
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   2.4.3. 베르누이분포의 모수추정
+  <a class="reference internal nav-link" href="#id6">
+   2.4.2. 이항분포
   </a>
  </li>
 </ul>
@@ -502,10 +511,12 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.4. </span>베르누이분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>베르누이분포는 값이 두가지로만 나오는 범주값 확률변수의 확률분포다. 예를 들어 앞 절에서 설명한 팁 데이터에서 성별을 나타내는 sex 필드나 흡연유무를 나타내는 smoker, 그리고 점심/저녁을 나타내는 time 필드는 모두 베르누이분포를 따른다고 할 수 있다. 베르누이분포의 값은 성별일 경우 “Male/Female”, 흡연유무를 나타내는 경우 “Yes/No”같이 문자열이 되는 경우가 많지만 수학적 모형을 위해 이 값을 0과 1이라는 숫자로 바꾸어서 사용하는 경우가 보통이다. 어느 값을 0으로 하고 어느 값을 1로 할지는 분석하는 사람의 마음대로다.</p>
+<h1><span class="section-number">2.4. </span>베르누이분포와 이항분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">2.4.1. </span>베르누이분포의 확률분포함수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.4.1. </span>베르누이분포<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>베르누이분포는 값이 두가지로만 나오는 범주값 확률변수의 확률분포다. 예를 들어 앞 절에서 설명한 팁 데이터에서 성별을 나타내는 sex 필드나 흡연유무를 나타내는 smoker 필드, 그리고 점심/저녁을 나타내는 time 필드는 모두 베르누이분포를 따른다고 할 수 있다. 베르누이분포의 값은 성별일 경우 “Male/Female”, 흡연유무를 나타내는 경우 “Yes/No”같이 문자열이 되는 경우가 많지만 수학적 모형을 위해 이 값을 0과 1이라는 숫자로 바꾸어서 사용하는 경우가 보통이다. 어느 값을 0으로 하고 어느 값을 1로 할지는 분석하는 사람의 마음대로다.</p>
+<section id="id3">
+<h3><span class="section-number">2.4.1.1. </span>베르누이분포의 확률분포함수<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 베르누이분포를 따르는 경우 다음과 같이 표시한다.</p>
 <div class="math notranslate nohighlight">
 \[ x \sim \text{Bern}(x) \]</div>
@@ -536,15 +547,15 @@ title="Print to PDF"
 \end{align}
 \end{split}
 \end{split}\]</div>
-<p>확률질량함수 <span class="math notranslate nohighlight">\(\text{Bern}(x)\)</span>을 다음과 같이 쓰기도 한다. 이 식과 위에서 쓴 식은 결과가 같다.</p>
+<p>확률질량함수 <span class="math notranslate nohighlight">\(\text{Bern}(x)\)</span>을 다음과 같이 쓰기도 한다. <span class="math notranslate nohighlight">\(x\)</span>의 값에 0과 1을 각각 대입해보면 이 식과 위에서 쓴 식은 같은 식이라는 것을 알 수 있을 것이다.</p>
 <div class="math notranslate nohighlight">
 \[ \text{Bern}(x;\mu) = \mu^x(1-\mu)^{(1-x)} \]</div>
 <p>만약 1과 0이 나올 확률이 같다면 다음과 같이 쓸 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[ \text{Bern}(x;\mu) = 0.5^x0.5^{(1-x)} \]</div>
 </section>
-<section id="id3">
-<h2><span class="section-number">2.4.2. </span>베르누이분포의 예<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<section id="id4">
+<h3><span class="section-number">2.4.1.2. </span>베르누이분포의 예<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>위에서 이야기한대로 팁 데이터에서 성별을 나타내는 sex 데이터는 남성 또는 여성의 두 가지 값만 가지므로 베르누이분포를 따르는 확률변수다. 따라서 다음과 같이 표현할 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[ \text{sex} \sim \text{Bern}(x;\mu_{\text{sex}}) \]</div>
@@ -566,13 +577,17 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_8_0.png" src="../_images/02_04_8_0.png" />
+<img alt="../_images/02_04_9_0.png" src="../_images/02_04_9_0.png" />
 </div>
 </div>
 </section>
-<section id="id4">
-<h2><span class="section-number">2.4.3. </span>베르누이분포의 모수추정<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<p>베르누이분포는 확률분포함수가 고정된 수식으로 표현된 확률분포모형이므로 모수값 <span class="math notranslate nohighlight">\(\mu\)</span>만 알 수 있다면 확률분포함수를 완전히 알아내는 것이다. 그러면 베르누이분포의 모수는 어떤 방법으로 알아낼 수 있을까?</p>
+<section id="id5">
+<h3><span class="section-number">2.4.1.3. </span>베르누이분포의 모수추정<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>베르누이분포는 확률분포함수가 고정된 수식으로 표현된 확률분포모형이므로 모수값 <span class="math notranslate nohighlight">\(\mu\)</span>만 알 수 있다면 확률분포함수를 완전히 알아내는 것이다. 그러면 베르누이분포의 모수는 어떤 방법으로 알아낼 수 있을까? 이 문제는 다음에 설명할 이항분포에서 함께 다루도록 한다.</p>
+</section>
+</section>
+<section id="id6">
+<h2><span class="section-number">2.4.2. </span>이항분포<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
@@ -613,7 +628,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="02_05.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.5. </span>카테고리분포</p>
+        <p class="prev-next-title"><span class="section-number">2.5. </span>카테고리분포와 다항분포</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
