@@ -419,42 +419,47 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   2.3.3. 확률분포모형의 수식과 모수
+   2.3.3. 확률분포모형과 실제 데이터 값 분포의 관계
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   2.3.4. 확률분포모형과 실제 데이터 값 분포의 관계
+   2.3.4. 확률분포모형의 수식과 모수
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
-   2.3.5. 베르누이분포
+   2.3.5. 모수추정을 통한 확률분포추정
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id7">
-   2.3.6. 카테고리분포
+   2.3.6. 베르누이분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id8">
-   2.3.7. 이항분포
+   2.3.7. 카테고리분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id9">
-   2.3.8. 정규분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#t">
-   2.3.9. 스튜던트t분포
+   2.3.8. 이항분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id10">
-   2.3.10. 로그정규분포
+   2.3.9. 정규분포
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#t">
+   2.3.10. 스튜던트t분포
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   2.3.11. 로그정규분포
   </a>
  </li>
 </ul>
@@ -488,42 +493,47 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   2.3.3. 확률분포모형의 수식과 모수
+   2.3.3. 확률분포모형과 실제 데이터 값 분포의 관계
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   2.3.4. 확률분포모형과 실제 데이터 값 분포의 관계
+   2.3.4. 확률분포모형의 수식과 모수
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
-   2.3.5. 베르누이분포
+   2.3.5. 모수추정을 통한 확률분포추정
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id7">
-   2.3.6. 카테고리분포
+   2.3.6. 베르누이분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id8">
-   2.3.7. 이항분포
+   2.3.7. 카테고리분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id9">
-   2.3.8. 정규분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#t">
-   2.3.9. 스튜던트t분포
+   2.3.8. 이항분포
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id10">
-   2.3.10. 로그정규분포
+   2.3.9. 정규분포
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#t">
+   2.3.10. 스튜던트t분포
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id11">
+   2.3.11. 로그정규분포
   </a>
  </li>
 </ul>
@@ -581,7 +591,46 @@ title="Print to PDF"
 <p>total_bill 확률변수의 확률분포는 원래 다음과 같은 로그정규분포를 따른다고 보는 것이다.</p>
 </section>
 <section id="id4">
-<h2><span class="section-number">2.3.3. </span>확률분포모형의 수식과 모수<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.3. </span>확률분포모형과 실제 데이터 값 분포의 관계<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>확률변수가 수학적인 확률분포모형을 가진다고 해도 실제 데이터 값의 분포는 이와 정확히 같지 않을 수 있다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02_03_14_0.png" src="../_images/02_03_14_0.png" />
+</div>
+</div>
+<p>예를 들어 팁 데이터의 total_bill 확률변수가 로그정규분포라는 확률분포모형을 따른다고 가정하자.
+이 때 확률분포함수는 왼쪽 그림과 같은 모양을 가진다. 이 확률분포에서 측정한 실제 데이터의 분포는 이와 유사하지만 오른쪽 그림과 같이 원래의 확률분포함수와 유사하지만 정확하게는 같지 않다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">s</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;확률분포모형&quot;</span><span class="p">);</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;표본분포&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_03_16_0.png" src="../_images/02_03_16_0.png" />
+</div>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">2.3.4. </span>확률분포모형의 수식과 모수<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <p>확률분포모형의 공통점은 확률질량함수(pmf)나 확률밀도함수(pdf)가 정확한 수식으로 표현된다는 점이다. 이 수식에는 확률변수가 가질 수 있는 값을 나타내는 <span class="math notranslate nohighlight">\(x\)</span>라는 기호이외에 몇가지 상수기호가 있는데 이 상수기호들을 <b>모수(parameter)</b>라고 부른다. 확률분포모형의 가장 큰 특징은 이 모수의 값만 알고 있으면 정확히 같은 확률분포함수를 재현할 수 있다는 점이다.</p>
 <p>위에서 제시한 기본 확률분포모형의 수식과 모수는 다음과 같다.</p>
 <table class="colwidths-auto table">
@@ -615,62 +664,27 @@ title="Print to PDF"
 </tbody>
 </table>
 </section>
-<section id="id5">
-<h2><span class="section-number">2.3.4. </span>확률분포모형과 실제 데이터 값 분포의 관계<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>확률변수가 수학적인 확률분포모형을 가진다고 해도 실제 데이터 값의 분포는 이와 정확히 같지 않을 수 있다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_03_16_0.png" src="../_images/02_03_16_0.png" />
-</div>
-</div>
-<p>예를 들어 팁 데이터의 total_bill 확률변수가 로그정규분포라는 확률분포모형을 따른다고 가정하자.
-이 때 확률분포함수는 왼쪽 그림과 같은 모양을 가진다. 이 확률분포에서 측정한 실제 데이터의 분포는 이와 유사하지만 오른쪽 그림과 같이 원래의 확률분포함수와 유사하지만 정확하게는 같지 않다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-
-<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
-<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
-<span class="n">s</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">lognorm</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="p">),</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;확률분포모형&quot;</span><span class="p">);</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span><span class="mi">2</span><span class="p">,</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s2">&quot;density&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;표본분포&quot;</span><span class="p">)</span>
-
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/02_03_18_0.png" src="../_images/02_03_18_0.png" />
-</div>
-</div>
-</section>
 <section id="id6">
-<h2><span class="section-number">2.3.5. </span>베르누이분포<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.5. </span>모수추정을 통한 확률분포추정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p>확률분포모형을 사용했을 때 가장 좋은 점은 확률분포함수의 수식이 이미 정해져 있기 때문에 한 두개의 모수값만 알 수 있으면 전체 확률분포를 모두 알 수 있다는 점이다. 따라서 확률분포모형을 사용하는 경우의 확률분포추정은 사실상 <b>모수추정(parameter estimation)</b>이라고 할 수 있다. 이러한 방법을 <b>모수적 확률분포추정(parametric probability distribution estimation)</b>이라고 한다. 모수를 사용하지 않고 확률분포의 모양을 수학적으로 추정하는 <b>비모수적 확률분포추정(non-parametric probability distribution estimation)</b> 방법도 물론 존재한다. 이 방법은 나중에 설명할 것이다. 우선 다음 절부터는 모수추정을 통한 확률분포추정 방법론을 설명한다..</p>
 </section>
 <section id="id7">
-<h2><span class="section-number">2.3.6. </span>카테고리분포<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.6. </span>베르누이분포<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id8">
-<h2><span class="section-number">2.3.7. </span>이항분포<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.7. </span>카테고리분포<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id9">
-<h2><span class="section-number">2.3.8. </span>정규분포<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="t">
-<h2><span class="section-number">2.3.9. </span>스튜던트t분포<a class="headerlink" href="#t" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.8. </span>이항분포<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id10">
-<h2><span class="section-number">2.3.10. </span>로그정규분포<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.9. </span>정규분포<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="t">
+<h2><span class="section-number">2.3.10. </span>스튜던트t분포<a class="headerlink" href="#t" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="id11">
+<h2><span class="section-number">2.3.11. </span>로그정규분포<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
