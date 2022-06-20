@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.5. 카테고리분포 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>2.8. 정규분포 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -85,12 +85,10 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.6. 이항분포" href="02_06.html" />
-    <link rel="prev" title="2.4. 베르누이분포" href="02_04.html" />
+    <link rel="next" title="2.9. 스튜던트t분포" href="02_09.html" />
+    <link rel="prev" title="2.7. 다항분포" href="02_07.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -203,8 +201,8 @@ const thebe_selector_output = ".output, .cell_output"
      2.4. 베르누이분포
     </a>
    </li>
-   <li class="toctree-l2 current active">
-    <a class="current reference internal" href="#">
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_05.html">
      2.5. 카테고리분포
     </a>
    </li>
@@ -218,8 +216,8 @@ const thebe_selector_output = ".output, .cell_output"
      2.7. 다항분포
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_08.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      2.8. 정규분포
     </a>
    </li>
@@ -327,7 +325,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch02/02_05.ipynb"
+        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch02/02_08.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -383,7 +381,7 @@ title="Source repository"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="../_sources/ch02/02_05.ipynb"
+        <a href="../_sources/ch02/02_08.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -432,7 +430,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>카테고리분포</h1>
+                <h1>정규분포</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -445,53 +443,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.5. </span>카테고리분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>카테고리분포는 베르누이분포의 확장판이다. 베르누이분포는 두 가지의 값만 가질 수 있지만 카테고리분포는 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>까지 <span class="math notranslate nohighlight">\(K\)</span>(<span class="math notranslate nohighlight">\(K&gt;0\)</span>)개의 값을 가질 수 있다. 예를 들어 주사위를 던져 나오는 숫자 데이터는 <span class="math notranslate nohighlight">\(K=6\)</span>인 카테고리분포를 따른다고 할 수 있다.</p>
-<p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 카테고리분포를 따르는 경우 다음과 같이 표시한다.</p>
-<div class="math notranslate nohighlight">
-\[ x \sim \text{Cat}(x) \]</div>
-<p>위 식에서 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>은 카테고리분포의 확률질량함수를 가리키는 기호다.</p>
-<p>카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>의 수식은 다음과 같다.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
-\begin{split}
-\begin{align}
-\text{Cat}(x;\mu_1,\mu_2,\ldots,\mu_K) = 
-\begin{cases} 
-\mu_1 &amp; \text{if }x=1, \\
-\mu_2 &amp; \text{if }x=2, \\
-\vdots &amp; \vdots \\
-\mu_K &amp; \text{if }x=K, \\
-\end{cases}
-\end{align}
-\end{split}
-\end{split}\]</div>
-<p>카테고리분포는 각각 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>값이 나올 확률을 나타내는 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>라는 <span class="math notranslate nohighlight">\(K\)</span>개의 모수를 가진다. 이 모수들은 모두 더해서 1이 되어야 한다. 이 제한조건을 수식으로 표현하면 다음과 같다.</p>
-<div class="math notranslate nohighlight">
-\[ \sum_{i=1}^{K}\mu_i = 1 \]</div>
-<p>카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>도 하나의 수식으로 표현하는 방법이 있는데 이렇게 하려면 카테고리분포가 생성하는 값이 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>와 같은 정수값이 아니라 다음과 같이 0과 1로 이루어진 벡터값</p>
-<div class="math notranslate nohighlight">
-\[ x = (x_1, x_2, \ldots, x_K) \]</div>
-<p>으로 풀어써야 한다.</p>
-<p>\begin{split}
-\begin{align}
-\begin{aligned}
-x = 1  ;; &amp; \rightarrow &amp; ;; x = (1, 0, 0, 0, 0, 0) \
-x = 2  ;; &amp; \rightarrow &amp; ;; x = (0, 1, 0, 0, 0, 0) \
-x = 3  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 1, 0, 0, 0) \
-x = 4  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 1, 0, 0) \
-x = 5  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 1, 0) \
-x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
-\end{aligned}
-\end{align}
-\end{split}</p>
-<p>즉, <span class="math notranslate nohighlight">\(x=1\)</span>인 경우에는 <span class="math notranslate nohighlight">\(x_1=1, x_2=0, x_3=0, \ldots, x_K=1\)</span>이라 하는 것이다.</p>
-<p>이렇게 정수 범주값을 0과 1로 이루어진 벡터값으로 바꾸는 작업을 <b>원핫인코딩(one-hot encoding)</b>이라고 한다. 원핫인코딩을 하게되면 카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}\)</span>은 다음과 같이 표시한다.</p>
-<div class="math notranslate nohighlight">
-\[ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) \]</div>
-<p>이렇게 원핫인코딩을 한 경우에는 카테고리분포의 확률질량함수를 다음과 같은 간단한 수식으로 표현할 수 있다.</p>
-<div class="math notranslate nohighlight">
-\[ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) = \mu_1^{x_1} \mu_2^{x_2}  \cdots \mu_K^{x_K}  =  \prod_{k=1}^K \mu_k^{x_k} \]</div>
+<h1><span class="section-number">2.8. </span>정규분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -521,17 +473,17 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="02_04.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="02_07.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">2.4. </span>베르누이분포</p>
+            <p class="prev-next-title"><span class="section-number">2.7. </span>다항분포</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="02_06.html" title="next page">
+    <a class='right-next' id="next-link" href="02_09.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.6. </span>이항분포</p>
+        <p class="prev-next-title"><span class="section-number">2.9. </span>스튜던트t분포</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

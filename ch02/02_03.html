@@ -89,7 +89,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.4. 최대가능도 모수추정법" href="02_04.html" />
+    <link rel="next" title="2.4. 베르누이분포" href="02_04.html" />
     <link rel="prev" title="2.2. 시각적 확률분포추정" href="02_02.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -200,12 +200,47 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_04.html">
-     2.4. 최대가능도 모수추정법
+     2.4. 베르누이분포
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_05.html">
-     2.5. 최대사후확률 모수추정법
+     2.5. 카테고리분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_06.html">
+     2.6. 이항분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_07.html">
+     2.7. 다항분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_08.html">
+     2.8. 정규분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_09.html">
+     2.9. 스튜던트t분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_10.html">
+     2.10. 로그정규분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_11.html">
+     2.11. 최대가능도 모수추정법
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="02_12.html">
+     2.12. 최대사후확률 모수추정법
     </a>
    </li>
   </ul>
@@ -424,42 +459,12 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   2.3.4. 베르누이분포
+   2.3.4. 확률분포모형의 수식과 모수
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
-   2.3.5. 카테고리분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
-   2.3.6. 이항분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   2.3.7. 정규분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#t">
-   2.3.8. 스튜던트t분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id9">
-   2.3.9. 로그정규분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id10">
-   2.3.10. 확률분포모형의 수식과 모수
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id11">
-   2.3.11. 모수추정을 통한 확률분포추정
+   2.3.5. 모수추정을 통한 확률분포추정
   </a>
  </li>
 </ul>
@@ -498,42 +503,12 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   2.3.4. 베르누이분포
+   2.3.4. 확률분포모형의 수식과 모수
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
-   2.3.5. 카테고리분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
-   2.3.6. 이항분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   2.3.7. 정규분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#t">
-   2.3.8. 스튜던트t분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id9">
-   2.3.9. 로그정규분포
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id10">
-   2.3.10. 확률분포모형의 수식과 모수
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id11">
-   2.3.11. 모수추정을 통한 확률분포추정
+   2.3.5. 모수추정을 통한 확률분포추정
   </a>
  </li>
 </ul>
@@ -555,12 +530,8 @@ title="Print to PDF"
 <p><img alt="도형의 모형" src="../_images/model01.png" /></p>
 <p>이 그림을 보면 모든 사람이 원, 사각형, 삼각형이라고 할 것이다. 하지만 정확한 원, 사각형, 삼각형은 다음과 같은 이상적이고 완벽한 모양을 가져야 한다.</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_03_5_0.png" src="../_images/02_03_5_0.png" />
 </div>
-</div>
-<p>사실은 위 그림도 정확한 원, 사각형, 삼각형은 아니다. 수학적인 원, 사각형, 삼각형에서는 선의 두께가 존재하지 않고 0이기 때문잊다.</p>
-<p>이런 식으로 현실에서는 정확하게 표현되지 않는 현실의 존재를 이상적인 수학적 존재라고 가정하는 것을 모형이라고 한다.</p>
+<p>사실은 위 그림도 정확한 원, 사각형, 삼각형은 아니다. 수학적인 원, 사각형, 삼각형에서는 선의 두께가 존재하지 않고 0이기 때문이다. 이런 식으로 현실에서는 정확하게 표현되지 않는 현실의 존재를 이상적인 수학적 존재라고 가정하는 것을 모형이라고 한다.</p>
 </section>
 <section id="id3">
 <h2><span class="section-number">2.3.2. </span>확률분포모형<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
@@ -584,18 +555,12 @@ title="Print to PDF"
 </ul>
 <p>다음 그림은 위 기본 확률분포모형의 대략적인 분포 모양을 그린 것이다.</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_03_10_0.png" src="../_images/02_03_10_0.png" />
-</div>
 </div>
 </section>
 <section id="id4">
 <h2><span class="section-number">2.3.3. </span>확률분포모형과 실제 데이터 값 분포의 관계<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 <p>확률변수가 수학적인 확률분포모형을 가진다고 해도 실제 데이터 값의 분포는 이와 정확히 같지 않을 수 있다.</p>
 <div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/02_03_13_0.png" src="../_images/02_03_13_0.png" />
-</div>
 </div>
 <p>예를 들어 팁 데이터의 total_bill 확률변수가 로그정규분포라는 확률분포모형을 따른다고 가정하자.
 이 때 확률분포함수는 왼쪽 그림과 같은 모양을 가진다. 이 확률분포에서 측정한 실제 데이터의 분포는 이와 유사하지만 오른쪽 그림과 같이 원래의 확률분포함수와 유사하지만 정확하게는 같지 않다.</p>
@@ -623,32 +588,10 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<img alt="../_images/02_03_15_0.png" src="../_images/02_03_15_0.png" />
 </div>
-</div>
-<p>이제부터는 위에서 설명한 기본 확률분포모형 각각에 대해 자세히 설명하도록 한다.</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">2.3.4. </span>베르누이분포<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="id6">
-<h2><span class="section-number">2.3.5. </span>카테고리분포<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="id7">
-<h2><span class="section-number">2.3.6. </span>이항분포<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="id8">
-<h2><span class="section-number">2.3.7. </span>정규분포<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="t">
-<h2><span class="section-number">2.3.8. </span>스튜던트t분포<a class="headerlink" href="#t" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="id9">
-<h2><span class="section-number">2.3.9. </span>로그정규분포<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="id10">
-<h2><span class="section-number">2.3.10. </span>확률분포모형의 수식과 모수<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.3.4. </span>확률분포모형의 수식과 모수<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <p>확률분포모형의 공통점은 확률질량함수(pmf)나 확률밀도함수(pdf)가 정확한 수식으로 표현된다는 점이다. 이 수식에는 확률변수가 가질 수 있는 값을 나타내는 <span class="math notranslate nohighlight">\(x\)</span>라는 기호이외에 몇가지 상수기호가 있는데 이 상수기호들을 <b>모수(parameter)</b>라고 부른다. 확률분포모형의 가장 큰 특징은 이 모수의 값만 알고 있으면 정확히 같은 확률분포함수를 재현할 수 있다는 점이다.</p>
 <p>위에서 제시한 기본 확률분포모형의 수식과 모수를 다시 정리하면 다음과 같다.</p>
 <table class="colwidths-auto table">
@@ -682,9 +625,10 @@ title="Print to PDF"
 </tbody>
 </table>
 </section>
-<section id="id11">
-<h2><span class="section-number">2.3.11. </span>모수추정을 통한 확률분포추정<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h2>
+<section id="id6">
+<h2><span class="section-number">2.3.5. </span>모수추정을 통한 확률분포추정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
 <p>확률분포모형을 사용했을 때 가장 좋은 점은 확률분포함수의 수식이 이미 정해져 있기 때문에 한 두개의 모수값만 알 수 있으면 전체 확률분포를 모두 알 수 있다는 점이다. 따라서 확률분포모형을 사용하는 경우의 확률분포추정은 사실상 <b>모수추정(parameter estimation)</b>이라고 할 수 있다. 이러한 방법을 <b>모수적 확률분포추정(parametric probability distribution estimation)</b>이라고 한다. 모수를 사용하지 않고 확률분포의 모양을 수학적으로 추정하는 <b>비모수적 확률분포추정(non-parametric probability distribution estimation)</b> 방법도 물론 존재한다. 이 방법은 나중에 설명할 것이다. 우선 다음 절부터는 모수추정을 통한 확률분포추정 방법론을 설명한다..</p>
+<p>이제부터는 위에서 설명한 기본 확률분포모형 각각에 대해 자세히 설명하도록 한다.</p>
 </section>
 </section>
 
@@ -725,7 +669,7 @@ title="Print to PDF"
     <a class='right-next' id="next-link" href="02_04.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.4. </span>최대가능도 모수추정법</p>
+        <p class="prev-next-title"><span class="section-number">2.4. </span>베르누이분포</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
