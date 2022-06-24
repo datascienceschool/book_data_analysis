@@ -132,3 +132,5 @@ dmypy.json
 # my
 _build/
 .DS_Store
+.virtual_documents
+
