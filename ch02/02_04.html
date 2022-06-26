@@ -474,6 +474,21 @@ title="Print to PDF"
      2.4.2.2. 이항분포의 시뮬레이션
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     2.4.2.3. 이항분포와 베르누이분포의 비교
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     2.4.2.4. 이항분포의 예
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     2.4.2.5. 이항분포의 모수추정
+    </a>
+   </li>
   </ul>
  </li>
 </ul>
@@ -540,6 +555,21 @@ title="Print to PDF"
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id10">
      2.4.2.2. 이항분포의 시뮬레이션
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id11">
+     2.4.2.3. 이항분포와 베르누이분포의 비교
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id12">
+     2.4.2.4. 이항분포의 예
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id13">
+     2.4.2.5. 이항분포의 모수추정
     </a>
    </li>
   </ul>
@@ -612,7 +642,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x12e052650&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x137c3b190&gt;
 </pre></div>
 </div>
 </div>
@@ -855,7 +885,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x12e41a560&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x138021c00&gt;
 </pre></div>
 </div>
 </div>
@@ -941,6 +971,72 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 <img alt="../_images/02_04_46_0.png" src="../_images/02_04_46_0.png" />
 </div>
 </div>
+</section>
+<section id="id11">
+<h3><span class="section-number">2.4.2.3. </span>이항분포와 베르누이분포의 비교<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<p>지금까지 설명했듯이 이항분포를 따르는 확률변수 <span class="math notranslate nohighlight">\(y\)</span>는 베르누이분포를 따르는 확률변수 <span class="math notranslate nohighlight">\(x\)</span>에서 파생된 확률변수다. 이항분포와 베르누이분포 사이에는 다음과 같은 관계가 성립한다.</p>
+<ol class="simple">
+<li><p>베르누이분포를 따른 확률변수 <span class="math notranslate nohighlight">\(x\)</span>의 표본 <span class="math notranslate nohighlight">\(N\)</span>개를 모으면 이항분포를 따르는 확률변수 <span class="math notranslate nohighlight">\(y\)</span>의 표본 한 개가 얻어진다.</p></li>
+<li><p>베르누이분포의 모수 <span class="math notranslate nohighlight">\(\mu_x\)</span>와 이 베르누이분포에서 파생된 이항분포의 모수 <span class="math notranslate nohighlight">\(\mu_y\)</span>는 같다.</p></li>
+<li><p>시행횟수 <span class="math notranslate nohighlight">\(N=1\)</span>인 이항분포는 베르누이분포다.</p></li>
+</ol>
+</section>
+<section id="id12">
+<h3><span class="section-number">2.4.2.4. </span>이항분포의 예<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<p>식당 팁 데이터에서 sex 필드 데이터는 베르누이분포를 따르는 확률변수의 표본이라고 하였다. 그러면 sex 필드 데이터를 4개씩 묶어서 4개 중 남성이 있는 레코드의 개수를 센다면 이는 <span class="math notranslate nohighlight">\(N=4\)</span>인 이항분포를 따르는 확률변수의 표본이라고 할 수 있다. 실제로 이 방법으로 남성이 나오는 횟수를 세면 다음과 같아진다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)))</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;4개 팀 중 &#39;sex=Male&#39;인 경우의 수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_04_51_0.png" src="../_images/02_04_51_0.png" />
+</div>
+</div>
+<p>위에서 sex 데이터의 베르누이모수는 약 0.643이라고 추정하였다. 이 모수값은 이항분포에도 그대로 적용되므로 <span class="math notranslate nohighlight">\(N=4, \mu=0.643\)</span>인 이항분포의 확률질량함수를 그리면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.643</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$N=4, \mu=0.643$인 이항분포의 확률질량함수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_04_53_0.png" src="../_images/02_04_53_0.png" />
+</div>
+</div>
+<p>두 그래프를 비교하면 아래와 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;이론&quot;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s2">&quot;시뮬레이션&quot;</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="s2">&quot;비율&quot;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="s2">&quot;비율&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;비율&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;이항분포의 이론적 분포와 시뮬레이션 분포&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_04_55_0.png" src="../_images/02_04_55_0.png" />
+</div>
+</div>
+</section>
+<section id="id13">
+<h3><span class="section-number">2.4.2.5. </span>이항분포의 모수추정<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
 </section>
 </section>
 </section>
