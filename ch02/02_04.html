@@ -439,25 +439,42 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     2.4.1.2. 베르누이분포의 예
+     2.4.1.2. 베르누이 분포의 시뮬레이션
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
-     2.4.1.3. 베르누이분포의 모수추정
+     2.4.1.3. 베르누이분포의 예
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
-     2.4.1.4. 모수추정에 관한 추가적인 사항
+     2.4.1.4. 베르누이분포의 모수추정
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     2.4.1.5. 모수추정에 관한 추가적인 사항
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
+  <a class="reference internal nav-link" href="#id8">
    2.4.2. 이항분포
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     2.4.2.1. 이항분포의 확률분포함수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     2.4.2.2. 이항분포의 시뮬레이션
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -490,25 +507,42 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id4">
-     2.4.1.2. 베르누이분포의 예
+     2.4.1.2. 베르누이 분포의 시뮬레이션
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id5">
-     2.4.1.3. 베르누이분포의 모수추정
+     2.4.1.3. 베르누이분포의 예
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id6">
-     2.4.1.4. 모수추정에 관한 추가적인 사항
+     2.4.1.4. 베르누이분포의 모수추정
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     2.4.1.5. 모수추정에 관한 추가적인 사항
     </a>
    </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id7">
+  <a class="reference internal nav-link" href="#id8">
    2.4.2. 이항분포
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     2.4.2.1. 이항분포의 확률분포함수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     2.4.2.2. 이항분포의 시뮬레이션
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -524,7 +558,7 @@ title="Print to PDF"
 <h1><span class="section-number">2.4. </span>베르누이분포와 이항분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">2.4.1. </span>베르누이분포<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p><b>베르누이분포(bernoulli distribution)</b>는 값이 두가지로만 나오는 범주값 확률변수의 확률분포다. 예를 들어 앞 절에서 설명한 팁 데이터에서 성별을 나타내는 sex 필드나 흡연유무를 나타내는 smoker 필드, 그리고 점심/저녁을 나타내는 time 필드는 모두 베르누이분포를 따른다고 할 수 있다. 베르누이분포의 값은 성별일 경우 “Male/Female”, 흡연유무를 나타내는 경우 “Yes/No”같이 문자열이 되는 경우가 많지만 수학적 모형을 위해 이 값을 0과 1이라는 숫자로 바꾸어서 사용하는 경우가 보통이다. 어느 값을 0으로 하고 어느 값을 1로 할지는 분석하는 사람의 마음대로다.</p>
+<p><b>베르누이분포(bernoulli distribution)</b>는 값이 두가지로만 나오는 범주값 확률변수의 확률분포다. 예를 들어 동전을 한 번 던졌을 때 앞면 혹은 뒷면이 나오는 것은 베르누이분포를 따르는 확률변수다. 또한 앞 절에서 설명한 팁 데이터에서 성별을 나타내는 sex 필드나 흡연유무를 나타내는 smoker 필드, 그리고 점심/저녁을 나타내는 time 필드는 모두 베르누이분포를 따른다고 할 수 있다. 베르누이분포의 값은 성별일 경우 “Male/Female”, 흡연유무를 나타내는 경우 “Yes/No”같이 문자열이 되는 경우가 많지만 수학적 모형을 위해 이 값을 0과 1이라는 숫자로 바꾸어서 사용하는 경우가 보통이다. 어느 값을 0으로 하고 어느 값을 1로 할지는 분석하는 사람의 마음대로다.</p>
 <section id="id3">
 <h3><span class="section-number">2.4.1.1. </span>베르누이분포의 확률분포함수<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 베르누이분포를 따르는 경우 다음과 같이 표시한다.</p>
@@ -544,7 +578,7 @@ title="Print to PDF"
 \end{align}
 \end{split}
 \end{split}\]</div>
-<p>이 식에서 <span class="math notranslate nohighlight">\(x\)</span>의 값이 1이 될 확률을 <span class="math notranslate nohighlight">\(\mu\)</span>라는 기호로 표시한다. <span class="math notranslate nohighlight">\(x\)</span>의 값이 0이 될 확률은 <span class="math notranslate nohighlight">\(1-\mu\)</span>가 된다. 위 식에서 베르누이분포의 모수는 <span class="math notranslate nohighlight">\(\mu\)</span> 하나만 있다는 것을 알 수 있다. 모수는 위 식에서 표시하였듯이 확류변수의 값 기호 <span class="math notranslate nohighlight">\(x\)</span> 오른쪽에 세미콜론(;) 기호를 붙이고 그 옆에 표시한다. 만약 1과 0이 나올 확률이 같다면 다음과 같이 쓸 수 있다.</p>
+<p>이 식에서 <span class="math notranslate nohighlight">\(x\)</span>의 값이 1이 될 확률을 <span class="math notranslate nohighlight">\(\mu\)</span>라는 기호로 표시한다. <span class="math notranslate nohighlight">\(x\)</span>의 값이 0이 될 확률은 <span class="math notranslate nohighlight">\(1-\mu\)</span>가 된다. 위 식에서 베르누이분포의 모수는 <span class="math notranslate nohighlight">\(\mu\)</span> 하나만 있다는 것을 알 수 있다. 모수는 위 식에서 표시하였듯이 확류변수의 값 기호 <span class="math notranslate nohighlight">\(x\)</span> 오른쪽에 세미콜론(;) 기호를 붙이고 그 옆에 표시한다. 만약 1과 0이 나올 확률이 같다면 <span class="math notranslate nohighlight">\(\mu=0.5\)</span>가 되므로 다음과 같이 쓸 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 \begin{split}
@@ -565,35 +599,92 @@ title="Print to PDF"
 \[ \text{Bern}(x;\mu) = 0.5^x0.5^{(1-x)} \]</div>
 </section>
 <section id="id4">
-<h3><span class="section-number">2.4.1.2. </span>베르누이분포의 예<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.4.1.2. </span>베르누이 분포의 시뮬레이션<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>scipy 패키지의 stats 서브패키지는 베르누이분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">bernoulli</span></code> 클래스를 제공한다. 우선 다음과 같이 모수를 지정한 클래스 인스턴스를 만든다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">bernoulli</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">bernoulli</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x12e052650&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메서드를 사용하면 확률질량함수를 계산할 수 있다. 인수로는 확률변수가 가질 수 있는 값 즉, 0과 1을 넣는다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">pmf</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.5, 0.5])
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하면 시뮬레이션을 통해 표본을 측정할 수 있다. 인수로는 시뮬레이션 즉, 표본 개수를 넣는다. <code class="docutils literal notranslate"><span class="pre">np.random.seed</span></code> 명령은 시뮬레이션의 시드값을 설정하기 위한 것이다. 시드값이 같으면 시뮬레이션 값은 항상 동일한 값이 나온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 1, 1, 1, 0, 1, 0, 1, 1, 0])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">samples</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_04_13_0.png" src="../_images/02_04_13_0.png" />
+</div>
+</div>
+</section>
+<section id="id5">
+<h3><span class="section-number">2.4.1.3. </span>베르누이분포의 예<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <p>위에서 이야기한대로 팁 데이터에서 성별을 나타내는 sex 데이터는 남성 또는 여성의 두 가지 값만 가지므로 베르누이분포를 따르는 확률변수다. 따라서 다음과 같이 표현할 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[ \text{sex} \sim \text{Bern}(\text{sex};\mu_{\text{sex}}) \]</div>
 <p>sex 데이터의 확률분포는 다음과 같이 시각화할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
-<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
 
-<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_9_0.png" src="../_images/02_04_9_0.png" />
+<img alt="../_images/02_04_16_0.png" src="../_images/02_04_16_0.png" />
 </div>
 </div>
 </section>
-<section id="id5">
-<h3><span class="section-number">2.4.1.3. </span>베르누이분포의 모수추정<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<section id="id6">
+<h3><span class="section-number">2.4.1.4. </span>베르누이분포의 모수추정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p>베르누이분포는 확률분포함수가 고정된 수식으로 표현된 확률분포모형이므로 모수값 <span class="math notranslate nohighlight">\(\mu\)</span>만 알 수 있다면 확률분포함수를 완전히 알아내는 것이다. 그러면 베르누이분포의 모수는 다음 수식으로 추정한다. 이 식은 이후에 설명할 최대가능도추정(maximum likelihood estimation)방법을 따른 결과이다. 자세한 이론은 이후에 다루도록 한다.</p>
 <div class="math notranslate nohighlight">
 \[ \hat{\mu} = \dfrac{N_1}{N_1 + N_0} \]</div>
@@ -628,8 +719,8 @@ title="Print to PDF"
 </div>
 </div>
 </section>
-<section id="id6">
-<h3><span class="section-number">2.4.1.4. </span>모수추정에 관한 추가적인 사항<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<section id="id7">
+<h3><span class="section-number">2.4.1.5. </span>모수추정에 관한 추가적인 사항<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>이렇게 모수를 추정하였지만 아직 다음과 같은 몇가지 의문점이 남아있다.</p>
 <ol class="simple">
 <li><p>이 모수 추정치는 정말 정확한 값인가?</p></li>
@@ -653,8 +744,8 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>우리가 추정에 사용한 표본에 따라 추정치가 변하는 것을 알 수 있다. 따라서 위에서 구한 추정치는 정확한 값이라고 할 수 없다. 그렇다면 이렇게 부정확한 모수 추청치의 신뢰도는 어떻게 구할 것인가? 이 부분에 대해서는 아래에서 설명할 모수 추정치의 신뢰구간(confidence interval)이라는 것을 사용하여 구할 수 있다.</p>
-<p>다음으로 이 모수 추정치가 정확한 모수의 값이 아니라면 원래 정확한 모수는 전혀 다른 값, 예를 들어 0이나 0.6일 수도 있다. 그런데 표본을 측정하다보니 어쩌다 0.6434426229508197라는 값이 나온 것일 수도 있다. 그렇다면 원래의 정확한 모수의 값이 0인데 이렇게 어쩌다 0이 아닌 값이 나왔을 가능성은 어느 정도일까? 이 문제는 모수의 검정(parameter testing)과 관련된 내용으로 나중에 이 부분에 대해 자세히 설명할 것이다.</p>
+<p>우리가 추정에 사용한 표본에 따라 추정치가 변하는 것을 알 수 있다. 따라서 위에서 구한 추정치는 정확한 값이라고 할 수 없다. 그렇다면 이렇게 부정확한 모수 추청치의 신뢰도는 어떻게 구할 것인가? 이 부분에 대해서는 아래에서 설명할 모수 추정치의 <b>신뢰구간(confidence interval)</b>이라는 것을 사용하여 구할 수 있다.</p>
+<p>다음으로 이 모수 추정치가 정확한 모수의 값이 아니라면 원래 정확한 모수는 전혀 다른 값, 예를 들어 0이나 0.6일 수도 있다. 그런데 표본을 측정하다보니 어쩌다 0.6434426229508197라는 값이 나온 것일 수도 있다. 그렇다면 원래의 정확한 모수의 값이 0인데 이렇게 어쩌다 0이 아닌 값이 나왔을 가능성은 어느 정도일까? 이 문제는 <b>모수 검정(parameter testing)</b>과 관련된 내용으로 나중에 이 부분에 대해 자세히 설명할 것이다.</p>
 <p>마지막으로 만약 극단적으로 데이터를 다음과 같이 1번부터 3번까지 3개만 얻는다면 모두 남성(Male)이라는 결과가 나온다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -672,13 +763,185 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 </div>
 </div>
 </div>
-<p>그러면 모수의 추정치는 1이 된다. 만약 정말 베르누이분포의 모수값이 1이라면 이후에 측정할 모든 표본값은 언제나 1이 나와야 한다는 뜻이다. 하지만 우리의 상식으로는 그럴 가능성이 극히 적다는 것을 안다. 이 추정치는 표본을 3개밖에 쓰지 않았기 때문에 얻어진 극단적으로 부정확한 값이며 실제 값은 1보다 작을 것이라는 것이 우리의 상식에 맞는 결과다. 즉, 우리의 상식이라는 추가적인 정보를 이 추정치에 반영할 수 있는 방법이 필요하다. 이는 이후의 절에서 설명할 베이즈 추정(Bayesian estimation) 방법을 사용하면 된다.</p>
+<p>그러면 모수의 추정치는 1이 된다. 만약 정말 베르누이분포의 모수값이 1이라면 이후에 측정할 모든 표본값은 언제나 1이 나와야 한다는 뜻이다. 하지만 우리의 상식으로는 그럴 가능성이 극히 적다는 것을 안다. 이 추정치는 표본을 3개밖에 쓰지 않았기 때문에 얻어진 극단적으로 부정확한 값이며 실제 값은 1보다 작을 것이라는 것이 우리의 상식에 맞는 결과다. 즉, 우리의 상식이라는 추가적인 정보를 이 추정치에 반영할 수 있는 방법이 필요하다. 이는 이후의 절에서 설명할 <b>베이즈 추정(Bayesian estimation)</b> 방법을 사용하면 된다.</p>
 </section>
 </section>
-<section id="id7">
-<h2><span class="section-number">2.4.2. </span>이항분포<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h2>
-<p><b>이항분포(binomial distribution)</b>는 베르누이분포와 밀접한 관계를 가지고 있다. 이항분포의 수학적 정의는 베르누이분포를 따르는 확률변수에서 <span class="math notranslate nohighlight">\(N\)</span>개의 표본을 얻었을 때 그 중 1인 값이 나오는 횟수의 분포다.</p>
-<p>예를 들어 설명해 보자. 앞에서 팁 데이터 중 sex 데이터는 베르누이분포를 따른다고 하였다.</p>
+<section id="id8">
+<h2><span class="section-number">2.4.2. </span>이항분포<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<p>베르누이분포를 따르는 모수 <span class="math notranslate nohighlight">\(\mu\)</span>인 확률변수에서 <span class="math notranslate nohighlight">\(N\)</span>개의 표본을 얻었을 때 그 중 1인 값이 나오는 횟수의 분포를 <b>이항분포(binomial distribution)</b>라고 한다.
+어떤 확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 이항분포를 따를 때 다음과 같이 표시한다.</p>
+<div class="math notranslate nohighlight">
+\[ x \sim \text{Bin}(x) \]</div>
+<p>동전을 한 번 던질 때 나오는 값은 베르누이분포를 따르므로 동전을 <span class="math notranslate nohighlight">\(N\)</span>번 던져서 앞면이 나오는 횟수는 이항분포가 된다.</p>
+<p>위에서 설명한 scipy의 확률변수 시뮬레이션 기능을 통해 <span class="math notranslate nohighlight">\(N=10, \mu=0.5\)</span>인 이항분포의 표본 5개를 구해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">bernoulli</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+
+<span class="n">binomial_samples</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2">회 이항시도:&quot;</span><span class="p">)</span>
+    <span class="n">bernouilli_samples</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">binomial_sample</span> <span class="o">=</span> <span class="n">bernouilli_samples</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">binomial_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">binomial_sample</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;10회를 시행한 베르누이 샘플 =&quot;</span><span class="p">,</span> <span class="n">bernouilli_samples</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;베르누이 샘플 10개 중 1이 나온 횟수 =&quot;</span><span class="p">,</span> <span class="n">binomial_sample</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;결론:&quot;</span><span class="p">)</span>    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;이항분포 표본 =&quot;</span><span class="p">,</span> <span class="n">binomial_samples</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1회 이항시도:
+10회를 시행한 베르누이 샘플 = [1 1 1 1 0 0 0 1 1 1]
+베르누이 샘플 10개 중 1이 나온 횟수 = 7
+--------------------------------------------------------------------------------
+2회 이항시도:
+10회를 시행한 베르누이 샘플 = [1 1 0 1 0 1 0 1 1 0]
+베르누이 샘플 10개 중 1이 나온 횟수 = 6
+--------------------------------------------------------------------------------
+3회 이항시도:
+10회를 시행한 베르누이 샘플 = [0 1 0 1 0 1 1 1 1 1]
+베르누이 샘플 10개 중 1이 나온 횟수 = 7
+--------------------------------------------------------------------------------
+4회 이항시도:
+10회를 시행한 베르누이 샘플 = [0 0 1 0 1 1 0 0 0 0]
+베르누이 샘플 10개 중 1이 나온 횟수 = 3
+--------------------------------------------------------------------------------
+5회 이항시도:
+10회를 시행한 베르누이 샘플 = [1 0 1 0 0 0 1 0 0 0]
+베르누이 샘플 10개 중 1이 나온 횟수 = 3
+--------------------------------------------------------------------------------
+결론:
+이항분포 표본 = [7, 6, 7, 3, 3]
+</pre></div>
+</div>
+</div>
+</div>
+<p>여기에서는 표본을 5개만 측정하였지만 아주 많은 수의 측정을 반복한다면 어떨까? 아주 재수가 없다면 앞면이 단 한번도 나올 수 없을 것이고 아주 재수가 좋다면 10번 모두 앞면이 나올 수도 있을 것이다. 하지만 가장 확률이 높은 경우는 10번의 절반인 5번 나오는 경우일 것이다. 즉, 시행횟수가 <span class="math notranslate nohighlight">\(N\)</span>인 이항분포의 표본값은 0부터 <span class="math notranslate nohighlight">\(N\)</span>까지의 값을 가질 수 있다.</p>
+<section id="id9">
+<h3><span class="section-number">2.4.2.1. </span>이항분포의 확률분포함수<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>이항분포는 시행횟수 <span class="math notranslate nohighlight">\(N\)</span>과 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span> 이렇게 두 개의 모수를 가진다. 시행횟수가 <span class="math notranslate nohighlight">\(N\)</span>이고 베르누이모수가 <span class="math notranslate nohighlight">\(\mu\)</span>인 이항분포의 확률분포함수 수식은 다음과 같이 구할 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Bin}(x;N,\mu) = \binom N x \; \mu^x(1-\mu)^{N-x}
+\]</div>
+<p>이 식에서 (𝑁𝑥) 기호는 <b>조합(combination)</b>이라는 기호로 <span class="math notranslate nohighlight">\(N\)</span>개 원소 중에 <span class="math notranslate nohighlight">\(x\)</span>개 원소를 순서와 상관없이 선택할 수 있는 경우의 수를 뜻한다. 조합은 다음 공식으로 계산할 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+\binom N x =\dfrac{N!}{x!(N-x)!}
+\]</div>
+<p><span class="math notranslate nohighlight">\(!\)</span> 기호는 <b>팩토리얼(factorial)</b>이라고 하며 다음처럼 정의한다.</p>
+<div class="math notranslate nohighlight">
+\[
+N! = N\cdot (N-1) \cdots 2 \cdot 1
+\]</div>
+</section>
+<section id="id10">
+<h3><span class="section-number">2.4.2.2. </span>이항분포의 시뮬레이션<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>scipy 패키지의 stats 서브패키지는 이항분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">binom</span></code> 클래스를 제공한다. 사용방법은 앞에서 설명한 베르누이분포 시뮬레이션 클래스와 같다. 우선 시행횟수</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
+
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x12e41a560&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메서드를 사용하면 확률질량함수를 계산할 수 있다. 인수로는 확률변수가 가질 수 있는 값 즉, 0부터 <span class="math notranslate nohighlight">\(N\)</span>까지의 정수값을 넣는다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+<span class="n">p</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.00097656, 0.00976563, 0.04394531, 0.1171875 , 0.20507812,
+       0.24609375, 0.20507812, 0.1171875 , 0.04394531, 0.00976563,
+       0.00097656])
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 값을 그려보면 위에서 그린 것과 같은 모양이 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;이항분포 확률질량함수 (N=10, $\mu$=0.5)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_04_40_0.png" src="../_images/02_04_40_0.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하면 시뮬레이션을 통해 표본을 측정할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">s</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([3, 3, 6, 3, 4, 4, 6, 3, 7, 3, 8, 5, 8, 5, 6, 2, 4, 3, 4, 3, 4, 5,
+       3, 6, 5, 4, 5, 3, 5, 7, 4, 6, 3, 6, 4, 4, 5, 2, 7, 1, 6, 4, 6, 8,
+       4, 5, 5, 5, 4, 8, 5, 7, 6, 4, 6, 5, 7, 5, 7, 6, 6, 5, 8, 6, 5, 5,
+       2, 4, 6, 4, 5, 5, 3, 4, 5, 5, 5, 6, 6, 5, 7, 4, 5, 7, 6, 6, 3, 7,
+       6, 9, 3, 7, 3, 5, 3, 7, 6, 5, 5, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<p>numpy 패키지의 <code class="docutils literal notranslate"><span class="pre">bincount</span></code> 함수를 사용하면 이항함수 표본에서 각 값이 나온 횟수를 카운트할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0,  1,  3, 16, 17, 26, 20, 11,  5,  1,  0])
+</pre></div>
+</div>
+</div>
+</div>
+<p>이론적인 확률질량함수와 시뮬레이션 결과를 비교하면 다음 그림과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">s</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;이론&quot;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s2">&quot;시뮬레이션&quot;</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="s2">&quot;비율&quot;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="s2">&quot;비율&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;비율&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;이항분포의 이론적 분포와 시뮬레이션 분포&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_04_46_0.png" src="../_images/02_04_46_0.png" />
+</div>
+</div>
+</section>
 </section>
 </section>
 
