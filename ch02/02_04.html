@@ -662,7 +662,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x1f652970130&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x28bd0600be0&gt;
 </pre></div>
 </div>
 </div>
@@ -870,9 +870,10 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom_test</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binomtest</span>
 
-<span class="n">binom_test</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">samples</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">binomtest</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">samples</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">))</span>
+<span class="n">result</span><span class="o">.</span><span class="n">pvalue</span>
 </pre></div>
 </div>
 </div>
@@ -886,7 +887,8 @@ title="Print to PDF"
 <p>이번에는 모수값을 그냥 0.6이라고 해도 되는지를 알아보자. 이 때는 <code class="docutils literal notranslate"><span class="pre">p</span></code> 값을 0.6으로 넣는다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binom_test</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">samples</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">binomtest</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">samples</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">samples</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">pvalue</span>
 </pre></div>
 </div>
 </div>
@@ -1009,7 +1011,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x1f65413ea30&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x28bd1dc13a0&gt;
 </pre></div>
 </div>
 </div>
@@ -1216,6 +1218,68 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <p>두 방법 모두 동일한 값을 추정하고 있는 것을 알 수 있다.</p>
+<p>시행횟수 <span class="math notranslate nohighlight">\(N\)</span>을 알지 못하는 경우에는 distfit 패키지를 이용할 수 있다. distfit 패키지는 다음 명령으로 설치한다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">distfit</span>
+</pre></div>
+</div>
+<p>사용방법은 다음 코드와 같이 model 객체를 계산하면 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">distfit</span> <span class="kn">import</span> <span class="n">distfit</span>
+
+<span class="n">dist</span> <span class="o">=</span> <span class="n">distfit</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;discrete&#39;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">s</span><span class="p">))[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[distfit] &gt;fit..
+[distfit] &gt;transform..
+[distfit] &gt;Fit using binomial distribution..
+[distfit] &gt;[binomial] [RSS=0.00428] [n=4] [p=0.664505] [chi^2=0.00143]
+[distfit] &gt;Compute confidence interval [discrete]
+</pre></div>
+</div>
+</div>
+</div>
+<p>model 객체는 파이썬 type 타입 객체이다. <code class="docutils literal notranslate"><span class="pre">name</span></code> 키는 어떤 분포인지를 나타낸다. 다음과 같이 이항분포임을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;binom&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">p</span></code> 키에는 각각 <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span> 추정치가 들어있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6645045188248099
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
