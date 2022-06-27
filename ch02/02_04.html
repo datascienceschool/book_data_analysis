@@ -454,7 +454,7 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id7">
-     2.4.1.5. 모수추정에 관한 추가적인 사항
+     2.4.1.5. 신뢰구간과 검정
     </a>
    </li>
   </ul>
@@ -537,7 +537,7 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id7">
-     2.4.1.5. 모수추정에 관한 추가적인 사항
+     2.4.1.5. 신뢰구간과 검정
     </a>
    </li>
   </ul>
@@ -750,7 +750,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="id7">
-<h3><span class="section-number">2.4.1.5. </span>모수추정에 관한 추가적인 사항<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.4.1.5. </span>신뢰구간과 검정<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>이렇게 모수를 추정하였지만 아직 다음과 같은 몇가지 의문점이 남아있다.</p>
 <ol class="simple">
 <li><p>이 모수 추정치는 정말 정확한 값인가?</p></li>
@@ -774,7 +774,32 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>우리가 추정에 사용한 표본에 따라 추정치가 변하는 것을 알 수 있다. 따라서 위에서 구한 추정치는 정확한 값이라고 할 수 없다. 그렇다면 이렇게 부정확한 모수 추청치의 신뢰도는 어떻게 구할 것인가? 이 부분에 대해서는 아래에서 설명할 모수 추정치의 <b>신뢰구간(confidence interval)</b>이라는 것을 사용하여 구할 수 있다.</p>
+<p>우리가 추정에 사용한 표본에 따라 추정치가 변하는 것을 알 수 있다. 따라서 위에서 구한 추정치는 정확한 값이라고 할 수 없다. 그렇다면 이렇게 부정확한 모수 추청치의 신뢰도는 어떻게 구할 것인가? 이 부분에 모수 추정치의 <b>신뢰구간(confidence interval)</b>이라는 것을 사용하여 구할 수 있다. 신뢰구간은 모수의 값이 특정한 확률로 그 구간 내에 있는 구간이다. 이 때 확률은 <b>유의수준(significance level)</b>이라는 수치로 지정한다. 만약 유의수준이 <span class="math notranslate nohighlight">\(\alpha\)</span>면 확률은 <span class="math notranslate nohighlight">\(1-\alpha\)</span>다. 예를 들어 5% 유의수준의 신뢰구간은 모수의 값이 95%의 확률로 그 구간 안에 있다는 뜻이다.</p>
+<p>베르누이분포의 모수 <span class="math notranslate nohighlight">\(\mu\)</span>의 신뢰구간은 statsmodels 패키지의 <code class="docutils literal notranslate"><span class="pre">proportion_confint</span></code> 함수로 구할 수 있다. <code class="docutils literal notranslate"><span class="pre">proportion_confint</span></code> 함수는 3가지 인수를 가진다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: 표본값이 1인 횟수</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">nobs</span></code>: 전체 표본의 수</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">alpha</span></code>: 유의수준. 디폴트 0.05 (=5%)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">method</span></code>: 추정방법. 다음 문자열 중 하나 <code class="docutils literal notranslate"><span class="pre">“normal”</span></code>, <code class="docutils literal notranslate"><span class="pre">“agresti_coull”</span></code>, <code class="docutils literal notranslate"><span class="pre">“beta”</span></code>, <code class="docutils literal notranslate"><span class="pre">“wilson”</span></code>, <code class="docutils literal notranslate"><span class="pre">“binom_test”</span></code>. 디폴트 <code class="docutils literal notranslate"><span class="pre">“normal”</span></code></p></li>
+</ul>
+<p>이 방법으로 sex 데이터의 모수의 5% 유의수준 신뢰구간을 구하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.proportion</span> <span class="kn">import</span> <span class="n">proportion_confint</span>
+
+<span class="n">vc</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">N1</span><span class="p">,</span> <span class="n">N0</span> <span class="o">=</span> <span class="n">vc</span><span class="p">[</span><span class="kc">True</span><span class="p">],</span> <span class="n">vc</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span>
+
+<span class="n">proportion_confint</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N0</span> <span class="o">+</span> <span class="n">N1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.5833428537739491, 0.7035423921276902)
+</pre></div>
+</div>
+</div>
+</div>
 <p>다음으로 이 모수 추정치가 정확한 모수의 값이 아니라면 원래 정확한 모수는 전혀 다른 값, 예를 들어 0이나 0.6일 수도 있다. 그런데 표본을 측정하다보니 어쩌다 0.6434426229508197라는 값이 나온 것일 수도 있다. 그렇다면 원래의 정확한 모수의 값이 0인데 이렇게 어쩌다 0이 아닌 값이 나왔을 가능성은 어느 정도일까? 이 문제는 <b>모수 검정(parameter testing)</b>과 관련된 내용으로 나중에 이 부분에 대해 자세히 설명할 것이다.</p>
 <p>마지막으로 만약 극단적으로 데이터를 다음과 같이 1번부터 3번까지 3개만 얻는다면 모두 남성(Male)이라는 결과가 나온다.</p>
 <div class="cell docutils container">
@@ -917,7 +942,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_40_0.png" src="../_images/02_04_40_0.png" />
+<img alt="../_images/02_04_42_0.png" src="../_images/02_04_42_0.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하면 시뮬레이션을 통해 표본을 측정할 수 있다.</p>
@@ -968,7 +993,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_46_0.png" src="../_images/02_04_46_0.png" />
+<img alt="../_images/02_04_48_0.png" src="../_images/02_04_48_0.png" />
 </div>
 </div>
 </section>
@@ -983,7 +1008,20 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </section>
 <section id="id12">
 <h3><span class="section-number">2.4.2.4. </span>이항분포의 예<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
-<p>식당 팁 데이터에서 sex 필드 데이터는 베르누이분포를 따르는 확률변수의 표본이라고 하였다. 그러면 sex 필드 데이터를 4개씩 묶어서 4개 중 남성이 있는 레코드의 개수를 센다면 이는 <span class="math notranslate nohighlight">\(N=4\)</span>인 이항분포를 따르는 확률변수의 표본이라고 할 수 있다. 실제로 이 방법으로 남성이 나오는 횟수를 세면 다음과 같아진다.</p>
+<p>식당 팁 데이터에서 sex 필드 데이터는 베르누이분포를 따르는 확률변수의 표본이라고 하였다. sex 필드 데이터의 레코드는 전체가 244개이므로 전체 sex 필드 데이터에서 남성이 있는 레코드의 수는 <span class="math notranslate nohighlight">\(N=244\)</span>인 이항분포를 따르는 확률변수의 표본이 된다. 이 표본값은 157이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">),</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(244, 157)
+</pre></div>
+</div>
+</div>
+</div>
+<p>만약 sex 필드 데이터를 4개씩 묶어서 4개 중 남성이 있는 레코드의 개수를 센다면 이는 <span class="math notranslate nohighlight">\(N=4\)</span>인 이항분포를 따르는 확률변수의 표본이라고 할 수 있다. 실제로 이 방법으로 남성이 나오는 횟수를 세면 다음과 같아진다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)))</span>
@@ -995,7 +1033,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_51_0.png" src="../_images/02_04_51_0.png" />
+<img alt="../_images/02_04_55_0.png" src="../_images/02_04_55_0.png" />
 </div>
 </div>
 <p>위에서 sex 데이터의 베르누이모수는 약 0.643이라고 추정하였다. 이 모수값은 이항분포에도 그대로 적용되므로 <span class="math notranslate nohighlight">\(N=4, \mu=0.643\)</span>인 이항분포의 확률질량함수를 그리면 다음과 같다.</p>
@@ -1013,7 +1051,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_53_0.png" src="../_images/02_04_53_0.png" />
+<img alt="../_images/02_04_57_0.png" src="../_images/02_04_57_0.png" />
 </div>
 </div>
 <p>두 그래프를 비교하면 아래와 같다.</p>
@@ -1031,12 +1069,54 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_55_0.png" src="../_images/02_04_55_0.png" />
+<img alt="../_images/02_04_59_0.png" src="../_images/02_04_59_0.png" />
 </div>
 </div>
 </section>
 <section id="id13">
 <h3><span class="section-number">2.4.2.5. </span>이항분포의 모수추정<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<p>이항분포의 모수는 시행횟수 <span class="math notranslate nohighlight">\(N\)</span>과 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span>다. 이항분포의 모수추정 문제는 다음과 같은 두 가지가 있을 수 있다.</p>
+<ol class="simple">
+<li><p>시행횟수 <span class="math notranslate nohighlight">\(N\)</span>을 정확하게 알고 있고 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span>만 추정해야 하는 경우</p></li>
+<li><p>시행횟수 <span class="math notranslate nohighlight">\(N\)</span>과 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span>를 모두 추정해야 하는 경우</p></li>
+</ol>
+<p>만약 시행횟수 <span class="math notranslate nohighlight">\(N\)</span>을 정확하게 알고 있다면 <span class="math notranslate nohighlight">\(M\)</span>개의 이항분포 표본값으로부터 베르누이 모수는 다음과 같이 추정할 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\mu} = \dfrac{\sum_{i=1}^M y_i}{MN}
+\]</div>
+<p>만약 sex 데이터에서 전체 레코드 중 남성의 수를 <span class="math notranslate nohighlight">\(N=244\)</span>인 이항분포의 표본으로 본다면 모수는 다음과 같이 추정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6434426229508197
+</pre></div>
+</div>
+</div>
+</div>
+<p>만약 sex 데이터를 4개의 레코드씩 묶어서 각 그룹의 남성 수를 <span class="math notranslate nohighlight">\(N=4\)</span>인 이항분포의 표본으로 본다면 모수는 다음과 같이 추정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">y_i</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">groups</span><span class="p">))</span>
+<span class="n">sum_y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_i</span><span class="p">)</span>
+<span class="n">sum_y_i</span> <span class="o">/</span> <span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6434426229508197
+</pre></div>
+</div>
+</div>
+</div>
+<p>두 방법 모두 동일한 값을 추정하고 있는 것을 알 수 있다.</p>
 </section>
 </section>
 </section>
