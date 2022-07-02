@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2.7. F분포와 카이제곱분포" href="02_07.html" />
@@ -173,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="02_00.html">
-   2. 데이터의 신뢰성을 분석한다
+   2. 확률모형 - 데이터의 신뢰도를 나타낸다
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -403,12 +405,56 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   2.6.1. 정규분포
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.6.2. 정규분포의 확률분포함수
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   2.6.3. 정규분포의 시뮬레이션
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   2.6.4. 정규분포의 예
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#qq">
+   2.6.5. QQ플롯과 정규성 검정
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -420,6 +466,39 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   2.6.1. 정규분포
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.6.2. 정규분포의 확률분포함수
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   2.6.3. 정규분포의 시뮬레이션
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   2.6.4. 정규분포의 예
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#qq">
+   2.6.5. QQ플롯과 정규성 검정
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -429,6 +508,285 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="t">
 <h1><span class="section-number">2.6. </span>정규분포, 로그정규분포, 스튜던트t분포<a class="headerlink" href="#t" title="Permalink to this headline">#</a></h1>
+<section id="id1">
+<h2><span class="section-number">2.6.1. </span>정규분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h2>
+<p><b>정규분포(normal distribution)</b>은 혹은 <b>가우스 정규분포(Gaussian normal distribution)</b>는 값의 제한이 없이 음의 무한대부터 양의 무한대까지 어떤 수든 발생할 수 있지만 특정한 값 주변의 값이 가장 많이 나오는 확률변수의 분포다.
+정규분포를 따르는 확률변수의 값은 다음과 같이 대칭인 종(bell) 모양을 이룬다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_4_0.png" src="../_images/02_06_4_0.png" />
+</div>
+</div>
+</section>
+<section id="id2">
+<h2><span class="section-number">2.6.2. </span>정규분포의 확률분포함수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 정규분포를 따르는 경우 다음과 같이 표시한다.</p>
+<div class="math notranslate nohighlight">
+\[ x \sim \mathcal{N}(x) \]</div>
+<p>위 식에서 <span class="math notranslate nohighlight">\(\mathcal{N}(x)\)</span>은 정규분포의 확률밀도함수를 가리키는 기호다.</p>
+<p>정규분포의 확률밀도함수 <span class="math notranslate nohighlight">\(\mathcal{N}(x)\)</span>의 수식은 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[ \mathcal{N}(x; \mu, \sigma^2) = \dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right) \]</div>
+<p>정규분포의 확률밀도함수는 평균 <span class="math notranslate nohighlight">\(\mu\)</span>와 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>라는 2개의 모수를 가진다. 평균 <span class="math notranslate nohighlight">\(\mu\)</span>는 가장 발생확률이 높은 값으로 정규분포 확률밀도함수의 종 모양의 위치를 지정하는 값이다. 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>는 확률밀도함수의 종 모양의 폭을 지정하는 값으로 값이 클수록 폭이 넓어진다.</p>
+<p>다음은 여러가지 모수값을 가지는 정규분포의 확률밀도함수 모양을 나타낸 것이다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_7_0.png" src="../_images/02_06_7_0.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">2.6.3. </span>정규분포의 시뮬레이션<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>scipy 패키지의 stats 서브패키지는 정규분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">norm</span></code> 클래스를 제공한다. 우선 다음과 같이 모수를 지정한 클래스 인스턴스를 만든다. 이때 <code class="docutils literal notranslate"><span class="pre">loc</span></code> 인수로 모수 <span class="math notranslate nohighlight">\(\mu\)</span>를 설정하고 <code class="docutils literal notranslate"><span class="pre">scale</span></code> 인수로 모수 <span class="math notranslate nohighlight">\(sigma^2\)</span>의 제곱근값 <span class="math notranslate nohighlight">\(\sigma\)</span>를 설정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
+
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sigma2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma2</span><span class="p">))</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x12e6dd060&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">pdf</span></code> 메서드를 사용하면 확률밀도함수를 계산할 수 있다. 인수로는 확률변수가 가질 수 있는 값을 넣는다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;정규분포의 확률밀도함수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_12_0.png" src="../_images/02_06_12_0.png" />
+</div>
+</div>
+<p>다른 확률분포와 마찬가지로 <code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하여 표본측정 시뮬레이션을 할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+
+<span class="n">samples</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">samples</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-4.16757847e-01, -5.62668272e-02, -2.13619610e+00,  1.64027081e+00,
+       -1.79343559e+00, -8.41747366e-01,  5.02881417e-01, -1.24528809e+00,
+       -1.05795222e+00, -9.09007615e-01,  5.51454045e-01,  2.29220801e+00,
+        4.15393930e-02, -1.11792545e+00,  5.39058321e-01, -5.96159700e-01,
+       -1.91304965e-02,  1.17500122e+00, -7.47870949e-01,  9.02525097e-03,
+       -8.78107893e-01, -1.56434170e-01,  2.56570452e-01, -9.88779049e-01,
+       -3.38821966e-01, -2.36184031e-01, -6.37655012e-01, -1.18761229e+00,
+       -1.42121723e+00, -1.53495196e-01, -2.69056960e-01,  2.23136679e+00,
+       -2.43476758e+00,  1.12726505e-01,  3.70444537e-01,  1.35963386e+00,
+        5.01857207e-01, -8.44213704e-01,  9.76147160e-06,  5.42352572e-01,
+       -3.13508197e-01,  7.71011738e-01, -1.86809065e+00,  1.73118467e+00,
+        1.46767801e+00, -3.35677339e-01,  6.11340780e-01,  4.79705919e-02,
+       -8.29135289e-01,  8.77102184e-02,  1.00036589e+00, -3.81092518e-01,
+       -3.75669423e-01, -7.44707629e-02,  4.33496330e-01,  1.27837923e+00,
+       -6.34679305e-01,  5.08396243e-01,  2.16116006e-01, -1.85861239e+00,
+       -4.19316482e-01, -1.32328898e-01, -3.95702397e-02,  3.26003433e-01,
+       -2.04032305e+00,  4.62555231e-02, -6.77675577e-01, -1.43943903e+00,
+        5.24296430e-01,  7.35279576e-01, -6.53250268e-01,  8.42456282e-01,
+       -3.81516482e-01,  6.64890091e-02, -1.09873895e+00,  1.58448706e+00,
+       -2.65944946e+00, -9.14526229e-02,  6.95119605e-01, -2.03346655e+00,
+       -1.89469265e-01, -7.72186654e-02,  8.24703005e-01,  1.24821292e+00,
+       -4.03892269e-01, -1.38451867e+00,  1.36723542e+00,  1.21788563e+00,
+       -4.62005348e-01,  3.50888494e-01,  3.81866234e-01,  5.66275441e-01,
+        2.04207979e-01,  1.40669624e+00, -1.73795950e+00,  1.04082395e+00,
+        3.80471970e-01, -2.17135269e-01,  1.17353150e+00, -2.34360319e+00])
+</pre></div>
+</div>
+</div>
+</div>
+<p>시뮬레이션된 표본값의 히스토그램을 그리면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">displot</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_16_0.png" src="../_images/02_06_16_0.png" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">2.6.4. </span>정규분포의 예<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>사실 현실세계에서는 상당히 많은 데이터가 정규분포를 따른다. 다음 데이터는 setosa라는 붓꽃종에 속하는 50개의 꽃송이에 대해 꽃받침의 길이를 0.1cm 단위로 측정한 데이터다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+
+<span class="n">setosa_sepal_length</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">50</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">setosa_sepal_length</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4,
+       1.1, 1.2, 1.5, 1.3, 1.4, 1.7, 1.5, 1.7, 1.5, 1. , 1.7, 1.9, 1.6,
+       1.6, 1.5, 1.4, 1.6, 1.6, 1.5, 1.5, 1.4, 1.5, 1.2, 1.3, 1.4, 1.3,
+       1.5, 1.3, 1.3, 1.3, 1.6, 1.9, 1.4, 1.6, 1.4, 1.5, 1.4])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;붓꽃 꽃받침의 길이 분포&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_20_0.png" src="../_images/02_06_20_0.png" />
+</div>
+</div>
+<p>다음은 팁 데이터에서 지불 금액과 팁 금액의 비율(tip/total_bill)의 분포를 구하면 마찬가지로 정규분포와 유사한 모양을 가진다. 다만 상식적으로는 생각하기 어려운 40% 혹은 70% 근처의 값들이 있는 것을 알 수 있다. 이렇게 다른 값들과 동떨어진 값들을 아웃라이어(outlier)라고 한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+
+<span class="n">tip_ratio</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">&quot;tip&quot;</span><span class="p">]</span> <span class="o">/</span> <span class="n">tips</span><span class="p">[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">]</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">tip_ratio</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;팁 비율의 분포&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_22_0.png" src="../_images/02_06_22_0.png" />
+</div>
+</div>
+</section>
+<section id="qq">
+<h2><span class="section-number">2.6.5. </span>QQ플롯과 정규성 검정<a class="headerlink" href="#qq" title="Permalink to this headline">#</a></h2>
+<p>그런데 사실 위와 같이 히스토그램 등의 시각적 분포만으로는 데이터의 분포가 정규분포인지 아니면 이와 유사한 다른 분포인지 알기 어렵다. 이를 판별하기 위한 방법으로 두가지를 소개한다.</p>
+<ol class="simple">
+<li><p>QQ플롯</p></li>
+<li><p>정규성 검정</p></li>
+</ol>
+<p>QQ플롯은 표본 데이터의 분포와 진짜 정규분포의 분포 형태를 비교하여 표본 데이터가 정규분포를 따르는지 검사하는 간단한 시각적 도구다. QQ플롯을 그렸을 때 직선 모양에 가까울수록 정규분포일 가능성이 높다.</p>
+<p>scipy 패키지의 stats 서브패키지는 Q-Q 플롯을 계산하고 그리기 위한 <code class="docutils literal notranslate"><span class="pre">probplot</span></code> 함수를 제공한다. <code class="docutils literal notranslate"><span class="pre">probplot</span></code> 함수는 기본적으로 인수로 보낸 데이터 표본에 대한 QQ플롯 정보만을 반환하고 실제 챠트는 그리지 않는다. 만약 차트를 그리고 싶다면 <code class="docutils literal notranslate"><span class="pre">plot</span></code> 인수에 다음과 같이 matplotlib.pylab 모듈 객체를 넘겨주어야 한다.</p>
+<p>다음은 붓꽃 꽃받침 길이에 대해 QQ플롯을 그린 것이다. 직선에 가까운 모양을 띄고 있음을 알 수 있다. QQ플롯의 모양이 계단모양이 된 것은 길이를 측정할 때 0.1cm 단위로 절사했기 때문이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_25_0.png" src="../_images/02_06_25_0.png" />
+</div>
+</div>
+<p>팁 비율 데이터에 대해 QQ플롯을 그리면 전반적으로 직선 모양을 따르지만 아웃라이어가 있어서 우측 끝단에서 상단으로 휘어지면서 직선 모양이 깨지는 것을 볼 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">tip_ratio</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_27_0.png" src="../_images/02_06_27_0.png" />
+</div>
+</div>
+<p>만약 40%가 넘는 아웃라이어들을 제거하면 직선에 가까운 모양을 띄게 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_ratio_ex_outlier</span> <span class="o">=</span> <span class="n">tip_ratio</span><span class="p">[</span><span class="n">tip_ratio</span> <span class="o">&lt;</span> <span class="mf">0.4</span><span class="p">]</span>
+
+<span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">probplot</span><span class="p">(</span><span class="n">tip_ratio_ex_outlier</span><span class="p">,</span> <span class="n">plot</span><span class="o">=</span><span class="n">plt</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_29_0.png" src="../_images/02_06_29_0.png" />
+</div>
+</div>
+<p>하지만 QQ플롯도 정규분포인지 아닌지 정량적으로 판단해주지는 못한다. 이때는 앞에서 설명한 검정(test)을 사용해야 한다. 어떤 데이터의 분포가 정규분포인지 아닌지를 판단하는 검정을 <b>정규성 검정(normality test)</b>이라고 한다.</p>
+<p>정규성 검정을 위한 함수는 scipy 패키지와 statsmodels 패키지에서 제공한다. 정규성 검정 방법이 여러가지이므로 함수도 다양한 함수가 제공한다.</p>
+<ul class="simple">
+<li><p>scipy 패키지가 제공하는 정규성 검정 함수</p>
+<ul>
+<li><p>콜모고로프-스미르노프 검정(Kolmogorov-Smirnov test) : <code class="docutils literal notranslate"><span class="pre">scipy.stats.ks_2samp</span></code></p></li>
+<li><p>샤피로-윌크 검정(Shapiro–Wilk test) : <code class="docutils literal notranslate"><span class="pre">scipy.stats.shapiro</span></code></p></li>
+<li><p>앤더스-달링 검정(Anderson–Darling test) : <code class="docutils literal notranslate"><span class="pre">scipy.stats.anderson</span></code></p></li>
+<li><p>다고스티노 K-제곱 검정(D’Agostino’s K-squared test) : <code class="docutils literal notranslate"><span class="pre">scipy.stats.mstats.normaltest</span></code></p></li>
+</ul>
+</li>
+<li><p>statsmodels 패키지가 제공하는 정규성 검정 명령어</p>
+<ul>
+<li><p>콜모고로프-스미르노프 검정(Kolmogorov-Smirnov test) : <code class="docutils literal notranslate"><span class="pre">statsmodels.stats.diagnostic.kstest_normal</span></code></p></li>
+<li><p>옴니버스 검정(Omnibus Normality test) : <code class="docutils literal notranslate"><span class="pre">statsmodels.stats.stattools.omni_normtest</span></code></p></li>
+<li><p>자크-베라 검정(Jarque–Bera test) : <code class="docutils literal notranslate"><span class="pre">statsmodels.stats.stattools.jarque_bera</span></code></p></li>
+<li><p>릴리포스 검정(Lilliefors test) : <code class="docutils literal notranslate"><span class="pre">statsmodels.stats.diagnostic.lillifors</span></code></p></li>
+</ul>
+</li>
+</ul>
+<p>예를 들어 statsmodels 패키지가 제공하는 옴니버스 검정 함수를 사용하여 붓꽃 꽃받침 길이의 정규성 검정을 실시하면 다음과 같이 32.677%의 유의확률을 얻을 수 있다. 정규성 검정의 귀무가설은 “표본 데이터가 정규분포를 따른다”이고 유의확률의 값이 보통 사용하는 1% 혹은 5%의 유의수준보다 높기 때문에 이 귀무가설을 기각할 수 없어 채택하게 된다. 즉, 붓꽃 꽃받침 길이는 정규분포를 따른다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.stattools</span> <span class="kn">import</span> <span class="n">omni_normtest</span>
+
+<span class="n">omni_normtest</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=2.236973547672174, pvalue=0.32677390349997293)
+</pre></div>
+</div>
+</div>
+</div>
+<p>같은 방법으로 아웃라이어를 제거한 팁 비율도 정규분포를 따른다고 판단할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">tip_ratio_ex_outlier</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=4.684342675054582, pvalue=0.09611870532870112)
+</pre></div>
+</div>
+</div>
+</div>
+<p>하지만 아웃라이어를 포함하면 유의확률이 0에 가까운 값이 되므로 아웃라이어를 포함한 전체 팁 비율은 정규분포를 따른다고 할 수 없다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">tip_ratio</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=220.8879728815828, pvalue=1.0833932598440914e-48)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
