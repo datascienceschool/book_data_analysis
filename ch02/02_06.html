@@ -806,6 +806,9 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_25_0.png" src="../_images/02_06_25_0.png" />
+</div>
 </div>
 <p>팁 비율 데이터에 대해 QQ플롯을 그리면 전반적으로 직선 모양을 따르지만 아웃라이어가 있어서 우측 끝단에서 상단으로 휘어지면서 직선 모양이 깨지는 것을 볼 수 있다.</p>
 <div class="cell docutils container">
@@ -814,6 +817,9 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_27_0.png" src="../_images/02_06_27_0.png" />
 </div>
 </div>
 <p>만약 40%가 넘는 아웃라이어들을 제거하면 직선에 가까운 모양을 띄게 된다.</p>
@@ -825,6 +831,9 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_29_0.png" src="../_images/02_06_29_0.png" />
 </div>
 </div>
 <p>하지만 QQ플롯도 정규분포인지 아닌지 정량적으로 판단해주지는 못한다. 이때는 앞에서 설명한 검정(test)을 사용해야 한다. 어떤 데이터의 분포가 정규분포인지 아닌지를 판단하는 검정을 <b>정규성 검정(normality test)</b>이라고 한다.</p>
@@ -856,6 +865,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=2.236973547672174, pvalue=0.32677390349997293)
+</pre></div>
+</div>
+</div>
 </div>
 <p>같은 방법으로 아웃라이어를 제거한 팁 비율도 정규분포를 따른다고 판단할 수 있다.</p>
 <div class="cell docutils container">
@@ -864,11 +878,21 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=4.684342675054582, pvalue=0.09611870532870112)
+</pre></div>
+</div>
+</div>
 </div>
 <p>하지만 아웃라이어를 포함하면 유의확률이 0에 가까운 값이 되므로 아웃라이어를 포함한 전체 팁 비율은 정규분포를 따른다고 할 수 없다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">tip_ratio</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=220.8879728815828, pvalue=1.0833932598440914e-48)
 </pre></div>
 </div>
 </div>
@@ -890,6 +914,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.4620000000000002, 0.029555999999999995)
+</pre></div>
+</div>
+</div>
 </div>
 <p>scipy 패키지의 stats 서브패키지에서 제공하는 <code class="docutils literal notranslate"><span class="pre">norm</span></code> 클래스의 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 정적 메서드를 사용해서 모수 추정을 할 수도 있다. 이 방법을 사용하면  정규분포 뿐 아니라 뒤에서 설명할 임의의 수치형 확률분포함수의 모수를 추정할 수 있다는 장점이 있다. 다만 <code class="docutils literal notranslate"><span class="pre">norm</span></code> 클래스에서는 분산이 아닌 분산의 제곱근 값인 표준편차(standard deviation)를 계산한다.</p>
 <div class="cell docutils container">
@@ -899,10 +928,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.4620000000000002, 0.17191858538273283)
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sigma_hat</span> <span class="o">**</span> <span class="mi">2</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.029556
 </pre></div>
 </div>
 </div>
@@ -915,6 +954,9 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_43_0.png" src="../_images/02_06_43_0.png" />
 </div>
 </div>
 </section>
@@ -946,6 +988,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x136743070&gt;
+</pre></div>
+</div>
+</div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">pdf</span></code> 메서드를 사용하면 확률밀도함수를 계산할 수 있다. 인수로는 확률변수가 가질 수 있는 값을 넣는다.</p>
 <div class="cell docutils container">
@@ -956,6 +1003,9 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_54_0.png" src="../_images/02_06_54_0.png" />
 </div>
 </div>
 <p>다른 확률분포와 마찬가지로 <code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하여 표본측정 시뮬레이션을 할 수 있다.</p>
@@ -981,6 +1031,9 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_58_0.png" src="../_images/02_06_58_0.png" />
+</div>
 </div>
 </section>
 <section id="id10">
@@ -995,12 +1048,20 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_61_0.png" src="../_images/02_06_61_0.png" />
+</div>
 </div>
 <p>정규성 검정을 실시하면 유의확율이 <span class="math notranslate nohighlight">\(1.595
 \times 10^{-10}\)</span>으로 정규분포가 아니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">total_bill</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=45.11781912347332, pvalue=1.5951078766352608e-10)
 </pre></div>
 </div>
 </div>
@@ -1015,11 +1076,19 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_65_0.png" src="../_images/02_06_65_0.png" />
+</div>
 </div>
 <p>정규성 검정을 실시하면 유의확률이 26.77%로 정규분포다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">log_total_bill</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=2.635400431729126, pvalue=0.26775036247744166)
 </pre></div>
 </div>
 </div>
@@ -1035,6 +1104,11 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.39848779123634986, -1.5965087437786663, 19.74259954314551)
+</pre></div>
+</div>
+</div>
 </div>
 <p>추정된 모수값으로 확률밀도함수를 그려서 원래 데이터의 히스토그램과 비교하면 다음과 같다.</p>
 <div class="cell docutils container">
@@ -1046,6 +1120,9 @@ title="Print to PDF"
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_72_0.png" src="../_images/02_06_72_0.png" />
 </div>
 </div>
 </section>
@@ -1078,6 +1155,23 @@ t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Date
+2001-01-02     3350
+2001-01-03     3370
+2001-01-04     3780
+2001-01-05     3900
+2001-01-08     3880
+              ...  
+2021-12-24    80500
+2021-12-27    80200
+2021-12-28    80300
+2021-12-29    78800
+2021-12-30    78300
+Name: Close, Length: 5191, dtype: int64
+</pre></div>
+</div>
+</div>
 </div>
 <p>이 주식의 주가 수익률은 다음과 같이 구할 수 있다.</p>
 <div class="cell docutils container">
@@ -1089,6 +1183,9 @@ t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_82_0.png" src="../_images/02_06_82_0.png" />
+</div>
 </div>
 <p>주가수익률 데이터의 분포는 얼핏보면 정규분포와 유사한 형태를 가진다. 하지만 QQ플롯을 그려보면 직선이 아니라 양측 끝에서 휘어지는 모습을 볼 수 있다.</p>
 <div class="cell docutils container">
@@ -1098,6 +1195,9 @@ t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_84_0.png" src="../_images/02_06_84_0.png" />
+</div>
 </div>
 <p>정규성 검정을 해도 유의확률이 <span class="math notranslate nohighlight">\(4\times 10^{-103}\)</span>으로 분포가 정규분포가 아니라는 것을 확인할 수 있다.</p>
 <div class="cell docutils container">
@@ -1106,11 +1206,21 @@ t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=471.43954606556974, pvalue=4.2481837795163223e-103)
+</pre></div>
+</div>
+</div>
 </div>
 <p>이 분포가 정규분포를 따르지 않는 이유는 양 끝단의 데이터가 정규분포보다 많기 때문이다. 분포함수에서 꼬리부분이 길거나 두껍다는 뜻에서 이 현상을 롱테일(long tail) 혹은 팻테일(fat tail) 현상이라고 부른다. 위에서 예시로 든 주가 수익률의 경우 만약 정규분포를 따른다면 30년 기간동안 일수익률 7%를 넘는 수익률은 거의 발생하지 않았어야 했다. 하지만 실제로는 22번이나 발생했다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">returns</span><span class="p">[</span><span class="n">returns</span> <span class="o">&gt;</span> <span class="mf">0.07</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>22
 </pre></div>
 </div>
 </div>
@@ -1123,6 +1233,9 @@ t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_90_0.png" src="../_images/02_06_90_0.png" />
 </div>
 </div>
 </section>
