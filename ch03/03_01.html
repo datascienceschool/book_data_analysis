@@ -89,8 +89,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.2. 회귀분석을 위한 데이터 준비" href="03_02.html" />
-    <link rel="prev" title="3. 수치형 데이터의 상관관계를 분석한다" href="03_00.html" />
+    <link rel="next" title="3.2. 회귀분석을 위한 준비" href="03_02.html" />
+    <link rel="prev" title="3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다" href="03_00.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -175,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch02/02_00.html">
-   2. 데이터의 신뢰성을 분석한다
+   2. 모수추정과 검정 - 데이터의 신뢰도를 분석한다
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -188,11 +188,51 @@ const thebe_selector_output = ".output, .cell_output"
      2.1. 확률적 데이터
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch02/02_02.html">
+     2.2. 시각적 확률분포추정
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch02/02_03.html">
+     2.3. 확률분포모형을 사용한 확률분포추정
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch02/02_04.html">
+     2.4. 베르누이분포와 이항분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch02/02_05.html">
+     2.5. 카테고리분포와 다항분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch02/02_06.html">
+     2.6. 정규분포, 로그정규분포, 스튜던트t분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch02/02_07.html">
+     2.7. F분포와 카이제곱분포
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch02/02_08.html">
+     2.8. 최대가능도 모수추정법
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch02/02_09.html">
+     2.9. 최대사후확률 모수추정법
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="03_00.html">
-   3. 수치형 데이터의 상관관계를 분석한다
+   3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -207,7 +247,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_02.html">
-     3.2. 회귀분석을 위한 데이터 준비
+     3.2. 회귀분석을 위한 준비
     </a>
    </li>
    <li class="toctree-l2">
@@ -448,136 +488,33 @@ title="Print to PDF"
 </div>
 <section id="id2">
 <h2><span class="section-number">3.1.1. </span>회귀분석 문제의 예<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>다음 데이터는 1940년부터 1950년까지의 미국 전체의 소득(income)과 지출(expenditure) 데이터다. 테이블에서 하나의 레코드는 하나의 연도(year)를 나타낸다. war 열은 전쟁이 있던 연도에는 1, 그렇지 않은 연도에는 0인 값이다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-
-<span class="n">df</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;USConsump1950&quot;</span><span class="p">,</span> <span class="s2">&quot;AER&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
-<span class="n">df</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>income</th>
-      <th>expenditure</th>
-      <th>war</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>241</td>
-      <td>226</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>280</td>
-      <td>240</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>319</td>
-      <td>235</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>331</td>
-      <td>245</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>345</td>
-      <td>255</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>340</td>
-      <td>265</td>
-      <td>1</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>332</td>
-      <td>295</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>320</td>
-      <td>300</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>339</td>
-      <td>305</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>338</td>
-      <td>315</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>371</td>
-      <td>325</td>
-      <td>0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>이 데이터를 다음과 같이 소득을 가로축으로 하고 지출을 세로축으로 한 스캐터플롯(scatter plot)으로 표시하자. 이 그래프에서는 하나의 점이 하나의 연도 즉, 하나의 레코드를 표시한다.</p>
+<p>팁 데이터에서 전체 지불금액(total_bill)과 팁 금액(tip)을 2차원 스캐터플롯(scatter plot)으로 나타내면 다음과 같다. 이 그래프에서는 하나의 점이 하나의 고객그룹 즉, 하나의 레코드를 표시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;income&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;expenditure&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;war&quot;</span><span class="p">)</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_01_8_0.png" src="../_images/03_01_8_0.png" />
+<img alt="../_images/03_01_6_0.png" src="../_images/03_01_6_0.png" />
 </div>
 </div>
-<p>이 그래프를 보면 소득이 증가한 경우에는 지출도 같이 증가하는 것처럼 보인다. 또한 우측 하단의 데이터로부터 전쟁이 있는 경우에는 지출이 하락하는 것을 볼 수 있다. 따라서 다음과 같은 회귀분석 문제를 생각할 수 있다.</p>
+<p>이 그래프를 보면 지불금액이 증가한 경우에는 팁도 같이 증가하는 것처럼 보인다. 우리가 관심을 가지는 것은 지불금액이 증가할 때 팁 금액은 어느 정도 증가하는지이다.</p>
+<p>이 문제를 회귀분석 문제로 보고 분석하기위해 다음과 같이 독립변수와 종속변수를 정한다.</p>
 <ul class="simple">
-<li><p>독립변수 : 소득, 전쟁여부</p></li>
-<li><p>종속변수 : 지출</p></li>
+<li><p>독립변수 : 지불금액, 성별</p></li>
+<li><p>종속변수 : 팁금액</p></li>
 </ul>
-<p>우리는 소득과 전쟁여부가 지출에 주는 영향을 분석하는 회귀분석을 통해 다음과 같은 질문에 대한 답을 얻을 수 있다.</p>
+<p>이 회귀분석을 통해 다음과 같은 질문들에 대한 답을 얻을 수 있다.</p>
 <ul class="simple">
-<li><p>소득이 증가할 때 정말 지출이 증가하는가?</p></li>
-<li><p>소득이 단위소득(1)만큼 증가할 때 지출은 어느정도 증가하는가?</p></li>
-<li><p>전쟁이 있을 경우와 없을 경우 지출이 달라지는가?</p></li>
-<li><p>전쟁이 있을 경우와 없을 경우 어느정도 지출이 달라지는가?</p></li>
+<li><p>지불금액이 증가할 때 정말 팁이 증가하는가?</p></li>
+<li><p>지불금액이 1 달러만큼 증가할 때 팁은 어느 정도 증가하는가?</p></li>
+<li><p>성별이 달라지면 팁이 증가하는가?</p></li>
 </ul>
 </section>
 <section id="id3">
@@ -588,7 +525,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
 
-<span class="n">m</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;expenditure ~ income + C(war)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">m</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;tip ~ total_bill + C(sex)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
 <span class="n">r</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
@@ -597,45 +534,41 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:            expenditure   R-squared:                       0.946
-Model:                            OLS   Adj. R-squared:                  0.933
-Method:                 Least Squares   F-statistic:                     70.61
-Date:                Sun, 12 Jun 2022   Prob (F-statistic):           8.26e-06
-Time:                        15:08:05   Log-Likelihood:                -38.263
-No. Observations:                  11   AIC:                             82.53
-Df Residuals:                       8   BIC:                             83.72
+Dep. Variable:                    tip   R-squared:                       0.457
+Model:                            OLS   Adj. R-squared:                  0.452
+Method:                 Least Squares   F-statistic:                     101.3
+Date:                Sun, 03 Jul 2022   Prob (F-statistic):           1.18e-32
+Time:                        15:31:09   Log-Likelihood:                -350.52
+No. Observations:                 244   AIC:                             707.0
+Df Residuals:                     241   BIC:                             717.5
 Df Model:                           2                                         
 Covariance Type:            nonrobust                                         
-===============================================================================
-                  coef    std err          t      P&gt;|t|      [0.025      0.975]
--------------------------------------------------------------------------------
-Intercept      14.4954     27.299      0.531      0.610     -48.457      77.448
-C(war)[T.1]   -50.6897      5.932     -8.545      0.000     -64.370     -37.010
-income          0.8575      0.085     10.048      0.000       0.661       1.054
+====================================================================================
+                       coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------------
+Intercept            0.9067      0.175      5.182      0.000       0.562       1.251
+C(sex)[T.Female]     0.0266      0.138      0.192      0.848      -0.246       0.299
+total_bill           0.1052      0.007     14.110      0.000       0.091       0.120
 ==============================================================================
-Omnibus:                        0.196   Durbin-Watson:                   2.574
-Prob(Omnibus):                  0.907   Jarque-Bera (JB):                0.381
-Skew:                          -0.032   Prob(JB):                        0.827
-Kurtosis:                       2.091   Cond. No.                     3.20e+03
+Omnibus:                       20.499   Durbin-Watson:                   2.149
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               38.652
+Skew:                           0.447   Prob(JB):                     4.05e-09
+Kurtosis:                       4.733   Cond. No.                         63.0
 ==============================================================================
 
 Notes:
 [1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The condition number is large, 3.2e+03. This might indicate that there are
-strong multicollinearity or other numerical problems.
 </pre></div>
 </div>
 </div>
 </div>
 <p>위 회귀분석 결과를 해석하면 다음과 같은 결론을 얻을 수 있다.</p>
 <ul class="simple">
-<li><p>소득이 증가할 때 정말 지출도 증가한다.</p></li>
-<li><p>소득이 단위소득(1)만큼 증가할 때 지출은 약 0.9 정도 증가한다.</p></li>
-<li><p>전쟁이 있을 경우 지출은 감소한다.</p></li>
-<li><p>전쟁이 있을 경우 지출은 약 51 정도 감소한다.</p></li>
+<li><p>지불금액이 증가할 때 팁도 증가한다.</p></li>
+<li><p>지불금액이 1달러만큼 증가할 때 팁은 약 0.1달러 정도 증가한다.</p></li>
+<li><p>성별은 팁 금액에 영향을 주지 않는다.</p></li>
 </ul>
-<p>위 결과에서 이 정보를 읽고 해석하는 방법은 다음 절부터 차근차근 설명하도록 한다.</p>
-<p>또한 이 분석이 제대로 된 분석인지 아닌지, 그리고 더 좋은 분석을 수행하려면 어떻게 해야 하는지도 같이 설명한다.</p>
+<p>위의 결과에서 이러한 정보를 읽고 해석하는 방법은 다음 절부터 차근차근 설명하도록 한다.</p>
 </section>
 </section>
 
@@ -670,13 +603,13 @@ strong multicollinearity or other numerical problems.
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3. </span>수치형 데이터의 상관관계를 분석한다</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>회귀분석 - 수치형 데이터의 상관관계를 분석한다</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="03_02.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.2. </span>회귀분석을 위한 데이터 준비</p>
+        <p class="prev-next-title"><span class="section-number">3.2. </span>회귀분석을 위한 준비</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
