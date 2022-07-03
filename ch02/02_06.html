@@ -503,7 +503,17 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id14">
-     2.6.3.2. 스튜던트t분포의 예
+     2.6.3.2. 스튜던트t분포의 시뮬레이션
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     2.6.3.3. 스튜던트t분포의 예
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     2.6.3.4. 스튜던트t분포의 모수추정
     </a>
    </li>
   </ul>
@@ -603,7 +613,17 @@ title="Print to PDF"
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id14">
-     2.6.3.2. 스튜던트t분포의 예
+     2.6.3.2. 스튜던트t분포의 시뮬레이션
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id15">
+     2.6.3.3. 스튜던트t분포의 예
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id16">
+     2.6.3.4. 스튜던트t분포의 모수추정
     </a>
    </li>
   </ul>
@@ -661,7 +681,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x136100e50&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x13874b2e0&gt;
 </pre></div>
 </div>
 </div>
@@ -1219,7 +1239,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x135f41f60&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x138757370&gt;
 </pre></div>
 </div>
 </div>
@@ -1340,7 +1360,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>추정된 모수값으로 확률밀도함수를 그려서 원래 데이터의 히스토그램과 비교하면 다음과 같다.</p>
+<p>팁 데이터의 total_bill 데이터에 대해 추정된 모수값으로 확률밀도함수를 그려서 원래 데이터의 히스토그램과 비교하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">lognorm</span><span class="p">(</span><span class="n">s</span><span class="o">=</span><span class="n">s</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
@@ -1372,9 +1392,57 @@ title="Print to PDF"
 t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\frac{\nu+1}{2}\right)} {\Gamma\left(\frac{\nu}{2}\right)} \left(1+\lambda\frac{(x-\mu)^2}{\nu} \right)^{-\frac{\nu+1}{2}}
 \]</div>
 <p>이 식에서 <span class="math notranslate nohighlight">\(\lambda\)</span>는 정규분포의 정밀도 <span class="math notranslate nohighlight">\(\sigma^{-2}\)</span>에 대응하는 개념이고 <span class="math notranslate nohighlight">\(\Gamma(x)\)</span>는 감마(Gamma) 함수라는 특수 함수다.</p>
+<div class="math notranslate nohighlight">
+\[
+\Gamma(x) = \int_0^\infty  u^{x-1} e^{-u} d
+\]</div>
+<p>스튜던트t분포는 양끝쪽의 꼬리부분의 두께를 조정할 수 있는 자유도(degree of freedom) 모수 <span class="math notranslate nohighlight">\(\nu\)</span>가 있다. 이 값은 2 이상의 자연수를 사용한다. 모수 <span class="math notranslate nohighlight">\(\nu\)</span>가 1인 경우는 <b>코시분포(Cauchy distribution)&lt;.b&gt;라고 한다. 코시분포에서 양수인 부분만 사용하는 경우에는 <b>하프코시분포(Half-Cauchy distribution)</b>라고 부른다.</p>
 </section>
 <section id="id14">
-<h3><span class="section-number">2.6.3.2. </span>스튜던트t분포의 예<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">2.6.3.2. </span>스튜던트t분포의 시뮬레이션<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<p>scipy 패키지의 stats 서브패키지는 로그정규분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">t</span></code> 클래스를 제공한다. <code class="docutils literal notranslate"><span class="pre">t</span></code> 클래스의 인수는 <code class="docutils literal notranslate"><span class="pre">df</span></code>와 <code class="docutils literal notranslate"><span class="pre">loc</span></code>, <code class="docutils literal notranslate"><span class="pre">scale</span></code> 3가지 인데 <code class="docutils literal notranslate"><span class="pre">df</span></code>는 자유도, <code class="docutils literal notranslate"><span class="pre">loc</span></code>는 평균, <code class="docutils literal notranslate"><span class="pre">scale</span></code>은 표준편차를 설정한다. 메서드의 사용 방법은 정규분포와 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">t</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="mi">2</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">sigma2</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">mu</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="n">sigma2</span><span class="p">))</span>
+
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;스튜던트t분포 확률밀도함수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_94_0.png" src="../_images/02_06_94_0.png" />
+</div>
+</div>
+<p>자유도 모수의 값이 증가하면 스튜던트t분포의 모양이 점점 정규분포와 닮아간다. 일반적으로 자유도가 30 이상이면 정규분포라고 본다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">df</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">20</span><span class="p">]:</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="p">(</span><span class="s2">&quot;스튜던트t분포(dof=</span><span class="si">%d</span><span class="s2">)&quot;</span> <span class="o">%</span> <span class="n">df</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">norm</span><span class="p">()</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;정규분포&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;자유도에 따른 스튜던트t분포의 변화&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;표본값&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;확률밀도함수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_96_0.png" src="../_images/02_06_96_0.png" />
+</div>
+</div>
+</section>
+<section id="id15">
+<h3><span class="section-number">2.6.3.3. </span>스튜던트t분포의 예<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h3>
 <p>다음은 삼성전자 주식의 20년간의 주가수익률 데이터다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1414,7 +1482,7 @@ Name: Close, Length: 5191, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_97_0.png" src="../_images/02_06_97_0.png" />
+<img alt="../_images/02_06_101_0.png" src="../_images/02_06_101_0.png" />
 </div>
 </div>
 <p>주가수익률 데이터의 분포는 얼핏보면 정규분포와 유사한 형태를 가진다. 하지만 QQ플롯을 그려보면 직선이 아니라 양측 끝에서 휘어지는 모습을 볼 수 있다.</p>
@@ -1426,7 +1494,7 @@ Name: Close, Length: 5191, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_99_0.png" src="../_images/02_06_99_0.png" />
+<img alt="../_images/02_06_103_0.png" src="../_images/02_06_103_0.png" />
 </div>
 </div>
 <p>정규성 검정을 해도 유의확률이 <span class="math notranslate nohighlight">\(4\times 10^{-103}\)</span>으로 분포가 정규분포가 아니라는 것을 확인할 수 있다.</p>
@@ -1458,14 +1526,46 @@ Name: Close, Length: 5191, dtype: int64
 <p>히스토그램을 정규분포와 비교하여 삺펴보아도 정규분포의 꼬리 바깥쪽에 아웃라이어 데이터가 많이 존재하는 것을 볼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">fit</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">fit</span><span class="o">=</span><span class="n">norm</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">rug</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">rug_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;height&quot;</span><span class="p">:</span> <span class="mf">0.1</span><span class="p">,})</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.15</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_105_0.png" src="../_images/02_06_105_0.png" />
+<img alt="../_images/02_06_109_0.png" src="../_images/02_06_109_0.png" />
+</div>
+</div>
+</section>
+<section id="id16">
+<h3><span class="section-number">2.6.3.4. </span>스튜던트t분포의 모수추정<a class="headerlink" href="#id16" title="Permalink to this headline">#</a></h3>
+<p>스튜던트t분포의 모수는 다음과 같이 추정한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span> <span class="o">=</span> <span class="n">t</span><span class="o">.</span><span class="n">fit</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
+<span class="n">df</span><span class="p">,</span> <span class="n">loc</span><span class="p">,</span> <span class="n">scale</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(4.6818243426797395, 0.0004703968628922298, 0.01567026026775519)
+</pre></div>
+</div>
+</div>
+</div>
+<p>주가 수익률 데이터에 대해 추정된 모수값으로 확률밀도함수를 그려서 원래 데이터의 히스토그램과 비교하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">t</span><span class="p">(</span><span class="n">df</span><span class="o">=</span><span class="n">df</span><span class="p">,</span> <span class="n">loc</span><span class="o">=</span><span class="n">loc</span><span class="p">,</span> <span class="n">scale</span><span class="o">=</span><span class="n">scale</span><span class="p">)</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">returns</span><span class="p">,</span> <span class="n">stat</span><span class="o">=</span><span class="s1">&#39;density&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_114_0.png" src="../_images/02_06_114_0.png" />
 </div>
 </div>
 </section>
