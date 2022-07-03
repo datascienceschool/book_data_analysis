@@ -661,7 +661,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x1367438e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x136100e50&gt;
 </pre></div>
 </div>
 </div>
@@ -740,35 +740,149 @@ title="Print to PDF"
 </section>
 <section id="id4">
 <h3><span class="section-number">2.6.1.3. </span>정규분포의 예<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
-<p>사실 현실세계에서는 상당히 많은 데이터가 정규분포를 따른다. 다음 데이터는 setosa라는 붓꽃종에 속하는 50개의 꽃송이에 대해 꽃받침의 길이를 0.1cm 단위로 측정한 데이터다.</p>
+<p>사실 현실세계에서는 상당히 많은 데이터가 정규분포를 따른다. 다음 데이터는 setosa, versicolor, virginica라는 3가지 붓꽃종에 속하는 꽃송이에 대해 꽃잎(petal), 꽃받침(sepal)의 길이(length)와 폭(width)을 0.1cm 단위로 측정한 데이터다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">load_iris</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-<span class="n">setosa_sepal_length</span> <span class="o">=</span> <span class="n">load_iris</span><span class="p">()</span><span class="o">.</span><span class="n">data</span><span class="p">[:</span><span class="mi">50</span><span class="p">,</span> <span class="mi">2</span><span class="p">]</span>
-<span class="n">setosa_sepal_length</span>
+<span class="n">iris</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;iris&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">iris</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1.4, 1.4, 1.3, 1.5, 1.4, 1.7, 1.4, 1.5, 1.4, 1.5, 1.5, 1.6, 1.4,
-       1.1, 1.2, 1.5, 1.3, 1.4, 1.7, 1.5, 1.7, 1.5, 1. , 1.7, 1.9, 1.6,
-       1.6, 1.5, 1.4, 1.6, 1.6, 1.5, 1.5, 1.4, 1.5, 1.2, 1.3, 1.4, 1.3,
-       1.5, 1.3, 1.3, 1.3, 1.6, 1.9, 1.4, 1.6, 1.4, 1.5, 1.4])
-</pre></div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>Sepal.Length</th>
+      <th>Sepal.Width</th>
+      <th>Petal.Length</th>
+      <th>Petal.Width</th>
+      <th>Species</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5.1</td>
+      <td>3.5</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>4.9</td>
+      <td>3.0</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>4.7</td>
+      <td>3.2</td>
+      <td>1.3</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>4.6</td>
+      <td>3.1</td>
+      <td>1.5</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>5.0</td>
+      <td>3.6</td>
+      <td>1.4</td>
+      <td>0.2</td>
+      <td>setosa</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>145</th>
+      <td>6.7</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>146</th>
+      <td>6.3</td>
+      <td>2.5</td>
+      <td>5.0</td>
+      <td>1.9</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>147</th>
+      <td>6.5</td>
+      <td>3.0</td>
+      <td>5.2</td>
+      <td>2.0</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>148</th>
+      <td>6.2</td>
+      <td>3.4</td>
+      <td>5.4</td>
+      <td>2.3</td>
+      <td>virginica</td>
+    </tr>
+    <tr>
+      <th>149</th>
+      <td>5.9</td>
+      <td>3.0</td>
+      <td>5.1</td>
+      <td>1.8</td>
+      <td>virginica</td>
+    </tr>
+  </tbody>
+</table>
+<p>150 rows × 5 columns</p>
+</div></div></div>
 </div>
-</div>
-</div>
+<p>이 중에서 setosa 종의 꽃받침 길이만 setosa_sepal_length라는 이름으로 뽑아서 분포를 그려보면 정규분포와 유사한 모양을 가지는 것을 볼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">setosa_sepal_length</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="n">iris</span><span class="o">.</span><span class="n">Species</span> <span class="o">==</span> <span class="s2">&quot;setosa&quot;</span><span class="p">][</span><span class="s2">&quot;Sepal.Length&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;붓꽃 꽃받침의 길이 분포&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_20_0.png" src="../_images/02_06_20_0.png" />
+<img alt="../_images/02_06_21_0.png" src="../_images/02_06_21_0.png" />
 </div>
 </div>
 <p>다음은 팁 데이터에서 지불 금액과 팁 금액의 비율(tip/total_bill)의 분포를 구하면 마찬가지로 정규분포와 유사한 모양을 가진다. 다만 상식적으로는 생각하기 어려운 40% 혹은 70% 근처의 값들이 있는 것을 알 수 있다. 이렇게 다른 값들과 동떨어진 값들을 아웃라이어(outlier)라고 한다.</p>
@@ -785,7 +899,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_22_0.png" src="../_images/02_06_22_0.png" />
+<img alt="../_images/02_06_23_0.png" src="../_images/02_06_23_0.png" />
 </div>
 </div>
 </section>
@@ -807,7 +921,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_25_0.png" src="../_images/02_06_25_0.png" />
+<img alt="../_images/02_06_26_0.png" src="../_images/02_06_26_0.png" />
 </div>
 </div>
 <p>팁 비율 데이터에 대해 QQ플롯을 그리면 전반적으로 직선 모양을 따르지만 아웃라이어가 있어서 우측 끝단에서 상단으로 휘어지면서 직선 모양이 깨지는 것을 볼 수 있다.</p>
@@ -819,7 +933,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_27_0.png" src="../_images/02_06_27_0.png" />
+<img alt="../_images/02_06_28_0.png" src="../_images/02_06_28_0.png" />
 </div>
 </div>
 <p>만약 40%가 넘는 아웃라이어들을 제거하면 직선에 가까운 모양을 띄게 된다.</p>
@@ -833,7 +947,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_29_0.png" src="../_images/02_06_29_0.png" />
+<img alt="../_images/02_06_30_0.png" src="../_images/02_06_30_0.png" />
 </div>
 </div>
 <p>하지만 QQ플롯도 정규분포인지 아닌지 정량적으로 판단해주지는 못한다. 이때는 앞에서 설명한 검정(test)을 사용해야 한다. 어떤 데이터의 분포가 정규분포인지 아닌지를 판단하는 검정을 <b>정규성 검정(normality test)</b>이라고 한다.</p>
@@ -856,7 +970,7 @@ title="Print to PDF"
 </ul>
 </li>
 </ul>
-<p>예를 들어 statsmodels 패키지가 제공하는 옴니버스 검정 함수를 사용하여 붓꽃 꽃받침 길이의 정규성 검정을 실시하면 다음과 같이 32.677%의 유의확률을 얻을 수 있다. 정규성 검정의 귀무가설은 “표본 데이터가 정규분포를 따른다”이고 유의확률의 값이 보통 사용하는 1% 혹은 5%의 유의수준보다 높기 때문에 이 귀무가설을 기각할 수 없어 채택하게 된다. 즉, 붓꽃 꽃받침 길이는 정규분포를 따른다.</p>
+<p>예를 들어 statsmodels 패키지가 제공하는 옴니버스 검정 함수를 사용하여 붓꽃 꽃받침 길이의 정규성 검정을 실시하면 다음과 같이 90.7%의 유의확률을 얻을 수 있다. 정규성 검정의 귀무가설은 “표본 데이터가 정규분포를 따른다”이고 유의확률의 값이 보통 사용하는 1% 혹은 5%의 유의수준보다 높기 때문에 이 귀무가설을 기각할 수 없어 채택하게 된다. 즉, 붓꽃 꽃받침 길이는 정규분포를 따른다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.stattools</span> <span class="kn">import</span> <span class="n">omni_normtest</span>
@@ -866,7 +980,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=2.236973547672174, pvalue=0.32677390349997293)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>NormaltestResult(statistic=0.19416346073876928, pvalue=0.907481834276742)
 </pre></div>
 </div>
 </div>
@@ -906,7 +1020,7 @@ title="Print to PDF"
 <div class="math notranslate nohighlight">
 \[ \hat{\sigma^2} = \dfrac{1}{N}\sum_{i=1}^{N} (x_i - \hat\mu)^2 \]</div>
 <p>위 식에서 <span class="math notranslate nohighlight">\(x_i\)</span>는 <span class="math notranslate nohighlight">\(N\)</span>개의 표본 데이터 각각의 값을 나타낸다.</p>
-<p>이 모수 추정치는 각각 numpy 패키지의 <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">var</span></code> 함수로 계산할 수 있다. 예를 들어 붓꽃 꽃받침의 길이의 평균과 분산은 1,46, 0.3이다.</p>
+<p>이 모수 추정치는 각각 numpy 패키지의 <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">var</span></code> 함수로 계산할 수 있다. 예를 들어 붓꽃 꽃받침의 길이의 평균과 분산은 5.006, 0.121766다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu_hat</span><span class="p">,</span> <span class="n">sigma2_hat</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">var</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">)</span>
@@ -915,7 +1029,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.4620000000000002, 0.029555999999999995)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.006, 0.12176400000000002)
 </pre></div>
 </div>
 </div>
@@ -929,7 +1043,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.4620000000000002, 0.17191858538273283)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(5.006, 0.3489469873777391)
 </pre></div>
 </div>
 </div>
@@ -941,7 +1055,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.029556
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.12176400000000001
 </pre></div>
 </div>
 </div>
@@ -956,12 +1070,128 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_43_0.png" src="../_images/02_06_43_0.png" />
+<img alt="../_images/02_06_44_0.png" src="../_images/02_06_44_0.png" />
 </div>
 </div>
 </section>
 <section id="id6">
 <h3><span class="section-number">2.6.1.6. </span>정규분포의 모수검정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>이렇게 추정한 정규분포의 모수값이 특정한 값과 같은지 아닌지를 검정을 통해 검증할 수 있다. 정규분포의 평균 모수를 검정할 때는 <b>단일표본 t검정(one sample t-test)</b>이라는 방법을 사용한다. 이 이름은 뒤에서 설명할 스튜던트t분포에서 나온 이름이다.</p>
+<p>예를 들어 setosa종 붓꽃 꽃받침의 평균값은 5.06이 나왔지만 이 값을 그냥 5라고 할 수 있는지 알아보려면 다음과 같은 귀무가설 <span class="math notranslate nohighlight">\(H_0\)</span>에 대한 t검정을 하면 된다.</p>
+<div class="math notranslate nohighlight">
+\[ H_0 : \mu = 5 \]</div>
+<p>scipy 패키지의 stats 서브패키지는 t검정을 위한 <code class="docutils literal notranslate"><span class="pre">ttest_1samp</span></code> 함수를 제공한다. 이 함수에 데이터 값과 비교모수값을 인수로 넣으면 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_1samp</span>
+
+<span class="n">ttest_1samp</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">,</span> <span class="mi">5</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ttest_1sampResult(statistic=0.12036212238318053, pvalue=0.9046884777690936)
+</pre></div>
+</div>
+</div>
+</div>
+<p>유의확률이 90%가 넘으므로 모수값을 5라고 해도 문제가 없다고 할 수 있다.</p>
+<p><b>독립표본 t검정(independent two sample t-test)</b>을 사용하면 두 개의 정규분포의 모수값이 같은지 아닌지 비교할 수도 있다. 이 때는 같은 패키지의 <code class="docutils literal notranslate"><span class="pre">ttest_ind</span></code> 함수를 사용한다.</p>
+<p>예를 들어 setosa 종의 꽃받침 길이는 5.06이었지만 versicolor 종의 꽃받침 길이는 5.936이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vericolor_sepal_length</span> <span class="o">=</span> <span class="n">iris</span><span class="p">[</span><span class="n">iris</span><span class="o">.</span><span class="n">Species</span> <span class="o">==</span> <span class="s2">&quot;versicolor&quot;</span><span class="p">][</span><span class="s2">&quot;Sepal.Length&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">vericolor_sepal_length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>5.936
+</pre></div>
+</div>
+</div>
+</div>
+<p>하지만 시각적 분포도에서 볼 수 있듯이 이 두 종의 꽃받침 길이 분포에는 겹치는 부분이 많다. 따라서 원래 두 종의 꽃받침 길이의 모수는 같지만 표본 데이터의 오차로 인해 이렇게 두 값이 다른 결과가 나왔을 수도 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;Sepal.Length&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;Species&quot;</span><span class="p">,</span> <span class="n">element</span><span class="o">=</span><span class="s2">&quot;poly&quot;</span><span class="p">,</span>
+             <span class="n">data</span><span class="o">=</span><span class="n">iris</span><span class="p">[</span><span class="n">iris</span><span class="o">.</span><span class="n">Species</span><span class="o">.</span><span class="n">isin</span><span class="p">([</span><span class="s2">&quot;setosa&quot;</span><span class="p">,</span> <span class="s2">&quot;versicolor&quot;</span><span class="p">])])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_06_51_0.png" src="../_images/02_06_51_0.png" />
+</div>
+</div>
+<p>이 두 종의 원래 모수는 같았지만 표본 데이터의 오차에 의해 이렇게 다른 값이 나온건지 아닌지를 알아내려면 다음 코드를 사용한다. <code class="docutils literal notranslate"><span class="pre">ttest_ind</span></code> 함수에서 <code class="docutils literal notranslate"><span class="pre">equal_var</span></code> 인수는 두 표본데이터의 분산 모수가 같을 때는 True, 아니면 False를 넣는다. 일단 여기에서는 두 분산 모수가 같은지 모르므로 False 값을 넣는다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">ttest_ind</span>
+
+<span class="n">ttest_ind</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">,</span> <span class="n">vericolor_sepal_length</span><span class="p">,</span> <span class="n">equal_var</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Ttest_indResult(statistic=-10.52098626754911, pvalue=3.746742613983842e-17)
+</pre></div>
+</div>
+</div>
+</div>
+<p>유의확률이 <span class="math notranslate nohighlight">\(3.7\times 10^{-17}\)</span>로 두 종의 꽃받침 길이는 다르다는 것을 확인할 수 있다.</p>
+<p>앞에서는 두 표본 데이터의 분산 모수가 다르다고 가정햐고 검정을 실시했는데 다음 함수를 사용하면 두 표본 데이터의 분산 모수가 같은지 다른지에 대한 검정을 실시할 수 있다.</p>
+<ul class="simple">
+<li><p>바틀렛 검정 : <code class="docutils literal notranslate"><span class="pre">scipy.stat.bartlett</span></code></p></li>
+<li><p>플리그너 검정 : <code class="docutils literal notranslate"><span class="pre">scipy.stat.fligner</span></code></p></li>
+<li><p>레빈 검정 : <code class="docutils literal notranslate"><span class="pre">scipy.stat.levene</span></code></p></li>
+</ul>
+<p>이 함수들을 이용하여 setosa 종과 versicolor 종의 꽃받침 길이의 분산이 같은지 다른지 알아보자</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">bartlett</span><span class="p">,</span> <span class="n">fligner</span><span class="p">,</span> <span class="n">levene</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bartlett</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">,</span> <span class="n">vericolor_sepal_length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>BartlettResult(statistic=6.891726740802407, pvalue=0.008659557933880048)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fligner</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">,</span> <span class="n">vericolor_sepal_length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>FlignerResult(statistic=7.394812196534449, pvalue=0.006541225398265243)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">levene</span><span class="p">(</span><span class="n">setosa_sepal_length</span><span class="p">,</span> <span class="n">vericolor_sepal_length</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>LeveneResult(statistic=8.172720533728683, pvalue=0.005195521631017526)
+</pre></div>
+</div>
+</div>
+</div>
+<p>3가지 검정의 결과가 모두 유의확률 1% 이내로 나왔으므로 두 종의 꽃받침 길이의 분산은 다르다는 것을 알 수 있다.</p>
 </section>
 </section>
 <section id="id7">
@@ -989,7 +1219,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x136743070&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x135f41f60&gt;
 </pre></div>
 </div>
 </div>
@@ -1005,7 +1235,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_54_0.png" src="../_images/02_06_54_0.png" />
+<img alt="../_images/02_06_69_0.png" src="../_images/02_06_69_0.png" />
 </div>
 </div>
 <p>다른 확률분포와 마찬가지로 <code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하여 표본측정 시뮬레이션을 할 수 있다.</p>
@@ -1032,7 +1262,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_58_0.png" src="../_images/02_06_58_0.png" />
+<img alt="../_images/02_06_73_0.png" src="../_images/02_06_73_0.png" />
 </div>
 </div>
 </section>
@@ -1049,7 +1279,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_61_0.png" src="../_images/02_06_61_0.png" />
+<img alt="../_images/02_06_76_0.png" src="../_images/02_06_76_0.png" />
 </div>
 </div>
 <p>정규성 검정을 실시하면 유의확율이 <span class="math notranslate nohighlight">\(1.595
@@ -1077,7 +1307,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_65_0.png" src="../_images/02_06_65_0.png" />
+<img alt="../_images/02_06_80_0.png" src="../_images/02_06_80_0.png" />
 </div>
 </div>
 <p>정규성 검정을 실시하면 유의확률이 26.77%로 정규분포다.</p>
@@ -1122,7 +1352,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_72_0.png" src="../_images/02_06_72_0.png" />
+<img alt="../_images/02_06_87_0.png" src="../_images/02_06_87_0.png" />
 </div>
 </div>
 </section>
@@ -1184,7 +1414,7 @@ Name: Close, Length: 5191, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_82_0.png" src="../_images/02_06_82_0.png" />
+<img alt="../_images/02_06_97_0.png" src="../_images/02_06_97_0.png" />
 </div>
 </div>
 <p>주가수익률 데이터의 분포는 얼핏보면 정규분포와 유사한 형태를 가진다. 하지만 QQ플롯을 그려보면 직선이 아니라 양측 끝에서 휘어지는 모습을 볼 수 있다.</p>
@@ -1196,7 +1426,7 @@ Name: Close, Length: 5191, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_84_0.png" src="../_images/02_06_84_0.png" />
+<img alt="../_images/02_06_99_0.png" src="../_images/02_06_99_0.png" />
 </div>
 </div>
 <p>정규성 검정을 해도 유의확률이 <span class="math notranslate nohighlight">\(4\times 10^{-103}\)</span>으로 분포가 정규분포가 아니라는 것을 확인할 수 있다.</p>
@@ -1235,7 +1465,7 @@ Name: Close, Length: 5191, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_06_90_0.png" src="../_images/02_06_90_0.png" />
+<img alt="../_images/02_06_105_0.png" src="../_images/02_06_105_0.png" />
 </div>
 </div>
 </section>
