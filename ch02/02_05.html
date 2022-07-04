@@ -175,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="02_00.html">
-   2. 확률모형 - 데이터의 신뢰도를 나타낸다
+   2. 모수추정과 검정 - 데이터의 신뢰도를 분석한다
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -232,7 +232,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch03/03_00.html">
-   3. 수치형 데이터의 상관관계를 분석한다
+   3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -431,9 +431,21 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id2">
    2.5.1. 카테고리분포
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     2.5.1.1. 카테고리분포의 확률분포함수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     2.5.1.2. 카테고리분포의 시뮬레이션
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
+  <a class="reference internal nav-link" href="#id5">
    2.5.2. 카테고리분포의 예
   </a>
  </li>
@@ -460,9 +472,21 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id2">
    2.5.1. 카테고리분포
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     2.5.1.1. 카테고리분포의 확률분포함수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     2.5.1.2. 카테고리분포의 시뮬레이션
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
+  <a class="reference internal nav-link" href="#id5">
    2.5.2. 카테고리분포의 예
   </a>
  </li>
@@ -480,11 +504,13 @@ title="Print to PDF"
 <h1><span class="section-number">2.5. </span>카테고리분포와 다항분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">2.5.1. </span>카테고리분포<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>카테고리분포는 베르누이분포의 확장판이다. 베르누이분포는 두 가지의 값만 가질 수 있지만 카테고리분포는 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>까지 <span class="math notranslate nohighlight">\(K\)</span>(<span class="math notranslate nohighlight">\(K&gt;0\)</span>)개의 값을 가질 수 있다. 예를 들어 주사위를 던져 나오는 숫자 데이터는 <span class="math notranslate nohighlight">\(K=6\)</span>인 카테고리분포를 따른다고 할 수 있다.</p>
+<p>카테고리분포는 베르누이분포의 확장판이다. 베르누이분포는 두 가지의 값만 가질 수 있지만 카테고리분포는 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>까지 <span class="math notranslate nohighlight">\(K\)</span>(<span class="math notranslate nohighlight">\(K&gt;0\)</span>)개의 값을 가질 수 있다. 예를 들어 주사위를 던져 나오는 숫자는 <span class="math notranslate nohighlight">\(K=6\)</span>인 카테고리분포를 따른다고 할 수 있다.</p>
 <p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 카테고리분포를 따르는 경우 다음과 같이 표시한다.</p>
 <div class="math notranslate nohighlight">
 \[ x \sim \text{Cat}(x) \]</div>
 <p>위 식에서 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>은 카테고리분포의 확률질량함수를 가리키는 기호다.</p>
+<section id="id3">
+<h3><span class="section-number">2.5.1.1. </span>카테고리분포의 확률분포함수<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>의 수식은 다음과 같다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
@@ -500,13 +526,16 @@ title="Print to PDF"
 \end{align}
 \end{split}
 \end{split}\]</div>
-<p>카테고리분포는 각각 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>값이 나올 확률을 나타내는 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>라는 <span class="math notranslate nohighlight">\(K\)</span>개의 모수를 가진다. 이 모수들은 모두 더해서 1이 되어야 한다. 이 제한조건을 수식으로 표현하면 다음과 같다.</p>
+<p>카테고리분포는 각각 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>값이 나올 확률을 나타내는 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>라는 <span class="math notranslate nohighlight">\(K\)</span>개의 모수를 가진다. 예를 들어 공정한 주사위의 경우에는 모든 모수값이 <span class="math notranslate nohighlight">\(\frac{1}{6}\)</span>이 된다.</p>
+<div class="math notranslate nohighlight">
+\[ \text{공정한 주사위의 카테고리모수}: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5 = \mu_6 = \dfrac{1}{6} \]</div>
+<p>어떤 경우에도 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>를 모두 더하면 1이 되어야 한다. 이 제한조건을 수식으로 표현하면 다음과 같다.</p>
 <div class="math notranslate nohighlight">
 \[ \sum_{i=1}^{K}\mu_i = 1 \]</div>
-<p>카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>도 하나의 수식으로 표현하는 방법이 있는데 이렇게 하려면 카테고리분포가 생성하는 값이 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>와 같은 정수값이 아니라 다음과 같이 0과 1로 이루어진 벡터값</p>
+<p>카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>도 베르누이분포처럼 하나의 수식으로 표현하는 방법이 있는데 이렇게 하려면 카테고리분포가 생성하는 값이 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>와 같은 정수값이 아니라 다음과 같이 0과 1로 이루어진 벡터값</p>
 <div class="math notranslate nohighlight">
 \[ x = (x_1, x_2, \ldots, x_K) \]</div>
-<p>으로 풀어써야 한다.</p>
+<p>으로 풀어써야 한다. 예를 들어 주사위와 같이 <span class="math notranslate nohighlight">\(K=6\)</span>인 카테고리분포는 다음과 같은 값을 가진다고 가정한다.</p>
 <p>\begin{split}
 \begin{align}
 \begin{aligned}
@@ -519,7 +548,6 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 \end{aligned}
 \end{align}
 \end{split}</p>
-<p>즉, <span class="math notranslate nohighlight">\(x=1\)</span>인 경우에는 <span class="math notranslate nohighlight">\(x_1=1, x_2=0, x_3=0, \ldots, x_K=1\)</span>이라 하는 것이다.</p>
 <p>이렇게 정수 범주값을 0과 1로 이루어진 벡터값으로 바꾸는 작업을 <b>원핫인코딩(one-hot encoding)</b>이라고 한다. 원핫인코딩을 하게되면 카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}\)</span>은 다음과 같이 표시한다.</p>
 <div class="math notranslate nohighlight">
 \[ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) \]</div>
@@ -527,15 +555,51 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 <div class="math notranslate nohighlight">
 \[ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) = \mu_1^{x_1} \mu_2^{x_2}  \cdots \mu_K^{x_K}  =  \prod_{k=1}^K \mu_k^{x_k} \]</div>
 </section>
-<section id="id3">
-<h2><span class="section-number">2.5.2. </span>카테고리분포의 예<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<section id="id4">
+<h3><span class="section-number">2.5.1.2. </span>카테고리분포의 시뮬레이션<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+<p>scipy 패키지의 stats 서브패키지는 카테고리분포를 시뮬레이션할 수 있는 별도의 클래스를 제공하지 않지만 다음에 설명할 다항분포를 시뮬레이션할 수 있는 클래스 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code>를 제공한다. 이 클래스에서 인수 <code class="docutils literal notranslate"><span class="pre">n</span></code>을 1로 설정하면 카테고리분포를 시뮬레이션할 수 있다.</p>
+<p>예를 들어 공정한 주사위의 눈금을 나타내는 카테고리분포를 시뮬레이션해보자. 이 카테고리분포의 모수는 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[K=6\]</div>
+<div class="math notranslate nohighlight">
+\[ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5 = \mu_6 = \dfrac{1}{6} \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multinomial</span>
 
-<span class="n">df</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;email50&quot;</span><span class="p">,</span> <span class="s2">&quot;openintro&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
-<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="p">[[</span><span class="s2">&quot;spam&quot;</span><span class="p">,</span> <span class="s2">&quot;to_multiple&quot;</span><span class="p">,</span> <span class="s2">&quot;from&quot;</span><span class="p">,</span> <span class="s2">&quot;re_subj&quot;</span><span class="p">,</span> <span class="s2">&quot;exclaim_subj&quot;</span><span class="p">,</span> <span class="s2">&quot;urgent_subj&quot;</span><span class="p">]]</span>
-<span class="n">df</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">K</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">multinomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x1b4c4d32520&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">multinomial</span></code> 클래스의 <code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메소드는 확률질량함수를 계산한다. 다만 확률질량함수의 입력값으로는 원핫인코딩된 값을 넣어야 하므로 pandas 패키지의 <code class="docutils literal notranslate"><span class="pre">get_dummies</span></code> 함수를 사용하여 원핫인코딩을 해준다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+<span class="n">xx</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3, 4, 5])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">xx_ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">get_dummies</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+<span class="n">xx_ohe</span>
 </pre></div>
 </div>
 </div>
@@ -558,36 +622,36 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>spam</th>
-      <th>to_multiple</th>
-      <th>from</th>
-      <th>re_subj</th>
-      <th>exclaim_subj</th>
-      <th>urgent_subj</th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
-      <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>1</th>
       <td>0</td>
-      <td>0</td>
       <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>2</th>
-      <td>1</td>
+      <td>0</td>
       <td>0</td>
       <td>1</td>
       <td>0</td>
@@ -598,8 +662,8 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
       <th>3</th>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
       <td>0</td>
+      <td>1</td>
       <td>0</td>
       <td>0</td>
     </tr>
@@ -607,419 +671,66 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
       <th>4</th>
       <td>0</td>
       <td>0</td>
+      <td>0</td>
+      <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
     </tr>
     <tr>
       <th>5</th>
       <td>0</td>
       <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>6</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>7</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>8</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>9</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>10</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>11</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>12</th>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>13</th>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>14</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>15</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>16</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>17</th>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>18</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>19</th>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>20</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>21</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>22</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>23</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>24</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>25</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>26</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>27</th>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>28</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>29</th>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>30</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>31</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>32</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>33</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>34</th>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>35</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>36</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>37</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>38</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>39</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>40</th>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>41</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>42</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>43</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
-    </tr>
-    <tr>
-      <th>44</th>
       <td>0</td>
       <td>0</td>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>45</th>
-      <td>1</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>46</th>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>47</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>48</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>49</th>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pmf</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xx_ohe</span><span class="o">.</span><span class="n">values</span><span class="p">)</span>
+<span class="n">pmf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.16666667, 0.16666667, 0.16666667, 0.16666667, 0.16666667,
+       0.16666667])
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">pmf</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$K=6$인 카테고리 분포의 확률질량함수의 예&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_05_13_0.png" src="../_images/02_05_13_0.png" />
+</div>
+</div>
+</section>
+</section>
+<section id="id5">
+<h2><span class="section-number">2.5.2. </span>카테고리분포의 예<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_05_16_0.png" src="../_images/02_05_16_0.png" />
+</div>
 </div>
 </section>
 </section>
