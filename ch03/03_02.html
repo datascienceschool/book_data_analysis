@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.2. 회귀분석을 위한 준비 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.2. 회귀분석 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -89,8 +89,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.3. 선형 회귀분석 모형" href="03_03.html" />
-    <link rel="prev" title="3.1. 회귀분석이란" href="03_01.html" />
+    <link rel="next" title="3.3. 회귀분석을 위한 준비" href="03_03.html" />
+    <link rel="prev" title="3.1. 상관관계" href="03_01.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -175,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch02/02_00.html">
-   2. 데이터의 신뢰성을 분석한다
+   2. 모수추정과 검정 - 데이터의 신뢰도를 분석한다
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -225,14 +225,14 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch02/02_09.html">
-     2.9. 최대사후확률 모수추정법
+     2.9. EDA: 탐색적 데이터 분석
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="03_00.html">
-   3. 수치형 데이터의 상관관계를 분석한다
+   3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -242,17 +242,22 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="03_01.html">
-     3.1. 회귀분석이란
+     3.1. 상관관계
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.2. 회귀분석을 위한 준비
+     3.2. 회귀분석
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_03.html">
-     3.3. 선형 회귀분석 모형
+     3.3. 회귀분석을 위한 준비
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_04.html">
+     3.4. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -429,50 +434,13 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.2.1. 변수의 결정
+   3.2.1. 회귀분석 문제의 예
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.2.2. 데이터의 수집
+   3.2.2. 회귀분석의 예
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   3.2.3. 데이터를 벡터와 행렬 형식으로 변환
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   3.2.4. 데이터의 전처리
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     3.2.4.1. 잘못된 데이터 처리
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     3.2.4.2. 누락된 데이터 처리
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     3.2.4.3. 상수항 추가
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     3.2.4.4. 독립변수의 독립성 확인
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     3.2.4.5. 독립변수 단위 조정
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -483,7 +451,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>회귀분석을 위한 준비</h1>
+                <h1>회귀분석</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -495,50 +463,13 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.2.1. 변수의 결정
+   3.2.1. 회귀분석 문제의 예
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.2.2. 데이터의 수집
+   3.2.2. 회귀분석의 예
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id4">
-   3.2.3. 데이터를 벡터와 행렬 형식으로 변환
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   3.2.4. 데이터의 전처리
-  </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id6">
-     3.2.4.1. 잘못된 데이터 처리
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id7">
-     3.2.4.2. 누락된 데이터 처리
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id8">
-     3.2.4.3. 상수항 추가
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     3.2.4.4. 독립변수의 독립성 확인
-    </a>
-   </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id10">
-     3.2.4.5. 독립변수 단위 조정
-    </a>
-   </li>
-  </ul>
  </li>
 </ul>
 
@@ -551,125 +482,98 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.2. </span>회귀분석을 위한 준비<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>제대로 된 회귀분석을 하기 위해서는 분석 이전 단계에서의 다음과 같은 준비작업이 필요하다.</p>
-<ol class="simple">
-<li><p>변수의 결정</p></li>
-<li><p>데이터의 수집</p></li>
-<li><p>데이터의 변환</p></li>
-<li><p>데이터 전처리</p></li>
-</ol>
-<p>이 절에서는 이러한 준비 과정에 대해 설명한다.</p>
+<h1><span class="section-number">3.2. </span>회귀분석<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>어떤 수치형 변수의 값이 다른 변수의 값에 의해 어떻게 영향을 받는지를 분석하는 방법을 <b>회귀분석(regression analysis)</b>이라고 한다.</p>
+<p>회귀분석을 하려면 영향을 주는 변수들과 영향을 받는 변수가 무엇인지를 결정해야 한다. 회귀분석에서 분석의 대상이 되는 수치형 변수를 <b>종속변수(independent variable)</b>라 하고 그 종속변수에 영향을 주는 다른 변수들을 <b>독립변수(dependent variable)</b>라 한다. 보통 종속변수는 <span class="math notranslate nohighlight">\(y\)</span> 기호로 나타내고 독립변수는 <span class="math notranslate nohighlight">\(x\)</span> 기호로 나타낸다. 독립변수가 여러개 있을 때는 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 등으로 아랫첨자를 이용하여 표시한다.</p>
+<p>회귀분석에서 종속변수와 독립변수의 관계는 다음과 같은 다이어그램으로 표현할 수 있다. 화살표는 변수간의 관계를 나타내는 것으로 독립변수에서 종속변수를 향하는 방향으로 그린다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/03_02_3_0.png" src="../_images/03_02_3_0.png" />
+</div>
+</div>
 <section id="id2">
-<h2><span class="section-number">3.2.1. </span>변수의 결정<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>회귀분석을 하기 위한 가장 첫번째 단계는 종속변수와 독립변수를 결정하는 것이다. 즉, 어떤 데이터(종속변수)에 영향을 주는 요소가 무엇무엇(독립변수)이 있을지 찾아내야 한다. 보통 분석의 대상이 되는 종속변수는 결정되어 있는 경우가 많지만 영향을 비치는 독립변수는 분석을 수행하는 사람이 찾아야 한다. 당연하게도 목표가 되는 종속변수에 많은 영향을 끼지는 중요한 독립변수를 찾지 못하면 좋은 분석결과는 나올 수 없다. 이 부분은 컴퓨터나 수학이 대신해 줄 수 없는 부분으로 데이터가 속해있는 분야의 지식과 노하우 그리고 직관에 의해 결정된다.</p>
-<p>변수가 결정되면 결정된 종속변수를 <span class="math notranslate nohighlight">\(y\)</span>, 결정된 <span class="math notranslate nohighlight">\(K\)</span>개의 독립변수를 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>라고 이름붙인다.</p>
+<h2><span class="section-number">3.2.1. </span>회귀분석 문제의 예<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>팁 데이터에서 전체 지불금액(total_bill)과 팁 금액(tip)을 2차원 스캐터플롯(scatter plot)으로 나타내면 다음과 같다. 이 그래프에서는 하나의 점이 하나의 고객그룹 즉, 하나의 레코드를 표시한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_02_6_0.png" src="../_images/03_02_6_0.png" />
+</div>
+</div>
+<p>이 그래프를 보면 지불금액이 증가한 경우에는 팁도 같이 증가하는 것처럼 보인다. 우리가 관심을 가지는 것은 지불금액이 증가할 때 팁 금액은 어느 정도 증가하는지이다.</p>
+<p>이 문제를 회귀분석 문제로 보고 분석하기위해 다음과 같이 독립변수와 종속변수를 정한다.</p>
+<ul class="simple">
+<li><p>독립변수 : 지불금액, 성별</p></li>
+<li><p>종속변수 : 팁금액</p></li>
+</ul>
+<p>이 회귀분석을 통해 다음과 같은 질문들에 대한 답을 얻을 수 있다.</p>
+<ul class="simple">
+<li><p>지불금액이 증가할 때 정말 팁이 증가하는가?</p></li>
+<li><p>지불금액이 1 달러만큼 증가할 때 팁은 어느 정도 증가하는가?</p></li>
+<li><p>성별이 달라지면 팁이 증가하는가?</p></li>
+</ul>
 </section>
 <section id="id3">
-<h2><span class="section-number">3.2.2. </span>데이터의 수집<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>변수가 결정되면 해당 변수들의 표본값을 수집하는 과정이 필요하다. 사실 실제 데이터 분석 실무에서는 이 과정에 들어가는 시간과 노력이 대부분을 차지할 정도로 중요한 과정이나 여기에서는 이미 수집된 데이터가 존재한다고 가정한다.</p>
-<p>데이터는 보통 다음과 같은 형식으로 수집된다. 여기에서는 수집된 데이터의 갯수가 <span class="math notranslate nohighlight">\(N\)</span>개라고 가정한다. <span class="math notranslate nohighlight">\(i\)</span>번째 레코드의 종속변수 값을 <span class="math notranslate nohighlight">\(y_i\)</span>, <span class="math notranslate nohighlight">\(i\)</span>번째 레코드의 <span class="math notranslate nohighlight">\(j\)</span>번째 독립변수 값을 <span class="math notranslate nohighlight">\(x_{ij}\)</span>라고 표시한다.</p>
-<table class="colwidths-auto table">
-<thead>
-<tr class="row-odd"><th class="head"><p></p></th>
-<th class="head"><p>종속변수 <span class="math notranslate nohighlight">\(y\)</span> 값</p></th>
-<th class="head"><p>독립변수 <span class="math notranslate nohighlight">\(x_1\)</span> 값</p></th>
-<th class="head"><p>독립변수 <span class="math notranslate nohighlight">\(x_2\)</span> 값</p></th>
-<th class="head"><p>…</p></th>
-</tr>
-</thead>
-<tbody>
-<tr class="row-even"><td><p>표본 1</p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(y_1\)</span></p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(x_{11}\)</span></p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(x_{12}\)</span></p></td>
-<td><p>…</p></td>
-</tr>
-<tr class="row-odd"><td><p>표본 2</p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(y_2\)</span></p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(x_{21}\)</span></p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(x_{22}\)</span></p></td>
-<td><p>…</p></td>
-</tr>
-<tr class="row-even"><td><p>표본 3</p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(y_3\)</span></p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(x_{31}\)</span></p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(x_{32}\)</span></p></td>
-<td><p>…</p></td>
-</tr>
-<tr class="row-odd"><td><p>:</p></td>
-<td><p>:</p></td>
-<td><p>:</p></td>
-<td><p>:</p></td>
-<td><p>…</p></td>
-</tr>
-<tr class="row-even"><td><p>표본 N</p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(y_N\)</span></p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(x_{N1}\)</span></p></td>
-<td><p>수치 <span class="math notranslate nohighlight">\(x_{N2}\)</span></p></td>
-<td><p>…</p></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="id4">
-<h2><span class="section-number">3.2.3. </span>데이터를 벡터와 행렬 형식으로 변환<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<p>데이터가 준비되면 다음과 같이</p>
+<h2><span class="section-number">3.2.2. </span>회귀분석의 예<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>위와 같은 회귀분석 문제는 여러가지 방법으로 풀 수 있다. 다음은 선형회귀분석이라는 방법으로 위 문제를 푸는 코드를 보여주고 있다.
+문제를 풀면 코드의 출력과 같은 형식의 정보가 표시된다. 회귀분석 문제를 푼다는 것은 이 정보를 제대로 읽고 해석하는 과정을 포함한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
+
+<span class="n">m</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;tip ~ total_bill + C(sex)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">r</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    tip   R-squared:                       0.457
+Model:                            OLS   Adj. R-squared:                  0.452
+Method:                 Least Squares   F-statistic:                     101.3
+Date:                Sun, 03 Jul 2022   Prob (F-statistic):           1.18e-32
+Time:                        15:31:09   Log-Likelihood:                -350.52
+No. Observations:                 244   AIC:                             707.0
+Df Residuals:                     241   BIC:                             717.5
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+====================================================================================
+                       coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------------
+Intercept            0.9067      0.175      5.182      0.000       0.562       1.251
+C(sex)[T.Female]     0.0266      0.138      0.192      0.848      -0.246       0.299
+total_bill           0.1052      0.007     14.110      0.000       0.091       0.120
+==============================================================================
+Omnibus:                       20.499   Durbin-Watson:                   2.149
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               38.652
+Skew:                           0.447   Prob(JB):                     4.05e-09
+Kurtosis:                       4.733   Cond. No.                         63.0
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>위 회귀분석 결과를 해석하면 다음과 같은 결론을 얻을 수 있다.</p>
 <ul class="simple">
-<li><p>종속변수는 벡터 <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> 형식으로</p></li>
-<li><p>독립변수는 행렬 <span class="math notranslate nohighlight">\(\mathbf{X_0}\)</span> 형식으로</p></li>
+<li><p>지불금액이 증가할 때 팁도 증가한다.</p></li>
+<li><p>지불금액이 1달러만큼 증가할 때 팁은 약 0.1달러 정도 증가한다.</p></li>
+<li><p>성별은 팁 금액에 영향을 주지 않는다.</p></li>
 </ul>
-<p>변환한다.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split} 
-\mathbf{y}
-=
-\begin{bmatrix}
-y_1 \\
-y_2 \\
-\vdots \\
-y_N \\
-\end{bmatrix}
-\end{split}\]</div>
-<div class="math notranslate nohighlight">
-\[\begin{split} 
-\mathbf{X_0}
-=
-\begin{bmatrix}
-x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1K} \\
-x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2K} \\
-\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
-x_{N1} &amp; x_{N2} &amp; \cdots &amp; x_{NK} \\
-\end{bmatrix}
-\end{split}\]</div>
-</section>
-<section id="id5">
-<h2><span class="section-number">3.2.4. </span>데이터의 전처리<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>이렇게 수집 및 정리된 데이터 값에 대해 다음과 같은 전처리를 거치게 된다.</p>
-<ul class="simple">
-<li><p>잘못된 데이터가 있는지 검사하고 해당 레코드 삭제하거나 정상적인 데이터로 대체</p></li>
-<li><p>누락된 데이터가 있는지 검사하고 해당 레코드를 삭제하거나 가상의 데이터로 대체</p></li>
-<li><p>상수항 추가</p></li>
-<li><p>독립변수 중에 중복 혹은 종속적인 변수가 존재하는지 확인</p></li>
-<li><p>독립변수 단위 조정</p></li>
-</ul>
-<section id="id6">
-<h3><span class="section-number">3.2.4.1. </span>잘못된 데이터 처리<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="id7">
-<h3><span class="section-number">3.2.4.2. </span>누락된 데이터 처리<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="id8">
-<h3><span class="section-number">3.2.4.3. </span>상수항 추가<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
-</section>
-<section id="id9">
-<h3><span class="section-number">3.2.4.4. </span>독립변수의 독립성 확인<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
-<p>행렬 <span class="math notranslate nohighlight">\(\mathbf{X_0}\)</span>의 랭크 검사</p>
-</section>
-<section id="id10">
-<h3><span class="section-number">3.2.4.5. </span>독립변수 단위 조정<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
-<p>스케일링</p>
-</section>
+<p>위의 결과에서 이러한 정보를 읽고 해석하는 방법은 다음 절부터 차근차근 설명하도록 한다.</p>
 </section>
 </section>
 
@@ -704,13 +608,13 @@ x_{N1} &amp; x_{N2} &amp; \cdots &amp; x_{NK} \\
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3.1. </span>회귀분석이란</p>
+            <p class="prev-next-title"><span class="section-number">3.1. </span>상관관계</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="03_03.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.3. </span>선형 회귀분석 모형</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>회귀분석을 위한 준비</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

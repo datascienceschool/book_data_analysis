@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.3. 선형 회귀분석 모형 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.3. 회귀분석을 위한 준비 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -89,7 +89,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="prev" title="3.2. 회귀분석을 위한 준비" href="03_02.html" />
+    <link rel="next" title="3.4. 선형 회귀분석 모형" href="03_04.html" />
+    <link rel="prev" title="3.2. 회귀분석" href="03_02.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -174,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch02/02_00.html">
-   2. 데이터의 신뢰성을 분석한다
+   2. 모수추정과 검정 - 데이터의 신뢰도를 분석한다
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -224,14 +225,14 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch02/02_09.html">
-     2.9. 최대사후확률 모수추정법
+     2.9. EDA: 탐색적 데이터 분석
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="03_00.html">
-   3. 수치형 데이터의 상관관계를 분석한다
+   3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -241,17 +242,22 @@ const thebe_selector_output = ".output, .cell_output"
   <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="03_01.html">
-     3.1. 회귀분석이란
+     3.1. 상관관계
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_02.html">
-     3.2. 회귀분석을 위한 준비
+     3.2. 회귀분석
     </a>
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.3. 선형 회귀분석 모형
+     3.3. 회귀분석을 위한 준비
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_04.html">
+     3.4. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -428,13 +434,50 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.3.1. 회귀분석 모형
+   3.3.1. 변수의 결정
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.3.2. 선형 회귀분석
+   3.3.2. 데이터의 수집
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.3.3. 데이터를 벡터와 행렬 형식으로 변환
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.3.4. 데이터의 전처리
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     3.3.4.1. 잘못된 데이터 처리
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     3.3.4.2. 누락된 데이터 처리
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     3.3.4.3. 상수항 추가
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     3.3.4.4. 독립변수의 독립성 확인
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     3.3.4.5. 독립변수 단위 조정
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -445,7 +488,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>선형 회귀분석 모형</h1>
+                <h1>회귀분석을 위한 준비</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -457,13 +500,50 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.3.1. 회귀분석 모형
+   3.3.1. 변수의 결정
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.3.2. 선형 회귀분석
+   3.3.2. 데이터의 수집
   </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.3.3. 데이터를 벡터와 행렬 형식으로 변환
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.3.4. 데이터의 전처리
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     3.3.4.1. 잘못된 데이터 처리
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     3.3.4.2. 누락된 데이터 처리
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     3.3.4.3. 상수항 추가
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     3.3.4.4. 독립변수의 독립성 확인
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     3.3.4.5. 독립변수 단위 조정
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -476,21 +556,773 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.3. </span>선형 회귀분석 모형<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.3. </span>회귀분석을 위한 준비<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>제대로 된 회귀분석을 하기 위해서는 분석 이전 단계에서의 다음과 같은 준비작업이 필요하다.</p>
+<ol class="simple">
+<li><p>변수의 결정</p></li>
+<li><p>데이터의 수집</p></li>
+<li><p>데이터의 변환</p></li>
+<li><p>데이터 전처리</p></li>
+</ol>
+<p>이 절에서는 두가지 예제를 통해 이러한 준비 과정에 대해 설명한다. 하나는 지금까지 계속 사용해온 팁 데이터다.</p>
 <section id="id2">
-<h2><span class="section-number">3.3.1. </span>회귀분석 모형<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>회귀분석은 복수의 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>와 하나의 종속변수 <span class="math notranslate nohighlight">\(y\)</span>간의 관계를 분석하는 것이다. 회귀분석을 하려면 독립변수와 종속변수의 관계를 수식으로 정해놓아야 한다. 이 수식을 <b>회귀분석 모형(regression model)</b>이라고 한다. 회귀분석 모형은 일반적으로 다음과 같은 수식으로 표현한다.</p>
-<div class="math notranslate nohighlight">
-\[ y = f(x_1, x_2, x_3, \ldots, x_K) + \varepsilon \]</div>
-<p>이 수식에서 <span class="math notranslate nohighlight">\(f\)</span>는 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>와 종속변수 <span class="math notranslate nohighlight">\(y\)</span>간의 결정론적 관계를 나타내는 함수이다. 우리가 회귀분석 문제를 푼다는 것은 이 함수 <span class="math notranslate nohighlight">\(f\)</span>를 찾아내는 것이라고 할 수 있다.</p>
-<p>그런데 현실의 데이터에서는 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>만으로 정확히 종속변수 <span class="math notranslate nohighlight">\(y\)</span>의 값을 결정할 수 있는 함수가 존재하는 경우는 없으며 항상 어느 정도의 오차가 존재한다. <span class="math notranslate nohighlight">\(\varepsilon\)</span> 항은 바로 이 오차를 나타내는 항으로 <b>교란항(disturbance)</b>이라고 한다. 교란항은 우리가 예측할 수 없는 랜덤 변수다.</p>
-<p>교란항이 발생하는 이유는 여러가지가 있으나 가장 쉬운 설명 중의 하나는 현실에서 종속변수 <span class="math notranslate nohighlight">\(y\)</span>에 영향을 미치는 변수가 우리가 정해놓은 <span class="math notranslate nohighlight">\(K\)</span>개의 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>이외에도 휠씬 더 많이 존재하기 때문이다.</p>
+<h2><span class="section-number">3.3.1. </span>변수의 결정<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>회귀분석을 하기 위한 가장 첫번째 단계는 종속변수와 독립변수를 결정하는 것이다. 즉, 어떤 데이터(종속변수)에 영향을 주는 요소가 무엇무엇(독립변수)이 있을지 찾아내야 한다. 보통 분석의 대상이 되는 종속변수는 결정되어 있는 경우가 많지만 영향을 비치는 독립변수는 분석을 수행하는 사람이 찾아야 한다. 당연하게도 목표가 되는 종속변수에 많은 영향을 끼지는 중요한 독립변수를 찾지 못하면 좋은 분석결과는 나올 수 없다. 이 부분은 컴퓨터나 수학이 대신해 줄 수 없는 부분으로 데이터가 속해있는 분야의 지식과 노하우 그리고 직관에 의해 결정된다.</p>
+<p>변수가 결정되면 결정된 종속변수를 <span class="math notranslate nohighlight">\(y\)</span>, 결정된 <span class="math notranslate nohighlight">\(K\)</span>개의 독립변수를 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>라고 이름붙인다.</p>
+<p>우리는 팁 데이터에서 팁금액(tip)을 종속변수 <span class="math notranslate nohighlight">\(y\)</span>로, 수치형 데이터인 지불금액(total_bill)과 고객인원수(size)를 각각 독립변수 <span class="math notranslate nohighlight">\(x_1\)</span>, <span class="math notranslate nohighlight">\(x_2\)</span>로 정하기로 하자.</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">3.3.2. </span>선형 회귀분석<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>가장 많이 사용되는 회귀분석 모형은 선형 회귀분석 모형(linear regression model)이다. 선형 회귀분석 모형은 다음과 같은 수식으로 표현한다.</p>
+<h2><span class="section-number">3.3.2. </span>데이터의 수집<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>변수가 결정되면 해당 변수들의 표본값을 수집하는 과정이 필요하다. 사실 실제 데이터 분석 실무에서는 이 과정에 들어가는 시간과 노력이 대부분을 차지할 정도로 중요한 과정이나 여기에서는 이미 수집된 데이터가 존재한다고 가정한다.</p>
+<p>데이터는 보통 다음과 같은 형식으로 수집된다. 여기에서는 수집된 데이터의 갯수가 <span class="math notranslate nohighlight">\(N\)</span>개라고 가정한다. <span class="math notranslate nohighlight">\(i\)</span>번째 레코드의 종속변수 값을 <span class="math notranslate nohighlight">\(y_i\)</span>, <span class="math notranslate nohighlight">\(i\)</span>번째 레코드의 <span class="math notranslate nohighlight">\(j\)</span>번째 독립변수 값을 <span class="math notranslate nohighlight">\(x_{ij}\)</span>라고 표시한다.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p></p></th>
+<th class="head"><p>종속변수 <span class="math notranslate nohighlight">\(y\)</span> 값</p></th>
+<th class="head"><p>독립변수 <span class="math notranslate nohighlight">\(x_1\)</span> 값</p></th>
+<th class="head"><p>독립변수 <span class="math notranslate nohighlight">\(x_2\)</span> 값</p></th>
+<th class="head"><p>…</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>표본 1</p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(y_1\)</span></p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(x_{11}\)</span></p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(x_{12}\)</span></p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>표본 2</p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(y_2\)</span></p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(x_{21}\)</span></p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(x_{22}\)</span></p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>표본 3</p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(y_3\)</span></p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(x_{31}\)</span></p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(x_{32}\)</span></p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-odd"><td><p>:</p></td>
+<td><p>:</p></td>
+<td><p>:</p></td>
+<td><p>:</p></td>
+<td><p>…</p></td>
+</tr>
+<tr class="row-even"><td><p>표본 N</p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(y_N\)</span></p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(x_{N1}\)</span></p></td>
+<td><p>수치 <span class="math notranslate nohighlight">\(x_{N2}\)</span></p></td>
+<td><p>…</p></td>
+</tr>
+</tbody>
+</table>
+<p>이 과정은 원래 현실세계에서 데이터를 수집하는 과정이 필요하지만 여기에서는 <code class="docutils literal notranslate"><span class="pre">load_dataset</span></code> 함수로 간단하게 얻을 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+<span class="n">tips</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>29.03</td>
+      <td>5.92</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>27.18</td>
+      <td>2.00</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>241</th>
+      <td>22.67</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>17.82</td>
+      <td>1.75</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>18.78</td>
+      <td>3.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Thur</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>244 rows × 7 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">sklearn.datasets</span> <span class="kn">import</span> <span class="n">fetch_california_housing</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">fetch_california_housing</span><span class="p">(</span><span class="n">as_frame</span><span class="o">=</span><span class="kc">True</span><span class="p">)[</span><span class="s2">&quot;frame&quot;</span><span class="p">]</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>MedInc</th>
+      <th>HouseAge</th>
+      <th>AveRooms</th>
+      <th>AveBedrms</th>
+      <th>Population</th>
+      <th>AveOccup</th>
+      <th>Latitude</th>
+      <th>Longitude</th>
+      <th>MedHouseVal</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8.3252</td>
+      <td>41.0</td>
+      <td>6.984127</td>
+      <td>1.023810</td>
+      <td>322.0</td>
+      <td>2.555556</td>
+      <td>37.88</td>
+      <td>-122.23</td>
+      <td>4.526</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8.3014</td>
+      <td>21.0</td>
+      <td>6.238137</td>
+      <td>0.971880</td>
+      <td>2401.0</td>
+      <td>2.109842</td>
+      <td>37.86</td>
+      <td>-122.22</td>
+      <td>3.585</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7.2574</td>
+      <td>52.0</td>
+      <td>8.288136</td>
+      <td>1.073446</td>
+      <td>496.0</td>
+      <td>2.802260</td>
+      <td>37.85</td>
+      <td>-122.24</td>
+      <td>3.521</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>5.6431</td>
+      <td>52.0</td>
+      <td>5.817352</td>
+      <td>1.073059</td>
+      <td>558.0</td>
+      <td>2.547945</td>
+      <td>37.85</td>
+      <td>-122.25</td>
+      <td>3.413</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>3.8462</td>
+      <td>52.0</td>
+      <td>6.281853</td>
+      <td>1.081081</td>
+      <td>565.0</td>
+      <td>2.181467</td>
+      <td>37.85</td>
+      <td>-122.25</td>
+      <td>3.422</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>20635</th>
+      <td>1.5603</td>
+      <td>25.0</td>
+      <td>5.045455</td>
+      <td>1.133333</td>
+      <td>845.0</td>
+      <td>2.560606</td>
+      <td>39.48</td>
+      <td>-121.09</td>
+      <td>0.781</td>
+    </tr>
+    <tr>
+      <th>20636</th>
+      <td>2.5568</td>
+      <td>18.0</td>
+      <td>6.114035</td>
+      <td>1.315789</td>
+      <td>356.0</td>
+      <td>3.122807</td>
+      <td>39.49</td>
+      <td>-121.21</td>
+      <td>0.771</td>
+    </tr>
+    <tr>
+      <th>20637</th>
+      <td>1.7000</td>
+      <td>17.0</td>
+      <td>5.205543</td>
+      <td>1.120092</td>
+      <td>1007.0</td>
+      <td>2.325635</td>
+      <td>39.43</td>
+      <td>-121.22</td>
+      <td>0.923</td>
+    </tr>
+    <tr>
+      <th>20638</th>
+      <td>1.8672</td>
+      <td>18.0</td>
+      <td>5.329513</td>
+      <td>1.171920</td>
+      <td>741.0</td>
+      <td>2.123209</td>
+      <td>39.43</td>
+      <td>-121.32</td>
+      <td>0.847</td>
+    </tr>
+    <tr>
+      <th>20639</th>
+      <td>2.3886</td>
+      <td>16.0</td>
+      <td>5.254717</td>
+      <td>1.162264</td>
+      <td>1387.0</td>
+      <td>2.616981</td>
+      <td>39.37</td>
+      <td>-121.24</td>
+      <td>0.894</td>
+    </tr>
+  </tbody>
+</table>
+<p>20640 rows × 9 columns</p>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;gss_wages&quot;</span><span class="p">,</span> <span class="s2">&quot;stevedata&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>year</th>
+      <th>realrinc</th>
+      <th>age</th>
+      <th>occ10</th>
+      <th>occrecode</th>
+      <th>prestg10</th>
+      <th>childs</th>
+      <th>wrkstat</th>
+      <th>gender</th>
+      <th>educcat</th>
+      <th>maritalcat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>1974</td>
+      <td>4935.0</td>
+      <td>21.0</td>
+      <td>5620.0</td>
+      <td>Office and Administrative Support</td>
+      <td>25.0</td>
+      <td>0.0</td>
+      <td>School</td>
+      <td>Male</td>
+      <td>High School</td>
+      <td>Married</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1974</td>
+      <td>43178.0</td>
+      <td>41.0</td>
+      <td>2040.0</td>
+      <td>Professional</td>
+      <td>66.0</td>
+      <td>3.0</td>
+      <td>Full-Time</td>
+      <td>Male</td>
+      <td>Bachelor</td>
+      <td>Married</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>1974</td>
+      <td>NaN</td>
+      <td>83.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>Housekeeper</td>
+      <td>Female</td>
+      <td>Less Than High School</td>
+      <td>Widowed</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>1974</td>
+      <td>NaN</td>
+      <td>69.0</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>2.0</td>
+      <td>Housekeeper</td>
+      <td>Female</td>
+      <td>Less Than High School</td>
+      <td>Widowed</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1974</td>
+      <td>18505.0</td>
+      <td>58.0</td>
+      <td>5820.0</td>
+      <td>Office and Administrative Support</td>
+      <td>37.0</td>
+      <td>0.0</td>
+      <td>Full-Time</td>
+      <td>Female</td>
+      <td>High School</td>
+      <td>Never Married</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>61692</th>
+      <td>2018</td>
+      <td>NaN</td>
+      <td>37.0</td>
+      <td>5700.0</td>
+      <td>Office and Administrative Support</td>
+      <td>47.0</td>
+      <td>2.0</td>
+      <td>Full-Time</td>
+      <td>Female</td>
+      <td>High School</td>
+      <td>Divorced</td>
+    </tr>
+    <tr>
+      <th>61693</th>
+      <td>2018</td>
+      <td>7377.5</td>
+      <td>75.0</td>
+      <td>4720.0</td>
+      <td>Sales</td>
+      <td>28.0</td>
+      <td>4.0</td>
+      <td>Part-Time</td>
+      <td>Female</td>
+      <td>High School</td>
+      <td>Married</td>
+    </tr>
+    <tr>
+      <th>61694</th>
+      <td>2018</td>
+      <td>1589.0</td>
+      <td>67.0</td>
+      <td>5140.0</td>
+      <td>Office and Administrative Support</td>
+      <td>40.0</td>
+      <td>3.0</td>
+      <td>Retired</td>
+      <td>Female</td>
+      <td>High School</td>
+      <td>Married</td>
+    </tr>
+    <tr>
+      <th>61695</th>
+      <td>2018</td>
+      <td>NaN</td>
+      <td>72.0</td>
+      <td>1540.0</td>
+      <td>Professional</td>
+      <td>47.0</td>
+      <td>2.0</td>
+      <td>Retired</td>
+      <td>Male</td>
+      <td>High School</td>
+      <td>Married</td>
+    </tr>
+    <tr>
+      <th>61696</th>
+      <td>2018</td>
+      <td>NaN</td>
+      <td>79.0</td>
+      <td>4020.0</td>
+      <td>Service</td>
+      <td>33.0</td>
+      <td>6.0</td>
+      <td>Housekeeper</td>
+      <td>Female</td>
+      <td>High School</td>
+      <td>Widowed</td>
+    </tr>
+  </tbody>
+</table>
+<p>61697 rows × 11 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.3.3. </span>데이터를 벡터와 행렬 형식으로 변환<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>데이터가 준비되면 다음과 같이</p>
+<ul class="simple">
+<li><p>종속변수는 벡터 <span class="math notranslate nohighlight">\(\mathbf{y}\)</span> 형식으로</p></li>
+<li><p>독립변수는 행렬 <span class="math notranslate nohighlight">\(\mathbf{X_0}\)</span> 형식으로</p></li>
+</ul>
+<p>변환한다.</p>
 <div class="math notranslate nohighlight">
-\[ y = w_0 + w_1 x_1 + w_2 x_2 + \cdots + w_K x_K + \epsilon \]</div>
+\[\begin{split} 
+\mathbf{y}
+=
+\begin{bmatrix}
+y_1 \\
+y_2 \\
+\vdots \\
+y_N \\
+\end{bmatrix}
+\end{split}\]</div>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\mathbf{X_0}
+=
+\begin{bmatrix}
+x_{11} &amp; x_{12} &amp; \cdots &amp; x_{1K} \\
+x_{21} &amp; x_{22} &amp; \cdots &amp; x_{2K} \\
+\vdots &amp; \vdots &amp; \ddots &amp; \vdots \\
+x_{N1} &amp; x_{N2} &amp; \cdots &amp; x_{NK} \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>팁 데이터의 경우 다음과 같이 처리한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">&quot;tip&quot;</span><span class="p">]</span>
+<span class="n">y</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      1.01
+1      1.66
+2      3.50
+3      3.31
+4      3.61
+       ... 
+239    5.92
+240    2.00
+241    2.00
+242    1.75
+243    3.00
+Name: tip, Length: 244, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X0</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">]]</span>
+<span class="n">X0</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>29.03</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>27.18</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>241</th>
+      <td>22.67</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>17.82</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>18.78</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>244 rows × 2 columns</p>
+</div></div></div>
+</div>
+</section>
+<section id="id5">
+<h2><span class="section-number">3.3.4. </span>데이터의 전처리<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>이렇게 수집 및 정리된 데이터 값에 대해 다음과 같은 전처리를 거치게 된다.</p>
+<ul class="simple">
+<li><p>잘못된 데이터가 있는지 검사하고 해당 레코드 삭제하거나 정상적인 데이터로 대체</p></li>
+<li><p>누락된 데이터가 있는지 검사하고 해당 레코드를 삭제하거나 가상의 데이터로 대체</p></li>
+<li><p>상수항 추가</p></li>
+<li><p>독립변수 중에 중복 혹은 종속적인 변수가 존재하는지 확인</p></li>
+<li><p>독립변수 단위 조정</p></li>
+</ul>
+<section id="id6">
+<h3><span class="section-number">3.3.4.1. </span>잘못된 데이터 처리<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>만약 데이터 중에 잘못된 데이터가 있어면 해당 레코드(행)나 해당 필드(열)을 삭제할 필요가 있다.</p>
+</section>
+<section id="id7">
+<h3><span class="section-number">3.3.4.2. </span>누락된 데이터 처리<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="id8">
+<h3><span class="section-number">3.3.4.3. </span>상수항 추가<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="id9">
+<h3><span class="section-number">3.3.4.4. </span>독립변수의 독립성 확인<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>행렬 <span class="math notranslate nohighlight">\(\mathbf{X_0}\)</span>의 랭크 검사</p>
+</section>
+<section id="id10">
+<h3><span class="section-number">3.3.4.5. </span>독립변수 단위 조정<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>스케일링</p>
+</section>
 </section>
 </section>
 
@@ -525,8 +1357,15 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3.2. </span>회귀분석을 위한 준비</p>
+            <p class="prev-next-title"><span class="section-number">3.2. </span>회귀분석</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="03_04.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.4. </span>선형 회귀분석 모형</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
