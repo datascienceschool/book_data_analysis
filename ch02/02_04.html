@@ -175,7 +175,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="02_00.html">
-   2. 확률모형 - 데이터의 신뢰도를 나타낸다
+   2. 모수추정과 검정 - 데이터의 신뢰도를 분석한다
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -215,24 +215,24 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_07.html">
-     2.7. F분포와 카이제곱분포
+     2.7. 최대가능도 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_08.html">
-     2.8. 최대가능도 모수추정법
+     2.8. 최대사후확률 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_09.html">
-     2.9. 최대사후확률 모수추정법
+     2.9. EDA: 탐색적 데이터 분석
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch03/03_00.html">
-   3. 수치형 데이터의 상관관계를 분석한다
+   3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -242,17 +242,22 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_01.html">
-     3.1. 회귀분석이란
+     3.1. 상관관계
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_02.html">
-     3.2. 회귀분석을 위한 준비
+     3.2. 회귀분석
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_03.html">
-     3.3. 선형 회귀분석 모형
+     3.3. 회귀분석을 위한 준비
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch03/03_04.html">
+     3.4. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -662,7 +667,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x24dd7b1ceb0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x12d763c40&gt;
 </pre></div>
 </div>
 </div>
@@ -764,6 +769,21 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6434426229508197
+</pre></div>
+</div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">normalize</span></code> 인수를 <code class="docutils literal notranslate"><span class="pre">True</span></code> 값으로 하면 한번에 계산할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Male      0.643443
+Female    0.356557
+Name: sex, dtype: float64
 </pre></div>
 </div>
 </div>
@@ -893,7 +913,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.17056745244373592
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.17056745244373606
 </pre></div>
 </div>
 </div>
@@ -1011,7 +1031,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x24dd9365820&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x12d91b220&gt;
 </pre></div>
 </div>
 </div>
@@ -1043,7 +1063,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_51_0.png" src="../_images/02_04_51_0.png" />
+<img alt="../_images/02_04_53_0.png" src="../_images/02_04_53_0.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하면 시뮬레이션을 통해 표본을 측정할 수 있다.</p>
@@ -1072,7 +1092,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0,  1,  3, 16, 17, 26, 20, 11,  5,  1,  0], dtype=int64)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([ 0,  1,  3, 16, 17, 26, 20, 11,  5,  1,  0])
 </pre></div>
 </div>
 </div>
@@ -1094,7 +1114,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_57_0.png" src="../_images/02_04_57_0.png" />
+<img alt="../_images/02_04_59_0.png" src="../_images/02_04_59_0.png" />
 </div>
 </div>
 </section>
@@ -1156,7 +1176,7 @@ Length: 61, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_65_0.png" src="../_images/02_04_65_0.png" />
+<img alt="../_images/02_04_67_0.png" src="../_images/02_04_67_0.png" />
 </div>
 </div>
 <p>위에서 sex 데이터의 베르누이모수는 약 0.643이라고 추정하였다. 이 모수값은 이항분포에도 그대로 적용되므로 <span class="math notranslate nohighlight">\(N=4, \mu=0.643\)</span>인 이항분포의 확률질량함수를 그리면 다음과 같다.</p>
@@ -1174,7 +1194,7 @@ Length: 61, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_67_0.png" src="../_images/02_04_67_0.png" />
+<img alt="../_images/02_04_69_0.png" src="../_images/02_04_69_0.png" />
 </div>
 </div>
 <p>두 그래프를 비교하면 아래와 같다.</p>
@@ -1204,7 +1224,7 @@ Length: 61, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_70_0.png" src="../_images/02_04_70_0.png" />
+<img alt="../_images/02_04_72_0.png" src="../_images/02_04_72_0.png" />
 </div>
 </div>
 </section>
@@ -1267,11 +1287,14 @@ Length: 61, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[distfit] &gt;fit..
-[distfit] &gt;transform..
-[distfit] &gt;Fit using binomial distribution..
-[distfit] &gt;[binomial] [RSS=0.00428] [n=4] [p=0.664505] [chi^2=0.00143]
-[distfit] &gt;Compute confidence interval [discrete]
+<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
+<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
+<span class="nn">Input In [31],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
+<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">distfit</span> <span class="kn">import</span> <span class="n">distfit</span>
+<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">distfit</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;discrete&#39;</span><span class="p">,</span> <span class="n">distr</span><span class="o">=</span><span class="s2">&quot;binom&quot;</span><span class="p">)</span>
+<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">model</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">))[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+
+<span class="ne">ModuleNotFoundError</span>: No module named &#39;distfit&#39;
 </pre></div>
 </div>
 </div>
@@ -1283,20 +1306,10 @@ Length: 61, dtype: int64
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6645045188248099
 </pre></div>
 </div>
 </div>

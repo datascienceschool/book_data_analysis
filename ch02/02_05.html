@@ -447,12 +447,22 @@ title="Print to PDF"
      2.5.1.2. 카테고리분포의 시뮬레이션
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     2.5.1.3. 카테고리분포의 예
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     2.5.1.4. 카테고리분포의 모수추정
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     2.5.1.5. 카테고리분포의 모수검정
+    </a>
+   </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   2.5.2. 카테고리분포의 예
-  </a>
  </li>
 </ul>
 
@@ -488,12 +498,22 @@ title="Print to PDF"
      2.5.1.2. 카테고리분포의 시뮬레이션
     </a>
    </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id5">
+     2.5.1.3. 카테고리분포의 예
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     2.5.1.4. 카테고리분포의 모수추정
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     2.5.1.5. 카테고리분포의 모수검정
+    </a>
+   </li>
   </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id5">
-   2.5.2. 카테고리분포의 예
-  </a>
  </li>
 </ul>
 
@@ -580,7 +600,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x1b4c4d32520&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x1359402b0&gt;
 </pre></div>
 </div>
 </div>
@@ -720,10 +740,58 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 <img alt="../_images/02_05_13_0.png" src="../_images/02_05_13_0.png" />
 </div>
 </div>
-</section>
+<p><code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하면 시뮬레이션을 통해 표본을 측정할 수 있다. 결과는 원핫인코딩 형식으로 나온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">samples_ohe</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">samples_ohe</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 0, 0, 0, 0, 1],
+       [0, 0, 1, 0, 0, 0],
+       [1, 0, 0, 0, 0, 0],
+       [0, 0, 0, 0, 1, 0],
+       [0, 0, 0, 1, 0, 0]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>원핫인코딩 형식의 값은 numpy의 <code class="docutils literal notranslate"><span class="pre">argmax</span></code> 함수를 이용하여 카테고리 번호로 바꿀 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">samples_ohe</span><span class="p">,</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">samples</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([5, 2, 0, 4, 3, 1, 0, 2, 3, 3])
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 결과는 seaborn 패키지의 <code class="docutils literal notranslate"><span class="pre">countplot</span></code> 함수로 시각화할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_05_19_0.png" src="../_images/02_05_19_0.png" />
+</div>
+</div>
 </section>
 <section id="id5">
-<h2><span class="section-number">2.5.2. </span>카테고리분포의 예<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">2.5.1.3. </span>카테고리분포의 예<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
+<p>범주형 데이터에서 범주의 종류가 3개 이상인 것은 카테고리분포를 따른다. 예를 들어 팁 데이터에서 요일을 나타내는 day 필드는 ‘Thur’, ‘Fri’, ‘Sat’, ‘Sun’ 이렇게 4가지 값을 가지는 범주형 데이터이므로 카테고리분포를 따른다. day 필드의 카테고리분포는 다음과 같이 시각화할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
@@ -734,9 +802,44 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_05_16_0.png" src="../_images/02_05_16_0.png" />
+<img alt="../_images/02_05_22_0.png" src="../_images/02_05_22_0.png" />
 </div>
 </div>
+</section>
+<section id="id6">
+<h3><span class="section-number">2.5.1.4. </span>카테고리분포의 모수추정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<p>카테고리분포의 <span class="math notranslate nohighlight">\(K\)</span>개의 모수 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>의 값은 다음과 같이 추정한다.</p>
+<div class="math notranslate nohighlight">
+\[
+\hat\mu_1 = \dfrac{N_1}{N}, \,
+\hat\mu_2 = \dfrac{N_2}{N}, \,
+\cdots, \,
+\hat\mu_K = \dfrac{N_K}{N},
+\]</div>
+<p>위 식에서 <span class="math notranslate nohighlight">\(N_1, N_2, \ldots, N_K\)</span>는 각각 <span class="math notranslate nohighlight">\(1, 2, \ldots, K\)</span>번째 범주값이 나온 횟수이고 <span class="math notranslate nohighlight">\(N\)</span>은 전체 표본 데이터의 개수다.</p>
+<div class="math notranslate nohighlight">
+\[ N = N_1 + N_2 + \cdots + N_K \]</div>
+<p>팁데이터의 day 필드 데이터에 대해 이 방식으로 모수를 추정하면 다음과 같다. 이 데이터의 경우에는 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 클래스 인스턴스이므로 <code class="docutils literal notranslate"><span class="pre">normalize</span></code> 인수를 <code class="docutils literal notranslate"><span class="pre">True</span></code> 값으로 한 <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> 메서드를 사용하면 한번에 계산할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Sat     0.356557
+Sun     0.311475
+Thur    0.254098
+Fri     0.077869
+Name: day, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id7">
+<h3><span class="section-number">2.5.1.5. </span>카테고리분포의 모수검정<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+</section>
 </section>
 </section>
 
