@@ -667,7 +667,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x12d763c40&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x1334fd660&gt;
 </pre></div>
 </div>
 </div>
@@ -1035,7 +1035,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x12d91b220&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._distn_infrastructure.rv_frozen at 0x1336b3310&gt;
 </pre></div>
 </div>
 </div>
@@ -1291,14 +1291,11 @@ Length: 61, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">ModuleNotFoundError</span><span class="g g-Whitespace">                       </span>Traceback (most recent call last)
-<span class="nn">Input In [31],</span> in <span class="ni">&lt;cell line: 1&gt;</span><span class="nt">()</span>
-<span class="ne">----&gt; </span><span class="mi">1</span> <span class="kn">from</span> <span class="nn">distfit</span> <span class="kn">import</span> <span class="n">distfit</span>
-<span class="g g-Whitespace">      </span><span class="mi">3</span> <span class="n">dist</span> <span class="o">=</span> <span class="n">distfit</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;discrete&#39;</span><span class="p">,</span> <span class="n">distr</span><span class="o">=</span><span class="s2">&quot;binom&quot;</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">model</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">))[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
-
-<span class="ne">ModuleNotFoundError</span>: No module named &#39;distfit&#39;
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[distfit] &gt;fit..
+[distfit] &gt;transform..
+[distfit] &gt;Fit using binomial distribution..
+[distfit] &gt;[binomial] [RSS=0.00428] [n=4] [p=0.664505] [chi^2=0.00143]
+[distfit] &gt;Compute confidence interval [discrete]
 </pre></div>
 </div>
 </div>
@@ -1310,10 +1307,20 @@ Length: 61, dtype: int64
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4
+</pre></div>
+</div>
+</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.6645045188248099
 </pre></div>
 </div>
 </div>
