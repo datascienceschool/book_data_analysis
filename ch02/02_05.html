@@ -600,7 +600,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x1359402b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x131226c80&gt;
 </pre></div>
 </div>
 </div>
@@ -747,7 +747,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">samples_ohe</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">samples_ohe</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
 <span class="n">samples_ohe</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
@@ -776,7 +776,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 </div>
-<p>이 결과는 seaborn 패키지의 <code class="docutils literal notranslate"><span class="pre">countplot</span></code> 함수로 시각화할 수 있다.</p>
+<p>이 결과는 seaborn 패키지의 <code class="docutils literal notranslate"><span class="pre">countplot</span></code> 함수로 시각화할 수 있다. 원래 공정한 주사위의 데이터는 모든 범주값의 개수가 같아야 하지만 실제로는 다음과 같이 오차가 발생한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
@@ -819,7 +819,28 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 <p>위 식에서 <span class="math notranslate nohighlight">\(N_1, N_2, \ldots, N_K\)</span>는 각각 <span class="math notranslate nohighlight">\(1, 2, \ldots, K\)</span>번째 범주값이 나온 횟수이고 <span class="math notranslate nohighlight">\(N\)</span>은 전체 표본 데이터의 개수다.</p>
 <div class="math notranslate nohighlight">
 \[ N = N_1 + N_2 + \cdots + N_K \]</div>
-<p>팁데이터의 day 필드 데이터에 대해 이 방식으로 모수를 추정하면 다음과 같다. 이 데이터의 경우에는 <code class="docutils literal notranslate"><span class="pre">Series</span></code> 클래스 인스턴스이므로 <code class="docutils literal notranslate"><span class="pre">normalize</span></code> 인수를 <code class="docutils literal notranslate"><span class="pre">True</span></code> 값으로 한 <code class="docutils literal notranslate"><span class="pre">value_counts</span></code> 메서드를 사용하면 한번에 계산할 수 있다.</p>
+<p>위에서 시뮬레이션으로 구한 공정한 주사위 데이터의 경우에는 다음과 같은 모수 추정치가 나온다.  공정한 주사위를 시뮬레이션한 것이므로 원래는 모든 모수가 <span class="math notranslate nohighlight">\(\frac{1}{6}\approx 0.1667\)</span> 값을 가져야 한다. 하지만 측정 오차로 인해 이와 다른 값을 가지는 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">samples</span><span class="p">,</span> <span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3    0.200000
+1    0.200000
+5    0.183333
+4    0.183333
+2    0.116667
+0    0.116667
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>팁데이터의 day 필드 데이터에 대해서도 이 방식으로 모수를 추정하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
@@ -839,6 +860,41 @@ Name: day, dtype: float64
 </section>
 <section id="id7">
 <h3><span class="section-number">2.5.1.5. </span>카테고리분포의 모수검정<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>위 방법으로 추정한 카테고리분포의 모수는 오차가 있을 수 있다. 따라서 원래는 우리가 생각하는 모수값을 가졌지만(귀무가설), 측정오차로 인해 추정치가 나왔을 가능성이 있다. 이 가능성을 검증하기 위해 카테고리분포의 모수검정을 할 수 있다.</p>
+<p>카테고리분포의 모수검정 중 가장 일반적으로 사용되는 검정은 <b>일원카이제곱검정(one-way chi-square test)</b>이다. scipy 패키지의 stats 서브패키지는 일원카이제곱검정을 하는 <code class="docutils literal notranslate"><span class="pre">chisquare</span></code> 함수를 제공한다.</p>
+<p>위에서 시뮬레이션으로 구한 공정한 주사위의 데이터에 대해 모든 모수값이 <span class="math notranslate nohighlight">\(\frac{1}{6}\)</span>이라는 귀무가설을 검정하는 방법은 다음과 같이 첫번째 인수로 측정 데이터를 넣고 두번째 데이터로 귀무가설에 정확히 따르는 측정값을 넣는다. 사실 공정한 주사위의 경우처럼 모든 모수값이 같은 경우에는 두번째 인수를 생략해도 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chisquare</span>
+
+<span class="n">samples_count_real</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+<span class="n">samples_count_null</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+
+<span class="n">chisquare</span><span class="p">(</span><span class="n">samples_count_real</span><span class="p">,</span> <span class="n">samples_count_null</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Power_divergenceResult(statistic=2.8, pvalue=0.7307864865887586)
+</pre></div>
+</div>
+</div>
+</div>
+<p>유의확률이 73%가 넘으므로 이 귀무가설을 기각하지 못하고 채택한다. 즉, 공정한 주사위가 아니라 할 수 없다.</p>
+<p>팁 데이터를 보면 목/금/토/일의 값이 각각 다르게 나왔다. 만약 이 결과는 측정오차때문이고 실제로 고객이 방문하는 비율은 모든 요일이 같은지를 알아보는 검정을 하려면 다음과 같은 코드를 사용한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">chisquare</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">day</span><span class="o">.</span><span class="n">value_counts</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Power_divergenceResult(statistic=43.704918032786885, pvalue=1.7434891890557612e-09)
+</pre></div>
+</div>
+</div>
+</div>
+<p>유의확률이 아주 작으므로 모든 요일에 대해 고객 방문비율이 같다는 귀무가설은 기각한다. 즉, 요일에 따른 고객 방문율 차이가 존재하는 것이 사실이라는 결론을 얻는다.</p>
 </section>
 </section>
 </section>
