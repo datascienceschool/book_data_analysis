@@ -468,6 +468,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id8">
    2.5.2. 다항분포
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     2.5.2.1. 다항분포의 확률분포함수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     2.5.2.2. 다항분포의 시뮬레이션
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -524,6 +536,18 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id8">
    2.5.2. 다항분포
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     2.5.2.1. 다항분포의 확률분포함수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id10">
+     2.5.2.2. 다항분포의 시뮬레이션
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -610,7 +634,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x131226c80&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x136b4aa10&gt;
 </pre></div>
 </div>
 </div>
@@ -912,8 +936,32 @@ Name: day, dtype: float64
 <p>카테고리분포가 베르누이분포의 확장판이듯이 다항분포는 이항분포의 확장판이다. 다항분포(multinomial distribution)는 카테고리분포의 표본값을 <span class="math notranslate nohighlight">\(N\)</span>개 측정하였을 때 각 범주값이 나온 횟수를 표본값으로 가진다.</p>
 <p>어떤 확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 다항분포를 따를 때 다음과 같이 표시한다.</p>
 <div class="math notranslate nohighlight">
-\[ x \sim \text{Mult}(x) \]</div>
+\[ x \sim \text{Mult}(x; N, \mu) \]</div>
 <p>주사위를 한 번 던질 때 나오는 값은 카테고리분포를 따르므로 주사위를 <span class="math notranslate nohighlight">\(N\)</span>번 던져서 각각의 면이 나오는 횟수는 다항분포가 된다.</p>
+<p>예를 들어 6면체 주사위(<span class="math notranslate nohighlight">\(K=6\)</span>)를 3번(<span class="math notranslate nohighlight">\(N=3\)</span>) 던졌을 때 각각의 면이 나오는 횟수를 나타내는 데이터는 다음과 같은 표본값을 가질 수 있는 다항분포가 된다.</p>
+<section id="id9">
+<h3><span class="section-number">2.5.2.1. </span>다항분포의 확률분포함수<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>다항분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Mult}(x)\)</span>의 수식은 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Mu}(x;N,\mu) = \binom N x  \prod_{k=1}^K \mu_k^{x_k} = \binom N {x_1, \cdots, x_K} \prod_{k=1}^K \mu_k^{x_k}
+\]</div>
+<p>이 식에서 조합기호는 다음과 같이 정의된다.</p>
+<div class="math notranslate nohighlight">
+\[
+\binom N {x_1, \cdots, x_K} = \dfrac{N!}{x_1! \cdots x_K!}
+\]</div>
+</section>
+<section id="id10">
+<h3><span class="section-number">2.5.2.2. </span>다항분포의 시뮬레이션<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<p>scipy 패키지의 stats 서브패키지는 다항분포를 시뮬레이션할 수 있는 클래스 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code>를 제공한다.</p>
+<p>예를 들어 공정한 주사위를 10번 던졌을 때 각 눈금이 나오는 횟수를 나타내는 다항분포를 시뮬레이션해보자. 이 다항분포의 모수는 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[ N=10 \]</div>
+<div class="math notranslate nohighlight">
+\[ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5 = \mu_6 = \dfrac{1}{6} \]</div>
+<p>앞에서 설명했듯이 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code> 클래스의 <code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메소드는 확률질량함수를 계산한다.</p>
+</section>
 </section>
 </section>
 
