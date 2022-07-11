@@ -563,7 +563,8 @@ title="Print to PDF"
 <h1><span class="section-number">2.5. </span>카테고리분포와 다항분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">2.5.1. </span>카테고리분포<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>카테고리분포는 베르누이분포의 확장판이다. 베르누이분포는 두 가지의 값만 가질 수 있지만 카테고리분포는 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>까지 <span class="math notranslate nohighlight">\(K\)</span>(<span class="math notranslate nohighlight">\(K&gt;0\)</span>)개의 값을 가질 수 있다. 예를 들어 주사위를 던져 나오는 숫자는 <span class="math notranslate nohighlight">\(K=6\)</span>인 카테고리분포를 따른다고 할 수 있다.</p>
+<p>카테고리분포는 베르누이분포의 확장판이다. 베르누이분포는 두 가지의 값만 가질 수 있지만 카테고리분포는 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>까지 <span class="math notranslate nohighlight">\(K\)</span>(<span class="math notranslate nohighlight">\(K&gt;0\)</span>)개의 값을 가질 수 있다. 예를 들어 다음 그림과 같은 4면체 주사위를 던져 나오는 숫자는 <span class="math notranslate nohighlight">\(K=4\)</span>인 카테고리분포를 따른다고 할 수 있다.</p>
+<img src="4dice.png" alt="4면체주사위" width="200"/>
 <p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 카테고리분포를 따르는 경우 다음과 같이 표시한다.</p>
 <div class="math notranslate nohighlight">
 \[ x \sim \text{Cat}(x) \]</div>
@@ -585,25 +586,23 @@ title="Print to PDF"
 \end{align}
 \end{split}
 \end{split}\]</div>
-<p>카테고리분포는 각각 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>값이 나올 확률을 나타내는 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>라는 <span class="math notranslate nohighlight">\(K\)</span>개의 모수를 가진다. 예를 들어 공정한 주사위의 경우에는 모든 모수값이 <span class="math notranslate nohighlight">\(\frac{1}{6}\)</span>이 된다.</p>
+<p>카테고리분포는 각각 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>값이 나올 확률을 나타내는 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>라는 <span class="math notranslate nohighlight">\(K\)</span>개의 모수를 가진다. 예를 들어 공정한 4면체주사위의 경우에는 모든 모수값이 <span class="math notranslate nohighlight">\(\frac{1}{4}\)</span>이 된다.</p>
 <div class="math notranslate nohighlight">
-\[ \text{공정한 주사위의 카테고리모수}: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5 = \mu_6 = \dfrac{1}{6} \]</div>
+\[ \text{공정한 4면체주사위의 카테고리모수}: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} \]</div>
 <p>어떤 경우에도 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>를 모두 더하면 1이 되어야 한다. 이 제한조건을 수식으로 표현하면 다음과 같다.</p>
 <div class="math notranslate nohighlight">
 \[ \sum_{i=1}^{K}\mu_i = 1 \]</div>
 <p>카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>도 베르누이분포처럼 하나의 수식으로 표현하는 방법이 있는데 이렇게 하려면 카테고리분포가 생성하는 값이 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>와 같은 정수값이 아니라 다음과 같이 0과 1로 이루어진 벡터값</p>
 <div class="math notranslate nohighlight">
 \[ x = (x_1, x_2, \ldots, x_K) \]</div>
-<p>으로 풀어써야 한다. 예를 들어 주사위와 같이 <span class="math notranslate nohighlight">\(K=6\)</span>인 카테고리분포는 다음과 같은 값을 가진다고 가정한다.</p>
+<p>으로 풀어써야 한다. 예를 들어 4면체주사위와 같이 <span class="math notranslate nohighlight">\(K=4\)</span>인 카테고리분포는 다음과 같은 값을 가진다고 가정한다.</p>
 <p>\begin{split}
 \begin{align}
 \begin{aligned}
-x = 1  ;; &amp; \rightarrow &amp; ;; x = (1, 0, 0, 0, 0, 0) \
-x = 2  ;; &amp; \rightarrow &amp; ;; x = (0, 1, 0, 0, 0, 0) \
-x = 3  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 1, 0, 0, 0) \
-x = 4  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 1, 0, 0) \
-x = 5  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 1, 0) \
-x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
+x = 1  ;; &amp; \rightarrow &amp; ;; x = (1, 0, 0, 0) \
+x = 2  ;; &amp; \rightarrow &amp; ;; x = (0, 1, 0, 0) \
+x = 3  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 1, 0) \
+x = 4  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 1) \
 \end{aligned}
 \end{align}
 \end{split}</p>
@@ -617,16 +616,16 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 <section id="id4">
 <h3><span class="section-number">2.5.1.2. </span>카테고리분포의 시뮬레이션<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>scipy 패키지의 stats 서브패키지는 카테고리분포를 시뮬레이션할 수 있는 별도의 클래스를 제공하지 않지만 다음에 설명할 다항분포를 시뮬레이션할 수 있는 클래스 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code>를 제공한다. 이 클래스에서 인수 <code class="docutils literal notranslate"><span class="pre">n</span></code>을 1로 설정하면 카테고리분포를 시뮬레이션할 수 있다.</p>
-<p>예를 들어 공정한 주사위의 눈금을 나타내는 카테고리분포를 시뮬레이션해보자. 이 카테고리분포의 모수는 다음과 같다.</p>
+<p>예를 들어 공정한 4면체주사위의 눈금을 나타내는 카테고리분포를 시뮬레이션해보자. 이 카테고리분포의 모수는 다음과 같다.</p>
 <div class="math notranslate nohighlight">
-\[K=6\]</div>
+\[K=4\]</div>
 <div class="math notranslate nohighlight">
-\[ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5 = \mu_6 = \dfrac{1}{6} \]</div>
+\[ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multinomial</span>
 
-<span class="n">K</span> <span class="o">=</span> <span class="mi">6</span>
+<span class="n">K</span> <span class="o">=</span> <span class="mi">4</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">K</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">multinomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
 <span class="n">x</span>
@@ -634,7 +633,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x136b4aa10&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x1ea68cfd7f0&gt;
 </pre></div>
 </div>
 </div>
@@ -648,7 +647,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3, 4, 5])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0, 1, 2, 3])
 </pre></div>
 </div>
 </div>
@@ -685,16 +684,12 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
       <th>1</th>
       <th>2</th>
       <th>3</th>
-      <th>4</th>
-      <th>5</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>0</th>
       <td>1</td>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -705,8 +700,6 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
       <td>1</td>
       <td>0</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>2</th>
@@ -714,31 +707,9 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
       <td>0</td>
       <td>1</td>
       <td>0</td>
-      <td>0</td>
-      <td>0</td>
     </tr>
     <tr>
       <th>3</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>0</td>
-      <td>1</td>
-      <td>0</td>
-    </tr>
-    <tr>
-      <th>5</th>
-      <td>0</td>
-      <td>0</td>
       <td>0</td>
       <td>0</td>
       <td>0</td>
@@ -756,8 +727,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.16666667, 0.16666667, 0.16666667, 0.16666667, 0.16666667,
-       0.16666667])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.25, 0.25, 0.25, 0.25])
 </pre></div>
 </div>
 </div>
@@ -765,7 +735,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">pmf</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$K=6$인 카테고리 분포의 확률질량함수의 예&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$K=4$인 카테고리 분포의 확률질량함수의 예&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -781,17 +751,17 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 
 <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-<span class="n">samples_ohe</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">60</span><span class="p">)</span>
+<span class="n">samples_ohe</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">40</span><span class="p">)</span>
 <span class="n">samples_ohe</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 0, 0, 0, 0, 1],
-       [0, 0, 1, 0, 0, 0],
-       [1, 0, 0, 0, 0, 0],
-       [0, 0, 0, 0, 1, 0],
-       [0, 0, 0, 1, 0, 0]])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[0, 1, 0, 0],
+       [0, 0, 0, 1],
+       [0, 0, 1, 0],
+       [1, 0, 0, 0],
+       [0, 1, 0, 0]])
 </pre></div>
 </div>
 </div>
@@ -805,7 +775,7 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([5, 2, 0, 4, 3, 1, 0, 2, 3, 3])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([1, 3, 2, 0, 1, 2, 3, 0, 0, 0], dtype=int64)
 </pre></div>
 </div>
 </div>
@@ -863,12 +833,10 @@ x = 6  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3    0.200000
-1    0.200000
-5    0.183333
-4    0.183333
-2    0.116667
-0    0.116667
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>3    0.325
+1    0.250
+0    0.225
+2    0.200
 dtype: float64
 </pre></div>
 </div>
@@ -896,25 +864,25 @@ Name: day, dtype: float64
 <h3><span class="section-number">2.5.1.5. </span>카테고리분포의 모수검정<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>위 방법으로 추정한 카테고리분포의 모수는 오차가 있을 수 있다. 따라서 원래는 우리가 생각하는 모수값을 가졌지만(귀무가설), 측정오차로 인해 추정치가 나왔을 가능성이 있다. 이 가능성을 검증하기 위해 카테고리분포의 모수검정을 할 수 있다.</p>
 <p>카테고리분포의 모수검정 중 가장 일반적으로 사용되는 검정은 <b>일원카이제곱검정(one-way chi-square test)</b>이다. scipy 패키지의 stats 서브패키지는 일원카이제곱검정을 하는 <code class="docutils literal notranslate"><span class="pre">chisquare</span></code> 함수를 제공한다.</p>
-<p>위에서 시뮬레이션으로 구한 공정한 주사위의 데이터에 대해 모든 모수값이 <span class="math notranslate nohighlight">\(\frac{1}{6}\)</span>이라는 귀무가설을 검정하는 방법은 다음과 같이 첫번째 인수로 측정 데이터를 넣고 두번째 데이터로 귀무가설에 정확히 따르는 측정값을 넣는다. 사실 공정한 주사위의 경우처럼 모든 모수값이 같은 경우에는 두번째 인수를 생략해도 된다.</p>
+<p>위에서 시뮬레이션으로 구한 공정한 4면체주사위의 데이터에 대해 모든 모수값이 <span class="math notranslate nohighlight">\(\frac{1}{4}\)</span>이라는 귀무가설을 검정하는 방법은 다음과 같이 첫번째 인수로 측정 데이터를 넣고 두번째 데이터로 귀무가설에 정확히 따르는 측정값을 넣는다. 사실 공정한 주사위의 경우처럼 모든 모수값이 같은 경우에는 두번째 인수를 생략해도 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chisquare</span>
 
 <span class="n">samples_count_real</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
-<span class="n">samples_count_null</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
+<span class="n">samples_count_null</span> <span class="o">=</span> <span class="p">[</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">]</span>
 
 <span class="n">chisquare</span><span class="p">(</span><span class="n">samples_count_real</span><span class="p">,</span> <span class="n">samples_count_null</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Power_divergenceResult(statistic=2.8, pvalue=0.7307864865887586)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Power_divergenceResult(statistic=1.4, pvalue=0.7055347312040912)
 </pre></div>
 </div>
 </div>
 </div>
-<p>유의확률이 73%가 넘으므로 이 귀무가설을 기각하지 못하고 채택한다. 즉, 공정한 주사위가 아니라 할 수 없다.</p>
+<p>유의확률이 70%가 넘으므로 이 귀무가설을 기각하지 못하고 채택한다. 즉, 공정한 주사위가 아니라 할 수 없다.</p>
 <p>팁 데이터를 보면 목/금/토/일의 값이 각각 다르게 나왔다. 만약 이 결과는 측정오차때문이고 실제로 고객이 방문하는 비율은 모든 요일이 같은지를 알아보는 검정을 하려면 다음과 같은 코드를 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -928,7 +896,7 @@ Name: day, dtype: float64
 </div>
 </div>
 </div>
-<p>유의확률이 아주 작으므로 모든 요일에 대해 고객 방문비율이 같다는 귀무가설은 기각한다. 즉, 요일에 따른 고객 방문율 차이가 존재하는 것이 사실이라는 결론을 얻는다.</p>
+<p>유의확률이 <span class="math notranslate nohighlight">\(1.74\times 10^{-9}\)</span>로 아주 작으므로 모든 요일에 대해 고객 방문비율이 같다는 귀무가설은 기각한다. 즉, 요일에 따른 고객 방문율 차이가 존재하는 것이 사실이라는 결론을 얻는다.</p>
 </section>
 </section>
 <section id="id8">
@@ -938,7 +906,44 @@ Name: day, dtype: float64
 <div class="math notranslate nohighlight">
 \[ x \sim \text{Mult}(x; N, \mu) \]</div>
 <p>주사위를 한 번 던질 때 나오는 값은 카테고리분포를 따르므로 주사위를 <span class="math notranslate nohighlight">\(N\)</span>번 던져서 각각의 면이 나오는 횟수는 다항분포가 된다.</p>
-<p>예를 들어 6면체 주사위(<span class="math notranslate nohighlight">\(K=6\)</span>)를 3번(<span class="math notranslate nohighlight">\(N=3\)</span>) 던졌을 때 각각의 면이 나오는 횟수를 나타내는 데이터는 다음과 같은 표본값을 가질 수 있는 다항분포가 된다.</p>
+<p>예를 들어 4면체 주사위(<span class="math notranslate nohighlight">\(K=4\)</span>)를 3번(<span class="math notranslate nohighlight">\(N=3\)</span>) 던졌을 때 각각의 면이 나오는 횟수를 모두 찾아보면 다음과 같다. 이 값들이 <span class="math notranslate nohighlight">\(K=4, N=3\)</span>인 다항분포의 표본값이 될 수 있다ㅣ.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations_with_replacement</span>
+
+<span class="n">xx_ohe</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">eye</span><span class="p">(</span><span class="mi">4</span><span class="p">,</span> <span class="n">dtype</span><span class="o">=</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">index</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">combinations_with_replacement</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">4</span><span class="p">),</span> <span class="mi">3</span><span class="p">))</span>
+<span class="n">samples_K4N3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="n">xx_ohe</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">0</span><span class="p">]]</span> <span class="o">+</span> <span class="n">xx_ohe</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">1</span><span class="p">]]</span> <span class="o">+</span> <span class="n">xx_ohe</span><span class="p">[</span><span class="n">index</span><span class="p">[</span><span class="n">i</span><span class="p">][</span><span class="mi">2</span><span class="p">]]</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">idx</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">index</span><span class="p">)])</span>
+<span class="n">samples_K4N3</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[3, 0, 0, 0],
+       [2, 1, 0, 0],
+       [2, 0, 1, 0],
+       [2, 0, 0, 1],
+       [1, 2, 0, 0],
+       [1, 1, 1, 0],
+       [1, 1, 0, 1],
+       [1, 0, 2, 0],
+       [1, 0, 1, 1],
+       [1, 0, 0, 2],
+       [0, 3, 0, 0],
+       [0, 2, 1, 0],
+       [0, 2, 0, 1],
+       [0, 1, 2, 0],
+       [0, 1, 1, 1],
+       [0, 1, 0, 2],
+       [0, 0, 3, 0],
+       [0, 0, 2, 1],
+       [0, 0, 1, 2],
+       [0, 0, 0, 3]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>첫번째 표본데이터는 눈금이 1인 면이 연속 3번 나왔다는 뜻이고 두번째 표본데이터는 눈금이 1인 면이 2번, 눈금이 2인 면이 1번 나왔다는 뜻이다.</p>
 <section id="id9">
 <h3><span class="section-number">2.5.2.1. </span>다항분포의 확률분포함수<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <p>다항분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Mult}(x)\)</span>의 수식은 다음과 같다.</p>
@@ -955,12 +960,61 @@ Name: day, dtype: float64
 <section id="id10">
 <h3><span class="section-number">2.5.2.2. </span>다항분포의 시뮬레이션<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <p>scipy 패키지의 stats 서브패키지는 다항분포를 시뮬레이션할 수 있는 클래스 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code>를 제공한다.</p>
-<p>예를 들어 공정한 주사위를 10번 던졌을 때 각 눈금이 나오는 횟수를 나타내는 다항분포를 시뮬레이션해보자. 이 다항분포의 모수는 다음과 같다.</p>
+<p>예를 들어 공정한 4면체 주사위를 3번 던졌을 때 각 눈금이 나오는 횟수를 나타내는 다항분포를 시뮬레이션해보자. 이 다항분포의 모수는 다음과 같다.</p>
 <div class="math notranslate nohighlight">
-\[ N=10 \]</div>
+\[ N=3 \]</div>
 <div class="math notranslate nohighlight">
-\[ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \mu_5 = \mu_6 = \dfrac{1}{6} \]</div>
+\[ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} \]</div>
+<p>이 다항분포 확률변수는 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code> 클래스로 다음과 같이 생성한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">K</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">multinomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">x</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x1ea562ff7f0&gt;
+</pre></div>
+</div>
+</div>
+</div>
 <p>앞에서 설명했듯이 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code> 클래스의 <code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메소드는 확률질량함수를 계산한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">samples_K4N3</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;표본=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">, 확률=</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>표본=[3 0 0 0], 확률=0.016
+표본=[2 1 0 0], 확률=0.047
+표본=[2 0 1 0], 확률=0.047
+표본=[2 0 0 1], 확률=0.047
+표본=[1 2 0 0], 확률=0.047
+표본=[1 1 1 0], 확률=0.094
+표본=[1 1 0 1], 확률=0.094
+표본=[1 0 2 0], 확률=0.047
+표본=[1 0 1 1], 확률=0.094
+표본=[1 0 0 2], 확률=0.047
+표본=[0 3 0 0], 확률=0.016
+표본=[0 2 1 0], 확률=0.047
+표본=[0 2 0 1], 확률=0.047
+표본=[0 1 2 0], 확률=0.047
+표본=[0 1 1 1], 확률=0.094
+표본=[0 1 0 2], 확률=0.047
+표본=[0 0 3 0], 확률=0.016
+표본=[0 0 2 1], 확률=0.047
+표본=[0 0 1 2], 확률=0.047
+표본=[0 0 0 3], 확률=0.016
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 </section>
