@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2.6. 정규분포, 로그정규분포, 스튜던트t분포" href="02_06.html" />
@@ -255,7 +257,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_04.html">
-     3.6. 선형 회귀분석 모형
+     3.4. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -561,34 +563,39 @@ title="Print to PDF"
 <h1><span class="section-number">2.5. </span>카테고리분포와 다항분포<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <section id="id2">
 <h2><span class="section-number">2.5.1. </span>카테고리분포<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>카테고리분포는 베르누이분포의 확장판이다. 베르누이분포는 두 가지의 값만 가질 수 있지만 카테고리분포는 $1,2,\ldots,K$까지 $K$($K&gt;0$)개의 값을 가질 수 있다. 예를 들어 다음 그림과 같은 4면체 주사위를 던져 나오는 숫자는 $K=4$인 카테고리분포를 따른다고 할 수 있다.</p>
-<a class="reference internal image-reference" href="../_images/4dice.png"><img alt="4면체주사위" src="../_images/4dice.png" style="width: 200px;" /></a>
-<p>확률변수 $x$가 카테고리분포를 따르는 경우 다음과 같이 표시한다.</p>
-<p>$$ x \sim \text{Cat}(x) $$</p>
-<p>위 식에서 $\text{Cat}(x)$은 카테고리분포의 확률질량함수를 가리키는 기호다.</p>
+<p>카테고리분포는 베르누이분포의 확장판이다. 베르누이분포는 두 가지의 값만 가질 수 있지만 카테고리분포는 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>까지 <span class="math notranslate nohighlight">\(K\)</span>(<span class="math notranslate nohighlight">\(K&gt;0\)</span>)개의 값을 가질 수 있다. 예를 들어 다음 그림과 같은 4면체 주사위를 던져 나오는 숫자는 <span class="math notranslate nohighlight">\(K=4\)</span>인 카테고리분포를 따른다고 할 수 있다.</p>
+<p><img alt="4면체주사위" src="../_images/4dice.png" /></p>
+<p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 카테고리분포를 따르는 경우 다음과 같이 표시한다.</p>
+<div class="math notranslate nohighlight">
+\[ x \sim \text{Cat}(x) \]</div>
+<p>위 식에서 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>은 카테고리분포의 확률질량함수를 가리키는 기호다.</p>
 <section id="id3">
 <h3><span class="section-number">2.5.1.1. </span>카테고리분포의 확률분포함수<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<p>카테고리분포의 확률질량함수 $\text{Cat}(x)$의 수식은 다음과 같다.</p>
-<p>$$
+<p>카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>의 수식은 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
 \begin{split}
 \begin{align}
-\text{Cat}(x;\mu_1,\mu_2,\ldots,\mu_K) =
-\begin{cases}
-\mu_1 &amp; \text{if }x=1, \
-\mu_2 &amp; \text{if }x=2, \
-\vdots &amp; \vdots \
-\mu_K &amp; \text{if }x=K, \
+\text{Cat}(x;\mu_1,\mu_2,\ldots,\mu_K) = 
+\begin{cases} 
+\mu_1 &amp; \text{if }x=1, \\
+\mu_2 &amp; \text{if }x=2, \\
+\vdots &amp; \vdots \\
+\mu_K &amp; \text{if }x=K, \\
 \end{cases}
 \end{align}
 \end{split}
-$$</p>
-<p>카테고리분포는 각각 $1,2,\ldots,K$값이 나올 확률을 나타내는 $\mu_1,\mu_2,\ldots,\mu_K$라는 $K$개의 모수를 가진다. 예를 들어 공정한 4면체주사위의 경우에는 모든 모수값이 $\frac{1}{4}$이 된다.</p>
-<p>$$ \text{공정한 4면체주사위의 카테고리모수}: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} $$</p>
-<p>어떤 경우에도 $\mu_1,\mu_2,\ldots,\mu_K$를 모두 더하면 1이 되어야 한다. 이 제한조건을 수식으로 표현하면 다음과 같다.</p>
-<p>$$ \sum_{i=1}^{K}\mu_i = 1 $$</p>
-<p>카테고리분포의 확률질량함수 $\text{Cat}(x)$도 베르누이분포처럼 하나의 수식으로 표현하는 방법이 있는데 이렇게 하려면 카테고리분포가 생성하는 값이 $1,2,\ldots,K$와 같은 정수값이 아니라 다음과 같이 0과 1로 이루어진 벡터값</p>
-<p>$$ x = (x_1, x_2, \ldots, x_K) $$</p>
-<p>으로 풀어써야 한다. 예를 들어 4면체주사위와 같이 $K=4$인 카테고리분포는 다음과 같은 값을 가진다고 가정한다.</p>
+\end{split}\]</div>
+<p>카테고리분포는 각각 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>값이 나올 확률을 나타내는 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>라는 <span class="math notranslate nohighlight">\(K\)</span>개의 모수를 가진다. 예를 들어 공정한 4면체주사위의 경우에는 모든 모수값이 <span class="math notranslate nohighlight">\(\frac{1}{4}\)</span>이 된다.</p>
+<div class="math notranslate nohighlight">
+\[ \text{공정한 4면체주사위의 카테고리모수}: \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} \]</div>
+<p>어떤 경우에도 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>를 모두 더하면 1이 되어야 한다. 이 제한조건을 수식으로 표현하면 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[ \sum_{i=1}^{K}\mu_i = 1 \]</div>
+<p>카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}(x)\)</span>도 베르누이분포처럼 하나의 수식으로 표현하는 방법이 있는데 이렇게 하려면 카테고리분포가 생성하는 값이 <span class="math notranslate nohighlight">\(1,2,\ldots,K\)</span>와 같은 정수값이 아니라 다음과 같이 0과 1로 이루어진 벡터값</p>
+<div class="math notranslate nohighlight">
+\[ x = (x_1, x_2, \ldots, x_K) \]</div>
+<p>으로 풀어써야 한다. 예를 들어 4면체주사위와 같이 <span class="math notranslate nohighlight">\(K=4\)</span>인 카테고리분포는 다음과 같은 값을 가진다고 가정한다.</p>
 <p>\begin{split}
 \begin{align}
 \begin{aligned}
@@ -599,17 +606,21 @@ x = 4  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 1) \
 \end{aligned}
 \end{align}
 \end{split}</p>
-<p>이렇게 정수 범주값을 0과 1로 이루어진 벡터값으로 바꾸는 작업을 <b>원핫인코딩(one-hot encoding)</b>이라고 한다. 원핫인코딩을 하게되면 카테고리분포의 확률질량함수 $\text{Cat}$은 다음과 같이 표시한다.</p>
-<p>$$ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) $$</p>
+<p>이렇게 정수 범주값을 0과 1로 이루어진 벡터값으로 바꾸는 작업을 <b>원핫인코딩(one-hot encoding)</b>이라고 한다. 원핫인코딩을 하게되면 카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}\)</span>은 다음과 같이 표시한다.</p>
+<div class="math notranslate nohighlight">
+\[ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) \]</div>
 <p>이렇게 원핫인코딩을 한 경우에는 카테고리분포의 확률질량함수를 다음과 같은 간단한 수식으로 표현할 수 있다.</p>
-<p>$$ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) = \mu_1^{x_1} \mu_2^{x_2}  \cdots \mu_K^{x_K}  =  \prod_{k=1}^K \mu_k^{x_k} $$</p>
+<div class="math notranslate nohighlight">
+\[ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) = \mu_1^{x_1} \mu_2^{x_2}  \cdots \mu_K^{x_K}  =  \prod_{k=1}^K \mu_k^{x_k} \]</div>
 </section>
 <section id="id4">
 <h3><span class="section-number">2.5.1.2. </span>카테고리분포의 시뮬레이션<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
 <p>scipy 패키지의 stats 서브패키지는 카테고리분포를 시뮬레이션할 수 있는 별도의 클래스를 제공하지 않지만 다음에 설명할 다항분포를 시뮬레이션할 수 있는 클래스 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code>를 제공한다. 이 클래스에서 인수 <code class="docutils literal notranslate"><span class="pre">n</span></code>을 1로 설정하면 카테고리분포를 시뮬레이션할 수 있다.</p>
 <p>예를 들어 공정한 4면체주사위의 눈금을 나타내는 카테고리분포를 시뮬레이션해보자. 이 카테고리분포의 모수는 다음과 같다.</p>
-<p>$$K=4$$</p>
-<p>$$ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} $$</p>
+<div class="math notranslate nohighlight">
+\[K=4\]</div>
+<div class="math notranslate nohighlight">
+\[ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">multinomial</span>
@@ -801,16 +812,18 @@ x = 4  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 1) \
 </section>
 <section id="id6">
 <h3><span class="section-number">2.5.1.4. </span>카테고리분포의 모수추정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
-<p>카테고리분포의 $K$개의 모수 $\mu_1,\mu_2,\ldots,\mu_K$의 값은 다음과 같이 추정한다.</p>
-<p>$$
-\hat\mu_1 = \dfrac{N_1}{N}, ,
-\hat\mu_2 = \dfrac{N_2}{N}, ,
-\cdots, ,
+<p>카테고리분포의 <span class="math notranslate nohighlight">\(K\)</span>개의 모수 <span class="math notranslate nohighlight">\(\mu_1,\mu_2,\ldots,\mu_K\)</span>의 값은 다음과 같이 추정한다.</p>
+<div class="math notranslate nohighlight">
+\[
+\hat\mu_1 = \dfrac{N_1}{N}, \,
+\hat\mu_2 = \dfrac{N_2}{N}, \,
+\cdots, \,
 \hat\mu_K = \dfrac{N_K}{N},
-$$</p>
-<p>위 식에서 $N_1, N_2, \ldots, N_K$는 각각 $1, 2, \ldots, K$번째 범주값이 나온 횟수이고 $N$은 전체 표본 데이터의 개수다.</p>
-<p>$$ N = N_1 + N_2 + \cdots + N_K $$</p>
-<p>위에서 시뮬레이션으로 구한 공정한 주사위 데이터의 경우에는 다음과 같은 모수 추정치가 나온다.  공정한 주사위를 시뮬레이션한 것이므로 원래는 모든 모수가 $\frac{1}{6}\approx 0.1667$ 값을 가져야 한다. 하지만 측정 오차로 인해 이와 다른 값을 가지는 것을 알 수 있다.</p>
+\]</div>
+<p>위 식에서 <span class="math notranslate nohighlight">\(N_1, N_2, \ldots, N_K\)</span>는 각각 <span class="math notranslate nohighlight">\(1, 2, \ldots, K\)</span>번째 범주값이 나온 횟수이고 <span class="math notranslate nohighlight">\(N\)</span>은 전체 표본 데이터의 개수다.</p>
+<div class="math notranslate nohighlight">
+\[ N = N_1 + N_2 + \cdots + N_K \]</div>
+<p>위에서 시뮬레이션으로 구한 공정한 주사위 데이터의 경우에는 다음과 같은 모수 추정치가 나온다.  공정한 주사위를 시뮬레이션한 것이므로 원래는 모든 모수가 <span class="math notranslate nohighlight">\(\frac{1}{6}\approx 0.1667\)</span> 값을 가져야 한다. 하지만 측정 오차로 인해 이와 다른 값을 가지는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -851,7 +864,7 @@ Name: day, dtype: float64
 <h3><span class="section-number">2.5.1.5. </span>카테고리분포의 모수검정<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>위 방법으로 추정한 카테고리분포의 모수는 오차가 있을 수 있다. 따라서 원래는 우리가 생각하는 모수값을 가졌지만(귀무가설), 측정오차로 인해 추정치가 나왔을 가능성이 있다. 이 가능성을 검증하기 위해 카테고리분포의 모수검정을 할 수 있다.</p>
 <p>카테고리분포의 모수검정 중 가장 일반적으로 사용되는 검정은 <b>일원카이제곱검정(one-way chi-square test)</b>이다. scipy 패키지의 stats 서브패키지는 일원카이제곱검정을 하는 <code class="docutils literal notranslate"><span class="pre">chisquare</span></code> 함수를 제공한다.</p>
-<p>위에서 시뮬레이션으로 구한 공정한 4면체주사위의 데이터에 대해 모든 모수값이 $\frac{1}{4}$이라는 귀무가설을 검정하는 방법은 다음과 같이 첫번째 인수로 측정 데이터를 넣고 두번째 데이터로 귀무가설에 정확히 따르는 측정값을 넣는다. 사실 공정한 주사위의 경우처럼 모든 모수값이 같은 경우에는 두번째 인수를 생략해도 된다.</p>
+<p>위에서 시뮬레이션으로 구한 공정한 4면체주사위의 데이터에 대해 모든 모수값이 <span class="math notranslate nohighlight">\(\frac{1}{4}\)</span>이라는 귀무가설을 검정하는 방법은 다음과 같이 첫번째 인수로 측정 데이터를 넣고 두번째 데이터로 귀무가설에 정확히 따르는 측정값을 넣는다. 사실 공정한 주사위의 경우처럼 모든 모수값이 같은 경우에는 두번째 인수를 생략해도 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">chisquare</span>
@@ -883,16 +896,17 @@ Name: day, dtype: float64
 </div>
 </div>
 </div>
-<p>유의확률이 $1.74\times 10^{-9}$로 아주 작으므로 모든 요일에 대해 고객 방문비율이 같다는 귀무가설은 기각한다. 즉, 요일에 따른 고객 방문율 차이가 존재하는 것이 사실이라는 결론을 얻는다.</p>
+<p>유의확률이 <span class="math notranslate nohighlight">\(1.74\times 10^{-9}\)</span>로 아주 작으므로 모든 요일에 대해 고객 방문비율이 같다는 귀무가설은 기각한다. 즉, 요일에 따른 고객 방문율 차이가 존재하는 것이 사실이라는 결론을 얻는다.</p>
 </section>
 </section>
 <section id="id8">
 <h2><span class="section-number">2.5.2. </span>다항분포<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
-<p>카테고리분포가 베르누이분포의 확장판이듯이 다항분포는 이항분포의 확장판이다. 다항분포(multinomial distribution)는 카테고리분포의 표본값을 $N$개 측정하였을 때 각 범주값이 나온 횟수를 표본값으로 가진다.</p>
-<p>어떤 확률변수 $x$가 다항분포를 따를 때 다음과 같이 표시한다.</p>
-<p>$$ x \sim \text{Mult}(x; N, \mu) $$</p>
-<p>주사위를 한 번 던질 때 나오는 값은 카테고리분포를 따르므로 주사위를 $N$번 던져서 각각의 면이 나오는 횟수는 다항분포가 된다.</p>
-<p>예를 들어 4면체 주사위($K=4$)를 3번($N=3$) 던졌을 때 각각의 면이 나오는 횟수를 모두 찾아보면 다음과 같다. 이 값들이 $K=4, N=3$인 다항분포의 표본값이 될 수 있다ㅣ.</p>
+<p>카테고리분포가 베르누이분포의 확장판이듯이 다항분포는 이항분포의 확장판이다. 다항분포(multinomial distribution)는 카테고리분포의 표본값을 <span class="math notranslate nohighlight">\(N\)</span>개 측정하였을 때 각 범주값이 나온 횟수를 표본값으로 가진다.</p>
+<p>어떤 확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 다항분포를 따를 때 다음과 같이 표시한다.</p>
+<div class="math notranslate nohighlight">
+\[ x \sim \text{Mult}(x; N, \mu) \]</div>
+<p>주사위를 한 번 던질 때 나오는 값은 카테고리분포를 따르므로 주사위를 <span class="math notranslate nohighlight">\(N\)</span>번 던져서 각각의 면이 나오는 횟수는 다항분포가 된다.</p>
+<p>예를 들어 4면체 주사위(<span class="math notranslate nohighlight">\(K=4\)</span>)를 3번(<span class="math notranslate nohighlight">\(N=3\)</span>) 던졌을 때 각각의 면이 나오는 횟수를 모두 찾아보면 다음과 같다. 이 값들이 <span class="math notranslate nohighlight">\(K=4, N=3\)</span>인 다항분포의 표본값이 될 수 있다ㅣ.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">combinations_with_replacement</span>
@@ -932,22 +946,26 @@ Name: day, dtype: float64
 <p>첫번째 표본데이터는 눈금이 1인 면이 연속 3번 나왔다는 뜻이고 두번째 표본데이터는 눈금이 1인 면이 2번, 눈금이 2인 면이 1번 나왔다는 뜻이다.</p>
 <section id="id9">
 <h3><span class="section-number">2.5.2.1. </span>다항분포의 확률분포함수<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
-<p>다항분포의 확률질량함수 $\text{Mult}(x)$의 수식은 다음과 같다.</p>
-<p>$$
+<p>다항분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Mult}(x)\)</span>의 수식은 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[
 \text{Mu}(x;N,\mu) = \binom N x  \prod_{k=1}^K \mu_k^{x_k} = \binom N {x_1, \cdots, x_K} \prod_{k=1}^K \mu_k^{x_k}
-$$</p>
+\]</div>
 <p>이 식에서 조합기호는 다음과 같이 정의된다.</p>
-<p>$$
+<div class="math notranslate nohighlight">
+\[
 \binom N {x_1, \cdots, x_K} = \dfrac{N!}{x_1! \cdots x_K!}
-$$</p>
+\]</div>
 </section>
 <section id="id10">
 <h3><span class="section-number">2.5.2.2. </span>다항분포의 시뮬레이션<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <p>scipy 패키지의 stats 서브패키지는 다항분포를 시뮬레이션할 수 있는 클래스 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code>를 제공한다.</p>
 <p>예를 들어 공정한 4면체 주사위를 3번 던졌을 때 각 눈금이 나오는 횟수를 나타내는 다항분포를 시뮬레이션해보자. 이 다항분포의 모수는 다음과 같다.</p>
-<p>$$ N=3 $$</p>
-<p>$$ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} $$</p>
-<p>이 다항분포 확률변수는 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code> 클래스로 다음과 같이 생성한다.</p>
+<div class="math notranslate nohighlight">
+\[ N=3 \]</div>
+<div class="math notranslate nohighlight">
+\[ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} \]</div>
+<p>이 다항분포</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="mi">4</span>
