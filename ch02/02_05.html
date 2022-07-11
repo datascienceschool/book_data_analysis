@@ -633,7 +633,7 @@ x = 4  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 1) \
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x1ea68cfd7f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x12d08e36280&gt;
 </pre></div>
 </div>
 </div>
@@ -960,16 +960,18 @@ Name: day, dtype: float64
 <section id="id10">
 <h3><span class="section-number">2.5.2.2. </span>다항분포의 시뮬레이션<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <p>scipy 패키지의 stats 서브패키지는 다항분포를 시뮬레이션할 수 있는 클래스 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code>를 제공한다.</p>
-<p>예를 들어 공정한 4면체 주사위를 3번 던졌을 때 각 눈금이 나오는 횟수를 나타내는 다항분포를 시뮬레이션해보자. 이 다항분포의 모수는 다음과 같다.</p>
+<p>예를 들어 공정한 4면체 주사위를 100번 던졌을 때 각 눈금이 나오는 횟수를 나타내는 다항분포를 시뮬레이션해보자. 이 다항분포의 모수는 다음과 같다.</p>
 <div class="math notranslate nohighlight">
-\[ N=3 \]</div>
+\[ K=4 \]</div>
 <div class="math notranslate nohighlight">
 \[ \mu_1 = \mu_2 = \mu_3 = \mu_4 = \dfrac{1}{4} \]</div>
-<p>이 다항분포</p>
+<div class="math notranslate nohighlight">
+\[ N=100 \]</div>
+<p>이 다항분포는  클래스 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code>로 다음과 같이 정의한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">K</span> <span class="o">=</span> <span class="mi">4</span>
-<span class="n">N</span> <span class="o">=</span> <span class="mi">3</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">100</span>
 <span class="n">mu</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="n">K</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="n">K</span><span class="p">)</span>
 <span class="n">x</span> <span class="o">=</span> <span class="n">multinomial</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
 <span class="n">x</span>
@@ -977,42 +979,211 @@ Name: day, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x1ea562ff7f0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;scipy.stats._multivariate.multinomial_frozen at 0x12d0a7c2910&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>앞에서 설명했듯이 <code class="docutils literal notranslate"><span class="pre">multinomial</span></code> 클래스의 <code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메소드는 확률질량함수를 계산한다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하면 시뮬레이션을 통해 표본을 측정할 수 있다. 결과는 원핫인코딩 형식으로 나온다. 여기에서는 50개의 표본을 측정한다. 이는 4면체 주사위를 100번 던져서 각 면이 나오는 횟수를 세는 작업을 50번 반복한다는 뜻이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">s</span> <span class="ow">in</span> <span class="n">samples_K4N3</span><span class="p">:</span>
-    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;표본=</span><span class="si">{</span><span class="n">s</span><span class="si">}</span><span class="s2">, 확률=</span><span class="si">{</span><span class="n">x</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">s</span><span class="p">)</span><span class="si">:</span><span class="s2">.3f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+
+<span class="n">samples_ohe</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">50</span><span class="p">))</span>
+<span class="n">samples_ohe</span><span class="o">.</span><span class="n">loc</span><span class="p">[:</span><span class="mi">5</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>표본=[3 0 0 0], 확률=0.016
-표본=[2 1 0 0], 확률=0.047
-표본=[2 0 1 0], 확률=0.047
-표본=[2 0 0 1], 확률=0.047
-표본=[1 2 0 0], 확률=0.047
-표본=[1 1 1 0], 확률=0.094
-표본=[1 1 0 1], 확률=0.094
-표본=[1 0 2 0], 확률=0.047
-표본=[1 0 1 1], 확률=0.094
-표본=[1 0 0 2], 확률=0.047
-표본=[0 3 0 0], 확률=0.016
-표본=[0 2 1 0], 확률=0.047
-표본=[0 2 0 1], 확률=0.047
-표본=[0 1 2 0], 확률=0.047
-표본=[0 1 1 1], 확률=0.094
-표본=[0 1 0 2], 확률=0.047
-표본=[0 0 3 0], 확률=0.016
-표본=[0 0 2 1], 확률=0.047
-표본=[0 0 1 2], 확률=0.047
-표본=[0 0 0 3], 확률=0.016
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>0</th>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>25</td>
+      <td>27</td>
+      <td>25</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>25</td>
+      <td>24</td>
+      <td>27</td>
+      <td>24</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>24</td>
+      <td>30</td>
+      <td>29</td>
+      <td>17</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>24</td>
+      <td>29</td>
+      <td>24</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>26</td>
+      <td>31</td>
+      <td>17</td>
+      <td>26</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>19</td>
+      <td>19</td>
+      <td>24</td>
+      <td>38</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>시뮬레이션 결과에서 보듯이 각 면이 나온 횟수는 약 25번 근처이다. 공정한 4면체주사위를 100번 던졌기 때문에 예상했던 결과라고 할 수 있다. 이 결과를 박스플롯으로 시각화하기 위해 다음과 같은 DataFrame을 만든다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">samples</span> <span class="o">=</span> <span class="n">samples_ohe</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">samples</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;시도&quot;</span><span class="p">,</span> <span class="s2">&quot;범주값&quot;</span><span class="p">,</span> <span class="s2">&quot;횟수&quot;</span><span class="p">]</span>
+<span class="n">samples</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>시도</th>
+      <th>범주값</th>
+      <th>횟수</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>0</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0</td>
+      <td>1</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0</td>
+      <td>2</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0</td>
+      <td>3</td>
+      <td>23</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1</td>
+      <td>0</td>
+      <td>25</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>195</th>
+      <td>48</td>
+      <td>3</td>
+      <td>22</td>
+    </tr>
+    <tr>
+      <th>196</th>
+      <td>49</td>
+      <td>0</td>
+      <td>27</td>
+    </tr>
+    <tr>
+      <th>197</th>
+      <td>49</td>
+      <td>1</td>
+      <td>37</td>
+    </tr>
+    <tr>
+      <th>198</th>
+      <td>49</td>
+      <td>2</td>
+      <td>15</td>
+    </tr>
+    <tr>
+      <th>199</th>
+      <td>49</td>
+      <td>3</td>
+      <td>21</td>
+    </tr>
+  </tbody>
+</table>
+<p>200 rows × 3 columns</p>
+</div></div></div>
+</div>
+<p>이 DataFrame을 박스플롯으로 시각화하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;범주값&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;횟수&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">samples</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;다항분포의 시뮬레이션 결과&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_05_48_0.png" src="../_images/02_05_48_0.png" />
 </div>
 </div>
 </section>
