@@ -85,8 +85,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2.5. 카테고리분포와 다항분포" href="02_05.html" />
@@ -215,12 +213,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_07.html">
-     2.7. F분포와 카이제곱분포
+     2.7. 최대가능도 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_08.html">
-     2.8. 최대가능도 모수추정법
+     2.8. 최대사후확률 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
@@ -257,7 +255,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_04.html">
-     3.4. 선형 회귀분석 모형
+     3.6. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -616,42 +614,37 @@ title="Print to PDF"
 <p><b>베르누이분포(bernoulli distribution)</b>는 값이 두가지로만 나오는 범주값 확률변수의 확률분포다. 예를 들어 동전을 한 번 던졌을 때 앞면 혹은 뒷면이 나오는 것은 베르누이분포를 따르는 확률변수다. 또한 앞 절에서 설명한 팁 데이터에서 성별을 나타내는 sex 필드나 흡연유무를 나타내는 smoker 필드, 그리고 점심/저녁을 나타내는 time 필드는 모두 베르누이분포를 따른다고 할 수 있다. 베르누이분포의 값은 성별일 경우 “Male/Female”, 흡연유무를 나타내는 경우 “Yes/No”같이 문자열이 되는 경우가 많지만 수학적 모형을 위해 이 값을 0과 1이라는 숫자로 바꾸어서 사용하는 경우가 보통이다. 어느 값을 0으로 하고 어느 값을 1로 할지는 분석하는 사람의 마음대로다.</p>
 <section id="id3">
 <h3><span class="section-number">2.4.1.1. </span>베르누이분포의 확률분포함수<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 베르누이분포를 따르는 경우 다음과 같이 표시한다.</p>
-<div class="math notranslate nohighlight">
-\[ x \sim \text{Bern}(x) \]</div>
-<p>위 식에서 <span class="math notranslate nohighlight">\(\text{Bern}(x)\)</span>은 베르누이분포의 확률질량함수를 가리키는 기호다.</p>
-<p>베르누이분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Bern}(x)\)</span>의 수식은 다음과 같다.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+<p>확률변수 $x$가 베르누이분포를 따르는 경우 다음과 같이 표시한다.</p>
+<p>$$ x \sim \text{Bern}(x) $$</p>
+<p>위 식에서 $\text{Bern}(x)$은 베르누이분포의 확률질량함수를 가리키는 기호다.</p>
+<p>베르누이분포의 확률질량함수 $\text{Bern}(x)$의 수식은 다음과 같다.</p>
+<p>$$
 \begin{split}
 \begin{align}
-\text{Bern}(x;\mu) = 
-\begin{cases} 
-\mu   &amp; \text{if }x=1, \\
+\text{Bern}(x;\mu) =
+\begin{cases}
+\mu   &amp; \text{if }x=1, \
 1-\mu &amp; \text{if }x=0
 \end{cases}
 \end{align}
 \end{split}
-\end{split}\]</div>
-<p>이 식에서 <span class="math notranslate nohighlight">\(x\)</span>의 값이 1이 될 확률을 <span class="math notranslate nohighlight">\(\mu\)</span>라는 기호로 표시한다. <span class="math notranslate nohighlight">\(x\)</span>의 값이 0이 될 확률은 <span class="math notranslate nohighlight">\(1-\mu\)</span>가 된다. 위 식에서 베르누이분포의 모수는 <span class="math notranslate nohighlight">\(\mu\)</span> 하나만 있다는 것을 알 수 있다. 모수는 위 식에서 표시하였듯이 확류변수의 값 기호 <span class="math notranslate nohighlight">\(x\)</span> 오른쪽에 세미콜론(;) 기호를 붙이고 그 옆에 표시한다. 만약 1과 0이 나올 확률이 같다면 <span class="math notranslate nohighlight">\(\mu=0.5\)</span>가 되므로 다음과 같이 쓸 수 있다.</p>
-<div class="math notranslate nohighlight">
-\[\begin{split}
+$$</p>
+<p>이 식에서 $x$의 값이 1이 될 확률을 $\mu$라는 기호로 표시한다. $x$의 값이 0이 될 확률은 $1-\mu$가 된다. 위 식에서 베르누이분포의 모수는 $\mu$ 하나만 있다는 것을 알 수 있다. 모수는 위 식에서 표시하였듯이 확류변수의 값 기호 $x$ 오른쪽에 세미콜론(;) 기호를 붙이고 그 옆에 표시한다. 만약 1과 0이 나올 확률이 같다면 $\mu=0.5$가 되므로 다음과 같이 쓸 수 있다.</p>
+<p>$$
 \begin{split}
 \begin{align}
-\text{Bern}(x;\mu) = 
-\begin{cases} 
-0.5   &amp; \text{if }x=1, \\
+\text{Bern}(x;\mu) =
+\begin{cases}
+0.5   &amp; \text{if }x=1, \
 0.5 &amp; \text{if }x=0
 \end{cases}
 \end{align}
 \end{split}
-\end{split}\]</div>
-<p>확률질량함수 <span class="math notranslate nohighlight">\(\text{Bern}(x)\)</span>을 다음과 같이 쓰기도 한다. <span class="math notranslate nohighlight">\(x\)</span>의 값에 0과 1을 각각 대입해보면 이 식과 위에서 쓴 식은 같은 식이라는 것을 알 수 있을 것이다.</p>
-<div class="math notranslate nohighlight">
-\[ \text{Bern}(x;\mu) = \mu^x(1-\mu)^{(1-x)} \]</div>
+$$</p>
+<p>확률질량함수 $\text{Bern}(x)$을 다음과 같이 쓰기도 한다. $x$의 값에 0과 1을 각각 대입해보면 이 식과 위에서 쓴 식은 같은 식이라는 것을 알 수 있을 것이다.</p>
+<p>$$ \text{Bern}(x;\mu) = \mu^x(1-\mu)^{(1-x)} $$</p>
 <p>만약 1과 0이 나올 확률이 같다면 다음과 같이 쓸 수 있다.</p>
-<div class="math notranslate nohighlight">
-\[ \text{Bern}(x;\mu) = 0.5^x0.5^{(1-x)} \]</div>
+<p>$$ \text{Bern}(x;\mu) = 0.5^x0.5^{(1-x)} $$</p>
 </section>
 <section id="id4">
 <h3><span class="section-number">2.4.1.2. </span>베르누이 분포의 시뮬레이션<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
@@ -721,8 +714,7 @@ title="Print to PDF"
 <section id="id5">
 <h3><span class="section-number">2.4.1.3. </span>베르누이분포의 예<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
 <p>위에서 이야기한대로 팁 데이터에서 성별을 나타내는 sex 데이터는 남성 또는 여성의 두 가지 값만 가지므로 베르누이분포를 따르는 확률변수다. 따라서 다음과 같이 표현할 수 있다.</p>
-<div class="math notranslate nohighlight">
-\[ \text{sex} \sim \text{Bern}(\text{sex};\mu_{\text{sex}}) \]</div>
+<p>$$ \text{sex} \sim \text{Bern}(\text{sex};\mu_{\text{sex}}) $$</p>
 <p>sex 데이터의 확률분포는 다음과 같이 시각화할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -740,11 +732,10 @@ title="Print to PDF"
 </section>
 <section id="id6">
 <h3><span class="section-number">2.4.1.4. </span>베르누이분포의 모수추정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
-<p>베르누이분포는 확률분포함수가 고정된 수식으로 표현된 확률분포모형이므로 모수값 <span class="math notranslate nohighlight">\(\mu\)</span>만 알 수 있다면 확률분포함수를 완전히 알아내는 것이다. 그러면 베르누이분포의 모수는 다음 수식으로 추정한다. 이 식은 이후에 설명할 최대가능도추정(maximum likelihood estimation)방법을 따른 결과이다. 자세한 이론은 이후에 다루도록 한다.</p>
-<div class="math notranslate nohighlight">
-\[ \hat{\mu} = \dfrac{N_1}{N_1 + N_0} \]</div>
-<p>이 식에서 수학기호 <span class="math notranslate nohighlight">\(\hat{\mu}\)</span>는 모수 <span class="math notranslate nohighlight">\(\mu\)</span>의 추정치를 말한다. <span class="math notranslate nohighlight">\(N_0\)</span>는 데이터 값이 0인 횟수, <span class="math notranslate nohighlight">\(N_1\)</span>은 데이터 값이 1인 횟수다. 즉, 전체 데이터 중 1이 나온 횟수의 비율이 모수 <span class="math notranslate nohighlight">\(\mu\)</span>의 추정치 <span class="math notranslate nohighlight">\(\hat{\mu}\)</span>가 된다.</p>
-<p>실제로 sex 데이터의 모수를 추정해보자. 여기에서는 남자(Male)인 경우를 <span class="math notranslate nohighlight">\(x=1\)</span>인 경우라고 가정한다. 다음 코드로 <span class="math notranslate nohighlight">\(N_1=157, N_0=87\)</span>이라는 것을 알 수 있다.</p>
+<p>베르누이분포는 확률분포함수가 고정된 수식으로 표현된 확률분포모형이므로 모수값 $\mu$만 알 수 있다면 확률분포함수를 완전히 알아내는 것이다. 그러면 베르누이분포의 모수는 다음 수식으로 추정한다. 이 식은 이후에 설명할 최대가능도추정(maximum likelihood estimation)방법을 따른 결과이다. 자세한 이론은 이후에 다루도록 한다.</p>
+<p>$$ \hat{\mu} = \dfrac{N_1}{N_1 + N_0} $$</p>
+<p>이 식에서 수학기호 $\hat{\mu}$는 모수 $\mu$의 추정치를 말한다. $N_0$는 데이터 값이 0인 횟수, $N_1$은 데이터 값이 1인 횟수다. 즉, 전체 데이터 중 1이 나온 횟수의 비율이 모수 $\mu$의 추정치 $\hat{\mu}$가 된다.</p>
+<p>실제로 sex 데이터의 모수를 추정해보자. 여기에서는 남자(Male)인 경우를 $x=1$인 경우라고 가정한다. 다음 코드로 $N_1=157, N_0=87$이라는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vc</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
@@ -811,8 +802,8 @@ Name: sex, dtype: float64
 </div>
 </div>
 </div>
-<p>우리가 추정에 사용한 표본에 따라 추정치가 변하는 것을 알 수 있다. 따라서 위에서 구한 추정치는 정확한 값이라고 할 수 없다. 그렇다면 이렇게 부정확한 모수 추청치의 신뢰도는 어떻게 구할 것인가? 이 부분에 모수 추정치의 <b>신뢰구간(confidence interval)</b>이라는 것을 사용하여 구할 수 있다. 신뢰구간은 모수의 값이 특정한 확률로 그 구간 내에 있는 구간이다. 이 때 확률은 <b>유의수준(significance level)</b>이라는 수치로 지정한다. 만약 유의수준이 <span class="math notranslate nohighlight">\(\alpha\)</span>면 확률은 <span class="math notranslate nohighlight">\(1-\alpha\)</span>다. 예를 들어 5% 유의수준의 신뢰구간은 모수의 값이 95%의 확률로 그 구간 안에 있다는 뜻이다.</p>
-<p>베르누이분포의 모수 <span class="math notranslate nohighlight">\(\mu\)</span>의 신뢰구간은 statsmodels 패키지의 <code class="docutils literal notranslate"><span class="pre">proportion_confint</span></code> 함수로 구할 수 있다. <code class="docutils literal notranslate"><span class="pre">proportion_confint</span></code> 함수는 3가지 인수를 가진다.</p>
+<p>우리가 추정에 사용한 표본에 따라 추정치가 변하는 것을 알 수 있다. 따라서 위에서 구한 추정치는 정확한 값이라고 할 수 없다. 그렇다면 이렇게 부정확한 모수 추청치의 신뢰도는 어떻게 구할 것인가? 이 부분에 모수 추정치의 <b>신뢰구간(confidence interval)</b>이라는 것을 사용하여 구할 수 있다. 신뢰구간은 모수의 값이 특정한 확률로 그 구간 내에 있는 구간이다. 이 때 확률은 <b>유의수준(significance level)</b>이라는 수치로 지정한다. 만약 유의수준이 $\alpha$면 확률은 $1-\alpha$다. 예를 들어 5% 유의수준의 신뢰구간은 모수의 값이 95%의 확률로 그 구간 안에 있다는 뜻이다.</p>
+<p>베르누이분포의 모수 $\mu$의 신뢰구간은 statsmodels 패키지의 <code class="docutils literal notranslate"><span class="pre">proportion_confint</span></code> 함수로 구할 수 있다. <code class="docutils literal notranslate"><span class="pre">proportion_confint</span></code> 함수는 3가지 인수를 가진다.</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">count</span></code>: 표본값이 1인 횟수</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">nobs</span></code>: 전체 표본의 수</p></li>
@@ -847,10 +838,9 @@ Name: sex, dtype: float64
 <li><p>모수의 정확한 값을 그냥 0.6이라고 해도 될까?</p></li>
 </ol>
 <p>이 모수 추정치가 정확한 값이 아니라면 원래 정확한 모수는 전혀 다른 값, 예를 들어 0.6이나 0.5일 수도 있다. 그런데 표본을 측정하다보니 어쩌다 0.6434426229508197라는 값이 나온 것일 수도 있다. 그렇다면 원래의 정확한 모수의 값이 0.5인데 이렇게 어쩌다 0이 아닌 값이 나왔을 가능성은 어느 정도일까? 이 문제는 <b>모수검정(parameter testing)</b>이라는 방법으로 풀 수 있다.</p>
-<p><b>검정(testing)</b>은 <b>귀무가설(null hypothesis)</b>이라고 부르는 가설이 사실인지 아닌지를 알아보는 방법이다. 그 중에서도 모수검정은 모수의 값이 특정한 값과 같을(혹은 크거나 작을) 가능성을 확인하는 방법이다. 모수검정에서 사용하는 가설 <span class="math notranslate nohighlight">\(H_0\)</span>는 다음과 같다.</p>
-<div class="math notranslate nohighlight">
-\[ H_0: \mu = \mu_0 \]</div>
-<p><span class="math notranslate nohighlight">\(\mu_0\)</span>는 우리가 비교하려는 값이다. 예를 들어 모수의 정확한 값이 0.5라고 생각된다면 <span class="math notranslate nohighlight">\(\mu_0=0.5\)</span>이고 모수의 정확한 값이 0.6이라고 생각된다면 <span class="math notranslate nohighlight">\(\mu_0=0.6\)</span>이 된다.</p>
+<p><b>검정(testing)</b>은 <b>귀무가설(null hypothesis)</b>이라고 부르는 가설이 사실인지 아닌지를 알아보는 방법이다. 그 중에서도 모수검정은 모수의 값이 특정한 값과 같을(혹은 크거나 작을) 가능성을 확인하는 방법이다. 모수검정에서 사용하는 가설 $H_0$는 다음과 같다.</p>
+<p>$$ H_0: \mu = \mu_0 $$</p>
+<p>$\mu_0$는 우리가 비교하려는 값이다. 예를 들어 모수의 정확한 값이 0.5라고 생각된다면 $\mu_0=0.5$이고 모수의 정확한 값이 0.6이라고 생각된다면 $\mu_0=0.6$이 된다.</p>
 <p>검정을 실시하면 <b>검정통계량(test statistics)</b>과 <b>유의확률(p-value)</b>이라는 것을 계산한다.</p>
 <ul class="simple">
 <li><p>검정통계량: 표본 데이터 값 집합을 입력으로 계산되는 특정한 함수의 값</p></li>
@@ -861,11 +851,10 @@ Name: sex, dtype: float64
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">x</span></code>: 데이터 표본 중 1이 나온 횟수</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">n</span></code>: 데이터 표본의 개수</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">p</span></code>: 가설의 모수값 <span class="math notranslate nohighlight">\(\mu_0\)</span>. 디폴트 0.5</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p</span></code>: 가설의 모수값 $\mu_0$. 디폴트 0.5</p></li>
 </ul>
-<p>이 함수를 이용하여 모수의 정확한 값이 0.5일 가능성을 검증해보자. 즉 귀무가설 <span class="math notranslate nohighlight">\(H_0\)</span>은 다음과 같다.</p>
-<div class="math notranslate nohighlight">
-\[ H_0: \mu = 0.5 \]</div>
+<p>이 함수를 이용하여 모수의 정확한 값이 0.5일 가능성을 검증해보자. 즉 귀무가설 $H_0$은 다음과 같다.</p>
+<p>$$ H_0: \mu = 0.5 $$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bernouilli_samples</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
@@ -906,9 +895,8 @@ Name: sex, dtype: float64
 </div>
 </div>
 <p>이 유의확률은 유의수준 1%보다 아주 작으므로 모수의 정확한 값이 0.5일 가능성은 거의 없다고 생각해도 된다.</p>
-<p>이번에는 모수값을 그냥 0.6이라고 해도 되는지를 알아보자. 이 때는 인수 <code class="docutils literal notranslate"><span class="pre">p</span></code>의 값을 0.6으로 넣는다. 귀무가설 <span class="math notranslate nohighlight">\(H_0\)</span>은 다음과 같아진다.</p>
-<div class="math notranslate nohighlight">
-\[ H_0: \mu = 0.6 \]</div>
+<p>이번에는 모수값을 그냥 0.6이라고 해도 되는지를 알아보자. 이 때는 인수 <code class="docutils literal notranslate"><span class="pre">p</span></code>의 값을 0.6으로 넣는다. 귀무가설 $H_0$은 다음과 같아진다.</p>
+<p>$$ H_0: \mu = 0.6 $$</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">binomtest</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">bernouilli_samples</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">bernouilli_samples</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
@@ -948,12 +936,11 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 </section>
 <section id="id10">
 <h2><span class="section-number">2.4.2. </span>이항분포<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
-<p>베르누이분포를 따르는 모수 <span class="math notranslate nohighlight">\(\mu\)</span>인 확률변수에서 <span class="math notranslate nohighlight">\(N\)</span>개의 표본을 얻었을 때 그 중 1인 값이 나오는 횟수의 분포를 <b>이항분포(binomial distribution)</b>라고 한다.
-어떤 확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 이항분포를 따를 때 다음과 같이 표시한다.</p>
-<div class="math notranslate nohighlight">
-\[ x \sim \text{Bin}(x) \]</div>
-<p>동전을 한 번 던질 때 나오는 값은 베르누이분포를 따르므로 동전을 <span class="math notranslate nohighlight">\(N\)</span>번 던져서 앞면이 나오는 횟수는 이항분포가 된다.</p>
-<p>위에서 설명한 scipy의 확률변수 시뮬레이션 기능을 통해 <span class="math notranslate nohighlight">\(N=10, \mu=0.5\)</span>인 이항분포의 표본 5개를 구해보자.</p>
+<p>베르누이분포를 따르는 모수 $\mu$인 확률변수에서 $N$개의 표본을 얻었을 때 그 중 1인 값이 나오는 횟수의 분포를 <b>이항분포(binomial distribution)</b>라고 한다.
+어떤 확률변수 $x$가 이항분포를 따를 때 다음과 같이 표시한다.</p>
+<p>$$ x \sim \text{Bin}(x) $$</p>
+<p>동전을 한 번 던질 때 나오는 값은 베르누이분포를 따르므로 동전을 $N$번 던져서 앞면이 나오는 횟수는 이항분포가 된다.</p>
+<p>위에서 설명한 scipy의 확률변수 시뮬레이션 기능을 통해 $N=10, \mu=0.5$인 이항분포의 표본 5개를 구해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">0.5</span>
@@ -1001,24 +988,21 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 </div>
 </div>
 </div>
-<p>여기에서는 표본을 5개만 측정하였지만 아주 많은 수의 측정을 반복한다면 어떨까? 아주 재수가 없다면 앞면이 단 한번도 나올 수 없을 것이고 아주 재수가 좋다면 10번 모두 앞면이 나올 수도 있을 것이다. 하지만 가장 확률이 높은 경우는 10번의 절반인 5번 나오는 경우일 것이다. 즉, 시행횟수가 <span class="math notranslate nohighlight">\(N\)</span>인 이항분포의 표본값은 0부터 <span class="math notranslate nohighlight">\(N\)</span>까지의 값을 가질 수 있다.</p>
+<p>여기에서는 표본을 5개만 측정하였지만 아주 많은 수의 측정을 반복한다면 어떨까? 아주 재수가 없다면 앞면이 단 한번도 나올 수 없을 것이고 아주 재수가 좋다면 10번 모두 앞면이 나올 수도 있을 것이다. 하지만 가장 확률이 높은 경우는 10번의 절반인 5번 나오는 경우일 것이다. 즉, 시행횟수가 $N$인 이항분포의 표본값은 0부터 $N$까지의 값을 가질 수 있다.</p>
 <section id="id11">
 <h3><span class="section-number">2.4.2.1. </span>이항분포의 확률분포함수<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
-<p>이항분포는 시행횟수 <span class="math notranslate nohighlight">\(N\)</span>과 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span> 이렇게 두 개의 모수를 가진다. 시행횟수가 <span class="math notranslate nohighlight">\(N\)</span>이고 베르누이모수가 <span class="math notranslate nohighlight">\(\mu\)</span>인 이항분포의 확률분포함수 수식은 다음과 같이 구할 수 있다.</p>
-<div class="math notranslate nohighlight">
-\[
-\text{Bin}(x;N,\mu) = \binom N x \; \mu^x(1-\mu)^{N-x}
-\]</div>
-<p>이 식에서 (𝑁𝑥) 기호는 <b>조합(combination)</b>이라는 기호로 <span class="math notranslate nohighlight">\(N\)</span>개 원소 중에 <span class="math notranslate nohighlight">\(x\)</span>개 원소를 순서와 상관없이 선택할 수 있는 경우의 수를 뜻한다. 조합은 다음 공식으로 계산할 수 있다.</p>
-<div class="math notranslate nohighlight">
-\[
+<p>이항분포는 시행횟수 $N$과 베르누이모수 $\mu$ 이렇게 두 개의 모수를 가진다. 시행횟수가 $N$이고 베르누이모수가 $\mu$인 이항분포의 확률분포함수 수식은 다음과 같이 구할 수 있다.</p>
+<p>$$
+\text{Bin}(x;N,\mu) = \binom N x ; \mu^x(1-\mu)^{N-x}
+$$</p>
+<p>이 식에서 (𝑁𝑥) 기호는 <b>조합(combination)</b>이라는 기호로 $N$개 원소 중에 $x$개 원소를 순서와 상관없이 선택할 수 있는 경우의 수를 뜻한다. 조합은 다음 공식으로 계산할 수 있다.</p>
+<p>$$
 \binom N x =\dfrac{N!}{x!(N-x)!}
-\]</div>
-<p><span class="math notranslate nohighlight">\(!\)</span> 기호는 <b>팩토리얼(factorial)</b>이라고 하며 다음처럼 정의한다.</p>
-<div class="math notranslate nohighlight">
-\[
+$$</p>
+<p>$!$ 기호는 <b>팩토리얼(factorial)</b>이라고 하며 다음처럼 정의한다.</p>
+<p>$$
 N! = N\cdot (N-1) \cdots 2 \cdot 1
-\]</div>
+$$</p>
 </section>
 <section id="id12">
 <h3><span class="section-number">2.4.2.2. </span>이항분포의 시뮬레이션<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
@@ -1040,7 +1024,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메서드를 사용하면 확률질량함수를 계산할 수 있다. 인수로는 확률변수가 가질 수 있는 값 즉, 0부터 <span class="math notranslate nohighlight">\(N\)</span>까지의 정수값을 넣는다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메서드를 사용하면 확률질량함수를 계산할 수 있다. 인수로는 확률변수가 가질 수 있는 값 즉, 0부터 $N$까지의 정수값을 넣는다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
@@ -1153,16 +1137,16 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </section>
 <section id="id13">
 <h3><span class="section-number">2.4.2.3. </span>이항분포와 베르누이분포의 비교<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
-<p>지금까지 설명했듯이 이항분포를 따르는 확률변수 <span class="math notranslate nohighlight">\(y\)</span>는 베르누이분포를 따르는 확률변수 <span class="math notranslate nohighlight">\(x\)</span>에서 파생된 확률변수다. 이항분포와 베르누이분포 사이에는 다음과 같은 관계가 성립한다.</p>
+<p>지금까지 설명했듯이 이항분포를 따르는 확률변수 $y$는 베르누이분포를 따르는 확률변수 $x$에서 파생된 확률변수다. 이항분포와 베르누이분포 사이에는 다음과 같은 관계가 성립한다.</p>
 <ol class="simple">
-<li><p>베르누이분포를 따른 확률변수 <span class="math notranslate nohighlight">\(x\)</span>의 표본 <span class="math notranslate nohighlight">\(N\)</span>개를 모으면 이항분포를 따르는 확률변수 <span class="math notranslate nohighlight">\(y\)</span>의 표본 한 개가 얻어진다.</p></li>
-<li><p>베르누이분포의 모수 <span class="math notranslate nohighlight">\(\mu_x\)</span>와 이 베르누이분포에서 파생된 이항분포의 모수 <span class="math notranslate nohighlight">\(\mu_y\)</span>는 같다.</p></li>
-<li><p>시행횟수 <span class="math notranslate nohighlight">\(N=1\)</span>인 이항분포는 베르누이분포다.</p></li>
+<li><p>베르누이분포를 따른 확률변수 $x$의 표본 $N$개를 모으면 이항분포를 따르는 확률변수 $y$의 표본 한 개가 얻어진다.</p></li>
+<li><p>베르누이분포의 모수 $\mu_x$와 이 베르누이분포에서 파생된 이항분포의 모수 $\mu_y$는 같다.</p></li>
+<li><p>시행횟수 $N=1$인 이항분포는 베르누이분포다.</p></li>
 </ol>
 </section>
 <section id="id14">
 <h3><span class="section-number">2.4.2.4. </span>이항분포의 예<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
-<p>식당 팁 데이터에서 sex 필드 데이터는 베르누이분포를 따르는 확률변수의 표본이라고 하였다. sex 필드 데이터의 레코드는 전체가 244개이므로 전체 sex 필드 데이터에서 남성이 있는 레코드의 수는 <span class="math notranslate nohighlight">\(N=244\)</span>인 이항분포를 따르는 확률변수의 표본이 된다. 이 표본값은 157이다.</p>
+<p>식당 팁 데이터에서 sex 필드 데이터는 베르누이분포를 따르는 확률변수의 표본이라고 하였다. sex 필드 데이터의 레코드는 전체가 244개이므로 전체 sex 필드 데이터에서 남성이 있는 레코드의 수는 $N=244$인 이항분포를 따르는 확률변수의 표본이 된다. 이 표본값은 157이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">),</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
@@ -1175,7 +1159,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 </div>
-<p>만약 sex 필드 데이터를 4개씩 묶어서 4개 중 남성이 있는 레코드의 개수를 센다면 이는 <span class="math notranslate nohighlight">\(N=4\)</span>인 이항분포를 따르는 확률변수의 표본이라고 할 수 있다. 실제로 이 방법으로 남성이 나오는 횟수를 세면 다음과 같다.</p>
+<p>만약 sex 필드 데이터를 4개씩 묶어서 4개 중 남성이 있는 레코드의 개수를 센다면 이는 $N=4$인 이항분포를 따르는 확률변수의 표본이라고 할 수 있다. 실제로 이 방법으로 남성이 나오는 횟수를 세면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sex_counts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)))</span>
@@ -1212,7 +1196,7 @@ Length: 61, dtype: int64
 <img alt="../_images/02_04_69_0.png" src="../_images/02_04_69_0.png" />
 </div>
 </div>
-<p>위에서 sex 데이터의 베르누이모수는 약 0.643이라고 추정하였다. 이 모수값은 이항분포에도 그대로 적용되므로 <span class="math notranslate nohighlight">\(N=4, \mu=0.643\)</span>인 이항분포의 확률질량함수를 그리면 다음과 같다.</p>
+<p>위에서 sex 데이터의 베르누이모수는 약 0.643이라고 추정하였다. 이 모수값은 이항분포에도 그대로 적용되므로 $N=4, \mu=0.643$인 이항분포의 확률질량함수를 그리면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
@@ -1263,17 +1247,16 @@ Length: 61, dtype: int64
 </section>
 <section id="id15">
 <h3><span class="section-number">2.4.2.5. </span>이항분포의 모수추정<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h3>
-<p>이항분포의 모수는 시행횟수 <span class="math notranslate nohighlight">\(N\)</span>과 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span>다. 이항분포의 모수추정 문제는 다음과 같은 두 가지가 있을 수 있다.</p>
+<p>이항분포의 모수는 시행횟수 $N$과 베르누이모수 $\mu$다. 이항분포의 모수추정 문제는 다음과 같은 두 가지가 있을 수 있다.</p>
 <ol class="simple">
-<li><p>시행횟수 <span class="math notranslate nohighlight">\(N\)</span>을 정확하게 알고 있고 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span>만 추정해야 하는 경우</p></li>
-<li><p>시행횟수 <span class="math notranslate nohighlight">\(N\)</span>과 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span>를 모두 추정해야 하는 경우</p></li>
+<li><p>시행횟수 $N$을 정확하게 알고 있고 베르누이모수 $\mu$만 추정해야 하는 경우</p></li>
+<li><p>시행횟수 $N$과 베르누이모수 $\mu$를 모두 추정해야 하는 경우</p></li>
 </ol>
-<p>만약 시행횟수 <span class="math notranslate nohighlight">\(N\)</span>을 정확하게 알고 있다면 <span class="math notranslate nohighlight">\(M\)</span>개의 이항분포 표본값으로부터 베르누이 모수는 다음과 같이 추정할 수 있다.</p>
-<div class="math notranslate nohighlight">
-\[
+<p>만약 시행횟수 $N$을 정확하게 알고 있다면 $M$개의 이항분포 표본값으로부터 베르누이 모수는 다음과 같이 추정할 수 있다.</p>
+<p>$$
 \hat{\mu} = \dfrac{\sum_{i=1}^M y_i}{MN}
-\]</div>
-<p>만약 sex 데이터에서 전체 레코드 중 남성의 수를 <span class="math notranslate nohighlight">\(N=244\)</span>인 이항분포의 표본으로 본다면 모수는 다음과 같이 추정한다.</p>
+$$</p>
+<p>만약 sex 데이터에서 전체 레코드 중 남성의 수를 $N=244$인 이항분포의 표본으로 본다면 모수는 다음과 같이 추정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">)</span>
@@ -1286,7 +1269,7 @@ Length: 61, dtype: int64
 </div>
 </div>
 </div>
-<p>만약 sex 데이터를 4개의 레코드씩 묶어서 각 그룹의 남성 수를 <span class="math notranslate nohighlight">\(N=4\)</span>인 이항분포의 표본으로 본다면 모수는 다음과 같이 추정한다.</p>
+<p>만약 sex 데이터를 4개의 레코드씩 묶어서 각 그룹의 남성 수를 $N=4$인 이항분포의 표본으로 본다면 모수는 다음과 같이 추정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
@@ -1305,7 +1288,7 @@ Length: 61, dtype: int64
 </div>
 </div>
 <p>두 방법 모두 동일한 값을 추정하고 있는 것을 알 수 있다.</p>
-<p>시행횟수 <span class="math notranslate nohighlight">\(N\)</span>을 알지 못하는 경우에는 distfit 패키지를 이용할 수 있다. distfit 패키지는 다음 명령으로 설치한다.</p>
+<p>시행횟수 $N$을 알지 못하는 경우에는 distfit 패키지를 이용할 수 있다. distfit 패키지는 다음 명령으로 설치한다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">distfit</span>
 </pre></div>
 </div>
@@ -1329,7 +1312,7 @@ Length: 61, dtype: int64
 </div>
 </div>
 </div>
-<p>계산결과인 model 객체는 파이썬 dict 타입 객체다. <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">p</span></code> 키에는 각각 <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span> 추정치가 들어있다.</p>
+<p>계산결과인 model 객체는 파이썬 dict 타입 객체다. <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">p</span></code> 키에는 각각 $N$, $\mu$ 추정치가 들어있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">]</span>

@@ -85,11 +85,9 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.7. F분포와 카이제곱분포" href="02_07.html" />
+    <link rel="next" title="2.7. 최대가능도 모수추정법" href="02_07.html" />
     <link rel="prev" title="2.5. 카테고리분포와 다항분포" href="02_05.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -215,17 +213,17 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_07.html">
-     2.7. F분포와 카이제곱분포
+     2.7. 최대가능도 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_08.html">
-     2.8. 최대가능도 모수추정법
+     2.8. 최대사후확률 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_09.html">
-     2.9. 최대사후확률 모수추정법
+     2.9. EDA: 탐색적 데이터 분석
     </a>
    </li>
   </ul>
@@ -242,17 +240,22 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_01.html">
-     3.1. 회귀분석이란
+     3.1. 상관관계
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_02.html">
-     3.2. 회귀분석을 위한 준비
+     3.2. 회귀분석
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_03.html">
-     3.3. 선형 회귀분석 모형
+     3.3. 회귀분석을 위한 준비
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch03/03_04.html">
+     3.6. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -651,14 +654,12 @@ title="Print to PDF"
 </div>
 <section id="id2">
 <h3><span class="section-number">2.6.1.1. </span>정규분포의 확률분포함수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h3>
-<p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 정규분포를 따르는 경우 다음과 같이 표시한다.</p>
-<div class="math notranslate nohighlight">
-\[ x \sim \mathcal{N}(x) \]</div>
-<p>위 식에서 <span class="math notranslate nohighlight">\(\mathcal{N}(x)\)</span>은 정규분포의 확률밀도함수를 가리키는 기호다.</p>
-<p>정규분포의 확률밀도함수 <span class="math notranslate nohighlight">\(\mathcal{N}(x)\)</span>의 수식은 다음과 같다.</p>
-<div class="math notranslate nohighlight">
-\[ \mathcal{N}(x; \mu, \sigma^2) = \dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right) \]</div>
-<p>정규분포의 확률밀도함수는 <b>평균 <span class="math notranslate nohighlight">\(\mu\)</span></b>와 <b>분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span></b>이라는 2개의 모수를 가진다. 평균 <span class="math notranslate nohighlight">\(\mu\)</span>는 가장 발생확률이 높은 값으로 정규분포 확률밀도함수의 종 모양의 위치를 지정하는 값이다. 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>는 확률밀도함수의 종 모양의 폭을 지정하는 값으로 값이 클수록 폭이 넓어진다. 분산의 역수 <span class="math notranslate nohighlight">\(\sigma^{-2}\)</span>를 <b>정밀도(precision)</b>라고 한다.</p>
+<p>확률변수 $x$가 정규분포를 따르는 경우 다음과 같이 표시한다.</p>
+<p>$$ x \sim \mathcal{N}(x) $$</p>
+<p>위 식에서 $\mathcal{N}(x)$은 정규분포의 확률밀도함수를 가리키는 기호다.</p>
+<p>정규분포의 확률밀도함수 $\mathcal{N}(x)$의 수식은 다음과 같다.</p>
+<p>$$ \mathcal{N}(x; \mu, \sigma^2) = \dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right) $$</p>
+<p>정규분포의 확률밀도함수는 <b>평균 $\mu$</b>와 <b>분산 $\sigma^2$</b>이라는 2개의 모수를 가진다. 평균 $\mu$는 가장 발생확률이 높은 값으로 정규분포 확률밀도함수의 종 모양의 위치를 지정하는 값이다. 분산 $\sigma^2$는 확률밀도함수의 종 모양의 폭을 지정하는 값으로 값이 클수록 폭이 넓어진다. 분산의 역수 $\sigma^{-2}$를 <b>정밀도(precision)</b>라고 한다.</p>
 <p>다음은 여러가지 모수값을 가지는 정규분포의 확률밀도함수 모양을 나타낸 것이다.</p>
 <div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
@@ -668,7 +669,7 @@ title="Print to PDF"
 </section>
 <section id="id3">
 <h3><span class="section-number">2.6.1.2. </span>정규분포의 시뮬레이션<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
-<p>scipy 패키지의 stats 서브패키지는 정규분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">norm</span></code> 클래스를 제공한다. 우선 다음과 같이 모수를 지정한 클래스 인스턴스를 만든다. 이때 <code class="docutils literal notranslate"><span class="pre">loc</span></code> 인수로 모수 <span class="math notranslate nohighlight">\(\mu\)</span>를 설정하고 <code class="docutils literal notranslate"><span class="pre">scale</span></code> 인수로 모수 <span class="math notranslate nohighlight">\(\sigma^2\)</span>의 제곱근값 <span class="math notranslate nohighlight">\(\sigma\)</span>를 설정한다.</p>
+<p>scipy 패키지의 stats 서브패키지는 정규분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">norm</span></code> 클래스를 제공한다. 우선 다음과 같이 모수를 지정한 클래스 인스턴스를 만든다. 이때 <code class="docutils literal notranslate"><span class="pre">loc</span></code> 인수로 모수 $\mu$를 설정하고 <code class="docutils literal notranslate"><span class="pre">scale</span></code> 인수로 모수 $\sigma^2$의 제곱근값 $\sigma$를 설정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span>
@@ -1034,12 +1035,10 @@ title="Print to PDF"
 </section>
 <section id="id5">
 <h3><span class="section-number">2.6.1.5. </span>정규분포의 모수추정<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
-<p>정규성 검정을 통해 우리가 관심있는 데이터의 분포가 정규분포라는 것을 확인한 후에는 정규분포의 모수 <span class="math notranslate nohighlight">\(\mu\)</span>와 <span class="math notranslate nohighlight">\(\sigma^2\)</span>의 값을 추정해야 한다. 나중에 설명할 최대가능도추정법에 따르면 모수 <span class="math notranslate nohighlight">\(\mu\)</span>의 추정치 <span class="math notranslate nohighlight">\(\hat\mu\)</span>는 표본 데이터의 평균이고 모수 <span class="math notranslate nohighlight">\(\sigma^2\)</span>의 추정치 <span class="math notranslate nohighlight">\(\hat{\sigma^2}\)</span>는 표본 데이터의 분산이다.</p>
-<div class="math notranslate nohighlight">
-\[ \hat\mu = \dfrac{1}{N}\sum_{i=1}^{N} x_i \]</div>
-<div class="math notranslate nohighlight">
-\[ \hat{\sigma^2} = \dfrac{1}{N}\sum_{i=1}^{N} (x_i - \hat\mu)^2 \]</div>
-<p>위 식에서 <span class="math notranslate nohighlight">\(x_i\)</span>는 <span class="math notranslate nohighlight">\(N\)</span>개의 표본 데이터 각각의 값을 나타낸다.</p>
+<p>정규성 검정을 통해 우리가 관심있는 데이터의 분포가 정규분포라는 것을 확인한 후에는 정규분포의 모수 $\mu$와 $\sigma^2$의 값을 추정해야 한다. 나중에 설명할 최대가능도추정법에 따르면 모수 $\mu$의 추정치 $\hat\mu$는 표본 데이터의 평균이고 모수 $\sigma^2$의 추정치 $\hat{\sigma^2}$는 표본 데이터의 분산이다.</p>
+<p>$$ \hat\mu = \dfrac{1}{N}\sum_{i=1}^{N} x_i $$</p>
+<p>$$ \hat{\sigma^2} = \dfrac{1}{N}\sum_{i=1}^{N} (x_i - \hat\mu)^2 $$</p>
+<p>위 식에서 $x_i$는 $N$개의 표본 데이터 각각의 값을 나타낸다.</p>
 <p>이 모수 추정치는 각각 numpy 패키지의 <code class="docutils literal notranslate"><span class="pre">mean</span></code>, <code class="docutils literal notranslate"><span class="pre">var</span></code> 함수로 계산할 수 있다. 예를 들어 붓꽃 꽃받침의 길이의 평균과 분산은 5.006, 0.121766다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1097,9 +1096,8 @@ title="Print to PDF"
 <section id="id6">
 <h3><span class="section-number">2.6.1.6. </span>정규분포의 모수검정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p>이렇게 추정한 정규분포의 모수값이 특정한 값과 같은지 아닌지를 검정을 통해 검증할 수 있다. 정규분포의 평균 모수를 검정할 때는 <b>단일표본 t검정(one sample t-test)</b>이라는 방법을 사용한다. 이 이름은 뒤에서 설명할 스튜던트t분포에서 나온 이름이다.</p>
-<p>예를 들어 setosa종 붓꽃 꽃받침의 평균값은 5.06이 나왔지만 이 값을 그냥 5라고 할 수 있는지 알아보려면 다음과 같은 귀무가설 <span class="math notranslate nohighlight">\(H_0\)</span>에 대한 t검정을 하면 된다.</p>
-<div class="math notranslate nohighlight">
-\[ H_0 : \mu = 5 \]</div>
+<p>예를 들어 setosa종 붓꽃 꽃받침의 평균값은 5.06이 나왔지만 이 값을 그냥 5라고 할 수 있는지 알아보려면 다음과 같은 귀무가설 $H_0$에 대한 t검정을 하면 된다.</p>
+<p>$$ H_0 : \mu = 5 $$</p>
 <p>scipy 패키지의 stats 서브패키지는 t검정을 위한 <code class="docutils literal notranslate"><span class="pre">ttest_1samp</span></code> 함수를 제공한다. 이 함수에 데이터 값과 비교모수값을 인수로 넣으면 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1160,7 +1158,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>유의확률이 <span class="math notranslate nohighlight">\(3.7\times 10^{-17}\)</span>로 두 종의 꽃받침 길이는 다르다는 것을 확인할 수 있다.</p>
+<p>유의확률이 $3.7\times 10^{-17}$로 두 종의 꽃받침 길이는 다르다는 것을 확인할 수 있다.</p>
 <p>앞에서는 두 표본 데이터의 분산 모수가 다르다고 가정햐고 검정을 실시했는데 다음 함수를 사용하면 두 표본 데이터의 분산 모수가 같은지 다른지에 대한 검정을 실시할 수 있다.</p>
 <ul class="simple">
 <li><p>바틀렛 검정 : <code class="docutils literal notranslate"><span class="pre">scipy.stat.bartlett</span></code></p></li>
@@ -1219,14 +1217,13 @@ title="Print to PDF"
 <p>어떤 데이터는 그 자체로는 정규분포가 아니지만 로그 함수를 적용하면 정규분포가 되는 경우가 있다. 이러한 분포를 <b>로그정규분포(lognormal distribution)</b>라고 한다. 금액, 수량, 가격 등 양수 값만 존재하고 0이나 음수값이 존재하지 않는 데이터에서 이런 경우가 종종 발생한다.</p>
 <section id="id8">
 <h3><span class="section-number">2.6.2.1. </span>로그정규분포의 확률분포함수<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
-<p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 정규분포를 따르는 경우 다음과 같이 표시한다.</p>
-<div class="math notranslate nohighlight">
-\[ \log(x) \sim \mathcal{N}(x) \]</div>
-<p>위 식에서 <span class="math notranslate nohighlight">\(\mathcal{N}(x)\)</span>은 정규분포의 확률밀도함수를 가리키는 기호다.</p>
+<p>확률변수 $x$가 정규분포를 따르는 경우 다음과 같이 표시한다.</p>
+<p>$$ \log(x) \sim \mathcal{N}(x) $$</p>
+<p>위 식에서 $\mathcal{N}(x)$은 정규분포의 확률밀도함수를 가리키는 기호다.</p>
 </section>
 <section id="id9">
 <h3><span class="section-number">2.6.2.2. </span>로그정규분포의 시뮬레이션<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
-<p>scipy 패키지의 stats 서브패키지는 로그정규분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">lognorm</span></code> 클래스를 제공한다. <code class="docutils literal notranslate"><span class="pre">lognorm</span></code> 클래스의 인수는 <code class="docutils literal notranslate"><span class="pre">loc</span></code>와 <code class="docutils literal notranslate"><span class="pre">s</span></code>가 있다. <code class="docutils literal notranslate"><span class="pre">loc</span></code> 인수로 모수 <span class="math notranslate nohighlight">\(\mu\)</span>를 설정하고 <code class="docutils literal notranslate"><span class="pre">s</span></code> 인수로 모수 <span class="math notranslate nohighlight">\(\sigma^2\)</span>의 제곱근값 <span class="math notranslate nohighlight">\(\sigma\)</span>를 설정한다.</p>
+<p>scipy 패키지의 stats 서브패키지는 로그정규분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">lognorm</span></code> 클래스를 제공한다. <code class="docutils literal notranslate"><span class="pre">lognorm</span></code> 클래스의 인수는 <code class="docutils literal notranslate"><span class="pre">loc</span></code>와 <code class="docutils literal notranslate"><span class="pre">s</span></code>가 있다. <code class="docutils literal notranslate"><span class="pre">loc</span></code> 인수로 모수 $\mu$를 설정하고 <code class="docutils literal notranslate"><span class="pre">s</span></code> 인수로 모수 $\sigma^2$의 제곱근값 $\sigma$를 설정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">lognorm</span>
@@ -1302,8 +1299,8 @@ title="Print to PDF"
 <img alt="../_images/02_06_76_0.png" src="../_images/02_06_76_0.png" />
 </div>
 </div>
-<p>정규성 검정을 실시하면 유의확율이 <span class="math notranslate nohighlight">\(1.595
-\times 10^{-10}\)</span>으로 정규분포가 아니다.</p>
+<p>정규성 검정을 실시하면 유의확율이 $1.595
+\times 10^{-10}$으로 정규분포가 아니다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">total_bill</span><span class="p">)</span>
@@ -1382,21 +1379,18 @@ title="Print to PDF"
 <p>스튜던트t분포는 정규분포와 유사하지만 양 끝단의 꼬리 부분 데이터가 정규분포보다 많은 분포다.</p>
 <section id="id13">
 <h3><span class="section-number">2.6.3.1. </span>스튜던트t분포의 확률분포함수<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
-<p>확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 정규분포를 따르는 경우 다음과 같이 표시한다.</p>
-<div class="math notranslate nohighlight">
-\[ x \sim t(x) \]</div>
-<p>위 식에서 <span class="math notranslate nohighlight">\(t(x)\)</span>은 스튜던트t분포의 확률밀도함수를 가리키는 기호다.</p>
-<p>스튜던트t분포의 확률밀도함수 <span class="math notranslate nohighlight">\(t(x)\)</span>의 수식은 다음과 같다.</p>
-<div class="math notranslate nohighlight">
-\[ 
+<p>확률변수 $x$가 정규분포를 따르는 경우 다음과 같이 표시한다.</p>
+<p>$$ x \sim t(x) $$</p>
+<p>위 식에서 $t(x)$은 스튜던트t분포의 확률밀도함수를 가리키는 기호다.</p>
+<p>스튜던트t분포의 확률밀도함수 $t(x)$의 수식은 다음과 같다.</p>
+<p>$$
 t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\frac{\nu+1}{2}\right)} {\Gamma\left(\frac{\nu}{2}\right)} \left(1+\lambda\frac{(x-\mu)^2}{\nu} \right)^{-\frac{\nu+1}{2}}
-\]</div>
-<p>이 식에서 <span class="math notranslate nohighlight">\(\lambda\)</span>는 정규분포의 정밀도 <span class="math notranslate nohighlight">\(\sigma^{-2}\)</span>에 대응하는 개념이고 <span class="math notranslate nohighlight">\(\Gamma(x)\)</span>는 감마(Gamma) 함수라는 특수 함수다.</p>
-<div class="math notranslate nohighlight">
-\[
+$$</p>
+<p>이 식에서 $\lambda$는 정규분포의 정밀도 $\sigma^{-2}$에 대응하는 개념이고 $\Gamma(x)$는 감마(Gamma) 함수라는 특수 함수다.</p>
+<p>$$
 \Gamma(x) = \int_0^\infty  u^{x-1} e^{-u} d
-\]</div>
-<p>스튜던트t분포는 양끝쪽의 꼬리부분의 두께를 조정할 수 있는 자유도(degree of freedom) 모수 <span class="math notranslate nohighlight">\(\nu\)</span>가 있다. 이 값은 2 이상의 자연수를 사용한다. 모수 <span class="math notranslate nohighlight">\(\nu\)</span>가 1인 경우는 <b>코시분포(Cauchy distribution)</b>라고 한다. 코시분포에서 양수인 부분만 사용하는 경우에는 <b>하프코시분포(Half-Cauchy distribution)</b>라고 부른다.</p>
+$$</p>
+<p>스튜던트t분포는 양끝쪽의 꼬리부분의 두께를 조정할 수 있는 자유도(degree of freedom) 모수 $\nu$가 있다. 이 값은 2 이상의 자연수를 사용한다. 모수 $\nu$가 1인 경우는 <b>코시분포(Cauchy distribution)</b>라고 한다. 코시분포에서 양수인 부분만 사용하는 경우에는 <b>하프코시분포(Half-Cauchy distribution)</b>라고 부른다.</p>
 </section>
 <section id="id14">
 <h3><span class="section-number">2.6.3.2. </span>스튜던트t분포의 시뮬레이션<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
@@ -1497,7 +1491,7 @@ Name: Close, Length: 5191, dtype: int64
 <img alt="../_images/02_06_103_0.png" src="../_images/02_06_103_0.png" />
 </div>
 </div>
-<p>정규성 검정을 해도 유의확률이 <span class="math notranslate nohighlight">\(4\times 10^{-103}\)</span>으로 분포가 정규분포가 아니라는 것을 확인할 수 있다.</p>
+<p>정규성 검정을 해도 유의확률이 $4\times 10^{-103}$으로 분포가 정규분포가 아니라는 것을 확인할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">omni_normtest</span><span class="p">(</span><span class="n">returns</span><span class="p">)</span>
@@ -1609,7 +1603,7 @@ Name: Close, Length: 5191, dtype: int64
     <a class='right-next' id="next-link" href="02_07.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">2.7. </span>F분포와 카이제곱분포</p>
+        <p class="prev-next-title"><span class="section-number">2.7. </span>최대가능도 모수추정법</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

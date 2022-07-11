@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.4. 선형 회귀분석 모형 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.6. 선형 회귀분석 모형 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -85,8 +85,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="prev" title="3.3. 회귀분석을 위한 준비" href="03_03.html" />
@@ -214,12 +212,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch02/02_07.html">
-     2.7. F분포와 카이제곱분포
+     2.7. 최대가능도 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch02/02_08.html">
-     2.8. 최대가능도 모수추정법
+     2.8. 최대사후확률 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
@@ -256,7 +254,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.4. 선형 회귀분석 모형
+     3.6. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -433,12 +431,12 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.4.1. 회귀분석 모형
+   3.6.1. 회귀분석 모형
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.4.2. 선형 회귀분석
+   3.6.2. 선형 회귀분석
   </a>
  </li>
 </ul>
@@ -462,12 +460,12 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.4.1. 회귀분석 모형
+   3.6.1. 회귀분석 모형
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.4.2. 선형 회귀분석
+   3.6.2. 선형 회귀분석
   </a>
  </li>
 </ul>
@@ -481,21 +479,19 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.4. </span>선형 회귀분석 모형<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.6. </span>선형 회귀분석 모형<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <section id="id2">
-<h2><span class="section-number">3.4.1. </span>회귀분석 모형<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>회귀분석은 복수의 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>와 하나의 종속변수 <span class="math notranslate nohighlight">\(y\)</span>간의 관계를 분석하는 것이다. 회귀분석을 하려면 독립변수와 종속변수의 관계를 수식으로 정해놓아야 한다. 이 수식을 <b>회귀분석 모형(regression model)</b>이라고 한다. 회귀분석 모형은 일반적으로 다음과 같은 수식으로 표현한다.</p>
-<div class="math notranslate nohighlight">
-\[ y = f(x_1, x_2, x_3, \ldots, x_K) + \varepsilon \]</div>
-<p>이 수식에서 <span class="math notranslate nohighlight">\(f\)</span>는 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>와 종속변수 <span class="math notranslate nohighlight">\(y\)</span>간의 결정론적 관계를 나타내는 함수이다. 우리가 회귀분석 문제를 푼다는 것은 이 함수 <span class="math notranslate nohighlight">\(f\)</span>를 찾아내는 것이라고 할 수 있다.</p>
-<p>그런데 현실의 데이터에서는 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>만으로 정확히 종속변수 <span class="math notranslate nohighlight">\(y\)</span>의 값을 결정할 수 있는 함수가 존재하는 경우는 없으며 항상 어느 정도의 오차가 존재한다. <span class="math notranslate nohighlight">\(\varepsilon\)</span> 항은 바로 이 오차를 나타내는 항으로 <b>교란항(disturbance)</b>이라고 한다. 교란항은 우리가 예측할 수 없는 랜덤 변수다.</p>
-<p>교란항이 발생하는 이유는 여러가지가 있으나 가장 쉬운 설명 중의 하나는 현실에서 종속변수 <span class="math notranslate nohighlight">\(y\)</span>에 영향을 미치는 변수가 우리가 정해놓은 <span class="math notranslate nohighlight">\(K\)</span>개의 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>이외에도 휠씬 더 많이 존재하기 때문이다.</p>
+<h2><span class="section-number">3.6.1. </span>회귀분석 모형<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>회귀분석은 복수의 독립변수 $x_1, x_2, \ldots, x_K$와 하나의 종속변수 $y$간의 관계를 분석하는 것이다. 회귀분석을 하려면 독립변수와 종속변수의 관계를 수식으로 정해놓아야 한다. 이 수식을 <b>회귀분석 모형(regression model)</b>이라고 한다. 회귀분석 모형은 일반적으로 다음과 같은 수식으로 표현한다.</p>
+<p>$$ y = f(x_1, x_2, x_3, \ldots, x_K) + \varepsilon $$</p>
+<p>이 수식에서 $f$는 독립변수 $x_1, x_2, \ldots, x_K$와 종속변수 $y$간의 결정론적 관계를 나타내는 함수이다. 우리가 회귀분석 문제를 푼다는 것은 이 함수 $f$를 찾아내는 것이라고 할 수 있다.</p>
+<p>그런데 현실의 데이터에서는 독립변수 $x_1, x_2, \ldots, x_K$만으로 정확히 종속변수 $y$의 값을 결정할 수 있는 함수가 존재하는 경우는 없으며 항상 어느 정도의 오차가 존재한다. $\varepsilon$ 항은 바로 이 오차를 나타내는 항으로 <b>교란항(disturbance)</b>이라고 한다. 교란항은 우리가 예측할 수 없는 랜덤 변수다.</p>
+<p>교란항이 발생하는 이유는 여러가지가 있으나 가장 쉬운 설명 중의 하나는 현실에서 종속변수 $y$에 영향을 미치는 변수가 우리가 정해놓은 $K$개의 독립변수 $x_1, x_2, \ldots, x_K$이외에도 휠씬 더 많이 존재하기 때문이다.</p>
 </section>
 <section id="id3">
-<h2><span class="section-number">3.4.2. </span>선형 회귀분석<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.6.2. </span>선형 회귀분석<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 <p>가장 많이 사용되는 회귀분석 모형은 선형 회귀분석 모형(linear regression model)이다. 선형 회귀분석 모형은 다음과 같은 수식으로 표현한다.</p>
-<div class="math notranslate nohighlight">
-\[ y = w_0 + w_1 x_1 + w_2 x_2 + \cdots + w_K x_K + \epsilon \]</div>
+<p>$$ y = w_0 + w_1 x_1 + w_2 x_2 + \cdots + w_K x_K + \epsilon $$</p>
 </section>
 </section>
 

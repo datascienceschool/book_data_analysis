@@ -85,8 +85,6 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
-    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
-    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2.4. 베르누이분포와 이항분포" href="02_04.html" />
@@ -175,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="02_00.html">
-   2. 데이터의 신뢰성을 분석한다
+   2. 모수추정과 검정 - 데이터의 신뢰도를 분석한다
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -215,24 +213,24 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_07.html">
-     2.7. F분포와 카이제곱분포
+     2.7. 최대가능도 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_08.html">
-     2.8. 최대가능도 모수추정법
+     2.8. 최대사후확률 모수추정법
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_09.html">
-     2.9. 최대사후확률 모수추정법
+     2.9. EDA: 탐색적 데이터 분석
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch03/03_00.html">
-   3. 수치형 데이터의 상관관계를 분석한다
+   3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -242,17 +240,22 @@ const thebe_selector_output = ".output, .cell_output"
   <ul>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_01.html">
-     3.1. 회귀분석이란
+     3.1. 상관관계
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_02.html">
-     3.2. 회귀분석을 위한 준비
+     3.2. 회귀분석
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="../ch03/03_03.html">
-     3.3. 선형 회귀분석 모형
+     3.3. 회귀분석을 위한 준비
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../ch03/03_04.html">
+     3.6. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -577,7 +580,7 @@ title="Print to PDF"
 </section>
 <section id="id5">
 <h2><span class="section-number">2.3.4. </span>확률분포모형의 수식과 모수<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>확률분포모형의 공통점은 확률질량함수(pmf)나 확률밀도함수(pdf)가 정확한 수식으로 표현된다는 점이다. 이 수식에는 확률변수가 가질 수 있는 값을 나타내는 <span class="math notranslate nohighlight">\(x\)</span>라는 기호이외에 몇가지 상수기호가 있는데 이 상수기호들을 <b>모수(parameter)</b>라고 부른다. 확률분포모형의 가장 큰 특징은 이 모수의 값만 알고 있으면 정확히 같은 확률분포함수를 재현할 수 있다는 점이다.</p>
+<p>확률분포모형의 공통점은 확률질량함수(pmf)나 확률밀도함수(pdf)가 정확한 수식으로 표현된다는 점이다. 이 수식에는 확률변수가 가질 수 있는 값을 나타내는 $x$라는 기호이외에 몇가지 상수기호가 있는데 이 상수기호들을 <b>모수(parameter)</b>라고 부른다. 확률분포모형의 가장 큰 특징은 이 모수의 값만 알고 있으면 정확히 같은 확률분포함수를 재현할 수 있다는 점이다.</p>
 <p>위에서 제시한 기본 확률분포모형의 수식과 모수를 다시 정리하면 다음과 같다.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -588,24 +591,24 @@ title="Print to PDF"
 </thead>
 <tbody>
 <tr class="row-even"><td><p>베르누이분포</p></td>
-<td><p><span class="math notranslate nohighlight">\( \text{Bern}(x;\mu) = \mu^x(1-\mu)^{1-x} \)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\mu\)</span></p></td>
+<td><p>$ \text{Bern}(x;\mu) = \mu^x(1-\mu)^{1-x} $</p></td>
+<td><p>$\mu$</p></td>
 </tr>
 <tr class="row-odd"><td><p>카테고리분포</p></td>
-<td><p><span class="math notranslate nohighlight">\( \text{Cat}(x;\mu_1, \ldots, \mu_K) = \prod_{k=1}^K \mu_k^{x_k} \)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\mu_1,\ldots,\mu_K\)</span></p></td>
+<td><p>$ \text{Cat}(x;\mu_1, \ldots, \mu_K) = \prod_{k=1}^K \mu_k^{x_k} $</p></td>
+<td><p>$\mu_1,\ldots,\mu_K$</p></td>
 </tr>
 <tr class="row-even"><td><p>이항분포</p></td>
-<td><p><span class="math notranslate nohighlight">\( \text{Bin}(x;\mu, N) = \binom N x \; \mu^x(1-\mu)^{N-x} \)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\mu\)</span>, <span class="math notranslate nohighlight">\(N\)</span></p></td>
+<td><p>$ \text{Bin}(x;\mu, N) = \binom N x ; \mu^x(1-\mu)^{N-x} $</p></td>
+<td><p>$\mu$, $N$</p></td>
 </tr>
 <tr class="row-odd"><td><p>정규분포</p></td>
-<td><p><span class="math notranslate nohighlight">\( \mathcal{N}(x; \mu, \sigma^2) = \dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right) \)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\mu, \sigma^2\)</span></p></td>
+<td><p>$ \mathcal{N}(x; \mu, \sigma^2) = \dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right) $</p></td>
+<td><p>$\mu, \sigma^2$</p></td>
 </tr>
 <tr class="row-even"><td><p>스튜던트t분포</p></td>
-<td><p><span class="math notranslate nohighlight">\( t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\frac{\nu+1}{2}\right)} {\Gamma\left(\frac{\nu}{2}\right)} \left(1+\lambda\frac{(x-\mu)^2}{\nu} \right)^{-\frac{\nu+1}{2}} \)</span></p></td>
-<td><p><span class="math notranslate nohighlight">\(\mu, \lambda, \nu\)</span></p></td>
+<td><p>$ t(x;\mu, \lambda, \nu) = \frac{\sqrt{\lambda}}{\sqrt{\nu\pi}}\frac{\Gamma\left(\frac{\nu+1}{2}\right)} {\Gamma\left(\frac{\nu}{2}\right)} \left(1+\lambda\frac{(x-\mu)^2}{\nu} \right)^{-\frac{\nu+1}{2}} $</p></td>
+<td><p>$\mu, \lambda, \nu$</p></td>
 </tr>
 </tbody>
 </table>
