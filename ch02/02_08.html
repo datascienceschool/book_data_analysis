@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다" href="../ch03/03_00.html" />
@@ -403,12 +405,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.8.1. 탐색적 데이터 분석의 예 : 팁 데이터
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -420,6 +446,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.8.1. 탐색적 데이터 분석의 예 : 팁 데이터
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -434,22 +473,21 @@ title="Print to PDF"
 <ul class="simple">
 <li><p>데이터의 개수</p></li>
 <li><p>데이터 중 누락 혹은 잘못된 데이터의 개수</p></li>
+<li><p>데이터가 수치형 데이터인지 범주형 데이터인지 유형 판단</p></li>
 <li><p>데이터의 대표값 (수치형 데이터의 경우에는 평균이나 중간값, 범주형 데이터의 경우에는 최빈값)</p></li>
-<li><p>데이터의 제한조건 (수치현 데이터의 경우에는 제한조건, 범주형 데이터의 경우에는 범주값의 종류)</p></li>
+<li><p>데이터의 최대/최소값 혹은 분산</p></li>
+<li><p>데이터의 제한조건 (수치형 데이터의 경우에는 제한조건, 범주형 데이터의 경우에는 범주값의 종류)</p></li>
 <li><p>데이터의 확률분포 및 모수</p></li>
 </ul>
+<section id="id2">
+<h2><span class="section-number">2.8.1. </span>탐색적 데이터 분석의 예 : 팁 데이터<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>지금까지 많이 살펴보았던 팁 데이터에 대해 탐색적 데이터 분석을 하면 다음과 같은 결과를 얻을 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
 <span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span>
+<span class="n">tips</span>
 </pre></div>
 </div>
 </div>
@@ -597,6 +635,138 @@ title="Print to PDF"
 <p>244 rows × 7 columns</p>
 </div></div></div>
 </div>
+<p>데이터의 개수나 평균, 최대/최소값 등은 pandas 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">describe</span></code> 메서드로 얻을 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>244.000000</td>
+      <td>244.000000</td>
+      <td>244.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>19.785943</td>
+      <td>2.998279</td>
+      <td>2.569672</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>8.902412</td>
+      <td>1.383638</td>
+      <td>0.951100</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>3.070000</td>
+      <td>1.000000</td>
+      <td>1.000000</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>13.347500</td>
+      <td>2.000000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>17.795000</td>
+      <td>2.900000</td>
+      <td>2.000000</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>24.127500</td>
+      <td>3.562500</td>
+      <td>3.000000</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>50.810000</td>
+      <td>10.000000</td>
+      <td>6.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>탐색적 데이터 분석의 결과를 정리하면 다음과 같다.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>이름</p></th>
+<th class="head"><p>개수</p></th>
+<th class="head"><p>누락/오류 데이터 개수</p></th>
+<th class="head"><p>데이터 유형</p></th>
+<th class="head"><p>데이터 대표값</p></th>
+<th class="head"><p>최대/최소값</p></th>
+<th class="head"><p>데이터 제한조건</p></th>
+<th class="head"><p>데이터 확률분포</p></th>
+<th class="head"><p>확률분포 모수</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>total_bill</p></td>
+<td><p>243</p></td>
+<td><p>0</p></td>
+<td><p>수치형</p></td>
+<td><p>19.7859</p></td>
+<td><p>3.07 / 50.81</p></td>
+<td><p>양수</p></td>
+<td><p>로그정규분포</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu=-1.5965, \sigma^2=0.1588\)</span></p></td>
+</tr>
+<tr class="row-odd"><td><p>tip</p></td>
+<td><p>243</p></td>
+<td><p>0</p></td>
+<td><p>수치형</p></td>
+<td><p>2.9983</p></td>
+<td><p>1 / 10</p></td>
+<td><p>양수</p></td>
+<td><p>로그정규분포</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu=-1.5965, \sigma^2=0.1588\)</span></p></td>
+</tr>
+<tr class="row-even"><td><p>size</p></td>
+<td><p>243</p></td>
+<td><p>0</p></td>
+<td><p>수치형</p></td>
+<td><p>2.5697</p></td>
+<td><p>1 / 6</p></td>
+<td><p>양수, 정수</p></td>
+<td><p>정규분포</p></td>
+<td><p><span class="math notranslate nohighlight">\(\mu=-1.5965, \sigma^2=0.1588\)</span></p></td>
+</tr>
+</tbody>
+</table>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
