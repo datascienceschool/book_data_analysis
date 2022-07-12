@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.8. EDA: 탐색적 데이터 분석 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>2.8. 탐색적 데이터 분석 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -173,7 +173,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="02_00.html">
-   2. 모수추정과 검정 - 데이터의 신뢰도를 분석한다
+   2. 탐색적 데이터 분석 - 개별 데이터의 특징을 분석한다.
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
   <label for="toctree-checkbox-2">
@@ -218,7 +218,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.8. EDA: 탐색적 데이터 분석
+     2.8. 탐색적 데이터 분석
     </a>
    </li>
   </ul>
@@ -415,7 +415,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>EDA: 탐색적 데이터 분석</h1>
+                <h1>탐색적 데이터 분석</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -427,23 +427,22 @@ title="Print to PDF"
                 
               <div>
                 
-  <section class="tex2jax_ignore mathjax_ignore" id="eda">
-<h1><span class="section-number">2.8. </span>EDA: 탐색적 데이터 분석<a class="headerlink" href="#eda" title="Permalink to this headline">#</a></h1>
-<p>Exploratory Data Analysis</p>
+  <section class="tex2jax_ignore mathjax_ignore" id="id1">
+<h1><span class="section-number">2.8. </span>탐색적 데이터 분석<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>EDA(Exploratory Data Analysis)라고도 부르는 탐색적 데이터 분석은 데이터 각각에 대한 특징을 찾아내는 작업이다. 탐색적 데이터 분석에서 찾아내야 할 데이터의 특징은 여러가지가 있지만 가장 중요한 것은 해당 데이터가 어떤 확률분포를 따르며 확률분포함수의 모수가 어떤 값을 가지는 지를 추정하는 것이다.</p>
+<p>탐색적 데이터 분석에서 수행해야 할 일은 다음과 같다.</p>
+<ul class="simple">
+<li><p>데이터의 개수</p></li>
+<li><p>데이터 중 누락 혹은 잘못된 데이터의 개수</p></li>
+<li><p>데이터의 대표값 (수치형 데이터의 경우에는 평균이나 중간값, 범주형 데이터의 경우에는 최빈값)</p></li>
+<li><p>데이터의 제한조건 (수치현 데이터의 경우에는 제한조건, 범주형 데이터의 경우에는 범주값의 종류)</p></li>
+<li><p>데이터의 확률분포 및 모수</p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
 <span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">lux</span>
-
-<span class="n">tips</span><span class="o">.</span><span class="n">default_display</span> <span class="o">=</span> <span class="s2">&quot;lux&quot;</span>
 </pre></div>
 </div>
 </div>
