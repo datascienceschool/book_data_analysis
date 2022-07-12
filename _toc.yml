@@ -21,7 +21,6 @@ chapters:
       - file: ch02/02_06.ipynb
       - file: ch02/02_07.ipynb
       - file: ch02/02_08.ipynb
-      - file: ch02/02_09.ipynb
   - file: ch03/03_00.ipynb
     sections:
       - file: ch03/03_01.ipynb
