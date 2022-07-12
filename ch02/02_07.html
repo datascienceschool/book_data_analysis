@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>2.7. 최대가능도 모수추정법 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>2.7. 최대가능도추정 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="2.8. 최대사후확률 모수추정법" href="02_08.html" />
@@ -213,7 +215,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     2.7. 최대가능도 모수추정법
+     2.7. 최대가능도추정
     </a>
    </li>
    <li class="toctree-l2">
@@ -408,23 +410,70 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.7.1. 가능도함수
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   2.7.2. 최대가능도추정
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>최대가능도 모수추정법</h1>
+                <h1>최대가능도추정</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   2.7.1. 가능도함수
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   2.7.2. 최대가능도추정
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -433,8 +482,175 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">2.7. </span>최대가능도 모수추정법<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>MLE(Maximum Likelihood Estimation</p>
+<h1><span class="section-number">2.7. </span>최대가능도추정<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>지금까지 각종 확률분포의 모수를 추정하는 공식들을 설명했다. 이 공식들은 <b>최대가능도추정(MLE: Maximum Likelihood Estimation)</b>이라는 이론에 기반하여 유도된 공식이다. 이 절에서는 최대가능도추정에 대해 간단히 소개한다. 이 절은 모수추정공식이 어떻게 유도되었는지를 설명하기 위한 수학적인 내용이다.</p>
+<section id="id2">
+<h2><span class="section-number">2.7.1. </span>가능도함수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>다음과 같이 표본값이 <span class="math notranslate nohighlight">\(x\)</span>, 모수가 <span class="math notranslate nohighlight">\(\theta\)</span>인 확률분포함수가 있다고 가정하자.</p>
+<div class="math notranslate nohighlight">
+\[ p(x;\theta) \]</div>
+<p>이 식에서 <span class="math notranslate nohighlight">\(\theta\)</span>는 모든 모수를 합쳐서 나타낸 기호다. 예를 들어 확률분포가 베르누이분포라면 모수 <span class="math notranslate nohighlight">\(\theta = \mu\)</span>가 되고 이항분포라면 <span class="math notranslate nohighlight">\(\theta = (N, \mu)\)</span>, 정규분포라면 <span class="math notranslate nohighlight">\(\theta = (\mu, \sigma^2)\)</span>가 된다.</p>
+<p>확률분포함수에서는 변수가 <span class="math notranslate nohighlight">\(x\)</span>고 모수 <span class="math notranslate nohighlight">\(\theta\)</span>는 변하지 않는 상수다. 그런데 같은 함수를 <span class="math notranslate nohighlight">\(x\)</span>가 상수이고 <span class="math notranslate nohighlight">\(\theta\)</span>가 변수라고 가정하면 <b>가능도함수(likelihood function)</b>라고 부른다. 가능도 함수는 <span class="math notranslate nohighlight">\(L(\theta; x)\)</span>로 표기한다. 함수의 수식은 확률분포함수 <span class="math notranslate nohighlight">\(p(x;\theta)\)</span>나 <span class="math notranslate nohighlight">\(L(\theta; x)\)</span>나 똑같다.</p>
+<p>예를 들어 정규분포 가능도함수는 <span class="math notranslate nohighlight">\(\mu\)</span>와 <span class="math notranslate nohighlight">\(\sigma^2\)</span>를 변수로 가지는 2차원 함수다.</p>
+<div class="math notranslate nohighlight">
+\[  L(\mu, \sigma^2; x) = \dfrac{1}{\sqrt{2\pi\sigma^2}} \exp \left(-\dfrac{(x-\mu)^2}{2\sigma^2}\right) \]</div>
+<p>만약 표본값 <span class="math notranslate nohighlight">\(x=0\)</span>이면 다음과 같은 모양을 띄게 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">mus</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">sigma2s</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">,</span> <span class="mi">1000</span><span class="p">)</span>
+<span class="n">MU</span><span class="p">,</span> <span class="n">SIGMA2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">meshgrid</span><span class="p">(</span><span class="n">mus</span><span class="p">,</span> <span class="n">sigma2s</span><span class="p">)</span>
+<span class="n">L</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="n">MU</span> <span class="o">**</span> <span class="mi">2</span> <span class="o">/</span> <span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">SIGMA2</span><span class="p">))</span> <span class="o">/</span> <span class="n">np</span><span class="o">.</span><span class="n">sqrt</span><span class="p">(</span><span class="mi">2</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span> <span class="o">*</span> <span class="n">SIGMA2</span><span class="p">)</span>
+
+<span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">()</span>
+<span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="o">.</span><span class="n">gca</span><span class="p">(</span><span class="n">projection</span><span class="o">=</span><span class="s1">&#39;3d&#39;</span><span class="p">)</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">plot_surface</span><span class="p">(</span><span class="n">MU</span><span class="p">,</span> <span class="n">SIGMA2</span><span class="p">,</span> <span class="n">L</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s1">&#39;$\mu$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s1">&#39;$\sigma^2$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s1">&#39;가능도함수 $L(\mu, \sigma^2)$&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_07_5_0.png" src="../_images/02_07_5_0.png" />
+</div>
+</div>
+<p>확률분포함수의 값은 모수 <span class="math notranslate nohighlight">\(\theta\)</span>가 고정되었을 때 값 <span class="math notranslate nohighlight">\(x\)</span>가 나올 가능성을 뜻하지만 가능도함수의 값은 값 <span class="math notranslate nohighlight">\(x\)</span>가 관측되었을 때 모수가 <span class="math notranslate nohighlight">\(\theta\)</span>이라는 값을 가질 가능성을 나타낸다.</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">2.7.2. </span>최대가능도추정<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>최대가능도추정은 주어진 표본값에 대해 가능도함수 <span class="math notranslate nohighlight">\(L(\theta;x)\)</span>의 값을 가장 크게 하는 모수 <span class="math notranslate nohighlight">\(\theta\)</span>가 가장 가능성이 높은 모수값이라고 추정하는 방법이다. 이 방법으로 찾은 모수는 기호로 <span class="math notranslate nohighlight">\(\hat\theta_{\text{MLE}}\)</span>와 같이 표시한다. 수식으로는 다음과 같이 정의한다.</p>
+<div class="math notranslate nohighlight">
+\[ \hat\theta_{\text{MLE}} = \arg \max_{\theta} L(\theta; x) \]</div>
+<p>이 식에서 <span class="math notranslate nohighlight">\(\arg \max_{\theta}\)</span>는 그 다음에 오는 함수의 값을 가장 크게 만드는 변수값을 뜻한다.</p>
+<p>예를 들어 분산 <span class="math notranslate nohighlight">\(\sigma^2 = 1\)</span>인 정규분포를 따르는 확률변수가 있고 이 확률변수로부터 <span class="math notranslate nohighlight">\(x_1=1\)</span>이라는 하나의 표본을 얻었다고 가정하자.  모수 <span class="math notranslate nohighlight">\(\mu\)</span>는 어떻게 추정할 것인가? 최대가능도추정 방법에서는 여러가지 <span class="math notranslate nohighlight">\(\mu\)</span> 값을 가정하여 각각의 가능도를 구한다.</p>
+<p>만약 모수값이 <span class="math notranslate nohighlight">\(\mu=-1\)</span>이라면 확률분포함수는 다음과 같아진다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">norm</span> 
+
+<span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">-</span><span class="mi">4</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;표본값이 x=1이 나올 가능성&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="s2">&quot;$x_1=1$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;확률밀도&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$\mu=-1$인 확률변수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_07_9_0.png" src="../_images/02_07_9_0.png" />
+</div>
+</div>
+<p>이 확률분포로부터 표본값 <span class="math notranslate nohighlight">\(x_1=1\)</span>이 나올 가능성은 약 0.054다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=-</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.05399096651318806
+</pre></div>
+</div>
+</div>
+</div>
+<p>이번에는 모수값이 <span class="math notranslate nohighlight">\(\mu=0\)</span>일 경우를 생각하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;표본값이 x=1이 나올 가능성&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="s2">&quot;$x_1=1$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;확률밀도&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$\mu=0$인 확률변수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_07_13_0.png" src="../_images/02_07_13_0.png" />
+</div>
+</div>
+<p>이 확률분포로부터 표본값  𝑥1=1 이 나올 가능성은 약 0.242다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.24197072451914337
+</pre></div>
+</div>
+</div>
+</div>
+<p>마지막으로 모수값이 <span class="math notranslate nohighlight">\(\mu=1\)</span>일 경우를 생각하자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;v&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;표본값이 x=1이 나올 가능성&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="n">x</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">100</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s1">&#39;k&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">vlines</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.09</span><span class="p">,</span> <span class="mf">0.45</span><span class="p">,</span> <span class="n">linestyle</span><span class="o">=</span><span class="s2">&quot;:&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">text</span><span class="p">(</span><span class="mi">1</span><span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.15</span><span class="p">,</span> <span class="s2">&quot;$x_1=1$&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;x&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;확률밀도&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$\mu=1$인 확률변수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_07_17_0.png" src="../_images/02_07_17_0.png" />
+</div>
+</div>
+<p>이 확률분포로부터 표본값 <span class="math notranslate nohighlight">\(𝑥_1=1\)</span>이 나올 가능성은 약 0.399다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">norm</span><span class="p">(</span><span class="n">loc</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span><span class="o">.</span><span class="n">pdf</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.3989422804014327
+</pre></div>
+</div>
+</div>
+</div>
+<p>지금까지의 결과를 표로 정리하면 다음과 같다.</p>
+<table class="colwidths-auto table">
+<thead>
+<tr class="row-odd"><th class="head"><p>확률분포</p></th>
+<th class="head"><p><span class="math notranslate nohighlight">\(x=1\)</span>이 나올 가능성</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>모수가 <span class="math notranslate nohighlight">\(\mu=-1\)</span>인 확률분포</p></td>
+<td><p>0.054</p></td>
+</tr>
+<tr class="row-odd"><td><p>모수가 <span class="math notranslate nohighlight">\(\mu=0\)</span>인 확률분포</p></td>
+<td><p>0.242</p></td>
+</tr>
+<tr class="row-even"><td><p>모수가 <span class="math notranslate nohighlight">\(\mu=1\)</span>인 확률분포</p></td>
+<td><p>0.399</p></td>
+</tr>
+</tbody>
+</table>
+<p>이 3가지 확률분포 중 어떻 것을 선택할 것인가? 최대가능도추정 방법에서는 <span class="math notranslate nohighlight">\(x=1\)</span>이 나올 가능성이 가장 높은 <span class="math notranslate nohighlight">\(\mu=1\)</span>을 선택한다.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
