@@ -215,17 +215,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_07.html">
-     2.7. 최대가능도 모수추정법
+     2.7. 최대가능도추정
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="02_08.html">
      2.8. 최대사후확률 모수추정법
-    </a>
-   </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_09.html">
-     2.9. EDA: 탐색적 데이터 분석
     </a>
    </li>
   </ul>
@@ -467,40 +462,35 @@ title="Print to PDF"
      2.4.1.6. 모수검정
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     2.4.1.7. 베이즈 추정법
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id10">
+  <a class="reference internal nav-link" href="#id9">
    2.4.2. 이항분포
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
+    <a class="reference internal nav-link" href="#id10">
      2.4.2.1. 이항분포의 확률분포함수
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id12">
+    <a class="reference internal nav-link" href="#id11">
      2.4.2.2. 이항분포의 시뮬레이션
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id13">
+    <a class="reference internal nav-link" href="#id12">
      2.4.2.3. 이항분포와 베르누이분포의 비교
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
+    <a class="reference internal nav-link" href="#id13">
      2.4.2.4. 이항분포의 예
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id15">
+    <a class="reference internal nav-link" href="#id14">
      2.4.2.5. 이항분포의 모수추정
     </a>
    </li>
@@ -560,40 +550,35 @@ title="Print to PDF"
      2.4.1.6. 모수검정
     </a>
    </li>
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id9">
-     2.4.1.7. 베이즈 추정법
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id10">
+  <a class="reference internal nav-link" href="#id9">
    2.4.2. 이항분포
   </a>
   <ul class="nav section-nav flex-column">
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id11">
+    <a class="reference internal nav-link" href="#id10">
      2.4.2.1. 이항분포의 확률분포함수
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id12">
+    <a class="reference internal nav-link" href="#id11">
      2.4.2.2. 이항분포의 시뮬레이션
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id13">
+    <a class="reference internal nav-link" href="#id12">
      2.4.2.3. 이항분포와 베르누이분포의 비교
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id14">
+    <a class="reference internal nav-link" href="#id13">
      2.4.2.4. 이항분포의 예
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id15">
+    <a class="reference internal nav-link" href="#id14">
      2.4.2.5. 이항분포의 모수추정
     </a>
    </li>
@@ -924,30 +909,9 @@ Name: sex, dtype: float64
 </div>
 <p>유의확률이 17%가 넘기 때문에 귀무가설을 채택한다. 즉, 0.6434426229508197이 아닌 0.6이라고 해도 무방하다는 것을 알 수 있다.</p>
 </section>
+</section>
 <section id="id9">
-<h3><span class="section-number">2.4.1.7. </span>베이즈 추정법<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
-<p>마지막으로 만약 극단적으로 데이터를 다음과 같이 1번부터 3번까지 3개만 얻는다면 모두 남성(Male)이라는 결과가 나온다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">][</span><span class="mi">1</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>1    Male
-2    Male
-3    Male
-Name: sex, dtype: category
-Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
-</pre></div>
-</div>
-</div>
-</div>
-<p>그러면 모수의 추정치는 1이 된다. 만약 정말 베르누이분포의 모수값이 1이라면 이후에 측정할 모든 표본값은 언제나 1이 나와야 한다는 뜻이다. 하지만 우리의 상식으로는 그럴 가능성이 극히 적다는 것을 안다. 이 추정치는 표본을 3개밖에 쓰지 않았기 때문에 얻어진 극단적으로 부정확한 값이며 실제 값은 1보다 작을 것이라는 것이 우리의 상식에 맞는 결과다. 즉, 우리의 상식이라는 추가적인 정보를 이 추정치에 반영할 수 있는 방법이 필요하다. 이는 이후의 절에서 설명할 <b>베이즈 추정(Bayesian estimation)</b> 방법을 사용하면 된다.</p>
-</section>
-</section>
-<section id="id10">
-<h2><span class="section-number">2.4.2. </span>이항분포<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">2.4.2. </span>이항분포<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h2>
 <p>베르누이분포를 따르는 모수 <span class="math notranslate nohighlight">\(\mu\)</span>인 확률변수에서 <span class="math notranslate nohighlight">\(N\)</span>개의 표본을 얻었을 때 그 중 1인 값이 나오는 횟수의 분포를 <b>이항분포(binomial distribution)</b>라고 한다.
 어떤 확률변수 <span class="math notranslate nohighlight">\(x\)</span>가 이항분포를 따를 때 다음과 같이 표시한다.</p>
 <div class="math notranslate nohighlight">
@@ -1002,8 +966,8 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 </div>
 </div>
 <p>여기에서는 표본을 5개만 측정하였지만 아주 많은 수의 측정을 반복한다면 어떨까? 아주 재수가 없다면 앞면이 단 한번도 나올 수 없을 것이고 아주 재수가 좋다면 10번 모두 앞면이 나올 수도 있을 것이다. 하지만 가장 확률이 높은 경우는 10번의 절반인 5번 나오는 경우일 것이다. 즉, 시행횟수가 <span class="math notranslate nohighlight">\(N\)</span>인 이항분포의 표본값은 0부터 <span class="math notranslate nohighlight">\(N\)</span>까지의 값을 가질 수 있다.</p>
-<section id="id11">
-<h3><span class="section-number">2.4.2.1. </span>이항분포의 확률분포함수<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
+<section id="id10">
+<h3><span class="section-number">2.4.2.1. </span>이항분포의 확률분포함수<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <p>이항분포는 시행횟수 <span class="math notranslate nohighlight">\(N\)</span>과 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span> 이렇게 두 개의 모수를 가진다. 시행횟수가 <span class="math notranslate nohighlight">\(N\)</span>이고 베르누이모수가 <span class="math notranslate nohighlight">\(\mu\)</span>인 이항분포의 확률분포함수 수식은 다음과 같이 구할 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1020,8 +984,8 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 N! = N\cdot (N-1) \cdots 2 \cdot 1
 \]</div>
 </section>
-<section id="id12">
-<h3><span class="section-number">2.4.2.2. </span>이항분포의 시뮬레이션<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
+<section id="id11">
+<h3><span class="section-number">2.4.2.2. </span>이항분포의 시뮬레이션<a class="headerlink" href="#id11" title="Permalink to this headline">#</a></h3>
 <p>scipy 패키지의 stats 서브패키지는 이항분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">binom</span></code> 클래스를 제공한다. 사용방법은 앞에서 설명한 베르누이분포 시뮬레이션 클래스와 같다. 우선 시행횟수</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1067,7 +1031,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_53_0.png" src="../_images/02_04_53_0.png" />
+<img alt="../_images/02_04_49_0.png" src="../_images/02_04_49_0.png" />
 </div>
 </div>
 <p>모수값이 0.5이므로 10번 동전을 던졌을 때 1이 나오는 횟수는 위 그래프에서처럼 5번의 경우가 확률이 가장 높다. 만약 모수값이 0.5보다 작거나 커지면 이항분포의 모습은 다음과 같이 변한다.</p>
@@ -1096,7 +1060,7 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_55_0.png" src="../_images/02_04_55_0.png" />
+<img alt="../_images/02_04_51_0.png" src="../_images/02_04_51_0.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하면 시뮬레이션을 통해 표본을 측정할 수 있다.</p>
@@ -1147,12 +1111,12 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_61_0.png" src="../_images/02_04_61_0.png" />
+<img alt="../_images/02_04_57_0.png" src="../_images/02_04_57_0.png" />
 </div>
 </div>
 </section>
-<section id="id13">
-<h3><span class="section-number">2.4.2.3. </span>이항분포와 베르누이분포의 비교<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
+<section id="id12">
+<h3><span class="section-number">2.4.2.3. </span>이항분포와 베르누이분포의 비교<a class="headerlink" href="#id12" title="Permalink to this headline">#</a></h3>
 <p>지금까지 설명했듯이 이항분포를 따르는 확률변수 <span class="math notranslate nohighlight">\(y\)</span>는 베르누이분포를 따르는 확률변수 <span class="math notranslate nohighlight">\(x\)</span>에서 파생된 확률변수다. 이항분포와 베르누이분포 사이에는 다음과 같은 관계가 성립한다.</p>
 <ol class="simple">
 <li><p>베르누이분포를 따른 확률변수 <span class="math notranslate nohighlight">\(x\)</span>의 표본 <span class="math notranslate nohighlight">\(N\)</span>개를 모으면 이항분포를 따르는 확률변수 <span class="math notranslate nohighlight">\(y\)</span>의 표본 한 개가 얻어진다.</p></li>
@@ -1160,8 +1124,8 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 <li><p>시행횟수 <span class="math notranslate nohighlight">\(N=1\)</span>인 이항분포는 베르누이분포다.</p></li>
 </ol>
 </section>
-<section id="id14">
-<h3><span class="section-number">2.4.2.4. </span>이항분포의 예<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
+<section id="id13">
+<h3><span class="section-number">2.4.2.4. </span>이항분포의 예<a class="headerlink" href="#id13" title="Permalink to this headline">#</a></h3>
 <p>식당 팁 데이터에서 sex 필드 데이터는 베르누이분포를 따르는 확률변수의 표본이라고 하였다. sex 필드 데이터의 레코드는 전체가 244개이므로 전체 sex 필드 데이터에서 남성이 있는 레코드의 수는 <span class="math notranslate nohighlight">\(N=244\)</span>인 이항분포를 따르는 확률변수의 표본이 된다. 이 표본값은 157이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1209,7 +1173,7 @@ Length: 61, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_69_0.png" src="../_images/02_04_69_0.png" />
+<img alt="../_images/02_04_65_0.png" src="../_images/02_04_65_0.png" />
 </div>
 </div>
 <p>위에서 sex 데이터의 베르누이모수는 약 0.643이라고 추정하였다. 이 모수값은 이항분포에도 그대로 적용되므로 <span class="math notranslate nohighlight">\(N=4, \mu=0.643\)</span>인 이항분포의 확률질량함수를 그리면 다음과 같다.</p>
@@ -1227,7 +1191,7 @@ Length: 61, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_71_0.png" src="../_images/02_04_71_0.png" />
+<img alt="../_images/02_04_67_0.png" src="../_images/02_04_67_0.png" />
 </div>
 </div>
 <p>두 그래프를 비교하면 아래와 같다.</p>
@@ -1257,12 +1221,12 @@ Length: 61, dtype: int64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_04_74_0.png" src="../_images/02_04_74_0.png" />
+<img alt="../_images/02_04_70_0.png" src="../_images/02_04_70_0.png" />
 </div>
 </div>
 </section>
-<section id="id15">
-<h3><span class="section-number">2.4.2.5. </span>이항분포의 모수추정<a class="headerlink" href="#id15" title="Permalink to this headline">#</a></h3>
+<section id="id14">
+<h3><span class="section-number">2.4.2.5. </span>이항분포의 모수추정<a class="headerlink" href="#id14" title="Permalink to this headline">#</a></h3>
 <p>이항분포의 모수는 시행횟수 <span class="math notranslate nohighlight">\(N\)</span>과 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span>다. 이항분포의 모수추정 문제는 다음과 같은 두 가지가 있을 수 있다.</p>
 <ol class="simple">
 <li><p>시행횟수 <span class="math notranslate nohighlight">\(N\)</span>을 정확하게 알고 있고 베르누이모수 <span class="math notranslate nohighlight">\(\mu\)</span>만 추정해야 하는 경우</p></li>

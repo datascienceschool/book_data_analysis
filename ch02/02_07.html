@@ -223,11 +223,6 @@ const thebe_selector_output = ".output, .cell_output"
      2.8. 최대사후확률 모수추정법
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="02_09.html">
-     2.9. EDA: 탐색적 데이터 분석
-    </a>
-   </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
@@ -442,6 +437,11 @@ title="Print to PDF"
    2.7.2. 최대가능도추정
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   2.7.3. 로그가능도함수
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -469,6 +469,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
    2.7.2. 최대가능도추정
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   2.7.3. 로그가능도함수
   </a>
  </li>
 </ul>
@@ -650,6 +655,20 @@ title="Print to PDF"
 </tbody>
 </table>
 <p>이 3가지 확률분포 중 어떻 것을 선택할 것인가? 최대가능도추정 방법에서는 <span class="math notranslate nohighlight">\(x=1\)</span>이 나올 가능성이 가장 높은 <span class="math notranslate nohighlight">\(\mu=1\)</span>을 선택한다.</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">2.7.3. </span>로그가능도함수<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>일반적으로 최대가능도추정을 사용하여 가능도가 최대가 되는 <span class="math notranslate nohighlight">\(\theta\)</span>를 계산해려면 수치적 최적화(numerical optimization)를 해야 한다.</p>
+<div class="math notranslate nohighlight">
+\[ \hat\theta_{\text{ML}} = \arg \max_{\theta} L(\theta; x) \]</div>
+<p>그런데 보통은 가능도함수를 직접 사용하는 것이 아니라 가능도함수를 로그(log)변환한 로그가능도함수(log-likelihood function) <span class="math notranslate nohighlight">\(LL=\log L\)</span>를 사용하는 경우가 많다.</p>
+<div class="math notranslate nohighlight">
+\[ \hat\theta_{\text{ML}} = \arg \max_{\theta} \log{L}(\theta; x) \]</div>
+<p>로그가능도함수를 선호하는 이유는 다음과 같다.</p>
+<ul class="simple">
+<li><p>로그 변환에 의해서는 최대값의 위치가 변치 않는다.</p></li>
+<li><p>반복시행으로 인한 복수 표본 데이터인 경우 결합 확률밀도함수가 동일한 함수의 곱으로 나타나는 경우가 많은데 이때 로그 변환에 의해 곱셈이 덧셈이 되어 계산이 단순해진다.</p></li>
+</ul>
 </section>
 </section>
 
