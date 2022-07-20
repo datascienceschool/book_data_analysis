@@ -85,10 +85,12 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.2. 회귀분석" href="03_02.html" />
-    <link rel="prev" title="3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다" href="03_00.html" />
+    <link rel="prev" title="3. 회귀분석 - 수치형 데이터를 예측한다." href="03_00.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -225,7 +227,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="03_00.html">
-   3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다
+   3. 회귀분석 - 수치형 데이터를 예측한다.
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -403,12 +405,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.1.1. 상관계수
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -420,6 +446,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.1.1. 상관계수
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -429,6 +468,709 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.1. </span>상관관계<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>어떤 데이터의 값이 증가할 때 다른 데이터의 값이 그에 따라 같이 증가하거나 혹은 반대로 감소하는 경향이 있을 때 두 데이터는 <b>상관관계가 있다(correlated)</b>고 한다.</p>
+<p>다음 데이터는 보스턴 외곽에 있는 여러 지역(county)의 주택 가격에 대한 데이터다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">df</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>black</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+      <td>21.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+      <td>34.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+      <td>36.2</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>501</th>
+      <td>0.06263</td>
+      <td>0.0</td>
+      <td>11.93</td>
+      <td>0</td>
+      <td>0.573</td>
+      <td>6.593</td>
+      <td>69.1</td>
+      <td>2.4786</td>
+      <td>1</td>
+      <td>273</td>
+      <td>21.0</td>
+      <td>391.99</td>
+      <td>9.67</td>
+      <td>22.4</td>
+    </tr>
+    <tr>
+      <th>502</th>
+      <td>0.04527</td>
+      <td>0.0</td>
+      <td>11.93</td>
+      <td>0</td>
+      <td>0.573</td>
+      <td>6.120</td>
+      <td>76.7</td>
+      <td>2.2875</td>
+      <td>1</td>
+      <td>273</td>
+      <td>21.0</td>
+      <td>396.90</td>
+      <td>9.08</td>
+      <td>20.6</td>
+    </tr>
+    <tr>
+      <th>503</th>
+      <td>0.06076</td>
+      <td>0.0</td>
+      <td>11.93</td>
+      <td>0</td>
+      <td>0.573</td>
+      <td>6.976</td>
+      <td>91.0</td>
+      <td>2.1675</td>
+      <td>1</td>
+      <td>273</td>
+      <td>21.0</td>
+      <td>396.90</td>
+      <td>5.64</td>
+      <td>23.9</td>
+    </tr>
+    <tr>
+      <th>504</th>
+      <td>0.10959</td>
+      <td>0.0</td>
+      <td>11.93</td>
+      <td>0</td>
+      <td>0.573</td>
+      <td>6.794</td>
+      <td>89.3</td>
+      <td>2.3889</td>
+      <td>1</td>
+      <td>273</td>
+      <td>21.0</td>
+      <td>393.45</td>
+      <td>6.48</td>
+      <td>22.0</td>
+    </tr>
+    <tr>
+      <th>505</th>
+      <td>0.04741</td>
+      <td>0.0</td>
+      <td>11.93</td>
+      <td>0</td>
+      <td>0.573</td>
+      <td>6.030</td>
+      <td>80.8</td>
+      <td>2.5050</td>
+      <td>1</td>
+      <td>273</td>
+      <td>21.0</td>
+      <td>396.90</td>
+      <td>7.88</td>
+      <td>11.9</td>
+    </tr>
+  </tbody>
+</table>
+<p>506 rows × 14 columns</p>
+</div></div></div>
+</div>
+<p>각 열이 뜻하는 바는 다음과 같다.</p>
+<ul class="simple">
+<li><p>crim: 범죄율</p></li>
+<li><p>zn: 25,000평방피트를 초과하는 거주지역 비율</p></li>
+<li><p>indus: 비소매상업지역 면적의 비율</p></li>
+<li><p>chas: 찰스강의 경계에 위치한 경우는 1, 아니면 0</p></li>
+<li><p>nox: 일산화질소 농도</p></li>
+<li><p>rm: 주택당 방 수</p></li>
+<li><p>age: 1940년 이전에 건축된 주택의 비율</p></li>
+<li><p>dis: 직업센터의 거리</p></li>
+<li><p>rad: 방사형 고속도로까지의 거리</p></li>
+<li><p>tax: 재산세율</p></li>
+<li><p>ptratio: 학생/교사 비율</p></li>
+<li><p>black: 인구 중 흑인 비율</p></li>
+<li><p>lstat: 인구 중 하위 계층 비율</p></li>
+<li><p>medv: 해당 지역의 주택가격 중앙값</p></li>
+</ul>
+<p>스캐터플롯에서 볼 수 있듯이 주택가격 medv 값은 방의 개수 rm가 증가할 수록 커지는 경향이 있다. 이 때는 양의 상관관계를 가진다고 한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_6_0.png" src="../_images/03_01_6_0.png" />
+</div>
+</div>
+<p>반대로 하위 계층 비율 lstat이 증가하면 주택가격은 떨어지는 경향이 있다. 이 때는 음의 상관관계를 가진다고 한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_8_0.png" src="../_images/03_01_8_0.png" />
+</div>
+</div>
+<p>방의 개수와 흑인 비율은 어떠한 상관관계도 보기 어렵다. 이 때는 상관관계가 거의 없다고 한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;ptratio&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_10_0.png" src="../_images/03_01_10_0.png" />
+</div>
+</div>
+<section id="id2">
+<h2><span class="section-number">3.1.1. </span>상관계수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>상관관계의 정도를 정량적으로 수치화한 것을 <b>상관계수(correlation coefficient)</b>라고 한다. 데이터 <span class="math notranslate nohighlight">\(x\)</span>와 <span class="math notranslate nohighlight">\(y\)</span> 사이의 상관계수 <span class="math notranslate nohighlight">\(r_{xy}\)</span>는 다음 공식으로 계산한다.</p>
+<div class="math notranslate nohighlight">
+\[
+r_{xy} = \dfrac{s_{xy}}{\sqrt{s^2_{x} \cdot s^2_{y}}}
+\]</div>
+<p>이 식에서 <span class="math notranslate nohighlight">\(s_{x}^2\)</span>, <span class="math notranslate nohighlight">\(s_{y}^2\)</span>, <span class="math notranslate nohighlight">\(s_{xy}\)</span>는 각각 <span class="math notranslate nohighlight">\(x\)</span>의 분산(variance), <span class="math notranslate nohighlight">\(y\)</span>의 분산, <span class="math notranslate nohighlight">\(x\)</span>와 <span class="math notranslate nohighlight">\(y\)</span> 사이의 공분산(covariance)을 뜻하며 다음 공식으로 계산한다.</p>
+<div class="math notranslate nohighlight">
+\[
+s_{x} = \dfrac{1}{N}\sum_{i=1}^N (x_i - \bar{x})^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s_{y} = \dfrac{1}{N}\sum_{i=1}^N (y_i - \bar{y})^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+s_{xy} = \dfrac{1}{N}\sum_{i=1}^{N} (x_i-\bar{x})(y_i-\bar{y})
+\]</div>
+<p>위 식에서 <span class="math notranslate nohighlight">\(\bar{x}\)</span>, <span class="math notranslate nohighlight">\(\bar{x}\)</span>는 각각 <span class="math notranslate nohighlight">\(x\)</span>, <span class="math notranslate nohighlight">\(y\)</span>의 평균을 뜻한다.</p>
+<p>상관계수는 다음과 같은 성질이 있다.</p>
+<ul class="simple">
+<li><p>-1보다 같거나 크고 1보다 같거나 작다.</p></li>
+<li><p>상관계수의 값이 양수이면 양의 상관관계를 가진다.</p></li>
+<li><p>상관계수의 값이 음수이면 음의 상관관계를 가진다.</p></li>
+<li><p>상관관계가 강할수록 상관계수의 절대값이 커진다.</p></li>
+<li><p>완전히 같은 데이터 사이의 상관계수는 1이다.</p></li>
+<li><p>절대값이 완전히 같고 부호가 반대인 데이터 사이의 상관계수는 -1이다.</p></li>
+</ul>
+<p>다음 그림에서 이러한 성질을 확인할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">corrs</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">corrs</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">corrs</span><span class="p">):</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="n">r</span><span class="p">],</span> <span class="p">[</span><span class="n">r</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="mi">1000</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">corrs</span><span class="p">),</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$r$=</span><span class="si">{}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;상관계수와 스캐터 플롯의 모양&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_13_0.png" src="../_images/03_01_13_0.png" />
+</div>
+</div>
+<p>하지만 스캐터 플롯의 기울기와 상관관계는 아무런 상관이 없다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">slope</span> <span class="o">=</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mf">0.7</span><span class="p">,</span> <span class="mf">0.3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.3</span><span class="p">,</span> <span class="o">-</span><span class="mf">0.7</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">slope</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">s</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">slope</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">slope</span><span class="p">),</span> <span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+    <span class="n">x</span><span class="p">,</span> <span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">multivariate_normal</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span> <span class="p">[[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">],</span> <span class="p">[</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">]],</span> <span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">T</span>
+    <span class="n">y2</span> <span class="o">=</span> <span class="n">s</span> <span class="o">*</span> <span class="n">y</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y2</span><span class="p">,</span> <span class="s1">&#39;ro&#39;</span><span class="p">,</span> <span class="n">ms</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;equal&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">xticks</span><span class="p">([])</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">yticks</span><span class="p">([])</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\rho$=1&quot;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">s</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;$\rho$=-1&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;상관계수와 스케터플롯의 기울기&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="mf">1.1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_15_0.png" src="../_images/03_01_15_0.png" />
+</div>
+</div>
+<p>데이터 간의 상관계수를 표시할 때는 상관계수행렬을 사용하는 경우가 많다. 예를 들어 데이터 <span class="math notranslate nohighlight">\(x, y, z\)</span>가 있을 때 이 데이터 사이의 상관관계계수들은 다음과 같은 행렬 형태로 표시한다.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+\begin{bmatrix}
+r_{xx} &amp; r_{xy} &amp; r_{xz} \\
+r_{yx} &amp; r_{yy} &amp; r_{yz} \\
+r_{zx} &amp; r_{zy} &amp; r_{zz} \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>numpy 패키지의 <code class="docutils literal notranslate"><span class="pre">corrcoef</span></code> 함수를 사용하면 상관계수 행렬을 계산할 수 있다. 예를 들어 주택가격의 중앙값 medv와 방의 개수 rm 사이의 상관계수는 다음과 같이 계산한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">corrcoef</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">medv</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">rm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([[1.        , 0.69535995],
+       [0.69535995, 1.        ]])
+</pre></div>
+</div>
+</div>
+</div>
+<p>pandas 데이터프레임은 데이터 사이의 상관계수 행렬을 계산하는 <code class="docutils literal notranslate"><span class="pre">corr</span></code> 메서드를 제공한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_corr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">df_corr</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>black</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>crim</th>
+      <td>1.000000</td>
+      <td>-0.200469</td>
+      <td>0.406583</td>
+      <td>-0.055892</td>
+      <td>0.420972</td>
+      <td>-0.219247</td>
+      <td>0.352734</td>
+      <td>-0.379670</td>
+      <td>0.625505</td>
+      <td>0.582764</td>
+      <td>0.289946</td>
+      <td>-0.385064</td>
+      <td>0.455621</td>
+      <td>-0.388305</td>
+    </tr>
+    <tr>
+      <th>zn</th>
+      <td>-0.200469</td>
+      <td>1.000000</td>
+      <td>-0.533828</td>
+      <td>-0.042697</td>
+      <td>-0.516604</td>
+      <td>0.311991</td>
+      <td>-0.569537</td>
+      <td>0.664408</td>
+      <td>-0.311948</td>
+      <td>-0.314563</td>
+      <td>-0.391679</td>
+      <td>0.175520</td>
+      <td>-0.412995</td>
+      <td>0.360445</td>
+    </tr>
+    <tr>
+      <th>indus</th>
+      <td>0.406583</td>
+      <td>-0.533828</td>
+      <td>1.000000</td>
+      <td>0.062938</td>
+      <td>0.763651</td>
+      <td>-0.391676</td>
+      <td>0.644779</td>
+      <td>-0.708027</td>
+      <td>0.595129</td>
+      <td>0.720760</td>
+      <td>0.383248</td>
+      <td>-0.356977</td>
+      <td>0.603800</td>
+      <td>-0.483725</td>
+    </tr>
+    <tr>
+      <th>chas</th>
+      <td>-0.055892</td>
+      <td>-0.042697</td>
+      <td>0.062938</td>
+      <td>1.000000</td>
+      <td>0.091203</td>
+      <td>0.091251</td>
+      <td>0.086518</td>
+      <td>-0.099176</td>
+      <td>-0.007368</td>
+      <td>-0.035587</td>
+      <td>-0.121515</td>
+      <td>0.048788</td>
+      <td>-0.053929</td>
+      <td>0.175260</td>
+    </tr>
+    <tr>
+      <th>nox</th>
+      <td>0.420972</td>
+      <td>-0.516604</td>
+      <td>0.763651</td>
+      <td>0.091203</td>
+      <td>1.000000</td>
+      <td>-0.302188</td>
+      <td>0.731470</td>
+      <td>-0.769230</td>
+      <td>0.611441</td>
+      <td>0.668023</td>
+      <td>0.188933</td>
+      <td>-0.380051</td>
+      <td>0.590879</td>
+      <td>-0.427321</td>
+    </tr>
+    <tr>
+      <th>rm</th>
+      <td>-0.219247</td>
+      <td>0.311991</td>
+      <td>-0.391676</td>
+      <td>0.091251</td>
+      <td>-0.302188</td>
+      <td>1.000000</td>
+      <td>-0.240265</td>
+      <td>0.205246</td>
+      <td>-0.209847</td>
+      <td>-0.292048</td>
+      <td>-0.355501</td>
+      <td>0.128069</td>
+      <td>-0.613808</td>
+      <td>0.695360</td>
+    </tr>
+    <tr>
+      <th>age</th>
+      <td>0.352734</td>
+      <td>-0.569537</td>
+      <td>0.644779</td>
+      <td>0.086518</td>
+      <td>0.731470</td>
+      <td>-0.240265</td>
+      <td>1.000000</td>
+      <td>-0.747881</td>
+      <td>0.456022</td>
+      <td>0.506456</td>
+      <td>0.261515</td>
+      <td>-0.273534</td>
+      <td>0.602339</td>
+      <td>-0.376955</td>
+    </tr>
+    <tr>
+      <th>dis</th>
+      <td>-0.379670</td>
+      <td>0.664408</td>
+      <td>-0.708027</td>
+      <td>-0.099176</td>
+      <td>-0.769230</td>
+      <td>0.205246</td>
+      <td>-0.747881</td>
+      <td>1.000000</td>
+      <td>-0.494588</td>
+      <td>-0.534432</td>
+      <td>-0.232471</td>
+      <td>0.291512</td>
+      <td>-0.496996</td>
+      <td>0.249929</td>
+    </tr>
+    <tr>
+      <th>rad</th>
+      <td>0.625505</td>
+      <td>-0.311948</td>
+      <td>0.595129</td>
+      <td>-0.007368</td>
+      <td>0.611441</td>
+      <td>-0.209847</td>
+      <td>0.456022</td>
+      <td>-0.494588</td>
+      <td>1.000000</td>
+      <td>0.910228</td>
+      <td>0.464741</td>
+      <td>-0.444413</td>
+      <td>0.488676</td>
+      <td>-0.381626</td>
+    </tr>
+    <tr>
+      <th>tax</th>
+      <td>0.582764</td>
+      <td>-0.314563</td>
+      <td>0.720760</td>
+      <td>-0.035587</td>
+      <td>0.668023</td>
+      <td>-0.292048</td>
+      <td>0.506456</td>
+      <td>-0.534432</td>
+      <td>0.910228</td>
+      <td>1.000000</td>
+      <td>0.460853</td>
+      <td>-0.441808</td>
+      <td>0.543993</td>
+      <td>-0.468536</td>
+    </tr>
+    <tr>
+      <th>ptratio</th>
+      <td>0.289946</td>
+      <td>-0.391679</td>
+      <td>0.383248</td>
+      <td>-0.121515</td>
+      <td>0.188933</td>
+      <td>-0.355501</td>
+      <td>0.261515</td>
+      <td>-0.232471</td>
+      <td>0.464741</td>
+      <td>0.460853</td>
+      <td>1.000000</td>
+      <td>-0.177383</td>
+      <td>0.374044</td>
+      <td>-0.507787</td>
+    </tr>
+    <tr>
+      <th>black</th>
+      <td>-0.385064</td>
+      <td>0.175520</td>
+      <td>-0.356977</td>
+      <td>0.048788</td>
+      <td>-0.380051</td>
+      <td>0.128069</td>
+      <td>-0.273534</td>
+      <td>0.291512</td>
+      <td>-0.444413</td>
+      <td>-0.441808</td>
+      <td>-0.177383</td>
+      <td>1.000000</td>
+      <td>-0.366087</td>
+      <td>0.333461</td>
+    </tr>
+    <tr>
+      <th>lstat</th>
+      <td>0.455621</td>
+      <td>-0.412995</td>
+      <td>0.603800</td>
+      <td>-0.053929</td>
+      <td>0.590879</td>
+      <td>-0.613808</td>
+      <td>0.602339</td>
+      <td>-0.496996</td>
+      <td>0.488676</td>
+      <td>0.543993</td>
+      <td>0.374044</td>
+      <td>-0.366087</td>
+      <td>1.000000</td>
+      <td>-0.737663</td>
+    </tr>
+    <tr>
+      <th>medv</th>
+      <td>-0.388305</td>
+      <td>0.360445</td>
+      <td>-0.483725</td>
+      <td>0.175260</td>
+      <td>-0.427321</td>
+      <td>0.695360</td>
+      <td>-0.376955</td>
+      <td>0.249929</td>
+      <td>-0.381626</td>
+      <td>-0.468536</td>
+      <td>-0.507787</td>
+      <td>0.333461</td>
+      <td>-0.737663</td>
+      <td>1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이 자료에서 주택가격인 medv 데이터와 다른 데이터간의 상관계수 순위를 계산하면 다음과 같이 방의 개수 rm과 가장 상관계수가 높다는 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">medv_corr</span> <span class="o">=</span> <span class="n">df_corr</span><span class="p">[</span><span class="s2">&quot;medv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">medv_corr</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">kind</span><span class="o">=</span><span class="s2">&quot;bar&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">5</span><span class="p">),</span> <span class="n">rot</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_22_0.png" src="../_images/03_01_22_0.png" />
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
@@ -462,7 +1204,7 @@ title="Print to PDF"
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title"><span class="section-number">3. </span>회귀분석 - 수치형 데이터의 상관관계를 분석한다</p>
+            <p class="prev-next-title"><span class="section-number">3. </span>회귀분석 - 수치형 데이터를 예측한다.</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="03_02.html" title="next page">
