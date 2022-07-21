@@ -432,6 +432,21 @@ title="Print to PDF"
    3.1.1. 상관계수
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.1.2. 상관계수 검정
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.1.3. 비선형 상관관계
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.1.4. 앤스콤 데이터
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -454,6 +469,21 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
    3.1.1. 상관계수
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.1.2. 상관계수 검정
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.1.3. 비선형 상관관계
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.1.4. 앤스콤 데이터
   </a>
  </li>
 </ul>
@@ -764,7 +794,8 @@ title="Print to PDF"
 </div>
 <section id="id2">
 <h2><span class="section-number">3.1.1. </span>상관계수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>상관관계의 정도를 정량적으로 수치화한 것을 <b>상관계수(correlation coefficient)</b>라고 한다. 데이터 <span class="math notranslate nohighlight">\(x\)</span>와 <span class="math notranslate nohighlight">\(y\)</span> 사이의 상관계수 <span class="math notranslate nohighlight">\(r_{xy}\)</span>는 다음 공식으로 계산한다.</p>
+<p>두 데이터 사이의 상관관계의 정도를 정량적으로 수치화한 것을 <b>상관계수(correlation coefficient)</b>라고 한다. 상관계수에도 여러가지 종류가 있지만 일반적으로 그냥 상관계수라고 하면 두 데이터 사이의 선형 상관관계를 계산하는 <b>피어슨 상관계수(Pearson correlation coefficient)</b>를 뜻한다.</p>
+<p>데이터 <span class="math notranslate nohighlight">\(x\)</span>와 <span class="math notranslate nohighlight">\(y\)</span> 사이의 (피어슨) 상관계수 <span class="math notranslate nohighlight">\(r_{xy}\)</span>는 다음 공식으로 계산한다.</p>
 <div class="math notranslate nohighlight">
 \[
 r_{xy} = \dfrac{s_{xy}}{\sqrt{s^2_{x} \cdot s^2_{y}}}
@@ -846,6 +877,21 @@ s_{xy} = \dfrac{1}{N}\sum_{i=1}^{N} (x_i-\bar{x})(y_i-\bar{y})
 <img alt="../_images/03_01_15_0.png" src="../_images/03_01_15_0.png" />
 </div>
 </div>
+<p>scipy 패키지의 stats 서브패키지는 상관계수를 계산하는 <code class="docutils literal notranslate"><span class="pre">pearsonr</span></code> 함수를 제공한다. <code class="docutils literal notranslate"><span class="pre">pearsonr</span></code> 함수로 보스턴 주택가격의 중앙값 medv와 방의 개수 rm 사이의 상관계수를 구하면 다음과 같이 약 0.695가 나온다. 두번째 나오는 수치는 뒤에서 설명할 상관계수 검정의 유의확률이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
+
+<span class="n">pearsonr</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">medv</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">rm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.6953599470715394, 2.4872288710071593e-74)
+</pre></div>
+</div>
+</div>
+</div>
 <p>데이터 간의 상관계수를 표시할 때는 상관계수행렬을 사용하는 경우가 많다. 예를 들어 데이터 <span class="math notranslate nohighlight">\(x, y, z\)</span>가 있을 때 이 데이터 사이의 상관관계계수들은 다음과 같은 행렬 형태로 표시한다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} 
@@ -855,7 +901,7 @@ r_{yx} &amp; r_{yy} &amp; r_{yz} \\
 r_{zx} &amp; r_{zy} &amp; r_{zz} \\
 \end{bmatrix}
 \end{split}\]</div>
-<p>numpy 패키지의 <code class="docutils literal notranslate"><span class="pre">corrcoef</span></code> 함수를 사용하면 상관계수 행렬을 계산할 수 있다. 예를 들어 주택가격의 중앙값 medv와 방의 개수 rm 사이의 상관계수는 다음과 같이 계산한다.</p>
+<p>numpy 패키지의 <code class="docutils literal notranslate"><span class="pre">corrcoef</span></code> 함수를 사용하면 상관계수 행렬을 계산할 수 있다. 예를 들어 보스턴 주택가격의 중앙값 medv와 방의 개수 rm 사이의 상관계수 행렬은 다음과 같이 계산한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
@@ -871,6 +917,20 @@ r_{zx} &amp; r_{zy} &amp; r_{zz} \\
 </div>
 </div>
 </div>
+<p>즉</p>
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{bmatrix}
+r_{\text{medv}, \text{medv}} &amp; r_{\text{medv}, \text{rm}} \\
+r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
+\end{bmatrix}
+=
+\begin{bmatrix}
+1 &amp; 0.69535995 \\
+0.69535995 &amp; 1 \\
+\end{bmatrix}
+\end{split}\]</div>
+<p>이 된다.</p>
 <p>pandas 데이터프레임은 데이터 사이의 상관계수 행렬을 계산하는 <code class="docutils literal notranslate"><span class="pre">corr</span></code> 메서드를 제공한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -947,7 +1007,289 @@ r_{zx} &amp; r_{zy} &amp; r_{zz} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_01_22_0.png" src="../_images/03_01_22_0.png" />
+<img alt="../_images/03_01_24_0.png" src="../_images/03_01_24_0.png" />
+</div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.1.2. </span>상관계수 검정<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>확률변수의 표본 데이터로부터 계산한 상관계수는 실제 두 확률변수의 상관계수와 다를 수 있다. 따라서 상관계수를 계산한 후에도 이 상관계수가 어느정도의 신뢰성을 가지고 있는지 검정을 통해 확인해야 한다. 상관계수의 값에 대한 검정은 기본적으로 상관계수가 0인 경우를 귀무가설로 한다.</p>
+<div class="math notranslate nohighlight">
+\[ H_0 : r_{xy} = 0 \]</div>
+<p>따라서 검정 결과인 유의확률이 아주 작은 값이 나오면 상관관계가 유의하게 존재하는 것이고 그렇지 않으면 상관관계가 없다(<span class="math notranslate nohighlight">\(r_{xy}=0\)</span>)고 보는 것이 옳다.</p>
+<p>scipy 패키지의 stats 서브패키지에 제공하는 상관계수 계산 함수 <code class="docutils literal notranslate"><span class="pre">pearsonr</span></code>는 두번째 결과값으로 위 귀무가설에 대한 유의확률을 제공한다. 예를 들어 보스턴 주택가격의 중앙값 medv와 방의 개수 rm 사이의 상관계수를 구할 때 나오는 두번째 수치인 <span class="math notranslate nohighlight">\(2.487\times 10^{-74}\)</span>가 두 데이터간의 상관관계가 없을 귀무가설 검정의 유의확률이다. 수치가 아주 작으므로 이 귀무가설은 기각한다. 즉, 상관계수가 실제로는 0일 가능성은 없다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pearsonr</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">medv</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">rm</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.6953599470715394, 2.4872288710071593e-74)
+</pre></div>
+</div>
+</div>
+</div>
+<p>그런데 다른 두 데이터 chas와 crim 사이의 상관관계를 계산하면 다음과 같은 결과가 나온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pearsonr</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">chas</span><span class="p">,</span> <span class="n">df</span><span class="o">.</span><span class="n">crim</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.055891582222241484, 0.20943450153515702)
+</pre></div>
+</div>
+</div>
+</div>
+<p>즉 상관계수가 값이 -0.05589라는 0 아닌 값이 나오지만 상관계수가 0이라는 귀무가설에 대한 유의확률이 20%나 되기 때문에 실제로는 상관계수의 값이 0일 가능성이 아주 높다. 즉 두 데이터 chas와 crim는 서로 상관관계가 없는 가능성이 높다.</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.1.3. </span>비선형 상관관계<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>어떤 데이터 <span class="math notranslate nohighlight">\(x\)</span>의 값이 증가할 때 다른 데이터 <span class="math notranslate nohighlight">\(y\)</span>의 값이 반드시 선형적으로 증가해야지만 서로 상관관계가 있는 것은 아니다. 두 값 사이에 비선형적인 함수 관계가 성립하는 경우에도 상관관계가 있다고 한다.</p>
+<div class="math notranslate nohighlight">
+\[ y \approx f(x) \]</div>
+<p>예를 들어 다음 그림에서 표시하는 두 데이터들은 모두 비선형적인 상관관계를 가지고 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">n</span> <span class="o">=</span> <span class="mi">500</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+<span class="n">x1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">y1</span> <span class="o">=</span> <span class="mi">2</span><span class="o">*</span><span class="n">x1</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)</span>
+<span class="n">r1</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">x1</span><span class="p">,</span> <span class="n">y1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;비선형 상관관계 1: r=</span><span class="si">{:3.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r1</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+<span class="n">x2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">y2</span> <span class="o">=</span> <span class="mi">4</span><span class="o">*</span><span class="p">(</span><span class="n">x2</span><span class="o">**</span><span class="mi">2</span><span class="o">-</span><span class="mf">0.5</span><span class="p">)</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="mf">0.1</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)</span>
+<span class="n">r2</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">x2</span><span class="p">,</span> <span class="n">y2</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;비선형 상관관계 2: r=</span><span class="si">{:3.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r2</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">y3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">cos</span><span class="p">(</span><span class="n">x3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">x3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="n">x3</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="o">/</span><span class="mi">8</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">)</span>
+<span class="n">r3</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">x3</span><span class="p">,</span> <span class="n">y3</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;비선형 상관관계 3: r=</span><span class="si">{:3.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>
+<span class="n">x4</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">n</span><span class="p">)</span>
+<span class="n">y4</span> <span class="o">=</span> <span class="p">(</span><span class="n">x4</span><span class="o">**</span><span class="mi">2</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">uniform</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">n</span><span class="p">))</span> <span class="o">*</span> \
+    <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">])[</span><span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">random_integers</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">size</span><span class="o">=</span><span class="n">n</span><span class="p">)]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">y4</span><span class="p">)</span>
+<span class="n">r4</span> <span class="o">=</span> <span class="n">sp</span><span class="o">.</span><span class="n">stats</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">x4</span><span class="p">,</span> <span class="n">y4</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">r</span><span class="s2">&quot;비선형 상관관계 4: r=</span><span class="si">{:3.1f}</span><span class="s2">&quot;</span><span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="n">r4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_33_0.png" src="../_images/03_01_33_0.png" />
+</div>
+</div>
+<p>하지만 위에서 표시한 비선형 상관관계 데이터에 대해 피어슨 상관계수를 계산하면 모두 0에 가까운 값이 나온다. 피어슨 상관계수는 두 데이터 사이의 선형적인 상관관계만을 고려하기 때문이다.</p>
+<p>이러한 단점을 극복하기 위해 다음과 같은 여러가지 다른 정의를 가진 상관계수들이 고안되었다.</p>
+<ul class="simple">
+<li><p>스피어만(Spearman) 상관계수</p></li>
+<li><p>켄달 타우(Kendall’s <span class="math notranslate nohighlight">\(\tau\)</span>)</p></li>
+</ul>
+<p>이러한 상관계수는 각각의 특성을 가지고 있으므로 필요한 경우 상황에 맞게 사용할 수 있다. scipy 패키지의 stats 서브패키지는 이러한 상관계수를 위한 함수들을 제공한다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">spearmanr</span></code> : 스피어만 상관계수 계산</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">kendalltau</span></code> : 켄달 타우 계산</p></li>
+</ul>
+</section>
+<section id="id5">
+<h2><span class="section-number">3.1.4. </span>앤스콤 데이터<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>또한 피어슨 상관계수가 같더라도 데이터의 관계는 여러가지 경우가 있을 수 있다는 점에도 유의해야 한다. 다음은 프랭크 앤스콤(Frank Anscombe)의 논문에 예시된 데이터다. 이 데이터는 서로 다른 4가지 종류의 2차원 데이터셋을 포함하는데 4종류 데이터셋 모두 상관계수가 약 0.816로 동일하다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">anscombe</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;anscombe&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">anscombe</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x1</th>
+      <th>x2</th>
+      <th>x3</th>
+      <th>x4</th>
+      <th>y1</th>
+      <th>y2</th>
+      <th>y3</th>
+      <th>y4</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>10</td>
+      <td>10</td>
+      <td>10</td>
+      <td>8</td>
+      <td>8.04</td>
+      <td>9.14</td>
+      <td>7.46</td>
+      <td>6.58</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>8</td>
+      <td>8</td>
+      <td>8</td>
+      <td>8</td>
+      <td>6.95</td>
+      <td>8.14</td>
+      <td>6.77</td>
+      <td>5.76</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>13</td>
+      <td>13</td>
+      <td>13</td>
+      <td>8</td>
+      <td>7.58</td>
+      <td>8.74</td>
+      <td>12.74</td>
+      <td>7.71</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>9</td>
+      <td>9</td>
+      <td>9</td>
+      <td>8</td>
+      <td>8.81</td>
+      <td>8.77</td>
+      <td>7.11</td>
+      <td>8.84</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>11</td>
+      <td>11</td>
+      <td>11</td>
+      <td>8</td>
+      <td>8.33</td>
+      <td>9.26</td>
+      <td>7.81</td>
+      <td>8.47</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>14</td>
+      <td>14</td>
+      <td>14</td>
+      <td>8</td>
+      <td>9.96</td>
+      <td>8.10</td>
+      <td>8.84</td>
+      <td>7.04</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>6</td>
+      <td>6</td>
+      <td>8</td>
+      <td>7.24</td>
+      <td>6.13</td>
+      <td>6.08</td>
+      <td>5.25</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>4</td>
+      <td>4</td>
+      <td>4</td>
+      <td>19</td>
+      <td>4.26</td>
+      <td>3.10</td>
+      <td>5.39</td>
+      <td>12.50</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>12</td>
+      <td>12</td>
+      <td>12</td>
+      <td>8</td>
+      <td>10.84</td>
+      <td>9.13</td>
+      <td>8.15</td>
+      <td>5.56</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>7</td>
+      <td>7</td>
+      <td>7</td>
+      <td>8</td>
+      <td>4.82</td>
+      <td>7.26</td>
+      <td>6.42</td>
+      <td>7.91</td>
+    </tr>
+    <tr>
+      <th>10</th>
+      <td>5</td>
+      <td>5</td>
+      <td>5</td>
+      <td>8</td>
+      <td>5.68</td>
+      <td>4.74</td>
+      <td>5.73</td>
+      <td>6.89</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">7</span><span class="p">,</span> <span class="mi">7</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;x1&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;y1&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;x2&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;y2&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;x3&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;y3&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;x4&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;y4&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">anscombe</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplots_adjust</span><span class="p">(</span><span class="n">top</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;앤스콤 데이터&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_38_0.png" src="../_images/03_01_38_0.png" />
 </div>
 </div>
 </section>
