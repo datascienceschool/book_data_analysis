@@ -935,7 +935,7 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_corr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
-<span class="n">df_corr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">4</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]</span>
+<span class="n">df_corr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">6</span><span class="p">,</span> <span class="p">:</span><span class="mi">6</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -962,6 +962,8 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
       <th>zn</th>
       <th>indus</th>
       <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
     </tr>
   </thead>
   <tbody>
@@ -971,6 +973,8 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
       <td>-0.200469</td>
       <td>0.406583</td>
       <td>-0.055892</td>
+      <td>0.420972</td>
+      <td>-0.219247</td>
     </tr>
     <tr>
       <th>zn</th>
@@ -978,6 +982,8 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
       <td>1.000000</td>
       <td>-0.533828</td>
       <td>-0.042697</td>
+      <td>-0.516604</td>
+      <td>0.311991</td>
     </tr>
     <tr>
       <th>indus</th>
@@ -985,6 +991,8 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
       <td>-0.533828</td>
       <td>1.000000</td>
       <td>0.062938</td>
+      <td>0.763651</td>
+      <td>-0.391676</td>
     </tr>
     <tr>
       <th>chas</th>
@@ -992,12 +1000,60 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
       <td>-0.042697</td>
       <td>0.062938</td>
       <td>1.000000</td>
+      <td>0.091203</td>
+      <td>0.091251</td>
+    </tr>
+    <tr>
+      <th>nox</th>
+      <td>0.420972</td>
+      <td>-0.516604</td>
+      <td>0.763651</td>
+      <td>0.091203</td>
+      <td>1.000000</td>
+      <td>-0.302188</td>
+    </tr>
+    <tr>
+      <th>rm</th>
+      <td>-0.219247</td>
+      <td>0.311991</td>
+      <td>-0.391676</td>
+      <td>0.091251</td>
+      <td>-0.302188</td>
+      <td>1.000000</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>이 자료에서 주택가격인 medv 데이터와 다른 데이터간의 상관계수 순위를 계산하면 다음과 같이 방의 개수 rm과 가장 상관계수가 높다는 것을 알 수 있다.</p>
+<p>seaborn 패키지는 이러한 상관계수 행렬의 전체 형상을 좀 더 쉽게 인식할 수 있도록 시각화하는 <code class="docutils literal notranslate"><span class="pre">heatmap</span></code> 함수를 제공한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_corr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">6</span><span class="p">,</span> <span class="p">:</span><span class="mi">6</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_24_0.png" src="../_images/03_01_24_0.png" />
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">heatmap</span></code> 함수는 여러가지 시각화 옵션을 제공한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">df_corr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">6</span><span class="p">,</span> <span class="p">:</span><span class="mi">6</span><span class="p">],</span> <span class="n">mask</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">df_corr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">6</span><span class="p">,</span> <span class="p">:</span><span class="mi">6</span><span class="p">]),</span>
+            <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;5.2f&quot;</span><span class="p">,</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Blues&quot;</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_01_26_0.png" src="../_images/03_01_26_0.png" />
+</div>
+</div>
+<p>이 자료에서 주택가격인 medv 데이터와 다른 데이터간의 상관계수 순위만 계산하면 다음과 같이 방의 개수 rm과 가장 상관계수가 높다는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">medv_corr</span> <span class="o">=</span> <span class="n">df_corr</span><span class="p">[</span><span class="s2">&quot;medv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
@@ -1007,7 +1063,7 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_01_24_0.png" src="../_images/03_01_24_0.png" />
+<img alt="../_images/03_01_28_0.png" src="../_images/03_01_28_0.png" />
 </div>
 </div>
 </section>
@@ -1088,7 +1144,7 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_01_33_0.png" src="../_images/03_01_33_0.png" />
+<img alt="../_images/03_01_37_0.png" src="../_images/03_01_37_0.png" />
 </div>
 </div>
 <p>하지만 위에서 표시한 비선형 상관관계 데이터에 대해 피어슨 상관계수를 계산하면 모두 0에 가까운 값이 나온다. 피어슨 상관계수는 두 데이터 사이의 선형적인 상관관계만을 고려하기 때문이다.</p>
@@ -1108,9 +1164,7 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
 <p>또한 피어슨 상관계수가 같더라도 데이터의 관계는 여러가지 경우가 있을 수 있다는 점에도 유의해야 한다. 다음은 프랭크 앤스콤(Frank Anscombe)의 논문에 예시된 데이터다. 이 데이터는 서로 다른 4가지 종류의 2차원 데이터셋을 포함하는데 4종류 데이터셋 모두 상관계수가 약 0.816로 동일하다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-
-<span class="n">anscombe</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;anscombe&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">anscombe</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;anscombe&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
 <span class="n">anscombe</span>
 </pre></div>
 </div>
@@ -1289,7 +1343,7 @@ r_{\text{rm}, \text{medv}} &amp; r_{\text{rm}, \text{rm}} \\
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_01_38_0.png" src="../_images/03_01_38_0.png" />
+<img alt="../_images/03_01_42_0.png" src="../_images/03_01_42_0.png" />
 </div>
 </div>
 </section>
