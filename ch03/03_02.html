@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.2. 회귀분석 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.2. 회귀분석의 소개 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -227,7 +227,7 @@ const thebe_selector_output = ".output, .cell_output"
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="03_00.html">
-   3. 회귀분석 - 수치형 데이터의 상관관계를 분석한다
+   3. 회귀분석 - 수치형 데이터를 예측한다.
   </a>
   <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
@@ -242,7 +242,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.2. 회귀분석
+     3.2. 회귀분석의 소개
     </a>
    </li>
    <li class="toctree-l2">
@@ -429,12 +429,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.2.1. 회귀분석 문제의 예
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   3.2.2. 회귀분석의 예
+   3.2.1. 독립변수와 종속변수
   </a>
  </li>
 </ul>
@@ -446,7 +441,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>회귀분석</h1>
+                <h1>회귀분석의 소개</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -458,12 +453,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.2.1. 회귀분석 문제의 예
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id3">
-   3.2.2. 회귀분석의 예
+   3.2.1. 독립변수와 종속변수
   </a>
  </li>
 </ul>
@@ -477,98 +467,302 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.2. </span>회귀분석<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>어떤 수치형 변수의 값이 다른 변수의 값에 의해 어떻게 영향을 받는지를 분석하는 방법을 <b>회귀분석(regression analysis)</b>이라고 한다.</p>
-<p>회귀분석을 하려면 영향을 주는 변수들과 영향을 받는 변수가 무엇인지를 결정해야 한다. 회귀분석에서 분석의 대상이 되는 수치형 변수를 <b>종속변수(independent variable)</b>라 하고 그 종속변수에 영향을 주는 다른 변수들을 <b>독립변수(dependent variable)</b>라 한다. 보통 종속변수는 <span class="math notranslate nohighlight">\(y\)</span> 기호로 나타내고 독립변수는 <span class="math notranslate nohighlight">\(x\)</span> 기호로 나타낸다. 독립변수가 여러개 있을 때는 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 등으로 아랫첨자를 이용하여 표시한다.</p>
-<p>회귀분석에서 종속변수와 독립변수의 관계는 다음과 같은 다이어그램으로 표현할 수 있다. 화살표는 변수간의 관계를 나타내는 것으로 독립변수에서 종속변수를 향하는 방향으로 그린다.</p>
-<div class="cell tag_remove-input docutils container">
-<div class="cell_output docutils container">
-<img alt="../_images/03_02_3_0.png" src="../_images/03_02_3_0.png" />
-</div>
-</div>
-<section id="id2">
-<h2><span class="section-number">3.2.1. </span>회귀분석 문제의 예<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>팁 데이터에서 전체 지불금액(total_bill)과 팁 금액(tip)을 2차원 스캐터플롯(scatter plot)으로 나타내면 다음과 같다. 이 그래프에서는 하나의 점이 하나의 고객그룹 즉, 하나의 레코드를 표시한다.</p>
+<h1><span class="section-number">3.2. </span>회귀분석의 소개<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>서로 상관관계가 있는 두가지 데이터가 있으면 한가지 데이터의 값으로부터 다른 하나의 데이터 값을 대략적이나마 유추할 수 있다. 예를 들어 팁데이터에서 총 지불금액 total_bill과 팁 금액 tip은 다음과 같이 하나가 증가하면 다른 하나도 증가하는 양의 상관관계가 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
 <span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
 
-<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">style</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_02_6_0.png" src="../_images/03_02_6_0.png" />
+<img alt="../_images/03_02_3_0.png" src="../_images/03_02_3_0.png" />
 </div>
 </div>
-<p>이 그래프를 보면 지불금액이 증가한 경우에는 팁도 같이 증가하는 것처럼 보인다. 우리가 관심을 가지는 것은 지불금액이 증가할 때 팁 금액은 어느 정도 증가하는지이다.</p>
-<p>이 문제를 회귀분석 문제로 보고 분석하기위해 다음과 같이 독립변수와 종속변수를 정한다.</p>
-<ul class="simple">
-<li><p>독립변수 : 지불금액, 성별</p></li>
-<li><p>종속변수 : 팁금액</p></li>
-</ul>
-<p>이 회귀분석을 통해 다음과 같은 질문들에 대한 답을 얻을 수 있다.</p>
-<ul class="simple">
-<li><p>지불금액이 증가할 때 정말 팁이 증가하는가?</p></li>
-<li><p>지불금액이 1 달러만큼 증가할 때 팁은 어느 정도 증가하는가?</p></li>
-<li><p>성별이 달라지면 팁이 증가하는가?</p></li>
-</ul>
-</section>
-<section id="id3">
-<h2><span class="section-number">3.2.2. </span>회귀분석의 예<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>위와 같은 회귀분석 문제는 여러가지 방법으로 풀 수 있다. 다음은 선형회귀분석이라는 방법으로 위 문제를 푸는 코드를 보여주고 있다.
-문제를 풀면 코드의 출력과 같은 형식의 정보가 표시된다. 회귀분석 문제를 푼다는 것은 이 정보를 제대로 읽고 해석하는 과정을 포함한다.</p>
+<p>seaborn 패키지에서 제공하는 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수를 사용하면 total_bill과 tip의 선형 상관관계를 직선으로 스캐터플롯 위에 표시할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.formula.api</span> <span class="k">as</span> <span class="nn">smf</span>
-
-<span class="n">m</span> <span class="o">=</span> <span class="n">smf</span><span class="o">.</span><span class="n">ols</span><span class="p">(</span><span class="s1">&#39;tip ~ total_bill + C(sex)&#39;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
-<span class="n">r</span> <span class="o">=</span> <span class="n">m</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> 
+            <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;lw&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.457
-Model:                            OLS   Adj. R-squared:                  0.452
-Method:                 Least Squares   F-statistic:                     101.3
-Date:                Sun, 03 Jul 2022   Prob (F-statistic):           1.18e-32
-Time:                        15:31:09   Log-Likelihood:                -350.52
-No. Observations:                 244   AIC:                             707.0
-Df Residuals:                     241   BIC:                             717.5
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-====================================================================================
-                       coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------------
-Intercept            0.9067      0.175      5.182      0.000       0.562       1.251
-C(sex)[T.Female]     0.0266      0.138      0.192      0.848      -0.246       0.299
-total_bill           0.1052      0.007     14.110      0.000       0.091       0.120
-==============================================================================
-Omnibus:                       20.499   Durbin-Watson:                   2.149
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               38.652
-Skew:                           0.447   Prob(JB):                     4.05e-09
-Kurtosis:                       4.733   Cond. No.                         63.0
-==============================================================================
+<img alt="../_images/03_02_5_0.png" src="../_images/03_02_5_0.png" />
+</div>
+</div>
+<p>statsmodels 패키지를 사용하면 이 직선의 방정식을 알아낼 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+<span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>tip</td>       <th>  R-squared:         </th> <td>   0.457</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.454</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   203.4</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Thu, 21 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>6.69e-34</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>18:16:11</td>     <th>  Log-Likelihood:    </th> <td> -350.54</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   244</td>      <th>  AIC:               </th> <td>   705.1</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   242</td>      <th>  BIC:               </th> <td>   712.1</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>  <td>    0.9203</td> <td>    0.160</td> <td>    5.761</td> <td> 0.000</td> <td>    0.606</td> <td>    1.235</td>
+</tr>
+<tr>
+  <th>total_bill</th> <td>    0.1050</td> <td>    0.007</td> <td>   14.260</td> <td> 0.000</td> <td>    0.091</td> <td>    0.120</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>20.185</td> <th>  Durbin-Watson:     </th> <td>   2.151</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  37.750</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.443</td> <th>  Prob(JB):          </th> <td>6.35e-09</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.711</td> <th>  Cond. No.          </th> <td>    53.0</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>위 코드를 작성하는 방법와 결과를 해석하는 방법은 다음 절에서 자세힌 설명한다. 우선은 위 결과로부터 직선의 방정식이 다음과 같다는 것을 알 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{tip} = 0.1050 \cdot \text{total_bill} + 0.9203
+\]</div>
+<p>이 방정식은 total_bill을 입력으로 받아 tip을 출력하는 함수의 방정식이므로 total_bill 값으로부터 tip의 대략적인 값을 알아낼 수 있다.
+예를 들어 total_bill의 값이 30달러이면 방정식으로부터 tip 금액은 약 4.07달러가 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">0.1050</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">+</span> <span class="mf">0.9203</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.0703
 </pre></div>
 </div>
 </div>
 </div>
-<p>위 회귀분석 결과를 해석하면 다음과 같은 결론을 얻을 수 있다.</p>
-<ul class="simple">
-<li><p>지불금액이 증가할 때 팁도 증가한다.</p></li>
-<li><p>지불금액이 1달러만큼 증가할 때 팁은 약 0.1달러 정도 증가한다.</p></li>
-<li><p>성별은 팁 금액에 영향을 주지 않는다.</p></li>
-</ul>
-<p>위의 결과에서 이러한 정보를 읽고 해석하는 방법은 다음 절부터 차근차근 설명하도록 한다.</p>
+<p>실제로 total_bill이 30달러 근처(29달러 이상 31달러 이하)인 경우의 데이터를 모아서 보면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_totalbill30</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">&gt;=</span> <span class="mi">29</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">&lt;=</span> <span class="mi">31</span><span class="p">)]</span><span class="o">.</span><span class="n">tip</span>
+<span class="n">tip_totalbill30</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44     5.60
+116    5.07
+125    4.20
+155    5.14
+187    2.00
+210    2.00
+219    3.09
+239    5.92
+Name: tip, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 데이터의 평균은 4.13달러다. 우리가 위 방정식으로부터 계산한 값과 유사한 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_totalbill30</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.1274999999999995
+</pre></div>
+</div>
+</div>
+</div>
+<p>여기에서는 total_bill이라는 하나의 데이터만을 사용하여 tip을 계산하였지만 tip과 상관관계가 있는 다른 데이터가 있다면 그 값도 동시에 사용할 수 있다.
+예를 들어 size와 tip도 서로 약간의 상관관계를 가지고 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
+
+<span class="n">pearsonr</span><span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">],</span> <span class="n">tips</span><span class="p">[</span><span class="s2">&quot;tip&quot;</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.4892987752303571, 4.3005433272249695e-16)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_02_16_0.png" src="../_images/03_02_16_0.png" />
+</div>
+</div>
+<p>total_bill과 size 두 가지 값을 모두 입력값으로 하여 tip을 예측하는 방정식을 찾으면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill + size&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><table class="simpletable">
+<caption>OLS Regression Results</caption>
+<tr>
+  <th>Dep. Variable:</th>           <td>tip</td>       <th>  R-squared:         </th> <td>   0.468</td>
+</tr>
+<tr>
+  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.463</td>
+</tr>
+<tr>
+  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   105.9</td>
+</tr>
+<tr>
+  <th>Date:</th>             <td>Thu, 21 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>9.67e-34</td>
+</tr>
+<tr>
+  <th>Time:</th>                 <td>18:16:11</td>     <th>  Log-Likelihood:    </th> <td> -347.99</td>
+</tr>
+<tr>
+  <th>No. Observations:</th>      <td>   244</td>      <th>  AIC:               </th> <td>   702.0</td>
+</tr>
+<tr>
+  <th>Df Residuals:</th>          <td>   241</td>      <th>  BIC:               </th> <td>   712.5</td>
+</tr>
+<tr>
+  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
+</tr>
+<tr>
+  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
+</tr>
+<tr>
+  <th>Intercept</th>  <td>    0.6689</td> <td>    0.194</td> <td>    3.455</td> <td> 0.001</td> <td>    0.288</td> <td>    1.050</td>
+</tr>
+<tr>
+  <th>total_bill</th> <td>    0.0927</td> <td>    0.009</td> <td>   10.172</td> <td> 0.000</td> <td>    0.075</td> <td>    0.111</td>
+</tr>
+<tr>
+  <th>size</th>       <td>    0.1926</td> <td>    0.085</td> <td>    2.258</td> <td> 0.025</td> <td>    0.025</td> <td>    0.361</td>
+</tr>
+</table>
+<table class="simpletable">
+<tr>
+  <th>Omnibus:</th>       <td>24.753</td> <th>  Durbin-Watson:     </th> <td>   2.100</td>
+</tr>
+<tr>
+  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  46.169</td>
+</tr>
+<tr>
+  <th>Skew:</th>          <td> 0.545</td> <th>  Prob(JB):          </th> <td>9.43e-11</td>
+</tr>
+<tr>
+  <th>Kurtosis:</th>      <td> 4.831</td> <th>  Cond. No.          </th> <td>    67.6</td>
+</tr>
+</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+</div>
+<p>위 코드에 대해서도 다음 절에서 설명한다. 일단은 위 결과로부터 우리가 원하는 방정식은 다음과 같다는 것을 알 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{tip} = 0.0927 \cdot \text{total_bill} + 0.1926 \cdot \text{size} + 0.6689
+\]</div>
+<p>이 방정식을 이용하여 size=4, total_bill=30 인 경우 즉, 4인 고객이 30달러를 지불하는 경우의 팁을 계산하면 4.22달러다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">0.0927</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">+</span> <span class="mf">0.1926</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mf">0.6689</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.2203
+</pre></div>
+</div>
+</div>
+</div>
+<p>실제로 해당 경우의 데이터를 구하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_totalbill30size4</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">&gt;=</span> <span class="mi">29</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">&lt;=</span> <span class="mi">31</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)]</span><span class="o">.</span><span class="n">tip</span>
+<span class="n">tip_totalbill30size4</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>44     5.60
+116    5.07
+219    3.09
+Name: tip, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>평균값은 4.59달러로 우리가 계산한 4.22달러와 비슷하다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_totalbill30size4</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.586666666666667
+</pre></div>
+</div>
+</div>
+</div>
+<p>이렇게 데이터 간의 상관관계를 이용하여 하나 혹은 복수의 데이터 값으로부터 다른 수치형 데이터의 값을 구하는 것을 <b>회귀분석(regression analysis)</b>이라고 한다.</p>
+<section id="id2">
+<h2><span class="section-number">3.2.1. </span>독립변수와 종속변수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>회귀분석을 하려면 우선 우리가 값을 구하려는 수치형 데이터와 그 데이터를 계산하기 위해 사용하는 데이터들이 무엇인지를 결정해야 한다. 회귀분석에서 분석의 대상이 되는 수치형 변수를 <b>종속변수(independent variable)</b>라 하고 그 종속변수에 영향을 주는 다른 변수들을 <b>독립변수(dependent variable)</b>라 한다. 보통 종속변수는 <span class="math notranslate nohighlight">\(y\)</span> 기호로 나타내고 독립변수는 <span class="math notranslate nohighlight">\(x\)</span> 기호로 나타낸다. 독립변수가 여러개 있을 때는 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 등으로 아랫첨자를 이용하여 표시한다.</p>
 </section>
 </section>
 
