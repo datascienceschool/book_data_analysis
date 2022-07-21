@@ -875,7 +875,7 @@ r_{zx} &amp; r_{zy} &amp; r_{zz} \\
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_corr</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
-<span class="n">df_corr</span>
+<span class="n">df_corr</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">4</span><span class="p">,</span> <span class="p">:</span><span class="mi">4</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -902,16 +902,6 @@ r_{zx} &amp; r_{zy} &amp; r_{zz} \\
       <th>zn</th>
       <th>indus</th>
       <th>chas</th>
-      <th>nox</th>
-      <th>rm</th>
-      <th>age</th>
-      <th>dis</th>
-      <th>rad</th>
-      <th>tax</th>
-      <th>ptratio</th>
-      <th>black</th>
-      <th>lstat</th>
-      <th>medv</th>
     </tr>
   </thead>
   <tbody>
@@ -921,16 +911,6 @@ r_{zx} &amp; r_{zy} &amp; r_{zz} \\
       <td>-0.200469</td>
       <td>0.406583</td>
       <td>-0.055892</td>
-      <td>0.420972</td>
-      <td>-0.219247</td>
-      <td>0.352734</td>
-      <td>-0.379670</td>
-      <td>0.625505</td>
-      <td>0.582764</td>
-      <td>0.289946</td>
-      <td>-0.385064</td>
-      <td>0.455621</td>
-      <td>-0.388305</td>
     </tr>
     <tr>
       <th>zn</th>
@@ -938,16 +918,6 @@ r_{zx} &amp; r_{zy} &amp; r_{zz} \\
       <td>1.000000</td>
       <td>-0.533828</td>
       <td>-0.042697</td>
-      <td>-0.516604</td>
-      <td>0.311991</td>
-      <td>-0.569537</td>
-      <td>0.664408</td>
-      <td>-0.311948</td>
-      <td>-0.314563</td>
-      <td>-0.391679</td>
-      <td>0.175520</td>
-      <td>-0.412995</td>
-      <td>0.360445</td>
     </tr>
     <tr>
       <th>indus</th>
@@ -955,202 +925,12 @@ r_{zx} &amp; r_{zy} &amp; r_{zz} \\
       <td>-0.533828</td>
       <td>1.000000</td>
       <td>0.062938</td>
-      <td>0.763651</td>
-      <td>-0.391676</td>
-      <td>0.644779</td>
-      <td>-0.708027</td>
-      <td>0.595129</td>
-      <td>0.720760</td>
-      <td>0.383248</td>
-      <td>-0.356977</td>
-      <td>0.603800</td>
-      <td>-0.483725</td>
     </tr>
     <tr>
       <th>chas</th>
       <td>-0.055892</td>
       <td>-0.042697</td>
       <td>0.062938</td>
-      <td>1.000000</td>
-      <td>0.091203</td>
-      <td>0.091251</td>
-      <td>0.086518</td>
-      <td>-0.099176</td>
-      <td>-0.007368</td>
-      <td>-0.035587</td>
-      <td>-0.121515</td>
-      <td>0.048788</td>
-      <td>-0.053929</td>
-      <td>0.175260</td>
-    </tr>
-    <tr>
-      <th>nox</th>
-      <td>0.420972</td>
-      <td>-0.516604</td>
-      <td>0.763651</td>
-      <td>0.091203</td>
-      <td>1.000000</td>
-      <td>-0.302188</td>
-      <td>0.731470</td>
-      <td>-0.769230</td>
-      <td>0.611441</td>
-      <td>0.668023</td>
-      <td>0.188933</td>
-      <td>-0.380051</td>
-      <td>0.590879</td>
-      <td>-0.427321</td>
-    </tr>
-    <tr>
-      <th>rm</th>
-      <td>-0.219247</td>
-      <td>0.311991</td>
-      <td>-0.391676</td>
-      <td>0.091251</td>
-      <td>-0.302188</td>
-      <td>1.000000</td>
-      <td>-0.240265</td>
-      <td>0.205246</td>
-      <td>-0.209847</td>
-      <td>-0.292048</td>
-      <td>-0.355501</td>
-      <td>0.128069</td>
-      <td>-0.613808</td>
-      <td>0.695360</td>
-    </tr>
-    <tr>
-      <th>age</th>
-      <td>0.352734</td>
-      <td>-0.569537</td>
-      <td>0.644779</td>
-      <td>0.086518</td>
-      <td>0.731470</td>
-      <td>-0.240265</td>
-      <td>1.000000</td>
-      <td>-0.747881</td>
-      <td>0.456022</td>
-      <td>0.506456</td>
-      <td>0.261515</td>
-      <td>-0.273534</td>
-      <td>0.602339</td>
-      <td>-0.376955</td>
-    </tr>
-    <tr>
-      <th>dis</th>
-      <td>-0.379670</td>
-      <td>0.664408</td>
-      <td>-0.708027</td>
-      <td>-0.099176</td>
-      <td>-0.769230</td>
-      <td>0.205246</td>
-      <td>-0.747881</td>
-      <td>1.000000</td>
-      <td>-0.494588</td>
-      <td>-0.534432</td>
-      <td>-0.232471</td>
-      <td>0.291512</td>
-      <td>-0.496996</td>
-      <td>0.249929</td>
-    </tr>
-    <tr>
-      <th>rad</th>
-      <td>0.625505</td>
-      <td>-0.311948</td>
-      <td>0.595129</td>
-      <td>-0.007368</td>
-      <td>0.611441</td>
-      <td>-0.209847</td>
-      <td>0.456022</td>
-      <td>-0.494588</td>
-      <td>1.000000</td>
-      <td>0.910228</td>
-      <td>0.464741</td>
-      <td>-0.444413</td>
-      <td>0.488676</td>
-      <td>-0.381626</td>
-    </tr>
-    <tr>
-      <th>tax</th>
-      <td>0.582764</td>
-      <td>-0.314563</td>
-      <td>0.720760</td>
-      <td>-0.035587</td>
-      <td>0.668023</td>
-      <td>-0.292048</td>
-      <td>0.506456</td>
-      <td>-0.534432</td>
-      <td>0.910228</td>
-      <td>1.000000</td>
-      <td>0.460853</td>
-      <td>-0.441808</td>
-      <td>0.543993</td>
-      <td>-0.468536</td>
-    </tr>
-    <tr>
-      <th>ptratio</th>
-      <td>0.289946</td>
-      <td>-0.391679</td>
-      <td>0.383248</td>
-      <td>-0.121515</td>
-      <td>0.188933</td>
-      <td>-0.355501</td>
-      <td>0.261515</td>
-      <td>-0.232471</td>
-      <td>0.464741</td>
-      <td>0.460853</td>
-      <td>1.000000</td>
-      <td>-0.177383</td>
-      <td>0.374044</td>
-      <td>-0.507787</td>
-    </tr>
-    <tr>
-      <th>black</th>
-      <td>-0.385064</td>
-      <td>0.175520</td>
-      <td>-0.356977</td>
-      <td>0.048788</td>
-      <td>-0.380051</td>
-      <td>0.128069</td>
-      <td>-0.273534</td>
-      <td>0.291512</td>
-      <td>-0.444413</td>
-      <td>-0.441808</td>
-      <td>-0.177383</td>
-      <td>1.000000</td>
-      <td>-0.366087</td>
-      <td>0.333461</td>
-    </tr>
-    <tr>
-      <th>lstat</th>
-      <td>0.455621</td>
-      <td>-0.412995</td>
-      <td>0.603800</td>
-      <td>-0.053929</td>
-      <td>0.590879</td>
-      <td>-0.613808</td>
-      <td>0.602339</td>
-      <td>-0.496996</td>
-      <td>0.488676</td>
-      <td>0.543993</td>
-      <td>0.374044</td>
-      <td>-0.366087</td>
-      <td>1.000000</td>
-      <td>-0.737663</td>
-    </tr>
-    <tr>
-      <th>medv</th>
-      <td>-0.388305</td>
-      <td>0.360445</td>
-      <td>-0.483725</td>
-      <td>0.175260</td>
-      <td>-0.427321</td>
-      <td>0.695360</td>
-      <td>-0.376955</td>
-      <td>0.249929</td>
-      <td>-0.381626</td>
-      <td>-0.468536</td>
-      <td>-0.507787</td>
-      <td>0.333461</td>
-      <td>-0.737663</td>
       <td>1.000000</td>
     </tr>
   </tbody>
