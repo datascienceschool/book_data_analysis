@@ -945,9 +945,9 @@ Length: 244, dtype: float64
 <div class="math notranslate nohighlight">
 \[  y = w_0 + w_1 \cdot x_1  + w_2 \cdot x_2 + \cdots + w_K \cdot x_K \]</div>
 <p>이런 선형함수를 회귀분석모형으로 사용하는 것을 <b>선형회귀분석(linear regression analysis)</b>이라고 한다.</p>
-<p>회귀분석모형으로 반드시 선형함수를 사용해야만 하는 것은 아니다. 선형함수를 사용하지 않는 비선형회귀분석(non-linear egression analysis)도 가능하다. 예를 들어 다음과 같은 방정식을 가진 함수들 중에서 가장 잔차제곱합이 작은 함수를 찾을 수도 있다.</p>
+<p>회귀분석모형으로 반드시 선형함수를 사용해야만 하는 것은 아니다. 선형함수를 사용하지 않는 비선형회귀분석(non-linear egression analysis)도 가능하다. 예를 들어 다음과 같은 방정식을 가진 함수들 중에서 가장 잔차제곱합이 작은 함수를 찾을 수도 있다. 이러한 회귀분석모형을 사용하는 것을 세미로그회귀분석(semilog regression analysis)이라고 한다.</p>
 <div class="math notranslate nohighlight">
-\[ y = e^{w_0 + w_1 \cdot x_1  + w_2 \cdot x_2 + \cdots + w_K \cdot x_K} \]</div>
+\[ y = w_0 \cdot e^{w_1 x_1} \cdot e^{w_2 x_2} \cdots e^{w_K x_K} \]</div>
 <p>하지만 선형회귀분석은 독립변수(입력)와 종속변수(출력)의 관계를 직관적으로 알 수 있다는 장점과 뒤에서 설명할 여러가지 추가적인 분석이 가능하다는 장점이 있어서 회귀분석을 할 때 가장 우선적으로 시도할만한 가치가 있다.</p>
 </section>
 </section>
