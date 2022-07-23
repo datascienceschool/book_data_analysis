@@ -89,7 +89,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.3. 회귀분석을 위한 준비" href="03_03.html" />
+    <link rel="next" title="3.3. 선형회귀분석을 위한 준비" href="03_03.html" />
     <link rel="prev" title="3.1. 상관관계" href="03_01.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -247,12 +247,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_03.html">
-     3.3. 회귀분석을 위한 준비
+     3.3. 선형회귀분석을 위한 준비
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_04.html">
-     3.4. 선형 회귀분석 모형
+     3.5. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -611,7 +611,8 @@ title="Print to PDF"
 \[
 \text{tip} = 0.1050 \cdot \text{total_bill} + 0.9203
 \]</div>
-<p>이 방정식은 total_bill을 입력으로 받아 tip을 출력하는 함수의 방정식이므로 total_bill 값으로부터 tip의 대략적인 값을 알아낼 수 있다. 이 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
+<p>이 방정식은 total_bill을 입력으로 받아 tip을 출력하는 함수의 방정식이므로 total_bill 값으로부터 tip의 대략적인 값을 알아낼 수 있다. 이 함수의 식에서 total_bill 에 곱해지는 0.1050이라는 숫자를 total_bill에 대한 <b>가중치(weight)</b>라고 한다. 수식의 마지막에 있는 0.9203은 <b>상수항(constant)</b>이라고 한다.</p>
+<p>위 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reg1</span><span class="p">(</span><span class="n">total_bill</span><span class="p">):</span>
@@ -772,7 +773,8 @@ Name: tip, dtype: float64
 \[
 \;\;\;\text{tip} = 0.0927 \cdot \text{total_bill} + 0.1926 \cdot \text{size} + 0.6689\;\;\;
 \]</div>
-<p>이 방정식을 가진 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
+<p>이 식에서 total_bill에 대한 가중치는 0.0927, size에 대한 가중치는 0.1926, 상수항은 0.6689라는 것을 알 수 있다.</p>
+<p>이 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reg2</span><span class="p">(</span><span class="n">total_bill</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
@@ -989,7 +991,7 @@ Length: 244, dtype: float64
     <a class='right-next' id="next-link" href="03_03.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.3. </span>회귀분석을 위한 준비</p>
+        <p class="prev-next-title"><span class="section-number">3.3. </span>선형회귀분석을 위한 준비</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
