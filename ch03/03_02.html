@@ -484,7 +484,7 @@ title="Print to PDF"
 <img alt="../_images/03_02_3_0.png" src="../_images/03_02_3_0.png" />
 </div>
 </div>
-<p>seaborn 패키지에서 제공하는 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수를 사용하면 total_bill과 tip의 선형 상관관계를 직선으로 스캐터플롯 위에 표시할 수 있다.</p>
+<p>seaborn 패키지에서 제공하는 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수를 사용하면 total_bill과 tip의 선형 상관관계를 대표하는 직선을 스캐터플롯 위에 표시할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> 
@@ -714,7 +714,7 @@ Name: tip, dtype: float64
 <p>위 코드에 대해서도 다음 절에서 설명한다. 일단은 위 결과로부터 우리가 원하는 방정식은 다음과 같다는 것을 알 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[
-\text{tip} = 0.0927 \cdot \text{total_bill} + 0.1926 \cdot \text{size} + 0.6689
+\;\;\;\text{tip} = 0.0927 \cdot \text{total_bill} + 0.1926 \cdot \text{size} + 0.6689\;\;\;
 \]</div>
 <p>이 방정식을 이용하여 size=4, total_bill=30 인 경우 즉, 4인 고객이 30달러를 지불하는 경우의 팁을 계산하면 4.22달러다.</p>
 <div class="cell docutils container">
