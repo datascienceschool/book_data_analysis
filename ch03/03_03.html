@@ -89,7 +89,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="3.5. 선형 회귀분석 모형" href="03_04.html" />
+    <link rel="next" title="3.4. 선형 회귀분석 모형" href="03_04.html" />
     <link rel="prev" title="3.2. 회귀분석의 소개" href="03_02.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -252,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_04.html">
-     3.5. 선형 회귀분석 모형
+     3.4. 선형 회귀분석 모형
     </a>
    </li>
   </ul>
@@ -427,77 +427,45 @@ title="Print to PDF"
     </div>
     <nav id="bd-toc-nav" aria-label="Page">
         <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   3.3. 선형회귀분석을 위한 준비
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.3.1. 변수의 결정
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     3.3.1. 변수의 결정
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     3.3.2. 데이터의 수집
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     3.3.3. 데이터를 벡터와 행렬 형식으로 변환
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#n-j-x-ij-x-j-x-j">
-   3.4. 다음으로
-   <span class="math notranslate nohighlight">
-    \(N\)
-   </span>
-   개의
-   <span class="math notranslate nohighlight">
-    \(j\)
-   </span>
-   번째 독립변수
-   <span class="math notranslate nohighlight">
-    \(x_{ij}\)
-   </span>
-   데이터를 모아서 벡터
-   <span class="math notranslate nohighlight">
-    \(x_j\)
-   </span>
-   를 만든다.
-$$
-x_j
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.3.2. 데이터의 수집
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     3.4.1. 데이터의 전처리
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.3.3. 데이터를 벡터와 행렬 형식으로 변환
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.3.4. 데이터의 전처리
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     3.3.4.1. 잘못되거나 누락된 데이터 처리
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id6">
-       3.4.1.1. 잘못되거나 누락된 데이터 처리
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
-       3.4.1.2. 상수항 추가
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id8">
-       3.4.1.3. 범주형 독립변수 인코딩
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id9">
-       3.4.1.4. 수치형 독립변수 스케일링
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     3.3.4.2. 상수항 추가
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     3.3.4.3. 범주형 독립변수 인코딩
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     3.3.4.4. 수치형 독립변수 스케일링
+    </a>
    </li>
   </ul>
  </li>
@@ -520,77 +488,45 @@ x_j
                         </div>
                         <nav aria-label="Page">
                             <ul class="visible nav section-nav flex-column">
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#">
-   3.3. 선형회귀분석을 위한 준비
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.3.1. 변수의 결정
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id2">
-     3.3.1. 변수의 결정
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id3">
-     3.3.2. 데이터의 수집
-    </a>
-   </li>
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     3.3.3. 데이터를 벡터와 행렬 형식으로 변환
-    </a>
-   </li>
-  </ul>
  </li>
- <li class="toc-h1 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#n-j-x-ij-x-j-x-j">
-   3.4. 다음으로
-   <span class="math notranslate nohighlight">
-    \(N\)
-   </span>
-   개의
-   <span class="math notranslate nohighlight">
-    \(j\)
-   </span>
-   번째 독립변수
-   <span class="math notranslate nohighlight">
-    \(x_{ij}\)
-   </span>
-   데이터를 모아서 벡터
-   <span class="math notranslate nohighlight">
-    \(x_j\)
-   </span>
-   를 만든다.
-$$
-x_j
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.3.2. 데이터의 수집
   </a>
-  <ul class="visible nav section-nav flex-column">
-   <li class="toc-h2 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id5">
-     3.4.1. 데이터의 전처리
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.3.3. 데이터를 벡터와 행렬 형식으로 변환
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.3.4. 데이터의 전처리
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id6">
+     3.3.4.1. 잘못되거나 누락된 데이터 처리
     </a>
-    <ul class="nav section-nav flex-column">
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id6">
-       3.4.1.1. 잘못되거나 누락된 데이터 처리
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id7">
-       3.4.1.2. 상수항 추가
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id8">
-       3.4.1.3. 범주형 독립변수 인코딩
-      </a>
-     </li>
-     <li class="toc-h3 nav-item toc-entry">
-      <a class="reference internal nav-link" href="#id9">
-       3.4.1.4. 수치형 독립변수 스케일링
-      </a>
-     </li>
-    </ul>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     3.3.4.2. 상수항 추가
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     3.3.4.3. 범주형 독립변수 인코딩
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     3.3.4.4. 수치형 독립변수 스케일링
+    </a>
    </li>
   </ul>
  </li>
@@ -856,19 +792,18 @@ y_2 \\
 y_N \\
 \end{bmatrix}
 \end{split}\]</div>
-</section>
-</section>
-<section class="tex2jax_ignore mathjax_ignore" id="n-j-x-ij-x-j-x-j">
-<h1><span class="section-number">3.4. </span>다음으로 <span class="math notranslate nohighlight">\(N\)</span>개의 <span class="math notranslate nohighlight">\(j\)</span>번째 독립변수 <span class="math notranslate nohighlight">\(x_{ij}\)</span> 데이터를 모아서 벡터 <span class="math notranslate nohighlight">\(x_j\)</span>를 만든다.
-$$
-x_j<a class="headerlink" href="#n-j-x-ij-x-j-x-j" title="Permalink to this headline">#</a></h1>
-<p>\begin{bmatrix}
-x_{1,j} \
-x_{2,j} \
-\vdots \
-x_{N,j} \
+<p>다음으로 <span class="math notranslate nohighlight">\(N\)</span>개의 <span class="math notranslate nohighlight">\(j\)</span>번째 독립변수 <span class="math notranslate nohighlight">\(x_{ij}\)</span> 데이터를 모아서 벡터 <span class="math notranslate nohighlight">\(x_j\)</span>를 만든다.</p>
+<div class="math notranslate nohighlight">
+\[\begin{split} 
+x_j
+=
+\begin{bmatrix}
+x_{1,j} \\
+x_{2,j} \\
+\vdots \\
+x_{N,j} \\
 \end{bmatrix}
-$$</p>
+\end{split}\]</div>
 <p>이러한 과정을 <span class="math notranslate nohighlight">\(j=1,\ldots,K\)</span>에 대해 반복하여 <span class="math notranslate nohighlight">\(K\)</span>개의 독립변수 벡터 벡터 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>를 만들고 이를 모아서 독립변수 행렬 <span class="math notranslate nohighlight">\(X\)</span>를 만든다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} 
@@ -1048,8 +983,9 @@ Name: tip, Length: 244, dtype: float64
 <p>244 rows × 3 columns</p>
 </div></div></div>
 </div>
+</section>
 <section id="id5">
-<h2><span class="section-number">3.4.1. </span>데이터의 전처리<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.3.4. </span>데이터의 전처리<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 <p>이렇게 수집 및 정리된 데이터 값에 대해서는 다음과 같은 전처리를 해야한다.</p>
 <ul class="simple">
 <li><p>잘못되거나 누락된 데이터가 있는지 검사하고 해당 레코드 삭제하거나 정상적인 데이터로 대체</p></li>
@@ -1058,7 +994,7 @@ Name: tip, Length: 244, dtype: float64
 <li><p>수치형 독립변수 스케일링</p></li>
 </ul>
 <section id="id6">
-<h3><span class="section-number">3.4.1.1. </span>잘못되거나 누락된 데이터 처리<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.3.4.1. </span>잘못되거나 누락된 데이터 처리<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
 <p>만약 데이터 중에 잘못되거나 누락된 데이터가 있어면 해당 레코드(행)나 해당 필드(열)을 삭제하거나 가장 그럴듯한 값으로 대체할 필요가 있다. 가장 그럴듯한 값으로 대체하는 것을 <b>결측값대치(missing value imputation)</b>라고 한다. 삭제하는 것은 간단하지만 결측값대치는 사전에 고려해야할 사항과 방법론이 많다. 가장 간단한 결측값대치 방법은 다음과 같다.</p>
 <ul class="simple">
 <li><p>범주형 데이터의 경우 해당 열의 최빈값(mode)으로 대치한다.</p></li>
@@ -1067,7 +1003,7 @@ Name: tip, Length: 244, dtype: float64
 <p>기타 다른 결측값대치 방법에 대해서는 추후에 자세히 설명한다. 팁 데이터의 경우에는 결측치가 없으므로 이 부분은 생략한다.</p>
 </section>
 <section id="id7">
-<h3><span class="section-number">3.4.1.2. </span>상수항 추가<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.3.4.2. </span>상수항 추가<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
 <p>위에서 사용한 선형회귀분석모형</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1234,7 +1170,7 @@ w_0 \\ w_1 \\ w_2 \\ \vdots \\ w_K
 </div>
 </section>
 <section id="id8">
-<h3><span class="section-number">3.4.1.3. </span>범주형 독립변수 인코딩<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.3.4.3. </span>범주형 독립변수 인코딩<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
 <p>팁 데이터의 독립변수 중에서 sex 데이터는 <code class="docutils literal notranslate"><span class="pre">Female</span></code>과 <code class="docutils literal notranslate"><span class="pre">Male</span></code>이라는 두 종류의 문자열로 이루어진 범주형 값이다. 범주형 값은 선형회귀분석모형</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1422,7 +1358,7 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 <p>이 때 인코딩된 sex 열의 이름은 <code class="docutils literal notranslate"><span class="pre">C(sex)[T.Female]</span></code>이라는 이름으로 바뀌는데 이는 인코딩된 값이고 Female이라는 문자열을 1이라는 수치로 인코딩했다는 의미이다.</p>
 </section>
 <section id="id9">
-<h3><span class="section-number">3.4.1.4. </span>수치형 독립변수 스케일링<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.3.4.4. </span>수치형 독립변수 스케일링<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <p>수치형 독립변수의 경우 사용하는 데이터의 단위에 따라 수치의 크기가 달라질 수 있다. 예를 들어 total_bill의 원래 단위는 달러(dollar)이지만 만약 센트(cent)를 단위로 쓴다면 100배가 커진 값이 될 것이다.</p>
 <p>그런데 수치형 독립변수의 크기가 열마다 너무 크게 차이가 나면 회귀분석 결과에서 수치계산에 의한 오차가 발생할 수 있다. 이에 대한 자세한 내용은 추후에 데이터의 조건값(condition value)에 대해 설명하면서 같이 설명할 것이다.</p>
 <p>이러한 오차를 방지하기 위해 모든 열의 수치형 독립변수의 크기를 비슷한 수준으로 맞추는 작업이 필요하다. 이를 수치형 독립변수의 <b>스케일링(scaling)</b> 작업이라고 한다. 스케일링 방법에도 여러가지가 있지만 가장 일반적으로 사용하는 스케일링 방법은 각 열의 평균이 0, 표준편차가 1이 되도록 각각의 열을 조정하는 방법이다.</p>
@@ -1636,7 +1572,7 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
     <a class='right-next' id="next-link" href="03_04.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">3.5. </span>선형 회귀분석 모형</p>
+        <p class="prev-next-title"><span class="section-number">3.4. </span>선형 회귀분석 모형</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
