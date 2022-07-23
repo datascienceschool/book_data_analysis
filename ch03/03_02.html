@@ -442,6 +442,16 @@ title="Print to PDF"
    3.2.3. 독립변수와 종속변수
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.2.4. 회귀분석모형
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   3.2.5. 선형회귀분석
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -476,6 +486,16 @@ title="Print to PDF"
    3.2.3. 독립변수와 종속변수
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.2.4. 회귀분석모형
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   3.2.5. 선형회귀분석
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -506,7 +526,7 @@ title="Print to PDF"
 <img alt="../_images/03_02_4_0.png" src="../_images/03_02_4_0.png" />
 </div>
 </div>
-<p>seaborn 패키지에서 제공하는 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수를 사용하면 total_bill과 tip의 선형 상관관계를 대표하는 직선을 스캐터플롯 위에 표시할 수 있다.</p>
+<p>seaborn 패키지에서 제공하는 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수를 사용하면 total_bill과 tip의 선형 상관관계를 대표하는 직선, 즉 스캐터플롯의 모습과 가장 유사한 직선을 스캐터플롯 위에 표시할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> 
@@ -524,7 +544,8 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-<span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -541,10 +562,10 @@ title="Print to PDF"
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   203.4</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Thu, 21 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>6.69e-34</td>
+  <th>Date:</th>             <td>Sat, 23 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>6.69e-34</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>18:16:11</td>     <th>  Log-Likelihood:    </th> <td> -350.54</td>
+  <th>Time:</th>                 <td>14:39:52</td>     <th>  Log-Likelihood:    </th> <td> -350.54</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   244</td>      <th>  AIC:               </th> <td>   705.1</td>
@@ -590,11 +611,19 @@ title="Print to PDF"
 \[
 \text{tip} = 0.1050 \cdot \text{total_bill} + 0.9203
 \]</div>
-<p>이 방정식은 total_bill을 입력으로 받아 tip을 출력하는 함수의 방정식이므로 total_bill 값으로부터 tip의 대략적인 값을 알아낼 수 있다.
-예를 들어 total_bill의 값이 30달러이면 방정식으로부터 tip 금액은 약 4.07달러가 된다.</p>
+<p>이 방정식은 total_bill을 입력으로 받아 tip을 출력하는 함수의 방정식이므로 total_bill 값으로부터 tip의 대략적인 값을 알아낼 수 있다. 이 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">0.1050</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">+</span> <span class="mf">0.9203</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reg1</span><span class="p">(</span><span class="n">total_bill</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.1050</span> <span class="o">*</span> <span class="n">total_bill</span> <span class="o">+</span> <span class="mf">0.9203</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>예를 들어 total_bill의 값이 30달러이면 방정식으로부터 tip 금액은 약 4.07달러가 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg1</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -667,13 +696,14 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_02_19_0.png" src="../_images/03_02_19_0.png" />
+<img alt="../_images/03_02_21_0.png" src="../_images/03_02_21_0.png" />
 </div>
 </div>
 <p>total_bill과 size 두 가지 값을 모두 입력값으로 하여 tip을 예측하는 방정식을 찾으면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill + size&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill + size&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -690,10 +720,10 @@ Name: tip, dtype: float64
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   105.9</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Thu, 21 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>9.67e-34</td>
+  <th>Date:</th>             <td>Sat, 23 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>9.67e-34</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>18:16:11</td>     <th>  Log-Likelihood:    </th> <td> -347.99</td>
+  <th>Time:</th>                 <td>14:39:52</td>     <th>  Log-Likelihood:    </th> <td> -347.99</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   244</td>      <th>  AIC:               </th> <td>   702.0</td>
@@ -742,10 +772,19 @@ Name: tip, dtype: float64
 \[
 \;\;\;\text{tip} = 0.0927 \cdot \text{total_bill} + 0.1926 \cdot \text{size} + 0.6689\;\;\;
 \]</div>
-<p>이 방정식을 이용하여 size=4, total_bill=30 인 경우 즉, 4인 고객이 30달러를 지불하는 경우의 팁을 계산하면 4.22달러다.</p>
+<p>이 방정식을 가진 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="mf">0.0927</span> <span class="o">*</span> <span class="mi">30</span> <span class="o">+</span> <span class="mf">0.1926</span> <span class="o">*</span> <span class="mi">4</span> <span class="o">+</span> <span class="mf">0.6689</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reg2</span><span class="p">(</span><span class="n">total_bill</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.0927</span> <span class="o">*</span> <span class="n">total_bill</span> <span class="o">+</span> <span class="mf">0.1926</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mf">0.6689</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 함수를 이용하여 total_bill=30, size=4 인 경우 즉, 4인 고객이 30달러를 지불하는 경우의 팁을 계산하면 4.22달러다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg2</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -790,7 +829,7 @@ Name: tip, dtype: float64
 </section>
 <section id="id4">
 <h2><span class="section-number">3.2.3. </span>독립변수와 종속변수<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<p>회귀분석을 하려면 우선 우리가 값을 구하려는 수치형 데이터와 그 데이터를 계산하기 위해 사용하는 데이터들이 무엇인지를 결정해야 한다. 회귀분석에서 분석의 대상이 되는 수치형 변수를 <b>종속변수(independent variable)</b>라 하고 그 종속변수에 영향을 주는 다른 변수들을 <b>독립변수(dependent variable)</b>라 한다. 보통 종속변수는 <span class="math notranslate nohighlight">\(y\)</span> 기호로 나타내고 독립변수는 <span class="math notranslate nohighlight">\(x\)</span> 기호로 나타낸다. 독립변수가 여러개 있을 때는 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 등으로 아랫첨자를 이용하여 표시한다.</p>
+<p>회귀분석을 하려면 우선 우리가 값을 구하려는 수치형 데이터와 그 데이터를 계산하기 위해 사용하는 데이터들이 무엇인지를 결정해야 한다. 회귀분석에서 분석의 대상이 되는 수치형 변수를 <b>종속변수(independent variable)</b>라 하고 그 종속변수에 영향을 주는 다른 변수들을 <b>독립변수(dependent variable)</b>라 한다. 수식으로 표현할 때 종속변수는 <span class="math notranslate nohighlight">\(y\)</span> 기호로 나타내고 독립변수는 <span class="math notranslate nohighlight">\(x\)</span> 기호로 나타낸다. 독립변수가 여러개 있을 때는 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 등으로 아랫첨자를 이용하여 표시한다.</p>
 <p>위에서 보인 첫번째 회귀분석 예에서는 독립변수와 종속변수가 다음과 같았다.</p>
 <ul class="simple">
 <li><p>독립변수</p>
@@ -818,6 +857,98 @@ Name: tip, dtype: float64
 </ul>
 </li>
 </ul>
+</section>
+<section id="id5">
+<h2><span class="section-number">3.2.4. </span>회귀분석모형<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>수학적으로 회귀분석은 데이터 <span class="math notranslate nohighlight">\(N\)</span>개의 데이터 <span class="math notranslate nohighlight">\(\{x_i, y_i\} (i=1,2,\ldots,N)\)</span>가 있을 때 이와 가장 비슷한 함수</p>
+<div class="math notranslate nohighlight">
+\[ y = f(x) \]</div>
+<p>를 찾아내는 것이다.</p>
+<p>가장 비슷하다는 것은 다음과 같이 정의한다.</p>
+<p>실제 데이터 <span class="math notranslate nohighlight">\(x_i (i=1,2,\ldots,N)\)</span>를 이 함수에 넣으면 함수의 결과, 회귀분석 예측값 <span class="math notranslate nohighlight">\(\hat{y}_i (i=1,2,\ldots,N)\)</span>이 나온다.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y}_i = f(x_i) \]</div>
+<p>이 예측값 <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>은 <span class="math notranslate nohighlight">\(x_i\)</span>에 대응하는 원 데이터 <span class="math notranslate nohighlight">\(y_i\)</span>값과 차이가 있을 수 있다. 이 차이를 <b>잔차(residual)</b>라고 한다.</p>
+<div class="math notranslate nohighlight">
+\[ e_i = y_i - \hat{y}_i \]</div>
+<p><span class="math notranslate nohighlight">\(N\)</span>개의 모든 데이터에 대해 <span class="math notranslate nohighlight">\(N\)</span>개의 잔차값이 나온다. 이 모든 잔차를 제곱하여 더한 것을 <b>잔차제곱합(RSS: Residual Sum of Squares)</b>이라고 한다.</p>
+<div class="math notranslate nohighlight">
+\[ \text{RSS} = \sum_{i=1}^N e_i^2 \]</div>
+<p>잔차제곱합 RSS가 작을수록 회귀분석으로 구한 예측값 <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>값이 원래 데이터 <span class="math notranslate nohighlight">\(y_i\)</span>값이 비슷하다는 뜻이므로 좋은 함수가 된다. 회귀분석은 미리 정해놓은 여러가지 함수들 중에서 가장 잔차제곱합이 작은 함수를 찾는 과정이다. 미리 정해놓은 함수들의 집합을 <b>회귀분석모형(regression model)</b>이라고 한다.</p>
+<p>위에서 보인 첫번째 회귀분석 예에서 잔차제곱합을 구해보자. 우선 회귀분석 함수에서 <span class="math notranslate nohighlight">\(\hat{y}\)</span>를 구하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_hat</span> <span class="o">=</span> <span class="n">reg1</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="p">)</span>
+<span class="n">y_hat</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      2.70425
+1      2.00600
+2      3.12635
+3      3.40670
+4      3.50225
+        ...   
+239    3.96845
+240    3.77420
+241    3.30065
+242    2.79140
+243    2.89220
+Name: total_bill, Length: 244, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>원래의 tip 값에서 이 값을 빼면 잔차 <span class="math notranslate nohighlight">\(e\)</span>를 구할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">tip</span> <span class="o">-</span> <span class="n">y_hat</span>
+<span class="n">e</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0     -1.69425
+1     -0.34600
+2      0.37365
+3     -0.09670
+4      0.10775
+        ...   
+239    1.95155
+240   -1.77420
+241   -1.30065
+242   -1.04140
+243    0.10780
+Length: 244, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 잔차들을 제곱하여 합한 잔차제곱합 RSS를 구하면 약 252.7888이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">e</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>252.78880587749998
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id6">
+<h2><span class="section-number">3.2.5. </span>선형회귀분석<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<p>미리 정해놓은 함수들의 집합 즉, 회귀분석모형으로 가장 기초적인 것이 선형함수(linear function)이다. 선형함수는 출력값 <span class="math notranslate nohighlight">\(y\)</span>가 다음 수식처럼 입력값 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>의 선형조합(linear combination)인 경우를 말한다.</p>
+<div class="math notranslate nohighlight">
+\[  y = w_0 + w_1 \cdot x_1  + w_2 \cdot x_2 + \cdots + w_K \cdot x_K \]</div>
+<p>이런 선형함수를 회귀분석모형으로 사용하는 것을 <b>선형회귀분석(linear regression analysis)</b>이라고 한다.</p>
+<p>회귀분석모형으로 반드시 선형함수를 사용해야만 하는 것은 아니다. 선형함수를 사용하지 않는 비선형회귀분석(non-linear egression analysis)도 가능하다. 예를 들어 다음과 같은 방정식을 가진 함수들 중에서 가장 잔차제곱합이 작은 함수를 찾을 수도 있다.</p>
+<div class="math notranslate nohighlight">
+\[ y = e^{w_0 + w_1 \cdot x_1  + w_2 \cdot x_2 + \cdots + w_K \cdot x_K} \]</div>
+<p>하지만 선형회귀분석은 독립변수(입력)와 종속변수(출력)의 관계를 직관적으로 알 수 있다는 장점과 뒤에서 설명할 여러가지 추가적인 분석이 가능하다는 장점이 있어서 회귀분석을 할 때 가장 우선적으로 시도할만한 가치가 있다.</p>
 </section>
 </section>
 
