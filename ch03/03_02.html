@@ -995,37 +995,7 @@ y =
 <div><p>종속변수 <span class="math notranslate nohighlight">\(y\)</span>의 값은 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 값의 선형조합으로 어느 정도 결정되지만 이것만으로 예측할 수 없는 부분이 존재한다.</p>
 </div></blockquote>
 <p>이를 그림으로 표현하면 다음과 같다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -s 1000,500 -l arrows.meta
-
-\draw[-&gt;, &gt;=Stealth] (-0.5,0) -- (9.5,0);
-\draw[-&gt;, &gt;=Stealth] (0,-1) -- (0,4);
-\draw[ultra thick] (-0.5,0.5) -- (9,3);
-\node at (-0.3,0.8) {$w_0$};
-\draw (0.2,0.69) -- (0.8,0.69) -- (0.8,0.83);
-\node at (0.5,1) {$w_1$};
-
-\fill[radius=2pt] (1,-0.2) circle;
-\fill[radius=2pt] (2,0.9) circle;
-\fill[radius=2pt] (3,1.7) circle;
-\fill[radius=2pt] (4,2.5) circle;
-\fill[radius=2pt] (5,2.2) circle;
-\fill[radius=2pt] (6,1.9) circle;
-\fill[radius=2pt] (7,3) circle;
-\fill[radius=2pt] (8,3.5) circle;
-
-\node at (4,-0.3) {$x_1$};
-\draw[densely dashed] (4,0) -- (4,1.68);
-\draw[thick, densely dotted] (4,0) .. controls (4.2,0.5) and (4.2,1.5) .. (4,1.68);
-\node at (5,0.9) {$w_0+w_1x_1$};
-\draw[densely dashed] (4,1.68) -- (4,2.5);
-\draw[thick, densely dotted] (4,1.68) .. controls (4.2,2) and (4.2,2.3) .. (4,2.5);
-\node at (4.3,2.1) {$\varepsilon$};
-\node at (4,2.9) {$y$};
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/03_02_46_0.png" src="../_images/03_02_46_0.png" />
 </div>
@@ -1037,42 +1007,7 @@ y =
 <div class="math notranslate nohighlight">
 \[ \hat{w}_j \neq w_j \;\;\;\; (j=0,1,\ldots,K) \]</div>
 <p>이를 그림으로 표현하면 다음과 같다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -s 1000,500 -l arrows.meta
-
-\draw[-&gt;, &gt;=Stealth] (-0.5,0) -- (9.5,0);
-\draw[-&gt;, &gt;=Stealth] (0,-1) -- (0,4);
-\draw[ultra thick] (-0.5,0.5) -- (9,3);
-\node at (-0.3,0.8) {$w_0$};
-\draw (0.2,0.69) -- (0.8,0.69) -- (0.8,0.83);
-\node at (0.5,1) {$w_1$};
-
-\fill[radius=2pt] (1,-0.2) circle;
-\fill[radius=2pt] (2,0.9) circle;
-\fill[radius=2pt] (3,1.7) circle;
-\fill[radius=2pt] (4,2.5) circle;
-\fill[radius=2pt] (5,2.2) circle;
-\fill[radius=2pt] (6,1.9) circle;
-\fill[radius=2pt] (7,3) circle;
-\fill[radius=2pt] (8,3.5) circle;
-
-\node at (4,-0.3) {$x_1$};
-\draw[densely dashed] (4,0) -- (4,1.68);
-\draw[thick, densely dotted] (4,0) .. controls (4.2,0.5) and (4.2,1.5) .. (4,1.68);
-\node at (5,0.9) {$w_0+w_1x_1$};
-\draw[densely dashed] (4,1.68) -- (4,2.5);
-\draw[thick, densely dotted] (4,1.68) .. controls (4.2,2) and (4.2,2.3) .. (4,2.5);
-\node at (4.3,2.1) {$\varepsilon$};
-\node at (4,2.9) {$y$};
-
-\draw[ultra thick, densely dotted] (-0.5,-0.4) -- (9,3.3);
-\node at (-0.3,-0.7) {$\hat{w}_0$};
-\draw (0.22,-0.09) -- (0.8,-0.09) -- (0.8,0.13);
-\node at (0.53,-0.4) {$\hat{w}_1$};
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/03_02_49_0.png" src="../_images/03_02_49_0.png" />
 </div>
@@ -1093,47 +1028,7 @@ y =
 </ol>
 <p>이렇게 발생하는 원래의 <span class="math notranslate nohighlight">\(y\)</span>값과 예측치 <span class="math notranslate nohighlight">\(\hat{y}\)</span>의 차이를 잔차(residual) <span class="math notranslate nohighlight">\(e\)</span>라고 한다.</p>
 <p>이를 그림으로 표현하면 다음과 같다. 그림에서 교란항과 잔차가 다르다는 점에 유의하라.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -s 1000,500 -l arrows.meta
-
-\draw[-&gt;, &gt;=Stealth] (-0.5,0) -- (9.5,0);
-\draw[-&gt;, &gt;=Stealth] (0,-1) -- (0,4);
-\draw[ultra thick] (-0.5,0.5) -- (9,3);
-\node at (-0.3,0.8) {$w_0$};
-\draw (0.2,0.69) -- (0.8,0.69) -- (0.8,0.83);
-\node at (0.5,1) {$w_1$};
-
-\fill[radius=2pt] (1,-0.2) circle;
-\fill[radius=2pt] (2,0.9) circle;
-\fill[radius=2pt] (3,1.7) circle;
-\fill[radius=2pt] (4,2.5) circle;
-\fill[radius=2pt] (5,2.2) circle;
-\fill[radius=2pt] (6,1.9) circle;
-\fill[radius=2pt] (7,3) circle;
-\fill[radius=2pt] (8,3.5) circle;
-
-\node at (4,-0.3) {$x_1$};
-\draw[densely dashed] (4,0) -- (4,1.68);
-\draw[thick, densely dotted] (4,0) .. controls (4.2,0.5) and (4.2,1.5) .. (4,1.68);
-\node at (5,0.9) {$w_0+w_1x_1$};
-\draw[densely dashed] (4,1.68) -- (4,2.5);
-\draw[thick, densely dotted] (4,1.68) .. controls (4.2,2) and (4.2,2.3) .. (4,2.5);
-\node at (4.3,2.1) {$\varepsilon$};
-\node at (4,2.9) {$y$};
-
-\draw[ultra thick, densely dotted] (-0.5,-0.4) -- (9,3.3);
-\node at (-0.3,-0.7) {$\hat{w}_0$};
-\draw (0.22,-0.09) -- (0.8,-0.09) -- (0.8,0.13);
-\node at (0.53,-0.4) {$\hat{w}_1$};
-
-\draw[thick, densely dotted] (4,0) .. controls (3.8,0.2) and (3.8,1.2) .. (4,1.34);
-\node at (3,0.4) {$\hat{w}_0+\hat{w}_1x_1$};
-\draw[thick, densely dotted] (4,1.34) .. controls (3.8,1.7) and (3.8,2.1) .. (4,2.5);
-\node at (3.7,1.9) {$e$};
-</pre></div>
-</div>
-</div>
+<div class="cell tag_remove-input docutils container">
 <div class="cell_output docutils container">
 <img alt="../_images/03_02_52_0.png" src="../_images/03_02_52_0.png" />
 </div>
