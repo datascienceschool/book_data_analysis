@@ -252,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_04.html">
-     3.5. 선형 회귀분석 모형
+     3.4. 선형회귀분석
     </a>
    </li>
   </ul>
@@ -444,13 +444,30 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   3.2.4. 회귀분석모형
+   3.2.4. 회귀분석
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
    3.2.5. 선형회귀분석
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     3.2.5.1. 선형회귀분석의 가정
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     3.2.5.2. 선형회귀분석의 1차적 목적
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     3.2.5.3. 선형회귀분석을 사용한 종속변수 예측
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -488,13 +505,30 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   3.2.4. 회귀분석모형
+   3.2.4. 회귀분석
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id6">
    3.2.5. 선형회귀분석
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id7">
+     3.2.5.1. 선형회귀분석의 가정
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     3.2.5.2. 선형회귀분석의 1차적 목적
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id9">
+     3.2.5.3. 선형회귀분석을 사용한 종속변수 예측
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -562,10 +596,10 @@ title="Print to PDF"
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   203.4</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sat, 23 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>6.69e-34</td>
+  <th>Date:</th>             <td>Sun, 24 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>6.69e-34</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>15:00:43</td>     <th>  Log-Likelihood:    </th> <td> -350.54</td>
+  <th>Time:</th>                 <td>15:46:36</td>     <th>  Log-Likelihood:    </th> <td> -350.54</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   244</td>      <th>  AIC:               </th> <td>   705.1</td>
@@ -721,10 +755,10 @@ Name: tip, dtype: float64
   <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   105.9</td>
 </tr>
 <tr>
-  <th>Date:</th>             <td>Sat, 23 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>9.67e-34</td>
+  <th>Date:</th>             <td>Sun, 24 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>9.67e-34</td>
 </tr>
 <tr>
-  <th>Time:</th>                 <td>15:00:43</td>     <th>  Log-Likelihood:    </th> <td> -347.99</td>
+  <th>Time:</th>                 <td>15:46:37</td>     <th>  Log-Likelihood:    </th> <td> -347.99</td>
 </tr>
 <tr>
   <th>No. Observations:</th>      <td>   244</td>      <th>  AIC:               </th> <td>   702.0</td>
@@ -861,12 +895,11 @@ Name: tip, dtype: float64
 </ul>
 </section>
 <section id="id5">
-<h2><span class="section-number">3.2.4. </span>회귀분석모형<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>수학적으로 회귀분석은 데이터 <span class="math notranslate nohighlight">\(N\)</span>개의 데이터 <span class="math notranslate nohighlight">\(\{x_i, y_i\} (i=1,2,\ldots,N)\)</span>가 있을 때 이와 가장 비슷한 함수</p>
+<h2><span class="section-number">3.2.4. </span>회귀분석<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>수학적으로 회귀분석을 정의할 수 있는 방법도 여러가지가 있다. 가장 간단한 정의는 <span class="math notranslate nohighlight">\(N\)</span>개의 데이터 <span class="math notranslate nohighlight">\(\{x_i, y_i\} (i=1,2,\ldots,N)\)</span>가 있을 때 이 데이터와 가장 비슷한 함수</p>
 <div class="math notranslate nohighlight">
 \[ y = f(x) \]</div>
-<p>를 찾아내는 것이다.</p>
-<p>가장 비슷하다는 것은 다음과 같이 정의한다.</p>
+<p>를 찾아내는 것이다. 가장 비슷하다는 것은 다음과 같이 정의한다.</p>
 <p>실제 데이터 <span class="math notranslate nohighlight">\(x_i (i=1,2,\ldots,N)\)</span>를 이 함수에 넣으면 함수의 결과 즉, 회귀분석 예측값 <span class="math notranslate nohighlight">\(\hat{y}_i (i=1,2,\ldots,N)\)</span>이 나온다.</p>
 <div class="math notranslate nohighlight">
 \[ \hat{y}_i = f(x_i) \]</div>
@@ -943,14 +976,169 @@ Length: 244, dtype: float64
 </section>
 <section id="id6">
 <h2><span class="section-number">3.2.5. </span>선형회귀분석<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
-<p>미리 정해놓은 함수들의 집합 즉, 회귀분석모형으로 가장 기초적인 것이 선형함수(linear function)이다. 선형함수는 출력값 <span class="math notranslate nohighlight">\(y\)</span>가 다음 수식처럼 입력값 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>의 선형조합(linear combination)인 경우를 말한다.</p>
+<p>이제 회귀분석 중에서 가장 널리 사용되는 <b>선형회귀분석(linear regression analysis)</b>에 대해 설명한다.</p>
+<section id="id7">
+<h3><span class="section-number">3.2.5.1. </span>선형회귀분석의 가정<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
+<p>선형회귀분석에서는 현실세계의 데이터가 다음과 같은 자연법칙을 따른다고 가정한다.</p>
 <div class="math notranslate nohighlight">
-\[  y = w_0 + w_1 \cdot x_1  + w_2 \cdot x_2 + \cdots + w_K \cdot x_K \]</div>
-<p>이런 선형함수를 회귀분석모형으로 사용하는 것을 <b>선형회귀분석(linear regression analysis)</b>이라고 한다.</p>
-<p>회귀분석모형으로 반드시 선형함수를 사용해야만 하는 것은 아니다. 선형함수를 사용하지 않는 비선형회귀분석(non-linear egression analysis)도 가능하다. 예를 들어 다음과 같은 방정식을 가진 함수들 중에서 가장 잔차제곱합이 작은 함수를 찾을 수도 있다. 이러한 회귀분석모형을 사용하는 것을 세미로그회귀분석(semilog regression analysis)이라고 한다.</p>
+\[ 
+y = 
+\underbrace{w_0 + w_1 \cdot x_1  + w_2 \cdot x_2 + \cdots + w_K \cdot x_K}_{\text{독립변수의 선형조합}} 
++ \underbrace{\varepsilon}_{\text{교란항}}
+\]</div>
+<p>이 자연법칙 식에서 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>는 <span class="math notranslate nohighlight">\(K\)</span>개의 독립변수의 값이고 <span class="math notranslate nohighlight">\(w_0, w_1, \ldots, w_K\)</span>는 상수항을 포함한 가중치다. 독립변수의 값은 데이터 표본마다 바뀔 수 있지만 가중치는 항상 변하지 않는 고정된 값이다. 가중치와 독립변수로 이루어진 다음</p>
 <div class="math notranslate nohighlight">
-\[ y = w_0 \cdot e^{w_1 x_1} \cdot e^{w_2 x_2} \cdots e^{w_K x_K} \]</div>
-<p>하지만 선형회귀분석은 독립변수(입력)와 종속변수(출력)의 관계를 직관적으로 알 수 있다는 장점과 뒤에서 설명할 여러가지 추가적인 분석이 가능하다는 장점이 있어서 회귀분석을 할 때 가장 우선적으로 시도할만한 가치가 있다.</p>
+\[ w_0 + w_1 \cdot x_1  + w_2 \cdot x_2 + \cdots + w_K \cdot x_K \]</div>
+<p>부분을 독립변수의 <b>선형조합(linear combination)</b>이라고 한다. 위 식에서 이 선형조합 부분은 독립변수의 값과 가중치만 알면 정확하게 계산할 수 있다.</p>
+<p>위 자연법칙 식에서 가장 끝에 있는 <span class="math notranslate nohighlight">\(\varepsilon\)</span>은 <b>교란항(disturbance)</b>이라고 하며 값을 예측할 수 없는 확률변수이다. 따라서 위 자연법칙을 해석하면 다음과 같은 의미가 된다.</p>
+<blockquote>
+<div><p>종속변수 <span class="math notranslate nohighlight">\(y\)</span>의 값은 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 값의 선형조합으로 어느 정도 결정되지만 이것만으로 예측할 수 없는 부분이 존재한다.</p>
+</div></blockquote>
+<p>이를 그림으로 표현하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -s 1000,500 -l arrows.meta
+
+\draw[-&gt;, &gt;=Stealth] (-0.5,0) -- (9.5,0);
+\draw[-&gt;, &gt;=Stealth] (0,-1) -- (0,4);
+\draw[ultra thick] (-0.5,0.5) -- (9,3);
+\node at (-0.3,0.8) {$w_0$};
+\draw (0.2,0.69) -- (0.8,0.69) -- (0.8,0.83);
+\node at (0.5,1) {$w_1$};
+
+\fill[radius=2pt] (1,-0.2) circle;
+\fill[radius=2pt] (2,0.9) circle;
+\fill[radius=2pt] (3,1.7) circle;
+\fill[radius=2pt] (4,2.5) circle;
+\fill[radius=2pt] (5,2.2) circle;
+\fill[radius=2pt] (6,1.9) circle;
+\fill[radius=2pt] (7,3) circle;
+\fill[radius=2pt] (8,3.5) circle;
+
+\node at (4,-0.3) {$x_1$};
+\draw[densely dashed] (4,0) -- (4,1.68);
+\draw[thick, densely dotted] (4,0) .. controls (4.2,0.5) and (4.2,1.5) .. (4,1.68);
+\node at (5,0.9) {$w_0+w_1x_1$};
+\draw[densely dashed] (4,1.68) -- (4,2.5);
+\draw[thick, densely dotted] (4,1.68) .. controls (4.2,2) and (4.2,2.3) .. (4,2.5);
+\node at (4.3,2.1) {$\varepsilon$};
+\node at (4,2.9) {$y$};
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_02_46_0.png" src="../_images/03_02_46_0.png" />
+</div>
+</div>
+</section>
+<section id="id8">
+<h3><span class="section-number">3.2.5.2. </span>선형회귀분석의 1차적 목적<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
+<p>선형회귀분석의 1차적인 목적은 바로 이 가중치 <span class="math notranslate nohighlight">\(w_0, w_1, \ldots, w_K\)</span>을 알아내는 것이다. 하지만 우리는 어떠한 선형회귀분석 방법으로 이 값을 100% 정확하게는 알아낼 수 없다. 우리가 선형회귀분석으로 알아낸 값은 가중치 <span class="math notranslate nohighlight">\(w_0, w_1, \ldots, w_K\)</span>에 대한 추정치 <span class="math notranslate nohighlight">\(\hat{w}_0, \hat{w}_1, \ldots, \hat{w}_K\)</span>일 뿐이다. 이 가중치의 추정치 <span class="math notranslate nohighlight">\(\hat{w}_j\)</span>는 원래 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>와 같은 값이라는 보장이 없다.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{w}_j \neq w_j \;\;\;\; (j=0,1,\ldots,K) \]</div>
+<p>이를 그림으로 표현하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -s 1000,500 -l arrows.meta
+
+\draw[-&gt;, &gt;=Stealth] (-0.5,0) -- (9.5,0);
+\draw[-&gt;, &gt;=Stealth] (0,-1) -- (0,4);
+\draw[ultra thick] (-0.5,0.5) -- (9,3);
+\node at (-0.3,0.8) {$w_0$};
+\draw (0.2,0.69) -- (0.8,0.69) -- (0.8,0.83);
+\node at (0.5,1) {$w_1$};
+
+\fill[radius=2pt] (1,-0.2) circle;
+\fill[radius=2pt] (2,0.9) circle;
+\fill[radius=2pt] (3,1.7) circle;
+\fill[radius=2pt] (4,2.5) circle;
+\fill[radius=2pt] (5,2.2) circle;
+\fill[radius=2pt] (6,1.9) circle;
+\fill[radius=2pt] (7,3) circle;
+\fill[radius=2pt] (8,3.5) circle;
+
+\node at (4,-0.3) {$x_1$};
+\draw[densely dashed] (4,0) -- (4,1.68);
+\draw[thick, densely dotted] (4,0) .. controls (4.2,0.5) and (4.2,1.5) .. (4,1.68);
+\node at (5,0.9) {$w_0+w_1x_1$};
+\draw[densely dashed] (4,1.68) -- (4,2.5);
+\draw[thick, densely dotted] (4,1.68) .. controls (4.2,2) and (4.2,2.3) .. (4,2.5);
+\node at (4.3,2.1) {$\varepsilon$};
+\node at (4,2.9) {$y$};
+
+\draw[ultra thick, densely dotted] (-0.5,-0.4) -- (9,3.3);
+\node at (-0.3,-0.7) {$\hat{w}_0$};
+\draw (0.22,-0.09) -- (0.8,-0.09) -- (0.8,0.13);
+\node at (0.53,-0.4) {$\hat{w}_1$};
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_02_49_0.png" src="../_images/03_02_49_0.png" />
+</div>
+</div>
+</section>
+<section id="id9">
+<h3><span class="section-number">3.2.5.3. </span>선형회귀분석을 사용한 종속변수 예측<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<p>선형회귀분석의 최종 목적은 독립변수의 값이 주어졌을 때 종속변수의 값을 예측하는 것이다. 이 때는 다음 수식을 사용하게 된다.</p>
+<div class="math notranslate nohighlight">
+\[ 
+\hat{y} = 
+\hat{w}_0 + \hat{w}_1 \cdot x_1  + \hat{w}_2 \cdot x_2 + \cdots + \hat{w}_K \cdot x_K
+\]</div>
+<p>이 예측치 <span class="math notranslate nohighlight">\(\hat{y}\)</span>값은 두가지 측면에서 원래의 <span class="math notranslate nohighlight">\(y\)</span>값과 달라진다.</p>
+<ol class="simple">
+<li><p>가중치 <span class="math notranslate nohighlight">\(w\)</span>를 정확하게 예측하더라도 교란항(disturbance) <span class="math notranslate nohighlight">\(\varepsilon\)</span>만큼 차이가 있다.</p></li>
+<li><p>그런데 가중치 <span class="math notranslate nohighlight">\(w\)</span> 자체도 정확하게 예측하지 못하고 이에 대한 추정치 <span class="math notranslate nohighlight">\(\hat{w}\)</span>을 사용하므로 선형조합 부분도 원래의 선형조합 부분과 차이가 있다.</p></li>
+</ol>
+<p>이렇게 발생하는 원래의 <span class="math notranslate nohighlight">\(y\)</span>값과 예측치 <span class="math notranslate nohighlight">\(\hat{y}\)</span>의 차이를 잔차(residual) <span class="math notranslate nohighlight">\(e\)</span>라고 한다.</p>
+<p>이를 그림으로 표현하면 다음과 같다. 그림에서 교란항과 잔차가 다르다는 점에 유의하라.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%</span><span class="k">tikz</span> -s 1000,500 -l arrows.meta
+
+\draw[-&gt;, &gt;=Stealth] (-0.5,0) -- (9.5,0);
+\draw[-&gt;, &gt;=Stealth] (0,-1) -- (0,4);
+\draw[ultra thick] (-0.5,0.5) -- (9,3);
+\node at (-0.3,0.8) {$w_0$};
+\draw (0.2,0.69) -- (0.8,0.69) -- (0.8,0.83);
+\node at (0.5,1) {$w_1$};
+
+\fill[radius=2pt] (1,-0.2) circle;
+\fill[radius=2pt] (2,0.9) circle;
+\fill[radius=2pt] (3,1.7) circle;
+\fill[radius=2pt] (4,2.5) circle;
+\fill[radius=2pt] (5,2.2) circle;
+\fill[radius=2pt] (6,1.9) circle;
+\fill[radius=2pt] (7,3) circle;
+\fill[radius=2pt] (8,3.5) circle;
+
+\node at (4,-0.3) {$x_1$};
+\draw[densely dashed] (4,0) -- (4,1.68);
+\draw[thick, densely dotted] (4,0) .. controls (4.2,0.5) and (4.2,1.5) .. (4,1.68);
+\node at (5,0.9) {$w_0+w_1x_1$};
+\draw[densely dashed] (4,1.68) -- (4,2.5);
+\draw[thick, densely dotted] (4,1.68) .. controls (4.2,2) and (4.2,2.3) .. (4,2.5);
+\node at (4.3,2.1) {$\varepsilon$};
+\node at (4,2.9) {$y$};
+
+\draw[ultra thick, densely dotted] (-0.5,-0.4) -- (9,3.3);
+\node at (-0.3,-0.7) {$\hat{w}_0$};
+\draw (0.22,-0.09) -- (0.8,-0.09) -- (0.8,0.13);
+\node at (0.53,-0.4) {$\hat{w}_1$};
+
+\draw[thick, densely dotted] (4,0) .. controls (3.8,0.2) and (3.8,1.2) .. (4,1.34);
+\node at (3,0.4) {$\hat{w}_0+\hat{w}_1x_1$};
+\draw[thick, densely dotted] (4,1.34) .. controls (3.8,1.7) and (3.8,2.1) .. (4,2.5);
+\node at (3.7,1.9) {$e$};
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_02_52_0.png" src="../_images/03_02_52_0.png" />
+</div>
+</div>
+</section>
 </section>
 </section>
 
