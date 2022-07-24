@@ -252,7 +252,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_04.html">
-     3.4. 선형회귀분석
+     3.4. 최소자승법
     </a>
    </li>
   </ul>
@@ -579,66 +579,39 @@ title="Print to PDF"
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
 <span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="simpletable">
-<caption>OLS Regression Results</caption>
-<tr>
-  <th>Dep. Variable:</th>           <td>tip</td>       <th>  R-squared:         </th> <td>   0.457</td>
-</tr>
-<tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.454</td>
-</tr>
-<tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   203.4</td>
-</tr>
-<tr>
-  <th>Date:</th>             <td>Sun, 24 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>6.69e-34</td>
-</tr>
-<tr>
-  <th>Time:</th>                 <td>15:46:36</td>     <th>  Log-Likelihood:    </th> <td> -350.54</td>
-</tr>
-<tr>
-  <th>No. Observations:</th>      <td>   244</td>      <th>  AIC:               </th> <td>   705.1</td>
-</tr>
-<tr>
-  <th>Df Residuals:</th>          <td>   242</td>      <th>  BIC:               </th> <td>   712.1</td>
-</tr>
-<tr>
-  <th>Df Model:</th>              <td>     1</td>      <th>                     </th>     <td> </td>   
-</tr>
-<tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>Intercept</th>  <td>    0.9203</td> <td>    0.160</td> <td>    5.761</td> <td> 0.000</td> <td>    0.606</td> <td>    1.235</td>
-</tr>
-<tr>
-  <th>total_bill</th> <td>    0.1050</td> <td>    0.007</td> <td>   14.260</td> <td> 0.000</td> <td>    0.091</td> <td>    0.120</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-  <th>Omnibus:</th>       <td>20.185</td> <th>  Durbin-Watson:     </th> <td>   2.151</td>
-</tr>
-<tr>
-  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  37.750</td>
-</tr>
-<tr>
-  <th>Skew:</th>          <td> 0.443</td> <th>  Prob(JB):          </th> <td>6.35e-09</td>
-</tr>
-<tr>
-  <th>Kurtosis:</th>      <td> 4.711</td> <th>  Cond. No.          </th> <td>    53.0</td>
-</tr>
-</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    tip   R-squared:                       0.457
+Model:                            OLS   Adj. R-squared:                  0.454
+Method:                 Least Squares   F-statistic:                     203.4
+Date:                Sun, 24 Jul 2022   Prob (F-statistic):           6.69e-34
+Time:                        16:40:16   Log-Likelihood:                -350.54
+No. Observations:                 244   AIC:                             705.1
+Df Residuals:                     242   BIC:                             712.1
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      0.9203      0.160      5.761      0.000       0.606       1.235
+total_bill     0.1050      0.007     14.260      0.000       0.091       0.120
+==============================================================================
+Omnibus:                       20.185   Durbin-Watson:                   2.151
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               37.750
+Skew:                           0.443   Prob(JB):                     6.35e-09
+Kurtosis:                       4.711   Cond. No.                         53.0
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
 </div>
 <p>위 코드를 작성하는 방법와 결과를 해석하는 방법은 다음 절에서 자세힌 설명한다. 우선은 위 결과로부터 직선의 방정식이 다음과 같다는 것을 알 수 있다.</p>
 <div class="math notranslate nohighlight">
@@ -738,69 +711,40 @@ Name: tip, dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill + size&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><table class="simpletable">
-<caption>OLS Regression Results</caption>
-<tr>
-  <th>Dep. Variable:</th>           <td>tip</td>       <th>  R-squared:         </th> <td>   0.468</td>
-</tr>
-<tr>
-  <th>Model:</th>                   <td>OLS</td>       <th>  Adj. R-squared:    </th> <td>   0.463</td>
-</tr>
-<tr>
-  <th>Method:</th>             <td>Least Squares</td>  <th>  F-statistic:       </th> <td>   105.9</td>
-</tr>
-<tr>
-  <th>Date:</th>             <td>Sun, 24 Jul 2022</td> <th>  Prob (F-statistic):</th> <td>9.67e-34</td>
-</tr>
-<tr>
-  <th>Time:</th>                 <td>15:46:37</td>     <th>  Log-Likelihood:    </th> <td> -347.99</td>
-</tr>
-<tr>
-  <th>No. Observations:</th>      <td>   244</td>      <th>  AIC:               </th> <td>   702.0</td>
-</tr>
-<tr>
-  <th>Df Residuals:</th>          <td>   241</td>      <th>  BIC:               </th> <td>   712.5</td>
-</tr>
-<tr>
-  <th>Df Model:</th>              <td>     2</td>      <th>                     </th>     <td> </td>   
-</tr>
-<tr>
-  <th>Covariance Type:</th>      <td>nonrobust</td>    <th>                     </th>     <td> </td>   
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-       <td></td>         <th>coef</th>     <th>std err</th>      <th>t</th>      <th>P>|t|</th>  <th>[0.025</th>    <th>0.975]</th>  
-</tr>
-<tr>
-  <th>Intercept</th>  <td>    0.6689</td> <td>    0.194</td> <td>    3.455</td> <td> 0.001</td> <td>    0.288</td> <td>    1.050</td>
-</tr>
-<tr>
-  <th>total_bill</th> <td>    0.0927</td> <td>    0.009</td> <td>   10.172</td> <td> 0.000</td> <td>    0.075</td> <td>    0.111</td>
-</tr>
-<tr>
-  <th>size</th>       <td>    0.1926</td> <td>    0.085</td> <td>    2.258</td> <td> 0.025</td> <td>    0.025</td> <td>    0.361</td>
-</tr>
-</table>
-<table class="simpletable">
-<tr>
-  <th>Omnibus:</th>       <td>24.753</td> <th>  Durbin-Watson:     </th> <td>   2.100</td>
-</tr>
-<tr>
-  <th>Prob(Omnibus):</th> <td> 0.000</td> <th>  Jarque-Bera (JB):  </th> <td>  46.169</td>
-</tr>
-<tr>
-  <th>Skew:</th>          <td> 0.545</td> <th>  Prob(JB):          </th> <td>9.43e-11</td>
-</tr>
-<tr>
-  <th>Kurtosis:</th>      <td> 4.831</td> <th>  Cond. No.          </th> <td>    67.6</td>
-</tr>
-</table><br/><br/>Notes:<br/>[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.</div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    tip   R-squared:                       0.468
+Model:                            OLS   Adj. R-squared:                  0.463
+Method:                 Least Squares   F-statistic:                     105.9
+Date:                Sun, 24 Jul 2022   Prob (F-statistic):           9.67e-34
+Time:                        16:40:17   Log-Likelihood:                -347.99
+No. Observations:                 244   AIC:                             702.0
+Df Residuals:                     241   BIC:                             712.5
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+Intercept      0.6689      0.194      3.455      0.001       0.288       1.050
+total_bill     0.0927      0.009     10.172      0.000       0.075       0.111
+size           0.1926      0.085      2.258      0.025       0.025       0.361
+==============================================================================
+Omnibus:                       24.753   Durbin-Watson:                   2.100
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               46.169
+Skew:                           0.545   Prob(JB):                     9.43e-11
+Kurtosis:                       4.831   Cond. No.                         67.6
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
 </div>
 <p>위 코드에 대해서도 다음 절에서 설명한다. 일단은 위 결과로부터 우리가 원하는 방정식은 다음과 같다는 것을 알 수 있다.</p>
 <div class="math notranslate nohighlight">
