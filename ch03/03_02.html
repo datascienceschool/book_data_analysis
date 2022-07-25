@@ -472,21 +472,19 @@ title="Print to PDF"
      3.2.5.1. 선형회귀분석의 가정
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   3.2.6. 가중치의 의미
-  </a>
-  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     3.2.5.2. 가중치의 의미
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id9">
-     3.2.6.1. 선형회귀분석의 1차적 목적
+     3.2.5.3. 선형회귀분석의 1차적 목적
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id10">
-     3.2.6.2. 선형회귀분석을 사용한 종속변수 예측
+     3.2.5.4. 선형회귀분석을 사용한 종속변수 예측
     </a>
    </li>
   </ul>
@@ -540,21 +538,19 @@ title="Print to PDF"
      3.2.5.1. 선형회귀분석의 가정
     </a>
    </li>
-  </ul>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id8">
-   3.2.6. 가중치의 의미
-  </a>
-  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id8">
+     3.2.5.2. 가중치의 의미
+    </a>
+   </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id9">
-     3.2.6.1. 선형회귀분석의 1차적 목적
+     3.2.5.3. 선형회귀분석의 1차적 목적
     </a>
    </li>
    <li class="toc-h3 nav-item toc-entry">
     <a class="reference internal nav-link" href="#id10">
-     3.2.6.2. 선형회귀분석을 사용한 종속변수 예측
+     3.2.5.4. 선형회귀분석을 사용한 종속변수 예측
     </a>
    </li>
   </ul>
@@ -969,9 +965,8 @@ y =
 <p>종속변수 <span class="math notranslate nohighlight">\(y\)</span>의 값은 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span> 값의 선형조합으로 어느 정도 결정되지만 이것만으로 예측할 수 없는 부분이 존재한다.</p>
 </div>
 </section>
-</section>
 <section id="id8">
-<h2><span class="section-number">3.2.6. </span>가중치의 의미<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">3.2.5.2. </span>가중치의 의미<a class="headerlink" href="#id8" title="Permalink to this headline">#</a></h3>
 <p>선형회귀분석에서 가중치는 독립변수가 종속변수에 미치는 영향을 정량화한 것이다. 수식으로 보면 독립변수 <span class="math notranslate nohighlight">\(x_1\)</span>이 단위크기 1만큼 커지면 종속변수 <span class="math notranslate nohighlight">\(y\)</span>는 가중치 <span class="math notranslate nohighlight">\(w_1\)</span>만큼 커진다. 가중치가 크면 독립변수가 변했을 때 종속변수가 받는 영향이 크다는 뜻이다. 만약 가중치의 부호가 음수이면 독립변수가 증가했을 때 종속변수는 증가하는게 아니라 감소한다.</p>
 <p>독립변수가 1개인 선형회귀분석의 경우에는 자연법칙이 다음과 같아진다.</p>
 <div class="math notranslate nohighlight">
@@ -982,8 +977,9 @@ y =
 <img alt="../_images/03_02_48_0.png" src="../_images/03_02_48_0.png" />
 </div>
 </div>
+</section>
 <section id="id9">
-<h3><span class="section-number">3.2.6.1. </span>선형회귀분석의 1차적 목적<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.2.5.3. </span>선형회귀분석의 1차적 목적<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
 <p>선형회귀분석의 1차적인 목적은 바로 이 가중치 <span class="math notranslate nohighlight">\(w_0, w_1, \ldots, w_K\)</span>을 알아내는 것이다. 하지만 우리는 어떠한 선형회귀분석 방법으로 이 값을 100% 정확하게는 알아낼 수 없다. 우리가 선형회귀분석으로 알아낸 값은 가중치 <span class="math notranslate nohighlight">\(w_0, w_1, \ldots, w_K\)</span>에 대한 추정치 <span class="math notranslate nohighlight">\(\hat{w}_0, \hat{w}_1, \ldots, \hat{w}_K\)</span>일 뿐이다. 이 가중치의 추정치 <span class="math notranslate nohighlight">\(\hat{w}_j\)</span>는 원래 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>와 같은 값이라는 보장이 없다.</p>
 <div class="math notranslate nohighlight">
 \[ \hat{w}_j \neq w_j \;\;\;\; (j=0,1,\ldots,K) \]</div>
@@ -995,7 +991,7 @@ y =
 </div>
 </section>
 <section id="id10">
-<h3><span class="section-number">3.2.6.2. </span>선형회귀분석을 사용한 종속변수 예측<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
+<h3><span class="section-number">3.2.5.4. </span>선형회귀분석을 사용한 종속변수 예측<a class="headerlink" href="#id10" title="Permalink to this headline">#</a></h3>
 <p>선형회귀분석의 최종 목적은 독립변수의 값이 주어졌을 때 종속변수의 값을 예측하는 것이다. 이 때는 다음 수식을 사용하게 된다.</p>
 <div class="math notranslate nohighlight">
 \[ 
