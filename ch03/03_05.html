@@ -1071,10 +1071,7 @@ Notes:
 <span class="n">scale</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                       <span class="mf">0.081</span>     
 </pre></div>
 </div>
-</section>
-<section id="id4">
-<h2><span class="section-number">3.5.3. </span>가중치 검정<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<p>확률론적 가정을 했을 때 얻을 수 있는 또다른 결론은 표준편차로 나눈 가중치 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>가 진실된 가중치 <span class="math notranslate nohighlight">\(w\)</span>를 중심으로 하고 자유도가 <span class="math notranslate nohighlight">\(N−K-1\)</span>인 스튜던트t분포를 따른다는 점이다. 여기서 <span class="math notranslate nohighlight">\(N\)</span>은 데이터의 개수, <span class="math notranslate nohighlight">\(K\)</span>는 독립변수의 개수다.</p>
+<p>확률론적 가정을 했을 때 얻을 수 있는 또다른 결론은 우리가 구한 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>가 진실된 가중치 <span class="math notranslate nohighlight">\(w\)</span>를 중심으로 하고 자유도가 <span class="math notranslate nohighlight">\(N−K-1\)</span>인 스튜던트t분포를 따른다는 점이다. 여기서 <span class="math notranslate nohighlight">\(N\)</span>은 데이터의 개수, <span class="math notranslate nohighlight">\(K\)</span>는 독립변수의 개수다.</p>
 <div class="math notranslate nohighlight">
 \[
 \dfrac{\hat{w}_i - w_i}{se_i} \sim t_{N-K-1}
@@ -1090,6 +1087,40 @@ Notes:
 </pre></div>
 </div>
 <p>예를 들어 total_bill에 대한 가중치의 추정값은 0.8255이지만 진실된 가중치는 0.665 ~ 0.986 사이에 95%의 확률로 존재한다.</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.5.3. </span>가중치 검정<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>진실된 가중치의 정확한 값은 몰라도 어떤 분포를 이루는지 알 수 있게 되었으므로 진실된 가중치의 값이 0인지 아닌지에 대한 검정을 실시하는 것도 가능해진다. 이를 가중치 검정이라고 한다. 가중치 검정의 귀무가설은 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[ H_0 : w_j = 0 \;\;\; (k=0,1,\ldots,K) \]</div>
+<p>가중치 검정의 결과로 나온 유의확률(p-value)이 아주 작은 값이면 위 귀무가설은 기각되고 가중치는 0이 아닐 가능성이 높아진다. 하지만 반대로 유의확률이 커지면 귀무가설이 채택되어 가중치가 0일 가능성이 높아진다. 가중치 검정의 유의확률은 결과요약에서 <code class="docutils literal notranslate"><span class="pre">P&gt;|t|</span></code> 열 아래에 표시되어 있다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">================================================================</span>
+                                                        <span class="n">P</span><span class="o">&gt;|</span><span class="n">t</span><span class="o">|</span>   
+<span class="o">----------------------------------------------------------------</span>
+<span class="n">Intercept</span>                                               <span class="mf">0.000</span>    
+<span class="n">C</span><span class="p">(</span><span class="n">sex</span><span class="p">)[</span><span class="n">T</span><span class="o">.</span><span class="n">Female</span><span class="p">]</span>                                        <span class="mf">0.847</span>   
+<span class="n">scale</span><span class="p">(</span><span class="n">total_bill</span><span class="p">)</span>                                       <span class="mf">0.000</span>   
+<span class="n">scale</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                                             <span class="mf">0.025</span>   
+</pre></div>
+</div>
+<p>이 값은 결과 객체의 <code class="docutils literal notranslate"><span class="pre">pvalues</span></code> 속성에도 들어있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">pvalues</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept            1.647112e-100
+C(sex)[T.Female]      8.474464e-01
+scale(total_bill)     3.139115e-20
+scale(size)           2.517131e-02
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>total_bill에 대한 유의확률은 아주 작은 값이므로 total_bill의 가중치가 0일 확률은 거의 없다. 즉, total_bill은 팁 금액에 유의한 영향을 미친다. 하지만 sex 값의 경우 8.47%나 되는 큰 값이므로 가중치가 0일 가능성이 높다. 즉, sex는 팁 금액에 유의한 영향을 미치지 않는다. size의 경우에는 우리가 유의확률의 기준값인 유의수준(significance level)을 어느 값으로 정하느냐에 따라 결론이 달라질 수 있다. 유의확률이 2.5%이므로 만약 유의수준을 1%로 잡는다면 유의확률이 기준보다 커서 귀무가설이 채택되고 팁 금액에 유의한 영향을 미치지 않는다고 결론내릴 것이다. 하지만 유의수준을 5%로 잡는다면 유의확률이 이보자 작으므로 귀무가설을 기각하여 팁 금액에 유의한 영향을 미친다고 볼 수 있다.</p>
 </section>
 </section>
 
