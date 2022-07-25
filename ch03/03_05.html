@@ -447,6 +447,11 @@ title="Print to PDF"
    3.5.1. 부트스트래핑을 사용한 가중치 추정값의 범위 계산
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.5.2. 확률론적 가정을 사용한 가중치 표준편차 계산
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -471,6 +476,11 @@ title="Print to PDF"
    3.5.1. 부트스트래핑을 사용한 가중치 추정값의 범위 계산
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.5.2. 확률론적 가정을 사용한 가중치 표준편차 계산
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -483,8 +493,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.5. </span>가중치 검정<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>앞 절에서 선형회귀분석을 사용하여 계산한 가중치의 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>은 자연법칙에서 정해진 정확한 가중치 <span class="math notranslate nohighlight">\(w\)</span>와 다를 수 있다고 하였다. 팁 데이터를 사용하여 이 사실을 좀 더 자세히 설명한다.</p>
-<p>우리는 현재 다음과 같은 244개 레코드의 팁 데이터를 가지고 있다.</p>
+<p>앞 절에서 선형회귀분석을 사용하여 계산한 가중치의 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>은 자연법칙에서 정해진 정확한 가중치 <span class="math notranslate nohighlight">\(w\)</span>와 다를 수 있다고 하였다. 팁 데이터를 사용하여 이 사실을 좀 더 자세히 설명한다. 우리는 현재 다음과 같은 244개 레코드의 팁 데이터를 가지고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -640,7 +649,7 @@ title="Print to PDF"
 </div>
 <p>하지만 이 팁 데이터는 특정한 기간동안 식당에서 수집한 데이터일 것이다. 이 데이터를 수집하기 전에도 데이터는 계속 나오고 있었고 수집과정이 끝난 이후에도 데이터는 계속 생성되어 나올 것이다.
 만약 우리가 선형회귀분석으로 구한 가중치가 자연법칙에 의해 정해진 정확한 값이라면 이 데이터 뿐 아니라 다른 시점에 나온 데이터를 쓴다고 하더라고 같은 가중치가 나와야 할 것이다.
-같은 논리로 우리가 가진 244개의 데이터 중 일부만 사용하여 가중치를 계산한다고 하더라고 항상 같은 값이 나와야 한다. 이 사실을 검증하기 위해 244개의 데이터를 122개씩 2개의 데이터셋으로 나누어 각각 가중치를 구해보자</p>
+같은 논리로 우리가 가진 244개의 데이터 중 일부만 사용하여 가중치를 계산한다고 하더라고 항상 같은 값이 나와야 한다. 이 사실을 검증하기 위해 244개의 데이터를 122개씩 2개의 데이터셋으로 나누어 각각 가중치를 구해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips1</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">122</span><span class="p">]</span>
@@ -734,8 +743,8 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 15.8 s
-Wall time: 15.9 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 15.3 s
+Wall time: 15.3 s
 </pre></div>
 </div>
 <div class="output text_html"><div>
@@ -951,7 +960,105 @@ Wall time: 15.9 s
 </table>
 </div></div></div>
 </div>
-<p>total_bill 변수의 가중치는 평균적으로 0.8정도이고 0.4~1.5 정도의 범위에 있는 것을 알 수 있다. 어떤 경우든 음수가 나오는 경우는 없다. 즉 total_bill 값이 커질수록 팁이 증가하는 결과는 변함없다. 하지만 sex 변수의 가중치는 -0.3 ~ 0.3 범위의 값이 나온다. 즉 음수인 경우도 나오고 양수인 경우도 나온다. 이는 sex 변수가 팁에 미치는 영향을 정확히 분석할 수 없다는 뜻이다.</p>
+<p>우선 각 가중치의 평균값은 244개의 모든 데이터를 사용하여 구한 가중치 추정값과 비슷하다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result</span><span class="o">.</span><span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept            2.988859
+C(sex)[T.Female]     0.026419
+scale(total_bill)    0.825518
+scale(size)          0.182794
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>다음으로 각 가중치의 범위를 살펴본다. total_bill 변수의 가중치의 약 0.8이고 표준편차는 이보다 작은 0.15다. 값의 범위는 0.4~1.5 정도로 음수가 나오는 경우는 없다. 즉 total_bill 값이 커질수록 팁이 증가하는 결과는 변함없다. 하지만 sex 변수 가중치의 경우, 평균은 0.03이고 표준편차는 0.12로 표준편차의 크기가 평균보다 크다. 따라서 값의 범위가 -0.3 ~ 0.3로 음수인 경우도 나오고 양수인 경우도 나온다. 이는 sex 변수가 팁에 미치는 영향을 정확히 분석할 수 없다는 뜻이다. 극단적으로는 sex 변수 가중치의 진실된 값은 0인데 오차로 인해 0이 아닌 숫자가 나온 것일 수도 있다.</p>
+<p>가중치의 값이 0이라는 것은 해당 독립변수가 종속변수에 전혀 영향을 미치지 않는다는 뜻이다. 즉, 선형회귀분석을 할 때 독립변수로 넣으면 안된다는 의미가 된다.</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.5.2. </span>확률론적 가정을 사용한 가중치 표준편차 계산<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>부트스트래핑을 사용하여 가중치 추정값의 범위 즉, 표준편차를 대략이나마 계산할 수 있었다. 하지만 부트스트래핑은 선형회귀분석을 반복해야하므로 실행시간이 오래 걸린다는 단점이 있다. 몇가지 확률론적 가정을 한다면 부트스트래핑을 하지 않고도 가중치 추정값의 표준편차를 빠르게 계산할 수 있는 방법이 있다. 사용하는 가정은 다음과 같다.</p>
+<ol class="simple">
+<li><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>은 기댓값이 0이고 분산값이 어떤 경우에도 변하지 않는 정규분포다.</p></li>
+<li><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>의 값은 독립변수들의 값에 영향을 받지 않는다.</p></li>
+<li><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>의 값은 서로 영향을 주지 않는다.</p></li>
+</ol>
+<p>이러한 가정하에서 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>의 표준편차 <span class="math notranslate nohighlight">\(se_j\)</span>는 다음 수식으로 계산할 수 있다. se는 standard error의 약자이다.</p>
+<div class="math notranslate nohighlight">
+\[
+se_j = \sqrt{\dfrac{e^Te}{N-K} \big((X^TX)^{-1}\big)_{jj}}
+\]</div>
+<p>이 수식에서 <span class="math notranslate nohighlight">\(e\)</span>는 잔차 벡터이고 <span class="math notranslate nohighlight">\((X^TX)^{-1}\big)_{jj}\)</span>는 행렬 <span class="math notranslate nohighlight">\((X^TX)^{-1}\)</span>의 <span class="math notranslate nohighlight">\(j\)</span>번째 대각성분을 뜻한다.</p>
+<p>statsmodels 패키지를 사용한 선형회귀분석 결과 객체는 <code class="docutils literal notranslate"><span class="pre">bse</span></code> 속성에 가중치 표준편차 정보를 미리 계산하여 가지고 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">bse</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept            0.081358
+C(sex)[T.Female]     0.137179
+scale(total_bill)    0.081698
+scale(size)          0.081138
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>결과 객체의 <code class="docutils literal notranslate"><span class="pre">summary</span></code> 메서드로 나오는 결과요약에서는 <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">err</span></code>로 표시된 다음 부분이 위 식으로 계산한 표준편차다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                        <span class="n">coef</span>    <span class="n">std</span> <span class="n">err</span>     
+<span class="o">--------------------------------------------</span>
+<span class="n">Intercept</span>                         <span class="mf">0.081</span>     
+<span class="n">C</span><span class="p">(</span><span class="n">sex</span><span class="p">)[</span><span class="n">T</span><span class="o">.</span><span class="n">Female</span><span class="p">]</span>                  <span class="mf">0.137</span>     
+<span class="n">scale</span><span class="p">(</span><span class="n">total_bill</span><span class="p">)</span>                 <span class="mf">0.082</span>     
+<span class="n">scale</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                       <span class="mf">0.081</span>     
+</pre></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    tip   R-squared:                       0.468
+Model:                            OLS   Adj. R-squared:                  0.461
+Method:                 Least Squares   F-statistic:                     70.36
+Date:                Mon, 25 Jul 2022   Prob (F-statistic):           1.11e-32
+Time:                        17:31:44   Log-Likelihood:                -347.97
+No. Observations:                 244   AIC:                             703.9
+Df Residuals:                     240   BIC:                             717.9
+Df Model:                           3                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================
+                        coef    std err          t      P&gt;|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------
+Intercept             2.9889      0.081     36.737      0.000       2.829       3.149
+C(sex)[T.Female]      0.0264      0.137      0.193      0.847      -0.244       0.297
+scale(total_bill)     0.8255      0.082     10.104      0.000       0.665       0.986
+scale(size)           0.1828      0.081      2.253      0.025       0.023       0.343
+==============================================================================
+Omnibus:                       25.084   Durbin-Watson:                   2.098
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               47.089
+Skew:                           0.550   Prob(JB):                     5.95e-11
+Kurtosis:                       4.850   Cond. No.                         2.88
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
