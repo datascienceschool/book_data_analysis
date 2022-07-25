@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. 분류 - 범주형 데이터를 예측한다." href="../ch04/04_00.html" />
@@ -444,6 +446,211 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.5. </span>가중치 검정<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>앞 절에서 선형회귀분석을 사용하여 계산한 가중치의 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>은 자연법칙에서 정해진 정확한 가중치 <span class="math notranslate nohighlight">\(w\)</span>와 다를 수 있다고 하였다. 팁 데이터를 사용하여 이 사실을 좀 더 자세히 설명한다.</p>
+<p>우리는 현재 다음과 같은 244개 레코드의 팁 데이터를 가지고 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+<span class="n">tips</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>total_bill</th>
+      <th>tip</th>
+      <th>sex</th>
+      <th>smoker</th>
+      <th>day</th>
+      <th>time</th>
+      <th>size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>16.99</td>
+      <td>1.01</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>10.34</td>
+      <td>1.66</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>21.01</td>
+      <td>3.50</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>23.68</td>
+      <td>3.31</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>24.59</td>
+      <td>3.61</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sun</td>
+      <td>Dinner</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>239</th>
+      <td>29.03</td>
+      <td>5.92</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>240</th>
+      <td>27.18</td>
+      <td>2.00</td>
+      <td>Female</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>241</th>
+      <td>22.67</td>
+      <td>2.00</td>
+      <td>Male</td>
+      <td>Yes</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>242</th>
+      <td>17.82</td>
+      <td>1.75</td>
+      <td>Male</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>243</th>
+      <td>18.78</td>
+      <td>3.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Thur</td>
+      <td>Dinner</td>
+      <td>2</td>
+    </tr>
+  </tbody>
+</table>
+<p>244 rows × 7 columns</p>
+</div></div></div>
+</div>
+<p>하지만 이 팁 데이터는 특정한 기간동안 식당에서 수집한 데이터일 것이다. 이 데이터를 수집하기 전에도 데이터는 계속 나오고 있었고 수집과정이 끝난 이후에도 데이터는 계속 생성되어 나올 것이다.
+만약 우리가 선형회귀분석으로 구한 가중치가 자연법칙에 의해 정해진 정확한 값이라면 이 데이터 뿐 아니라 다른 시점에 나온 데이터를 쓴다고 하더라고 같은 가중치가 나와야 할 것이다.
+같은 논리로 우리가 가진 244개의 데이터 중 일부만 사용하여 가중치를 계산한다고 하더라고 항상 같은 값이 나와야 한다. 이 사실을 검증하기 위해 244개의 데이터를 122개씩 2개의 데이터셋으로 나누어 각각 가중치를 구해보자</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips1</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">122</span><span class="p">]</span>
+<span class="n">tips2</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">122</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>앞부분 절반의 데이터만 사용하여 가중치를 구하면 다음과 같이 나온다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ scale(total_bill) + scale(size) + C(sex)&quot;</span><span class="p">,</span> <span class="n">tips1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result1</span><span class="o">.</span><span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept            3.090691
+C(sex)[T.Female]    -0.116007
+scale(total_bill)    0.877198
+scale(size)          0.061576
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>이번에는 뒷부분 절반의 데이터만 사용하여 가중치를 구한 결과이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ scale(total_bill) + scale(size) + C(sex)&quot;</span><span class="p">,</span> <span class="n">tips2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result2</span><span class="o">.</span><span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept            2.878103
+C(sex)[T.Female]     0.164822
+scale(total_bill)    0.788890
+scale(size)          0.300813
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>두 선형회귀분석 결과가 서로 다르다는 것을 알 수 있다. 심지어 sex 데이터의 가중치는 부호조차 서로 다르다.</p>
 </section>
 
     <script type="text/x-thebe-config">

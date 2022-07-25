@@ -89,6 +89,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3.5. 가중치 검정" href="03_05.html" />
     <link rel="prev" title="3.3. 선형회귀분석을 위한 준비" href="03_03.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -254,7 +255,22 @@ const thebe_selector_output = ".output, .cell_output"
      3.4. 최소자승법
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_05.html">
+     3.5. 가중치 검정
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch04/04_00.html">
+   4. 분류 - 범주형 데이터를 예측한다.
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch05/05_00.html">
+   5. 시계열분석
+  </a>
  </li>
 </ul>
 
@@ -731,7 +747,7 @@ X^TX \hat{w} = X^T y
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>count    2.440000e+02
-mean    -2.256847e-16
+mean    -1.401429e-16
 std      1.009249e+00
 min     -2.921205e+00
 25%     -5.603338e-01
@@ -759,7 +775,7 @@ Name: e, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression.linear_model.OLS at 0x134631300&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression.linear_model.OLS at 0x2ab659b16a0&gt;
 </pre></div>
 </div>
 </div>
@@ -773,7 +789,7 @@ Name: e, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression.linear_model.RegressionResultsWrapper at 0x1346318a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression.linear_model.RegressionResultsWrapper at 0x2ab669a52e0&gt;
 </pre></div>
 </div>
 </div>
@@ -791,8 +807,8 @@ Name: e, dtype: float64
 Dep. Variable:                      y   R-squared:                       0.468
 Model:                            OLS   Adj. R-squared:                  0.461
 Method:                 Least Squares   F-statistic:                     70.36
-Date:                Sun, 24 Jul 2022   Prob (F-statistic):           1.11e-32
-Time:                        16:44:12   Log-Likelihood:                -347.97
+Date:                Mon, 25 Jul 2022   Prob (F-statistic):           1.11e-32
+Time:                        15:51:20   Log-Likelihood:                -347.97
 No. Observations:                 244   AIC:                             703.9
 Df Residuals:                     240   BIC:                             717.9
 Df Model:                           3                                         
@@ -838,6 +854,19 @@ Notes:
 \hat{w}_3 &amp;= 0.1828 \\
 \end{aligned}
 \end{split}\]</div>
+<p>result 객체는 가중치를 포함한 다양한 정보를 내포하고 있다. 예를 들어 가중치 값은 <code class="docutils literal notranslate"><span class="pre">params</span></code> 속성에 들어있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">params</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([2.98885891, 0.02641868, 0.82551828, 0.18279436])
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="from-formula">
 <h2><span class="section-number">3.4.4. </span><code class="docutils literal notranslate"><span class="pre">from_formula</span></code> 클래스 메서드를 이용한 최소자승법<a class="headerlink" href="#from-formula" title="Permalink to this headline">#</a></h2>
@@ -860,8 +889,8 @@ Notes:
 Dep. Variable:                    tip   R-squared:                       0.468
 Model:                            OLS   Adj. R-squared:                  0.461
 Method:                 Least Squares   F-statistic:                     70.36
-Date:                Sun, 24 Jul 2022   Prob (F-statistic):           1.11e-32
-Time:                        16:51:24   Log-Likelihood:                -347.97
+Date:                Mon, 25 Jul 2022   Prob (F-statistic):           1.11e-32
+Time:                        15:51:20   Log-Likelihood:                -347.97
 No. Observations:                 244   AIC:                             703.9
 Df Residuals:                     240   BIC:                             717.9
 Df Model:                           3                                         
@@ -922,6 +951,13 @@ Notes:
             <p class="prev-next-subtitle">previous</p>
             <p class="prev-next-title"><span class="section-number">3.3. </span>선형회귀분석을 위한 준비</p>
         </div>
+    </a>
+    <a class='right-next' id="next-link" href="03_05.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">3.5. </span>가중치 검정</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
     </a>
 </div>
             </footer>
