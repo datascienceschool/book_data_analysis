@@ -451,6 +451,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id3">
    3.5.2. 확률론적 가정을 사용한 가중치 표준편차 계산
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     3.5.2.1. 가중치 검정
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -480,6 +487,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id3">
    3.5.2. 확률론적 가정을 사용한 가중치 표준편차 계산
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id4">
+     3.5.2.1. 가중치 검정
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -1012,15 +1026,7 @@ dtype: float64
 </div>
 </div>
 </div>
-<p>결과 객체의 <code class="docutils literal notranslate"><span class="pre">summary</span></code> 메서드로 나오는 결과요약에서는 <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">err</span></code>로 표시된 다음 부분이 위 식으로 계산한 표준편차다.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                        <span class="n">coef</span>    <span class="n">std</span> <span class="n">err</span>     
-<span class="o">--------------------------------------------</span>
-<span class="n">Intercept</span>                         <span class="mf">0.081</span>     
-<span class="n">C</span><span class="p">(</span><span class="n">sex</span><span class="p">)[</span><span class="n">T</span><span class="o">.</span><span class="n">Female</span><span class="p">]</span>                  <span class="mf">0.137</span>     
-<span class="n">scale</span><span class="p">(</span><span class="n">total_bill</span><span class="p">)</span>                 <span class="mf">0.082</span>     
-<span class="n">scale</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                       <span class="mf">0.081</span>     
-</pre></div>
-</div>
+<p>결과 객체의 <code class="docutils literal notranslate"><span class="pre">summary</span></code> 메서드로 나오는 결과요약에도 이 정보가 포함되어 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
@@ -1059,6 +1065,29 @@ Notes:
 </div>
 </div>
 </div>
+<p>결과요약에서 <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">err</span></code>로 표시된 다음 부분이 위 식으로 계산한 표준편차다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">============================================</span>
+                                <span class="n">std</span> <span class="n">err</span>     
+<span class="o">--------------------------------------------</span>
+<span class="n">Intercept</span>                         <span class="mf">0.081</span>     
+<span class="n">C</span><span class="p">(</span><span class="n">sex</span><span class="p">)[</span><span class="n">T</span><span class="o">.</span><span class="n">Female</span><span class="p">]</span>                  <span class="mf">0.137</span>     
+<span class="n">scale</span><span class="p">(</span><span class="n">total_bill</span><span class="p">)</span>                 <span class="mf">0.082</span>     
+<span class="n">scale</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                       <span class="mf">0.081</span>     
+</pre></div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">[0.025</span></code>라는 열에 표시된 정보는 가중치 추정값이 이 값보다 작을 확률이 2.5%라는 뜻이고 <code class="docutils literal notranslate"><span class="pre">0.975]</span></code>라는 열에 표시된 정보는 가중치 추정값이 이 값보다 클 확률이 2.5%라는 뜻이다. 즉, 진실된 가중치는 95%의 확률로 이 두 값 사이에 존재한다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">=====================================================================================</span>
+                                                                  <span class="p">[</span><span class="mf">0.025</span>      <span class="mf">0.975</span><span class="p">]</span>
+<span class="o">-------------------------------------------------------------------------------------</span>
+<span class="n">Intercept</span>                                                          <span class="mf">2.829</span>       <span class="mf">3.149</span>
+<span class="n">C</span><span class="p">(</span><span class="n">sex</span><span class="p">)[</span><span class="n">T</span><span class="o">.</span><span class="n">Female</span><span class="p">]</span>                                                  <span class="o">-</span><span class="mf">0.244</span>       <span class="mf">0.297</span>
+<span class="n">scale</span><span class="p">(</span><span class="n">total_bill</span><span class="p">)</span>                                                  <span class="mf">0.665</span>       <span class="mf">0.986</span>
+<span class="n">scale</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                                                        <span class="mf">0.023</span>       <span class="mf">0.343</span>
+</pre></div>
+</div>
+<section id="id4">
+<h3><span class="section-number">3.5.2.1. </span>가중치 검정<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
+</section>
 </section>
 </section>
 
