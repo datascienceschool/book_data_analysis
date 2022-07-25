@@ -420,12 +420,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.5.1. 부트스트래핑을 사용한 가중치 추정값의 오차범위 계산
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -437,6 +461,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.5.1. 부트스트래핑을 사용한 가중치 추정값의 오차범위 계산
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -612,12 +649,19 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>앞부분 절반의 데이터만 사용하여 가중치를 구하면 다음과 같이 나온다.</p>
+<p>앞부분 절반의 데이터만 사용하여 가중치를 구해보자. 일단 모형 문자열은 앞에서 사용한 것과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ scale(total_bill) + scale(size) + C(sex)&quot;</span><span class="p">,</span> <span class="n">tips1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;tip ~ scale(total_bill) + scale(size) + C(sex)&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">tips1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="n">result1</span><span class="o">.</span><span class="n">params</span>
 </pre></div>
 </div>
@@ -635,7 +679,7 @@ dtype: float64
 <p>이번에는 뒷부분 절반의 데이터만 사용하여 가중치를 구한 결과이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ scale(total_bill) + scale(size) + C(sex)&quot;</span><span class="p">,</span> <span class="n">tips2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">tips2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="n">result2</span><span class="o">.</span><span class="n">params</span>
 </pre></div>
 </div>
@@ -650,7 +694,265 @@ dtype: float64
 </div>
 </div>
 </div>
-<p>두 선형회귀분석 결과가 서로 다르다는 것을 알 수 있다. 심지어 sex 데이터의 가중치는 부호조차 서로 다르다.</p>
+<p>두 선형회귀분석 결과가 서로 다르다는 것을 알 수 있다. 심지어 sex 데이터의 가중치는 부호조차 서로 다르다. 이 결과를 따르자면 만약 데이터 수집을 더 진행하여 추가적인 데이터를 얻으면 선형회귀분석의 결과가 달라질 수도 있다는 뜻이다.</p>
+<p>두 데이터셋이 수집되는 동안 자연법칙이 변하지 않았다면 결론은 우리가 구한 가중치의 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>이 자연법칙이 내장하고 있는 정확한 가중치 <span class="math notranslate nohighlight">\(w\)</span>가 아니라는 뜻이다. 즉 가중치의 추정값은 오차를 가지고 있다. 이러한 오차가 발생하는 근본적인 원인은 우리가 가진 데이터가 제한적이기 때문이다.</p>
+<section id="id2">
+<h2><span class="section-number">3.5.1. </span>부트스트래핑을 사용한 가중치 추정값의 오차범위 계산<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>그러면 가중치 추정값이 가지는 오차의 크기가 어느 정도인지 알 수 있는 방법은 없을까? 정확한 오차를 계산하기 위해서는 뒤에서 설명할 몇가지 가정이 필요하지만 일단 부트스프래핑(boot-straping)이라는 간단한 방법으로 오차의 크기를 짐작해 볼 수 있다.</p>
+<p><b>부트스프래핑(boot-straping)</b>은 전체 데이터에서 일부 데이터만 무작위로 골라서 선형회귀분석을 하는 것을 반복하는 것이다. 한번 무작위 선택 후 선형회귀분석을 실시하면 하나의 가중치 추정값 세트가 나온다. 또 한번 다시 데이터를 무작위 선택하여 선형회귀분석을 실시하면 또다른 가중치 추정값 세트가 나온다. 이 과정을 1000번 반복하면 1000개의 가중치 추정값 세트가 나오게 된다. 이렇게 나온 1000개의 가중치 추정값의 분포를 살펴보면 대략적으로 가중치 추정값이 어떤 범위에 있는지 살펴볼 수 있다.</p>
+<p>다음 코드는 1000번의 반복 부트스트래핑을 통해 1000개의 가중치 추정값 세트를 구하는 코드다. 1000번의 선형회귀분석을 반복해야해서 실행시간이 길다. 코드 앞부분의 <code class="docutils literal notranslate"><span class="pre">%%time</span></code>은 코드의 실행시간을 출력하는 주피터 노트북 매직명령이다. 저자의 컴퓨터에서는 10초 이상의 시간이 걸렸다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">1000</span>
+<span class="n">params_w0</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">params_w1</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">params_w2</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="n">params_w3</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">N</span><span class="p">):</span>
+    <span class="n">idx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">choice</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">),</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">),</span> <span class="n">replace</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">tips_i</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">tips_i</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">params_w0</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">params_w1</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">params_w2</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span>
+    <span class="n">params_w3</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span>
+
+<span class="n">weights</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;w_0&quot;</span><span class="p">:</span> <span class="n">params_w0</span><span class="p">,</span>
+    <span class="s2">&quot;w_sex&quot;</span><span class="p">:</span> <span class="n">params_w1</span><span class="p">,</span>
+    <span class="s2">&quot;w_total_bill&quot;</span><span class="p">:</span> <span class="n">params_w2</span><span class="p">,</span>
+    <span class="s2">&quot;w_size&quot;</span><span class="p">:</span> <span class="n">params_w3</span><span class="p">,</span>
+<span class="p">})</span>
+<span class="n">weights</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 15.8 s
+Wall time: 15.9 s
+</pre></div>
+</div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>w_0</th>
+      <th>w_sex</th>
+      <th>w_total_bill</th>
+      <th>w_size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>2.932750</td>
+      <td>0.005990</td>
+      <td>0.718988</td>
+      <td>0.227791</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>3.084244</td>
+      <td>0.087494</td>
+      <td>0.995008</td>
+      <td>0.049014</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.839063</td>
+      <td>0.034984</td>
+      <td>0.634239</td>
+      <td>0.285801</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.978962</td>
+      <td>0.032246</td>
+      <td>0.655065</td>
+      <td>0.034758</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>2.888683</td>
+      <td>0.075727</td>
+      <td>0.799001</td>
+      <td>0.162599</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>995</th>
+      <td>2.863593</td>
+      <td>0.023681</td>
+      <td>0.767523</td>
+      <td>0.253856</td>
+    </tr>
+    <tr>
+      <th>996</th>
+      <td>2.826096</td>
+      <td>0.268302</td>
+      <td>0.683563</td>
+      <td>0.227148</td>
+    </tr>
+    <tr>
+      <th>997</th>
+      <td>2.945665</td>
+      <td>0.049849</td>
+      <td>1.045534</td>
+      <td>0.047011</td>
+    </tr>
+    <tr>
+      <th>998</th>
+      <td>2.992950</td>
+      <td>0.013680</td>
+      <td>0.751426</td>
+      <td>0.206695</td>
+    </tr>
+    <tr>
+      <th>999</th>
+      <td>3.013054</td>
+      <td>-0.069818</td>
+      <td>0.800282</td>
+      <td>0.101308</td>
+    </tr>
+  </tbody>
+</table>
+<p>1000 rows × 4 columns</p>
+</div></div></div>
+</div>
+<p>이 결과를 히스토그램으로 나타내면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">2</span><span class="p">),</span> <span class="n">layout</span><span class="o">=</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_05_16_0.png" src="../_images/03_05_16_0.png" />
+</div>
+</div>
+<p>이 가중치 추정값들의 간단한 통계는 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">weights</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>w_0</th>
+      <th>w_sex</th>
+      <th>w_total_bill</th>
+      <th>w_size</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>count</th>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+      <td>1000.000000</td>
+    </tr>
+    <tr>
+      <th>mean</th>
+      <td>2.982061</td>
+      <td>0.032277</td>
+      <td>0.824139</td>
+      <td>0.178676</td>
+    </tr>
+    <tr>
+      <th>std</th>
+      <td>0.099503</td>
+      <td>0.124839</td>
+      <td>0.151586</td>
+      <td>0.104542</td>
+    </tr>
+    <tr>
+      <th>min</th>
+      <td>2.714403</td>
+      <td>-0.342809</td>
+      <td>0.391266</td>
+      <td>-0.127939</td>
+    </tr>
+    <tr>
+      <th>25%</th>
+      <td>2.912348</td>
+      <td>-0.052066</td>
+      <td>0.711447</td>
+      <td>0.103797</td>
+    </tr>
+    <tr>
+      <th>50%</th>
+      <td>2.979314</td>
+      <td>0.033755</td>
+      <td>0.821183</td>
+      <td>0.179384</td>
+    </tr>
+    <tr>
+      <th>75%</th>
+      <td>3.048256</td>
+      <td>0.113475</td>
+      <td>0.924565</td>
+      <td>0.252902</td>
+    </tr>
+    <tr>
+      <th>max</th>
+      <td>3.372273</td>
+      <td>0.395771</td>
+      <td>1.461748</td>
+      <td>0.523164</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>total_bill 변수의 가중치는 평균적으로 0.8정도이고 0.4~1.5 정도의 범위에 있는 것을 알 수 있다. 어떤 경우든 음수가 나오는 경우는 없다. 즉 total_bill 값이 커질수록 팁이 증가하는 결과는 변함없다. 하지만 sex 변수의 가중치는 -0.3 ~ 0.3 범위의 값이 나온다. 즉 음수인 경우도 나오고 양수인 경우도 나온다. 이는 sex 변수가 팁에 미치는 영향을 정확히 분석할 수 없다는 뜻이다.</p>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
