@@ -444,7 +444,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.5.1. 부트스트래핑을 사용한 가중치 추정값의 오차범위 계산
+   3.5.1. 부트스트래핑을 사용한 가중치 추정값의 범위 계산
   </a>
  </li>
 </ul>
@@ -468,7 +468,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.5.1. 부트스트래핑을 사용한 가중치 추정값의 오차범위 계산
+   3.5.1. 부트스트래핑을 사용한 가중치 추정값의 범위 계산
   </a>
  </li>
 </ul>
@@ -697,7 +697,7 @@ dtype: float64
 <p>두 선형회귀분석 결과가 서로 다르다는 것을 알 수 있다. 심지어 sex 데이터의 가중치는 부호조차 서로 다르다. 이 결과를 따르자면 만약 데이터 수집을 더 진행하여 추가적인 데이터를 얻으면 선형회귀분석의 결과가 달라질 수도 있다는 뜻이다.</p>
 <p>두 데이터셋이 수집되는 동안 자연법칙이 변하지 않았다면 결론은 우리가 구한 가중치의 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>이 자연법칙이 내장하고 있는 정확한 가중치 <span class="math notranslate nohighlight">\(w\)</span>가 아니라는 뜻이다. 즉 가중치의 추정값은 오차를 가지고 있다. 이러한 오차가 발생하는 근본적인 원인은 우리가 가진 데이터가 제한적이기 때문이다.</p>
 <section id="id2">
-<h2><span class="section-number">3.5.1. </span>부트스트래핑을 사용한 가중치 추정값의 오차범위 계산<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.5.1. </span>부트스트래핑을 사용한 가중치 추정값의 범위 계산<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>그러면 가중치 추정값이 가지는 오차의 크기가 어느 정도인지 알 수 있는 방법은 없을까? 정확한 오차를 계산하기 위해서는 뒤에서 설명할 몇가지 가정이 필요하지만 일단 부트스프래핑(boot-straping)이라는 간단한 방법으로 오차의 크기를 짐작해 볼 수 있다.</p>
 <p><b>부트스프래핑(boot-straping)</b>은 전체 데이터에서 일부 데이터만 무작위로 골라서 선형회귀분석을 하는 것을 반복하는 것이다. 한번 무작위 선택 후 선형회귀분석을 실시하면 하나의 가중치 추정값 세트가 나온다. 또 한번 다시 데이터를 무작위 선택하여 선형회귀분석을 실시하면 또다른 가중치 추정값 세트가 나온다. 이 과정을 1000번 반복하면 1000개의 가중치 추정값 세트가 나오게 된다. 이렇게 나온 1000개의 가중치 추정값의 분포를 살펴보면 대략적으로 가중치 추정값이 어떤 범위에 있는지 살펴볼 수 있다.</p>
 <p>다음 코드는 1000번의 반복 부트스트래핑을 통해 1000개의 가중치 추정값 세트를 구하는 코드다. 1000번의 선형회귀분석을 반복해야해서 실행시간이 길다. 코드 앞부분의 <code class="docutils literal notranslate"><span class="pre">%%time</span></code>은 코드의 실행시간을 출력하는 주피터 노트북 매직명령이다. 저자의 컴퓨터에서는 10초 이상의 시간이 걸렸다.</p>
