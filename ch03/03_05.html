@@ -451,13 +451,11 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id3">
    3.5.2. 확률론적 가정을 사용한 가중치 표준편차 계산
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     3.5.2.1. 가중치 검정
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.5.3. 가중치 검정
+  </a>
  </li>
 </ul>
 
@@ -487,13 +485,11 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#id3">
    3.5.2. 확률론적 가정을 사용한 가중치 표준편차 계산
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#id4">
-     3.5.2.1. 가중치 검정
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.5.3. 가중치 검정
+  </a>
  </li>
 </ul>
 
@@ -1075,7 +1071,15 @@ Notes:
 <span class="n">scale</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                       <span class="mf">0.081</span>     
 </pre></div>
 </div>
-<p><code class="docutils literal notranslate"><span class="pre">[0.025</span></code>라는 열에 표시된 정보는 가중치 추정값이 이 값보다 작을 확률이 2.5%라는 뜻이고 <code class="docutils literal notranslate"><span class="pre">0.975]</span></code>라는 열에 표시된 정보는 가중치 추정값이 이 값보다 클 확률이 2.5%라는 뜻이다. 즉, 진실된 가중치는 95%의 확률로 이 두 값 사이에 존재한다.</p>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.5.3. </span>가중치 검정<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>확률론적 가정을 했을 때 얻을 수 있는 또다른 결론은 표준편차로 나눈 가중치 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>가 진실된 가중치 <span class="math notranslate nohighlight">\(w\)</span>를 중심으로 하고 자유도가 <span class="math notranslate nohighlight">\(N−K-1\)</span>인 스튜던트t분포를 따른다는 점이다. 여기서 <span class="math notranslate nohighlight">\(N\)</span>은 데이터의 개수, <span class="math notranslate nohighlight">\(K\)</span>는 독립변수의 개수다.</p>
+<div class="math notranslate nohighlight">
+\[
+\dfrac{\hat{w}_i - w_i}{se_i} \sim t_{N-K-1}
+\]</div>
+<p>이 사실을 사용하면 진실된 가중치 <span class="math notranslate nohighlight">\(w\)</span>가 존재할 범위를 계산할 수 있다. statsmodels 패키지로 구한 선형회귀분석 결과 요약에서 <code class="docutils literal notranslate"><span class="pre">[0.025</span></code>라는 열에 표시된 값은 가중치 추정값이 이 값보다 작을 확률이 2.5%라는 뜻이고 <code class="docutils literal notranslate"><span class="pre">0.975]</span></code>라는 열에 표시된 값은 가중치 추정값이 이 값보다 클 확률이 2.5%라는 뜻이다. 즉, 진실된 가중치는 95%의 확률로 이 두 값 사이에 존재한다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">=====================================================================================</span>
                                                                   <span class="p">[</span><span class="mf">0.025</span>      <span class="mf">0.975</span><span class="p">]</span>
 <span class="o">-------------------------------------------------------------------------------------</span>
@@ -1085,9 +1089,7 @@ Notes:
 <span class="n">scale</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                                                        <span class="mf">0.023</span>       <span class="mf">0.343</span>
 </pre></div>
 </div>
-<section id="id4">
-<h3><span class="section-number">3.5.2.1. </span>가중치 검정<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
-</section>
+<p>예를 들어 total_bill에 대한 가중치의 추정값은 0.8255이지만 진실된 가중치는 0.665 ~ 0.986 사이에 95%의 확률로 존재한다.</p>
 </section>
 </section>
 
