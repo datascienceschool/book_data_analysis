@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. 분류 - 범주형 데이터를 예측한다." href="../ch04/04_00.html" />
@@ -450,6 +452,11 @@ title="Print to PDF"
    3.6.1. 결정계수
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#f">
+   3.6.2. F-검정
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -472,6 +479,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
    3.6.1. 결정계수
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#f">
+   3.6.2. F-검정
   </a>
  </li>
 </ul>
@@ -771,7 +783,36 @@ Notes:
 </div>
 <section id="id2">
 <h2><span class="section-number">3.6.1. </span>결정계수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>분석결과요약에서 상단 오른쪽 열의 가장 위에 있는 <code class="docutils literal notranslate"><span class="pre">R-squared</span></code> 수치는 <b>결정계수(Coefficient of Determination)</b>라고 하는 값으로 선형회귀분석 성능을 표시한다.</p>
+<p>분석결과요약에서 상단 오른쪽 열의 가장 위에 있는 <code class="docutils literal notranslate"><span class="pre">R-squared</span></code> 수치는 <b>결정계수(Coefficient of Determination)</b>라고 하는 값으로 선형회귀분석 성능을 표시한다. 결정계수는 수학기호로 <span class="math notranslate nohighlight">\(R^2\)</span>라고 표시하므로 <code class="docutils literal notranslate"><span class="pre">R-squared</span></code>라는 이름을 사용하였다.</p>
+<p>최소자승법은 원 데이터의 종속변수 <span class="math notranslate nohighlight">\(y\)</span> 값과 예측된 종속변수 <span class="math notranslate nohighlight">\(\hat{y}\)</span>의 차이인 잔차제곱합 RSS(Residual Sum of Squares) 수치를 가장 작게 만드는 방법이라고 설명하였다. 하지만 RSS 값 자체는 모든 데이터에 대해 예측 오차를 제곱한 수치를 더한 것이므로 데이터의 수가 증가하면 같이 증가한다. 따라서 같은 분석을 하더라도 데이터의 개수가 적은 경우와 데이터의 개수가 많은 경우를 직접 비교할 수 없다. 이러한 단점을 극복하기 위해 잔차제곱합 RSS를 특정한 범위내로 정규화(normalization)시킨 것이 결정계수다. 결정계수는 다음과 같이 계산한다.</p>
+<div class="math notranslate nohighlight">
+\[
+R^2 = 1 - \dfrac{\text{RSS}}{\text{TSS}}
+\]</div>
+<p>또는</p>
+<div class="math notranslate nohighlight">
+\[
+R^2 = \dfrac{\text{ESS}}{\text{TSS}}
+\]</div>
+<p>두 식 중 어떤 것을 사용해도 같은 값이 나온다. 위 식에서 TSS와 ESS는 각각 다음과 같이 정의한다.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{TSS} = \sum_{i=1}^N (y_i-\bar{y})^2
+\]</div>
+<div class="math notranslate nohighlight">
+\[
+\text{ESS}=\sum_{i=1}^N (\hat{y}_i -\bar{\hat{y}})^2 
+\]</div>
+</section>
+<section id="f">
+<h2><span class="section-number">3.6.2. </span>F-검정<a class="headerlink" href="#f" title="Permalink to this headline">#</a></h2>
+<p>개별 개수가 아닌 전체 회귀 계수가 모두 의미가 있는지 확인하는 경우에는 다음과 같은 귀무 가설을 생각할 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+H_0:w_0=w_1=\cdots=w_K−1=0
+\]</div>
+<p>이는 전체 독립 변수 중 어느 것도 의미를 가진 것이 없다는 뜻이다. 대부분의 경우, 이 귀무가설은 기각된다. 다만 유의 확률이 얼마나 작은가에 따라서 기각되는 정도가 달라진다. 유의 확률이 작으면 작을수록 더 강력하게 기각된 것이므로 더 의미가 있는 모형이라고 할 수 있다. 따라서 여러 모형의 유의 확률을 비교하여 어느 모형이 더 성능이 좋은가를 비교할 때 이 유의 확률을 사용한다. 이러한 검정을 <b>선형회귀분석 F-검정(regression F-test)</b>이라고 한다.</p>
+<p>분석결과요약에서 F-statistic라고 표시된 400.3이라는 값이 회귀분석 F-검정의 검정통계량이고 Prob (F-statistic)로 표시된 2.21e-36라는 값이 유의확률이다.</p>
 </section>
 </section>
 
