@@ -636,7 +636,7 @@ dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reg1</span><span class="p">(</span><span class="n">total_bill</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mf">0.1050</span> <span class="o">*</span> <span class="n">total_bill</span> <span class="o">+</span> <span class="mf">0.9203</span>
+    <span class="k">return</span> <span class="mf">0.9203</span> <span class="o">+</span> <span class="mf">0.1050</span> <span class="o">*</span> <span class="n">total_bill</span>
 </pre></div>
 </div>
 </div>
@@ -684,7 +684,7 @@ Name: tip, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.1274999999999995
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>4.1275
 </pre></div>
 </div>
 </div>
@@ -753,7 +753,7 @@ dtype: float64
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reg2</span><span class="p">(</span><span class="n">total_bill</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
-    <span class="k">return</span> <span class="mf">0.0927</span> <span class="o">*</span> <span class="n">total_bill</span> <span class="o">+</span> <span class="mf">0.1926</span> <span class="o">*</span> <span class="n">size</span> <span class="o">+</span> <span class="mf">0.6689</span>
+    <span class="k">return</span> <span class="mf">0.6689</span> <span class="o">+</span> <span class="mf">0.0927</span> <span class="o">*</span> <span class="n">total_bill</span> <span class="o">+</span> <span class="mf">0.1926</span> <span class="o">*</span> <span class="n">size</span>
 </pre></div>
 </div>
 </div>
@@ -837,17 +837,17 @@ Name: tip, dtype: float64
 </section>
 <section id="id5">
 <h2><span class="section-number">3.2.4. </span>회귀분석<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>수학적으로 회귀분석을 정의할 수 있는 방법도 여러가지가 있다. 가장 간단한 정의는 <span class="math notranslate nohighlight">\(N\)</span>개의 데이터 <span class="math notranslate nohighlight">\(\{x_i, y_i\} (i=1,2,\ldots,N)\)</span>가 있을 때 이 데이터와 가장 비슷한 함수</p>
+<p>수학적으로 회귀분석을 정의할 수 있는 방법도 여러가지가 있다. 가장 간단한 정의는 <span class="math notranslate nohighlight">\(N\)</span>개의 데이터 <span class="math notranslate nohighlight">\(\{x_i, y_i\}\)</span>가 있을 때 이 데이터와 가장 비슷한 함수</p>
 <div class="math notranslate nohighlight">
 \[ y = f(x) \]</div>
 <p>를 찾아내는 것이다. 가장 비슷하다는 것은 다음과 같이 정의한다.</p>
-<p>실제 데이터 <span class="math notranslate nohighlight">\(x_i (i=1,2,\ldots,N)\)</span>를 이 함수에 넣으면 함수의 결과 즉, 회귀분석 예측값 <span class="math notranslate nohighlight">\(\hat{y}_i (i=1,2,\ldots,N)\)</span>이 나온다.</p>
+<p>우리가 가지고 있는 <span class="math notranslate nohighlight">\(N\)</span>개의 데이터 중 <span class="math notranslate nohighlight">\(i\)</span>번째 데이터 <span class="math notranslate nohighlight">\(x_i\)</span>를 이 함수에 넣으면 함수의 결과 즉, 회귀분석 예측값 <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>이 나온다.</p>
 <div class="math notranslate nohighlight">
 \[ \hat{y}_i = f(x_i) \]</div>
 <p>이 예측값 <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>은 <span class="math notranslate nohighlight">\(x_i\)</span>에 대응하는 원 데이터 <span class="math notranslate nohighlight">\(y_i\)</span>값과 차이가 있을 수 있다. 이 차이를 <b>잔차(residual)</b>라고 한다.</p>
 <div class="math notranslate nohighlight">
 \[ e_i = y_i - \hat{y}_i \]</div>
-<p><span class="math notranslate nohighlight">\(N\)</span>개의 모든 데이터에 대해 <span class="math notranslate nohighlight">\(N\)</span>개의 잔차값이 나온다. 이 모든 잔차를 제곱하여 더한 것을 <b>잔차제곱합(RSS: Residual Sum of Squares)</b>이라고 한다.</p>
+<p><span class="math notranslate nohighlight">\(N\)</span>개의 모든 데이터에 대해 이를 반복하면 <span class="math notranslate nohighlight">\(N\)</span>개의 잔차값이 나온다. 이 모든 잔차를 제곱하여 더한 것을 <b>잔차제곱합(RSS: Residual Sum of Squares)</b>이라고 한다.</p>
 <div class="math notranslate nohighlight">
 \[ \text{RSS} = \sum_{i=1}^N e_i^2 \]</div>
 <p>잔차제곱합 RSS가 작을수록 회귀분석으로 구한 예측값 <span class="math notranslate nohighlight">\(\hat{y}_i\)</span>값이 원래 데이터 <span class="math notranslate nohighlight">\(y_i\)</span>값이 비슷하다는 뜻이므로 좋은 함수가 된다. 회귀분석은 미리 정해놓은 여러가지 함수들 중에서 가장 잔차제곱합이 작은 함수를 찾는 과정이다. 미리 정해놓은 함수들의 집합을 <b>회귀분석모형(regression model)</b>이라고 한다.</p>
