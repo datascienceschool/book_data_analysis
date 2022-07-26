@@ -745,17 +745,21 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-<span class="n">formula1</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(crim)&quot;</span>
-<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula1</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(crim)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="n">model1</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
 <p>이번에는 zn이라는 독립변수를 사용하여 medv 값을 예측해 보자.</p>
+<p>이 때 모형 문자열은 다음과 같다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;medv ~ scale(zn)&quot;</span>
+</pre></div>
+</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula2</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(zn)&quot;</span>
-<span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula2</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(zn)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -777,7 +781,8 @@ title="Print to PDF"
 <p>그런데 만약 비교 대상이 되는 선형회귀분석에서 사용한 데이터의 개수가 다르면 문제가 발생한다. 잔차제곱합은 각 데이터에 대해 발생한 잔차 제곱의 합이므로 데이터의 개수가 늘어나면 증가하고 데이터의 개수가 적어지면 감소한다. 예를 들어 zn 데이터 중 일부가 누락되어가 잘못된 값이 들어가 있어서 zn 데이터를 독립변수로 사용하는 선형회귀분석에서는 데이터의 일부만 사용할 수 있다고 가정하고 다시 계산해보자. 여기에서는 데이터의 절반만 사용해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula2</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(zn)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span>
+<span class="n">result3</span> <span class="o">=</span> <span class="n">model3</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="n">result3</span><span class="o">.</span><span class="n">ssr</span>
 </pre></div>
 </div>
@@ -909,7 +914,13 @@ Notes:
 </div>
 </div>
 </div>
-<p>상단 오른쪽 열의 가장 윗쪽, 첫번째에 있는 <code class="docutils literal notranslate"><span class="pre">R-squared</span></code> 값이 결정계수다. <code class="docutils literal notranslate"><span class="pre">rsquared</span></code> 속성과 일치한다.</p>
+<p>상단 오른쪽 열의 가장 윗쪽, 첫번째에 있는 <code class="docutils literal notranslate"><span class="pre">R-squared</span></code> 값이 결정계수다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                            <span class="n">OLS</span> <span class="n">Regression</span> <span class="n">Results</span>                            
+<span class="o">==============================================================================</span>
+                                       <span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="p">:</span>                       <span class="mf">0.151</span>
+</pre></div>
+</div>
+<p>분석결과 객체의 <code class="docutils literal notranslate"><span class="pre">rsquared</span></code> 속성과 일치한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">rsquared</span>
@@ -925,13 +936,45 @@ Notes:
 </section>
 <section id="f">
 <h2><span class="section-number">3.6.2. </span>F-검정<a class="headerlink" href="#f" title="Permalink to this headline">#</a></h2>
-<p>개별 개수가 아닌 전체 회귀 계수가 모두 의미가 있는지 확인하는 경우에는 다음과 같은 귀무 가설을 생각할 수 있다.</p>
+<p>모형의 성능을 살펴보는 또다른 방법은 <b>선형회귀분석 F-검정(regression F-test)</b> 혹은 간단하게 F-검정이다. F-검정은 다음과 같은 귀무가설을 검증하는 것이다.</p>
 <div class="math notranslate nohighlight">
 \[
-H_0:w_0=w_1=\cdots=w_K−1=0
+H_0 : w_1 = w_2 = \cdots = w_K = 0
 \]</div>
-<p>이는 전체 독립 변수 중 어느 것도 의미를 가진 것이 없다는 뜻이다. 대부분의 경우, 이 귀무가설은 기각된다. 다만 유의 확률이 얼마나 작은가에 따라서 기각되는 정도가 달라진다. 유의 확률이 작으면 작을수록 더 강력하게 기각된 것이므로 더 의미가 있는 모형이라고 할 수 있다. 따라서 여러 모형의 유의 확률을 비교하여 어느 모형이 더 성능이 좋은가를 비교할 때 이 유의 확률을 사용한다. 이러한 검정을 <b>선형회귀분석 F-검정(regression F-test)</b>이라고 한다.</p>
-<p>분석결과요약에서 F-statistic라고 표시된 400.3이라는 값이 회귀분석 F-검정의 검정통계량이고 Prob (F-statistic)로 표시된 2.21e-36라는 값이 유의확률이다.</p>
+<p>이 귀무가설은 우리가 회귀분석에 사용한 독립변수 중 어느 것도 유의한 것이 없다는 뜻이다. 우리가 아무런 상관관계도 없는 독립변수만 골라서 넣을리는 없기 때문에 현실에서 대부분의 경우 이 귀무가설은 기각된다. 다만 유의확률이 작으면 작을수록 귀무가설을 더 강력하게 기각한 것이므로 더 의미가 있는 모형이라고 할 수 있다. 따라서 여러 모형의 유의확률을 비교하여 어느 모형이 더 성능이 좋은가를 비교할 때 이 유의확률을 사용할 수 있다.</p>
+<p>위에서 사용한 귀무가설을 결정계수와 결합하여 생각해보면 모든 독립변수의 계수가 유의하지 않다는 것은 회귀분석 모형이 1차 모형과 같아지는 최악의 경우이다. 이때는 RSS 값이 TSS와 같아져서 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>의 값이 0이된다. 따라서 F-검정의 귀무가설은 다음 귀무가설과 같다고 볼 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+H_0 : R^2 = 0 
+\]</div>
+<p>F-검정이라는 이름은 잔차제곱합을 ESS로 나눈 RSS/ESS 값이 F분포라는 확률분포를 따른다는 점에서 나온 것이다.</p>
+<div class="math notranslate nohighlight">
+\[
+\dfrac{\text{ESS}}{\text{RSS}} \sim F
+\]</div>
+<p>결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>가 0에 가까울수록 RSS/ESS 값이 커지고 F-검정의 유의확률도 증가한다. 반대로 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>가 1에 가까울수록 RSS/ESS 값과 F-검정의 유의확률이 감소한다. 따라서 RSS/ESS 값과 F-검정의 유의확률이 작을수록 더 뛰어난 회귀분석 성능을 보인다고 할 수 있다.</p>
+<p>RSS/ESS 값과 F-검정의 유의확률은 각각 회귀분석 결과 객체의 <code class="docutils literal notranslate"><span class="pre">fvalue</span></code>, <code class="docutils literal notranslate"><span class="pre">f_pvalue</span></code> 속성에 저장되어 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">fvalue</span><span class="p">,</span> <span class="n">result1</span><span class="o">.</span><span class="n">f_pvalue</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(89.4861147576812, 1.1739870821944483e-19)
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 값은 결과요약의 상단 오른쪽 열에도 나타나는데 각각 <code class="docutils literal notranslate"><span class="pre">F-statistic</span></code>, <code class="docutils literal notranslate"><span class="pre">Prob</span> <span class="pre">(F-statistic)</span></code> 라는 이름으로 표시된다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                            <span class="n">OLS</span> <span class="n">Regression</span> <span class="n">Results</span>                            
+<span class="o">==============================================================================</span>
+                                                                             
+                                                                             
+                                        <span class="n">F</span><span class="o">-</span><span class="n">statistic</span><span class="p">:</span>                     <span class="mf">89.49</span>
+                                        <span class="n">Prob</span> <span class="p">(</span><span class="n">F</span><span class="o">-</span><span class="n">statistic</span><span class="p">):</span>           <span class="mf">1.17e-19</span>
+</pre></div>
+</div>
 </section>
 </section>
 

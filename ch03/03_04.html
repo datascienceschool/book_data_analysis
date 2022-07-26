@@ -260,6 +260,11 @@ const thebe_selector_output = ".output, .cell_output"
      3.5. 가중치 검정
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_06.html">
+     3.6. 성능과 변수선택
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -780,7 +785,7 @@ Name: e, dtype: float64
 </div>
 </div>
 </div>
-<p>다음으로 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 메서드를 실행하여 분석결과 객체를 만든다.</p>
+<p>다음으로 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 메서드를 실행하여 분석결과 객체를 만든다. 이 객체는 <code class="docutils literal notranslate"><span class="pre">OLSResults</span></code> 클래스 객체다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
