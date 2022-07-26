@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.6. 성능과 변수선택 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.6. 모형성능과 변수선택 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -262,7 +262,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.6. 성능과 변수선택
+     3.6. 모형성능과 변수선택
     </a>
    </li>
   </ul>
@@ -449,13 +449,20 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.6.1. 결정계수
+   3.6.1. 모형성능
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#f">
-   3.6.2. F-검정
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     3.6.1.1. 결정계수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f">
+     3.6.1.2. F-검정
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -466,7 +473,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>성능과 변수선택</h1>
+                <h1>모형성능과 변수선택</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -478,13 +485,20 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.6.1. 결정계수
+   3.6.1. 모형성능
   </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#f">
-   3.6.2. F-검정
-  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id3">
+     3.6.1.1. 결정계수
+    </a>
+   </li>
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#f">
+     3.6.1.2. F-검정
+    </a>
+   </li>
+  </ul>
  </li>
 </ul>
 
@@ -497,7 +511,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.6. </span>성능과 변수선택<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.6. </span>모형성능과 변수선택<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>이 절에서는 모형의 성능을 가늠하는 방법과 성능 향상을 위해 어떤 변수를 선택해야 하는지를 설명한다. 예제 데이터로는 상관관계를 설명할 때 사용하였던 보스턴 집값 데이터를 사용한다. 보스턴 집값 데이터는 13개의 독립변수를 이용하여 medv라는 종속변수를 예측한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -736,6 +750,8 @@ title="Print to PDF"
 <p>506 rows × 14 columns</p>
 </div></div></div>
 </div>
+<section id="id2">
+<h2><span class="section-number">3.6.1. </span>모형성능<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>일단 범죄율 crim 변수만 사용하여 medv 값을 예측해 보자. 이 때 모형 문자열은 다음과 같다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;medv ~ scale(crim)&quot;</span>
 </pre></div>
@@ -794,8 +810,8 @@ title="Print to PDF"
 </div>
 </div>
 <p>잔차제곱합 값은 앞에서 구한 두 개의 결과보다 훨씬 작은 값이 나왔다. 따라서 잔차제곱합을 사용하여 선형회귀분석의 성능을 비교하는 방법은 데이터 개수가 다른 경우에 사용할 수 없다.</p>
-<section id="id2">
-<h2><span class="section-number">3.6.1. </span>결정계수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<section id="id3">
+<h3><span class="section-number">3.6.1.1. </span>결정계수<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h3>
 <p>이러한 단점을 극복하기 위해 잔차제곱합 RSS를 특정한 범위내로 정규화(normalization)시킨 <b>결정계수(Coefficient of Determination)</b>라는 성능지표를 사용할 수 있다. 결정계수는 다음과 같이 계산한다.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -935,7 +951,7 @@ Notes:
 </div>
 </section>
 <section id="f">
-<h2><span class="section-number">3.6.2. </span>F-검정<a class="headerlink" href="#f" title="Permalink to this headline">#</a></h2>
+<h3><span class="section-number">3.6.1.2. </span>F-검정<a class="headerlink" href="#f" title="Permalink to this headline">#</a></h3>
 <p>모형의 성능을 살펴보는 또다른 방법은 <b>선형회귀분석 F-검정(regression F-test)</b> 혹은 간단하게 F-검정이다. F-검정은 다음과 같은 귀무가설을 검증하는 것이다.</p>
 <div class="math notranslate nohighlight">
 \[
@@ -1000,6 +1016,7 @@ H_0 : R^2 = 0
 </div>
 </div>
 </div>
+</section>
 </section>
 </section>
 
