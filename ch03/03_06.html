@@ -811,8 +811,8 @@ R^2 = \dfrac{\text{ESS}}{\text{TSS}}
 \text{ESS}=\sum_{i=1}^N (\hat{y}_i -\bar{\hat{y}})^2 
 \]</div>
 <p>TSS를 정의할 때 사용된 <span class="math notranslate nohighlight">\(\bar{y}\)</span>는 전체 <span class="math notranslate nohighlight">\(y\)</span> 데이터의 평균값이고 ESS를 정의할 때 사용된 <span class="math notranslate nohighlight">\(\bar{\hat{y}}\)</span>는 전체 예측값 <span class="math notranslate nohighlight">\(\hat{y}\)</span>의 평균값이다.</p>
-<p>TSS는 독립변수를 사용한 회귀분석을 하지 않았을 때의 잔차제곱합이다. 즉, 상수항만 있는 회귀분석 모형을 사용한 경우다. 이러한 모형을 1차 모형(first-order model)이라고 한다. 아무런 독립변수를 사용하지 않았을 때, 우리가 사용할 수 있는 가장 좋은 예측은 <span class="math notranslate nohighlight">\(y\)</span> 데이터의 평균값이다.</p>
-<p>ESS는 회귀분석을 실시하여 구한 예측값 <span class="math notranslate nohighlight">\(\hat{y}\)</span> 데이터에 대해 TSS와 마찬가지 방법으로 1차 모형의 잔차제곱합을 구한 값이다.</p>
+<p>TSS는 Total Sum of Squares의 약자로 독립변수를 사용한 회귀분석을 하지 않았을 때의 잔차제곱합이다. 즉, 상수항만 있는 회귀분석 모형을 사용한 경우다. 이러한 모형을 1차 모형(first-order model)이라고 한다. 아무런 독립변수를 사용하지 않았을 때, 우리가 사용할 수 있는 가장 좋은 예측은 <span class="math notranslate nohighlight">\(y\)</span> 데이터의 평균값이다.</p>
+<p>ESS는 Explained Sum of Squares의 약자로 회귀분석을 실시하여 구한 예측값 <span class="math notranslate nohighlight">\(\hat{y}\)</span> 데이터에 대해 TSS와 마찬가지 방법으로 1차 모형의 잔차제곱합을 구한 값이다.</p>
 <p>잔차제곱합 RSS와 TSS, ESS 사이에는 다음과 같은 관계가 항상 성립한다.</p>
 <div class="math notranslate nohighlight">
 \[ \text{TSS} = \text{RSS} + \text{ESS} \]</div>
@@ -822,7 +822,7 @@ R^2 = \dfrac{\text{ESS}}{\text{TSS}}
 <p>이 때는 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span> 값이 1이 된다.</p>
 <div class="math notranslate nohighlight">
 \[ R^2 = 1 - \dfrac{\text{RSS}}{\text{TSS}} =  1 - \dfrac{0}{\text{TSS}} = 1 \]</div>
-<p>반대로 모든 독립변수가 아무런 의미가 없을 때는 가중치 값이 모두 0이 되므로</p>
+<p>회귀모형의 오차가 점점 증가할수록 RSS 값이 증가하므로 결정계수는 차츰 감소한다. 가장 극단적인 경우로 모든 독립변수가 아무런 의미가 없을 때는 가중치 값이 모두 0이 되므로</p>
 <div class="math notranslate nohighlight">
 \[ w_1 = w_2 = \cdots = w_K = 0 \]</div>
 <p>선형회귀모형이 상수항만 있는 1차 모형이 되고 이 경우의 잔차제곱합 RSS 값이 TSS 값과 같아진다. 따라서 결정계수 값은 0이 된다.</p>
@@ -837,6 +837,90 @@ R^2 = \dfrac{\text{ESS}}{\text{TSS}}
 <li><p>선형회귀분석의 예측성능이 증가할수록 결정계수 값은 증가한다.</p></li>
 <li><p>모든 데이터를 정확히 예측한 완벽한 경우에 결정계수는 1이 된다.</p></li>
 </ul>
+</div>
+<p>결정계수는 잔차제곱합과 달리 데이터 개수와 상관없이 0부터 1사이의 값만 가지므로 여러가지 회귀분석모형의 성능을 비교하는데 용이하다.</p>
+<p>statsmodels 패키지를 사용한 선형회귀분석 결과 객체는 각각 다음 속성에 결정계수, RSS, TSS, ESS 값을 가지고 있다.</p>
+<ul class="simple">
+<li><p>결정계수 : <code class="docutils literal notranslate"><span class="pre">rsquared</span></code></p></li>
+<li><p>RSS : <code class="docutils literal notranslate"><span class="pre">ssr</span></code></p></li>
+<li><p>TSS : <code class="docutils literal notranslate"><span class="pre">centered_tss</span></code></p></li>
+<li><p>ESS : <code class="docutils literal notranslate"><span class="pre">ess</span></code></p></li>
+</ul>
+<p>crim 독립변수를 사용한 회귀분석의 경우 각각의 값을 구하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">centered_tss</span><span class="p">,</span> <span class="n">result1</span><span class="o">.</span><span class="n">ssr</span><span class="p">,</span> <span class="n">result1</span><span class="o">.</span><span class="n">ess</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(42716.29541501977, 36275.512356275096, 6440.783058744673)
+</pre></div>
+</div>
+</div>
+</div>
+<p>RSS와 ESS를 더하면 TSS와 같아지는 것을 확인할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">ssr</span> <span class="o">+</span> <span class="n">result1</span><span class="o">.</span><span class="n">ess</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>42716.29541501977
+</pre></div>
+</div>
+</div>
+</div>
+<p>결정계수는 분석결과 요약에도 표시된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.151
+Model:                            OLS   Adj. R-squared:                  0.149
+Method:                 Least Squares   F-statistic:                     89.49
+Date:                Tue, 26 Jul 2022   Prob (F-statistic):           1.17e-19
+Time:                        14:14:02   Log-Likelihood:                -1798.9
+No. Observations:                 506   AIC:                             3602.
+Df Residuals:                     504   BIC:                             3610.
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+===============================================================================
+                  coef    std err          t      P&gt;|t|      [0.025      0.975]
+-------------------------------------------------------------------------------
+Intercept      22.5328      0.377     59.745      0.000      21.792      23.274
+scale(crim)    -3.5677      0.377     -9.460      0.000      -4.309      -2.827
+==============================================================================
+Omnibus:                      139.832   Durbin-Watson:                   0.713
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              295.404
+Skew:                           1.490   Prob(JB):                     7.14e-65
+Kurtosis:                       5.264   Cond. No.                         1.00
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>상단 오른쪽 열의 가장 윗쪽, 첫번째에 있는 <code class="docutils literal notranslate"><span class="pre">R-squared</span></code> 값이 결정계수다. <code class="docutils literal notranslate"><span class="pre">rsquared</span></code> 속성과 일치한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">rsquared</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.15078046904975717
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 <section id="f">
