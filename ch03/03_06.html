@@ -891,7 +891,7 @@ Dep. Variable:                   medv   R-squared:                       0.151
 Model:                            OLS   Adj. R-squared:                  0.149
 Method:                 Least Squares   F-statistic:                     89.49
 Date:                Tue, 26 Jul 2022   Prob (F-statistic):           1.17e-19
-Time:                        14:14:02   Log-Likelihood:                -1798.9
+Time:                        14:46:07   Log-Likelihood:                -1798.9
 No. Observations:                 506   AIC:                             3602.
 Df Residuals:                     504   BIC:                             3610.
 Df Model:                           1                                         
@@ -920,15 +920,15 @@ Notes:
                                        <span class="n">R</span><span class="o">-</span><span class="n">squared</span><span class="p">:</span>                       <span class="mf">0.151</span>
 </pre></div>
 </div>
-<p>분석결과 객체의 <code class="docutils literal notranslate"><span class="pre">rsquared</span></code> 속성과 일치한다.</p>
+<p>결정계수를 사용하여 crim 독립변수를 사용한 회귀분석과 zn 독립변수를 사용한 회귀분석의 성능을 비교하면 crim 독립변수를 사용한 첫번째 모형의 성능이 더 우수한 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">rsquared</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">rsquared</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">rsquared</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0.15078046904975717
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.15078046904975717, 0.12992084489428946)
 </pre></div>
 </div>
 </div>
@@ -947,12 +947,12 @@ H_0 : w_1 = w_2 = \cdots = w_K = 0
 \[
 H_0 : R^2 = 0 
 \]</div>
-<p>F-검정이라는 이름은 잔차제곱합을 ESS로 나눈 RSS/ESS 값이 F분포라는 확률분포를 따른다는 점에서 나온 것이다.</p>
+<p>F-검정이라는 이름은 ESS값을 잔차제곱합으로 나눈 ESS/RSS 값이 F분포라는 확률분포를 따른다는 점에서 나온 것이다.</p>
 <div class="math notranslate nohighlight">
 \[
 \dfrac{\text{ESS}}{\text{RSS}} \sim F
 \]</div>
-<p>결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>가 0에 가까울수록 RSS/ESS 값이 커지고 F-검정의 유의확률도 증가한다. 반대로 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>가 1에 가까울수록 RSS/ESS 값과 F-검정의 유의확률이 감소한다. 따라서 RSS/ESS 값과 F-검정의 유의확률이 작을수록 더 뛰어난 회귀분석 성능을 보인다고 할 수 있다.</p>
+<p>결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>가 1에 가까울수록 (모형성능이 좋을수록) RSS가 감소하고 ESS는 증가하므로 ESS/RSS 값이 커지고 F-검정의 유의확률은 감소한다. 반대로 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>가 0에 가까울수록 (모형성능이 나빠질수록) ESS/RSS 값은 작아지고 F-검정의 유의확률이 증가한다. 따라서 F-검정의 ESS/RSS 값이 크거나 유의확률이 작을수록 더 뛰어난 회귀분석 성능을 보인다고 할 수 있다.</p>
 <p>RSS/ESS 값과 F-검정의 유의확률은 각각 회귀분석 결과 객체의 <code class="docutils literal notranslate"><span class="pre">fvalue</span></code>, <code class="docutils literal notranslate"><span class="pre">f_pvalue</span></code> 속성에 저장되어 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -974,6 +974,31 @@ H_0 : R^2 = 0
                                         <span class="n">F</span><span class="o">-</span><span class="n">statistic</span><span class="p">:</span>                     <span class="mf">89.49</span>
                                         <span class="n">Prob</span> <span class="p">(</span><span class="n">F</span><span class="o">-</span><span class="n">statistic</span><span class="p">):</span>           <span class="mf">1.17e-19</span>
 </pre></div>
+</div>
+<p>F-검정을 사용하여 crim 독립변수를 사용한 회귀분석과 zn 독립변수를 사용한 회귀분석의 성능을 비교하면 결정계수를 사용하였을 때와 마찬가지로 crim 독립변수를 사용한 첫번째 모형의 성능이 더 우수한 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">fvalue</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">fvalue</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(89.4861147576812, 75.2576422989542)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">f_pvalue</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">f_pvalue</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.1739870821944483e-19, 5.71358415308128e-17)
+</pre></div>
+</div>
+</div>
 </div>
 </section>
 </section>
