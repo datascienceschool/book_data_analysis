@@ -457,6 +457,11 @@ title="Print to PDF"
    3.6.2. F-검정
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.6.3. 로그가능도
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -484,6 +489,11 @@ title="Print to PDF"
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#f">
    3.6.2. F-검정
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.6.3. 로그가능도
   </a>
  </li>
 </ul>
@@ -892,7 +902,7 @@ Dep. Variable:                   medv   R-squared:                       0.151
 Model:                            OLS   Adj. R-squared:                  0.149
 Method:                 Least Squares   F-statistic:                     89.49
 Date:                Tue, 26 Jul 2022   Prob (F-statistic):           1.17e-19
-Time:                        14:46:07   Log-Likelihood:                -1798.9
+Time:                        15:44:32   Log-Likelihood:                -1798.9
 No. Observations:                 506   AIC:                             3602.
 Df Residuals:                     504   BIC:                             3610.
 Df Model:                           1                                         
@@ -997,6 +1007,39 @@ H_0 : R^2 = 0
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.1739870821944483e-19, 5.71358415308128e-17)
+</pre></div>
+</div>
+</div>
+</div>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.6.3. </span>로그가능도<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>지금까지는 가중치를 구하기 위해 잔차제곱합을 최소화하는 최소자승법을 사용했지만 몇가지 확률론적 가정을 한다면 앞 장에서 설명한 최대가능도추정(MLE: Maximum Likelihood Estimation) 방법으로도 가중치를 구할 수 있다. 자세한 증명은 생략하겠지만 일반적인 경우에는 최대가능도추정 방법으로 가중치를 구해도 최소자승법으로 구한 값과 같은 값이 나오게 된다. 즉, 다음과 같은 수식으로 가중치가 구해진다.</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{w} = (X^TX)^{-1}X^T y 
+\]</div>
+<p>최대가능도추정법은 우리가 가진 데이터가 나올 가능성 즉, 가능도(likelihood)를 가장 크게 만드는 모수값을 찾는 방법이었다. 가능도에 로그(log)를 취한 로그가능도를 최대화하는 모수를 찾아도 같은 결과가 나온다. 최대가능도추정법을 사용하여 구한 경우에는 우리가 구한 가중치에 대한 (로그)가능도를 계산할 수 있다. 가능도나 로그가능도가 클수록 모형성능이 좋다.</p>
+<p>선형회귀분석 결과요약에서 상단 오른쪽열의 <code class="docutils literal notranslate"><span class="pre">Log-Likelihood</span></code> 정보가 로그가능도 값이다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                            <span class="n">OLS</span> <span class="n">Regression</span> <span class="n">Results</span>                            
+<span class="o">==============================================================================</span>
+                                                                             
+                                                                             
+                                                                             
+                                                                             
+                                        <span class="n">Log</span><span class="o">-</span><span class="n">Likelihood</span><span class="p">:</span>                <span class="o">-</span><span class="mf">1798.9</span>
+</pre></div>
+</div>
+<p>로그가능도는 보통 음수인 경우가 많기 때문에 두 값을 비교할 때 주의해야 한다. 로그가능도 값이 클수록 좋은 모형이라고 했는데 이는 (부호를 뺀) 절대값만 크다는 뜻이 아니라 부호까지 감안하여 더 큰 수를 의미한다.</p>
+<p>분석결과 객체는 <code class="docutils literal notranslate"><span class="pre">llf</span></code> 속성에 로그가능도 값을 저장하고 있다. 로그가능도를 사용하여 crim 독립변수를 사용한 회귀분석과 zn 독립변수를 사용한 회귀분석의 성능을 비교하면 마찬가지로 crim 독립변수를 사용한 첫번째 모형의 성능이 더 우수한 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">llf</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">llf</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-1798.8903655469715, -1805.029780329389)
 </pre></div>
 </div>
 </div>
