@@ -260,6 +260,11 @@ const thebe_selector_output = ".output, .cell_output"
      3.5. 가중치 검정
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_06.html">
+     3.6. 성능과 변수선택
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1">
@@ -585,7 +590,12 @@ title="Print to PDF"
 <img alt="../_images/03_02_4_0.png" src="../_images/03_02_4_0.png" />
 </div>
 </div>
-<p>seaborn 패키지에서 제공하는 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수를 사용하면 total_bill과 tip의 선형 상관관계를 대표하는 직선, 즉 스캐터플롯의 모습과 가장 유사한 직선을 스캐터플롯 위에 표시할 수 있다.</p>
+<p>위 그림을 보면 total_bill 데이터와 tip 데이터가 대략적이나마 직선의 형태를 띄는 것을 알 수 있다. seaborn 패키지에서 제공하는 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수를 사용하면 total_bill과 tip의 선형 상관관계를 대표하는 직선, 즉 스캐터플롯의 모습과 가장 유사한 직선을 스캐터플롯 위에 표시할 수 있다. 직선의 방정식은 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[
+\widehat{\text{tip}} = w_0 + w_1 \cdot \text{total_bill}
+\]</div>
+<p>이 식에서 tip 데이터 변수를 <span class="math notranslate nohighlight">\(\widehat{\text{tip}}\)</span>이라고 표시한 이유는 이 직선의 방정식으로 계산한 값은 정확한 tip 값과는 다르기 때문이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> 
@@ -598,42 +608,20 @@ title="Print to PDF"
 <img alt="../_images/03_02_6_0.png" src="../_images/03_02_6_0.png" />
 </div>
 </div>
-<p>statsmodels 패키지를 사용하면 이 직선의 방정식을 알아낼 수 있다.</p>
+<p>statsmodels 패키지를 사용하면 이 직선의 방정식에 들어가는 계수 <span class="math notranslate nohighlight">\(w_0\)</span>, <span class="math notranslate nohighlight">\(w_1\)</span> 값을 알아낼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
 <span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="n">result1</span><span class="o">.</span><span class="n">params</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.457
-Model:                            OLS   Adj. R-squared:                  0.454
-Method:                 Least Squares   F-statistic:                     203.4
-Date:                Sun, 24 Jul 2022   Prob (F-statistic):           6.69e-34
-Time:                        16:40:16   Log-Likelihood:                -350.54
-No. Observations:                 244   AIC:                             705.1
-Df Residuals:                     242   BIC:                             712.1
-Df Model:                           1                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-Intercept      0.9203      0.160      5.761      0.000       0.606       1.235
-total_bill     0.1050      0.007     14.260      0.000       0.091       0.120
-==============================================================================
-Omnibus:                       20.185   Durbin-Watson:                   2.151
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               37.750
-Skew:                           0.443   Prob(JB):                     6.35e-09
-Kurtosis:                       4.711   Cond. No.                         53.0
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept     0.920270
+total_bill    0.105025
+dtype: float64
 </pre></div>
 </div>
 </div>
@@ -641,9 +629,9 @@ Notes:
 <p>위 코드를 작성하는 방법와 결과를 해석하는 방법은 다음 절에서 자세힌 설명한다. 우선은 위 결과로부터 직선의 방정식이 다음과 같다는 것을 알 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[
-\text{tip} = 0.1050 \cdot \text{total_bill} + 0.9203
+\widehat{\text{tip}} = 0.9203 + 0.1050 \cdot \text{total_bill}
 \]</div>
-<p>이 방정식은 total_bill을 입력으로 받아 tip을 출력하는 함수의 방정식이므로 total_bill 값으로부터 tip의 대략적인 값을 알아낼 수 있다. 이 함수의 식에서 total_bill 에 곱해지는 0.1050이라는 숫자를 total_bill에 대한 <b>가중치(weight)</b>라고 한다. 수식의 마지막에 있는 0.9203은 <b>상수항(constant)</b>이라고 한다.</p>
+<p>이 방정식은 total_bill을 입력으로 받아 tip을 출력하는 함수의 방정식이므로 total_bill 값을 입력하면 tip의 대략적인 값인 <span class="math notranslate nohighlight">\(\widehat{\text{tip}}\)</span> 값을 알아낼 수 있다. 이 함수의 식에서 total_bill 에 곱해지는 0.1050이라는 숫자를 total_bill에 대한 <b>가중치(weight)</b>라고 한다. 수식의 처음에 있는 0.9203은 <b>상수항(constant)</b>이라고 한다.</p>
 <p>위 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -701,7 +689,8 @@ Name: tip, dtype: float64
 </div>
 </div>
 </div>
-<p>이렇게 데이터 간의 상관관계를 이용하여 수치형 데이터의 값을 구하는 것을 <b>회귀분석(regression analysis)</b>이라고 한다. 회귀분석 중에서도 하나의 데이터 값을 사용하여 다른 하나의 데이터 값을 알아내는 것을 <b>단변수 회귀분석(univariate regression analysis)</b>이라고 한다.</p>
+<p>이렇게 데이터 간의 상관관계를 이용하여 하나의 데이터로부터 다른 데이터의 값을 알아내는 것을 <b>예측(prediction)</b>이라고 한다. 이 때 예측이라는 말에 시간적인 미래(future) 시점의 의미는 없다는 점에 주의한다.</p>
+<p>만약 예측하고자 하는 데이터가 수치형 데이터인 경우에는 예측 중에서도 특별히 <b>회귀분석(regression analysis)</b>이라고 한다. total_bill 하나의 데이터를 사용하여 tip 데이터를 예측한 것처럼 예측을 위해 입력하는 데이터가 하나뿐인 경우에는 <b>단변수 회귀분석(univariate regression analysis)</b>이라고 한다.</p>
 </section>
 <section id="id3">
 <h2><span class="section-number">3.2.2. </span>다변수 회귀분석의 예<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
@@ -732,41 +721,24 @@ Name: tip, dtype: float64
 <img alt="../_images/03_02_21_0.png" src="../_images/03_02_21_0.png" />
 </div>
 </div>
-<p>total_bill과 size 두 가지 값을 모두 입력값으로 하여 tip을 예측하는 방정식을 찾으면 다음과 같다.</p>
+<p>total_bill과 size 두 가지 값을 모두 입력값으로 하여 tip을 예측하려면 다음 방정식을 이용해야 한다.</p>
+<div class="math notranslate nohighlight">
+\[
+\widehat{\text{tip}} = w_0 + w_1 \cdot \text{total_bill} + w_2 \cdot \text{size}
+\]</div>
+<p>위 방정식의 계수 <span class="math notranslate nohighlight">\(w_0, w_1, w_2\)</span>는 다음과 같이 계산한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill + size&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<span class="n">result2</span><span class="o">.</span><span class="n">params</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.468
-Model:                            OLS   Adj. R-squared:                  0.463
-Method:                 Least Squares   F-statistic:                     105.9
-Date:                Sun, 24 Jul 2022   Prob (F-statistic):           9.67e-34
-Time:                        16:40:17   Log-Likelihood:                -347.99
-No. Observations:                 244   AIC:                             702.0
-Df Residuals:                     241   BIC:                             712.5
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-Intercept      0.6689      0.194      3.455      0.001       0.288       1.050
-total_bill     0.0927      0.009     10.172      0.000       0.075       0.111
-size           0.1926      0.085      2.258      0.025       0.025       0.361
-==============================================================================
-Omnibus:                       24.753   Durbin-Watson:                   2.100
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               46.169
-Skew:                           0.545   Prob(JB):                     9.43e-11
-Kurtosis:                       4.831   Cond. No.                         67.6
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Intercept     0.668945
+total_bill    0.092713
+size          0.192598
+dtype: float64
 </pre></div>
 </div>
 </div>
@@ -774,7 +746,7 @@ Notes:
 <p>위 코드에 대해서도 다음 절에서 설명한다. 일단은 위 결과로부터 우리가 원하는 방정식은 다음과 같다는 것을 알 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[
-\;\;\;\text{tip} = 0.0927 \cdot \text{total_bill} + 0.1926 \cdot \text{size} + 0.6689\;\;\;
+\;\;\; \widehat{\text{tip}} = 0.6689 + 0.0927 \cdot \text{total_bill} + 0.1926 \cdot \text{size} \;\;\;
 \]</div>
 <p>이 식에서 total_bill에 대한 가중치는 0.0927, size에 대한 가중치는 0.1926, 상수항은 0.6689라는 것을 알 수 있다.</p>
 <p>이 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
