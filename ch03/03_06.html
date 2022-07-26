@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>성능과 변수선택 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.6. 성능과 변수선택 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -87,6 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. 분류 - 범주형 데이터를 예측한다." href="../ch04/04_00.html" />
+    <link rel="prev" title="3.5. 가중치 검정" href="03_05.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -141,7 +143,7 @@ const thebe_selector_output = ".output, .cell_output"
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
   <a class="reference internal" href="../ch01/01_00.html">
    1. 데이터 분석의 소개
@@ -221,16 +223,16 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
+ <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="03_00.html">
    3. 회귀분석 - 수치형 데이터를 예측한다.
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
     <a class="reference internal" href="03_01.html">
      3.1. 상관관계
@@ -254,6 +256,11 @@ const thebe_selector_output = ".output, .cell_output"
    <li class="toctree-l2">
     <a class="reference internal" href="03_05.html">
      3.5. 가중치 검정
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     3.6. 성능과 변수선택
     </a>
    </li>
   </ul>
@@ -440,7 +447,7 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   결정계수
+   3.6.1. 결정계수
   </a>
  </li>
 </ul>
@@ -464,7 +471,7 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   결정계수
+   3.6.1. 결정계수
   </a>
  </li>
 </ul>
@@ -478,7 +485,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>성능과 변수선택<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.6. </span>성능과 변수선택<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>이 절에서는 모형의 성능을 가늠하는 방법과 성능 향상을 위해 어떤 변수를 선택해야 하는지를 설명한다. 예제 데이터로는 상관관계를 설명할 때 사용하였던 보스턴 집값 데이터를 사용한다. 보스턴 집값 데이터는 13개의 독립변수를 이용하여 medv라는 1개의 종속변수를 예측한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -763,7 +770,7 @@ Notes:
 </div>
 </div>
 <section id="id2">
-<h2>결정계수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.6.1. </span>결정계수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>분석결과요약에서 상단 오른쪽 열의 가장 위에 있는 <code class="docutils literal notranslate"><span class="pre">R-squared</span></code> 수치는 <b>결정계수(Coefficient of Determination)</b>라고 하는 값으로 선형회귀분석 성능을 표시한다.</p>
 </section>
 </section>
@@ -795,6 +802,20 @@ Notes:
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="03_05.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3.5. </span>가중치 검정</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../ch04/04_00.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>분류 - 범주형 데이터를 예측한다.</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>
