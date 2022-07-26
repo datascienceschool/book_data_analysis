@@ -28,5 +28,10 @@ chapters:
       - file: ch03/03_03.ipynb
       - file: ch03/03_04.ipynb
       - file: ch03/03_05.ipynb
+      - file: ch03/03_06.ipynb
+      - file: ch03/03_07.ipynb
+      - file: ch03/03_08.ipynb
+      - file: ch03/03_09.ipynb
   - file: ch04/04_00.ipynb
   - file: ch05/05_00.ipynb
+  - file: ch06/06_00.ipynb
