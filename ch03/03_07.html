@@ -1055,6 +1055,72 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
+<p>이 결과에서 세번째로 추가할 변수는 ptratio임을 알 수 있다.</p>
+<p>다음 코드는 13개까지 이러한 전체 과정을 반복하는 작업을 자동화하는 파이썬 코드다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
+
+<span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">var_names_all</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">!=</span> <span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">var_names</span> <span class="o">=</span> <span class="n">var_names_all</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">sel_ns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">formulas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">r2s</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">var_names_all</span><span class="p">)):</span>
+    <span class="n">results_k</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">var_names</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">formula_k_n</span> <span class="o">=</span> <span class="s2">&quot;medv ~ C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">formula_k_n</span> <span class="o">=</span> <span class="n">formula_k</span> <span class="o">+</span> <span class="s2">&quot; + C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="n">formula_k</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; + scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="n">results_k</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_k_n</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">df_r2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_k</span><span class="o">.</span><span class="n">items</span><span class="p">()}})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">sel_n</span> <span class="o">=</span> <span class="n">df_r2</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">sel_r2</span> <span class="o">=</span> <span class="n">df_r2</span><span class="p">[</span><span class="s2">&quot;r2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span> <span class="k">if</span> <span class="n">sel_n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="s2">&quot;scale&quot;</span>
+    <span class="n">formula_k</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">sel_n</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">formula_k</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; + </span><span class="si">{</span><span class="n">op</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">sel_n</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="n">sel_ns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sel_n</span><span class="p">)</span>
+    <span class="n">formulas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">formula_k</span><span class="p">)</span>
+    <span class="n">r2s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sel_r2</span><span class="p">)</span>
+    <span class="n">var_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">sel_n</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3.16 s
+Wall time: 3.13 s
+</pre></div>
+</div>
+</div>
+</div>
+<p>최종적으로 선택된 모형은 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formulas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;medv ~ scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(nox) + C(chas) + scale(black) + scale(zn) + scale(crim) + scale(rad) + scale(tax) + scale(indus) + scale(age)&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<p>변수가 추가되면서 결정계수가 어떻게 변하는지를 플롯으로 표시해보자. x축은 추가된 변수의 순서를 나타내고 y축은 결정계수 값이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">r2s</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;추가변수에 따른 결정계수의 변화&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_07_19_0.png" src="../_images/03_07_19_0.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
