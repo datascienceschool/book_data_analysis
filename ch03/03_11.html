@@ -6,42 +6,42 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>데이터 사이언스 스쿨 - 데이터 분석 편 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.11. 비선형회귀분석과 심볼릭 서치 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
-  <link href="_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
-<link href="_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
 
     
   <link rel="stylesheet"
-    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
   <link rel="preload" as="font" type="font/woff2" crossorigin
-    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
 
-    <link rel="stylesheet" type="text/css" href="_static/pygments.css" />
-    <link rel="stylesheet" href="_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
-    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
-    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
-    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
-    <link rel="stylesheet" type="text/css" href="_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=62ba249389abaaa9ffc34bf36a076bdc1d65ee18" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
     
   <!-- Pre-loaded scripts that we'll load fully later -->
-  <link rel="preload" as="script" href="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
 
-    <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
-    <script src="_static/jquery.js"></script>
-    <script src="_static/underscore.js"></script>
-    <script src="_static/doctools.js"></script>
-    <script src="_static/clipboard.min.js"></script>
-    <script src="_static/copybutton.js"></script>
-    <script src="_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=f31d14ad54b65d19161ba51d4ffff3a77ae00456"></script>
     <script>let toggleHintShow = 'Click to show';</script>
     <script>let toggleHintHide = 'Click to hide';</script>
     <script>let toggleOpenOnPrint = 'true';</script>
-    <script src="_static/togglebutton.js"></script>
+    <script src="../_static/togglebutton.js"></script>
     <script async="async" kind="hypothesis" src="https://hypothes.is/embed.js"></script>
     <script kind="utterances">
 
@@ -78,16 +78,17 @@ var addUtterances = () => {
 commentsRunWhenDOMLoaded(addUtterances);
 </script>
     <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
-    <script src="_static/design-tabs.js"></script>
+    <script src="../_static/design-tabs.js"></script>
     <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
 const thebe_selector = ".thebe,.cell"
 const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
-    <script async="async" src="_static/sphinx-thebe.js"></script>
-    <link rel="index" title="Index" href="genindex.html" />
-    <link rel="search" title="Search" href="search.html" />
-    <link rel="next" title="1. 데이터 분석의 소개" href="ch01/01_00.html" />
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="4. 분류 - 범주형 데이터를 예측한다." href="../ch04/04_00.html" />
+    <link rel="prev" title="3.10. 아웃라이어와 영향도" href="03_10.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -122,29 +123,29 @@ const thebe_selector_output = ".output, .cell_output"
 <div class="bd-sidebar noprint" id="site-navigation">
     <div class="bd-sidebar__content">
         <div class="bd-sidebar__top"><div class="navbar-brand-box">
-    <a class="navbar-brand text-wrap" href="#">
+    <a class="navbar-brand text-wrap" href="../index.html">
       
       
       
       <h1 class="site-logo" id="site-title">데이터 사이언스 스쿨 - 데이터 분석 편</h1>
       
     </a>
-</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
   <i class="icon fas fa-search"></i>
   <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
 </form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
     <div class="bd-toc-item active">
         
         <ul class="nav bd-sidenav bd-sidenav__home-link">
-            <li class="toctree-l1 current active">
-                <a class="reference internal" href="#">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../index.html">
                     데이터 사이언스 스쿨 - 데이터 분석 편
                 </a>
             </li>
         </ul>
-        <ul class="nav bd-sidenav">
+        <ul class="current nav bd-sidenav">
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="ch01/01_00.html">
+  <a class="reference internal" href="../ch01/01_00.html">
    1. 데이터 분석의 소개
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
@@ -154,24 +155,24 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch01/01_01.html">
+    <a class="reference internal" href="../ch01/01_01.html">
      1.1. 이 책에서 다루는 데이터 분석이란?
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch01/01_02.html">
+    <a class="reference internal" href="../ch01/01_02.html">
      1.2. 데이터 분석을 위한 도구의 소개
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch01/01_03.html">
+    <a class="reference internal" href="../ch01/01_03.html">
      1.3. 예제 데이터
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1 has-children">
-  <a class="reference internal" href="ch02/02_00.html">
+  <a class="reference internal" href="../ch02/02_00.html">
    2. 탐색적 데이터 분석 - 개별 데이터의 특징을 분석한다.
   </a>
   <input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
@@ -181,126 +182,126 @@ const thebe_selector_output = ".output, .cell_output"
   </label>
   <ul>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch02/02_01.html">
+    <a class="reference internal" href="../ch02/02_01.html">
      2.1. 확률적 데이터
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch02/02_02.html">
+    <a class="reference internal" href="../ch02/02_02.html">
      2.2. 시각적 확률분포추정
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch02/02_03.html">
+    <a class="reference internal" href="../ch02/02_03.html">
      2.3. 확률분포모형을 사용한 확률분포추정
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch02/02_04.html">
+    <a class="reference internal" href="../ch02/02_04.html">
      2.4. 베르누이분포와 이항분포
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch02/02_05.html">
+    <a class="reference internal" href="../ch02/02_05.html">
      2.5. 카테고리분포와 다항분포
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch02/02_06.html">
+    <a class="reference internal" href="../ch02/02_06.html">
      2.6. 정규분포, 로그정규분포, 스튜던트t분포
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch02/02_07.html">
+    <a class="reference internal" href="../ch02/02_07.html">
      2.7. 최대가능도추정
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch02/02_08.html">
+    <a class="reference internal" href="../ch02/02_08.html">
      2.8. 탐색적 데이터 분석
     </a>
    </li>
   </ul>
  </li>
- <li class="toctree-l1 has-children">
-  <a class="reference internal" href="ch03/03_00.html">
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="03_00.html">
    3. 회귀분석 - 수치형 데이터를 예측한다.
   </a>
-  <input class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-3" name="toctree-checkbox-3" type="checkbox"/>
   <label for="toctree-checkbox-3">
    <i class="fas fa-chevron-down">
    </i>
   </label>
-  <ul>
+  <ul class="current">
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_01.html">
+    <a class="reference internal" href="03_01.html">
      3.1. 상관관계
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_02.html">
+    <a class="reference internal" href="03_02.html">
      3.2. 회귀분석의 소개
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_03.html">
+    <a class="reference internal" href="03_03.html">
      3.3. 선형회귀분석을 위한 준비
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_04.html">
+    <a class="reference internal" href="03_04.html">
      3.4. 최소자승법
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_05.html">
+    <a class="reference internal" href="03_05.html">
      3.5. 가중치 검정
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_06.html">
+    <a class="reference internal" href="03_06.html">
      3.6. 모형성능
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_07.html">
+    <a class="reference internal" href="03_07.html">
      3.7. 모형 선택과 과최적화
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_08.html">
+    <a class="reference internal" href="03_08.html">
      3.8. 교차검증과 정규화
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_09.html">
+    <a class="reference internal" href="03_09.html">
      3.9. 스케일링과 다중공선성
     </a>
    </li>
    <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_10.html">
+    <a class="reference internal" href="03_10.html">
      3.10. 아웃라이어와 영향도
     </a>
    </li>
-   <li class="toctree-l2">
-    <a class="reference internal" href="ch03/03_11.html">
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
      3.11. 비선형회귀분석과 심볼릭 서치
     </a>
    </li>
   </ul>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ch04/04_00.html">
+  <a class="reference internal" href="../ch04/04_00.html">
    4. 분류 - 범주형 데이터를 예측한다.
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ch05/05_00.html">
+  <a class="reference internal" href="../ch05/05_00.html">
    5. 딥러닝 기초
   </a>
  </li>
  <li class="toctree-l1">
-  <a class="reference internal" href="ch06/06_00.html">
+  <a class="reference internal" href="../ch06/06_00.html">
    6. 시계열분석
   </a>
  </li>
@@ -359,7 +360,7 @@ title="Toggle navigation"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./index.ipynb"
+        <a href="https://mybinder.org/v2/gh/datascienceschool/book_data_analysis/main?urlpath=tree/./ch03/03_11.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -369,7 +370,7 @@ title="Launch on Binder"
 
 <span class="headerbtn__icon-container">
   
-    <img src="_static/images/logo_binder.svg">
+    <img src="../_static/images/logo_binder.svg">
   </span>
 <span class="headerbtn__text-container">Binder</span>
 </a>
@@ -415,7 +416,7 @@ title="Source repository"
   <div class="menu-dropdown__content">
     <ul>
       <li>
-        <a href="_sources/index.ipynb"
+        <a href="../_sources/ch03/03_11.ipynb"
    class="headerbtn"
    data-toggle="tooltip"
 data-placement="left"
@@ -464,7 +465,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>데이터 사이언스 스쿨 - 데이터 분석 편</h1>
+                <h1>비선형회귀분석과 심볼릭 서치</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -477,45 +478,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1>데이터 사이언스 스쿨 - 데이터 분석 편<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<div class="toctree-wrapper compound">
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="ch01/01_00.html">1. 데이터 분석의 소개</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ch01/01_01.html">1.1. 이 책에서 다루는 데이터 분석이란?</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch01/01_02.html">1.2. 데이터 분석을 위한 도구의 소개</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch01/01_03.html">1.3. 예제 데이터</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ch02/02_00.html">2. 탐색적 데이터 분석 - 개별 데이터의 특징을 분석한다.</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ch02/02_01.html">2.1. 확률적 데이터</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch02/02_02.html">2.2. 시각적 확률분포추정</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch02/02_03.html">2.3. 확률분포모형을 사용한 확률분포추정</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch02/02_04.html">2.4. 베르누이분포와 이항분포</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch02/02_05.html">2.5. 카테고리분포와 다항분포</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch02/02_06.html">2.6. 정규분포, 로그정규분포, 스튜던트t분포</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch02/02_07.html">2.7. 최대가능도추정</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch02/02_08.html">2.8. 탐색적 데이터 분석</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ch03/03_00.html">3. 회귀분석 - 수치형 데이터를 예측한다.</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_01.html">3.1. 상관관계</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_02.html">3.2. 회귀분석의 소개</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_03.html">3.3. 선형회귀분석을 위한 준비</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_04.html">3.4. 최소자승법</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_05.html">3.5. 가중치 검정</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_06.html">3.6. 모형성능</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_07.html">3.7. 모형 선택과 과최적화</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_08.html">3.8. 교차검증과 정규화</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_09.html">3.9. 스케일링과 다중공선성</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_10.html">3.10. 아웃라이어와 영향도</a></li>
-<li class="toctree-l2"><a class="reference internal" href="ch03/03_11.html">3.11. 비선형회귀분석과 심볼릭 서치</a></li>
-</ul>
-</li>
-<li class="toctree-l1"><a class="reference internal" href="ch04/04_00.html">4. 분류 - 범주형 데이터를 예측한다.</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ch05/05_00.html">5. 딥러닝 기초</a></li>
-<li class="toctree-l1"><a class="reference internal" href="ch06/06_00.html">6. 시계열분석</a></li>
-</ul>
-</div>
+<h1><span class="section-number">3.11. </span>비선형회귀분석과 심볼릭 서치<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 </section>
 
     <script type="text/x-thebe-config">
@@ -531,7 +494,7 @@ title="Print to PDF"
         },
         kernelOptions: {
             kernelName: "python3",
-            path: "./."
+            path: "./ch03"
         },
         predefinedOutput: true
     }
@@ -545,10 +508,17 @@ title="Print to PDF"
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='right-next' id="next-link" href="ch01/01_00.html" title="next page">
+    <a class='left-prev' id="prev-link" href="03_10.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title"><span class="section-number">3.10. </span>아웃라이어와 영향도</p>
+        </div>
+    </a>
+    <a class='right-next' id="next-link" href="../ch04/04_00.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title"><span class="section-number">1. </span>데이터 분석의 소개</p>
+        <p class="prev-next-title"><span class="section-number">4. </span>분류 - 범주형 데이터를 예측한다.</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>
@@ -573,7 +543,7 @@ title="Print to PDF"
     </div>
   
   <!-- Scripts loaded after <body> so the DOM is not blocked -->
-  <script src="_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
 
 
   </body>
