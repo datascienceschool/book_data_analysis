@@ -973,7 +973,7 @@ y =
 </section>
 <section id="id9">
 <h3><span class="section-number">3.2.5.3. </span>선형회귀분석의 1차적 목적<a class="headerlink" href="#id9" title="Permalink to this headline">#</a></h3>
-<p>선형회귀분석의 1차적인 목적은 바로 이 가중치 <span class="math notranslate nohighlight">\(w_0, w_1, \ldots, w_K\)</span>을 알아내는 것이다. 하지만 우리는 어떠한 선형회귀분석 방법으로 이 값을 100% 정확하게는 알아낼 수 없다. 우리가 선형회귀분석으로 알아낸 값은 가중치 <span class="math notranslate nohighlight">\(w_0, w_1, \ldots, w_K\)</span>에 대한 추정치 <span class="math notranslate nohighlight">\(\hat{w}_0, \hat{w}_1, \ldots, \hat{w}_K\)</span>일 뿐이다. 이 가중치의 추정치 <span class="math notranslate nohighlight">\(\hat{w}_j\)</span>는 원래 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>와 같은 값이라는 보장이 없다.</p>
+<p>선형회귀분석의 1차적인 목적은 바로 이 가중치 <span class="math notranslate nohighlight">\(w_0, w_1, \ldots, w_K\)</span>을 알아내는 것이다. 하지만 우리는 어떠한 선형회귀분석 방법으로 이 값을 100% 정확하게는 알아낼 수 없다. 우리가 선형회귀분석으로 알아낸 값은 가중치 <span class="math notranslate nohighlight">\(w_0, w_1, \ldots, w_K\)</span>에 대한 추정값 <span class="math notranslate nohighlight">\(\hat{w}_0, \hat{w}_1, \ldots, \hat{w}_K\)</span>일 뿐이다. 이 가중치의 추정값 <span class="math notranslate nohighlight">\(\hat{w}_j\)</span>는 원래 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>와 같은 값이라는 보장이 없다.</p>
 <div class="math notranslate nohighlight">
 \[ \hat{w}_j \neq w_j \;\;\;\; (j=0,1,\ldots,K) \]</div>
 <p>이를 그림으로 표현하면 다음과 같다.</p>
@@ -994,7 +994,7 @@ y =
 <p>이 예측치 <span class="math notranslate nohighlight">\(\hat{y}\)</span>값은 두가지 측면에서 원래의 <span class="math notranslate nohighlight">\(y\)</span>값과 달라진다.</p>
 <ol class="simple">
 <li><p>가중치 <span class="math notranslate nohighlight">\(w\)</span>를 정확하게 예측하더라도 교란항(disturbance) <span class="math notranslate nohighlight">\(\varepsilon\)</span>만큼 차이가 있다.</p></li>
-<li><p>그런데 가중치 <span class="math notranslate nohighlight">\(w\)</span> 자체도 정확하게 예측하지 못하고 이에 대한 추정치 <span class="math notranslate nohighlight">\(\hat{w}\)</span>을 사용하므로 선형조합 부분도 원래의 선형조합 부분과 차이가 있다.</p></li>
+<li><p>그런데 가중치 <span class="math notranslate nohighlight">\(w\)</span> 자체도 정확하게 예측하지 못하고 이에 대한 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>을 사용하므로 선형조합 부분도 원래의 선형조합 부분과 차이가 있다.</p></li>
 </ol>
 <p>이렇게 발생하는 원래의 <span class="math notranslate nohighlight">\(y\)</span>값과 예측치 <span class="math notranslate nohighlight">\(\hat{y}\)</span>의 차이를 잔차(residual) <span class="math notranslate nohighlight">\(e\)</span>라고 한다.</p>
 <p>이를 그림으로 표현하면 다음과 같다. 그림에서 교란항과 잔차가 다르다는 점에 유의하라.</p>
