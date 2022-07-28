@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.7. 모형 선택과 과최적화 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.7. 모형 선택 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -267,7 +267,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.7. 모형 선택과 과최적화
+     3.7. 모형 선택
     </a>
    </li>
    <li class="toctree-l2">
@@ -467,7 +467,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>모형 선택과 과최적화</h1>
+                <h1>모형 선택</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -480,14 +480,21 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.7. </span>모형 선택과 과최적화<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.7. </span>모형 선택<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>이제 모형의 성능을 비교할 수 있으므로 남은 문제는 여러가지 선형회귀모형을 분석하여 가장 좋은 모형을 찾는 일이다. 이를 <b>모형 선택(model selection)</b>이라고 한다. 선형회귀분석에서는 어떤 독립변수를 사용하는가에 따라 회귀모형이 달라지므로 이를 <b>변수 선택(variable selection)</b>이고 하기도 한다.</p>
 <p>선형회귀분석에서 변수 선택을 하는 방법은 여러가지가 있다. 모든 변수의 선택 조합에 대해 성능을 살펴보는 것은 독립변수의 개수가 많을 경우 현실적으로 어렵기 때문에 보통은 다음 두 가지 접근방식을 많이 사용한다.</p>
 <ul class="simple">
-<li><p>전진 선택(forward selection) : 독립변수가 적은 간단한 모형부터 시작하여 차츰 유의한 독립변수를 추가하는 방식</p></li>
-<li><p>후진 제거(backward elimination) : 모든 독립변수를 사용한 가장 복잡한 모형부터 시작하여 차츰 유의하지 않은 독립변수를 제거하는 방식</p></li>
+<li><p>전진선택(forward selection) : 독립변수가 적은 간단한 모형부터 시작하여 차츰 유의한 독립변수를 추가하는 방식</p></li>
+<li><p>후진제거(backward elimination) : 모든 독립변수를 사용한 가장 복잡한 모형부터 시작하여 차츰 유의하지 않은 독립변수를 제거하는 방식</p></li>
 </ul>
-<p>이 절에서는 보스턴 집값 데이터를 예로 사용하여 순방향 선택 방법에 대해서만 설명한다.</p>
+<p>이 절에서는 전진선택 방법에 대해서만 설명한다.</p>
+<p>독립변수 선택히 가장 유의한 독립변수를 고르는 기준도 두 가지가 있다.</p>
+<ul class="simple">
+<li><p>유의확률이 가장 작은 독립변수</p></li>
+<li><p>가장 회귀분석 성능을 높이는 독립변수</p></li>
+</ul>
+<p>여기에서는 가장 회귀분석 성능을 높이는 독립변수를 선택하되 해당 독립변수의 유의확률이 우리가 정한 유의수준보다 큰 경우에는 제외하는 방법을 사용하기로 한다.</p>
+<p>이 절에서는 보스턴 집값 데이터를 예제 데이터로 사용한다</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
@@ -730,21 +737,12 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-<span class="n">models_1</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;model_1_crim&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(crim)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_zn&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(zn)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_indus&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(indus)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_chas&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ C(chas)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_nox&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(nox)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_rm&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_age&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(age)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_dis&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(dis)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_rad&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(rad)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_tax&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(tax)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_ptratio&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(ptratio)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_black&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(black)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_1_lstat&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-<span class="p">}</span>
+<span class="n">var_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">!=</span> <span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>  <span class="c1"># 종속변수 medv를 제외한 독립변수 리스트</span>
+<span class="n">models_1</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">var_names</span><span class="p">:</span>
+    <span class="n">name_n</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model_1_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">formula_n</span> <span class="o">=</span> <span class="s2">&quot;medv ~ C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
+    <span class="n">models_1</span><span class="p">[</span><span class="n">name_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_n</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -759,13 +757,14 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>모형 선택을 할 때도 여러가지를 고려할 수 있지만 여기에서는 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>로 대표되는 예측성능만 고려하기로 한다. 위에서 구한 13가지 모형의 결정계수를 구하면 다음과 같다.</p>
+<p>회귀분석 성능은 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>로 대표되는 예측성능만 고려하기로 한다. 위에서 구한 13가지 모형의 결정계수와 유의확률을 구하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
 <span class="n">df_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
   <span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_1</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+  <span class="s2">&quot;pv&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">pvalues</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_1</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
 <span class="p">})</span>
 <span class="n">df_1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
@@ -791,89 +790,98 @@ title="Print to PDF"
     <tr style="text-align: right;">
       <th></th>
       <th>r2</th>
+      <th>pv</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>model_1_lstat</th>
       <td>0.544146</td>
+      <td>5.081103e-88</td>
     </tr>
     <tr>
       <th>model_1_rm</th>
       <td>0.483525</td>
+      <td>2.487229e-74</td>
     </tr>
     <tr>
       <th>model_1_ptratio</th>
       <td>0.257847</td>
+      <td>1.609509e-34</td>
     </tr>
     <tr>
       <th>model_1_indus</th>
       <td>0.233990</td>
+      <td>4.900260e-31</td>
     </tr>
     <tr>
       <th>model_1_tax</th>
       <td>0.219526</td>
+      <td>5.637734e-29</td>
     </tr>
     <tr>
       <th>model_1_nox</th>
       <td>0.182603</td>
+      <td>7.065042e-24</td>
     </tr>
     <tr>
       <th>model_1_crim</th>
       <td>0.150780</td>
+      <td>1.173987e-19</td>
     </tr>
     <tr>
       <th>model_1_rad</th>
       <td>0.145639</td>
+      <td>5.465933e-19</td>
     </tr>
     <tr>
       <th>model_1_age</th>
       <td>0.142095</td>
+      <td>1.569982e-18</td>
     </tr>
     <tr>
       <th>model_1_zn</th>
       <td>0.129921</td>
+      <td>5.713584e-17</td>
     </tr>
     <tr>
       <th>model_1_black</th>
       <td>0.111196</td>
+      <td>1.318113e-14</td>
     </tr>
     <tr>
       <th>model_1_dis</th>
       <td>0.062464</td>
+      <td>1.206612e-08</td>
     </tr>
     <tr>
       <th>model_1_chas</th>
       <td>0.030716</td>
+      <td>7.390623e-05</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>13가지 모형 중 lstat을 독립변수로 사용한 모형의 결정계수값이 0.54로 가장 결정계수가 높으므로 이를 첫번째 독립변수로 선택한다. 다음으로는 여기에 12가지 독립변수를 차례대로 추가하여 성능을 살펴본다.</p>
+<p>13가지 모형 중 lstat을 독립변수로 사용한 모형의 결정계수값이 0.54로 가장 결정계수가 높으므로 이를 첫번째 독립변수로 선택한다. 유의확률들이 모두 아주 작기 때문에 제외할 독립변수는 없다.</p>
+<p>다음으로는 여기에 12가지 독립변수를 차례대로 추가하여 성능을 살펴본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">models_2</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;model_2_crim&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(crim)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_zn&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(zn)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_indus&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(indus)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_chas&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + C(chas)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_nox&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(nox)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_rm&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_age&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(age)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_dis&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(dis)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_rad&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rad)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_tax&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(tax)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_ptratio&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(ptratio)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_2_black&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(black)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-<span class="p">}</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;lstat&quot;</span><span class="p">)</span>  <span class="c1"># 선택된 독립변수 lstat 제외</span>
+<span class="n">formula_1</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(lstat) &quot;</span>  <span class="c1"># 선택된 모형 문자열</span>
+<span class="n">models_2</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">var_names</span><span class="p">:</span>
+    <span class="n">name_n</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model_2_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">formula_n</span> <span class="o">=</span> <span class="n">formula_1</span> <span class="o">+</span> <span class="s2">&quot; + C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="n">formula_1</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; + scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
+    <span class="n">models_2</span><span class="p">[</span><span class="n">name_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_n</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
 
 <span class="n">results_2</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models_2</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
     <span class="n">results_2</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
 <span class="n">df_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-  <span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_2</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+    <span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_2</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+    <span class="s2">&quot;pv&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">pvalues</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_2</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
 <span class="p">})</span>
 <span class="n">df_2</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
@@ -899,176 +907,87 @@ title="Print to PDF"
     <tr style="text-align: right;">
       <th></th>
       <th>r2</th>
+      <th>pv</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <th>model_2_rm</th>
       <td>0.638562</td>
+      <td>3.472258e-27</td>
     </tr>
     <tr>
       <th>model_2_ptratio</th>
       <td>0.606655</td>
+      <td>7.382385e-18</td>
     </tr>
     <tr>
       <th>model_2_chas</th>
       <td>0.562554</td>
+      <td>6.033649e-89</td>
     </tr>
     <tr>
       <th>model_2_dis</th>
       <td>0.562228</td>
+      <td>6.487838e-06</td>
     </tr>
     <tr>
       <th>model_2_age</th>
       <td>0.551269</td>
+      <td>4.906776e-03</td>
     </tr>
     <tr>
       <th>model_2_tax</th>
       <td>0.550570</td>
+      <td>7.573724e-03</td>
     </tr>
     <tr>
       <th>model_2_black</th>
       <td>0.548790</td>
+      <td>2.331593e-02</td>
     </tr>
     <tr>
       <th>model_2_zn</th>
       <td>0.547900</td>
+      <td>4.152669e-02</td>
     </tr>
     <tr>
       <th>model_2_crim</th>
       <td>0.547586</td>
+      <td>5.105917e-02</td>
     </tr>
     <tr>
       <th>model_2_indus</th>
       <td>0.546458</td>
+      <td>1.099809e-01</td>
     </tr>
     <tr>
       <th>model_2_rad</th>
       <td>0.544734</td>
+      <td>4.207994e-01</td>
     </tr>
     <tr>
       <th>model_2_nox</th>
       <td>0.544259</td>
+      <td>7.249664e-01</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
-<p>lstat과 rm 이렇게 2개의 독립변수를 사용하는 경우 결정계수는 0.64로 증가하였다.</p>
+<p>lstat과 rm 이렇게 2개의 독립변수를 사용하는 경우가 결정계수는 0.64로 가장 높다. 이 경우에도 rm 변수에 대한 유의확률이 아주 작으므로 선택 가능하다.</p>
 <p>이 결과에서 주의할 부분은 1개의 독립변수만 넣었을 때 lstat 다음으로 성능이 좋았던 독립변수의 순서는 rm, ptratio, indus, tax 순이었지만 2개의 독립변수를 넣었을 때는 이 순서가 아니라 rm, ptratio, chas, dis의 순서가 되었다는 점이다. 즉, 개별적인 성능순서가 좋은 순으로 결합한다고 반드시 더 성능이 낫다는 보장이 없기 때문에 2개의 독립변수를 사용하는 경우는 따로 계산을 해야 한다.</p>
-<p>다음으로는 여기에 다시 11개의 독립변수를 추가하여 비교한다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">models_3</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;model_3_crim&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(crim)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_zn&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(zn)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_indus&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(indus)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_chas&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + C(chas)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_nox&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(nox)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_age&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(age)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_dis&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(dis)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_rad&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(rad)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_tax&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(tax)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_ptratio&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(ptratio)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-    <span class="s2">&quot;model_3_black&quot;</span><span class="p">:</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(black)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">),</span>
-<span class="p">}</span>
-
-<span class="n">results_3</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models_3</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
-    <span class="n">results_3</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-
-<span class="n">df_3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
-  <span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_3</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
-<span class="p">})</span>
-<span class="n">df_3</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>r2</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>model_3_ptratio</th>
-      <td>0.678624</td>
-    </tr>
-    <tr>
-      <th>model_3_chas</th>
-      <td>0.651403</td>
-    </tr>
-    <tr>
-      <th>model_3_black</th>
-      <td>0.650555</td>
-    </tr>
-    <tr>
-      <th>model_3_tax</th>
-      <td>0.648515</td>
-    </tr>
-    <tr>
-      <th>model_3_dis</th>
-      <td>0.646782</td>
-    </tr>
-    <tr>
-      <th>model_3_crim</th>
-      <td>0.645852</td>
-    </tr>
-    <tr>
-      <th>model_3_rad</th>
-      <td>0.642786</td>
-    </tr>
-    <tr>
-      <th>model_3_indus</th>
-      <td>0.639992</td>
-    </tr>
-    <tr>
-      <th>model_3_zn</th>
-      <td>0.639886</td>
-    </tr>
-    <tr>
-      <th>model_3_age</th>
-      <td>0.639034</td>
-    </tr>
-    <tr>
-      <th>model_3_nox</th>
-      <td>0.638910</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>이 결과에서 세번째로 추가할 변수는 ptratio임을 알 수 있다.</p>
 <p>다음 코드는 13개까지 이러한 전체 과정을 반복하는 작업을 자동화하는 파이썬 코드다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
-<span class="n">models</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">results</span> <span class="o">=</span> <span class="p">{}</span>
-<span class="n">dfs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">var_names_all</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">!=</span> <span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
 <span class="n">var_names</span> <span class="o">=</span> <span class="n">var_names_all</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">sel_ns</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">formulas</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="n">r2s</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">pvs</span> <span class="o">=</span> <span class="p">[]</span>
 <span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">var_names_all</span><span class="p">)):</span>
     <span class="n">results_k</span> <span class="o">=</span> <span class="p">{}</span>
     <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">var_names</span><span class="p">:</span>
@@ -1077,21 +996,25 @@ title="Print to PDF"
         <span class="k">else</span><span class="p">:</span>
             <span class="n">formula_k_n</span> <span class="o">=</span> <span class="n">formula_k</span> <span class="o">+</span> <span class="s2">&quot; + C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="n">formula_k</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; + scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
         <span class="n">results_k</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_k_n</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-    <span class="n">df_r2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_k</span><span class="o">.</span><span class="n">items</span><span class="p">()}})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">sel_n</span> <span class="o">=</span> <span class="n">df_r2</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
-    <span class="n">sel_r2</span> <span class="o">=</span> <span class="n">df_r2</span><span class="p">[</span><span class="s2">&quot;r2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared_adj</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_k</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+        <span class="s2">&quot;pv&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">pvalues</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_k</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+    <span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">sel_n</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
     <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span> <span class="k">if</span> <span class="n">sel_n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="s2">&quot;scale&quot;</span>
     <span class="n">formula_k</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">sel_n</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">formula_k</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; + </span><span class="si">{</span><span class="n">op</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">sel_n</span><span class="si">}</span><span class="s2">)&quot;</span>
     <span class="n">sel_ns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sel_n</span><span class="p">)</span>
     <span class="n">formulas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">formula_k</span><span class="p">)</span>
-    <span class="n">r2s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sel_r2</span><span class="p">)</span>
+    <span class="n">r2s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;r2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">pvs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;pv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
     <span class="n">var_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">sel_n</span><span class="p">)</span>
+<span class="n">last_result</span> <span class="o">=</span> <span class="n">results_k</span><span class="p">[</span><span class="n">sel_n</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3.16 s
-Wall time: 3.13 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3.09 s
+Wall time: 3.12 s
 </pre></div>
 </div>
 </div>
@@ -1099,38 +1022,38 @@ Wall time: 3.13 s
 <p>최종적으로 선택된 모형은 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formulas</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">last_result</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">formula</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;medv ~ scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(nox) + C(chas) + scale(black) + scale(zn) + scale(crim) + scale(rad) + scale(tax) + scale(indus) + scale(age)&#39;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;medv ~ scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(nox) + C(chas) + scale(black) + scale(zn) + scale(crim) + scale(rad) + scale(tax) + scale(indus) + scale(age) &#39;
 </pre></div>
 </div>
 </div>
 </div>
-<p>다음은 독립변수가 추가되면서 결정계수가 어떻게 변하는지를 정리한 것이다.</p>
+<p>독립변수가 추가되면서 결정계수가 어떻게 변하였는지를 정리하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">r2s</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
-<span class="n">s</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_r2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">r2s</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
+<span class="n">s_r2</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lstat      0.544146
-rm         0.638562
-ptratio    0.678624
-dis        0.690308
-nox        0.708089
-chas       0.715774
-black      0.722161
-zn         0.726608
-crim       0.728825
-rad        0.734177
-tax        0.740582
-indus      0.740641
-age        0.740643
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lstat      0.543242
+rm         0.637124
+ptratio    0.676704
+dis        0.687835
+nox        0.705170
+chas       0.712357
+black      0.718256
+zn         0.722207
+crim       0.723905
+rad        0.728807
+tax        0.734806
+indus      0.734328
+age        0.733790
 dtype: float64
 </pre></div>
 </div>
@@ -1139,15 +1062,100 @@ dtype: float64
 <p>이를 플롯으로 표시하면 다음과 같다. x축은 추가된 변수의 순서를 나타내고 y축은 결정계수 값이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;추가변수에 따른 결정계수의 변화&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s</span><span class="p">)))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">s</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">s_r2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;추가변수에 따른 결정계수의 변화&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s_r2</span><span class="p">)))</span> <span class="c1"># 모든 x 라벨을 표시하기 위한 코드</span>
+<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">s_r2</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_07_21_0.png" src="../_images/03_07_21_0.png" />
+<img alt="../_images/03_07_19_0.png" src="../_images/03_07_19_0.png" />
+</div>
+</div>
+<p>이제 선택된 독립변수들의 유의확률을 살펴본다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pvs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
+<span class="n">s_pv</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lstat      5.081103e-88
+rm         3.472258e-27
+ptratio    1.644660e-14
+dis        1.668467e-05
+nox        5.488148e-08
+chas       1.134454e-08
+black      7.719459e-04
+zn         4.651616e-03
+crim       4.456745e-02
+rad        1.692182e-03
+tax        5.214237e-04
+indus      7.379887e-01
+age        9.582293e-01
+dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+<p>유의수준을 1%라고 정하였을 때 indus와 age는 유의확률이 유의수준보다 크기 때문에 이 두 변수는 추가하면 안된다. 따라서 최종적으로 우리가 선택할 모형은 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> \
+    <span class="s2">&quot;scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(nox)&quot;</span> \
+    <span class="s2">&quot;+ C(chas) + scale(black) + scale(zn) + scale(crim) + scale(rad) + scale(tax)&quot;</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 모형의 회귀분석 결과는 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.741
+Model:                            OLS   Adj. R-squared:                  0.735
+Method:                 Least Squares   F-statistic:                     128.2
+Date:                Fri, 29 Jul 2022   Prob (F-statistic):          5.54e-137
+Time:                        08:52:12   Log-Likelihood:                -1498.9
+No. Observations:                 506   AIC:                             3022.
+Df Residuals:                     494   BIC:                             3072.
+Df Model:                          11                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept         22.3448      0.219    102.178      0.000      21.915      22.774
+C(chas)[T.1]       2.7187      0.854      3.183      0.002       1.040       4.397
+scale(lstat)      -3.7279      0.338    -11.019      0.000      -4.393      -3.063
+scale(rm)          2.6684      0.285      9.356      0.000       2.108       3.229
+scale(ptratio)    -2.0471      0.279     -7.334      0.000      -2.596      -1.499
+scale(dis)        -3.1401      0.391     -8.037      0.000      -3.908      -2.372
+scale(nox)        -2.0115      0.409     -4.915      0.000      -2.816      -1.207
+scale(black)       0.8474      0.244      3.475      0.001       0.368       1.327
+scale(zn)          1.0682      0.315      3.390      0.001       0.449       1.687
+scale(crim)       -0.9316      0.282     -3.307      0.001      -1.485      -0.378
+scale(rad)         2.6062      0.552      4.726      0.000       1.523       3.690
+scale(tax)        -1.9831      0.568     -3.493      0.001      -3.099      -0.867
+==============================================================================
+Omnibus:                      178.430   Durbin-Watson:                   1.078
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              787.785
+Skew:                           1.523   Prob(JB):                    8.60e-172
+Kurtosis:                       8.300   Cond. No.                         9.11
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
 </div>
 </div>
 </section>

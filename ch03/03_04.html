@@ -267,17 +267,27 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_07.html">
-     3.7. 변수선택과 과최적화
+     3.7. 모형 선택
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_08.html">
-     3.8. 스케일링과 다중공선성
+     3.8. 교차검증과 정규화
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_09.html">
-     3.9. 아웃라이어와 영향도
+     3.9. 스케일링과 다중공선성
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_10.html">
+     3.10. 아웃라이어와 영향도
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_11.html">
+     3.11. 비선형회귀분석과 심볼릭 서치
     </a>
    </li>
   </ul>
@@ -789,7 +799,7 @@ Name: e, dtype: float64
 <h2><span class="section-number">3.4.3. </span>statsmodels 패키지를 사용한 최소자승법 가중치 계산과 예측<a class="headerlink" href="#statsmodels" title="Permalink to this headline">#</a></h2>
 <p>statsmodels 패키지는 최소자승법을 포함한 각종 통계계산을 위한 전문 패키지다. statsmodels 패키지를 사용하면 위에서 수행했던 최소자승법 계산이나 예측을 편리하게 할 수 있는 것은 물론이고 이후에 설명할 가중치 검정을 포함한 각종 추가적인 분석도 자동으로 수행해 준다.</p>
 <p>statsmodels 패키지를 기반으로 최소자승법을 수행하는 방법은 다음과 같다.</p>
-<p>우선 <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> 데이터를 사용하여 <code class="docutils literal notranslate"><span class="pre">OLS</span></code> 클래스 객체를 만든다. 이 때 데이터의 순서에 주의하라.</p>
+<p>우선 <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> 데이터를 사용하여 <code class="docutils literal notranslate"><span class="pre">OLS</span></code> 클래스 객체를 만든다. 이 때 데이터의 순서에 주의하라. <code class="docutils literal notranslate"><span class="pre">OLS</span></code> 클래스 객체를 모형(model) 객체라고도 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
@@ -800,7 +810,32 @@ Name: e, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression.linear_model.OLS at 0x2ab659b16a0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression.linear_model.OLS at 0x153832cfe50&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>모형 객체는 선형회귀 분석에 필요한 다양한 정보를 속성으로 가지고 있다. 예를 들어 종속변수와 독립변수는 각각 <code class="docutils literal notranslate"><span class="pre">endog_names</span></code>, <code class="docutils literal notranslate"><span class="pre">exog_names</span></code> 속성에 저장된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">endog_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&#39;y&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;const&#39;, &#39;x1&#39;, &#39;x2&#39;, &#39;x3&#39;]
 </pre></div>
 </div>
 </div>
@@ -814,12 +849,12 @@ Name: e, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression.linear_model.RegressionResultsWrapper at 0x2ab669a52e0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression.linear_model.RegressionResultsWrapper at 0x153833549a0&gt;
 </pre></div>
 </div>
 </div>
 </div>
-<p>이 객체의 <code class="docutils literal notranslate"><span class="pre">summary</span></code> 메서드를 사용하면 가중치를 포함한 분석결과요약을 출력할 수 있다.</p>
+<p>분석결과 객체의 <code class="docutils literal notranslate"><span class="pre">summary</span></code> 메서드를 사용하면 가중치를 포함한 분석결과요약을 출력할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
@@ -832,8 +867,8 @@ Name: e, dtype: float64
 Dep. Variable:                      y   R-squared:                       0.468
 Model:                            OLS   Adj. R-squared:                  0.461
 Method:                 Least Squares   F-statistic:                     70.36
-Date:                Mon, 25 Jul 2022   Prob (F-statistic):           1.11e-32
-Time:                        15:51:20   Log-Likelihood:                -347.97
+Date:                Fri, 29 Jul 2022   Prob (F-statistic):           1.11e-32
+Time:                        08:35:14   Log-Likelihood:                -347.97
 No. Observations:                 244   AIC:                             703.9
 Df Residuals:                     240   BIC:                             717.9
 Df Model:                           3                                         
@@ -907,6 +942,19 @@ Notes:
 </div>
 </div>
 </div>
+<p>또한 분석에 사용한 모형 객체도 <code class="docutils literal notranslate"><span class="pre">model</span></code> 속성에 포함하고 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">model</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression.linear_model.OLS at 0x153832cfe50&gt;
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="from-formula">
 <h2><span class="section-number">3.4.4. </span><code class="docutils literal notranslate"><span class="pre">from_formula</span></code> 클래스 메서드를 이용한 최소자승법<a class="headerlink" href="#from-formula" title="Permalink to this headline">#</a></h2>
@@ -929,8 +977,8 @@ Notes:
 Dep. Variable:                    tip   R-squared:                       0.468
 Model:                            OLS   Adj. R-squared:                  0.461
 Method:                 Least Squares   F-statistic:                     70.36
-Date:                Mon, 25 Jul 2022   Prob (F-statistic):           1.11e-32
-Time:                        15:51:20   Log-Likelihood:                -347.97
+Date:                Fri, 29 Jul 2022   Prob (F-statistic):           1.11e-32
+Time:                        08:35:14   Log-Likelihood:                -347.97
 No. Observations:                 244   AIC:                             703.9
 Df Residuals:                     240   BIC:                             717.9
 Df Model:                           3                                         
