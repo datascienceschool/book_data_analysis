@@ -737,10 +737,12 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-<span class="n">var_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">!=</span> <span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>  <span class="c1"># 종속변수 medv를 제외한 독립변수 리스트</span>
+<span class="c1"># 종속변수 medv를 제외한 독립변수 리스트</span>
+<span class="n">var_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">!=</span> <span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span> 
 <span class="n">models_1</span> <span class="o">=</span> <span class="p">{}</span>
 <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">var_names</span><span class="p">:</span>
     <span class="n">name_n</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model_1_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="c1"># chas 변수는 범주형 변수이므로 scale이 아닌 C 연산을 사용</span>
     <span class="n">formula_n</span> <span class="o">=</span> <span class="s2">&quot;medv ~ C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
     <span class="n">models_1</span><span class="p">[</span><span class="n">name_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_n</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
 </pre></div>
