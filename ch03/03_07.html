@@ -487,6 +487,7 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.7. </span>모형 선택<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>이제 모형의 성능을 비교할 수 있으므로 남은 문제는 여러가지 선형회귀모형을 분석하여 가장 좋은 모형을 찾는 일이다. 이를 <b>모형 선택(model selection)</b>이라고 한다. 선형회귀분석에서는 어떤 독립변수를 사용하는가에 따라 회귀모형이 달라지므로 이를 <b>변수 선택(variable selection)</b>이고 하기도 한다.</p>
+<p>선형회귀분석에서 모형 선택의 기본 원리는 “오캄의 면도날” 원칙을 따른다. 오캄의 면도날 원칙은 논리학자 오컴의 윌리엄(William of Ockham)의 이름에서 따온 것으로 어떤 현상을 설명할 수 있는 이론 중에서 되도록 가장 간단한 이론을 선택하자는 것이다. 선형회귀분석에서는 비슷한 성능을 가진 모형이 있다면 독립변수의 개수가 적은 것을 선택하는 것이 좋다는 뜻이다.</p>
 <p>선형회귀분석에서 변수 선택을 하는 방법은 여러가지가 있다. 모든 변수의 선택 조합에 대해 성능을 살펴보는 것은 독립변수의 개수가 많을 경우 현실적으로 어렵기 때문에 보통은 다음 두 가지 접근방식을 많이 사용한다.</p>
 <ul class="simple">
 <li><p>전진선택(forward selection) : 독립변수가 적은 간단한 모형부터 시작하여 차츰 유의한 독립변수를 추가하는 방식</p></li>
@@ -1162,7 +1163,14 @@ Wall time: 3.25 s
 </table>
 </div></div>
 </div>
-<p>이제 선택된 독립변수들의 유의확률을 살펴본다.</p>
+<p>독립변수를 추가할수록 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span> 값이 점점 증가하는 것을 볼 수 있다. 이 현상은 어떤 데이터에 대해서도 항상 성립한다는 것이 수학적으로 증명가능하다. 수식으로 표현하면 다음과 같다.</p>
+<div class="math notranslate nohighlight">
+\[
+R^2_{Xz} = R^2_{X} + (1-R^2_{X})r^2_{yz}
+\]</div>
+<p>위 수식에서 <span class="math notranslate nohighlight">\(X\)</span>는 기존에 사용하고 있는 <span class="math notranslate nohighlight">\(K\)</span> 종류의 독립변수 데이터를 의미하고 <span class="math notranslate nohighlight">\(z\)</span>는 여기에 새로 추가하는 1 종류의 새 독립변수 데이터를 뜻한다. <span class="math notranslate nohighlight">\(R^2_{X}\)</span>는 기존에 사용하고 있는 독립변수만 사용하였을 때 얻을 수 있는 성능 결정계수이고 <span class="math notranslate nohighlight">\(R^2_{Xz}\)</span>는 기존의 독립변수와 새로운 독립변수를 합친 <span class="math notranslate nohighlight">\(K+1\)</span> 종류의 독립변수를 사용하였을 때 얻을 수 있는 성능 결정계수다. <span class="math notranslate nohighlight">\(r_{yz}\)</span>는 종속변수 <span class="math notranslate nohighlight">\(y\)</span>와 새로운 독립변수 <span class="math notranslate nohighlight">\(z\)</span>사이의 상관계수다.</p>
+<p><span class="math notranslate nohighlight">\(R^2_{X}\)</span>는 0 부터 1 사이의 값이므로 <span class="math notranslate nohighlight">\(1-R^2_{X}\)</span>도 0 부터 1 사이의 값이다. 상관계수의 제곱 <span class="math notranslate nohighlight">\(r^2_{yz}\)</span>도 마찬가지로 0 부터 1 사이의 값이다. 따라서 <span class="math notranslate nohighlight">\((1-R^2_{X})r^2_{yz}\)</span>도 0 부터 1 사이의 값이 된다. 따라서 새로운 독립변수를 추가했을 때의 성능 <span class="math notranslate nohighlight">\(R^2_{Xz}\)</span>은 기존 성능 <span class="math notranslate nohighlight">\(R^2_{X}\)</span>보다 항상 크거나 같다. <span class="math notranslate nohighlight">\(R^2_{Xz}\)</span> 값이 <span class="math notranslate nohighlight">\(R^2_{X}\)</span> 값과 정확이 같아지려면 <span class="math notranslate nohighlight">\(R^2_{X}\)</span>가 정확히 1이거나 <span class="math notranslate nohighlight">\(r_{yz}\)</span>가 정확히 0이어야 한다. 하지만 현실적으로는 <span class="math notranslate nohighlight">\(R^2_{X}\)</span> 값이 정확히 1이 되거나 <span class="math notranslate nohighlight">\(r_{yz}\)</span>가 정확히 0인 경우는 거의 없으므로 실무에서는 독립변수를 추가할수록 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span> 값이 항상 증가한다고 보아도 무관하다.</p>
+<p>이제는 선택된 독립변수들의 유의확률을 살펴보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;pv&quot;</span><span class="p">:</span> <span class="n">pvs</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
