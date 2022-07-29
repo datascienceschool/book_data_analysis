@@ -458,12 +458,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.8.1. 예측
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -475,6 +499,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.8.1. 예측
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -484,7 +521,321 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.8. </span>예측과 교차검증<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>회귀분석의 첫번째 목적은 종속변수와 독립변수간의 관계, 즉 가중치를 알아내는 것이다. 회귀분석의 두번째 목적은 이 가중치를 사용하여 새로운 독립변수 값에 대한 종속변수를 예측하는 것이다.</p>
+<p>회귀분석의 첫번째 목적은 종속변수와 독립변수간의 관계, 즉 가중치를 알아내는 것이다. 회귀분석의 두번째 목적은 이 가중치를 사용하여 새로운 독립변수 값에 대한 종속변수를 예측하는 것이다. 이 절에서는 새로운 종속변수를 예측하는 방법에 대해 알아본다.</p>
+<section id="id2">
+<h2><span class="section-number">3.8.1. </span>예측<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>예제 회귀분석모형으로 보스턴 집값 데이터를 lstat 독립변수로 예측하는 간단한 모형을 사용하여 설명한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(lstat)&quot;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>선형회귀분석 결과 객체는 종속변수를 예측하는 <code class="docutils literal notranslate"><span class="pre">get_prediction</span></code> 메서드를 제공한다. <code class="docutils literal notranslate"><span class="pre">get_prediction</span></code> 메서드의 입력값으로는 독립변수 값이 있는 pands 데이터프레임을 넣어야 한다. lstat의 값이 각각 5, 6, 7인 경우의 집값을 예측해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">X_new</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;lstat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]})</span>
+<span class="n">X_new</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>lstat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>7</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>이 독립변수 데이터를 넣어서 <code class="docutils literal notranslate"><span class="pre">get_prediction</span></code> 메서드를 호출하면 예측 객체가 나온다. 예측 객체는 <code class="docutils literal notranslate"><span class="pre">PredictionResults</span></code> 클래스 객체다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
+<span class="n">pred_result</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.regression._prediction.PredictionResults at 0x203ee22d970&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 예측 객체의 <code class="docutils literal notranslate"><span class="pre">summary_frame</span></code> 메서드를 호출하면 예측 결과를 데이터프레임으로 출력한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pred</span> <span class="o">=</span> <span class="n">pred_result</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">()</span>
+<span class="n">df_pred</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>mean_se</th>
+      <th>mean_ci_lower</th>
+      <th>mean_ci_upper</th>
+      <th>obs_ci_lower</th>
+      <th>obs_ci_upper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>29.803594</td>
+      <td>0.405247</td>
+      <td>29.007412</td>
+      <td>30.599776</td>
+      <td>17.565675</td>
+      <td>42.041513</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>28.853545</td>
+      <td>0.377839</td>
+      <td>28.111211</td>
+      <td>29.595878</td>
+      <td>16.619011</td>
+      <td>41.088079</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>27.903495</td>
+      <td>0.352562</td>
+      <td>27.210824</td>
+      <td>28.596167</td>
+      <td>15.671874</td>
+      <td>40.135117</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>예측 결과에서 <code class="docutils literal notranslate"><span class="pre">mean</span></code> 열이 예측된 종속변수 값이다.</p>
+<p>이와 같이 선형회귀분석에 사용되지 않은 새로운 독립변수 값을 넣어서 종속변수를 예측하는 것을 <b>표본 외 예측(out-of-sample prediction)</b>이라고 한다. 이와 다르게 이미 선형회귀분석에 사용되었던 데이터를 다시 모형에 넣어서 종속변수를 예측하는 것은 <b>표본 내 예측(in-sample prediction)</b>이라고 한다.</p>
+<p>다음은 표본 내 예측을 하는 코드다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_result_insample</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston</span><span class="p">)</span>
+<span class="n">df_pred_insample</span> <span class="o">=</span> <span class="n">pred_result_insample</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">()</span>
+<span class="n">df_pred_insample</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>mean</th>
+      <th>mean_se</th>
+      <th>mean_ci_lower</th>
+      <th>mean_ci_upper</th>
+      <th>obs_ci_lower</th>
+      <th>obs_ci_upper</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>29.822595</td>
+      <td>0.405814</td>
+      <td>29.025299</td>
+      <td>30.619891</td>
+      <td>17.584603</td>
+      <td>42.060587</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>25.870390</td>
+      <td>0.308011</td>
+      <td>25.265246</td>
+      <td>26.475534</td>
+      <td>13.643413</td>
+      <td>38.097367</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>30.725142</td>
+      <td>0.433488</td>
+      <td>29.873477</td>
+      <td>31.576807</td>
+      <td>18.483488</td>
+      <td>42.966796</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>31.760696</td>
+      <td>0.466794</td>
+      <td>30.843594</td>
+      <td>32.677798</td>
+      <td>19.514315</td>
+      <td>44.007076</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>29.490078</td>
+      <td>0.395994</td>
+      <td>28.712077</td>
+      <td>30.268079</td>
+      <td>17.253328</td>
+      <td>41.726828</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>501</th>
+      <td>25.366864</td>
+      <td>0.299509</td>
+      <td>24.778424</td>
+      <td>25.955303</td>
+      <td>13.140702</td>
+      <td>37.593025</td>
+    </tr>
+    <tr>
+      <th>502</th>
+      <td>25.927393</td>
+      <td>0.309045</td>
+      <td>25.320218</td>
+      <td>26.534568</td>
+      <td>13.700315</td>
+      <td>38.154470</td>
+    </tr>
+    <tr>
+      <th>503</th>
+      <td>29.195563</td>
+      <td>0.387483</td>
+      <td>28.434281</td>
+      <td>29.956844</td>
+      <td>16.959864</td>
+      <td>41.431261</td>
+    </tr>
+    <tr>
+      <th>504</th>
+      <td>28.397521</td>
+      <td>0.365412</td>
+      <td>27.679603</td>
+      <td>29.115439</td>
+      <td>16.164444</td>
+      <td>40.630598</td>
+    </tr>
+    <tr>
+      <th>505</th>
+      <td>27.067452</td>
+      <td>0.332467</td>
+      <td>26.414259</td>
+      <td>27.720645</td>
+      <td>14.838003</td>
+      <td>39.296901</td>
+    </tr>
+  </tbody>
+</table>
+<p>506 rows × 6 columns</p>
+</div></div></div>
+</div>
+<p>사실 표본 내 예측값은 분석결과 객체 내부에 <code class="docutils literal notranslate"><span class="pre">fittedvalues</span></code> 속성으로 이미 계산되어 있으므로 이렇게 계산할 필요는 없다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">fittedvalues</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0      29.822595
+1      25.870390
+2      30.725142
+3      31.760696
+4      29.490078
+         ...    
+501    25.366864
+502    25.927393
+503    29.195563
+504    28.397521
+505    27.067452
+Length: 506, dtype: float64
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
