@@ -1015,8 +1015,8 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3.09 s
-Wall time: 3.12 s
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>CPU times: total: 3.22 s
+Wall time: 3.25 s
 </pre></div>
 </div>
 </div>
@@ -1037,70 +1037,228 @@ Wall time: 3.12 s
 <p>독립변수가 추가되면서 결정계수가 어떻게 변하였는지를 정리하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_r2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">r2s</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
-<span class="n">s_r2</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_r2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="n">r2s</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
+<span class="n">df_r2</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lstat      0.543242
-rm         0.637124
-ptratio    0.676704
-dis        0.687835
-nox        0.705170
-chas       0.712357
-black      0.718256
-zn         0.722207
-crim       0.723905
-rad        0.728807
-tax        0.734806
-indus      0.734328
-age        0.733790
-dtype: float64
-</pre></div>
-</div>
-</div>
-</div>
-<p>이를 플롯으로 표시하면 다음과 같다. x축은 추가된 변수의 순서를 나타내고 y축은 결정계수 값이다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ax</span> <span class="o">=</span> <span class="n">s_r2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;추가변수에 따른 결정계수의 변화&quot;</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">s_r2</span><span class="p">)))</span> <span class="c1"># 모든 x 라벨을 표시하기 위한 코드</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticklabels</span><span class="p">(</span><span class="n">s_r2</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/03_07_19_0.png" src="../_images/03_07_19_0.png" />
-</div>
+<div class="output text_html"><style type="text/css">
+#T_4c76e_row0_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 73.9%, transparent 73.9%);
+}
+#T_4c76e_row1_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 86.7%, transparent 86.7%);
+}
+#T_4c76e_row2_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 92.1%, transparent 92.1%);
+}
+#T_4c76e_row3_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 93.6%, transparent 93.6%);
+}
+#T_4c76e_row4_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 96.0%, transparent 96.0%);
+}
+#T_4c76e_row5_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 96.9%, transparent 96.9%);
+}
+#T_4c76e_row6_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 97.7%, transparent 97.7%);
+}
+#T_4c76e_row7_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 98.3%, transparent 98.3%);
+}
+#T_4c76e_row8_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 98.5%, transparent 98.5%);
+}
+#T_4c76e_row9_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 99.2%, transparent 99.2%);
+}
+#T_4c76e_row10_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
+}
+#T_4c76e_row11_col0, #T_4c76e_row12_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 99.9%, transparent 99.9%);
+}
+</style>
+<table id="T_4c76e">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_4c76e_level0_col0" class="col_heading level0 col0" >r2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_4c76e_level0_row0" class="row_heading level0 row0" >lstat</th>
+      <td id="T_4c76e_row0_col0" class="data row0 col0" >0.543242</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row1" class="row_heading level0 row1" >rm</th>
+      <td id="T_4c76e_row1_col0" class="data row1 col0" >0.637124</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row2" class="row_heading level0 row2" >ptratio</th>
+      <td id="T_4c76e_row2_col0" class="data row2 col0" >0.676704</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row3" class="row_heading level0 row3" >dis</th>
+      <td id="T_4c76e_row3_col0" class="data row3 col0" >0.687835</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row4" class="row_heading level0 row4" >nox</th>
+      <td id="T_4c76e_row4_col0" class="data row4 col0" >0.705170</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row5" class="row_heading level0 row5" >chas</th>
+      <td id="T_4c76e_row5_col0" class="data row5 col0" >0.712357</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row6" class="row_heading level0 row6" >black</th>
+      <td id="T_4c76e_row6_col0" class="data row6 col0" >0.718256</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row7" class="row_heading level0 row7" >zn</th>
+      <td id="T_4c76e_row7_col0" class="data row7 col0" >0.722207</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row8" class="row_heading level0 row8" >crim</th>
+      <td id="T_4c76e_row8_col0" class="data row8 col0" >0.723905</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row9" class="row_heading level0 row9" >rad</th>
+      <td id="T_4c76e_row9_col0" class="data row9 col0" >0.728807</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row10" class="row_heading level0 row10" >tax</th>
+      <td id="T_4c76e_row10_col0" class="data row10 col0" >0.734806</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row11" class="row_heading level0 row11" >indus</th>
+      <td id="T_4c76e_row11_col0" class="data row11 col0" >0.734328</td>
+    </tr>
+    <tr>
+      <th id="T_4c76e_level0_row12" class="row_heading level0 row12" >age</th>
+      <td id="T_4c76e_row12_col0" class="data row12 col0" >0.733790</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
 </div>
 <p>이제 선택된 독립변수들의 유의확률을 살펴본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">s_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">pvs</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
-<span class="n">s_pv</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;pv&quot;</span><span class="p">:</span> <span class="n">pvs</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
+<span class="n">df_pv</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>lstat      5.081103e-88
-rm         3.472258e-27
-ptratio    1.644660e-14
-dis        1.668467e-05
-nox        5.488148e-08
-chas       1.134454e-08
-black      7.719459e-04
-zn         4.651616e-03
-crim       4.456745e-02
-rad        1.692182e-03
-tax        5.214237e-04
-indus      7.379887e-01
-age        9.582293e-01
-dtype: float64
-</pre></div>
-</div>
-</div>
+<div class="output text_html"><style type="text/css">
+#T_a8eed_row0_col0, #T_a8eed_row1_col0, #T_a8eed_row2_col0, #T_a8eed_row3_col0, #T_a8eed_row4_col0, #T_a8eed_row5_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.0%, transparent 0.0%);
+}
+#T_a8eed_row6_col0, #T_a8eed_row10_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.1%, transparent 0.1%);
+}
+#T_a8eed_row7_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.5%, transparent 0.5%);
+}
+#T_a8eed_row8_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 4.7%, transparent 4.7%);
+}
+#T_a8eed_row9_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.2%, transparent 0.2%);
+}
+#T_a8eed_row11_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 77.0%, transparent 77.0%);
+}
+#T_a8eed_row12_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
+}
+</style>
+<table id="T_a8eed">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_a8eed_level0_col0" class="col_heading level0 col0" >pv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_a8eed_level0_row0" class="row_heading level0 row0" >lstat</th>
+      <td id="T_a8eed_row0_col0" class="data row0 col0" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row1" class="row_heading level0 row1" >rm</th>
+      <td id="T_a8eed_row1_col0" class="data row1 col0" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row2" class="row_heading level0 row2" >ptratio</th>
+      <td id="T_a8eed_row2_col0" class="data row2 col0" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row3" class="row_heading level0 row3" >dis</th>
+      <td id="T_a8eed_row3_col0" class="data row3 col0" >0.000017</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row4" class="row_heading level0 row4" >nox</th>
+      <td id="T_a8eed_row4_col0" class="data row4 col0" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row5" class="row_heading level0 row5" >chas</th>
+      <td id="T_a8eed_row5_col0" class="data row5 col0" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row6" class="row_heading level0 row6" >black</th>
+      <td id="T_a8eed_row6_col0" class="data row6 col0" >0.000772</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row7" class="row_heading level0 row7" >zn</th>
+      <td id="T_a8eed_row7_col0" class="data row7 col0" >0.004652</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row8" class="row_heading level0 row8" >crim</th>
+      <td id="T_a8eed_row8_col0" class="data row8 col0" >0.044567</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row9" class="row_heading level0 row9" >rad</th>
+      <td id="T_a8eed_row9_col0" class="data row9 col0" >0.001692</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row10" class="row_heading level0 row10" >tax</th>
+      <td id="T_a8eed_row10_col0" class="data row10 col0" >0.000521</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row11" class="row_heading level0 row11" >indus</th>
+      <td id="T_a8eed_row11_col0" class="data row11 col0" >0.737989</td>
+    </tr>
+    <tr>
+      <th id="T_a8eed_level0_row12" class="row_heading level0 row12" >age</th>
+      <td id="T_a8eed_row12_col0" class="data row12 col0" >0.958229</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
 </div>
 <p>유의수준을 1%라고 정하였을 때 indus와 age는 유의확률이 유의수준보다 크기 때문에 이 두 변수는 추가하면 안된다. 따라서 최종적으로 우리가 선택할 모형은 다음과 같다.</p>
 <div class="cell docutils container">
@@ -1127,7 +1285,7 @@ Dep. Variable:                   medv   R-squared:                       0.741
 Model:                            OLS   Adj. R-squared:                  0.735
 Method:                 Least Squares   F-statistic:                     128.2
 Date:                Fri, 29 Jul 2022   Prob (F-statistic):          5.54e-137
-Time:                        08:52:12   Log-Likelihood:                -1498.9
+Time:                        09:18:17   Log-Likelihood:                -1498.9
 No. Observations:                 506   AIC:                             3022.
 Df Residuals:                     494   BIC:                             3072.
 Df Model:                          11                                         
