@@ -1175,48 +1175,48 @@ dtype: float64
 <p>또한 가중치 검정에서 나오는 유의확률의 값이 작을수록 더 유의한 독립변수라는 점을 이용하여 독립변수의 유의도를 비교하는 것도 가능하다. 이는 뒤에서 설명할 모형 선택 혹은 변수 선택에서도 쓰인다. 위 예제에서 사용된 sex, total_bill, size의 유의확률을 비교하면 다음과 같이 total_bill이 가장 작고 그 다음으로 size, sex의 순서임을 알 수 있다. 따라서 가장 유의한 독립변수는 total_bill이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">pvalues</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">()</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">pvalues</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">to_frame</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;p-value&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_31aae_row0_col0, #T_31aae_row1_col0 {
+#T_4f630_row0_col0, #T_4f630_row1_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 0.0%, transparent 0.0%);
 }
-#T_31aae_row2_col0 {
+#T_4f630_row2_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 3.0%, transparent 3.0%);
 }
-#T_31aae_row3_col0 {
+#T_4f630_row3_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
 }
 </style>
-<table id="T_31aae">
+<table id="T_4f630">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_31aae_level0_col0" class="col_heading level0 col0" >0</th>
+      <th id="T_4f630_level0_col0" class="col_heading level0 col0" >p-value</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_31aae_level0_row0" class="row_heading level0 row0" >Intercept</th>
-      <td id="T_31aae_row0_col0" class="data row0 col0" >0.000000</td>
+      <th id="T_4f630_level0_row0" class="row_heading level0 row0" >Intercept</th>
+      <td id="T_4f630_row0_col0" class="data row0 col0" >0.000000</td>
     </tr>
     <tr>
-      <th id="T_31aae_level0_row1" class="row_heading level0 row1" >scale(total_bill)</th>
-      <td id="T_31aae_row1_col0" class="data row1 col0" >0.000000</td>
+      <th id="T_4f630_level0_row1" class="row_heading level0 row1" >scale(total_bill)</th>
+      <td id="T_4f630_row1_col0" class="data row1 col0" >0.000000</td>
     </tr>
     <tr>
-      <th id="T_31aae_level0_row2" class="row_heading level0 row2" >scale(size)</th>
-      <td id="T_31aae_row2_col0" class="data row2 col0" >0.025171</td>
+      <th id="T_4f630_level0_row2" class="row_heading level0 row2" >scale(size)</th>
+      <td id="T_4f630_row2_col0" class="data row2 col0" >0.025171</td>
     </tr>
     <tr>
-      <th id="T_31aae_level0_row3" class="row_heading level0 row3" >C(sex)[T.Female]</th>
-      <td id="T_31aae_row3_col0" class="data row3 col0" >0.847446</td>
+      <th id="T_4f630_level0_row3" class="row_heading level0 row3" >C(sex)[T.Female]</th>
+      <td id="T_4f630_row3_col0" class="data row3 col0" >0.847446</td>
     </tr>
   </tbody>
 </table>
