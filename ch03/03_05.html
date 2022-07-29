@@ -1059,7 +1059,13 @@ dtype: float64
 <li><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>의 값은 독립변수들의 값에 영향을 받지 않는다.</p></li>
 <li><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>의 값은 서로 영향을 주지 않는다.</p></li>
 </ol>
-<p>이러한 가정하에서 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>의 표준편차 <span class="math notranslate nohighlight">\(se_j\)</span>는 다음 수식으로 계산할 수 있다. se는 standard error의 약자이다.</p>
+<p>이러한 가정을 사용하면 <span class="math notranslate nohighlight">\(j\)</span>번째 가중치의 추정값 <span class="math notranslate nohighlight">\(\hat{w}_j\)</span>가 진실된 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>를 중심으로 하고 자유도가 <span class="math notranslate nohighlight">\(N−K-1\)</span>인 스튜던트t분포를 따른다는 것을 증명할 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+\dfrac{\hat{w}_j - w_j}{se_j} \sim t_{N-K-1}
+\]</div>
+<p>여기서 <span class="math notranslate nohighlight">\(N\)</span>은 데이터의 개수, <span class="math notranslate nohighlight">\(K\)</span>는 독립변수의 개수다.</p>
+<p>위 식에서 <span class="math notranslate nohighlight">\(se_j\)</span>는 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>의 표준편차로 다음 수식으로 계산한다. se는 standard error의 약자이다.</p>
 <div class="math notranslate nohighlight">
 \[
 se_j = \sqrt{\dfrac{e^Te}{N-K} \big((X^TX)^{-1}\big)_{jj}}
@@ -1121,7 +1127,7 @@ Notes:
 </div>
 </div>
 </div>
-<p>결과요약에서 <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">err</span></code>로 표시된 다음 부분이 위 식으로 계산한 표준편차다.</p>
+<p>결과요약에서 <code class="docutils literal notranslate"><span class="pre">std</span> <span class="pre">err</span></code>로 표시된 다음 부분이 가중치의 표준편차다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">============================================</span>
                                 <span class="n">std</span> <span class="n">err</span>     
 <span class="o">--------------------------------------------</span>
@@ -1131,12 +1137,8 @@ Notes:
 <span class="n">scale</span><span class="p">(</span><span class="n">size</span><span class="p">)</span>                       <span class="mf">0.081</span>     
 </pre></div>
 </div>
-<p>확률론적 가정을 했을 때 얻을 수 있는 또다른 결론은 우리가 구한 추정값 <span class="math notranslate nohighlight">\(\hat{w}\)</span>가 진실된 가중치 <span class="math notranslate nohighlight">\(w\)</span>를 중심으로 하고 자유도가 <span class="math notranslate nohighlight">\(N−K-1\)</span>인 스튜던트t분포를 따른다는 점이다. 여기서 <span class="math notranslate nohighlight">\(N\)</span>은 데이터의 개수, <span class="math notranslate nohighlight">\(K\)</span>는 독립변수의 개수다.</p>
-<div class="math notranslate nohighlight">
-\[
-\dfrac{\hat{w}_i - w_i}{se_i} \sim t_{N-K-1}
-\]</div>
-<p>이 사실을 사용하면 진실된 가중치 <span class="math notranslate nohighlight">\(w\)</span>가 존재할 범위를 계산할 수 있다. statsmodels 패키지로 구한 선형회귀분석 결과 요약에서 <code class="docutils literal notranslate"><span class="pre">[0.025</span></code>라는 열에 표시된 값은 가중치 추정값이 이 값보다 작을 확률이 2.5%라는 뜻이고 <code class="docutils literal notranslate"><span class="pre">0.975]</span></code>라는 열에 표시된 값은 가중치 추정값이 이 값보다 클 확률이 2.5%라는 뜻이다. 즉, 진실된 가중치는 95%의 확률로 이 두 값 사이에 존재한다.</p>
+<p>또한 진실된 가중치 <span class="math notranslate nohighlight">\(w\)</span>가 t분포로 지정된 확률분포를 따르기 때문에 진실된 가중치 <span class="math notranslate nohighlight">\(w\)</span>가 존재하는 범위를 계산할 수 있다. 이를 가중치 <b>신뢰구간(confidence interval)</b>이라고 한다.</p>
+<p>statsmodels 패키지로 구한 선형회귀분석 결과 요약에서 <code class="docutils literal notranslate"><span class="pre">[0.025</span></code>라는 열과 <code class="docutils literal notranslate"><span class="pre">0.975]</span></code>라는 열이 가중치 신뢰구간을 나타낸다. <code class="docutils literal notranslate"><span class="pre">[0.025</span></code>라는 열에 표시된 값은 가중치 추정값이 이 값보다 작을 확률이 2.5%라는 뜻이고 <code class="docutils literal notranslate"><span class="pre">0.975]</span></code>라는 열에 표시된 값은 가중치 추정값이 이 값보다 클 확률이 2.5%라는 뜻이다. 즉, 진실된 가중치는 95%의 확률로 이 두 값 사이에 존재한다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">=====================================================================================</span>
                                                                   <span class="p">[</span><span class="mf">0.025</span>      <span class="mf">0.975</span><span class="p">]</span>
 <span class="o">-------------------------------------------------------------------------------------</span>
