@@ -484,6 +484,121 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.9. </span>아웃라이어와 영향도<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+
+<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(lstat)&quot;</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">outlier_test</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>student_resid</th>
+      <th>unadj_p</th>
+      <th>bonf(p)</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>-0.938639</td>
+      <td>0.348367</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>-0.687511</td>
+      <td>0.492078</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.640666</td>
+      <td>0.522031</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.264236</td>
+      <td>0.791706</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.081882</td>
+      <td>0.279823</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td>...</td>
+      <td>...</td>
+      <td>...</td>
+    </tr>
+    <tr>
+      <th>501</th>
+      <td>-0.477502</td>
+      <td>0.633212</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>502</th>
+      <td>-0.857915</td>
+      <td>0.391348</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>503</th>
+      <td>-0.853387</td>
+      <td>0.393851</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>504</th>
+      <td>-1.031090</td>
+      <td>0.302994</td>
+      <td>1.0</td>
+    </tr>
+    <tr>
+      <th>505</th>
+      <td>-2.455825</td>
+      <td>0.014393</td>
+      <td>1.0</td>
+    </tr>
+  </tbody>
+</table>
+<p>506 rows × 3 columns</p>
+</div></div></div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">

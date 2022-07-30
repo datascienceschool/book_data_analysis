@@ -680,7 +680,7 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
-<p>예측 결과에서 <code class="docutils literal notranslate"><span class="pre">mean</span></code> 열이 예측된 종속변수 값이다.</p>
+<p>예측 결과에서 <code class="docutils literal notranslate"><span class="pre">mean</span></code> 열이 예측된 종속변수 값이다. 나머지 열에 대해서는 잠시 후에 설명한다.</p>
 <p>이와 같이 선형회귀분석에 사용되지 않은 새로운 독립변수 값을 넣어서 종속변수를 예측하는 것을 <b>표본 외 예측(out-of-sample prediction)</b>이라고 한다. 이와 다르게 이미 선형회귀분석에 사용되었던 데이터를 다시 모형에 넣어서 종속변수를 예측하는 것은 <b>표본 내 예측(in-sample prediction)</b>이라고 한다.</p>
 <p>다음은 표본 내 예측을 하는 코드다.</p>
 <div class="cell docutils container">
@@ -868,7 +868,7 @@ Length: 506, dtype: float64
 \]</div>
 <p>이 식에서 <span class="math notranslate nohighlight">\(\bar{x}\)</span>는 회귀분석에 사용한 독립변수 데이터의 평균이고 <span class="math notranslate nohighlight">\(s^2_x\)</span>는 회귀분석에 사용한 독립변수 데이터의 분산이다. 이렇게 구한 예측값 확률분포의 평균과 분산을 이용하여 평균 예측신뢰구간을 구할 수 있다. 관측 예측신뢰구간도 비슷한 방법으로 구한다.</p>
 <p>위 식을 자세히 보면 예측하고자 하는 독립변수의 값 <span class="math notranslate nohighlight">\(x_{\text{new}}\)</span>이 회귀분석에 사용한 독립변수 데이터의 평균으로부터 멀어질수록 예측값 확률분포의 분산이 커지는 것을 알 수 있다. 예측값 확률분포의 분산이 커진다는 것은 예측신뢰구간이 넓어지고 예측의 정확도가 떨어진다는 뜻이다.</p>
-<p>앞에서 예측 객체의 <code class="docutils literal notranslate"><span class="pre">summary_frame</span></code> 메서드를 호출했을 때 나온 데이터프레임 중  <code class="docutils literal notranslate"><span class="pre">mean_ci_upper</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_ci_lower</span></code> 열이 평균 예측신뢰구간의 상한과 하한을 나타내는 값이다. <code class="docutils literal notranslate"><span class="pre">obs_ci_lower</span></code>, <code class="docutils literal notranslate"><span class="pre">obs_ci_upper</span></code> 열은 관측 예측신뢰구간의 상한과 하한을 나타낸다.</p>
+<p>앞에서 예측 객체의 <code class="docutils literal notranslate"><span class="pre">summary_frame</span></code> 메서드를 호출했을 때 나온 데이터프레임 중 <code class="docutils literal notranslate"><span class="pre">mean_se</span></code> 열이 예측값 확률분포의 표준편차다. 그리고 <code class="docutils literal notranslate"><span class="pre">mean_ci_upper</span></code>, <code class="docutils literal notranslate"><span class="pre">mean_ci_lower</span></code> 열이 평균 예측신뢰구간의 상한과 하한을 나타내는 값이다. <code class="docutils literal notranslate"><span class="pre">obs_ci_lower</span></code>, <code class="docutils literal notranslate"><span class="pre">obs_ci_upper</span></code> 열은 관측 예측신뢰구간의 상한과 하한을 나타낸다.</p>
 <p>그림으로 표시하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
