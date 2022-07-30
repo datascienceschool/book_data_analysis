@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.9. 아웃라이어와 영향도 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.9. 영향도와 아웃라이어 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.10. 스케일링과 다중공선성" href="03_10.html" />
@@ -275,7 +277,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.9. 아웃라이어와 영향도
+     3.9. 영향도와 아웃라이어
     </a>
    </li>
    <li class="toctree-l2">
@@ -458,23 +460,60 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.9.1. 영향도
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>아웃라이어와 영향도</h1>
+                <h1>영향도와 아웃라이어</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.9.1. 영향도
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -483,122 +522,91 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.9. </span>아웃라이어와 영향도<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.9. </span>영향도와 아웃라이어<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>지금까지는 회귀분석의 성능을 향상시키기 위해 독립변수를 선택하는 방법을 공부했다. 이 절에서는 개별적인 데이터 레코드를 분석하는 방법을 학습힌다. 즉 지금까지 독립변수행렬 <span class="math notranslate nohighlight">\(X\)</span>의 열을 선택하거나 제거하는 방법을 공부했다면 이제는 독립변수행렬 <span class="math notranslate nohighlight">\(X\)</span>의 행을 조사하고 선택하는 방법을 알아본다.</p>
+<p>예제로는 보스턴 집값을 lstat 독립변수를 사용하여 선형회귀분석한 결과를 사용한다. 다만 여기에서는 전체 데이터를 다 사용하는 것이 아니라 앞부분의 10개 데이터 레코드만을 사용하여 회귀분석을 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
 <span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">boston10</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">10</span><span class="p">]</span>  <span class="c1"># 앞 부분 10개의 데이터만 사용</span>
 
-<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(lstat)&quot;</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model10</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat)&quot;</span><span class="p">,</span> <span class="n">boston10</span><span class="p">)</span>
+<span class="n">result10</span> <span class="o">=</span> <span class="n">model10</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 </div>
+<p>seaborn 패키지의 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수로 선형회귀분석 결과를 그림으로 그리면 다음 그림과 같다. 이 그림에서는 0번 데이터 레코드부터 9번 데이터 레코드까지 10개의 데이터 레코드 각각에 대해 인덱스 번호를 붙어서 표시하였다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">outlier_test</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston10</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">boston10</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">lstat</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>student_resid</th>
-      <th>unadj_p</th>
-      <th>bonf(p)</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>-0.938639</td>
-      <td>0.348367</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>-0.687511</td>
-      <td>0.492078</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>0.640666</td>
-      <td>0.522031</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.264236</td>
-      <td>0.791706</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>1.081882</td>
-      <td>0.279823</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>...</th>
-      <td>...</td>
-      <td>...</td>
-      <td>...</td>
-    </tr>
-    <tr>
-      <th>501</th>
-      <td>-0.477502</td>
-      <td>0.633212</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>502</th>
-      <td>-0.857915</td>
-      <td>0.391348</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>503</th>
-      <td>-0.853387</td>
-      <td>0.393851</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>504</th>
-      <td>-1.031090</td>
-      <td>0.302994</td>
-      <td>1.0</td>
-    </tr>
-    <tr>
-      <th>505</th>
-      <td>-2.455825</td>
-      <td>0.014393</td>
-      <td>1.0</td>
-    </tr>
-  </tbody>
-</table>
-<p>506 rows × 3 columns</p>
-</div></div></div>
+<img alt="../_images/03_09_5_0.png" src="../_images/03_09_5_0.png" />
 </div>
+</div>
+<section id="id2">
+<h2><span class="section-number">3.9.1. </span>영향도<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>선형회귀분석을 실시하고 나면 찾아낸 가중치에 따른 예측값 <span class="math notranslate nohighlight">\(\hat{y}\)</span>을</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{y} = X \hat{w} = X(X^TX)^{-1}X^T y
+\]</div>
+<p>위 식에서 <span class="math notranslate nohighlight">\(y\)</span> 앞에 있는 <span class="math notranslate nohighlight">\(X(X^TX)^{-1}X^T\)</span> 행렬을 <b>영향도행렬(influence matrix)</b> 혹은 <b>hat행렬(hat-matrix)</b>이라고 부르고 기호로 <span class="math notranslate nohighlight">\(H\)</span>라고 쓴다.</p>
+<div class="math notranslate nohighlight">
+\[
+H = X(X^TX)^{-1}X^T
+\]</div>
+<p>데이터의 개수가 <span class="math notranslate nohighlight">\(N\)</span>개일 때 영향도행렬은 <span class="math notranslate nohighlight">\(N\times N\)</span> 크기의 행렬이 된다.</p>
+<p>영향도행렬에서 가장 중요한 부분은 대각성분이다. 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>의 <span class="math notranslate nohighlight">\(i\)</span>번째 대각성분 <span class="math notranslate nohighlight">\(H_{ii}\)</span>을 레버리지(leverage) <span class="math notranslate nohighlight">\(h_i\)</span>라고 부른다.</p>
+<div class="math notranslate nohighlight">
+\[
+h_i = H_{ii}
+\]</div>
+<p>영향도행렬의 크기가 <span class="math notranslate nohighlight">\(N\times N\)</span>이므로 레버리지의 개수는 데이터 개수와 같다. 즉, <span class="math notranslate nohighlight">\(i\)</span>번째 데이터에 대해 <span class="math notranslate nohighlight">\(i\)</span>번째 레버리지가 대응되는 구조로 각각의 데이터는 하나의 레버리지 값을 가진다.</p>
+<div class="math notranslate nohighlight">
+\[
+(x_i, y_i) \;\; \leftrightarrow \;\; h_i
+\]</div>
+<p>statsmodels 패키지의 선형회귀분석 결과 객체는 레버리지를 포함한 영향도 객체라는 객체를 출력하는 <code class="docutils literal notranslate"><span class="pre">get_influence</span></code> 메서드를 제공한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">influence10</span> <span class="o">=</span> <span class="n">result10</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span>
+<span class="n">influence10</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.stats.outliers_influence.OLSInfluence at 0x136aef2b0&gt;
+</pre></div>
+</div>
+</div>
+</div>
+<p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">OLSInfluence</span></code> 클래스 객체로 <code class="docutils literal notranslate"><span class="pre">hat_matrix_diag</span></code> 속성에 레버리지 값을 저장하고 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">influence10</span><span class="o">.</span><span class="n">hat_matrix_diag</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.1534897 , 0.10519736, 0.1716263 , 0.19569161, 0.14747404,
+       0.14949614, 0.10289462, 0.19668851, 0.62338413, 0.1540576 ])
+</pre></div>
+</div>
+</div>
+</div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
