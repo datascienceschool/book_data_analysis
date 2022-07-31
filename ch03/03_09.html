@@ -628,30 +628,36 @@ h_i = H_{ii}
 <div class="math notranslate nohighlight">
 \[ \varepsilon \sim \mathcal{N}(0, \sigma^2) \]</div>
 <p>교란항의 정규성 가정을 포함한 확률론적 가정을 사용하면 잔차에 대한 다음 두가지 사실을 수학적으로 증명할 수 있다.</p>
-<ol>
-<li><p>선형회귀분석으로 나온 <span class="math notranslate nohighlight">\(N\)</span>개의 전체 잔차 <span class="math notranslate nohighlight">\(e\)</span>는 기댓값이 0인 정규분포를 따른다.</p>
-<div class="math notranslate nohighlight">
-\[
-    e \sim \mathcal{N}\left(0, \sigma_e^2 \right)
-    \]</div>
-<p>이 사실을 이용하면 잔차의 크기로부터 교란항의 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>을 다음과 같이 추정할 수 있다.</p>
-<div class="math notranslate nohighlight">
-\[
-    \hat{\sigma}^2 = \dfrac{e^Te}{N-K-1} = \dfrac{RSS}{N-K-1}
-    \]</div>
-</li>
-<li><p><span class="math notranslate nohighlight">\(i\)</span>번째 개별 데이터에 대한 잔차 <span class="math notranslate nohighlight">\(e_i\)</span>도 기댓값이 0인 정규분포를 따른다.</p>
-<div class="math notranslate nohighlight">
-\[
-    e_i \sim \mathcal{N}\left(0, \sigma_{e,i}^2 \right)
-    \]</div>
-<p>하지만 <span class="math notranslate nohighlight">\(i\)</span>번째 개별 데이터의 잔차 <span class="math notranslate nohighlight">\(e_i\)</span>의 분산 <span class="math notranslate nohighlight">\(\sigma_{e,i}^2\)</span>은 <span class="math notranslate nohighlight">\(i\)</span>번째 데이터의 레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>의 영향을 받아서 데이터마다 달라진다.</p>
-<div class="math notranslate nohighlight">
-\[
-    \sigma_{e,i}^2 = \hat{\sigma}^2 (1 - h_i)
-    \]</div>
-</li>
-</ol>
+<div class="admonition- admonition">
+<p class="admonition-title">전체 잔차의 정규성</p>
+<p>선형회귀분석으로 나온 <span class="math notranslate nohighlight">\(N\)</span>개의 전체 잔차 <span class="math notranslate nohighlight">\(e\)</span>는 기댓값이 0인 정규분포를 따른다.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$$
+e \sim \mathcal{N}\left(0, \sigma_e^2 \right)
+$$
+
+이 사실을 이용하면 잔차의 크기로부터 교란항의 분산 $\sigma^2$을 다음과 같이 추정할 수 있다.
+
+$$
+\hat{\sigma}^2 = \dfrac{e^Te}{N-K-1} = \dfrac{RSS}{N-K-1}
+$$
+</pre></div>
+</div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">개별 잔차의 정규성</p>
+<p><span class="math notranslate nohighlight">\(i\)</span>번째 개별 데이터에 대한 잔차 <span class="math notranslate nohighlight">\(e_i\)</span>도 기댓값이 0인 정규분포를 따른다.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>$$
+e_i \sim \mathcal{N}\left(0, \sigma_{e,i}^2 \right)
+$$
+
+하지만 $i$번째 개별 데이터의 잔차 $e_i$의 분산 $\sigma_{e,i}^2$은 $i$번째 데이터의 레버리지 $h_i$의 영향을 받아서 데이터마다 달라진다. 
+
+$$
+\sigma_{e,i}^2 = \hat{\sigma}^2 (1 - h_i)
+$$
+</pre></div>
+</div>
+</div>
 </section>
 </section>
 
