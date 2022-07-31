@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.9. 영향도와 아웃라이어 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.9. 레버리지와 아웃라이어 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -277,7 +277,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.9. 영향도와 아웃라이어
+     3.9. 레버리지와 아웃라이어
     </a>
    </li>
    <li class="toctree-l2">
@@ -484,7 +484,12 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.9.1. 영향도
+   3.9.1. 레버리지
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.9.2. 잔차
   </a>
  </li>
 </ul>
@@ -496,7 +501,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>영향도와 아웃라이어</h1>
+                <h1>레버리지와 아웃라이어</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -508,7 +513,12 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.9.1. 영향도
+   3.9.1. 레버리지
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id3">
+   3.9.2. 잔차
   </a>
  </li>
 </ul>
@@ -522,7 +532,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.9. </span>영향도와 아웃라이어<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.9. </span>레버리지와 아웃라이어<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>지금까지는 회귀분석의 성능을 향상시키기 위해 독립변수를 선택하는 방법을 공부했다. 이 절에서는 개별적인 데이터 레코드를 분석하는 방법을 학습힌다. 즉 지금까지 독립변수행렬 <span class="math notranslate nohighlight">\(X\)</span>의 열을 선택하거나 제거하는 방법을 공부했다면 이제는 독립변수행렬 <span class="math notranslate nohighlight">\(X\)</span>의 행을 조사하고 선택하는 방법을 알아본다.</p>
 <p>예제로는 보스턴 집값을 lstat 독립변수를 사용하여 선형회귀분석한 결과를 사용한다. 다만 여기에서는 전체 데이터를 다 사용하는 것이 아니라 앞부분의 10개 데이터 레코드만을 사용하여 회귀분석을 한다.</p>
 <div class="cell docutils container">
@@ -556,8 +566,8 @@ title="Print to PDF"
 </div>
 </div>
 <section id="id2">
-<h2><span class="section-number">3.9.1. </span>영향도<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>선형회귀분석을 실시하고 나면 찾아낸 가중치에 따른 예측값 <span class="math notranslate nohighlight">\(\hat{y}\)</span>을</p>
+<h2><span class="section-number">3.9.1. </span>레버리지<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>선형회귀분석을 실시하고 나면 찾아낸 가중치에 따른 예측값 <span class="math notranslate nohighlight">\(\hat{y}\)</span>을 다음 공식으로 계산할 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[
 \hat{y} = X \hat{w} = X(X^TX)^{-1}X^T y
@@ -568,7 +578,7 @@ title="Print to PDF"
 H = X(X^TX)^{-1}X^T
 \]</div>
 <p>데이터의 개수가 <span class="math notranslate nohighlight">\(N\)</span>개일 때 영향도행렬은 <span class="math notranslate nohighlight">\(N\times N\)</span> 크기의 행렬이 된다.</p>
-<p>영향도행렬에서 가장 중요한 부분은 대각성분이다. 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>의 <span class="math notranslate nohighlight">\(i\)</span>번째 대각성분 <span class="math notranslate nohighlight">\(H_{ii}\)</span>을 레버리지(leverage) <span class="math notranslate nohighlight">\(h_i\)</span>라고 부른다.</p>
+<p>영향도행렬에서 가장 중요한 부분은 대각성분이다. 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>의 <span class="math notranslate nohighlight">\(i\)</span>번째 대각성분 <span class="math notranslate nohighlight">\(H_{ii}\)</span>을 <b>레버리지(leverage)<b> <span class="math notranslate nohighlight">\(h_i\)</span>라고 부른다.</p>
 <div class="math notranslate nohighlight">
 \[
 h_i = H_{ii}
@@ -606,6 +616,36 @@ h_i = H_{ii}
 </div>
 </div>
 </div>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.9.2. </span>잔차<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>위에서 정의한 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>을 이용하면 잔차의 크기를 계
+$<span class="math notranslate nohighlight">\(
+\begin{eqnarray}
+\text{Cov}[e] 
+&amp;=&amp; \text{E}[M \epsilon\epsilon^T M^T] \\
+&amp;=&amp; M \text{E}[\epsilon\epsilon^T] M^T \\
+&amp;=&amp; M \sigma^2 I M^T \\
+&amp;=&amp; \sigma^2MM^T \\
+&amp;=&amp; \sigma^2MM \\
+&amp;=&amp; \sigma^2M \\
+&amp;=&amp; \sigma^2(I - H) \\
+\end{eqnarray}
+\)</span>$</p>
+<p>우리는 앞에서 공부한 가중치 검정에서 다음과 같은 확률론적 가정을 사용하였다.</p>
+<blockquote>
+<div><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>은 기댓값이 0이고 분산이 <span class="math notranslate nohighlight">\(\sigma^2\)</span>인 정규분포를 따른다. 이 때 교란항의 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>은 어떤 경우에도 변하지 않는다.  $<span class="math notranslate nohighlight">\( \varepsilon \sim \mathcal{N}(0, \sigma^2) \)</span>$</p>
+</div></blockquote>
+<p>이 가정을 사용하면 선형회귀분석으로 나온 잔차 <span class="math notranslate nohighlight">\(e\)</span>도 기댓값 <span class="math notranslate nohighlight">\((N-K-1)\sigma^2\)</span>이 0인 정규분포를 따른다는 것을 증명할 수 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+e \sim \mathcal{N}\left(0, \dfrac{N-K-1}{N}\sigma^2 \right)
+\]</div>
+<p>따라서 잔차 <span class="math notranslate nohighlight">\(e\)</span>를 이용하여 교란항의 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>을 다음과 같이 추정한다.</p>
+<div class="math notranslate nohighlight">
+\[
+\hat{\sigma}^2 = \dfrac{e^Te}{N-K-1} = \dfrac{RSS}{N-K-1}
+\]</div>
 </section>
 </section>
 
