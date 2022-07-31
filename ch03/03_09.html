@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.9. 레버리지와 아웃라이어 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.9. 레버리지와 잔차분석 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -277,7 +277,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.9. 레버리지와 아웃라이어
+     3.9. 레버리지와 잔차분석
     </a>
    </li>
    <li class="toctree-l2">
@@ -501,7 +501,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>레버리지와 아웃라이어</h1>
+                <h1>레버리지와 잔차분석</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -532,7 +532,7 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.9. </span>레버리지와 아웃라이어<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.9. </span>레버리지와 잔차분석<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>지금까지는 회귀분석의 성능을 향상시키기 위해 독립변수를 선택하는 방법을 공부했다. 이 절에서는 개별적인 데이터 레코드를 분석하는 방법을 학습힌다. 즉 지금까지 독립변수행렬 <span class="math notranslate nohighlight">\(X\)</span>의 열을 선택하거나 제거하는 방법을 공부했다면 이제는 독립변수행렬 <span class="math notranslate nohighlight">\(X\)</span>의 행을 조사하고 선택하는 방법을 알아본다.</p>
 <p>예제로는 보스턴 집값을 lstat 독립변수를 사용하여 선형회귀분석한 결과를 사용한다. 다만 여기에서는 전체 데이터를 다 사용하는 것이 아니라 앞부분의 10개 데이터 레코드만을 사용하여 회귀분석을 한다.</p>
 <div class="cell docutils container">
@@ -611,7 +611,7 @@ h_i = H_{ii}
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.stats.outliers_influence.OLSInfluence at 0x136aef2b0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.stats.outliers_influence.OLSInfluence at 0x12d47df30&gt;
 </pre></div>
 </div>
 </div>
@@ -619,13 +619,27 @@ h_i = H_{ii}
 <p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">OLSInfluence</span></code> 클래스 객체로 <code class="docutils literal notranslate"><span class="pre">hat_matrix_diag</span></code> 속성에 레버리지 값을 저장하고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">influence10</span><span class="o">.</span><span class="n">hat_matrix_diag</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">leverage10</span> <span class="o">=</span> <span class="n">influence10</span><span class="o">.</span><span class="n">hat_matrix_diag</span>
+<span class="n">leverage10</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
 <div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.1534897 , 0.10519736, 0.1716263 , 0.19569161, 0.14747404,
        0.14949614, 0.10289462, 0.19668851, 0.62338413, 0.1540576 ])
+</pre></div>
+</div>
+</div>
+</div>
+<p>모두 0 부터 1 사이의 값이라는 것을 알 수 있다. 전체 레버리지의 합을 구하면 2가 되는 것도 확인할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">leverage10</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
 </pre></div>
 </div>
 </div>
@@ -668,7 +682,7 @@ e_i \sim \mathcal{N}\left(0, \sigma_{e,i}^2 \right)
 \sigma_{e,i}^2 = \hat{\sigma}^2 (1 - h_i)
 \]</div>
 </div>
-<p>두번째 특성 “개별 잔차의 정규성”을 보면 레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>가 커질수록</p>
+<p>두번째 특성 “개별 잔차의 정규성”을 보면 레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>가 커질수록 (1에 가까워질수록) 개별 데이터 잔차 <span class="math notranslate nohighlight">\(e_i\)</span>의 분산이 작아지는 것을 알 수 있다. 즉, 독립변수에 대한 “예측 오차가 작아진다.</p>
 </section>
 </section>
 
