@@ -606,7 +606,8 @@ h_i = H_{ii}
 <p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">OLSInfluence</span></code> 클래스 객체로 <code class="docutils literal notranslate"><span class="pre">hat_matrix_diag</span></code> 속성에 레버리지 값을 저장하고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">leverage10</span> <span class="o">=</span> <span class="n">influence10</span><span class="o">.</span><span class="n">hat_matrix_diag</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">influence10</span> <span class="o">=</span> <span class="n">result10</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span>
+<span class="n">leverage10</span> <span class="o">=</span> <span class="n">influence10</span><span class="o">.</span><span class="n">hat_matrix_diag</span>
 <span class="n">leverage10</span>
 </pre></div>
 </div>
