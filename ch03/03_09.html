@@ -578,7 +578,7 @@ title="Print to PDF"
 H = X(X^TX)^{-1}X^T
 \]</div>
 <p>데이터의 개수가 <span class="math notranslate nohighlight">\(N\)</span>개일 때 영향도행렬은 <span class="math notranslate nohighlight">\(N\times N\)</span> 크기의 행렬이 된다.</p>
-<p>영향도행렬에서 가장 중요한 부분은 대각성분이다. 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>의 <span class="math notranslate nohighlight">\(i\)</span>번째 대각성분 <span class="math notranslate nohighlight">\(H_{ii}\)</span>을 <b>레버리지(leverage)</b> <span class="math notranslate nohighlight">\(h_i\)</span>라고 부른다.</p>
+<p>영향도행렬에서 가장 중요한 부분은 대각성분이다. 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>의 <span class="math notranslate nohighlight">\(i\)</span>번째 대각성분 <span class="math notranslate nohighlight">\(H_{ii}\)</span>을 <b>레버리지(leverage)</b> <span class="math notranslate nohighlight">\(h_i\)</span> 혹은 영향도라고 부른다.</p>
 <div class="math notranslate nohighlight">
 \[
 h_i = H_{ii}
@@ -631,6 +631,147 @@ h_i = H_{ii}
 </div>
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">leverage10</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2.0
+</pre></div>
+</div>
+</div>
+</div>
+<p>위에서 예제로 사용한 선형회귀분석에서 개별 데이터의 레버리지 크기를 점의 크기로 표시하면 다음과 같아진다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston10</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">boston10</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">lstat</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span>
+                <span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">leverage10</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5000</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">lstat</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_09_14_0.png" src="../_images/03_09_14_0.png" />
+</div>
+</div>
+<p>레버리지를 영향도라고 부르는 이유는 레버리지 값이 1에 가까운 데이터 즉, <b>레버리지가 큰 데이터는 레버리지가 작은 데이터보다 회귀분석 결과에 영향을 크게 미치기 때문</b>이다.</p>
+<p>우리가 사용하는 예제에서 레버리지가 가장 작은 데이터는 6번 데이터이고 레버리지가 가장 큰 데이터는 8번 데이터다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">np</span><span class="o">.</span><span class="n">argmin</span><span class="p">(</span><span class="n">leverage10</span><span class="p">),</span> <span class="n">np</span><span class="o">.</span><span class="n">argmax</span><span class="p">(</span><span class="n">leverage10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(6, 8)
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 두가지 데이터를 각각 제외하고 다시 선형회귀분석을 해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boston10</span><span class="p">)))</span>
+<span class="n">idx_m6</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">copy</span><span class="p">();</span> <span class="n">idx_m6</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">6</span><span class="p">)</span>
+<span class="n">idx_m8</span> <span class="o">=</span> <span class="n">idx</span><span class="o">.</span><span class="n">copy</span><span class="p">();</span> <span class="n">idx_m8</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="mi">8</span><span class="p">)</span>
+<span class="n">boston10m6</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx_m6</span><span class="p">]</span>
+<span class="n">boston10m8</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">idx_m8</span><span class="p">]</span>
+
+<span class="n">result10m6</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat)&quot;</span><span class="p">,</span> <span class="n">boston10m6</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result10m8</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat)&quot;</span><span class="p">,</span> <span class="n">boston10m8</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>선형회귀분석 결과인 가중치를 비교하면 레버리지가 작은 6번 데이터를 제외하였을 경우에는 큰 차이가 없지만 레버리지가 큰 8번 데이터를 제외한 경우에는 가중치가 많이 달라지는 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
+    <span class="p">[</span>
+        <span class="n">result10</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;전체 데이터 사용&quot;</span><span class="p">),</span> 
+         <span class="n">result10m6</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;6번 데이터 제외&quot;</span><span class="p">),</span> 
+         <span class="n">result10m8</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;8번 데이터 제외&quot;</span><span class="p">),</span>
+    <span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
+<span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>전체 데이터 사용</th>
+      <th>6번 데이터 제외</th>
+      <th>8번 데이터 제외</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Intercept</th>
+      <td>26.400000</td>
+      <td>26.788889</td>
+      <td>27.500000</td>
+    </tr>
+    <tr>
+      <th>scale(lstat)</th>
+      <td>-4.746319</td>
+      <td>-4.941270</td>
+      <td>-3.633403</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>예측 직선을 그림으로 표시하면 더 알기쉽다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;전체 데이터 사용&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston10m6</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;6번 데이터 제외&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">38</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston10</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;전체 데이터 사용&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston10m8</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;8번 데이터 제외&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">31</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">38</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_09_22_0.png" src="../_images/03_09_22_0.png" />
+</div>
+</div>
+<p>따라서 뒤에서 서술할 여러가지 이유로 개별 데이터 레코드를 회귀분석에서 제외해야 하는 경우에 해당 데이터 레코드의 레버리지 값에 주의해야 한다. 레버리지가 큰 개별 데이터 레코드는 분석결과에 큰 영향을 주므로 주의가 필요하다.</p>
 </section>
 <section id="id3">
 <h2><span class="section-number">3.9.2. </span>잔차<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
@@ -674,7 +815,21 @@ e_i \sim \mathcal{N}\left(0, \sigma_{e,i}^2 \right)
 \[ 
 r_i = \dfrac{e_i}{\hat{\sigma}\sqrt{1 - h_i}}
 \]</div>
-<p>이렇게 개별 데이터의 표준편차로 나누어준 잔차 <span class="math notranslate nohighlight">\(r_i\)</span>를 <b>표준화잔차(standardized residual)</b> 혹은 <b>피어슨 잔차(Pearson residual)</b>라고 한다.</p>
+<p>이렇게 개별 데이터의 표준편차로 나누어준 잔차 <span class="math notranslate nohighlight">\(r_i\)</span>를 <b>표준화잔차(standardized residual)</b> 혹은 <b>피어슨 잔차(Pearson residual)</b> 혹은 스튜던트분포화 잔차(studentized resigual)라고 한다.</p>
+<p>statsmodels 패키지의 선형회귀분석 결과 객체는 <code class="docutils literal notranslate"><span class="pre">resid_pearson</span></code> 속성에 표준화잔차를 가지고 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result10</span><span class="o">.</span><span class="n">resid_pearson</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.20557597, -1.20778408,  0.8794609 ,  0.48398221,  1.34077184,
+       -0.21338313, -0.55285721,  1.10204089,  0.19679908, -0.82345453])
+</pre></div>
+</div>
+</div>
+</div>
 <p>레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>가 커질수록 (1에 가까워질수록) 개별 데이터 잔차 <span class="math notranslate nohighlight">\(e_i\)</span>의 분산이 작아지는 것을 알 수 있다. 즉, 독립변수에 대한 예측 오차가 작아진다.</p>
 </section>
 </section>
