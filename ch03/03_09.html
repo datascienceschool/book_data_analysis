@@ -619,19 +619,7 @@ h_i = H_{ii}
 </section>
 <section id="id3">
 <h2><span class="section-number">3.9.2. </span>잔차<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>위에서 정의한 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>을 이용하면 잔차의 크기를 계
-$<span class="math notranslate nohighlight">\(
-\begin{eqnarray}
-\text{Cov}[e] 
-&amp;=&amp; \text{E}[M \epsilon\epsilon^T M^T] \\
-&amp;=&amp; M \text{E}[\epsilon\epsilon^T] M^T \\
-&amp;=&amp; M \sigma^2 I M^T \\
-&amp;=&amp; \sigma^2MM^T \\
-&amp;=&amp; \sigma^2MM \\
-&amp;=&amp; \sigma^2M \\
-&amp;=&amp; \sigma^2(I - H) \\
-\end{eqnarray}
-\)</span>$</p>
+<p><a class="reference internal" href="03_05.html#subsection-linear-regression-probabilistic-assumptions"><span class="std std-ref">선형회귀분석의 확률론적 가정</span></a> 절에서</p>
 <p>우리는 앞에서 공부한 가중치 검정에서 다음과 같은 확률론적 가정을 사용하였다.</p>
 <blockquote>
 <div><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>은 기댓값이 0이고 분산이 <span class="math notranslate nohighlight">\(\sigma^2\)</span>인 정규분포를 따른다. 이 때 교란항의 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>은 어떤 경우에도 변하지 않는다.  $<span class="math notranslate nohighlight">\( \varepsilon \sim \mathcal{N}(0, \sigma^2) \)</span>$</p>
