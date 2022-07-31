@@ -591,9 +591,15 @@ h_i = H_{ii}
 <p>레버리지는 다음과 같은 수학적 성질을 가진다.</p>
 <div class="admonition- admonition">
 <p class="admonition-title">레버리지의 성질</p>
-<ol class="simple">
-<li><p>0 ~ 1 사이의 값을 가진다.  $<span class="math notranslate nohighlight">\( 0 \leq h_i \leq 1 \)</span>$</p></li>
-<li><p>독립변수의 개수가 <span class="math notranslate nohighlight">\(K\)</span>일 때  레버리지의 합은 <span class="math notranslate nohighlight">\(K+1\)</span>이 된다.  $<span class="math notranslate nohighlight">\( \sum_{i=1}^N h_i = K + 1 \)</span>$</p></li>
+<ol>
+<li><p>0 ~ 1 사이의 값을 가진다.</p>
+<div class="math notranslate nohighlight">
+\[ 0 \leq h_i \leq 1 \]</div>
+</li>
+<li><p>독립변수의 개수가 <span class="math notranslate nohighlight">\(K\)</span>일 때  레버리지의 합은 <span class="math notranslate nohighlight">\(K+1\)</span>이 된다.</p>
+<div class="math notranslate nohighlight">
+\[ \sum_{i=1}^N h_i = K + 1 \]</div>
+</li>
 </ol>
 </div>
 <p>statsmodels 패키지의 선형회귀분석 결과 객체는 레버리지를 포함한 영향도 객체라는 객체를 출력하는 <code class="docutils literal notranslate"><span class="pre">get_influence</span></code> 메서드를 제공한다.</p>
