@@ -591,33 +591,12 @@ h_i = H_{ii}
 <p>레버리지는 다음과 같은 수학적 성질을 가진다.</p>
 <div class="admonition- admonition">
 <p class="admonition-title">레버리지의 성질</p>
-<ol>
-<li><p>0 ~ 1 사이의 값을 가진다.</p>
-<div class="math notranslate nohighlight">
-\[ 0 \leq h_i \leq 1 \]</div>
-</li>
-</ol>
-<ol>
-<li><p>독립변수의 개수가 <span class="math notranslate nohighlight">\(K\)</span>일 때  레버리지의 합은 <span class="math notranslate nohighlight">\(K+1\)</span>이 된다.</p>
-<div class="math notranslate nohighlight">
-\[ \sum_{i=1}^N h_i = K + 1 \]</div>
-</li>
+<ol class="simple">
+<li><p>0 ~ 1 사이의 값을 가진다.  $<span class="math notranslate nohighlight">\( 0 \leq h_i \leq 1 \)</span>$</p></li>
+<li><p>독립변수의 개수가 <span class="math notranslate nohighlight">\(K\)</span>일 때  레버리지의 합은 <span class="math notranslate nohighlight">\(K+1\)</span>이 된다.  $<span class="math notranslate nohighlight">\( \sum_{i=1}^N h_i = K + 1 \)</span>$</p></li>
 </ol>
 </div>
 <p>statsmodels 패키지의 선형회귀분석 결과 객체는 레버리지를 포함한 영향도 객체라는 객체를 출력하는 <code class="docutils literal notranslate"><span class="pre">get_influence</span></code> 메서드를 제공한다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">influence10</span> <span class="o">=</span> <span class="n">result10</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span>
-<span class="n">influence10</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;statsmodels.stats.outliers_influence.OLSInfluence at 0x12d47df30&gt;
-</pre></div>
-</div>
-</div>
-</div>
 <p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">OLSInfluence</span></code> 클래스 객체로 <code class="docutils literal notranslate"><span class="pre">hat_matrix_diag</span></code> 속성에 레버리지 값을 저장하고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
