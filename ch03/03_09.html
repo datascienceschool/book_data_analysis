@@ -588,6 +588,20 @@ h_i = H_{ii}
 \[
 (x_i, y_i) \;\; \leftrightarrow \;\; h_i
 \]</div>
+<p>레버리지는 다음과 같은 수학적 성질을 가진다.</p>
+<div class="admonition- admonition">
+<p class="admonition-title">레버리지의 성질</p>
+<ol class="simple">
+<li><p>1보다 같거나 작은 양수 혹은 0이다.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ 0 \leq h_i \leq 1 \]</div>
+<ol class="simple">
+<li><p>독립변수의 개수가 <span class="math notranslate nohighlight">\(K\)</span>일 때  레버리지의 합은 <span class="math notranslate nohighlight">\(K+1\)</span>이 된다.</p></li>
+</ol>
+<div class="math notranslate nohighlight">
+\[ \sum_{i=1}^N h_i = K + 1 \]</div>
+</div>
 <p>statsmodels 패키지의 선형회귀분석 결과 객체는 레버리지를 포함한 영향도 객체라는 객체를 출력하는 <code class="docutils literal notranslate"><span class="pre">get_influence</span></code> 메서드를 제공한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -654,6 +668,7 @@ e_i \sim \mathcal{N}\left(0, \sigma_{e,i}^2 \right)
 \sigma_{e,i}^2 = \hat{\sigma}^2 (1 - h_i)
 \]</div>
 </div>
+<p>두번째 특성 “개별 잔차의 정규성”을 보면 레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>가 커질수록</p>
 </section>
 </section>
 
