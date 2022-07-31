@@ -669,7 +669,13 @@ e_i \sim \mathcal{N}\left(0, \sigma_{e,i}^2 \right)
 \sigma_{e,i}^2 = \hat{\sigma}^2 (1 - h_i)
 \]</div>
 </div>
-<p>두번째 특성 “개별 잔차의 정규성”을 보면 레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>가 커질수록 (1에 가까워질수록) 개별 데이터 잔차 <span class="math notranslate nohighlight">\(e_i\)</span>의 분산이 작아지는 것을 알 수 있다. 즉, 독립변수에 대한 “예측 오차가 작아진다.</p>
+<p>두번째 특성으로 인해 개별 잔차의 크기를 비교할 때 다음과 같이 개별 데이터의 표준편차로 나누어 표준화를 해야지만 올바른 비교가 가능하다.</p>
+<div class="math notranslate nohighlight">
+\[ 
+r_i = \dfrac{e_i}{\hat{\sigma}\sqrt{1 - h_i}}
+\]</div>
+<p>이렇게 개별 데이터의 표준편차로 나누어준 잔차 <span class="math notranslate nohighlight">\(r_i\)</span>를 <b>표준화잔차(standardized residual)</b> 혹은 <b>피어슨 잔차(Pearson residual)</b>라고 한다.</p>
+<p>레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>가 커질수록 (1에 가까워질수록) 개별 데이터 잔차 <span class="math notranslate nohighlight">\(e_i\)</span>의 분산이 작아지는 것을 알 수 있다. 즉, 독립변수에 대한 예측 오차가 작아진다.</p>
 </section>
 </section>
 
