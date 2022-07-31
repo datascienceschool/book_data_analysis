@@ -1046,10 +1046,6 @@ dtype: float64
 <p>위에서는 부트스트래핑을 사용하여 가중치 추정값의 범위 즉, 표준편차를 대략이나마 계산할 수 있었다. 하지만 부트스트래핑은 선형회귀분석을 여러번 반복해야하므로 실행시간이 오래 걸린다는 단점이 있다. 몇가지 확률론적 가정을 한다면 부트스트래핑을 하지 않고도 가중치 추정값의 확률분포를 계산할 수 있다. 사용하는 확률론적 가정은 다음과 같다.</p>
 <ol class="simple">
 <li><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>은 기댓값이 0이고 분산이 <span class="math notranslate nohighlight">\(\sigma^2\)</span>인 정규분포를 따른다.</p></li>
-</ol>
-<div class="math notranslate nohighlight">
-\[ \varepsilon \sim \mathcal{N}(0, \sigma^2) \]</div>
-<ol class="simple">
 <li><p>교란항의 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>은 어떤 경우에도 변하지 않는다. 만약 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>이 독립변수 값에 따라 달라지면 <b>이분산성(heteroskedasticity)</b>을 가진다고 한다. 여기에서는 이분산성이 없는 경우를 가정한다.</p></li>
 <li><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>의 값은 독립변수들의 값에 영향을 받지 않는다.</p></li>
 <li><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>의 값은 서로 영향을 주지 않는다.</p></li>
