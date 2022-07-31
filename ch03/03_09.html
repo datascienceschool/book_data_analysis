@@ -578,7 +578,7 @@ title="Print to PDF"
 H = X(X^TX)^{-1}X^T
 \]</div>
 <p>데이터의 개수가 <span class="math notranslate nohighlight">\(N\)</span>개일 때 영향도행렬은 <span class="math notranslate nohighlight">\(N\times N\)</span> 크기의 행렬이 된다.</p>
-<p>영향도행렬에서 가장 중요한 부분은 대각성분이다. 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>의 <span class="math notranslate nohighlight">\(i\)</span>번째 대각성분 <span class="math notranslate nohighlight">\(H_{ii}\)</span>을 <b>레버리지(leverage)<b> <span class="math notranslate nohighlight">\(h_i\)</span>라고 부른다.</p>
+<p>영향도행렬에서 가장 중요한 부분은 대각성분이다. 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>의 <span class="math notranslate nohighlight">\(i\)</span>번째 대각성분 <span class="math notranslate nohighlight">\(H_{ii}\)</span>을 <b>레버리지(leverage)</b> <span class="math notranslate nohighlight">\(h_i\)</span>라고 부른다.</p>
 <div class="math notranslate nohighlight">
 \[
 h_i = H_{ii}
@@ -619,15 +619,16 @@ h_i = H_{ii}
 </section>
 <section id="id3">
 <h2><span class="section-number">3.9.2. </span>잔차<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p><a class="reference internal" href="03_05.html#subsection-linear-regression-probabilistic-assumptions"><span class="std std-ref">선형회귀분석의 확률론적 가정</span></a> 절에서</p>
-<p>우리는 앞에서 공부한 가중치 검정에서 다음과 같은 확률론적 가정을 사용하였다.</p>
+<p>앞에서 가중치 검정을 공부할 때 다음과 확률론적 가정을 사용하였다. (<a class="reference internal" href="03_05.html#subsection-linear-regression-probabilistic-assumptions"><span class="std std-ref">선형회귀분석의 확률론적 가정</span></a> 참조)</p>
 <blockquote>
-<div><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>은 기댓값이 0이고 분산이 <span class="math notranslate nohighlight">\(\sigma^2\)</span>인 정규분포를 따른다. 이 때 교란항의 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>은 어떤 경우에도 변하지 않는다.  $<span class="math notranslate nohighlight">\( \varepsilon \sim \mathcal{N}(0, \sigma^2) \)</span>$</p>
+<div><p>교란항 <span class="math notranslate nohighlight">\(\varepsilon\)</span>은 기댓값이 0이고 분산이 <span class="math notranslate nohighlight">\(\sigma^2\)</span>인 정규분포를 따른다. 이 때 교란항의 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>은 어떤 경우에도 변하지 않는다.</p>
+<div class="math notranslate nohighlight">
+\[ \varepsilon \sim \mathcal{N}(0, \sigma^2) \]</div>
 </div></blockquote>
-<p>이 가정을 사용하면 선형회귀분석으로 나온 잔차 <span class="math notranslate nohighlight">\(e\)</span>도 기댓값 <span class="math notranslate nohighlight">\((N-K-1)\sigma^2\)</span>이 0인 정규분포를 따른다는 것을 증명할 수 있다.</p>
+<p>이 가정을 사용하면 선형회귀분석으로 나온 잔차 <span class="math notranslate nohighlight">\(e\)</span>도 기댓값이 0인 정규분포를 따른다는 것을 증명할 수 있다.</p>
 <div class="math notranslate nohighlight">
 \[
-e \sim \mathcal{N}\left(0, \dfrac{N-K-1}{N}\sigma^2 \right)
+e \sim \mathcal{N}\left(0, s_e^2 \right)
 \]</div>
 <p>따라서 잔차 <span class="math notranslate nohighlight">\(e\)</span>를 이용하여 교란항의 분산 <span class="math notranslate nohighlight">\(\sigma^2\)</span>을 다음과 같이 추정한다.</p>
 <div class="math notranslate nohighlight">
