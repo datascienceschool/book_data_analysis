@@ -882,7 +882,22 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 \[
 \text{쿡 거리(cook's distance)} = \dfrac{1}{K + 1}\cdot r_i^2\cdot \dfrac{h_i}{1-h_i}
 \]</div>
-<p>statsmodels 패키지는 각 데이터의 외부 스튜던트 잔차와 레버리지, 쿡 거리를 동시에 시각화하는 <code class="docutils literal notranslate"><span class="pre">influence_plot</span></code> 함수를 제공한다. 이 함수는 각 데이터 레코드의 외부 스튜던트 잔차를 y축에, 레버리지를 x축에 표시한다. 쿡 거리는 데이터 포인트의 원형 크기로 표시한다.</p>
+<p>영향도 객체는 쿡 거리를 <code class="docutils literal notranslate"><span class="pre">cooks_distance</span></code> 속성에 저장한다. 이 때 쿡 거리와 함께 아웃라이어 검증을 위한 유의확률도 같이 저장한다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cook</span><span class="p">,</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="n">influence10</span><span class="o">.</span><span class="n">cooks_distance</span>
+<span class="n">cook</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([0.15565888, 0.09582944, 0.09672401, 0.03542875, 0.18238122,
+       0.00470509, 0.01953897, 0.18508723, 0.08510883, 0.07298789])
+</pre></div>
+</div>
+</div>
+</div>
+<p>statsmodels 패키지는 각 데이터의 외부 스튜던트 잔차와 레버리지, 쿡 거리를 동시에 시각화하는 <code class="docutils literal notranslate"><span class="pre">influence_plot</span></code> 함수도 제공한다. 이 함수는 각 데이터 레코드의 외부 스튜던트 잔차를 y축에, 레버리지를 x축에 표시한다. 쿡 거리는 데이터 포인트의 원형 크기로 표시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
@@ -892,7 +907,7 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_34_0.png" src="../_images/03_09_34_0.png" />
+<img alt="../_images/03_09_36_0.png" src="../_images/03_09_36_0.png" />
 </div>
 </div>
 </section>
