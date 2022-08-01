@@ -578,7 +578,7 @@ title="Print to PDF"
 H = X(X^TX)^{-1}X^T
 \]</div>
 <p>데이터의 개수가 <span class="math notranslate nohighlight">\(N\)</span>개일 때 영향도행렬은 <span class="math notranslate nohighlight">\(N\times N\)</span> 크기의 행렬이 된다.</p>
-<p>영향도행렬에서 가장 중요한 부분은 대각성분이다. 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>의 <span class="math notranslate nohighlight">\(i\)</span>번째 대각성분 <span class="math notranslate nohighlight">\(H_{ii}\)</span>을 <b>레버리지(leverage)</b> <span class="math notranslate nohighlight">\(h_i\)</span> 혹은 영향도라고 부른다.</p>
+<p>영향도행렬에서 가장 중요한 부분은 대각성분이다. 영향도행렬 <span class="math notranslate nohighlight">\(H\)</span>의 <span class="math notranslate nohighlight">\(i\)</span>번째 대각성분 <span class="math notranslate nohighlight">\(H_{ii}\)</span>을 <b>레버리지(leverage)</b> <span class="math notranslate nohighlight">\(h_i\)</span>라고 부른다.</p>
 <div class="math notranslate nohighlight">
 \[
 h_i = H_{ii}
@@ -811,27 +811,39 @@ e_i \sim \mathcal{N}\left(0, \sigma_{e,i}^2 \right)
 \sigma_{e,i}^2 = \hat{\sigma}^2 (1 - h_i)
 \]</div>
 </div>
-<p>두번째 특성으로 인해 개별 잔차의 크기를 비교할 때 다음과 같이 개별 데이터의 표준편차로 나누어 표준화를 해야지만 올바른 비교가 가능하다.</p>
+<p>위에서 서술한 두번째 사실로 인해 개별 잔차의 크기를 비교할 때 다음과 같이 개별 데이터의 표준편차로 나누어 표준화를 해야지만 올바른 비교가 가능하다.</p>
 <div class="math notranslate nohighlight">
 \[ 
 r_i = \dfrac{e_i}{\hat{\sigma}\sqrt{1 - h_i}}
 \]</div>
-<p>이렇게 개별 데이터의 표준편차로 나누어준 잔차 <span class="math notranslate nohighlight">\(r_i\)</span>를 <b>표준화잔차(standardized residual)</b> 혹은 <b>피어슨 잔차(Pearson residual)</b> 혹은 스튜던트분포화 잔차(studentized resigual)라고 한다.</p>
-<p>statsmodels 패키지의 선형회귀분석 결과 객체는 <code class="docutils literal notranslate"><span class="pre">resid_pearson</span></code> 속성에 표준화잔차를 가지고 있다.</p>
+<p>이렇게 개별 데이터의 표준편차로 나누어준 잔차 <span class="math notranslate nohighlight">\(r_i\)</span>를 <b>스튜던트분포화 잔차(studentized residual)<b>라고 한다.</p>
+<p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">resid_studentized</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">resid_studentized_internal</span></code> 속성에 표준화잔차를 가지고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result10</span><span class="o">.</span><span class="n">resid_pearson</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">influence10</span><span class="o">.</span><span class="n">resid_studentized</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.20557597, -1.20778408,  0.8794609 ,  0.48398221,  1.34077184,
-       -0.21338313, -0.55285721,  1.10204089,  0.19679908, -0.82345453])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.31032329, -1.27680822,  0.96628087,  0.53965736,  1.4521152 ,
+       -0.23137794, -0.58370209,  1.22957697,  0.32068138, -0.89530133])
 </pre></div>
 </div>
 </div>
 </div>
-<p>레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>가 커질수록 (1에 가까워질수록) 개별 데이터 잔차 <span class="math notranslate nohighlight">\(e_i\)</span>의 분산이 작아지는 것을 알 수 있다. 즉, 독립변수에 대한 예측 오차가 작아진다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">influence10</span><span class="o">.</span><span class="n">resid_studentized_internal</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-1.31032329, -1.27680822,  0.96628087,  0.53965736,  1.4521152 ,
+       -0.23137794, -0.58370209,  1.22957697,  0.32068138, -0.89530133])
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 
