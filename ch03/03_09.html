@@ -554,15 +554,21 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.9. </span>레버리지와 아웃라이어<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>지금까지는 회귀분석의 성능을 향상시키기 위해 독립변수를 선택하는 방법을 공부했다. 이 절에서는 개별적인 데이터 레코드를 분석하는 방법을 학습힌다. 즉 지금까지 독립변수행렬 <span class="math notranslate nohighlight">\(X\)</span>의 열을 선택하거나 제거하는 방법을 공부했다면 이제는 독립변수행렬 <span class="math notranslate nohighlight">\(X\)</span>의 행을 조사하고 선택하는 방법을 알아본다.</p>
-<p>예제로는 보스턴 집값을 lstat 독립변수를 사용하여 선형회귀분석한 결과를 사용한다. 다만 여기에서는 전체 데이터를 다 사용하는 것이 아니라 일부(20개) 데이터 레코드만을 사용하여 회귀분석을 한다.</p>
+<p>예제로는 보스턴 집값을 rm 독립변수를 사용하여 선형회귀분석한 결과를 사용한다. 다만 여기에서는 전체 데이터를 다 사용하는 것이 아니라 일부(20개) 데이터 레코드만을 사용하여 회귀분석을 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
 <span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
 <span class="n">boston20</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">345</span><span class="p">:</span><span class="mi">365</span><span class="p">]</span>  <span class="c1"># 일부 데이터만 사용</span>
-
-<span class="n">model20</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston20</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>다음은 이 데이터를 사용한 회귀분석 결과다. 결정계수 성능이 0.192로 낮고 rm 독립변수에 대한 가중치 유의확률도 5.4%로 높은 편이다. 즉, 회귀분석 결과가 좋지 않다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model20</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston20</span><span class="p">)</span>
 <span class="n">result20</span> <span class="o">=</span> <span class="n">model20</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result20</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
@@ -575,7 +581,7 @@ Dep. Variable:                   medv   R-squared:                       0.192
 Model:                            OLS   Adj. R-squared:                  0.147
 Method:                 Least Squares   F-statistic:                     4.269
 Date:                Mon, 01 Aug 2022   Prob (F-statistic):             0.0535
-Time:                        20:45:32   Log-Likelihood:                -50.606
+Time:                        20:49:17   Log-Likelihood:                -50.606
 No. Observations:                  20   AIC:                             105.2
 Df Residuals:                      18   BIC:                             107.2
 Df Model:                           1                                         
@@ -613,7 +619,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_5_0.png" src="../_images/03_09_5_0.png" />
+<img alt="../_images/03_09_7_0.png" src="../_images/03_09_7_0.png" />
 </div>
 </div>
 <section id="id2">
@@ -802,7 +808,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_13_0.png" src="../_images/03_09_13_0.png" />
+<img alt="../_images/03_09_15_0.png" src="../_images/03_09_15_0.png" />
 </div>
 </div>
 <p>레버리지가 중요한 이유는 레버리지 값이 1에 가까운 데이터 즉, <b>레버리지가 큰 데이터는 레버리지가 작은 데이터보다 회귀분석 결과에 영향을 크게 미치기 때문</b>이다.</p>
@@ -913,7 +919,7 @@ dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_21_0.png" src="../_images/03_09_21_0.png" />
+<img alt="../_images/03_09_23_0.png" src="../_images/03_09_23_0.png" />
 </div>
 </div>
 </section>
@@ -988,7 +994,7 @@ r_i = \dfrac{e_i}{\hat{\sigma}\sqrt{1 - h_i}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_28_0.png" src="../_images/03_09_28_0.png" />
+<img alt="../_images/03_09_30_0.png" src="../_images/03_09_30_0.png" />
 </div>
 </div>
 <p>이와 비슷한 것으로 <b>외부 스튜던트화 잔차(externally studentized residual)</b> 혹은 SDR(studentized deleted residual)라 부르는 것이 있다. 외부 스튜던트화 잔차는 <span class="math notranslate nohighlight">\(i\)</span>번째 데이터 레코드의 외부 스튜던트화 잔차는 해당 데이터 레코드(<span class="math notranslate nohighlight">\(i\)</span>번째 데이터 레코드)를 제외한 나머지 데이터만 가지고 다시 선형회귀분석을 하여 계산한 잔차를 해당 잔차의 분산으로 나눈 값이다. 이러한 계산 방식을 <b>LOO(Leave-One-Out) 방식</b>이라고 한다. <span class="math notranslate nohighlight">\(i\)</span>번째 데이터 레코드의 외부 스튜던트화 잔차 <span class="math notranslate nohighlight">\(t_i\)</span>를 구하는 식은 다음과 같다.</p>
@@ -1187,7 +1193,7 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_35_0.png" src="../_images/03_09_35_0.png" />
+<img alt="../_images/03_09_37_0.png" src="../_images/03_09_37_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -1203,7 +1209,7 @@ Dep. Variable:                   medv   R-squared:                       0.569
 Model:                            OLS   Adj. R-squared:                  0.544
 Method:                 Least Squares   F-statistic:                     22.46
 Date:                Mon, 01 Aug 2022   Prob (F-statistic):           0.000190
-Time:                        20:45:35   Log-Likelihood:                -42.583
+Time:                        20:49:20   Log-Likelihood:                -42.583
 No. Observations:                  19   AIC:                             89.17
 Df Residuals:                      17   BIC:                             91.06
 Df Model:                           1                                         
@@ -1226,7 +1232,7 @@ Notes:
 </div>
 </div>
 </div>
-<p>이 때 가중치의 유의성이나 결정계수로 대표되는 성능이 크게 증가한 것을 알 수 있다.</p>
+<p>아웃라이어를 제거함으로써 가중치의 유의성이나 결정계수 성능이 크게 증가한 것을 알 수 있다.</p>
 </section>
 <section id="id5">
 <h2><span class="section-number">3.9.4. </span>영향점 검출<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
@@ -1265,7 +1271,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_42_0.png" src="../_images/03_09_42_0.png" />
+<img alt="../_images/03_09_44_0.png" src="../_images/03_09_44_0.png" />
 </div>
 </div>
 <p>statsmodels 패키지는 각 데이터의 외부 스튜던트 잔차와 레버리지, 쿡 거리를 동시에 시각화하는 <code class="docutils literal notranslate"><span class="pre">influence_plot</span></code> 함수도 제공한다. 이 함수는 각 데이터 레코드의 외부 스튜던트 잔차를 y축에, 레버리지를 x축에 표시한다. 쿡 거리는 데이터 포인트의 원형 크기로 표시한다.</p>
@@ -1278,7 +1284,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_44_0.png" src="../_images/03_09_44_0.png" />
+<img alt="../_images/03_09_46_0.png" src="../_images/03_09_46_0.png" />
 </div>
 </div>
 <p>외부 스튜던트화 잔차를 사용한 <b>DFFITS(DiFference in FITS)</b>라는 값을 사용할 수도 있다. DFFITS는 다음과 같이 정의한다.</p>
@@ -1315,7 +1321,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_47_0.png" src="../_images/03_09_47_0.png" />
+<img alt="../_images/03_09_49_0.png" src="../_images/03_09_49_0.png" />
 </div>
 </div>
 <p>우리가 사용한 예제에서는 364번 데이터가 아웃라이어면서 동시에 영향점임을 알 수 있다.</p>
