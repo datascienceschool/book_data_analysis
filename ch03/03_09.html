@@ -581,7 +581,7 @@ Dep. Variable:                   medv   R-squared:                       0.192
 Model:                            OLS   Adj. R-squared:                  0.147
 Method:                 Least Squares   F-statistic:                     4.269
 Date:                Mon, 01 Aug 2022   Prob (F-statistic):             0.0535
-Time:                        20:49:17   Log-Likelihood:                -50.606
+Time:                        20:53:56   Log-Likelihood:                -50.606
 No. Observations:                  20   AIC:                             105.2
 Df Residuals:                      18   BIC:                             107.2
 Df Model:                           1                                         
@@ -613,7 +613,7 @@ Notes:
 <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">boston20</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rm</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;아웃라이어 제거를 하기 전 회귀분석 결과&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;아웃라이어를 제거하기 전의 회귀분석 결과&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1187,7 +1187,7 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20max</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">boston20max</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rm</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;아웃라이어 제거한 후 회귀분석 결과&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;아웃라이어를 제거한 후의 회귀분석 결과&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -1209,7 +1209,7 @@ Dep. Variable:                   medv   R-squared:                       0.569
 Model:                            OLS   Adj. R-squared:                  0.544
 Method:                 Least Squares   F-statistic:                     22.46
 Date:                Mon, 01 Aug 2022   Prob (F-statistic):           0.000190
-Time:                        20:49:20   Log-Likelihood:                -42.583
+Time:                        20:53:59   Log-Likelihood:                -42.583
 No. Observations:                  19   AIC:                             89.17
 Df Residuals:                      17   BIC:                             91.06
 Df Model:                           1                                         
