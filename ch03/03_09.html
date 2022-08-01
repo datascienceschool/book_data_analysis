@@ -827,7 +827,7 @@ e_i \sim \mathcal{N}\left(0, \sigma_{e,i}^2 \right)
 r_i = \dfrac{e_i}{\hat{\sigma}\sqrt{1 - h_i}}
 \]</div>
 <p>이렇게 개별 데이터의 표준편차로 나누어준 잔차 <span class="math notranslate nohighlight">\(r_i\)</span>를 <b>스튜던트화 잔차(studentized residual)</b>라고 한다.</p>
-<p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">resid_studentized</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">resid_studentized_internal</span></code> 속성에 표준화잔차를 가지고 있다.</p>
+<p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">resid_studentized</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">resid_studentized_internal</span></code> 속성에 스튜던트화 잔차를 가지고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">influence10</span><span class="o">.</span><span class="n">resid_studentized</span>
@@ -854,7 +854,8 @@ r_i = \dfrac{e_i}{\hat{\sigma}\sqrt{1 - h_i}}
 </div>
 </div>
 </div>
-<p>이와 비슷한 것으로 <b>외부 스튜던트화 잔차(externally studentized residual)</b>이라는 것이 있다. 외부 스튜던트화 잔차는 <span class="math notranslate nohighlight">\(i\)</span>번째 데이터 레코드의 외부 스튜던트화 잔차는 해당 데이터 레코드(<span class="math notranslate nohighlight">\(i\)</span>번째 데이터 레코드)를 제외한 나머지 데이터만 가지고 다시 선형회귀분석을 하여 계산한 스튜던트화 잔차다. 이러한 계산 방식을 <b>LOO(Leave-One-Out) 방식</b>이라고 한다. statsmodels 패키지에서 외부 스튜던트화 잔차를 계산할 때는 실제로 데이터 개수만큼 선형회귀를 반복하지는 않고 유도된 수식을 이용하여 외부 스튜던트화 잔차를 계산한다.</p>
+<p>이와 비슷한 것으로 <b>외부 스튜던트화 잔차(externally studentized residual)</b>이라는 것이 있다. 외부 스튜던트화 잔차는 <span class="math notranslate nohighlight">\(i\)</span>번째 데이터 레코드의 외부 스튜던트화 잔차는 해당 데이터 레코드(<span class="math notranslate nohighlight">\(i\)</span>번째 데이터 레코드)를 제외한 나머지 데이터만 가지고 다시 선형회귀분석을 하여 계산한 스튜던트화 잔차다. 이러한 계산 방식을 <b>LOO(Leave-One-Out) 방식</b>이라고 한다. statsmodels 패키지에서 외부 스튜던트화 잔차를 계산할 때는 실제로 데이터 개수만큼 선형회귀를 반복하지는 않고 유도된 수식을 이용하여 외부 스튜던트화 잔차를 계산한다. 외부 스튜던트화 잔차는 곧 설명할 아웃라이어 검출에 사용된다.</p>
+<p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">resid_studentized_external</span></code> 속성에 외부 스튜던트화 잔차를 가지고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">influence10</span><span class="o">.</span><span class="n">resid_studentized_external</span>
