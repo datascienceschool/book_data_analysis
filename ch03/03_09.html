@@ -499,7 +499,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   3.9.4. 영향력 데이터 검출
+   3.9.4. 영향점 검출
   </a>
  </li>
 </ul>
@@ -538,7 +538,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   3.9.4. 영향력 데이터 검출
+   3.9.4. 영향점 검출
   </a>
  </li>
 </ul>
@@ -575,7 +575,7 @@ Dep. Variable:                   medv   R-squared:                       0.192
 Model:                            OLS   Adj. R-squared:                  0.147
 Method:                 Least Squares   F-statistic:                     4.269
 Date:                Mon, 01 Aug 2022   Prob (F-statistic):             0.0535
-Time:                        20:39:06   Log-Likelihood:                -50.606
+Time:                        20:45:32   Log-Likelihood:                -50.606
 No. Observations:                  20   AIC:                             105.2
 Df Residuals:                      18   BIC:                             107.2
 Df Model:                           1                                         
@@ -1203,7 +1203,7 @@ Dep. Variable:                   medv   R-squared:                       0.569
 Model:                            OLS   Adj. R-squared:                  0.544
 Method:                 Least Squares   F-statistic:                     22.46
 Date:                Mon, 01 Aug 2022   Prob (F-statistic):           0.000190
-Time:                        20:39:11   Log-Likelihood:                -42.583
+Time:                        20:45:35   Log-Likelihood:                -42.583
 No. Observations:                  19   AIC:                             89.17
 Df Residuals:                      17   BIC:                             91.06
 Df Model:                           1                                         
@@ -1226,23 +1226,11 @@ Notes:
 </div>
 </div>
 </div>
-<p>이 때 결정계수가 크게 증가한 것을 알 수 있다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result20</span><span class="o">.</span><span class="n">rsquared</span><span class="p">,</span> <span class="n">result20max</span><span class="o">.</span><span class="n">rsquared</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(0.19169107342808145, 0.5691313707164267)
-</pre></div>
-</div>
-</div>
-</div>
+<p>이 때 가중치의 유의성이나 결정계수로 대표되는 성능이 크게 증가한 것을 알 수 있다.</p>
 </section>
 <section id="id5">
-<h2><span class="section-number">3.9.4. </span>영향력 데이터 검출<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>그런데 아웃라이어 중에서도 레버리지로 대표되는 영향력이 작은 데이터는 사실 제외하든 제외하지 않든 회귀분석 결과에 큰 영향이 없기 때문에 데이터의 개수가 많을 경우 아웃라이어 중에서도 영향력이 큰 데이터만 고려할 수도 있다. 이 때는 스튜던트화 잔차 <span class="math notranslate nohighlight">\(r_i\)</span>와 레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>를 동시에 고려하는 <b>쿡 거리(cook’s distance)</b>라는 값을 기준으로 사용한다.</p>
+<h2><span class="section-number">3.9.4. </span>영향점 검출<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+<p>그런데 아웃라이어 중에서도 레버리지로 대표되는 영향력이 작은 데이터는 사실 제외하든 제외하지 않든 회귀분석 결과에 큰 영향이 없기 때문에 데이터의 개수가 많을 경우 아웃라이어 중에서도 영향력이 큰 데이터만 고려할 수도 있다. 이러한 데이터를 <b>영향점(influential point)</b>이라고 한다. 영향점을 찾을 때는 스튜던트화 잔차 <span class="math notranslate nohighlight">\(r_i\)</span>와 레버리지 <span class="math notranslate nohighlight">\(h_i\)</span>를 동시에 고려하는 <b>쿡 거리(cook’s distance)</b>라는 값을 기준으로 사용한다.</p>
 <div class="math notranslate nohighlight">
 \[
 \text{쿡 거리(cook's distance)} = \dfrac{1}{K + 1}\cdot r_i^2\cdot \dfrac{h_i}{1-h_i}
@@ -1277,7 +1265,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_43_0.png" src="../_images/03_09_43_0.png" />
+<img alt="../_images/03_09_42_0.png" src="../_images/03_09_42_0.png" />
 </div>
 </div>
 <p>statsmodels 패키지는 각 데이터의 외부 스튜던트 잔차와 레버리지, 쿡 거리를 동시에 시각화하는 <code class="docutils literal notranslate"><span class="pre">influence_plot</span></code> 함수도 제공한다. 이 함수는 각 데이터 레코드의 외부 스튜던트 잔차를 y축에, 레버리지를 x축에 표시한다. 쿡 거리는 데이터 포인트의 원형 크기로 표시한다.</p>
@@ -1290,7 +1278,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_45_0.png" src="../_images/03_09_45_0.png" />
+<img alt="../_images/03_09_44_0.png" src="../_images/03_09_44_0.png" />
 </div>
 </div>
 <p>외부 스튜던트화 잔차를 사용한 <b>DFFITS(DiFference in FITS)</b>라는 값을 사용할 수도 있다. DFFITS는 다음과 같이 정의한다.</p>
@@ -1327,9 +1315,10 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_09_48_0.png" src="../_images/03_09_48_0.png" />
+<img alt="../_images/03_09_47_0.png" src="../_images/03_09_47_0.png" />
 </div>
 </div>
+<p>우리가 사용한 예제에서는 364번 데이터가 아웃라이어면서 동시에 영향점임을 알 수 있다.</p>
 </section>
 </section>
 
