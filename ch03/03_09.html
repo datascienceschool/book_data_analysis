@@ -1240,8 +1240,14 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 </table>
 </div></div>
 </div>
-<p>아웃라이어를 찾은 후에는 데이터에 대한 검토를 거쳐 아웃라이어를 제거할 지 아닐지 결정한다. 이 때는 되도록 데이터에 대한 전문지식을 가진 사람의 검토가 필요하다.</p>
-<p>이 예제에서는 아웃라이어를 제외한 회귀분석 결과가 다음과 같아진다.</p>
+<p>아웃라이어가 발생하는 이유는 여러가지가 있을 수 있다.</p>
+<ol class="simple">
+<li><p>해당 데이터가 잘못된 데이터인 경우</p></li>
+<li><p>종속변수에 영향을 주는 다른 유의한 독립변수가 존재하는 경우</p></li>
+<li><p>선형회귀분석 가정이 맞지 않는 경우</p></li>
+</ol>
+<p>아웃라이어가 나오면 분석 대상이 되는 데이터에 대한 전문 지식(domain knowledge)을 가진 사람이 아웃라이어로 판별된 데이터를 검토하여 잘못된 데이터인지 혹은 종속변수에 영향을 미치는 어떤 다른 요소(독립변수)가 있는지를 검토할 필요가 있다. 만약 해당 데이터가 명백히 잘못된 데이터라면 이 데이터를 분석에서 제외해야 한다. 그 이외의 경우라면 모형을 수정하는 것을 생각해 볼 수 있다. 모형을 수정할 때는 해당 데이터에서 종속변수에 영향을 크게 미치고 있다고 생각되는 추가적인 독립변수를 찾든가 혹은 뒤에서 설명할 비선형회귀모형을 사용한다.</p>
+<p>이 예제에서는 아웃라이어를 제외해보기로 한다. 아웃라이어를 제외한 회귀분석 결과가 다음과 같아진다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
