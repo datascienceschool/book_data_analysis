@@ -494,7 +494,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   3.9.3. 아웃라이어
+   3.9.3. 아웃라이어 검출
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -533,7 +533,7 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   3.9.3. 아웃라이어
+   3.9.3. 아웃라이어 검출
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
@@ -1021,7 +1021,7 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 </div>
 </section>
 <section id="id4">
-<h2><span class="section-number">3.9.3. </span>아웃라이어<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.9.3. </span>아웃라이어 검출<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 <p><b>아웃라이어(outlier)</b>는 회귀분석모형으로 예측한 값과 원 데이터 간의 오차 즉, 잔차가 큰 데이터를 말한다. 보통 데이터의 측정/입력 단계 혹은 처리/관리 단계에서 여러가지 실수로 인해 아웃라이어가 발생하는 경우가 많다. 예를 들어 수동으로 데이터를 입력하는 경우에 오타가 발생하던가 입력 데이터의 순서를 바꾸어 넣어서 이런 잘못된 데이터가 발생하는 경우가 흔하다. 따라서  아웃라이어를 검출하여 해당 데이터가 실수로 인해 잘못된 데이터인지 아닌지를 검토해야 한다.</p>
 <p>statsmodels 패키지로 선형회귀분석을 실시하여 얻은 분석결과 객체는 아웃라이어를 검출하기 위한 <code class="docutils literal notranslate"><span class="pre">outlier_test</span></code> 메서드를 제공한다. 이 메서드는 아웃라이어 검정(outlier test)을 하는 메서드로 외부 스튜던트화 잔차의 확률분포를 이용하여 주어진 유의수준(지정하지 않은 경우 디폴트 5%) 미만인 데이터를 찾아낸다. 이 때 일반 유의확률이 아닌 <b>본페로니 수정(Bonferroni correction)</b>을 거친 유의확률을 사용해야 한다.</p>
 <p><code class="docutils literal notranslate"><span class="pre">outlier_test</span></code> 메서드를 호출하면 다음과 같은 데이터프레임을 출력한다. 결과 데이터프레임에서 <code class="docutils literal notranslate"><span class="pre">bonf(p)</span></code> 열이 본페로니 수정 유의확률이다. 아웃라이어 검정은 “아웃라이어가 아니다”라는 귀무가설을 사용하므로 유의확률이 작은 데이터가 아웃라이어가 된다. 364번 데이터의 유의확률이 5% 미만이므로 이 데이터가 아웃라이어가 된다.</p>
@@ -1186,7 +1186,7 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20max</span><span class="p">)</span>
 <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">boston20max</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rm</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">))</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rm</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;아웃라이어를 제거한 후의 회귀분석 결과&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
