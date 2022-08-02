@@ -728,7 +728,8 @@ Notes:
 <img alt="../_images/03_10_15_1.png" src="../_images/03_10_15_1.png" />
 </div>
 </div>
-<p>상단 왼쪽의 그림은 우리가 처음에 그렸던 <code class="docutils literal notranslate"><span class="pre">plot_fit</span></code> 함수의 결과다. 하단은 부분회귀와 CCPR 결과다. 상단 오른쪽의 그림은 잔차플롯(residual plot)이라고 하여 독립변수와 그에 대응하는 잔차의 값을 그린 것이다. 잔차플롯을 독립적으로 그리려면 다음 코드를 사용한다.</p>
+<p>상단 왼쪽의 그림은 우리가 처음에 그렸던 <code class="docutils literal notranslate"><span class="pre">plot_fit</span></code> 함수의 결과다. 하단은 부분회귀와 CCPR 결과다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> 함수가 출력한 그룸 중 상단 오른쪽의 그림은 <b>잔차플롯(residual plot)</b>이라고 하여 독립변수와 그에 대응하는 잔차의 값을 그린 것이다. statsmodels 패키지에는 잔차플롯만 그리는 함수가 없으므로 저자가 만든 다음 코드를 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resid_plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">exo_name</span><span class="p">):</span>
@@ -753,7 +754,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_10_17_0.png" src="../_images/03_10_17_0.png" />
+<img alt="../_images/03_10_18_0.png" src="../_images/03_10_18_0.png" />
 </div>
 </div>
 </section>
