@@ -729,7 +729,7 @@ Notes:
 </div>
 </div>
 <p>상단 왼쪽의 그림은 우리가 처음에 그렸던 <code class="docutils literal notranslate"><span class="pre">plot_fit</span></code> 함수의 결과다. 하단은 부분회귀와 CCPR 결과다.</p>
-<p><code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> 함수가 출력한 그룸 중 상단 오른쪽의 그림은 <b>잔차플롯(residual plot)</b>이라고 하여 독립변수와 그에 대응하는 잔차의 값을 그린 것이다. statsmodels 패키지에는 잔차플롯만 그리는 함수가 없으므로 저자가 만든 다음 코드를 사용한다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> 함수가 출력한 그룸 중 상단 오른쪽의 그림은 <b>잔차플롯(residual plot)</b>이라고 하여 독립변수와 그에 대응하는 잔차의 값을 그린 것이다. statsmodels 패키지에는 잔차플롯만 그리는 함수가 없으므로 저자가 만든 다음 코드를 사용한다. 잔차플롯에서 파란색 곡선은 독립변수의 변화에 따른 잔차의 평균을 표시한 것이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resid_plot</span><span class="p">(</span><span class="n">model</span><span class="p">,</span> <span class="n">exo_name</span><span class="p">):</span>
