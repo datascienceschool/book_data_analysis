@@ -581,7 +581,7 @@ Dep. Variable:                   medv   R-squared:                       0.639
 Model:                            OLS   Adj. R-squared:                  0.637
 Method:                 Least Squares   F-statistic:                     444.3
 Date:                Tue, 02 Aug 2022   Prob (F-statistic):          7.01e-112
-Time:                        10:24:26   Log-Likelihood:                -1582.8
+Time:                        13:09:15   Log-Likelihood:                -1582.8
 No. Observations:                 506   AIC:                             3172.
 Df Residuals:                     503   BIC:                             3184.
 Df Model:                           2                                         
@@ -612,6 +612,7 @@ Notes:
 <span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">medv</span>
 <span class="n">y_hat</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="n">fittedvalues</span>
 
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;원 데이터&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;예측값&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
@@ -622,6 +623,19 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/03_10_7_0.png" src="../_images/03_10_7_0.png" />
+</div>
+</div>
+<p>statsmodels 패키지가 제공하는 <code class="docutils literal notranslate"><span class="pre">plot_fit</span></code> 함수를 사용하면 좀 더 쉽게 그릴 수 있다. 이 때는 각 데이터에 대한 개별 잔차의 표준편차를 바(bar)로 표시해 준다. 개별 잔차의 표준편차보다도 바깥에 있는 데이터는 아웃라이어일 가능성이 높다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_fit</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_10_9_0.png" src="../_images/03_10_9_0.png" />
 </div>
 </div>
 <p>이러한 경우에 사용할 수 있는 방법이 CCPR(component-plus-residual) 및 부분회귀(partial-regression) 시각화 방법이다.</p>
@@ -645,13 +659,14 @@ Notes:
 <p>statsmodels 패키지는 CCPR 시각화를 위한 <code class="docutils literal notranslate"><span class="pre">plot_ccpr</span></code> 함수를 제공한다. 사용법은 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s1">&#39;scale(rm)&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_10_9_0.png" src="../_images/03_10_9_0.png" />
+<img alt="../_images/03_10_11_0.png" src="../_images/03_10_11_0.png" />
 </div>
 </div>
 <p>또다른 방법은 부분회귀 방법을 사용하는 것이다. <b>부분회귀(partial regression)</b>는 특정한 독립변수 <span class="math notranslate nohighlight">\(x_k\)</span>과 종속변수 <span class="math notranslate nohighlight">\(y\)</span>만의 관계만 분석하고 <span class="math notranslate nohighlight">\(x_k\)</span>를 제외한 다른 독립변수의 영향은 제거하는 방법이다. 부분회귀를 하려면 원리적으로 다음과 같이 3번의 회귀분석을 해야 한다.</p>
@@ -672,23 +687,9 @@ Notes:
 <p>함수를 실행하면 x축에는 잔차 <span class="math notranslate nohighlight">\(x_k^{\ast}\)</span>를, y축에는 잔차 <span class="math notranslate nohighlight">\(y_k^{\ast}\)</span>를 스케터플롯으로 그리고 가중치 <span class="math notranslate nohighlight">\(\hat{w}_k\)</span>를 사용한 선형회귀 결과를 직선으로 표시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s1">&#39;medv&#39;</span><span class="p">,</span> <span class="s1">&#39;scale(rm)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scale(lstat)&quot;</span><span class="p">],</span> <span class="n">boston</span><span class="p">,</span> <span class="n">obs_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
-</pre></div>
-</div>
-<img alt="../_images/03_10_11_1.png" src="../_images/03_10_11_1.png" />
-</div>
-</div>
-<p><code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> 함수를 이용하면 CCPR과 부분회귀 결과를 동시에 그릴 수 있다.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_regress_exog</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scale(lstat)&quot;</span><span class="p">],</span> <span class="n">boston</span><span class="p">,</span>
+                             <span class="n">obs_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -700,7 +701,24 @@ Notes:
 <img alt="../_images/03_10_13_1.png" src="../_images/03_10_13_1.png" />
 </div>
 </div>
-<p>상단 왼쪽의 그림은 우리가 처음에 그렸던 독립변수와 잔차 그대로 스캐터플롯한 결과다. 상단 오른쪽의 그림은 독립변수와 전체 선형회귀분석 잔차를 그린 것이다. 하단은 부분회귀와 CCPR 결과다.</p>
+<p><code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> 함수를 이용하면 CCPR과 부분회귀 결과를 동시에 그릴 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_regress_exog</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>eval_env: 1
+</pre></div>
+</div>
+<img alt="../_images/03_10_15_1.png" src="../_images/03_10_15_1.png" />
+</div>
+</div>
+<p>상단 왼쪽의 그림은 우리가 처음에 그렸던 <code class="docutils literal notranslate"><span class="pre">plot_fit</span></code> 함수의 결과다. 상단 오른쪽의 그림은 독립변수와 전체 선형회귀분석 잔차를 그린 것이다. 하단은 부분회귀와 CCPR 결과다.</p>
 </section>
 <section id="id3">
 <h2><span class="section-number">3.10.2. </span>비선형회귀분석<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
