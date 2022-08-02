@@ -605,10 +605,10 @@ Notes:
 </div>
 </div>
 </div>
-<p>x축을 첫번째 독립변수인 lstat으로, y축을 종속변수인 medv로 놓고 2차원 평면에 데이터(o)와 예측값(x)을 그리면 다음과 같다. 이 플롯으로는 독립변수 lstat에 대한 모형의 가중치(기울기)를 알 수가 없다.</p>
+<p>예를 들어 x축을 두번째 독립변수인 rm으로, y축을 종속변수인 medv로 놓고 2차원 평면에 데이터(o)와 예측값(x)을 그리면 다음과 같다. 이 플롯으로는 독립변수 lstat에 대한 모형의 가중치(기울기)를 알 수가 없다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">lstat</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">rm</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">medv</span>
 <span class="n">y_hat</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="n">fittedvalues</span>
 
@@ -645,7 +645,7 @@ Notes:
 <p>statsmodels 패키지는 CCPR 시각화를 위한 <code class="docutils literal notranslate"><span class="pre">plot_ccpr</span></code> 함수를 제공한다. 사용법은 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s1">&#39;scale(lstat)&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s1">&#39;scale(rm)&#39;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -672,7 +672,7 @@ Notes:
 <p>함수를 실행하면 x축에는 잔차 <span class="math notranslate nohighlight">\(x_k^{\ast}\)</span>를, y축에는 잔차 <span class="math notranslate nohighlight">\(y_k^{\ast}\)</span>를 스케터플롯으로 그리고 가중치 <span class="math notranslate nohighlight">\(\hat{w}_k\)</span>를 사용한 선형회귀 결과를 직선으로 표시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s1">&#39;medv&#39;</span><span class="p">,</span> <span class="s1">&#39;scale(lstat)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scale(rm)&quot;</span><span class="p">],</span> <span class="n">boston</span><span class="p">,</span> <span class="n">obs_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s1">&#39;medv&#39;</span><span class="p">,</span> <span class="s1">&#39;scale(rm)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scale(lstat)&quot;</span><span class="p">],</span> <span class="n">boston</span><span class="p">,</span> <span class="n">obs_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
