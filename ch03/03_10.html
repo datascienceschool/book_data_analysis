@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.10. 잔차분석과 비선형회귀분석 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.10. 부분회귀와 비선형회귀분석 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.11. 과최적화와 정규화" href="03_11.html" />
@@ -280,7 +282,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.10. 잔차분석과 비선형회귀분석
+     3.10. 부분회귀와 비선형회귀분석
     </a>
    </li>
    <li class="toctree-l2">
@@ -487,27 +489,22 @@ title="Print to PDF"
         <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.10.1. 잔차분석
+   3.10.1. 부분회귀
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.10.2. 부분회귀
+   3.10.2. 비선형회귀분석
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   3.10.3. 비선형회귀분석
+   3.10.3. 다항회귀
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   3.10.4. 다항회귀
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id6">
-   3.10.5. 심볼 탐색
+   3.10.4. 심볼 탐색
   </a>
  </li>
 </ul>
@@ -519,7 +516,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>잔차분석과 비선형회귀분석</h1>
+                <h1>부분회귀와 비선형회귀분석</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -531,27 +528,22 @@ title="Print to PDF"
                             <ul class="visible nav section-nav flex-column">
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id2">
-   3.10.1. 잔차분석
+   3.10.1. 부분회귀
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.10.2. 부분회귀
+   3.10.2. 비선형회귀분석
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   3.10.3. 비선형회귀분석
+   3.10.3. 다항회귀
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   3.10.4. 다항회귀
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id6">
-   3.10.5. 심볼 탐색
+   3.10.4. 심볼 탐색
   </a>
  </li>
 </ul>
@@ -565,21 +557,111 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.10. </span>잔차분석과 비선형회귀분석<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.10. </span>부분회귀와 비선형회귀분석<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>지금까지는 예측값이 직선형태로 나오는 선형(linear)회귀분석을 이용하여 종속변수를 예측하였다. 그러나 현실의 데이터는 이러한 선형회귀분석 모형을 따르지 않을 수도 있다. 이 절에서는 선형회귀분석 모형이 적절하지 않은 경우를 찾아내고 이런 경우에 어떤 방식으로 모형을 수정해야하는지를 공부한다.</p>
 <section id="id2">
-<h2><span class="section-number">3.10.1. </span>잔차분석<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.10.1. </span>부분회귀<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>독립변수가 하나뿐인 경우에는 x축을 독립변수로, y축을 종속변수로 하는 스캐터플롯과 예측값 직선을 이용하여 회귀분석의 결과를 시각적으로 표시하여 독립변수와 종속변수의 관계 및 회귀 성능을 유추할 수 있었다. 하지만 독립변수가 두개 이상인 경우에 이러한 방식을 사용하면 다른 독립변수의 영향으로 예측값이 직선으로 나오지 않기 때문에 이러한 시각화 방식을 사용하기 어렵다.</p>
+<p>보스턴 집값 데이터를 lstat과 rm 두가지 독립변수로 선형회귀분석한 결과를 이용하여 예를 들어보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
+<span class="n">result2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.639
+Model:                            OLS   Adj. R-squared:                  0.637
+Method:                 Least Squares   F-statistic:                     444.3
+Date:                Tue, 02 Aug 2022   Prob (F-statistic):          7.01e-112
+Time:                        10:24:26   Log-Likelihood:                -1582.8
+No. Observations:                 506   AIC:                             3172.
+Df Residuals:                     503   BIC:                             3184.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+================================================================================
+                   coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept       22.5328      0.246     91.487      0.000      22.049      23.017
+scale(lstat)    -4.5826      0.312    -14.689      0.000      -5.196      -3.970
+scale(rm)        3.5761      0.312     11.463      0.000       2.963       4.189
+==============================================================================
+Omnibus:                      145.712   Durbin-Watson:                   0.834
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              457.690
+Skew:                           1.343   Prob(JB):                    4.11e-100
+Kurtosis:                       6.807   Cond. No.                         2.04
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>x축을 첫번째 독립변수인 lstat으로, y축을 종속변수인 medv로 놓고 2차원 평면에 데이터(o)와 예측값(x)을 그리면 다음과 같다. 이 플롯으로는 독립변수 lstat에 대한 모형의 가중치(기울기)를 알 수가 없다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">lstat</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">medv</span>
+<span class="n">y_hat</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="n">fittedvalues</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;원 데이터&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;예측값&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;다중회귀분석 결과를 2차원에 표시한 경우&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_10_7_0.png" src="../_images/03_10_7_0.png" />
+</div>
+</div>
+<p>이러한 경우에 사용할 수 있는 방법이 CCPR(component-plus-residual) 및 부분회귀(partial-regression) 시각화 방법이다.</p>
+<p><b>CCPR(component-plus-residual)</b> 시각화는 2차원 평면에서 x축을 특정한 독립변수 하나, 예를 들어 <span class="math notranslate nohighlight">\(k\)</span>번째 독립변수인 <span class="math notranslate nohighlight">\(x_k\)</span> 값으로 놓고 y축은 다음 데이터를 이용한다.</p>
+<ul class="simple">
+<li><p>원 데이터의 y축 값으로는</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\hat{y}_k = w_k x_k + e
+\]</div>
+<p>를 사용한다. 여기에서 <span class="math notranslate nohighlight">\(e\)</span>는 전체 독립변수를 사용한 다중선형회귀분석 결과에서 나온 잔차다.</p>
+<ul class="simple">
+<li><p>예측 데이터의 y축 값으로는 선형회귀 예측값에서 <span class="math notranslate nohighlight">\(x_k\)</span>과 관련된 부분인</p></li>
+</ul>
+<div class="math notranslate nohighlight">
+\[
+\hat{y}_k = w_k x_k 
+\]</div>
+<p>만 사용한다. 이렇게 하면 다중선형회귀분석의 결과로 나온 가중치의 값(기울기)도 표시하고 그에 따른 오차도 표시된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s1">&#39;scale(lstat)&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_10_9_0.png" src="../_images/03_10_9_0.png" />
+</div>
+</div>
 </section>
 <section id="id3">
-<h2><span class="section-number">3.10.2. </span>부분회귀<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.10.2. </span>비선형회귀분석<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id4">
-<h2><span class="section-number">3.10.3. </span>비선형회귀분석<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.10.3. </span>다항회귀<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id5">
-<h2><span class="section-number">3.10.4. </span>다항회귀<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="id6">
-<h2><span class="section-number">3.10.5. </span>심볼 탐색<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.10.4. </span>심볼 탐색<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
