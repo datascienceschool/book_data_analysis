@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>3.12. 과최적화와 정규화 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
+    <title>3.12. 스케일링과 다중공선성 &#8212; 데이터 사이언스 스쿨 - 데이터 분석 편</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -275,12 +275,12 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_09.html">
-     3.9. 아웃라이어와 영향도
+     3.9. 레버리지와 아웃라이어
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_10.html">
-     3.10. 스케일링과 다중공선성
+     3.10. 비선형회귀분석
     </a>
    </li>
    <li class="toctree-l2">
@@ -290,7 +290,7 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2 current active">
     <a class="current reference internal" href="#">
-     3.12. 과최적화와 정규화
+     3.12. 스케일링과 다중공선성
     </a>
    </li>
   </ul>
@@ -470,7 +470,7 @@ title="Print to PDF"
         <div class="col pl-md-3 pl-lg-5 content-container">
             <!-- Table of contents that is only displayed when printing the page -->
             <div id="jb-print-docs-body" class="onlyprint">
-                <h1>과최적화와 정규화</h1>
+                <h1>스케일링과 다중공선성</h1>
                 <!-- Table of contents -->
                 <div id="print-main-content">
                     <div id="jb-print-toc">
@@ -483,7 +483,136 @@ title="Print to PDF"
               <div>
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
-<h1><span class="section-number">3.12. </span>과최적화와 정규화<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<h1><span class="section-number">3.12. </span>스케일링과 다중공선성<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+
+<span class="n">formula_scaled</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> \
+    <span class="s2">&quot;scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(nox)&quot;</span> \
+    <span class="s2">&quot;+ C(chas) + scale(black) + scale(zn) + scale(crim) + scale(rad) + scale(tax)&quot;</span>
+
+<span class="n">formula_notscaled</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> \
+    <span class="s2">&quot;lstat + rm + ptratio + dis + nox&quot;</span> \
+    <span class="s2">&quot;+ C(chas) + black + zn + crim + rad + tax&quot;</span>
+
+<span class="n">result_scaled</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_scaled</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result_notscaled</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_notscaled</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result_scaled</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.741
+Model:                            OLS   Adj. R-squared:                  0.735
+Method:                 Least Squares   F-statistic:                     128.2
+Date:                Fri, 29 Jul 2022   Prob (F-statistic):          5.54e-137
+Time:                        09:02:45   Log-Likelihood:                -1498.9
+No. Observations:                 506   AIC:                             3022.
+Df Residuals:                     494   BIC:                             3072.
+Df Model:                          11                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept         22.3448      0.219    102.178      0.000      21.915      22.774
+C(chas)[T.1]       2.7187      0.854      3.183      0.002       1.040       4.397
+scale(lstat)      -3.7279      0.338    -11.019      0.000      -4.393      -3.063
+scale(rm)          2.6684      0.285      9.356      0.000       2.108       3.229
+scale(ptratio)    -2.0471      0.279     -7.334      0.000      -2.596      -1.499
+scale(dis)        -3.1401      0.391     -8.037      0.000      -3.908      -2.372
+scale(nox)        -2.0115      0.409     -4.915      0.000      -2.816      -1.207
+scale(black)       0.8474      0.244      3.475      0.001       0.368       1.327
+scale(zn)          1.0682      0.315      3.390      0.001       0.449       1.687
+scale(crim)       -0.9316      0.282     -3.307      0.001      -1.485      -0.378
+scale(rad)         2.6062      0.552      4.726      0.000       1.523       3.690
+scale(tax)        -1.9831      0.568     -3.493      0.001      -3.099      -0.867
+==============================================================================
+Omnibus:                      178.430   Durbin-Watson:                   1.078
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              787.785
+Skew:                           1.523   Prob(JB):                    8.60e-172
+Kurtosis:                       8.300   Cond. No.                         9.11
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result_notscaled</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.741
+Model:                            OLS   Adj. R-squared:                  0.735
+Method:                 Least Squares   F-statistic:                     128.2
+Date:                Fri, 29 Jul 2022   Prob (F-statistic):          5.54e-137
+Time:                        09:02:53   Log-Likelihood:                -1498.9
+No. Observations:                 506   AIC:                             3022.
+Df Residuals:                     494   BIC:                             3072.
+Df Model:                          11                                         
+Covariance Type:            nonrobust                                         
+================================================================================
+                   coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept       36.3411      5.067      7.171      0.000      26.385      46.298
+C(chas)[T.1]     2.7187      0.854      3.183      0.002       1.040       4.397
+lstat           -0.5226      0.047    -11.019      0.000      -0.616      -0.429
+rm               3.8016      0.406      9.356      0.000       3.003       4.600
+ptratio         -0.9465      0.129     -7.334      0.000      -1.200      -0.693
+dis             -1.4927      0.186     -8.037      0.000      -1.858      -1.128
+nox            -17.3760      3.535     -4.915      0.000     -24.322     -10.430
+black            0.0093      0.003      3.475      0.001       0.004       0.015
+zn               0.0458      0.014      3.390      0.001       0.019       0.072
+crim            -0.1084      0.033     -3.307      0.001      -0.173      -0.044
+rad              0.2996      0.063      4.726      0.000       0.175       0.424
+tax             -0.0118      0.003     -3.493      0.001      -0.018      -0.005
+==============================================================================
+Omnibus:                      178.430   Durbin-Watson:                   1.078
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              787.785
+Skew:                           1.523   Prob(JB):                    8.60e-172
+Kurtosis:                       8.300   Cond. No.                     1.47e+04
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+[2] The condition number is large, 1.47e+04. This might indicate that there are
+strong multicollinearity or other numerical problems.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">heatmap</span><span class="p">(</span><span class="n">corr</span><span class="p">,</span> <span class="n">mask</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">triu</span><span class="p">(</span><span class="n">corr</span><span class="p">),</span> <span class="n">square</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">linewidths</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> 
+            <span class="n">annot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">fmt</span><span class="o">=</span><span class="s2">&quot;5.2f&quot;</span><span class="p">,</span> <span class="n">annot_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;fontsize&quot;</span><span class="p">:</span> <span class="mi">6</span><span class="p">},</span>
+            <span class="n">cmap</span><span class="o">=</span><span class="n">sns</span><span class="o">.</span><span class="n">color_palette</span><span class="p">(</span><span class="s2">&quot;Blues&quot;</span><span class="p">),</span> <span class="n">cbar</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_12_7_0.png" src="../_images/03_12_7_0.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
