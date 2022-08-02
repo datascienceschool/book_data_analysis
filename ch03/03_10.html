@@ -667,11 +667,12 @@ Notes:
 <li><p>분석하고자 하는 특정 독립변수의 이름 문자열</p></li>
 <li><p>분석하고자 하는 특정 독립변수를 제외한 나머지 독립변수들의 이름 문자열 리스트</p></li>
 <li><p>데이터프레임</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">obs_labels</span></code>: 각 데이터에 라벨을 그리는 경우 <code class="docutils literal notranslate"><span class="pre">True</span></code>, 아니면 <code class="docutils literal notranslate"><span class="pre">False</span></code></p></li>
 </ol>
 <p>함수를 실행하면 x축에는 잔차 <span class="math notranslate nohighlight">\(x_k^{\ast}\)</span>를, y축에는 잔차 <span class="math notranslate nohighlight">\(y_k^{\ast}\)</span>를 스케터플롯으로 그리고 가중치 <span class="math notranslate nohighlight">\(\hat{w}_k\)</span>를 사용한 선형회귀 결과를 직선으로 표시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s1">&#39;medv&#39;</span><span class="p">,</span> <span class="s1">&#39;scale(lstat)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scale(rm)&quot;</span><span class="p">],</span> <span class="n">boston</span><span class="p">,</span> <span class="n">obs_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ret_coords</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s1">&#39;medv&#39;</span><span class="p">,</span> <span class="s1">&#39;scale(lstat)&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scale(rm)&quot;</span><span class="p">],</span> <span class="n">boston</span><span class="p">,</span> <span class="n">obs_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
