@@ -571,7 +571,7 @@ Dep. Variable:                   medv   R-squared:                       0.639
 Model:                            OLS   Adj. R-squared:                  0.637
 Method:                 Least Squares   F-statistic:                     444.3
 Date:                Wed, 03 Aug 2022   Prob (F-statistic):          7.01e-112
-Time:                        15:17:40   Log-Likelihood:                -1582.8
+Time:                        15:28:00   Log-Likelihood:                -1582.8
 No. Observations:                 506   AIC:                             3172.
 Df Residuals:                     503   BIC:                             3184.
 Df Model:                           2                                         
@@ -825,7 +825,7 @@ Dep. Variable:                   medv   R-squared:                       0.751
 Model:                            OLS   Adj. R-squared:                  0.749
 Method:                 Least Squares   F-statistic:                     377.7
 Date:                Wed, 03 Aug 2022   Prob (F-statistic):          1.09e-149
-Time:                        15:17:43   Log-Likelihood:                -1488.5
+Time:                        15:28:03   Log-Likelihood:                -1488.5
 No. Observations:                 506   AIC:                             2987.
 Df Residuals:                     501   BIC:                             3008.
 Df Model:                           4                                         
@@ -871,6 +871,26 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/03_10_29_0.png" src="../_images/03_10_29_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(I(rm ** 2))&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_10_30_0.png" src="../_images/03_10_30_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(I(lstat ** 2))&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_10_31_0.png" src="../_images/03_10_31_0.png" />
 </div>
 </div>
 </section>
