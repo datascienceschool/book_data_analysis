@@ -581,7 +581,7 @@ Dep. Variable:                   medv   R-squared:                       0.639
 Model:                            OLS   Adj. R-squared:                  0.637
 Method:                 Least Squares   F-statistic:                     444.3
 Date:                Wed, 03 Aug 2022   Prob (F-statistic):          7.01e-112
-Time:                        13:28:43   Log-Likelihood:                -1582.8
+Time:                        14:05:24   Log-Likelihood:                -1582.8
 No. Observations:                 506   AIC:                             3172.
 Df Residuals:                     503   BIC:                             3184.
 Df Model:                           2                                         
@@ -723,7 +723,26 @@ Notes:
 </section>
 <section id="id3">
 <h2><span class="section-number">3.10.2. </span>잔차분석<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>잔차를 분석하는 이유는 우리가 만든 선형회귀분석 모형이 정상적인 모형인지 아닌지를 검증하기 위한 것이다. 만약 우리가 사용한 모형과 데이터가 선형회귀분석에 사용되는 기본적인 확률론적 가정을 만족한다면 잔차는 다음 성질을 만족해야 한다.</p>
+<p>잔차를 분석하는 이유는 우리가 만든 선형회귀분석 모형이 정상적인 모형인지 아닌지를 검증하기 위한 것이다. 만약 우리가 사용한 모형과 데이터가 선형회귀분석에 사용되는 기본적인 확률론적 가정을 만족한다면 잔차는 평균이 0이고 분산이 고정된 정규분포를 따라야 한다.</p>
+<p>회귀분석 결과 요약에서 하단에 있는 부분이 잔차의 정규분포에 대한 통계치 및 정규성 검정 결과다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Omnibus</span><span class="p">:</span>                      <span class="mf">145.712</span>   
+<span class="n">Prob</span><span class="p">(</span><span class="n">Omnibus</span><span class="p">):</span>                  <span class="mf">0.000</span>   <span class="n">Jarque</span><span class="o">-</span><span class="n">Bera</span> <span class="p">(</span><span class="n">JB</span><span class="p">):</span>              <span class="mf">457.690</span>
+<span class="n">Skew</span><span class="p">:</span>                           <span class="mf">1.343</span>   <span class="n">Prob</span><span class="p">(</span><span class="n">JB</span><span class="p">):</span>                    <span class="mf">4.11e-100</span>
+<span class="n">Kurtosis</span><span class="p">:</span>                       <span class="mf">6.807</span>   
+</pre></div>
+</div>
+<p>각 항목의 의미는 다음과 같다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Skew</span></code> : 잔차분포의 왜도(skewness)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Kurtosis</span></code> : 잔차분포의 첨도(kurtosis)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Omnibus</span></code> : 옴니버스 정규성 검정의 통계치</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Prob(Omnibus)</span></code> : 옴니버스 정규성 검정의 유의확률</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Jarque-Bera</span> <span class="pre">(JB)</span></code> : 자끄베라 정규성 검정의 통계치</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Prob(JB)</span></code> : 자끄베라 정규성 검정의 유의확률</p></li>
+</ul>
+<p>우리가 사용한 예제에서는 정규성 검정결과로 나온 유의확률이 0에 가까운 값이므로 정규성 검정을 통과하지 못했다. 즉 모형의 기본 가정을 만족하지 않는다. 잔차가 정규성을 만족하지 못했다는 것은 가중치의 유의확률이나 신뢰구간 등의 분석결과가 오차가 있을 수 있다는 것을 뜻한다. 따라서 원칙적으로는 정규성 분포를 만족할 때까지 모형을 수정할 필요가 있다.</p>
+<p>그러나 현실적으로 데이터의 개수가 충분한 경우 (15개 이상), 잔차의 비정규성이 분석결과에 큰 영향을 미치는 경우는 드물고 대부분의 문제에서는 비실용적일 정도로 복잡한 모형이 아닌한 정규성 검정읕 통과하기가 어렵다. 정규성 검정의 중요성에 대해서는 아직도 통계학자들 사이에서 논란이 되고 있는 부분이지만 이 책에서는 일단 이 부분을 크게 신경쓰지 않고 넘어가기로 한다.</p>
+<p>선형회귀에서 실질적으로 정규성보다 더 중요한 잔차의 성질은 다음 성질이다.</p>
 <div class="admonition- admonition">
 <p class="admonition-title">잔차의 조건부 정규성</p>
 <p>선형회귀분석으로 나온 <span class="math notranslate nohighlight">\(N\)</span>개의 잔차 <span class="math notranslate nohighlight">\(e\)</span>에 대해서 다음 성질이 성립한다.</p>
@@ -742,7 +761,7 @@ Notes:
 </li>
 </ol>
 </div>
-<p>이 성질이 성립하는지 시각적으로 확인하기 위해 독립변수와 잔차}의 관계를 나타내는 잔차플롯을 그려보자. statsmodels 패키지에는 잔차플롯만 그리는 함수가 없으므로 잔차플롯만 그리고 싶을 때는 저자가 만든 다음 코드를 사용한다. 이 잔차플롯에서 파란색 곡선은 독립변수의 변화에 따른 잔차의 평균값을 표시한 것이다.</p>
+<p>우리가 만든 예제에 대해 이 성질이 성립하는지 시각적으로 확인하기 위해 독립변수와 잔차}의 관계를 나타내는 잔차플롯을 그려보자. statsmodels 패키지에는 잔차플롯만 그리는 함수가 없으므로 잔차플롯만 그리고 싶을 때는 저자가 만든 다음 코드를 사용한다. 이 잔차플롯에서 파란색 곡선은 독립변수의 변화에 따른 잔차의 평균값을 표시한 것이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resid_plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">exo_name</span><span class="p">):</span>
@@ -763,7 +782,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_10_22_0.png" src="../_images/03_10_22_0.png" />
+<img alt="../_images/03_10_21_0.png" src="../_images/03_10_21_0.png" />
 </div>
 </div>
 <p>잔차 평균이 독립변수와 관계없이 0이 되려면 잔차플롯에서 푸른 곡선이 y=0 에 해당하는 평평한 직선이어야 한다. 그러나 독립변수 rm과 잔차의 관계를 보면 첫번째 결과를 만족하지 않고 rm 값이 너무 작거나 너무 커지면 잔차의 값이 양의 방향으로 증가하는 것을 볼 수 있다. lstat 독립변수에 대해 잔차플롯을 그려도 비슷한 현상이 발생한다.</p>
@@ -774,7 +793,7 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_10_24_0.png" src="../_images/03_10_24_0.png" />
+<img alt="../_images/03_10_23_0.png" src="../_images/03_10_23_0.png" />
 </div>
 </div>
 </section>
@@ -825,7 +844,7 @@ Dep. Variable:                   medv   R-squared:                       0.751
 Model:                            OLS   Adj. R-squared:                  0.749
 Method:                 Least Squares   F-statistic:                     377.7
 Date:                Wed, 03 Aug 2022   Prob (F-statistic):          1.09e-149
-Time:                        13:33:52   Log-Likelihood:                -1488.5
+Time:                        14:05:26   Log-Likelihood:                -1488.5
 No. Observations:                 506   AIC:                             2987.
 Df Residuals:                     501   BIC:                             3008.
 Df Model:                           4                                         
@@ -859,12 +878,23 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_10_29_0.png" src="../_images/03_10_29_0.png" />
+<img alt="../_images/03_10_28_0.png" src="../_images/03_10_28_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_10_29_0.png" src="../_images/03_10_29_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm</span><span class="o">.</span><span class="n">qqplot</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">,</span> <span class="n">line</span><span class="o">=</span><span class="s2">&quot;s&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
