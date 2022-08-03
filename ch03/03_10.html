@@ -581,7 +581,7 @@ Dep. Variable:                   medv   R-squared:                       0.639
 Model:                            OLS   Adj. R-squared:                  0.637
 Method:                 Least Squares   F-statistic:                     444.3
 Date:                Wed, 03 Aug 2022   Prob (F-statistic):          7.01e-112
-Time:                        14:43:33   Log-Likelihood:                -1582.8
+Time:                        14:49:51   Log-Likelihood:                -1582.8
 No. Observations:                 506   AIC:                             3172.
 Df Residuals:                     503   BIC:                             3184.
 Df Model:                           2                                         
@@ -821,7 +821,9 @@ y = w_0 + w_1 x + w_2 x^2 +  + w_3 x^3 \cdots + w_L x^L + \varepsilon
 <p>예제로 사용한 보스턴 집값 분석에서 rm과 lstat의 2차항을 추가하여 분석하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(I(lstat**2)) + scale(I(rm**2))&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula2</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(lstat) + scale(rm)&quot;</span> \
+    <span class="s2">&quot; + scale(I(lstat**2)) + scale(I(rm**2))&quot;</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula2</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
 <span class="n">result2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
@@ -834,7 +836,7 @@ Dep. Variable:                   medv   R-squared:                       0.751
 Model:                            OLS   Adj. R-squared:                  0.749
 Method:                 Least Squares   F-statistic:                     377.7
 Date:                Wed, 03 Aug 2022   Prob (F-statistic):          1.09e-149
-Time:                        14:34:32   Log-Likelihood:                -1488.5
+Time:                        14:49:54   Log-Likelihood:                -1488.5
 No. Observations:                 506   AIC:                             2987.
 Df Residuals:                     501   BIC:                             3008.
 Df Model:                           4                                         
