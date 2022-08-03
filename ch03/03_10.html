@@ -790,6 +790,23 @@ Notes:
 </section>
 <section id="id4">
 <h2><span class="section-number">3.10.3. </span>비선형회귀분석<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>위와 같은 현상이 발생하는 원인은 우리가 생각한 선형회귀모형이 데이터에 맞지 않기 때문이다. 즉 데이터가 다음과 같은 선형관계를 따르지 않는다</p>
+<div class="math notranslate nohighlight">
+\[
+y = w_0 + w_1 x_1 + w_2 x_2 + \cdots + w_K x_K + \varepsilon 
+\]</div>
+<p>따라서 선형모형을 확장한 비선형 모형을 사용해야한다. 그런데 일반적인 비선형모형을 사용하면 지금까지 우리가 공부한 선형회귀분석을 활용할 수 없기 때문에 다음과 같은 비선형모형을 사용하는 것이 좋다.</p>
+<div class="math notranslate nohighlight">
+\[
+y = w_0 + w_1 f_1(x_1, x_2, \ldots, x_K) + w_2 f_2(x_1, x_2, \ldots, x_K) + \cdots + w_L f_L(x_1, x_2, \ldots, x_K) + \varepsilon 
+\]</div>
+<p>이 식에서 <span class="math notranslate nohighlight">\(f_l()\)</span>은 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>를 입력으로 가지는 비선형함수들이다. 이 모형은 다음과 같이 표시할 수도 있다.</p>
+<div class="math notranslate nohighlight">
+\[
+y = w_0 + w_1 x'_1 + w_2 x'_2 + \cdots + w_L x'_L + \varepsilon 
+\]</div>
+<p>즉 기존에 우리가 사용한 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>를 비선형 변환한 값을 새로운 독립변수 <span class="math notranslate nohighlight">\(x'_1, x'_2, \ldots, x'_L\)</span>로 사용하는 것이다. 이 때 비선형함수는 자유롭게 지정할 수 있기 때문에 새로운 독립변수의 개수 <span class="math notranslate nohighlight">\(L\)</span>는 기존의 독립변수의 개수 <span class="math notranslate nohighlight">\(K\)</span>보다 훨씬 많아질 수 있다.</p>
+<p>이 방식을 사용하면 실질적으로는 비선형 함수를 사용하면서 우리가 지금까지 공부한 선형회귀분석을 활용할 수 있다.</p>
 </section>
 <section id="id5">
 <h2><span class="section-number">3.10.4. </span>다항회귀<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
