@@ -552,12 +552,12 @@ title="Print to PDF"
 <section id="id2">
 <h2><span class="section-number">3.10.1. </span>부분회귀<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>독립변수가 하나뿐인 경우에는 x축을 독립변수로, y축을 종속변수로 하는 스캐터플롯과 예측값 직선을 이용하여 회귀분석의 결과를 시각적으로 표시하여 독립변수와 종속변수의 관계 및 회귀 성능을 유추할 수 있었다. 하지만 독립변수가 두개 이상인 경우에 이러한 방식을 사용하면 다른 독립변수의 영향으로 예측값이 직선으로 나오지 않기 때문에 이러한 시각화 방식을 사용하기 어렵다.</p>
-<p>보스턴 집값 데이터를 lstat과 rm 두가지 독립변수로 선형회귀분석한 결과를 이용하여 예를 들어보자.</p>
+<p>보스턴 집값 데이터의 일부를 lstat과 rm 두가지 독립변수로 선형회귀분석한 결과를 이용하여 예를 들어보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
 <span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
 <span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
@@ -567,26 +567,26 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                   medv   R-squared:                       0.639
-Model:                            OLS   Adj. R-squared:                  0.637
-Method:                 Least Squares   F-statistic:                     444.3
-Date:                Wed, 03 Aug 2022   Prob (F-statistic):          7.01e-112
-Time:                        17:35:11   Log-Likelihood:                -1582.8
-No. Observations:                 506   AIC:                             3172.
-Df Residuals:                     503   BIC:                             3184.
+Dep. Variable:                   medv   R-squared:                       0.799
+Model:                            OLS   Adj. R-squared:                  0.795
+Method:                 Least Squares   F-statistic:                     193.1
+Date:                Sat, 06 Aug 2022   Prob (F-statistic):           1.52e-34
+Time:                        16:05:07   Log-Likelihood:                -239.08
+No. Observations:                 100   AIC:                             484.2
+Df Residuals:                      97   BIC:                             492.0
 Df Model:                           2                                         
 Covariance Type:            nonrobust                                         
 ================================================================================
                    coef    std err          t      P&gt;|t|      [0.025      0.975]
 --------------------------------------------------------------------------------
-Intercept       22.5328      0.246     91.487      0.000      22.049      23.017
-scale(lstat)    -4.5826      0.312    -14.689      0.000      -5.196      -3.970
-scale(rm)        3.5761      0.312     11.463      0.000       2.963       4.189
+Intercept       22.3090      0.268     83.135      0.000      21.776      22.842
+scale(lstat)    -2.1390      0.339     -6.319      0.000      -2.811      -1.467
+scale(rm)        3.6891      0.339     10.898      0.000       3.017       4.361
 ==============================================================================
-Omnibus:                      145.712   Durbin-Watson:                   0.834
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              457.690
-Skew:                           1.343   Prob(JB):                    4.11e-100
-Kurtosis:                       6.807   Cond. No.                         2.04
+Omnibus:                        5.327   Durbin-Watson:                   1.248
+Prob(Omnibus):                  0.070   Jarque-Bera (JB):                4.802
+Skew:                           0.419   Prob(JB):                       0.0906
+Kurtosis:                       3.670   Cond. No.                         2.03
 ==============================================================================
 
 Notes:
@@ -595,10 +595,10 @@ Notes:
 </div>
 </div>
 </div>
-<p>예를 들어 x축을 두번째 독립변수인 rm으로, y축을 종속변수인 medv로 놓고 2차원 평면에 데이터(o)와 예측값(x)을 그리면 다음과 같다. 이 플롯으로는 독립변수 lstat에 대한 모형의 가중치(기울기)를 알 수가 없다.</p>
+<p>예를 들어 x축을 첫번째 독립변수인 lstat으로, y축을 종속변수인 medv로 놓고 2차원 평면에 데이터(o)와 예측값(x)을 그리면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">rm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">lstat</span>
 <span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">medv</span>
 <span class="n">y_hat</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fittedvalues</span>
 
@@ -619,7 +619,7 @@ Notes:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_fit</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_fit</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -650,7 +650,7 @@ Notes:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -678,7 +678,7 @@ Notes:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scale(lstat)&quot;</span><span class="p">],</span> <span class="n">boston</span><span class="p">,</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scale(rm)&quot;</span><span class="p">],</span> <span class="n">boston</span><span class="p">,</span>
                              <span class="n">obs_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -695,7 +695,7 @@ Notes:
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_regress_exog</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
+<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_regress_exog</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
@@ -715,10 +715,10 @@ Notes:
 <h2><span class="section-number">3.10.2. </span>잔차분석<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 <p>잔차를 분석하는 이유는 우리가 만든 선형회귀분석 모형이 정상적인 모형인지 아닌지를 검증하기 위한 것이다. 만약 우리가 사용한 모형과 데이터가 선형회귀분석에 사용되는 기본적인 확률론적 가정을 만족한다면 잔차는 평균이 0이고 분산이 고정된 정규분포를 따라야 한다.</p>
 <p>회귀분석 결과 요약에서 하단에 있는 부분이 잔차의 정규분포에 대한 통계치 및 정규성 검정 결과다.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Omnibus</span><span class="p">:</span>                      <span class="mf">145.712</span>   
-<span class="n">Prob</span><span class="p">(</span><span class="n">Omnibus</span><span class="p">):</span>                  <span class="mf">0.000</span>   <span class="n">Jarque</span><span class="o">-</span><span class="n">Bera</span> <span class="p">(</span><span class="n">JB</span><span class="p">):</span>              <span class="mf">457.690</span>
-<span class="n">Skew</span><span class="p">:</span>                           <span class="mf">1.343</span>   <span class="n">Prob</span><span class="p">(</span><span class="n">JB</span><span class="p">):</span>                    <span class="mf">4.11e-100</span>
-<span class="n">Kurtosis</span><span class="p">:</span>                       <span class="mf">6.807</span>   
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Omnibus</span><span class="p">:</span>                        <span class="mf">5.327</span>   
+<span class="n">Prob</span><span class="p">(</span><span class="n">Omnibus</span><span class="p">):</span>                  <span class="mf">0.070</span>   <span class="n">Jarque</span><span class="o">-</span><span class="n">Bera</span> <span class="p">(</span><span class="n">JB</span><span class="p">):</span>                <span class="mf">4.802</span>
+<span class="n">Skew</span><span class="p">:</span>                           <span class="mf">0.419</span>   <span class="n">Prob</span><span class="p">(</span><span class="n">JB</span><span class="p">):</span>                       <span class="mf">0.0906</span>
+<span class="n">Kurtosis</span><span class="p">:</span>                       <span class="mf">3.670</span>   
 </pre></div>
 </div>
 <p>각 항목의 의미는 다음과 같다.</p>
@@ -730,33 +730,49 @@ Notes:
 <li><p><code class="docutils literal notranslate"><span class="pre">Jarque-Bera</span> <span class="pre">(JB)</span></code> : 자끄베라 정규성 검정의 통계치</p></li>
 <li><p><code class="docutils literal notranslate"><span class="pre">Prob(JB)</span></code> : 자끄베라 정규성 검정의 유의확률</p></li>
 </ul>
-<p>우리가 사용한 예제에서는 정규성 검정결과로 나온 유의확률이 0에 가까운 값이므로 정규성 검정을 통과하지 못했다. 즉 모형의 기본 가정을 만족하지 않는다. 잔차가 정규성을 만족하지 못했다는 것은 가중치의 유의확률이나 신뢰구간 등의 분석결과에 오차가 있을 수 있다는 것을 뜻한다. 따라서 원칙적으로는 정규성 분포를 만족할 때까지 아웃라이어를 제거하거나 모형을 수정할 필요가 있다.</p>
-<p>그러나 현실적으로 데이터의 개수가 충분한 경우 (15개 이상), 잔차의 비정규성이 분석결과에 큰 영향을 미치는 경우는 드물고 대부분의 문제에서는 비실용적일 정도로 복잡한 모형이 아닌 한 정규성 검정읕 통과하지 못하는 경우가 많다. 정규성 검정의 중요성에 대해서는 아직도 통계학자들 사이에서 논란이 되고 있는 부분이지만 이 책에서는 일단 이 부분을 크게 신경쓰지 않고 넘어가기로 한다.</p>
+<p>우리가 사용한 예제에서는 정규성 검정결과가 다음과 같다.</p>
+<ul class="simple">
+<li><p>옴니버스 정규성 검정의 유의확률 = 7%</p></li>
+<li><p>자끄베라 정규성 검정의 유의확률 = 9%</p></li>
+</ul>
+<p>만약 유의수준이 5%라면 유의확률이 이보다 크므로 정규성 검정을 통과한다. 즉 모형의 기본가정을 만족한다.</p>
+<p>만약 잔차가 정규성을 만족하지 못하면 우리가 지금까지 사용한 가중치의 유의확률이나 신뢰구간 등의 분석결과에 오차가 있을 수 있다. 따라서 원칙적으로는 정규성 분포를 만족할 때까지 아웃라이어를 제거하거나 모형을 수정할 필요가 있다.</p>
+<p>그러나 현실적으로 데이터의 개수가 충분한 경우(보통 15개 이상), 잔차의 비정규성이 분석결과에 큰 영향을 미치는 경우는 드물고 대부분의 문제에서는 비실용적일 정도로 복잡한 모형이 아닌 한 정규성 검정읕 통과하지 못하는 경우가 많다. 정규성 검정의 중요성에 대해서는 아직도 통계학자들 사이에서 논란이 되고 있는 부분이지만 이 책에서는 일단 이 부분을 크게 신경쓰지 않고 넘어가기로 한다.</p>
 <p>선형회귀에서 실질적으로 정규성보다 더 중요한 잔차의 성질은 다음 성질이다.</p>
 <div class="admonition- admonition">
 <p class="admonition-title">잔차의 조건부 평균</p>
-<p>선형회귀분석으로 나온 <span class="math notranslate nohighlight">\(N\)</span>개의 잔차 <span class="math notranslate nohighlight">\(e\)</span>에 대해서 기댓값은 독립변수와 상관없이 항상 0이다.</p>
+<p>선형회귀분석으로 나온 <span class="math notranslate nohighlight">\(N\)</span>개의 잔차 <span class="math notranslate nohighlight">\(e\)</span>의 기댓값은 독립변수와 상관없이 항상 0이다.</p>
 <div class="math notranslate nohighlight">
 \[
 \text{E}\left[ e | x \right] = 0
 \]</div>
 </div>
-<p>우리가 만든 예제에 대해 이 성질이 성립하는지 시각적으로 확인하기 위해 독립변수와 잔차의 관계를 나타내는 잔차플롯을 그려보자. statsmodels 패키지에는 잔차플롯만 그리는 함수가 없으므로 잔차플롯만 그리고 싶을 때는 저자가 만든 다음 코드를 사용한다. 이 잔차플롯에서 파란색 곡선은 독립변수의 변화에 따른 잔차의 평균값을 표시한 것이다.</p>
+<div class="admonition- admonition">
+<p class="admonition-title">잔차의 조건부 분산</p>
+<p>선형회귀분석으로 나온 <span class="math notranslate nohighlight">\(N\)</span>개의 잔차 <span class="math notranslate nohighlight">\(e\)</span>의 분산은 독립변수와 상관없이 항상 일정하다. 이를 등분산성(homoscedasticity)이라고 한다. 만약 이를 만족하지 않으면 이분산성(heteroscedasticity)이라고 한다.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{Var}\left[ e | x \right] = \text{상수}
+\]</div>
+</div>
+<p>statsmodels 패키지에는 잔차의 조건부 평균이 0인지 검증하기 위한 통계정 검정 기능이 없다 따라서 독립변수와 잔차의 관계를 나타내는 잔차플롯을 그려 시각적으로 살펴볼 수 밖에 없다.
+안타깝게도 statsmodels 패키지는 잔차플롯만 그리는 함수도 없다. 따라서 잔차플롯만 그리고 싶을 때는 저자가 만든 다음 코드를 사용한다. 이 잔차플롯에서 파란색 곡선은 독립변수의 변화에 따른 잔차의 평균값을 표시한 것이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resid_plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">exo_name</span><span class="p">):</span>
     <span class="n">id_x</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">exo_name</span><span class="p">)</span>
     <span class="n">x</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">[:,</span> <span class="n">id_x</span><span class="p">]</span>
     <span class="n">r</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">resid</span>
-    <span class="n">l</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">nonparametric</span><span class="o">.</span><span class="n">lowess</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">)</span>
+    <span class="n">l</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">nonparametric</span><span class="o">.</span><span class="n">lowess</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">frac</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
 
     <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">l</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">l</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;잔차플롯: 독립변수=</span><span class="si">{</span><span class="n">exo_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
-<span class="n">resid_plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">)</span>
+<span class="n">resid_plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -765,10 +781,10 @@ Notes:
 <img alt="../_images/03_10_21_0.png" src="../_images/03_10_21_0.png" />
 </div>
 </div>
-<p>잔차 평균이 독립변수와 관계없이 0이 되려면 잔차플롯에서 푸른 곡선이 y=0 에 해당하는 평평한 직선이어야 한다. 그러나 독립변수 rm과 잔차의 관계를 보면 첫번째 결과를 만족하지 않고 rm 값이 너무 작거나 너무 커지면 잔차의 값이 양의 방향으로 증가하는 것을 볼 수 있다. lstat 독립변수에 대해 잔차플롯을 그려도 비슷한 현상이 발생한다.</p>
+<p>잔차 평균이 독립변수와 관계없이 0이 되려면 잔차플롯에서 푸른 곡선이 y=0 에 해당하는 평평한 직선이어야 한다. 그러나 독립변수와 잔차의 관계를 보면 독립변수 값이 너무 작거나 커지면 잔차의 값이 양의 방향으로 증가하는 것을 볼 수 있다. rm 독립변수에 대해 잔차플롯을 그려도 비슷한 현상이 발생한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -776,10 +792,62 @@ Notes:
 <img alt="../_images/03_10_23_0.png" src="../_images/03_10_23_0.png" />
 </div>
 </div>
+<p>잔차의 조건부 분산 성질의 경우에는 statmodels 패키지에 이를 검증하기 위한 다음과 같은 함수가 있다.</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">het_breuschpagan</span></code> : 이분산성에 대한 브레슈-페이건(Breusch-Pagan) 검정</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">het_white</span></code> : 이분산성에 대한 화이트(white) 검정</p></li>
+</ul>
+<p>이 검정들의 귀무가설은 등분산성이므로 유의확률이 큰 경우에는 등분산성이고 유의확률이 작으면 이분산성이다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">het_breuschpagan</span><span class="p">,</span> <span class="n">het_white</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 함수들의 반환값은 다음과 같은 순서로 나오는 값의 튜플이다.</p>
+<ol class="simple">
+<li><p>라그랑주 승수검정 통계치</p></li>
+<li><p>라그랑주 승수검정 유의확률</p></li>
+<li><p>F검정 통계치</p></li>
+<li><p>F검정 유의확률</p></li>
+</ol>
+<p>두번째와 4번째의 유의확률의 값이 크면 등분산성이다. 우리가 사용한 예제에서는 이분산성이 존재하는 것을 확인할 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(22.398766185277374,
+ 1.3682634380455558e-05,
+ 13.99900628615844,
+ 4.55646855722389e-06)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">het_white</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(23.458466930318266,
+ 0.00027580773458726204,
+ 5.7618283904568415,
+ 0.00011057945959355164)
+</pre></div>
+</div>
+</div>
+</div>
+<p>이분산성이 존재하는 경우 가중치의 유의확률이나 신뢰구간에 오차가 있을 수 있으므로 앞에서 말한바와 마찬가지로 아웃라이어를 제거하거나 모형을 수정하여 다시 검정을 실시할 필요가 있다.</p>
 </section>
 <section id="id4">
 <h2><span class="section-number">3.10.3. </span>다항회귀<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<p>위와 같은 현상이 발생하는 원인은 우리가 생각한 선형회귀모형이 데이터에 맞지 않기 때문이다. 즉 데이터가 다음과 같은 선형관계를 따르지 않는다</p>
+<p>잔차분석을 했을 때 잔차가 원래 가져야할 성질을 만족하지 않는 이유는 우리가 사용한 회귀모형이 데이터에 맞지 않기 때문이다. 즉 데이터가 다음과 같은 선형관계를 따르지 않는다</p>
 <div class="math notranslate nohighlight">
 \[
 y = w_0 + w_1 x_1 + w_2 x_2 + \cdots + w_K x_K + \varepsilon 
@@ -821,28 +889,28 @@ y = w_0 + w_1 x + w_2 x^2 +  + w_3 x^3 \cdots + w_L x^L + \varepsilon
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                   medv   R-squared:                       0.751
-Model:                            OLS   Adj. R-squared:                  0.749
-Method:                 Least Squares   F-statistic:                     377.7
-Date:                Wed, 03 Aug 2022   Prob (F-statistic):          1.09e-149
-Time:                        17:35:14   Log-Likelihood:                -1488.5
-No. Observations:                 506   AIC:                             2987.
-Df Residuals:                     501   BIC:                             3008.
+Dep. Variable:                   medv   R-squared:                       0.853
+Model:                            OLS   Adj. R-squared:                  0.847
+Method:                 Least Squares   F-statistic:                     137.8
+Date:                Sat, 06 Aug 2022   Prob (F-statistic):           1.15e-38
+Time:                        16:05:09   Log-Likelihood:                -223.48
+No. Observations:                 100   AIC:                             457.0
+Df Residuals:                      95   BIC:                             470.0
 Df Model:                           4                                         
 Covariance Type:            nonrobust                                         
 ========================================================================================
                            coef    std err          t      P&gt;|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------------
-Intercept               22.5328      0.205    109.999      0.000      22.130      22.935
-scale(lstat)           -10.1034      0.858    -11.771      0.000     -11.790      -8.417
-scale(rm)              -18.2566      2.178     -8.382      0.000     -22.536     -13.977
-scale(I(lstat ** 2))     5.1528      0.829      6.217      0.000       3.524       6.781
-scale(I(rm ** 2))       21.3709      2.177      9.817      0.000      17.094      25.648
+Intercept               22.3090      0.232     96.161      0.000      21.848      22.770
+scale(lstat)            -6.1843      0.998     -6.195      0.000      -8.166      -4.203
+scale(rm)              -14.1352      4.350     -3.250      0.002     -22.770      -5.500
+scale(I(lstat ** 2))     3.4907      0.915      3.813      0.000       1.673       5.308
+scale(I(rm ** 2))       17.0996      4.304      3.973      0.000       8.555      25.645
 ==============================================================================
-Omnibus:                      138.644   Durbin-Watson:                   0.891
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):             1576.913
-Skew:                           0.839   Prob(JB):                         0.00
-Kurtosis:                      11.484   Cond. No.                         26.8
+Omnibus:                       25.903   Durbin-Watson:                   1.424
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               65.023
+Skew:                           0.899   Prob(JB):                     7.59e-15
+Kurtosis:                       6.517   Cond. No.                         46.2
 ==============================================================================
 
 Notes:
@@ -855,32 +923,22 @@ Notes:
 <p>잔차플롯을 그려보면 잔차의 평균이 앞의 모형보다 0에 더 가까운 형태로 개선되었다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/03_10_28_0.png" src="../_images/03_10_28_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_10_29_0.png" src="../_images/03_10_29_0.png" />
+<img alt="../_images/03_10_34_0.png" src="../_images/03_10_34_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(I(rm ** 2))&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_10_30_0.png" src="../_images/03_10_30_0.png" />
+<img alt="../_images/03_10_35_0.png" src="../_images/03_10_35_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -890,72 +948,46 @@ Notes:
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_10_31_0.png" src="../_images/03_10_31_0.png" />
+<img alt="../_images/03_10_36_0.png" src="../_images/03_10_36_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="k">as</span> <span class="nn">sm_diagnostic</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm_diagnostic</span><span class="o">.</span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(I(rm ** 2))&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.5297402080644174,
- 0.4653943799015743,
- 0.7626409185883087,
- 0.46697154888278514)
+<img alt="../_images/03_10_37_0.png" src="../_images/03_10_37_0.png" />
+</div>
+</div>
+<p>이분산성 검정을 한 결과도 유의확률이 1% 이상으로 증가하여 유의수준이 1%이면 검정을 통과하여 등분산성을 보이게 된다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(10.32306667382783,
+ 0.0353234696975647,
+ 2.7339564859078136,
+ 0.03337658699888184)
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm_diagnostic</span><span class="o">.</span><span class="n">het_white</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">het_white</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(102.25426404132212,
- 1.769244260564474e-20,
- 25.3264009831642,
- 8.597718759619385e-23)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm_diagnostic</span><span class="o">.</span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20.80288209839259,
- 0.0003464745142593689,
- 5.37010812037026,
- 0.00030607981867515665)
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm_diagnostic</span><span class="o">.</span><span class="n">het_white</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(70.26656812830915,
- 2.855436959406425e-10,
- 6.625116710013579,
- 4.6817171406777616e-11)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(13.899283201672985,
+ 0.30718609379310136,
+ 1.1703712461321483,
+ 0.3170099161339497)
 </pre></div>
 </div>
 </div>
