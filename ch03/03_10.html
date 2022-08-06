@@ -571,7 +571,7 @@ Dep. Variable:                   medv   R-squared:                       0.639
 Model:                            OLS   Adj. R-squared:                  0.637
 Method:                 Least Squares   F-statistic:                     444.3
 Date:                Wed, 03 Aug 2022   Prob (F-statistic):          7.01e-112
-Time:                        15:28:00   Log-Likelihood:                -1582.8
+Time:                        17:35:11   Log-Likelihood:                -1582.8
 No. Observations:                 506   AIC:                             3172.
 Df Residuals:                     503   BIC:                             3184.
 Df Model:                           2                                         
@@ -825,7 +825,7 @@ Dep. Variable:                   medv   R-squared:                       0.751
 Model:                            OLS   Adj. R-squared:                  0.749
 Method:                 Least Squares   F-statistic:                     377.7
 Date:                Wed, 03 Aug 2022   Prob (F-statistic):          1.09e-149
-Time:                        15:28:03   Log-Likelihood:                -1488.5
+Time:                        17:35:14   Log-Likelihood:                -1488.5
 No. Observations:                 506   AIC:                             2987.
 Df Residuals:                     501   BIC:                             3008.
 Df Model:                           4                                         
@@ -891,6 +891,73 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <img alt="../_images/03_10_31_0.png" src="../_images/03_10_31_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="k">as</span> <span class="nn">sm_diagnostic</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm_diagnostic</span><span class="o">.</span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1.5297402080644174,
+ 0.4653943799015743,
+ 0.7626409185883087,
+ 0.46697154888278514)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm_diagnostic</span><span class="o">.</span><span class="n">het_white</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(102.25426404132212,
+ 1.769244260564474e-20,
+ 25.3264009831642,
+ 8.597718759619385e-23)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm_diagnostic</span><span class="o">.</span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(20.80288209839259,
+ 0.0003464745142593689,
+ 5.37010812037026,
+ 0.00030607981867515665)
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sm_diagnostic</span><span class="o">.</span><span class="n">het_white</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(70.26656812830915,
+ 2.855436959406425e-10,
+ 6.625116710013579,
+ 4.6817171406777616e-11)
+</pre></div>
+</div>
 </div>
 </div>
 </section>
