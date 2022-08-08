@@ -489,6 +489,322 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.11. </span>과최적화와 정규화<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">boston_train</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
+<span class="n">boston_test</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">100</span><span class="p">:]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+
+<span class="n">x_name</span> <span class="o">=</span> <span class="s2">&quot;lstat&quot;</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">result1</span><span class="p">}</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+    <span class="n">formula</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; + scale(I(</span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2"> ** </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">))&quot;</span>
+    <span class="n">result_i</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">result_i</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="k">def</span> <span class="nf">plot_train</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">subplot</span><span class="p">):</span>
+    <span class="n">r_i</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">x_name</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">35.9</span><span class="p">,</span> <span class="mi">100</span><span class="p">)})</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">r_i</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="o">*</span><span class="n">subplot</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">boston_train</span><span class="p">[</span><span class="n">x_name</span><span class="p">],</span> <span class="n">boston_train</span><span class="p">[</span><span class="s2">&quot;medv&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;o&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">x_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;차수=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
+    <span class="n">plot_train</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;학습 데이터와 다중회귀 결과&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_11_4_0.png" src="../_images/03_11_4_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rss</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span>
+    <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">ssr</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;차수&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 결정계수&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 잔차제곱합&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;차수&quot;</span><span class="p">)</span>
+
+<span class="n">df_rss</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_e2041_row0_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 74.7%, transparent 74.7%);
+}
+#T_e2041_row0_col1, #T_e2041_row7_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
+}
+#T_e2041_row1_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 92.6%, transparent 92.6%);
+}
+#T_e2041_row1_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 70.3%, transparent 70.3%);
+}
+#T_e2041_row2_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 96.0%, transparent 96.0%);
+}
+#T_e2041_row2_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 64.7%, transparent 64.7%);
+}
+#T_e2041_row3_col0, #T_e2041_row4_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 97.7%, transparent 97.7%);
+}
+#T_e2041_row3_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 61.9%, transparent 61.9%);
+}
+#T_e2041_row4_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 61.8%, transparent 61.8%);
+}
+#T_e2041_row5_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 98.4%, transparent 98.4%);
+}
+#T_e2041_row5_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 60.8%, transparent 60.8%);
+}
+#T_e2041_row6_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 98.5%, transparent 98.5%);
+}
+#T_e2041_row6_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 60.5%, transparent 60.5%);
+}
+#T_e2041_row7_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 58.0%, transparent 58.0%);
+}
+</style>
+<table id="T_e2041">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_e2041_level0_col0" class="col_heading level0 col0" >학습 결정계수</th>
+      <th id="T_e2041_level0_col1" class="col_heading level0 col1" >학습 잔차제곱합</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >차수</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_e2041_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_e2041_row0_col0" class="data row0 col0" >0.553373</td>
+      <td id="T_e2041_row0_col1" class="data row0 col1" >1553.790601</td>
+    </tr>
+    <tr>
+      <th id="T_e2041_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_e2041_row1_col0" class="data row1 col0" >0.686105</td>
+      <td id="T_e2041_row1_col1" class="data row1 col1" >1092.022691</td>
+    </tr>
+    <tr>
+      <th id="T_e2041_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_e2041_row2_col0" class="data row2 col0" >0.710969</td>
+      <td id="T_e2041_row2_col1" class="data row2 col1" >1005.522571</td>
+    </tr>
+    <tr>
+      <th id="T_e2041_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_e2041_row3_col0" class="data row3 col0" >0.723554</td>
+      <td id="T_e2041_row3_col1" class="data row3 col1" >961.739072</td>
+    </tr>
+    <tr>
+      <th id="T_e2041_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_e2041_row4_col0" class="data row4 col0" >0.723823</td>
+      <td id="T_e2041_row4_col1" class="data row4 col1" >960.802511</td>
+    </tr>
+    <tr>
+      <th id="T_e2041_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_e2041_row5_col0" class="data row5 col0" >0.728595</td>
+      <td id="T_e2041_row5_col1" class="data row5 col1" >944.200845</td>
+    </tr>
+    <tr>
+      <th id="T_e2041_level0_row6" class="row_heading level0 row6" >7</th>
+      <td id="T_e2041_row6_col0" class="data row6 col0" >0.729950</td>
+      <td id="T_e2041_row6_col1" class="data row6 col1" >939.488687</td>
+    </tr>
+    <tr>
+      <th id="T_e2041_level0_row7" class="row_heading level0 row7" >8</th>
+      <td id="T_e2041_row7_col0" class="data row7 col0" >0.740790</td>
+      <td id="T_e2041_row7_col1" class="data row7 col1" >901.775330</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rss</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;학습 결정계수&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 잔차제곱합&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_11_6_0.png" src="../_images/03_11_6_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_test</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">subplot</span><span class="p">):</span>
+    <span class="n">r_i</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+    <span class="n">x</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="n">x_name</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.1</span><span class="p">,</span> <span class="mf">35.9</span><span class="p">,</span> <span class="mi">100</span><span class="p">)})</span>
+    <span class="n">y</span> <span class="o">=</span> <span class="n">r_i</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">x</span><span class="p">)</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">()</span>
+
+    <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="o">*</span><span class="n">subplot</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">boston_test</span><span class="p">[</span><span class="n">x_name</span><span class="p">],</span> <span class="n">boston_test</span><span class="p">[</span><span class="s2">&quot;medv&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s1">&#39;x&#39;</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">20</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">[</span><span class="n">x_name</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">y</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">3</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">51</span><span class="p">)</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;차수=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
+    <span class="n">plot_test</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;검증 데이터와 다중회귀 결과&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_11_7_0.png" src="../_images/03_11_7_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rss_test</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">y_true</span> <span class="o">=</span> <span class="n">boston_test</span><span class="o">.</span><span class="n">medv</span>
+    <span class="n">y_pred</span> <span class="o">=</span> <span class="n">r</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_test</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
+    <span class="n">rss_test</span><span class="o">.</span><span class="n">append</span><span class="p">(((</span><span class="n">y_true</span> <span class="o">-</span> <span class="n">y_pred</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">())</span>
+
+<span class="n">df_rss</span><span class="p">[</span><span class="s2">&quot;검증 잔차제곱합&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">rss_test</span>
+<span class="n">df_rss</span><span class="p">[[</span><span class="s2">&quot;검증 잔차제곱합&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_4eac3_row0_col0, #T_4eac3_row3_col0, #T_4eac3_row4_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.4%, transparent 0.4%);
+}
+#T_4eac3_row1_col0, #T_4eac3_row2_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.3%, transparent 0.3%);
+}
+#T_4eac3_row5_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.6%, transparent 0.6%);
+}
+#T_4eac3_row6_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 1.0%, transparent 1.0%);
+}
+#T_4eac3_row7_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
+}
+</style>
+<table id="T_4eac3">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_4eac3_level0_col0" class="col_heading level0 col0" >검증 잔차제곱합</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >차수</th>
+      <th class="blank col0" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_4eac3_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_4eac3_row0_col0" class="data row0 col0" >20145.399074</td>
+    </tr>
+    <tr>
+      <th id="T_4eac3_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_4eac3_row1_col0" class="data row1 col0" >17656.438628</td>
+    </tr>
+    <tr>
+      <th id="T_4eac3_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_4eac3_row2_col0" class="data row2 col0" >16362.769041</td>
+    </tr>
+    <tr>
+      <th id="T_4eac3_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_4eac3_row3_col0" class="data row3 col0" >18075.527274</td>
+    </tr>
+    <tr>
+      <th id="T_4eac3_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_4eac3_row4_col0" class="data row4 col0" >21171.613313</td>
+    </tr>
+    <tr>
+      <th id="T_4eac3_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_4eac3_row5_col0" class="data row5 col0" >32154.412838</td>
+    </tr>
+    <tr>
+      <th id="T_4eac3_level0_row6" class="row_heading level0 row6" >7</th>
+      <td id="T_4eac3_row6_col0" class="data row6 col0" >49392.894713</td>
+    </tr>
+    <tr>
+      <th id="T_4eac3_level0_row7" class="row_heading level0 row7" >8</th>
+      <td id="T_4eac3_row7_col0" class="data row7 col0" >5070235.057569</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rss</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;검증 잔차제곱합&quot;</span><span class="p">],</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mf">1.6e4</span><span class="p">,</span> <span class="mf">5e4</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_11_9_0.png" src="../_images/03_11_9_0.png" />
+</div>
+</div>
 </section>
 
     <script type="text/x-thebe-config">
