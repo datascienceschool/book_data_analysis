@@ -787,7 +787,7 @@ Notes:
 <p>하지만 검증 데이터에서 lstat 값이 33~35 사이인 데이터를 찾아보면 실제로는 집값이 8.4 ~ 14.4 범위인 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_test</span><span class="p">[(</span><span class="n">boston_test</span><span class="o">.</span><span class="n">lstat</span> <span class="o">&gt;</span> <span class="mi">34</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">boston_test</span><span class="o">.</span><span class="n">lstat</span> <span class="o">&lt;</span> <span class="mi">35</span><span class="p">)]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_test</span><span class="p">[(</span><span class="n">boston_test</span><span class="o">.</span><span class="n">lstat</span> <span class="o">&gt;</span> <span class="mi">34</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">boston_test</span><span class="o">.</span><span class="n">lstat</span> <span class="o">&lt;</span> <span class="mi">35</span><span class="p">)][[</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="s2">&quot;medv&quot;</span><span class="p">]]</span>
 </pre></div>
 </div>
 </div>
@@ -810,18 +810,6 @@ Notes:
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>crim</th>
-      <th>zn</th>
-      <th>indus</th>
-      <th>chas</th>
-      <th>nox</th>
-      <th>rm</th>
-      <th>age</th>
-      <th>dis</th>
-      <th>rad</th>
-      <th>tax</th>
-      <th>ptratio</th>
-      <th>black</th>
       <th>lstat</th>
       <th>medv</th>
     </tr>
@@ -829,69 +817,21 @@ Notes:
   <tbody>
     <tr>
       <th>141</th>
-      <td>1.62864</td>
-      <td>0.0</td>
-      <td>21.89</td>
-      <td>0</td>
-      <td>0.624</td>
-      <td>5.019</td>
-      <td>100.0</td>
-      <td>1.4394</td>
-      <td>4</td>
-      <td>437</td>
-      <td>21.2</td>
-      <td>396.90</td>
       <td>34.41</td>
       <td>14.4</td>
     </tr>
     <tr>
       <th>373</th>
-      <td>11.10810</td>
-      <td>0.0</td>
-      <td>18.10</td>
-      <td>0</td>
-      <td>0.668</td>
-      <td>4.906</td>
-      <td>100.0</td>
-      <td>1.1742</td>
-      <td>24</td>
-      <td>666</td>
-      <td>20.2</td>
-      <td>396.90</td>
       <td>34.77</td>
       <td>13.8</td>
     </tr>
     <tr>
       <th>412</th>
-      <td>18.81100</td>
-      <td>0.0</td>
-      <td>18.10</td>
-      <td>0</td>
-      <td>0.597</td>
-      <td>4.628</td>
-      <td>100.0</td>
-      <td>1.5539</td>
-      <td>24</td>
-      <td>666</td>
-      <td>20.2</td>
-      <td>28.79</td>
       <td>34.37</td>
       <td>17.9</td>
     </tr>
     <tr>
       <th>438</th>
-      <td>13.67810</td>
-      <td>0.0</td>
-      <td>18.10</td>
-      <td>0</td>
-      <td>0.740</td>
-      <td>5.935</td>
-      <td>87.9</td>
-      <td>1.8206</td>
-      <td>24</td>
-      <td>666</td>
-      <td>20.2</td>
-      <td>68.95</td>
       <td>34.02</td>
       <td>8.4</td>
     </tr>
