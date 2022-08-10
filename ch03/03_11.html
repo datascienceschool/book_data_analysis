@@ -971,7 +971,7 @@ Notes:
 </table>
 </div></div>
 </div>
-<p>차수가 3차까지 증가할 때는 잔차제곱합이 감소하지만 그 이후에는 오히려 잔차제곱합이 증가하여 예측 오차가 커지는 것을 알 수 있다. 이러한 현상을 과최적화라고 부른다. 과최적화를 막으려면 다항회귀를 할 때 표본내 성능을 사용하지 말고 표본외 성능을 이용해야 한다. 따라서 다항회귀의 차수는 가장 표본내 성능이 좋은 8차 모형이 아니라 가장 표본외 성능이 좋은  3차 모형을 사용해야 한다.</p>
+<p>차수가 3차까지 증가할 때는 잔차제곱합이 감소하지만 그 이후에는 오히려 잔차제곱합이 증가하여 예측 오차가 커지는 것을 알 수 있다. 이러한 현상을 과최적화라고 부른다. 과최적화를 막으려면 회귀분석을 할 때 표본내 성능을 사용하지 말고 표본외 성능을 이용해야 한다. 따라서 다항회귀의 차수는 가장 표본내 성능이 좋은 8차 모형이 아니라 가장 표본외 성능이 좋은  3차 모형을 사용해야 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rss</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;검증 잔차제곱합&quot;</span><span class="p">],</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
