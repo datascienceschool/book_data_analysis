@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.12. 스케일링과 다중공선성" href="03_12.html" />
@@ -463,12 +465,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.11.1. 과최적화
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -480,6 +506,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.11.1. 과최적화
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -489,6 +528,13 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.11. </span>과최적화와 정규화<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>회귀분석을 하는 1차 목적은 종속변수와 독립변수의 관계를 알아내는 것이지만 2차 목적은 독립변수 데이터를 이용하여 종속변수를 예측하는 것이다. 그런데 이미 종속변수 값을 알고 있는 경우는 사실 예측을 할 필요가 없다. 종속변수 값 예측이 필요한 경우는 독립변수만 알고 있고 종속변수를 모르는 경우다. 보스턴 집값 데이터를 예로 들자면 보스턴에 새로운 지역이 생겨서 방의 평균 개수 등 독립변수 값은 알고 있지만 집값이라는 종속변수 값을 모를 때 이를 대강이라도 예측하기 위한 것이다. 따라서 이미 회귀분석에 사용된 데이터를 예측하는 것보다 중요한 것이 회귀분석에 사용되지 않은 데이터에 대해 예측을 잘 할 수 있어야 한다.</p>
+<p>예측식을 구하기 위해 이미 회귀분석에 사용된 데이터를 <b>학습 데이터(traing data)</b>라 하고 이 데이터의 예측 성능을 <b>표본내(in-sample) 예측 성능</b>이라 한다. 올바른 예측 성능을 구하려면 회귀분석에 사용되지 않은 데이터에 대해서도 예측을 잘 할 수 있는지를 검증해야 한다. 회귀분석에 사용되지 않았지만 종속변수 값을 가지고 있어 예측 성능을 검증하는데 쓰일 수 있는 데이터를 <b>검증 데이터(test data)</b>라 하고 이를 이용한 예측 성능을 <b>표본외(out-of-sample) 예측 성능</b>이라고 한다. 예측이 회귀분석의 주된 목표라면 중요한 것은 표본내 예측 성능이 아니라 분석에 사용되지 않은 별개의 새로운 데이터를 넣었을 때 얼마나 예측을 잘 하는지를 알려주는 표본외 예측 성능이다. 표본외 성능을 계산할 때는 가지고 있는 데이터를 두 개로 나누어 하나를 학습 데이터로 사용한 회귀분석을 하고 나머지 데이터를 검증 데이터로 사용하여 표본외 성능을 알아보는 것이 일반적이다. 이러한 방법을 <b>교차검증(cross-validation)</b>이라고 한다.</p>
+<p>이 때 학습 데이터를 이용한 표본내 성능을 높이기 위해 독립변수의 수를 너무 많이 늘리거나 너무 복잡한 비선형 모형을 사용하게 되면 표본내 성능은 높아지지만 표본외 성능이 하락하는 <b>과최적화(over-fitting)</b> 현상이 발생할 수 있다. 따라서 회귀분석을 할 때는 교차검증을 통해 과최적화가 발생하지 않도록 해야 한다.</p>
+<p>이 절에서는 보스턴 집값 데이터를 사용하여 과최적화가 발생하는 현상을 살펴보고 이를 막기 위해 어떠한 조치를 취해야하는지를 설명한다.</p>
+<section id="id2">
+<h2><span class="section-number">3.11.1. </span>과최적화<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>우선 교차검증을 위해 보스턴 집값 데이터를 100개의 학습 데이터와 나머지 검증 데이터로 분리한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
@@ -500,13 +546,51 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>lstat 값을 독립변수로 사용하는 간단한 회귀분석을 한 결과는 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_name</span> <span class="o">=</span> <span class="s2">&quot;lstat&quot;</span>
+<span class="n">formula</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2">)&quot;</span>
+<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.553
+Model:                            OLS   Adj. R-squared:                  0.549
+Method:                 Least Squares   F-statistic:                     121.4
+Date:                Wed, 10 Aug 2022   Prob (F-statistic):           7.54e-19
+Time:                        14:13:14   Log-Likelihood:                -279.06
+No. Observations:                 100   AIC:                             562.1
+Df Residuals:                      98   BIC:                             567.3
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+================================================================================
+                   coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept       22.3090      0.398     56.027      0.000      21.519      23.099
+scale(lstat)    -4.3877      0.398    -11.019      0.000      -5.178      -3.597
+==============================================================================
+Omnibus:                       40.434   Durbin-Watson:                   1.087
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               78.705
+Skew:                           1.670   Prob(JB):                     8.12e-18
+Kurtosis:                       5.781   Cond. No.                         1.00
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>이제 이 회귀분석의 표본내 성능을 늘리기 위해 앞 절에서 설명한 다항회귀를 실시한다. 다음은 다항회귀의 차수를 8차까지 늘리면서 회귀분석을 반복 실시하는 코드다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
 
-<span class="n">x_name</span> <span class="o">=</span> <span class="s2">&quot;lstat&quot;</span>
-<span class="n">formula</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2">)&quot;</span>
-<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">result1</span><span class="p">}</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
     <span class="n">formula</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot; + scale(I(</span><span class="si">{</span><span class="n">x_name</span><span class="si">}</span><span class="s2"> ** </span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">))&quot;</span>
@@ -516,6 +600,148 @@ title="Print to PDF"
 </div>
 </div>
 </div>
+<p>이렇게 다항회귀의 차수를 늘렸을 때 표본내 성능을 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>와 잔차제곱합 RSS로 살펴보면 다음과 같이 차수를 늘림에 따라 결정계수가 계속 증가하고 잔차제곱합이 계속 감소하는 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rss</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span>
+    <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">ssr</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()],</span>
+    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;차수&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 결정계수&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 잔차제곱합&quot;</span><span class="p">]</span>
+<span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;차수&quot;</span><span class="p">)</span>
+
+<span class="n">df_rss</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_8c9db_row0_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 74.7%, transparent 74.7%);
+}
+#T_8c9db_row0_col1, #T_8c9db_row7_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
+}
+#T_8c9db_row1_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 92.6%, transparent 92.6%);
+}
+#T_8c9db_row1_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 70.3%, transparent 70.3%);
+}
+#T_8c9db_row2_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 96.0%, transparent 96.0%);
+}
+#T_8c9db_row2_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 64.7%, transparent 64.7%);
+}
+#T_8c9db_row3_col0, #T_8c9db_row4_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 97.7%, transparent 97.7%);
+}
+#T_8c9db_row3_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 61.9%, transparent 61.9%);
+}
+#T_8c9db_row4_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 61.8%, transparent 61.8%);
+}
+#T_8c9db_row5_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 98.4%, transparent 98.4%);
+}
+#T_8c9db_row5_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 60.8%, transparent 60.8%);
+}
+#T_8c9db_row6_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 98.5%, transparent 98.5%);
+}
+#T_8c9db_row6_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 60.5%, transparent 60.5%);
+}
+#T_8c9db_row7_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 58.0%, transparent 58.0%);
+}
+</style>
+<table id="T_8c9db">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_8c9db_level0_col0" class="col_heading level0 col0" >학습 결정계수</th>
+      <th id="T_8c9db_level0_col1" class="col_heading level0 col1" >학습 잔차제곱합</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >차수</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_8c9db_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_8c9db_row0_col0" class="data row0 col0" >0.553373</td>
+      <td id="T_8c9db_row0_col1" class="data row0 col1" >1553.790601</td>
+    </tr>
+    <tr>
+      <th id="T_8c9db_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_8c9db_row1_col0" class="data row1 col0" >0.686105</td>
+      <td id="T_8c9db_row1_col1" class="data row1 col1" >1092.022691</td>
+    </tr>
+    <tr>
+      <th id="T_8c9db_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_8c9db_row2_col0" class="data row2 col0" >0.710969</td>
+      <td id="T_8c9db_row2_col1" class="data row2 col1" >1005.522571</td>
+    </tr>
+    <tr>
+      <th id="T_8c9db_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_8c9db_row3_col0" class="data row3 col0" >0.723554</td>
+      <td id="T_8c9db_row3_col1" class="data row3 col1" >961.739072</td>
+    </tr>
+    <tr>
+      <th id="T_8c9db_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_8c9db_row4_col0" class="data row4 col0" >0.723823</td>
+      <td id="T_8c9db_row4_col1" class="data row4 col1" >960.802511</td>
+    </tr>
+    <tr>
+      <th id="T_8c9db_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_8c9db_row5_col0" class="data row5 col0" >0.728595</td>
+      <td id="T_8c9db_row5_col1" class="data row5 col1" >944.200845</td>
+    </tr>
+    <tr>
+      <th id="T_8c9db_level0_row6" class="row_heading level0 row6" >7</th>
+      <td id="T_8c9db_row6_col0" class="data row6 col0" >0.729950</td>
+      <td id="T_8c9db_row6_col1" class="data row6 col1" >939.488687</td>
+    </tr>
+    <tr>
+      <th id="T_8c9db_level0_row7" class="row_heading level0 row7" >8</th>
+      <td id="T_8c9db_row7_col0" class="data row7 col0" >0.740790</td>
+      <td id="T_8c9db_row7_col1" class="data row7 col1" >901.775330</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>결정계수와 잔차제곱합이 변하는 모습은 다음 그림과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rss</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;학습 결정계수&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 잔차제곱합&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_11_13_0.png" src="../_images/03_11_13_0.png" />
+</div>
+</div>
+<p>다음은 과최적화가 발생하는지 살펴보기 위해 학습 데이터와 예측 결과를 시각화하여 표시한 것이다. 차수가 증가함에 따라 예측식의 모양이 복잡해지면서 학습에 사용된 데이터는 더 잘 예측하지만 학습에 사용되지 않은 lstat 값에 대해서는  상식적으로 나올 수 없는 값을 예측하는 것을 볼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
@@ -541,148 +767,139 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_11_4_0.png" src="../_images/03_11_4_0.png" />
+<img alt="../_images/03_11_15_0.png" src="../_images/03_11_15_0.png" />
 </div>
 </div>
+<p>예를 들어 8차 다항회귀모형은 lstat 값이 34.5 일 때 집값을 -238.9 라고 예측한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rss</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="o">.</span><span class="n">from_records</span><span class="p">(</span>
-    <span class="p">[(</span><span class="n">i</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">ssr</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()],</span>
-    <span class="n">columns</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;차수&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 결정계수&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 잔차제곱합&quot;</span><span class="p">]</span>
-<span class="p">)</span><span class="o">.</span><span class="n">set_index</span><span class="p">(</span><span class="s2">&quot;차수&quot;</span><span class="p">)</span>
-
-<span class="n">df_rss</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result8</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
+<span class="n">result8</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;lstat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">34.5</span><span class="p">]}))</span><span class="o">.</span><span class="n">predicted_mean</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style type="text/css">
-#T_8e3d7_row0_col0 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 74.7%, transparent 74.7%);
-}
-#T_8e3d7_row0_col1, #T_8e3d7_row7_col0 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
-}
-#T_8e3d7_row1_col0 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 92.6%, transparent 92.6%);
-}
-#T_8e3d7_row1_col1 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 70.3%, transparent 70.3%);
-}
-#T_8e3d7_row2_col0 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 96.0%, transparent 96.0%);
-}
-#T_8e3d7_row2_col1 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 64.7%, transparent 64.7%);
-}
-#T_8e3d7_row3_col0, #T_8e3d7_row4_col0 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 97.7%, transparent 97.7%);
-}
-#T_8e3d7_row3_col1 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 61.9%, transparent 61.9%);
-}
-#T_8e3d7_row4_col1 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 61.8%, transparent 61.8%);
-}
-#T_8e3d7_row5_col0 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 98.4%, transparent 98.4%);
-}
-#T_8e3d7_row5_col1 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 60.8%, transparent 60.8%);
-}
-#T_8e3d7_row6_col0 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 98.5%, transparent 98.5%);
-}
-#T_8e3d7_row6_col1 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 60.5%, transparent 60.5%);
-}
-#T_8e3d7_row7_col1 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 58.0%, transparent 58.0%);
-}
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-238.93065284])
+</pre></div>
+</div>
+</div>
+</div>
+<p>하지만 검증 데이터에서 lstat 값이 33~35 사이인 데이터를 찾아보면 실제로는 집값이 8.4 ~ 14.4 범위인 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_test</span><span class="p">[(</span><span class="n">boston_test</span><span class="o">.</span><span class="n">lstat</span> <span class="o">&gt;</span> <span class="mi">34</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">boston_test</span><span class="o">.</span><span class="n">lstat</span> <span class="o">&lt;</span> <span class="mi">35</span><span class="p">)]</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
 </style>
-<table id="T_8e3d7">
+<table border="1" class="dataframe">
   <thead>
-    <tr>
-      <th class="blank level0" >&nbsp;</th>
-      <th id="T_8e3d7_level0_col0" class="col_heading level0 col0" >학습 결정계수</th>
-      <th id="T_8e3d7_level0_col1" class="col_heading level0 col1" >학습 잔차제곱합</th>
-    </tr>
-    <tr>
-      <th class="index_name level0" >차수</th>
-      <th class="blank col0" >&nbsp;</th>
-      <th class="blank col1" >&nbsp;</th>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>black</th>
+      <th>lstat</th>
+      <th>medv</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_8e3d7_level0_row0" class="row_heading level0 row0" >1</th>
-      <td id="T_8e3d7_row0_col0" class="data row0 col0" >0.553373</td>
-      <td id="T_8e3d7_row0_col1" class="data row0 col1" >1553.790601</td>
+      <th>141</th>
+      <td>1.62864</td>
+      <td>0.0</td>
+      <td>21.89</td>
+      <td>0</td>
+      <td>0.624</td>
+      <td>5.019</td>
+      <td>100.0</td>
+      <td>1.4394</td>
+      <td>4</td>
+      <td>437</td>
+      <td>21.2</td>
+      <td>396.90</td>
+      <td>34.41</td>
+      <td>14.4</td>
     </tr>
     <tr>
-      <th id="T_8e3d7_level0_row1" class="row_heading level0 row1" >2</th>
-      <td id="T_8e3d7_row1_col0" class="data row1 col0" >0.686105</td>
-      <td id="T_8e3d7_row1_col1" class="data row1 col1" >1092.022691</td>
+      <th>373</th>
+      <td>11.10810</td>
+      <td>0.0</td>
+      <td>18.10</td>
+      <td>0</td>
+      <td>0.668</td>
+      <td>4.906</td>
+      <td>100.0</td>
+      <td>1.1742</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>396.90</td>
+      <td>34.77</td>
+      <td>13.8</td>
     </tr>
     <tr>
-      <th id="T_8e3d7_level0_row2" class="row_heading level0 row2" >3</th>
-      <td id="T_8e3d7_row2_col0" class="data row2 col0" >0.710969</td>
-      <td id="T_8e3d7_row2_col1" class="data row2 col1" >1005.522571</td>
+      <th>412</th>
+      <td>18.81100</td>
+      <td>0.0</td>
+      <td>18.10</td>
+      <td>0</td>
+      <td>0.597</td>
+      <td>4.628</td>
+      <td>100.0</td>
+      <td>1.5539</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>28.79</td>
+      <td>34.37</td>
+      <td>17.9</td>
     </tr>
     <tr>
-      <th id="T_8e3d7_level0_row3" class="row_heading level0 row3" >4</th>
-      <td id="T_8e3d7_row3_col0" class="data row3 col0" >0.723554</td>
-      <td id="T_8e3d7_row3_col1" class="data row3 col1" >961.739072</td>
-    </tr>
-    <tr>
-      <th id="T_8e3d7_level0_row4" class="row_heading level0 row4" >5</th>
-      <td id="T_8e3d7_row4_col0" class="data row4 col0" >0.723823</td>
-      <td id="T_8e3d7_row4_col1" class="data row4 col1" >960.802511</td>
-    </tr>
-    <tr>
-      <th id="T_8e3d7_level0_row5" class="row_heading level0 row5" >6</th>
-      <td id="T_8e3d7_row5_col0" class="data row5 col0" >0.728595</td>
-      <td id="T_8e3d7_row5_col1" class="data row5 col1" >944.200845</td>
-    </tr>
-    <tr>
-      <th id="T_8e3d7_level0_row6" class="row_heading level0 row6" >7</th>
-      <td id="T_8e3d7_row6_col0" class="data row6 col0" >0.729950</td>
-      <td id="T_8e3d7_row6_col1" class="data row6 col1" >939.488687</td>
-    </tr>
-    <tr>
-      <th id="T_8e3d7_level0_row7" class="row_heading level0 row7" >8</th>
-      <td id="T_8e3d7_row7_col0" class="data row7 col0" >0.740790</td>
-      <td id="T_8e3d7_row7_col1" class="data row7 col1" >901.775330</td>
+      <th>438</th>
+      <td>13.67810</td>
+      <td>0.0</td>
+      <td>18.10</td>
+      <td>0</td>
+      <td>0.740</td>
+      <td>5.935</td>
+      <td>87.9</td>
+      <td>1.8206</td>
+      <td>24</td>
+      <td>666</td>
+      <td>20.2</td>
+      <td>68.95</td>
+      <td>34.02</td>
+      <td>8.4</td>
     </tr>
   </tbody>
 </table>
-</div></div>
+</div></div></div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rss</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;학습 결정계수&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 잔차제곱합&quot;</span><span class="p">],</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">subplots</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/03_11_6_0.png" src="../_images/03_11_6_0.png" />
-</div>
-</div>
+<p>다음은 학습에 사용하지 않은 검증 데이터와 예측식을 비교한 그림이다. 차수가 증가하면서 실제 집값과는 동떨어진 값을 예측하고 있음을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">plot_test</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="n">subplot</span><span class="p">):</span>
@@ -706,9 +923,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_11_7_0.png" src="../_images/03_11_7_0.png" />
+<img alt="../_images/03_11_21_0.png" src="../_images/03_11_21_0.png" />
 </div>
 </div>
+<p>검증 데이터에 대한 잔차제곱합을 구해보면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rss_test</span> <span class="o">=</span> <span class="p">[]</span>
@@ -724,32 +942,32 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_18d51_row0_col0, #T_18d51_row3_col0, #T_18d51_row4_col0 {
+#T_1bd90_row0_col0, #T_1bd90_row3_col0, #T_1bd90_row4_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 0.4%, transparent 0.4%);
 }
-#T_18d51_row1_col0, #T_18d51_row2_col0 {
+#T_1bd90_row1_col0, #T_1bd90_row2_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 0.3%, transparent 0.3%);
 }
-#T_18d51_row5_col0 {
+#T_1bd90_row5_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 0.6%, transparent 0.6%);
 }
-#T_18d51_row6_col0 {
+#T_1bd90_row6_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 1.0%, transparent 1.0%);
 }
-#T_18d51_row7_col0 {
+#T_1bd90_row7_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
 }
 </style>
-<table id="T_18d51">
+<table id="T_1bd90">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_18d51_level0_col0" class="col_heading level0 col0" >검증 잔차제곱합</th>
+      <th id="T_1bd90_level0_col0" class="col_heading level0 col0" >검증 잔차제곱합</th>
     </tr>
     <tr>
       <th class="index_name level0" >차수</th>
@@ -758,41 +976,42 @@ title="Print to PDF"
   </thead>
   <tbody>
     <tr>
-      <th id="T_18d51_level0_row0" class="row_heading level0 row0" >1</th>
-      <td id="T_18d51_row0_col0" class="data row0 col0" >20145.399074</td>
+      <th id="T_1bd90_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_1bd90_row0_col0" class="data row0 col0" >20145.399074</td>
     </tr>
     <tr>
-      <th id="T_18d51_level0_row1" class="row_heading level0 row1" >2</th>
-      <td id="T_18d51_row1_col0" class="data row1 col0" >17656.438628</td>
+      <th id="T_1bd90_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_1bd90_row1_col0" class="data row1 col0" >17656.438628</td>
     </tr>
     <tr>
-      <th id="T_18d51_level0_row2" class="row_heading level0 row2" >3</th>
-      <td id="T_18d51_row2_col0" class="data row2 col0" >16362.769041</td>
+      <th id="T_1bd90_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_1bd90_row2_col0" class="data row2 col0" >16362.769041</td>
     </tr>
     <tr>
-      <th id="T_18d51_level0_row3" class="row_heading level0 row3" >4</th>
-      <td id="T_18d51_row3_col0" class="data row3 col0" >18075.527274</td>
+      <th id="T_1bd90_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_1bd90_row3_col0" class="data row3 col0" >18075.527274</td>
     </tr>
     <tr>
-      <th id="T_18d51_level0_row4" class="row_heading level0 row4" >5</th>
-      <td id="T_18d51_row4_col0" class="data row4 col0" >21171.613313</td>
+      <th id="T_1bd90_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_1bd90_row4_col0" class="data row4 col0" >21171.613313</td>
     </tr>
     <tr>
-      <th id="T_18d51_level0_row5" class="row_heading level0 row5" >6</th>
-      <td id="T_18d51_row5_col0" class="data row5 col0" >32154.412838</td>
+      <th id="T_1bd90_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_1bd90_row5_col0" class="data row5 col0" >32154.412838</td>
     </tr>
     <tr>
-      <th id="T_18d51_level0_row6" class="row_heading level0 row6" >7</th>
-      <td id="T_18d51_row6_col0" class="data row6 col0" >49392.894713</td>
+      <th id="T_1bd90_level0_row6" class="row_heading level0 row6" >7</th>
+      <td id="T_1bd90_row6_col0" class="data row6 col0" >49392.894713</td>
     </tr>
     <tr>
-      <th id="T_18d51_level0_row7" class="row_heading level0 row7" >8</th>
-      <td id="T_18d51_row7_col0" class="data row7 col0" >5070235.057569</td>
+      <th id="T_1bd90_level0_row7" class="row_heading level0 row7" >8</th>
+      <td id="T_1bd90_row7_col0" class="data row7 col0" >5070235.057569</td>
     </tr>
   </tbody>
 </table>
 </div></div>
 </div>
+<p>차수가 3차까지 증가할 때는 잔차제곱합이 감소하지만 그 이후에는 오히려 잔차제곱합이 증가하여 예측 오차가 커지는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_rss</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;검증 잔차제곱합&quot;</span><span class="p">],</span> <span class="n">logy</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">)</span>
@@ -802,7 +1021,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_11_9_0.png" src="../_images/03_11_9_0.png" />
+<img alt="../_images/03_11_25_0.png" src="../_images/03_11_25_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -817,86 +1036,86 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_3f869_row0_col0 {
+#T_e1f59_row0_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 61.1%, transparent 61.1%);
 }
-#T_3f869_row0_col1, #T_3f869_row0_col2, #T_3f869_row7_col0 {
+#T_e1f59_row0_col1, #T_e1f59_row0_col2, #T_e1f59_row7_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 80.0%, transparent 80.0%);
 }
-#T_3f869_row1_col0, #T_3f869_row1_col2 {
+#T_e1f59_row1_col0, #T_e1f59_row1_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 75.7%, transparent 75.7%);
 }
-#T_3f869_row1_col1 {
+#T_e1f59_row1_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 75.3%, transparent 75.3%);
 }
-#T_3f869_row2_col0 {
+#T_e1f59_row2_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 78.2%, transparent 78.2%);
 }
-#T_3f869_row2_col1 {
+#T_e1f59_row2_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.4%, transparent 74.4%);
 }
-#T_3f869_row2_col2, #T_3f869_row3_col2 {
+#T_e1f59_row2_col2, #T_e1f59_row3_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 75.2%, transparent 75.2%);
 }
-#T_3f869_row3_col0 {
+#T_e1f59_row3_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 79.3%, transparent 79.3%);
 }
-#T_3f869_row3_col1 {
+#T_e1f59_row3_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.0%, transparent 74.0%);
 }
-#T_3f869_row4_col0, #T_3f869_row6_col0 {
+#T_e1f59_row4_col0, #T_e1f59_row6_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 79.0%, transparent 79.0%);
 }
-#T_3f869_row4_col1, #T_3f869_row5_col1 {
+#T_e1f59_row4_col1, #T_e1f59_row5_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.3%, transparent 74.3%);
 }
-#T_3f869_row4_col2 {
+#T_e1f59_row4_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 75.8%, transparent 75.8%);
 }
-#T_3f869_row5_col0 {
+#T_e1f59_row5_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 79.2%, transparent 79.2%);
 }
-#T_3f869_row5_col2 {
+#T_e1f59_row5_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 76.2%, transparent 76.2%);
 }
-#T_3f869_row6_col1 {
+#T_e1f59_row6_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.5%, transparent 74.5%);
 }
-#T_3f869_row6_col2 {
+#T_e1f59_row6_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 76.8%, transparent 76.8%);
 }
-#T_3f869_row7_col1 {
+#T_e1f59_row7_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.2%, transparent 74.2%);
 }
-#T_3f869_row7_col2 {
+#T_e1f59_row7_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 76.9%, transparent 76.9%);
 }
 </style>
-<table id="T_3f869">
+<table id="T_e1f59">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_3f869_level0_col0" class="col_heading level0 col0" >조정 결정계수</th>
-      <th id="T_3f869_level0_col1" class="col_heading level0 col1" >AIC</th>
-      <th id="T_3f869_level0_col2" class="col_heading level0 col2" >BIC</th>
+      <th id="T_e1f59_level0_col0" class="col_heading level0 col0" >조정 결정계수</th>
+      <th id="T_e1f59_level0_col1" class="col_heading level0 col1" >AIC</th>
+      <th id="T_e1f59_level0_col2" class="col_heading level0 col2" >BIC</th>
     </tr>
     <tr>
       <th class="index_name level0" >차수</th>
@@ -907,52 +1126,52 @@ title="Print to PDF"
   </thead>
   <tbody>
     <tr>
-      <th id="T_3f869_level0_row0" class="row_heading level0 row0" >1</th>
-      <td id="T_3f869_row0_col0" class="data row0 col0" >0.548815</td>
-      <td id="T_3f869_row0_col1" class="data row0 col1" >562.115965</td>
-      <td id="T_3f869_row0_col2" class="data row0 col2" >567.326306</td>
+      <th id="T_e1f59_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_e1f59_row0_col0" class="data row0 col0" >0.548815</td>
+      <td id="T_e1f59_row0_col1" class="data row0 col1" >562.115965</td>
+      <td id="T_e1f59_row0_col2" class="data row0 col2" >567.326306</td>
     </tr>
     <tr>
-      <th id="T_3f869_level0_row1" class="row_heading level0 row1" >2</th>
-      <td id="T_3f869_row1_col0" class="data row1 col0" >0.679633</td>
-      <td id="T_3f869_row1_col1" class="data row1 col1" >528.849382</td>
-      <td id="T_3f869_row1_col2" class="data row1 col2" >536.664892</td>
+      <th id="T_e1f59_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_e1f59_row1_col0" class="data row1 col0" >0.679633</td>
+      <td id="T_e1f59_row1_col1" class="data row1 col1" >528.849382</td>
+      <td id="T_e1f59_row1_col2" class="data row1 col2" >536.664892</td>
     </tr>
     <tr>
-      <th id="T_3f869_level0_row2" class="row_heading level0 row2" >3</th>
-      <td id="T_3f869_row2_col0" class="data row2 col0" >0.701937</td>
-      <td id="T_3f869_row2_col1" class="data row2 col1" >522.596954</td>
-      <td id="T_3f869_row2_col2" class="data row2 col2" >533.017634</td>
+      <th id="T_e1f59_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_e1f59_row2_col0" class="data row2 col0" >0.701937</td>
+      <td id="T_e1f59_row2_col1" class="data row2 col1" >522.596954</td>
+      <td id="T_e1f59_row2_col2" class="data row2 col2" >533.017634</td>
     </tr>
     <tr>
-      <th id="T_3f869_level0_row3" class="row_heading level0 row3" >4</th>
-      <td id="T_3f869_row3_col0" class="data row3 col0" >0.711914</td>
-      <td id="T_3f869_row3_col1" class="data row3 col1" >520.145006</td>
-      <td id="T_3f869_row3_col2" class="data row3 col2" >533.170857</td>
+      <th id="T_e1f59_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_e1f59_row3_col0" class="data row3 col0" >0.711914</td>
+      <td id="T_e1f59_row3_col1" class="data row3 col1" >520.145006</td>
+      <td id="T_e1f59_row3_col2" class="data row3 col2" >533.170857</td>
     </tr>
     <tr>
-      <th id="T_3f869_level0_row4" class="row_heading level0 row4" >5</th>
-      <td id="T_3f869_row4_col0" class="data row4 col0" >0.709133</td>
-      <td id="T_3f869_row4_col1" class="data row4 col1" >522.047577</td>
-      <td id="T_3f869_row4_col2" class="data row4 col2" >537.678598</td>
+      <th id="T_e1f59_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_e1f59_row4_col0" class="data row4 col0" >0.709133</td>
+      <td id="T_e1f59_row4_col1" class="data row4 col1" >522.047577</td>
+      <td id="T_e1f59_row4_col2" class="data row4 col2" >537.678598</td>
     </tr>
     <tr>
-      <th id="T_3f869_level0_row5" class="row_heading level0 row5" >6</th>
-      <td id="T_3f869_row5_col0" class="data row5 col0" >0.711085</td>
-      <td id="T_3f869_row5_col1" class="data row5 col1" >522.304578</td>
-      <td id="T_3f869_row5_col2" class="data row5 col2" >540.540770</td>
+      <th id="T_e1f59_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_e1f59_row5_col0" class="data row5 col0" >0.711085</td>
+      <td id="T_e1f59_row5_col1" class="data row5 col1" >522.304578</td>
+      <td id="T_e1f59_row5_col2" class="data row5 col2" >540.540770</td>
     </tr>
     <tr>
-      <th id="T_3f869_level0_row6" class="row_heading level0 row6" >7</th>
-      <td id="T_3f869_row6_col0" class="data row6 col0" >0.709403</td>
-      <td id="T_3f869_row6_col1" class="data row6 col1" >523.804266</td>
-      <td id="T_3f869_row6_col2" class="data row6 col2" >544.645627</td>
+      <th id="T_e1f59_level0_row6" class="row_heading level0 row6" >7</th>
+      <td id="T_e1f59_row6_col0" class="data row6 col0" >0.709403</td>
+      <td id="T_e1f59_row6_col1" class="data row6 col1" >523.804266</td>
+      <td id="T_e1f59_row6_col2" class="data row6 col2" >544.645627</td>
     </tr>
     <tr>
-      <th id="T_3f869_level0_row7" class="row_heading level0 row7" >8</th>
-      <td id="T_3f869_row7_col0" class="data row7 col0" >0.718003</td>
-      <td id="T_3f869_row7_col1" class="data row7 col1" >521.707229</td>
-      <td id="T_3f869_row7_col2" class="data row7 col2" >545.153761</td>
+      <th id="T_e1f59_level0_row7" class="row_heading level0 row7" >8</th>
+      <td id="T_e1f59_row7_col0" class="data row7 col0" >0.718003</td>
+      <td id="T_e1f59_row7_col1" class="data row7 col1" >521.707229</td>
+      <td id="T_e1f59_row7_col2" class="data row7 col2" >545.153761</td>
     </tr>
   </tbody>
 </table>
@@ -966,9 +1185,10 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_11_13_0.png" src="../_images/03_11_13_0.png" />
+<img alt="../_images/03_11_29_0.png" src="../_images/03_11_29_0.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
