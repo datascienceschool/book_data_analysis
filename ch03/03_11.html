@@ -583,7 +583,7 @@ Dep. Variable:                   medv   R-squared:                       0.553
 Model:                            OLS   Adj. R-squared:                  0.549
 Method:                 Least Squares   F-statistic:                     121.4
 Date:                Thu, 11 Aug 2022   Prob (F-statistic):           7.54e-19
-Time:                        13:55:35   Log-Likelihood:                -279.06
+Time:                        16:04:59   Log-Likelihood:                -279.06
 No. Observations:                 100   AIC:                             562.1
 Df Residuals:                      98   BIC:                             567.3
 Df Model:                           1                                         
@@ -606,10 +606,10 @@ Notes:
 </div>
 </div>
 </div>
-<p>이제 이 회귀분석의 표본내 성능을 늘리기 위해 앞 절에서 설명한 다항회귀를 실시한다. 다음은 다항회귀의 차수를 8차까지 늘리면서 회귀분석을 반복 실시하는 코드다.</p>
+<p>이제 이 회귀분석의 표본내 성능을 늘리기 위해 앞 절에서 설명한 다항회귀를 실시한다. 다음은 다항회귀의 차수를 10차까지 늘리면서 회귀분석을 반복 실시하는 코드다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">8</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
 
 <span class="n">results</span> <span class="o">=</span> <span class="p">{</span><span class="mi">1</span><span class="p">:</span> <span class="n">result1</span><span class="p">}</span>
 <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
@@ -634,69 +634,85 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_ecfc1_row0_col0 {
+#T_2492a_row0_col0 {
   width: 10em;
-  background: linear-gradient(90deg, #d65f5f 74.7%, transparent 74.7%);
+  background: linear-gradient(90deg, #d65f5f 74.4%, transparent 74.4%);
 }
-#T_ecfc1_row0_col1, #T_ecfc1_row7_col0 {
+#T_2492a_row0_col1, #T_2492a_row9_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
 }
-#T_ecfc1_row1_col0 {
+#T_2492a_row1_col0 {
   width: 10em;
-  background: linear-gradient(90deg, #d65f5f 92.6%, transparent 92.6%);
+  background: linear-gradient(90deg, #d65f5f 92.3%, transparent 92.3%);
 }
-#T_ecfc1_row1_col1 {
+#T_2492a_row1_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 70.3%, transparent 70.3%);
 }
-#T_ecfc1_row2_col0 {
+#T_2492a_row2_col0 {
   width: 10em;
-  background: linear-gradient(90deg, #d65f5f 96.0%, transparent 96.0%);
+  background: linear-gradient(90deg, #d65f5f 95.6%, transparent 95.6%);
 }
-#T_ecfc1_row2_col1 {
+#T_2492a_row2_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 64.7%, transparent 64.7%);
 }
-#T_ecfc1_row3_col0, #T_ecfc1_row4_col0 {
+#T_2492a_row3_col0, #T_2492a_row4_col0 {
   width: 10em;
-  background: linear-gradient(90deg, #d65f5f 97.7%, transparent 97.7%);
+  background: linear-gradient(90deg, #d65f5f 97.3%, transparent 97.3%);
 }
-#T_ecfc1_row3_col1 {
+#T_2492a_row3_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 61.9%, transparent 61.9%);
 }
-#T_ecfc1_row4_col1 {
+#T_2492a_row4_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 61.8%, transparent 61.8%);
 }
-#T_ecfc1_row5_col0 {
+#T_2492a_row5_col0 {
   width: 10em;
-  background: linear-gradient(90deg, #d65f5f 98.4%, transparent 98.4%);
+  background: linear-gradient(90deg, #d65f5f 98.0%, transparent 98.0%);
 }
-#T_ecfc1_row5_col1 {
+#T_2492a_row5_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 60.8%, transparent 60.8%);
 }
-#T_ecfc1_row6_col0 {
+#T_2492a_row6_col0 {
   width: 10em;
-  background: linear-gradient(90deg, #d65f5f 98.5%, transparent 98.5%);
+  background: linear-gradient(90deg, #d65f5f 98.1%, transparent 98.1%);
 }
-#T_ecfc1_row6_col1 {
+#T_2492a_row6_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 60.5%, transparent 60.5%);
 }
-#T_ecfc1_row7_col1 {
+#T_2492a_row7_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 99.6%, transparent 99.6%);
+}
+#T_2492a_row7_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 58.0%, transparent 58.0%);
 }
+#T_2492a_row8_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 99.9%, transparent 99.9%);
+}
+#T_2492a_row8_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 57.5%, transparent 57.5%);
+}
+#T_2492a_row9_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 57.4%, transparent 57.4%);
+}
 </style>
-<table id="T_ecfc1">
+<table id="T_2492a">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_ecfc1_level0_col0" class="col_heading level0 col0" >학습 결정계수</th>
-      <th id="T_ecfc1_level0_col1" class="col_heading level0 col1" >학습 잔차제곱합</th>
+      <th id="T_2492a_level0_col0" class="col_heading level0 col0" >학습 결정계수</th>
+      <th id="T_2492a_level0_col1" class="col_heading level0 col1" >학습 잔차제곱합</th>
     </tr>
     <tr>
       <th class="index_name level0" >차수</th>
@@ -706,44 +722,54 @@ Notes:
   </thead>
   <tbody>
     <tr>
-      <th id="T_ecfc1_level0_row0" class="row_heading level0 row0" >1</th>
-      <td id="T_ecfc1_row0_col0" class="data row0 col0" >0.553373</td>
-      <td id="T_ecfc1_row0_col1" class="data row0 col1" >1553.790601</td>
+      <th id="T_2492a_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_2492a_row0_col0" class="data row0 col0" >0.553373</td>
+      <td id="T_2492a_row0_col1" class="data row0 col1" >1553.790601</td>
     </tr>
     <tr>
-      <th id="T_ecfc1_level0_row1" class="row_heading level0 row1" >2</th>
-      <td id="T_ecfc1_row1_col0" class="data row1 col0" >0.686105</td>
-      <td id="T_ecfc1_row1_col1" class="data row1 col1" >1092.022691</td>
+      <th id="T_2492a_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_2492a_row1_col0" class="data row1 col0" >0.686105</td>
+      <td id="T_2492a_row1_col1" class="data row1 col1" >1092.022691</td>
     </tr>
     <tr>
-      <th id="T_ecfc1_level0_row2" class="row_heading level0 row2" >3</th>
-      <td id="T_ecfc1_row2_col0" class="data row2 col0" >0.710969</td>
-      <td id="T_ecfc1_row2_col1" class="data row2 col1" >1005.522571</td>
+      <th id="T_2492a_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_2492a_row2_col0" class="data row2 col0" >0.710969</td>
+      <td id="T_2492a_row2_col1" class="data row2 col1" >1005.522571</td>
     </tr>
     <tr>
-      <th id="T_ecfc1_level0_row3" class="row_heading level0 row3" >4</th>
-      <td id="T_ecfc1_row3_col0" class="data row3 col0" >0.723554</td>
-      <td id="T_ecfc1_row3_col1" class="data row3 col1" >961.739072</td>
+      <th id="T_2492a_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_2492a_row3_col0" class="data row3 col0" >0.723554</td>
+      <td id="T_2492a_row3_col1" class="data row3 col1" >961.739072</td>
     </tr>
     <tr>
-      <th id="T_ecfc1_level0_row4" class="row_heading level0 row4" >5</th>
-      <td id="T_ecfc1_row4_col0" class="data row4 col0" >0.723823</td>
-      <td id="T_ecfc1_row4_col1" class="data row4 col1" >960.802511</td>
+      <th id="T_2492a_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_2492a_row4_col0" class="data row4 col0" >0.723823</td>
+      <td id="T_2492a_row4_col1" class="data row4 col1" >960.802511</td>
     </tr>
     <tr>
-      <th id="T_ecfc1_level0_row5" class="row_heading level0 row5" >6</th>
-      <td id="T_ecfc1_row5_col0" class="data row5 col0" >0.728595</td>
-      <td id="T_ecfc1_row5_col1" class="data row5 col1" >944.200845</td>
+      <th id="T_2492a_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_2492a_row5_col0" class="data row5 col0" >0.728595</td>
+      <td id="T_2492a_row5_col1" class="data row5 col1" >944.200845</td>
     </tr>
     <tr>
-      <th id="T_ecfc1_level0_row6" class="row_heading level0 row6" >7</th>
-      <td id="T_ecfc1_row6_col0" class="data row6 col0" >0.729950</td>
-      <td id="T_ecfc1_row6_col1" class="data row6 col1" >939.488687</td>
+      <th id="T_2492a_level0_row6" class="row_heading level0 row6" >7</th>
+      <td id="T_2492a_row6_col0" class="data row6 col0" >0.729950</td>
+      <td id="T_2492a_row6_col1" class="data row6 col1" >939.488687</td>
     </tr>
     <tr>
-      <th id="T_ecfc1_level0_row7" class="row_heading level0 row7" >8</th>
-      <td id="T_ecfc1_row7_col0" class="data row7 col0" >0.740790</td>
-      <td id="T_ecfc1_row7_col1" class="data row7 col1" >901.775330</td>
+      <th id="T_2492a_level0_row7" class="row_heading level0 row7" >8</th>
+      <td id="T_2492a_row7_col0" class="data row7 col0" >0.740790</td>
+      <td id="T_2492a_row7_col1" class="data row7 col1" >901.775330</td>
+    </tr>
+    <tr>
+      <th id="T_2492a_level0_row8" class="row_heading level0 row8" >9</th>
+      <td id="T_2492a_row8_col0" class="data row8 col0" >0.743152</td>
+      <td id="T_2492a_row8_col1" class="data row8 col1" >893.559046</td>
+    </tr>
+    <tr>
+      <th id="T_2492a_level0_row9" class="row_heading level0 row9" >10</th>
+      <td id="T_2492a_row9_col0" class="data row9 col0" >0.743719</td>
+      <td id="T_2492a_row9_col1" class="data row9 col1" >891.586488</td>
     </tr>
   </tbody>
 </table>
@@ -778,8 +804,8 @@ Notes:
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;차수=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
-    <span class="n">plot_train</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">plot_train</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;학습 데이터와 다중회귀 결과&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -790,16 +816,16 @@ Notes:
 <img alt="../_images/03_11_15_0.png" src="../_images/03_11_15_0.png" />
 </div>
 </div>
-<p>예를 들어 8차 다항회귀모형은 lstat 값이 34.5 일 때 집값을 -238.9 라고 예측한다.</p>
+<p>예를 들어 10차 다항회귀모형은 lstat 값이 34.5 일 때 집값을 -216.9 라고 예측한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result8</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">8</span><span class="p">]</span>
-<span class="n">result8</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;lstat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">34.5</span><span class="p">]}))</span><span class="o">.</span><span class="n">predicted_mean</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result10</span> <span class="o">=</span> <span class="n">results</span><span class="p">[</span><span class="mi">10</span><span class="p">]</span>
+<span class="n">result10</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;lstat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">34.5</span><span class="p">]}))</span><span class="o">.</span><span class="n">predicted_mean</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-238.93065284])
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([-216.93650211])
 </pre></div>
 </div>
 </div>
@@ -874,8 +900,8 @@ Notes:
     <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;차수=</span><span class="si">{</span><span class="n">i</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">9</span><span class="p">):</span>
-    <span class="n">plot_test</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">11</span><span class="p">):</span>
+    <span class="n">plot_test</span><span class="p">(</span><span class="n">results</span><span class="p">,</span> <span class="n">i</span><span class="p">,</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="n">i</span><span class="p">])</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;검증 데이터와 다중회귀 결과&quot;</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
@@ -902,32 +928,40 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_78656_row0_col0, #T_78656_row3_col0, #T_78656_row4_col0 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 0.4%, transparent 0.4%);
-}
-#T_78656_row1_col0, #T_78656_row2_col0 {
+#T_bbd81_row0_col0, #T_bbd81_row4_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 0.3%, transparent 0.3%);
 }
-#T_78656_row5_col0 {
+#T_bbd81_row1_col0, #T_bbd81_row2_col0, #T_bbd81_row3_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.2%, transparent 0.2%);
+}
+#T_bbd81_row5_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.4%, transparent 0.4%);
+}
+#T_bbd81_row6_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.7%, transparent 0.7%);
+}
+#T_bbd81_row7_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 66.8%, transparent 66.8%);
+}
+#T_bbd81_row8_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 0.6%, transparent 0.6%);
 }
-#T_78656_row6_col0 {
-  width: 10em;
-  background: linear-gradient(90deg, #d65f5f 1.0%, transparent 1.0%);
-}
-#T_78656_row7_col0 {
+#T_bbd81_row9_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
 }
 </style>
-<table id="T_78656">
+<table id="T_bbd81">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_78656_level0_col0" class="col_heading level0 col0" >검증 잔차제곱합</th>
+      <th id="T_bbd81_level0_col0" class="col_heading level0 col0" >검증 잔차제곱합</th>
     </tr>
     <tr>
       <th class="index_name level0" >차수</th>
@@ -936,36 +970,44 @@ Notes:
   </thead>
   <tbody>
     <tr>
-      <th id="T_78656_level0_row0" class="row_heading level0 row0" >1</th>
-      <td id="T_78656_row0_col0" class="data row0 col0" >20145.399074</td>
+      <th id="T_bbd81_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_bbd81_row0_col0" class="data row0 col0" >20145.399074</td>
     </tr>
     <tr>
-      <th id="T_78656_level0_row1" class="row_heading level0 row1" >2</th>
-      <td id="T_78656_row1_col0" class="data row1 col0" >17656.438628</td>
+      <th id="T_bbd81_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_bbd81_row1_col0" class="data row1 col0" >17656.438628</td>
     </tr>
     <tr>
-      <th id="T_78656_level0_row2" class="row_heading level0 row2" >3</th>
-      <td id="T_78656_row2_col0" class="data row2 col0" >16362.769041</td>
+      <th id="T_bbd81_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_bbd81_row2_col0" class="data row2 col0" >16362.769041</td>
     </tr>
     <tr>
-      <th id="T_78656_level0_row3" class="row_heading level0 row3" >4</th>
-      <td id="T_78656_row3_col0" class="data row3 col0" >18075.527274</td>
+      <th id="T_bbd81_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_bbd81_row3_col0" class="data row3 col0" >18075.527274</td>
     </tr>
     <tr>
-      <th id="T_78656_level0_row4" class="row_heading level0 row4" >5</th>
-      <td id="T_78656_row4_col0" class="data row4 col0" >21171.613313</td>
+      <th id="T_bbd81_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_bbd81_row4_col0" class="data row4 col0" >21171.613313</td>
     </tr>
     <tr>
-      <th id="T_78656_level0_row5" class="row_heading level0 row5" >6</th>
-      <td id="T_78656_row5_col0" class="data row5 col0" >32154.412838</td>
+      <th id="T_bbd81_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_bbd81_row5_col0" class="data row5 col0" >32154.412838</td>
     </tr>
     <tr>
-      <th id="T_78656_level0_row6" class="row_heading level0 row6" >7</th>
-      <td id="T_78656_row6_col0" class="data row6 col0" >49392.894713</td>
+      <th id="T_bbd81_level0_row6" class="row_heading level0 row6" >7</th>
+      <td id="T_bbd81_row6_col0" class="data row6 col0" >49392.894713</td>
     </tr>
     <tr>
-      <th id="T_78656_level0_row7" class="row_heading level0 row7" >8</th>
-      <td id="T_78656_row7_col0" class="data row7 col0" >5070235.057569</td>
+      <th id="T_bbd81_level0_row7" class="row_heading level0 row7" >8</th>
+      <td id="T_bbd81_row7_col0" class="data row7 col0" >5070235.057569</td>
+    </tr>
+    <tr>
+      <th id="T_bbd81_level0_row8" class="row_heading level0 row8" >9</th>
+      <td id="T_bbd81_row8_col0" class="data row8 col0" >44132.795197</td>
+    </tr>
+    <tr>
+      <th id="T_bbd81_level0_row9" class="row_heading level0 row9" >10</th>
+      <td id="T_bbd81_row9_col0" class="data row9 col0" >7588331.833684</td>
     </tr>
   </tbody>
 </table>
@@ -1037,86 +1079,106 @@ R^2_{\text{adj}} = 1 - (1 - R^2)\dfrac{N-1}{N-K} = 1 - \dfrac{\text{RSS}/(N-K)}{
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_f23a5_row0_col0 {
+#T_2c4f6_row0_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 61.1%, transparent 61.1%);
 }
-#T_f23a5_row0_col1, #T_f23a5_row0_col2, #T_f23a5_row7_col0 {
+#T_2c4f6_row0_col1, #T_2c4f6_row0_col2, #T_2c4f6_row7_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 80.0%, transparent 80.0%);
 }
-#T_f23a5_row1_col0, #T_f23a5_row1_col2 {
+#T_2c4f6_row1_col0, #T_2c4f6_row1_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 75.7%, transparent 75.7%);
 }
-#T_f23a5_row1_col1 {
+#T_2c4f6_row1_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 75.3%, transparent 75.3%);
 }
-#T_f23a5_row2_col0 {
+#T_2c4f6_row2_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 78.2%, transparent 78.2%);
 }
-#T_f23a5_row2_col1 {
+#T_2c4f6_row2_col1, #T_2c4f6_row8_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.4%, transparent 74.4%);
 }
-#T_f23a5_row2_col2, #T_f23a5_row3_col2 {
+#T_2c4f6_row2_col2, #T_2c4f6_row3_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 75.2%, transparent 75.2%);
 }
-#T_f23a5_row3_col0 {
+#T_2c4f6_row3_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 79.3%, transparent 79.3%);
 }
-#T_f23a5_row3_col1 {
+#T_2c4f6_row3_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.0%, transparent 74.0%);
 }
-#T_f23a5_row4_col0, #T_f23a5_row6_col0 {
+#T_2c4f6_row4_col0, #T_2c4f6_row6_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 79.0%, transparent 79.0%);
 }
-#T_f23a5_row4_col1, #T_f23a5_row5_col1 {
+#T_2c4f6_row4_col1, #T_2c4f6_row5_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.3%, transparent 74.3%);
 }
-#T_f23a5_row4_col2 {
+#T_2c4f6_row4_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 75.8%, transparent 75.8%);
 }
-#T_f23a5_row5_col0 {
+#T_2c4f6_row5_col0 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 79.2%, transparent 79.2%);
 }
-#T_f23a5_row5_col2 {
+#T_2c4f6_row5_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 76.2%, transparent 76.2%);
 }
-#T_f23a5_row6_col1 {
+#T_2c4f6_row6_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.5%, transparent 74.5%);
 }
-#T_f23a5_row6_col2 {
+#T_2c4f6_row6_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 76.8%, transparent 76.8%);
 }
-#T_f23a5_row7_col1 {
+#T_2c4f6_row7_col1 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 74.2%, transparent 74.2%);
 }
-#T_f23a5_row7_col2 {
+#T_2c4f6_row7_col2 {
   width: 10em;
   background: linear-gradient(90deg, #d65f5f 76.9%, transparent 76.9%);
 }
+#T_2c4f6_row8_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 79.9%, transparent 79.9%);
+}
+#T_2c4f6_row8_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 77.4%, transparent 77.4%);
+}
+#T_2c4f6_row9_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 79.7%, transparent 79.7%);
+}
+#T_2c4f6_row9_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 74.7%, transparent 74.7%);
+}
+#T_2c4f6_row9_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 78.0%, transparent 78.0%);
+}
 </style>
-<table id="T_f23a5">
+<table id="T_2c4f6">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_f23a5_level0_col0" class="col_heading level0 col0" >조정 결정계수</th>
-      <th id="T_f23a5_level0_col1" class="col_heading level0 col1" >AIC</th>
-      <th id="T_f23a5_level0_col2" class="col_heading level0 col2" >BIC</th>
+      <th id="T_2c4f6_level0_col0" class="col_heading level0 col0" >조정 결정계수</th>
+      <th id="T_2c4f6_level0_col1" class="col_heading level0 col1" >AIC</th>
+      <th id="T_2c4f6_level0_col2" class="col_heading level0 col2" >BIC</th>
     </tr>
     <tr>
       <th class="index_name level0" >차수</th>
@@ -1127,52 +1189,64 @@ R^2_{\text{adj}} = 1 - (1 - R^2)\dfrac{N-1}{N-K} = 1 - \dfrac{\text{RSS}/(N-K)}{
   </thead>
   <tbody>
     <tr>
-      <th id="T_f23a5_level0_row0" class="row_heading level0 row0" >1</th>
-      <td id="T_f23a5_row0_col0" class="data row0 col0" >0.548815</td>
-      <td id="T_f23a5_row0_col1" class="data row0 col1" >562.115965</td>
-      <td id="T_f23a5_row0_col2" class="data row0 col2" >567.326306</td>
+      <th id="T_2c4f6_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_2c4f6_row0_col0" class="data row0 col0" >0.548815</td>
+      <td id="T_2c4f6_row0_col1" class="data row0 col1" >562.115965</td>
+      <td id="T_2c4f6_row0_col2" class="data row0 col2" >567.326306</td>
     </tr>
     <tr>
-      <th id="T_f23a5_level0_row1" class="row_heading level0 row1" >2</th>
-      <td id="T_f23a5_row1_col0" class="data row1 col0" >0.679633</td>
-      <td id="T_f23a5_row1_col1" class="data row1 col1" >528.849382</td>
-      <td id="T_f23a5_row1_col2" class="data row1 col2" >536.664892</td>
+      <th id="T_2c4f6_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_2c4f6_row1_col0" class="data row1 col0" >0.679633</td>
+      <td id="T_2c4f6_row1_col1" class="data row1 col1" >528.849382</td>
+      <td id="T_2c4f6_row1_col2" class="data row1 col2" >536.664892</td>
     </tr>
     <tr>
-      <th id="T_f23a5_level0_row2" class="row_heading level0 row2" >3</th>
-      <td id="T_f23a5_row2_col0" class="data row2 col0" >0.701937</td>
-      <td id="T_f23a5_row2_col1" class="data row2 col1" >522.596954</td>
-      <td id="T_f23a5_row2_col2" class="data row2 col2" >533.017634</td>
+      <th id="T_2c4f6_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_2c4f6_row2_col0" class="data row2 col0" >0.701937</td>
+      <td id="T_2c4f6_row2_col1" class="data row2 col1" >522.596954</td>
+      <td id="T_2c4f6_row2_col2" class="data row2 col2" >533.017634</td>
     </tr>
     <tr>
-      <th id="T_f23a5_level0_row3" class="row_heading level0 row3" >4</th>
-      <td id="T_f23a5_row3_col0" class="data row3 col0" >0.711914</td>
-      <td id="T_f23a5_row3_col1" class="data row3 col1" >520.145006</td>
-      <td id="T_f23a5_row3_col2" class="data row3 col2" >533.170857</td>
+      <th id="T_2c4f6_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_2c4f6_row3_col0" class="data row3 col0" >0.711914</td>
+      <td id="T_2c4f6_row3_col1" class="data row3 col1" >520.145006</td>
+      <td id="T_2c4f6_row3_col2" class="data row3 col2" >533.170857</td>
     </tr>
     <tr>
-      <th id="T_f23a5_level0_row4" class="row_heading level0 row4" >5</th>
-      <td id="T_f23a5_row4_col0" class="data row4 col0" >0.709133</td>
-      <td id="T_f23a5_row4_col1" class="data row4 col1" >522.047577</td>
-      <td id="T_f23a5_row4_col2" class="data row4 col2" >537.678598</td>
+      <th id="T_2c4f6_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_2c4f6_row4_col0" class="data row4 col0" >0.709133</td>
+      <td id="T_2c4f6_row4_col1" class="data row4 col1" >522.047577</td>
+      <td id="T_2c4f6_row4_col2" class="data row4 col2" >537.678598</td>
     </tr>
     <tr>
-      <th id="T_f23a5_level0_row5" class="row_heading level0 row5" >6</th>
-      <td id="T_f23a5_row5_col0" class="data row5 col0" >0.711085</td>
-      <td id="T_f23a5_row5_col1" class="data row5 col1" >522.304578</td>
-      <td id="T_f23a5_row5_col2" class="data row5 col2" >540.540770</td>
+      <th id="T_2c4f6_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_2c4f6_row5_col0" class="data row5 col0" >0.711085</td>
+      <td id="T_2c4f6_row5_col1" class="data row5 col1" >522.304578</td>
+      <td id="T_2c4f6_row5_col2" class="data row5 col2" >540.540770</td>
     </tr>
     <tr>
-      <th id="T_f23a5_level0_row6" class="row_heading level0 row6" >7</th>
-      <td id="T_f23a5_row6_col0" class="data row6 col0" >0.709403</td>
-      <td id="T_f23a5_row6_col1" class="data row6 col1" >523.804266</td>
-      <td id="T_f23a5_row6_col2" class="data row6 col2" >544.645627</td>
+      <th id="T_2c4f6_level0_row6" class="row_heading level0 row6" >7</th>
+      <td id="T_2c4f6_row6_col0" class="data row6 col0" >0.709403</td>
+      <td id="T_2c4f6_row6_col1" class="data row6 col1" >523.804266</td>
+      <td id="T_2c4f6_row6_col2" class="data row6 col2" >544.645627</td>
     </tr>
     <tr>
-      <th id="T_f23a5_level0_row7" class="row_heading level0 row7" >8</th>
-      <td id="T_f23a5_row7_col0" class="data row7 col0" >0.718003</td>
-      <td id="T_f23a5_row7_col1" class="data row7 col1" >521.707229</td>
-      <td id="T_f23a5_row7_col2" class="data row7 col2" >545.153761</td>
+      <th id="T_2c4f6_level0_row7" class="row_heading level0 row7" >8</th>
+      <td id="T_2c4f6_row7_col0" class="data row7 col0" >0.718003</td>
+      <td id="T_2c4f6_row7_col1" class="data row7 col1" >521.707229</td>
+      <td id="T_2c4f6_row7_col2" class="data row7 col2" >545.153761</td>
+    </tr>
+    <tr>
+      <th id="T_2c4f6_level0_row8" class="row_heading level0 row8" >9</th>
+      <td id="T_2c4f6_row8_col0" class="data row8 col0" >0.717467</td>
+      <td id="T_2c4f6_row8_col1" class="data row8 col1" >522.791930</td>
+      <td id="T_2c4f6_row8_col2" class="data row8 col2" >548.843632</td>
+    </tr>
+    <tr>
+      <th id="T_2c4f6_level0_row9" class="row_heading level0 row9" >10</th>
+      <td id="T_2c4f6_row9_col0" class="data row9 col0" >0.714923</td>
+      <td id="T_2c4f6_row9_col1" class="data row9 col1" >524.570933</td>
+      <td id="T_2c4f6_row9_col2" class="data row9 col2" >553.227805</td>
     </tr>
   </tbody>
 </table>
@@ -1193,6 +1267,237 @@ R^2_{\text{adj}} = 1 - (1 - R^2)\dfrac{N-1}{N-K} = 1 - \dfrac{\text{RSS}/(N-K)}{
 </section>
 <section id="id4">
 <h2><span class="section-number">3.11.3. </span>정규화<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>교차검증이 과최적화가 발생하는가를 알아내는 방법이라면 정규화(regularization)는 과최적화가 원천적으로 발생하지 못하게 하는 방법이다. 과최적화가 발생할 때는 선형회귀분석의 가중치의 크기가 비정상적으로 커지는 현상이 같이 발생한다. 정규화는 선형회귀분석 가중치의 크기가 너무 커지지 않도록 제어하여 과최적화가 발생하는 것을 막는다.</p>
+<p>앞에서 수행한 다중회귀 결과에서 차수가 증가하면 가중치의 크기가 실제로 어떻게 변화하는지 살펴보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+
+<span class="n">w1</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;scale(lstat)&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()}</span>
+<span class="n">w2</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;scale(I(lstat ** 2))&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">}</span>
+<span class="n">w3</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;scale(I(lstat ** 3))&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">2</span><span class="p">}</span>
+<span class="n">w4</span> <span class="o">=</span> <span class="p">{</span><span class="n">i</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">params</span><span class="p">[</span><span class="s2">&quot;scale(I(lstat ** 4))&quot;</span><span class="p">])</span> <span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results</span><span class="o">.</span><span class="n">items</span><span class="p">()</span> <span class="k">if</span> <span class="n">i</span> <span class="o">&gt;</span> <span class="mi">3</span><span class="p">}</span>
+<span class="n">df_w</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;$|w_1|$&quot;</span><span class="p">:</span> <span class="n">w1</span><span class="p">,</span> <span class="s2">&quot;$|w_2|$&quot;</span><span class="p">:</span> <span class="n">w2</span><span class="p">,</span> <span class="s2">&quot;$|w_3|$&quot;</span><span class="p">:</span> <span class="n">w3</span><span class="p">,</span> <span class="s2">&quot;$|w_4|$&quot;</span><span class="p">:</span> <span class="n">w4</span><span class="p">})</span>
+<span class="n">df_w</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">name</span> <span class="o">=</span> <span class="s2">&quot;차수&quot;</span>
+<span class="n">df_w</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_b64b3_row0_col0, #T_b64b3_row5_col0, #T_b64b3_row5_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.7%, transparent 0.7%);
+}
+#T_b64b3_row0_col1, #T_b64b3_row0_col2, #T_b64b3_row0_col3, #T_b64b3_row1_col2, #T_b64b3_row1_col3, #T_b64b3_row2_col3 {
+  width: 10em;
+}
+#T_b64b3_row1_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 1.9%, transparent 1.9%);
+}
+#T_b64b3_row1_col1, #T_b64b3_row4_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.1%, transparent 0.1%);
+}
+#T_b64b3_row2_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 3.4%, transparent 3.4%);
+}
+#T_b64b3_row2_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.4%, transparent 0.4%);
+}
+#T_b64b3_row2_col2, #T_b64b3_row3_col3, #T_b64b3_row4_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.0%, transparent 0.0%);
+}
+#T_b64b3_row3_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 6.1%, transparent 6.1%);
+}
+#T_b64b3_row3_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 1.2%, transparent 1.2%);
+}
+#T_b64b3_row3_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.2%, transparent 0.2%);
+}
+#T_b64b3_row4_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 5.4%, transparent 5.4%);
+}
+#T_b64b3_row4_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 0.8%, transparent 0.8%);
+}
+#T_b64b3_row5_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 2.6%, transparent 2.6%);
+}
+#T_b64b3_row5_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 1.6%, transparent 1.6%);
+}
+#T_b64b3_row6_col0, #T_b64b3_row6_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 7.2%, transparent 7.2%);
+}
+#T_b64b3_row6_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 4.8%, transparent 4.8%);
+}
+#T_b64b3_row6_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 2.7%, transparent 2.7%);
+}
+#T_b64b3_row7_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 41.6%, transparent 41.6%);
+}
+#T_b64b3_row7_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 37.0%, transparent 37.0%);
+}
+#T_b64b3_row7_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 30.1%, transparent 30.1%);
+}
+#T_b64b3_row7_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 22.9%, transparent 22.9%);
+}
+#T_b64b3_row8_col0 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 70.2%, transparent 70.2%);
+}
+#T_b64b3_row8_col1 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 65.7%, transparent 65.7%);
+}
+#T_b64b3_row8_col2 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 59.2%, transparent 59.2%);
+}
+#T_b64b3_row8_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 51.5%, transparent 51.5%);
+}
+#T_b64b3_row9_col0, #T_b64b3_row9_col1, #T_b64b3_row9_col2, #T_b64b3_row9_col3 {
+  width: 10em;
+  background: linear-gradient(90deg, #d65f5f 100.0%, transparent 100.0%);
+}
+</style>
+<table id="T_b64b3">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_b64b3_level0_col0" class="col_heading level0 col0" >$|w_1|$</th>
+      <th id="T_b64b3_level0_col1" class="col_heading level0 col1" >$|w_2|$</th>
+      <th id="T_b64b3_level0_col2" class="col_heading level0 col2" >$|w_3|$</th>
+      <th id="T_b64b3_level0_col3" class="col_heading level0 col3" >$|w_4|$</th>
+    </tr>
+    <tr>
+      <th class="index_name level0" >차수</th>
+      <th class="blank col0" >&nbsp;</th>
+      <th class="blank col1" >&nbsp;</th>
+      <th class="blank col2" >&nbsp;</th>
+      <th class="blank col3" >&nbsp;</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_b64b3_level0_row0" class="row_heading level0 row0" >1</th>
+      <td id="T_b64b3_row0_col0" class="data row0 col0" >4.387655</td>
+      <td id="T_b64b3_row0_col1" class="data row0 col1" >nan</td>
+      <td id="T_b64b3_row0_col2" class="data row0 col2" >nan</td>
+      <td id="T_b64b3_row0_col3" class="data row0 col3" >nan</td>
+    </tr>
+    <tr>
+      <th id="T_b64b3_level0_row1" class="row_heading level0 row1" >2</th>
+      <td id="T_b64b3_row1_col0" class="data row1 col0" >11.705900</td>
+      <td id="T_b64b3_row1_col1" class="data row1 col1" >7.627214</td>
+      <td id="T_b64b3_row1_col2" class="data row1 col2" >nan</td>
+      <td id="T_b64b3_row1_col3" class="data row1 col3" >nan</td>
+    </tr>
+    <tr>
+      <th id="T_b64b3_level0_row2" class="row_heading level0 row2" >3</th>
+      <td id="T_b64b3_row2_col0" class="data row2 col0" >20.997876</td>
+      <td id="T_b64b3_row2_col1" class="data row2 col1" >28.532474</td>
+      <td id="T_b64b3_row2_col2" class="data row2 col2" >12.307360</td>
+      <td id="T_b64b3_row2_col3" class="data row2 col3" >nan</td>
+    </tr>
+    <tr>
+      <th id="T_b64b3_level0_row3" class="row_heading level0 row3" >4</th>
+      <td id="T_b64b3_row3_col0" class="data row3 col0" >37.561319</td>
+      <td id="T_b64b3_row3_col1" class="data row3 col1" >91.331808</td>
+      <td id="T_b64b3_row3_col2" class="data row3 col2" >97.520636</td>
+      <td id="T_b64b3_row3_col3" class="data row3 col3" >39.073867</td>
+    </tr>
+    <tr>
+      <th id="T_b64b3_level0_row4" class="row_heading level0 row4" >5</th>
+      <td id="T_b64b3_row4_col0" class="data row4 col0" >32.970048</td>
+      <td id="T_b64b3_row4_col1" class="data row4 col1" >66.299925</td>
+      <td id="T_b64b3_row4_col2" class="data row4 col2" >41.693689</td>
+      <td id="T_b64b3_row4_col3" class="data row4 col3" >17.936717</td>
+    </tr>
+    <tr>
+      <th id="T_b64b3_level0_row5" class="row_heading level0 row5" >6</th>
+      <td id="T_b64b3_row5_col0" class="data row5 col0" >4.345815</td>
+      <td id="T_b64b3_row5_col1" class="data row5 col1" >201.367311</td>
+      <td id="T_b64b3_row5_col2" class="data row5 col2" >796.591643</td>
+      <td id="T_b64b3_row5_col3" class="data row5 col3" >1371.376515</td>
+    </tr>
+    <tr>
+      <th id="T_b64b3_level0_row6" class="row_heading level0 row6" >7</th>
+      <td id="T_b64b3_row6_col0" class="data row6 col0" >44.293542</td>
+      <td id="T_b64b3_row6_col1" class="data row6 col1" >571.215627</td>
+      <td id="T_b64b3_row6_col2" class="data row6 col2" >2357.648675</td>
+      <td id="T_b64b3_row6_col3" class="data row6 col3" >4999.339874</td>
+    </tr>
+    <tr>
+      <th id="T_b64b3_level0_row7" class="row_heading level0 row7" >8</th>
+      <td id="T_b64b3_row7_col0" class="data row7 col0" >254.915344</td>
+      <td id="T_b64b3_row7_col1" class="data row7 col1" >2918.838627</td>
+      <td id="T_b64b3_row7_col2" class="data row7 col2" >14723.819307</td>
+      <td id="T_b64b3_row7_col3" class="data row7 col3" >42626.314789</td>
+    </tr>
+    <tr>
+      <th id="T_b64b3_level0_row8" class="row_heading level0 row8" >9</th>
+      <td id="T_b64b3_row8_col0" class="data row8 col0" >430.317573</td>
+      <td id="T_b64b3_row8_col1" class="data row8 col1" >5183.139521</td>
+      <td id="T_b64b3_row8_col2" class="data row8 col2" >28939.241190</td>
+      <td id="T_b64b3_row8_col3" class="data row8 col3" >95943.395693</td>
+    </tr>
+    <tr>
+      <th id="T_b64b3_level0_row9" class="row_heading level0 row9" >10</th>
+      <td id="T_b64b3_row9_col0" class="data row9 col0" >612.624917</td>
+      <td id="T_b64b3_row9_col1" class="data row9 col1" >7886.670536</td>
+      <td id="T_b64b3_row9_col2" class="data row9 col2" >48895.898580</td>
+      <td id="T_b64b3_row9_col3" class="data row9 col3" >186169.033124</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>다항회귀 차수가 증가하면 가중치의 크기도 기하급수적으로 증가하는 것을 알 수 있다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_w</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;다항회귀에서 차수의 증가에 따른 가중치 크기의 변화&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_11_35_0.png" src="../_images/03_11_35_0.png" />
+</div>
+</div>
+<p>정규화는 앞서 말한바와 같이 선형회귀분석 가중치의 크기가 너무 커지지 않도록 제어하여 과최적화가 발생하는 것을 막는 방법이다. 구체적으로는 가중치를 구할 때 잔차제곱합 RSS를 최소화하는 가중치 벡터 <span class="math notranslate nohighlight">\(w\)</span>를 구하는 것이 아니라 잔차제곱합 RSS에 가중치 크기를 벌점(penality)으로 추가한 함수를 최소화한다.</p>
+<div class="math notranslate nohighlight">
+\[ 
+\dfrac{1}{2N}\text{RSS} + \underbrace{\alpha \left( (1-L_1) \cdot \dfrac{1}{2}\sum_{k=1}^{K} w_k^2 + L_1 \cdot \sum_{k=1}^{K} |w_k| \right)}_{\text{벌점(penalty)}}
+\]</div>
 </section>
 </section>
 
