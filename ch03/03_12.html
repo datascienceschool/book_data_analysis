@@ -662,7 +662,11 @@ strong multicollinearity or other numerical problems.
 \[
 \text{조건수(condition number)} = \dfrac{\lambda_{\text{max}}}{\lambda_{\text{min}}}
 \]</div>
-<p>선형회귀분석에서 조건수는 선형회귀분석 결과의 <b>수치적 안정성(numberical stability)</b>을 나타내는 값이다. 수치적 안정성이라는 것은 우리가 선형회귀분석에 사용한 독립변수값에 오류가 있었을 경우 이 오류에 얼마나 민감하게 반응하는가를 나타낸다.</p>
+<p>스케일링을 하지 않은 경우에 나타난 주의사항을 해석하면 다음과 같다.</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">조건수가</span> <span class="mi">5</span><span class="p">,</span><span class="mi">480</span><span class="n">으로</span> <span class="n">크다</span><span class="o">.</span> <span class="n">이는</span> <span class="n">강한</span> <span class="n">다중공선성이</span> <span class="n">있거나</span> <span class="n">수치적인</span> <span class="n">문제가</span> <span class="n">있다는</span> <span class="n">것을</span> <span class="n">의미할</span> <span class="n">수</span> <span class="n">있다</span><span class="o">.</span> 
+</pre></div>
+</div>
+<p>선형회귀분석에서 조건수는 선형회귀분석 결과의 <b>수치적 안정성(numerical stability)</b>을 나타내는 값이다. 수치적 안정성이라는 것은 우리가 선형회귀분석에 사용한 독립변수값에 오류가 있었을 경우 이 오류에 얼마나 민감하게 반응하는가를 나타낸다.</p>
 <p>우리가 분석에 사용하는 독립변수의 값은 측정에 의한 것이므로 반올림 오차 등을 포함한 노이즈(noise) 오차를 항상 어느정도 가지게 된다. 조건수가 클수록 수치적 안정성이 떨어져 오차에 대해 더 민감하게 반응한다.</p>
 <p>예시를 위해 우리가 가진 보스턴 집값 데이터에 일부러 어느정도 노이즈 오차를 추가해 보았다.</p>
 <div class="cell docutils container">
