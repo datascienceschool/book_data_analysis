@@ -463,12 +463,36 @@ title="Print to PDF"
     </ul>
   </div>
 </div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
 
     </div>
 </div>
 
 <!-- Table of contents -->
 <div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.12.1. 스케일링
+  </a>
+ </li>
+</ul>
+
+    </nav>
 </div>
     </div>
     <div class="article row">
@@ -480,6 +504,19 @@ title="Print to PDF"
                 <div id="print-main-content">
                     <div id="jb-print-toc">
                         
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id2">
+   3.12.1. 스케일링
+  </a>
+ </li>
+</ul>
+
+                        </nav>
                     </div>
                 </div>
             </div>
@@ -489,6 +526,11 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.12. </span>스케일링과 다중공선성<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>지금까지 선형회귀분석을 할 때 항상 독립변수값의 평균을 0, 분산을 1로 만드는 스케일링(scaling)을 하도록 권장하였다. 이 절에서는 스케일링이 어떤 영향을 미치고 왜 필요한 것인지를 설명한다. 또한 독립변수간의 상관관계도 회귀분석에 어떤 영향을 미칠 수 있는지 공부한다.</p>
+<section id="id2">
+<h2><span class="section-number">3.12.1. </span>스케일링<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
+<p>독립변수의 값은 사용하는 단위에 따라 아주 작은 값이 될 수도 있고 아주 큰 값이 될 수도 있다. 이러한 단위를 재설정하여 독립변수의 평균을 0, 분산을 1로 만드는 작업을 스케일링이라고 한다고 설명하였다. 실제로 보스턴 집값 데이터를 사용하여 스케일링의 영향을 살펴보자.</p>
+<p>예제로 보스턴 집값 medv 를 두개의 독립변수 tax, nox 로 선형회귀분석을 해본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
@@ -674,6 +716,7 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
+<p>우선 스케일링을 한 회귀분석 결과는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula_scaled</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(tax) + scale(nox)&quot;</span>
@@ -713,6 +756,7 @@ Notes:
 </div>
 </div>
 </div>
+<p>이번에는 스케일링을 하지 않는 결과를 살펴보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula_notscaled</span> <span class="o">=</span> <span class="s2">&quot;medv ~ tax + nox&quot;</span>
@@ -753,6 +797,29 @@ strong multicollinearity or other numerical problems.
 </pre></div>
 </div>
 </div>
+</div>
+<p>두 회귀분석 결과 요약을 비교하면 결정계수를 포함한 모든 성능 값이나 가중치의 유의확률등이 동일한 것을 알 수 있다. 차이가 있는 부분은 우측 하단에 표시된 <code class="docutils literal notranslate"><span class="pre">Cond.</span> <span class="pre">No.</span></code> 라는 값과 새롭게 나타난 두번째 주의사항이다.</p>
+<p><span class="caption">스케일을 한 경우의 결과</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                            <span class="n">OLS</span> <span class="n">Regression</span> <span class="n">Results</span>                            
+<span class="o">==============================================================================</span>
+
+
+
+
+                                        <span class="n">Cond</span><span class="o">.</span> <span class="n">No</span><span class="o">.</span>                         <span class="mf">2.24</span>
+<span class="o">==============================================================================</span>
+</pre></div>
+</div>
+<p><span class="caption">스케일을 하지 않은 경우의 결과</span></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>                            <span class="n">OLS</span> <span class="n">Regression</span> <span class="n">Results</span>                            
+<span class="o">==============================================================================</span>
+
+
+
+
+                                        <span class="n">Cond</span><span class="o">.</span> <span class="n">No</span><span class="o">.</span>                     <span class="mf">5.48e+03</span>
+<span class="o">==============================================================================</span>
+</pre></div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -1285,9 +1352,10 @@ strong multicollinearity or other numerical problems.
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_12_17_0.png" src="../_images/03_12_17_0.png" />
+<img alt="../_images/03_12_23_0.png" src="../_images/03_12_23_0.png" />
 </div>
 </div>
+</section>
 </section>
 
     <script type="text/x-thebe-config">
