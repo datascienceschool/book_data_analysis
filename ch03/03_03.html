@@ -840,7 +840,7 @@ title="Print to PDF"
 <li><p>독립변수는 행렬 <span class="math notranslate nohighlight">\(X\)</span> 형식으로</p></li>
 </ul>
 <p>변환한다.</p>
-<p>우선 종속변수인 <span class="math notranslate nohighlight">\(y_i\)</span>값을 모아서 종속변수 벡터 <span class="math notranslate nohighlight">\(y\)</span>를 만든다.</p>
+<p>우선 종속변수인 <span class="math notranslate nohighlight">\(y_i\)</span>값을 모아서 <b>종속변수벡터</b> <span class="math notranslate nohighlight">\(y\)</span>를 만든다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} 
 \mathbf{y}
@@ -852,7 +852,7 @@ y_2 \\
 y_N \\
 \end{bmatrix}
 \end{split}\]</div>
-<p>다음으로 <span class="math notranslate nohighlight">\(N\)</span>개의 <span class="math notranslate nohighlight">\(j\)</span>번째 독립변수 <span class="math notranslate nohighlight">\(x_{ij}\)</span> 데이터를 모아서 독립변수 벡터 <span class="math notranslate nohighlight">\(x_j\)</span>를 만든다.</p>
+<p>다음으로 <span class="math notranslate nohighlight">\(N\)</span>개의 <span class="math notranslate nohighlight">\(j\)</span>번째 독립변수 <span class="math notranslate nohighlight">\(x_{ij}\)</span> 데이터를 모아서 <b>독립변수벡터</b> <span class="math notranslate nohighlight">\(x_j\)</span>를 만든다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} 
 x_j
@@ -864,7 +864,7 @@ x_{2,j} \\
 x_{N,j} \\
 \end{bmatrix}
 \end{split}\]</div>
-<p>이러한 과정을 <span class="math notranslate nohighlight">\(j=1,\ldots,K\)</span>에 대해 반복하여 <span class="math notranslate nohighlight">\(K\)</span>개의 독립변수 벡터 벡터 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>를 만들고 이를 모아서 독립변수행렬 <span class="math notranslate nohighlight">\(X\)</span>를 만든다.</p>
+<p>이러한 과정을 <span class="math notranslate nohighlight">\(j=1,\ldots,K\)</span>에 대해 반복하여 <span class="math notranslate nohighlight">\(K\)</span>개의 독립변수 벡터 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_K\)</span>를 만들고 이를 모아서 <b>독립변수행렬</b> <span class="math notranslate nohighlight">\(X\)</span>를 만든다. 독립변수행렬은 <b>실험설계행렬(experiment design matrix)</b> 혹은 <b>설계행렬(design matrix)</b>이라고도 부른다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} 
 X
@@ -902,7 +902,7 @@ x_{N1} &amp; x_{N2} &amp; \cdots &amp; x_{NK} \\
 w_1 \\ w_2 \\ \vdots \\ w_K
 \end{bmatrix} 
 \end{split}\]</div>
-<p>여기에서 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>로 이루어진 가중치 벡터 <span class="math notranslate nohighlight">\(w\)</span>를 다음과 같이 정의하면</p>
+<p>여기에서 가중치 <span class="math notranslate nohighlight">\(w_j\)</span>로 이루어진 <b>가중치벡터</b> <span class="math notranslate nohighlight">\(w\)</span>를 다음과 같이 정의하면</p>
 <div class="math notranslate nohighlight">
 \[\begin{split}
 w =
@@ -1238,7 +1238,7 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 \]</div>
 <p>에 직접 넣을 수 없으므로 수치형 값으로 바꾸는 과정이 필요하다.</p>
 <p>sex와 같이 두 종류의 값만 가지는 범주형 값인 경우 일반적으로 하나의 값을 0으로 다른 하나의 값을 1로 바꾸는 것이 보통이다. 두 종류가 넘는 값을 가지는 범주형 값인 경우 여러가지 방법으로 수치값 변환을 할 수 있다. 이러한 과정을 <b>범주값 인코딩(category encoding)</b>이라고 하며 이 주제에 대해서는 추후 자세히 설명한다.</p>
-<p>patsy 패키지의 <code class="docutils literal notranslate"><span class="pre">dmatrix</span></code> 함수를 사용하면 이러한 범주값 인코딩을 쉽게 할 수 있다.</p>
+<p>patsy 패키지의 <code class="docutils literal notranslate"><span class="pre">dmatrix</span></code> 함수를 사용하면 이러한 범주값 인코딩을 쉽게 할 수 있다. dmatrix라는 이름은 설계행렬(design matrix)의 축약어로부터 왔다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrix</span>
@@ -1249,9 +1249,9 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 <p><code class="docutils literal notranslate"><span class="pre">dmatrix</span></code> 함수는 모형 문자열과 독립변수행렬의 두가지 입력변수를 가진다.</p>
 <ul class="simple">
 <li><p>첫번째 입력변수 : 모형 문자열</p></li>
-<li><p>두번재 입력변수 : 독립변수행렬</p></li>
+<li><p>두번째 입력변수 : 독립변수행렬</p></li>
 </ul>
-<p>모형 문자열(formula string)은 독립변수 이름을 나열한 문자열이다. 독립변수와 독립변수 사이에는 <code class="docutils literal notranslate"><span class="pre">+</span></code> 기호를 넣어야 한다. 띄어쓰기는 무시되므로 아무렇게나 넣어도 된다.
+<p><b>모형문자열(formula string)</b>은 독립변수 이름을 나열한 문자열이다. 독립변수와 독립변수 사이에는 <code class="docutils literal notranslate"><span class="pre">+</span></code> 기호를 넣어야 한다. 띄어쓰기는 무시되므로 아무렇게나 넣어도 된다.
 예를 들어 팁 데이터 전체가 들어있는 tips 데이터프레임에서 total_bill과 size만 독립변수로 사용하는 경우 모형 문자열은 다음과 같아진다.</p>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="s2">&quot;total_bill + size&quot;</span>
 </pre></div>
@@ -1435,16 +1435,16 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 </div>
 </div>
 </div>
-<p>이 값이 1이 되도록 조정하려면 모든 total_bill 값에서 평균인 19.786을 빼고 표준편차인 8.9로 나누면 된다.</p>
+<p>데이터의 평균이 0이 되고 표준편차가 1이 되도록 조정하려면 모든 total_bill 데이터 값에서 원래 평균인 19.786을 빼고 원래 표준편차인 8.9로 나누면 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_total_bill</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">-</span> <span class="mf">19.786</span><span class="p">)</span><span class="o">/</span> <span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-<span class="n">scaled_total_bill</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">scaled_total_bill</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<span class="n">scaled_total_bill</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">scaled_total_bill</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-6.4451127933258685e-06, 1.0)
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.0, 1.0)
 </pre></div>
 </div>
 </div>
