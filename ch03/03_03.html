@@ -277,22 +277,27 @@ const thebe_selector_output = ".output, .cell_output"
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_09.html">
-     3.9. 아웃라이어와 영향도
+     3.9. 레버리지와 아웃라이어
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_10.html">
-     3.10. 스케일링과 다중공선성
+     3.10. 모형진단과 다항회귀
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_11.html">
-     3.11. 비선형회귀분석
+     3.11. 과최적화와 정규화
     </a>
    </li>
    <li class="toctree-l2">
     <a class="reference internal" href="03_12.html">
-     3.12. 과최적화와 정규화
+     3.12. 스케일링과 다중공선성
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="03_13.html">
+     3.13. 범주형 독립변수
     </a>
    </li>
   </ul>
@@ -835,7 +840,7 @@ title="Print to PDF"
 <li><p>독립변수는 행렬 <span class="math notranslate nohighlight">\(X\)</span> 형식으로</p></li>
 </ul>
 <p>변환한다.</p>
-<p>우선 종속변수인 <span class="math notranslate nohighlight">\(y_i\)</span>값을 모아서 벡터 <span class="math notranslate nohighlight">\(y\)</span>를 만든다.</p>
+<p>우선 종속변수인 <span class="math notranslate nohighlight">\(y_i\)</span>값을 모아서 종속변수 벡터 <span class="math notranslate nohighlight">\(y\)</span>를 만든다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} 
 \mathbf{y}
@@ -847,7 +852,7 @@ y_2 \\
 y_N \\
 \end{bmatrix}
 \end{split}\]</div>
-<p>다음으로 <span class="math notranslate nohighlight">\(N\)</span>개의 <span class="math notranslate nohighlight">\(j\)</span>번째 독립변수 <span class="math notranslate nohighlight">\(x_{ij}\)</span> 데이터를 모아서 벡터 <span class="math notranslate nohighlight">\(x_j\)</span>를 만든다.</p>
+<p>다음으로 <span class="math notranslate nohighlight">\(N\)</span>개의 <span class="math notranslate nohighlight">\(j\)</span>번째 독립변수 <span class="math notranslate nohighlight">\(x_{ij}\)</span> 데이터를 모아서 독립변수 벡터 <span class="math notranslate nohighlight">\(x_j\)</span>를 만든다.</p>
 <div class="math notranslate nohighlight">
 \[\begin{split} 
 x_j
