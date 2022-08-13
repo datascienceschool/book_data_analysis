@@ -497,6 +497,11 @@ title="Print to PDF"
    3.12.2. 다중공선성
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.12.3. 선형종속
+  </a>
+ </li>
 </ul>
 
     </nav>
@@ -526,6 +531,11 @@ title="Print to PDF"
    3.12.2. 다중공선성
   </a>
  </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id4">
+   3.12.3. 선형종속
+  </a>
+ </li>
 </ul>
 
                         </nav>
@@ -538,7 +548,7 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.12. </span>스케일링과 다중공선성<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>지금까지 선형회귀분석을 할 때 항상 독립변수값의 평균을 0, 분산을 1로 만드는 스케일링(scaling)을 하도록 권장하였다. 이 절에서는 스케일링이 어떤 영향을 미치고 왜 필요한 것인지를 설명한다. 또한 독립변수간의 상관관계도 회귀분석에 어떤 영향을 미칠 수 있는지 공부한다.</p>
+<p>지금까지 선형회귀분석을 할 때 항상 독립변수값의 평균을 0, 분산을 1로 만드는 스케일링(scaling)을 하도록 권장하였다. 이 절에서는 스케일링이 회귀분석에 어떤 영향을 미치고 왜 필요한 것인지를 설명한다. 또한 독립변수간의 상관관계의 영향도 같이 공부한다.</p>
 <section id="id2">
 <h2><span class="section-number">3.12.1. </span>스케일링<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>독립변수의 값은 사용하는 단위에 따라 아주 작은 값이 될 수도 있고 아주 큰 값이 될 수도 있다. 이러한 단위를 재설정하여 독립변수의 평균을 0, 분산을 1로 만드는 작업을 스케일링이라고 한다고 설명하였다. 실제로 보스턴 집값 데이터를 사용하여 스케일링의 영향을 살펴보자.</p>
@@ -547,7 +557,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="p">[[</span><span class="s2">&quot;nox&quot;</span><span class="p">,</span> <span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="s2">&quot;medv&quot;</span><span class="p">]]</span>
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
 </pre></div>
 </div>
 </div>
@@ -567,8 +577,8 @@ title="Print to PDF"
 Dep. Variable:                   medv   R-squared:                       0.243
 Model:                            OLS   Adj. R-squared:                  0.240
 Method:                 Least Squares   F-statistic:                     80.79
-Date:                Fri, 12 Aug 2022   Prob (F-statistic):           3.75e-31
-Time:                        15:44:44   Log-Likelihood:                -1769.8
+Date:                Sat, 13 Aug 2022   Prob (F-statistic):           3.75e-31
+Time:                        16:26:20   Log-Likelihood:                -1769.8
 No. Observations:                 506   AIC:                             3546.
 Df Residuals:                     503   BIC:                             3558.
 Df Model:                           2                                         
@@ -607,8 +617,8 @@ Notes:
 Dep. Variable:                   medv   R-squared:                       0.243
 Model:                            OLS   Adj. R-squared:                  0.240
 Method:                 Least Squares   F-statistic:                     80.79
-Date:                Fri, 12 Aug 2022   Prob (F-statistic):           3.75e-31
-Time:                        15:44:44   Log-Likelihood:                -1769.8
+Date:                Sat, 13 Aug 2022   Prob (F-statistic):           3.75e-31
+Time:                        16:26:20   Log-Likelihood:                -1769.8
 No. Observations:                 506   AIC:                             3546.
 Df Residuals:                     503   BIC:                             3558.
 Df Model:                           2                                         
@@ -677,18 +687,19 @@ strong multicollinearity or other numerical problems.
 </pre></div>
 </div>
 <p>선형회귀분석에서 조건수는 선형회귀분석 결과의 <b>수치적 안정성(numerical stability)</b>을 나타내는 값이다. 수치적 안정성이라는 것은 우리가 선형회귀분석에 사용한 독립변수값에 오류가 있었을 경우 이 오류에 얼마나 민감하게 반응하는가를 나타낸다.</p>
-<p>우리가 분석에 사용하는 독립변수의 값은 측정에 의한 것이므로 반올림 오차 등을 포함한 노이즈(noise) 오차를 항상 어느정도 가지게 된다. 조건수가 클수록 수치적 안정성이 떨어져 오차에 대해 더 민감하게 반응한다.</p>
+<p>우리가 분석에 사용하는 독립변수의 값은 측정에 의한 것이므로 반올림 오차 등을 포함한 노이즈(noise) 오차를 항상 어느정도 가지게 된다. 조건수가 크면 수치적 안정성이 떨어져 오차에 대해 더 민감하게 반응한다.</p>
 <p>예시를 위해 우리가 가진 보스턴 집값 데이터에 일부러 어느정도 노이즈 오차를 추가해 보았다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">rand</span>
 
-<span class="n">boston_noise</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">boston_nox_tax</span> <span class="o">=</span> <span class="n">boston</span><span class="p">[[</span><span class="s2">&quot;nox&quot;</span><span class="p">,</span> <span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="s2">&quot;medv&quot;</span><span class="p">]]</span>
+<span class="n">boston_noise</span> <span class="o">=</span> <span class="n">boston_nox_tax</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
 <span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;tax&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;tax&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.01</span>
-<span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;nox&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;nox&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.01</span>
+<span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;tax&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;tax&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boston_nox_tax</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.01</span>
+<span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;nox&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;nox&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boston_nox_tax</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.01</span>
 
-<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">boston</span><span class="p">,</span> <span class="n">boston_noise</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;원본&quot;</span><span class="p">,</span> <span class="s2">&quot;노이즈 오차 추가&quot;</span><span class="p">])</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">boston_nox_tax</span><span class="p">,</span> <span class="n">boston_noise</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;원본&quot;</span><span class="p">,</span> <span class="s2">&quot;노이즈 오차 추가&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -954,8 +965,261 @@ strong multicollinearity or other numerical problems.
 </section>
 <section id="id3">
 <h2><span class="section-number">3.12.2. </span>다중공선성<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>다음으로 스케일링을 하지 않았을 때 나타난 주의사항에서 언급된 “다중공선성”이란 용어에 대해 설명한다. <b>다중공선성(multi-collinearity)</b>은 독립변수 사이에 강한 상관관계가 있음을 의미한다. 일반적으로 독립변수들은 상관관계가 강할수록 회귀분석에 나쁜 영향을 미친다. 최악의 경우는 상관계수가 1이거나 선형종속관계가 있는 경우다.</p>
-<p><b>선형종속(linearly-dependent)</b>이란 하나 이상의 독립변수를 선형조합(linear-combination)하면 다른 독립변수와 같아지는 것을 의미한다. 수식으로 나타내면 다음과 같다.</p>
+<p>다음으로 스케일링을 하지 않았을 때 나타난 주의사항에서 언급된 “다중공선성”이란 용어에 대해 설명한다. <b>다중공선성(multi-collinearity)</b>은 독립변수 사이에 강한 상관관계가 있음을 의미한다. 다중공선성은 회귀분석에 다음과 같은 나쁜 영향을 미친다.</p>
+<ul class="simple">
+<li><p>스케일링을 하지 않았을 때처럼 가중치 계산의 수치적 안정성을 악화시킨다.</p></li>
+<li><p>과최적화가 발생했을 때처럼 검증성능을 악화시킨다.</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_train</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">250</span><span class="p">]</span>
+<span class="n">boston_test</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">250</span><span class="p">:</span><span class="mi">500</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula1</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> \
+    <span class="s2">&quot;scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(tax)&quot;</span> \
+    <span class="s2">&quot;+ C(chas) + scale(black) + scale(zn) + scale(crim) + scale(nox)&quot;</span>
+
+<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula1</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.844
+Model:                            OLS   Adj. R-squared:                  0.838
+Method:                 Least Squares   F-statistic:                     129.7
+Date:                Sat, 13 Aug 2022   Prob (F-statistic):           1.30e-90
+Time:                        16:26:20   Log-Likelihood:                -653.17
+No. Observations:                 250   AIC:                             1328.
+Df Residuals:                     239   BIC:                             1367.
+Df Model:                          10                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept         24.2502      0.223    108.553      0.000      23.810      24.690
+C(chas)[T.1]       0.4225      0.825      0.512      0.609      -1.203       2.048
+scale(lstat)      -1.3636      0.339     -4.023      0.000      -2.031      -0.696
+scale(rm)          5.5519      0.318     17.451      0.000       4.925       6.179
+scale(ptratio)    -1.5624      0.274     -5.703      0.000      -2.102      -1.023
+scale(dis)        -1.6825      0.376     -4.479      0.000      -2.423      -0.942
+scale(tax)        -1.0417      0.255     -4.088      0.000      -1.544      -0.540
+scale(black)       0.7918      0.252      3.141      0.002       0.295       1.288
+scale(zn)          0.6537      0.317      2.060      0.040       0.029       1.279
+scale(crim)        0.8220      0.382      2.152      0.032       0.070       1.574
+scale(nox)        -1.2513      0.482     -2.595      0.010      -2.201      -0.301
+==============================================================================
+Omnibus:                       15.247   Durbin-Watson:                   1.367
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               17.144
+Skew:                           0.528   Prob(JB):                     0.000189
+Kurtosis:                       3.727   Cond. No.                         7.48
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">boston_train</span><span class="o">.</span><span class="n">medv</span>
+<span class="n">y_test</span> <span class="o">=</span> <span class="n">boston_test</span><span class="o">.</span><span class="n">medv</span>
+
+<span class="n">y_train_pred1</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
+<span class="n">y_test_pred1</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_test</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
+
+<span class="n">rss_train1</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_train</span> <span class="o">-</span> <span class="n">y_train_pred1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">rss_test1</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_test_pred1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s2">&quot;학습 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형1)&quot;</span><span class="p">],</span> <span class="p">[</span><span class="n">rss_train1</span><span class="p">,</span> <span class="n">rss_test1</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_12_23_0.png" src="../_images/03_12_23_0.png" />
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+
+<span class="n">X</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span>
+<span class="n">X_names</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span>
+
+<span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
+<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_names</span>
+<span class="n">vif</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>VIF Factor</th>
+      <th>features</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>10</th>
+      <td>5.106064</td>
+      <td>scale(nox)</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>3.202863</td>
+      <td>scale(crim)</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>3.098666</td>
+      <td>scale(dis)</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.522302</td>
+      <td>scale(lstat)</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>2.222020</td>
+      <td>scale(rm)</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2.209713</td>
+      <td>scale(zn)</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.647898</td>
+      <td>scale(ptratio)</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1.425651</td>
+      <td>scale(tax)</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>1.395356</td>
+      <td>scale(black)</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1.099592</td>
+      <td>C(chas)[T.1]</td>
+    </tr>
+    <tr>
+      <th>0</th>
+      <td>1.095617</td>
+      <td>Intercept</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula2</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> \
+    <span class="s2">&quot;scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(tax)&quot;</span> \
+    <span class="s2">&quot;+ C(chas) + scale(black) + scale(zn) + scale(crim)&quot;</span>
+
+<span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula2</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.840
+Model:                            OLS   Adj. R-squared:                  0.834
+Method:                 Least Squares   F-statistic:                     140.0
+Date:                Sat, 13 Aug 2022   Prob (F-statistic):           2.89e-90
+Time:                        16:26:20   Log-Likelihood:                -656.65
+No. Observations:                 250   AIC:                             1333.
+Df Residuals:                     240   BIC:                             1369.
+Df Model:                           9                                         
+Covariance Type:            nonrobust                                         
+==================================================================================
+                     coef    std err          t      P&gt;|t|      [0.025      0.975]
+----------------------------------------------------------------------------------
+Intercept         24.2515      0.226    107.286      0.000      23.806      24.697
+C(chas)[T.1]       0.4064      0.835      0.487      0.627      -1.238       2.051
+scale(lstat)      -1.5139      0.338     -4.480      0.000      -2.180      -0.848
+scale(rm)          5.6766      0.318     17.839      0.000       5.050       6.304
+scale(ptratio)    -1.3944      0.269     -5.176      0.000      -1.925      -0.864
+scale(dis)        -1.1828      0.326     -3.624      0.000      -1.826      -0.540
+scale(tax)        -1.1461      0.255     -4.501      0.000      -1.648      -0.644
+scale(black)       0.8424      0.254      3.312      0.001       0.341       1.343
+scale(zn)          0.6707      0.321      2.090      0.038       0.038       1.303
+scale(crim)        0.2849      0.325      0.877      0.381      -0.355       0.925
+==============================================================================
+Omnibus:                       19.113   Durbin-Watson:                   1.373
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               23.813
+Skew:                           0.573   Prob(JB):                     6.75e-06
+Kurtosis:                       3.986   Cond. No.                         6.68
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train_pred2</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
+<span class="n">y_test_pred2</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_test</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
+
+<span class="n">rss_train2</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_train</span> <span class="o">-</span> <span class="n">y_train_pred2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<span class="n">rss_test2</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_test_pred2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s2">&quot;학습 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 잔차제곱합 (모형2)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형2)&quot;</span><span class="p">],</span> 
+        <span class="p">[</span><span class="n">rss_train1</span><span class="p">,</span> <span class="n">rss_test1</span><span class="p">,</span> <span class="n">rss_train2</span><span class="p">,</span> <span class="n">rss_test2</span><span class="p">])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/03_12_27_0.png" src="../_images/03_12_27_0.png" />
+</div>
+</div>
+</section>
+<section id="id4">
+<h2><span class="section-number">3.12.3. </span>선형종속<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<p>다중공선성의 가장 극단적인 경우는 독립변수간에 선형종속 관계가 있는 경우다. <b>선형종속(linearly-dependent)</b>이란 하나 이상의 독립변수를 선형조합(linear-combination)하면 다른 독립변수와 같아지는 것을 의미한다. 수식으로 나타내면 다음과 같다.</p>
 <div class="math notranslate nohighlight">
 \[
 c_1 x_1 + c_2 x_2 + c_3 x_3 + \cdots + c_J x_J = 0
@@ -977,104 +1241,7 @@ x_1 - c x_2 = 0 \;\; \leftrightarrow \;\; x_1 = c x_2
 x_1 + x_2 + x_3 - x_4 = 0 \;\; \leftrightarrow \;\; x_4 = x_1 + x_2 + x_3
 \]</div>
 <p>이 경우에는 <span class="math notranslate nohighlight">\(X^TX\)</span> 행렬의 역행렬이 존재하지 않으므로 수학적으로는 선형회귀분석의 가중치가 존재하지 않는다.</p>
-<p>실제로 보스턴 집값 데이터를 사용하여 위와 같은 경우를 실행해보자.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_case1</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">boston_case1</span><span class="p">[</span><span class="s2">&quot;nox10&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boston_case1</span><span class="o">.</span><span class="n">nox</span> <span class="o">*</span> <span class="mi">10</span>
-
-<span class="n">result_case1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ nox + nox10&quot;</span><span class="p">,</span> <span class="n">boston_case1</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result_case1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                   medv   R-squared:                       0.183
-Model:                            OLS   Adj. R-squared:                  0.181
-Method:                 Least Squares   F-statistic:                     112.6
-Date:                Fri, 12 Aug 2022   Prob (F-statistic):           7.07e-24
-Time:                        18:00:43   Log-Likelihood:                -1789.2
-No. Observations:                 506   AIC:                             3582.
-Df Residuals:                     504   BIC:                             3591.
-Df Model:                           1                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-Intercept     41.3459      1.811     22.828      0.000      37.787      44.904
-nox           -0.3358      0.032    -10.611      0.000      -0.398      -0.274
-nox10         -3.3580      0.316    -10.611      0.000      -3.980      -2.736
-==============================================================================
-Omnibus:                      165.520   Durbin-Watson:                   0.643
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              430.900
-Skew:                           1.641   Prob(JB):                     2.70e-94
-Kurtosis:                       6.109   Cond. No.                     1.23e+16
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The smallest eigenvalue is 1.12e-28. This might indicate that there are
-strong multicollinearity problems or that the design matrix is singular.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_case2</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">boston_case2</span><span class="p">[</span><span class="s2">&quot;nox_tax&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">boston_case2</span><span class="o">.</span><span class="n">nox</span> <span class="o">+</span> <span class="n">boston_case2</span><span class="o">.</span><span class="n">tax</span>
-
-<span class="n">result_case2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ nox + tax + nox_tax&quot;</span><span class="p">,</span> <span class="n">boston_case2</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result_case2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                   medv   R-squared:                       0.243
-Model:                            OLS   Adj. R-squared:                  0.240
-Method:                 Least Squares   F-statistic:                     80.79
-Date:                Fri, 12 Aug 2022   Prob (F-statistic):           3.75e-31
-Time:                        18:00:43   Log-Likelihood:                -1769.8
-No. Observations:                 506   AIC:                             3546.
-Df Residuals:                     503   BIC:                             3558.
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-==============================================================================
-                 coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------
-Intercept     38.9878      1.784     21.857      0.000      35.483      42.492
-nox          -10.9185      2.759     -3.958      0.000     -16.339      -5.498
-tax            5.4502      1.380      3.948      0.000       2.738       8.162
-nox_tax       -5.4683      1.378     -3.967      0.000      -8.177      -2.760
-==============================================================================
-Omnibus:                      187.216   Durbin-Watson:                   0.669
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              584.265
-Skew:                           1.773   Prob(JB):                    1.34e-127
-Kurtosis:                       6.891   Cond. No.                     8.21e+15
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-[2] The smallest eigenvalue is 2.93e-24. This might indicate that there are
-strong multicollinearity problems or that the design matrix is singular.
-</pre></div>
-</div>
-</div>
-</div>
-<p>실행이 되어 가중치가 계산되어 나왔지만 조건수가 아주 커지고 다음과 같은 주의사항이 출력되었다.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">The</span> <span class="n">smallest</span> <span class="n">eigenvalue</span> <span class="ow">is</span> <span class="n">xxxx</span><span class="o">.</span> <span class="n">This</span> <span class="n">might</span> <span class="n">indicate</span> <span class="n">that</span> <span class="n">there</span> <span class="n">are</span>
-<span class="n">strong</span> <span class="n">multicollinearity</span> <span class="n">problems</span> <span class="ow">or</span> <span class="n">that</span> <span class="n">the</span> <span class="n">design</span> <span class="n">matrix</span> <span class="ow">is</span> <span class="n">singular</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>해석하면 다음과 같다.</p>
-<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="n">가장</span> <span class="n">작은</span> <span class="n">고유값이</span> <span class="n">xxxx이다</span><span class="o">.</span> <span class="n">강한</span> <span class="n">다중공선성이</span> <span class="n">있거나</span> <span class="n">실험행렬이</span> <span class="n">특이행렬</span><span class="p">(</span><span class="n">singular</span> <span class="n">matrix</span><span class="p">)</span><span class="n">이다</span><span class="o">.</span>
-</pre></div>
-</div>
-<p>특이행렬(singular matrix)은 역행렬이 존재하지 않는 행렬을 말한다. 이 경우 수학적으로는 원래 가중치 계산 자체가 되면 안되지만 현실에서는 미세한 수치적 차이로 인해 대부분의 경우 가중치가 계산되어 나오는 경우가 많다.</p>
+<p>실제로 보스턴 집값 데이터를 사용하여 위와 같은 경우를 실행해보자. 교차검증을 위해 전체 데이터를 학습 데이터와 검증 데이터로 나눈다.</p>
 </section>
 </section>
 
