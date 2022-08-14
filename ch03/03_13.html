@@ -550,7 +550,7 @@ title="Print to PDF"
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 <span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -586,38 +586,28 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>0</th>
-      <td>28.97</td>
-      <td>3.00</td>
+      <td>17.59</td>
+      <td>2.64</td>
       <td>Male</td>
-      <td>Yes</td>
-      <td>Fri</td>
-      <td>Dinner</td>
-      <td>2</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>15.06</td>
-      <td>3.00</td>
-      <td>Female</td>
       <td>No</td>
       <td>Sat</td>
       <td>Dinner</td>
-      <td>2</td>
+      <td>3</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>30.14</td>
-      <td>3.09</td>
-      <td>Female</td>
+      <th>1</th>
+      <td>18.29</td>
+      <td>3.76</td>
+      <td>Male</td>
       <td>Yes</td>
       <td>Sat</td>
       <td>Dinner</td>
       <td>4</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>23.95</td>
-      <td>2.55</td>
+      <th>2</th>
+      <td>19.49</td>
+      <td>3.51</td>
       <td>Male</td>
       <td>No</td>
       <td>Sun</td>
@@ -625,12 +615,22 @@ title="Print to PDF"
       <td>2</td>
     </tr>
     <tr>
+      <th>3</th>
+      <td>7.25</td>
+      <td>1.00</td>
+      <td>Female</td>
+      <td>No</td>
+      <td>Sat</td>
+      <td>Dinner</td>
+      <td>1</td>
+    </tr>
+    <tr>
       <th>4</th>
-      <td>16.00</td>
-      <td>2.00</td>
-      <td>Male</td>
+      <td>16.27</td>
+      <td>2.50</td>
+      <td>Female</td>
       <td>Yes</td>
-      <td>Thur</td>
+      <td>Fri</td>
       <td>Lunch</td>
       <td>2</td>
     </tr>
@@ -699,13 +699,13 @@ title="Print to PDF"
   <tbody>
     <tr>
       <th>Male</th>
-      <td>2.844828</td>
-      <td>1.323275</td>
+      <td>3.089618</td>
+      <td>1.489102</td>
     </tr>
     <tr>
       <th>Female</th>
-      <td>2.701190</td>
-      <td>1.168316</td>
+      <td>2.833448</td>
+      <td>1.159495</td>
     </tr>
   </tbody>
 </table>
@@ -724,25 +724,25 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.003
-Model:                            OLS   Adj. R-squared:                 -0.007
-Method:                 Least Squares   F-statistic:                    0.3162
-Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.575
-Time:                        15:29:01   Log-Likelihood:                -164.06
-No. Observations:                 100   AIC:                             332.1
-Df Residuals:                      98   BIC:                             337.3
+Dep. Variable:                    tip   R-squared:                       0.008
+Model:                            OLS   Adj. R-squared:                  0.004
+Method:                 Least Squares   F-statistic:                     1.926
+Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.166
+Time:                        15:31:22   Log-Likelihood:                -423.98
+No. Observations:                 244   AIC:                             852.0
+Df Residuals:                     242   BIC:                             859.0
 Df Model:                           1                                         
 Covariance Type:            nonrobust                                         
 ====================================================================================
                        coef    std err          t      P&gt;|t|      [0.025      0.975]
 ------------------------------------------------------------------------------------
-Intercept            2.8448      0.166     17.184      0.000       2.516       3.173
-C(sex)[T.Female]    -0.1436      0.255     -0.562      0.575      -0.651       0.363
+Intercept            3.0896      0.110     28.032      0.000       2.873       3.307
+C(sex)[T.Female]    -0.2562      0.185     -1.388      0.166      -0.620       0.107
 ==============================================================================
-Omnibus:                       23.004   Durbin-Watson:                   1.808
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               30.408
-Skew:                           1.161   Prob(JB):                     2.49e-07
-Kurtosis:                       4.380   Cond. No.                         2.47
+Omnibus:                       75.995   Durbin-Watson:                   1.922
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              194.975
+Skew:                           1.415   Prob(JB):                     4.59e-43
+Kurtosis:                       6.342   Cond. No.                         2.42
 ==============================================================================
 
 Notes:
@@ -767,73 +767,73 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_e5b33_row0_col0, #T_e5b33_row1_col0, #T_e5b33_row1_col1, #T_e5b33_row2_col0, #T_e5b33_row2_col1, #T_e5b33_row3_col0, #T_e5b33_row4_col0, #T_e5b33_row5_col0, #T_e5b33_row6_col0, #T_e5b33_row6_col1, #T_e5b33_row7_col0, #T_e5b33_row8_col0, #T_e5b33_row8_col1, #T_e5b33_row9_col0, #T_e5b33_row9_col1 {
+#T_b73d8_row0_col0, #T_b73d8_row1_col0, #T_b73d8_row2_col0, #T_b73d8_row3_col0, #T_b73d8_row3_col1, #T_b73d8_row4_col0, #T_b73d8_row4_col1, #T_b73d8_row5_col0, #T_b73d8_row5_col1, #T_b73d8_row6_col0, #T_b73d8_row7_col0, #T_b73d8_row8_col0, #T_b73d8_row8_col1, #T_b73d8_row9_col0 {
   background-color: #023858;
   color: #f1f1f1;
 }
-#T_e5b33_row0_col1, #T_e5b33_row3_col1, #T_e5b33_row4_col1, #T_e5b33_row5_col1, #T_e5b33_row7_col1 {
+#T_b73d8_row0_col1, #T_b73d8_row1_col1, #T_b73d8_row2_col1, #T_b73d8_row6_col1, #T_b73d8_row7_col1, #T_b73d8_row9_col1 {
   background-color: #fff7fb;
   color: #000000;
 }
 </style>
-<table id="T_e5b33">
+<table id="T_b73d8">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_e5b33_level0_col0" class="col_heading level0 col0" >Intercept</th>
-      <th id="T_e5b33_level0_col1" class="col_heading level0 col1" >C(sex)[T.Female]</th>
+      <th id="T_b73d8_level0_col0" class="col_heading level0 col0" >Intercept</th>
+      <th id="T_b73d8_level0_col1" class="col_heading level0 col1" >C(sex)[T.Female]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_e5b33_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_e5b33_row0_col0" class="data row0 col0" >1</td>
-      <td id="T_e5b33_row0_col1" class="data row0 col1" >0</td>
+      <th id="T_b73d8_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_b73d8_row0_col0" class="data row0 col0" >1</td>
+      <td id="T_b73d8_row0_col1" class="data row0 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_e5b33_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_e5b33_row1_col0" class="data row1 col0" >1</td>
-      <td id="T_e5b33_row1_col1" class="data row1 col1" >1</td>
+      <th id="T_b73d8_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_b73d8_row1_col0" class="data row1 col0" >1</td>
+      <td id="T_b73d8_row1_col1" class="data row1 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_e5b33_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_e5b33_row2_col0" class="data row2 col0" >1</td>
-      <td id="T_e5b33_row2_col1" class="data row2 col1" >1</td>
+      <th id="T_b73d8_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_b73d8_row2_col0" class="data row2 col0" >1</td>
+      <td id="T_b73d8_row2_col1" class="data row2 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_e5b33_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_e5b33_row3_col0" class="data row3 col0" >1</td>
-      <td id="T_e5b33_row3_col1" class="data row3 col1" >0</td>
+      <th id="T_b73d8_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_b73d8_row3_col0" class="data row3 col0" >1</td>
+      <td id="T_b73d8_row3_col1" class="data row3 col1" >1</td>
     </tr>
     <tr>
-      <th id="T_e5b33_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_e5b33_row4_col0" class="data row4 col0" >1</td>
-      <td id="T_e5b33_row4_col1" class="data row4 col1" >0</td>
+      <th id="T_b73d8_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_b73d8_row4_col0" class="data row4 col0" >1</td>
+      <td id="T_b73d8_row4_col1" class="data row4 col1" >1</td>
     </tr>
     <tr>
-      <th id="T_e5b33_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_e5b33_row5_col0" class="data row5 col0" >1</td>
-      <td id="T_e5b33_row5_col1" class="data row5 col1" >0</td>
+      <th id="T_b73d8_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_b73d8_row5_col0" class="data row5 col0" >1</td>
+      <td id="T_b73d8_row5_col1" class="data row5 col1" >1</td>
     </tr>
     <tr>
-      <th id="T_e5b33_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_e5b33_row6_col0" class="data row6 col0" >1</td>
-      <td id="T_e5b33_row6_col1" class="data row6 col1" >1</td>
+      <th id="T_b73d8_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_b73d8_row6_col0" class="data row6 col0" >1</td>
+      <td id="T_b73d8_row6_col1" class="data row6 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_e5b33_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_e5b33_row7_col0" class="data row7 col0" >1</td>
-      <td id="T_e5b33_row7_col1" class="data row7 col1" >0</td>
+      <th id="T_b73d8_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_b73d8_row7_col0" class="data row7 col0" >1</td>
+      <td id="T_b73d8_row7_col1" class="data row7 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_e5b33_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_e5b33_row8_col0" class="data row8 col0" >1</td>
-      <td id="T_e5b33_row8_col1" class="data row8 col1" >1</td>
+      <th id="T_b73d8_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_b73d8_row8_col0" class="data row8 col0" >1</td>
+      <td id="T_b73d8_row8_col1" class="data row8 col1" >1</td>
     </tr>
     <tr>
-      <th id="T_e5b33_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_e5b33_row9_col0" class="data row9 col0" >1</td>
-      <td id="T_e5b33_row9_col1" class="data row9 col1" >1</td>
+      <th id="T_b73d8_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_b73d8_row9_col0" class="data row9 col0" >1</td>
+      <td id="T_b73d8_row9_col1" class="data row9 col1" >0</td>
     </tr>
   </tbody>
 </table>
@@ -850,25 +850,25 @@ Notes:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.003
-Model:                            OLS   Adj. R-squared:                 -0.007
-Method:                 Least Squares   F-statistic:                    0.3162
-Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.575
-Time:                        15:29:01   Log-Likelihood:                -164.06
-No. Observations:                 100   AIC:                             332.1
-Df Residuals:                      98   BIC:                             337.3
+Dep. Variable:                    tip   R-squared:                       0.008
+Model:                            OLS   Adj. R-squared:                  0.004
+Method:                 Least Squares   F-statistic:                     1.926
+Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.166
+Time:                        15:31:22   Log-Likelihood:                -423.98
+No. Observations:                 244   AIC:                             852.0
+Df Residuals:                     242   BIC:                             859.0
 Df Model:                           1                                         
 Covariance Type:            nonrobust                                         
 ==================================================================================
                      coef    std err          t      P&gt;|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-C(sex)[Male]       2.8448      0.166     17.184      0.000       2.516       3.173
-C(sex)[Female]     2.7012      0.195     13.885      0.000       2.315       3.087
+C(sex)[Male]       3.0896      0.110     28.032      0.000       2.873       3.307
+C(sex)[Female]     2.8334      0.148     19.137      0.000       2.542       3.125
 ==============================================================================
-Omnibus:                       23.004   Durbin-Watson:                   1.808
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               30.408
-Skew:                           1.161   Prob(JB):                     2.49e-07
-Kurtosis:                       4.380   Cond. No.                         1.18
+Omnibus:                       75.995   Durbin-Watson:                   1.922
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              194.975
+Skew:                           1.415   Prob(JB):                     4.59e-43
+Kurtosis:                       6.342   Cond. No.                         1.34
 ==============================================================================
 
 Notes:
@@ -886,73 +886,73 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_bd045_row0_col0, #T_bd045_row1_col1, #T_bd045_row2_col1, #T_bd045_row3_col0, #T_bd045_row4_col0, #T_bd045_row5_col0, #T_bd045_row6_col1, #T_bd045_row7_col0, #T_bd045_row8_col1, #T_bd045_row9_col1 {
+#T_ff8f7_row0_col0, #T_ff8f7_row1_col0, #T_ff8f7_row2_col0, #T_ff8f7_row3_col1, #T_ff8f7_row4_col1, #T_ff8f7_row5_col1, #T_ff8f7_row6_col0, #T_ff8f7_row7_col0, #T_ff8f7_row8_col1, #T_ff8f7_row9_col0 {
   background-color: #023858;
   color: #f1f1f1;
 }
-#T_bd045_row0_col1, #T_bd045_row1_col0, #T_bd045_row2_col0, #T_bd045_row3_col1, #T_bd045_row4_col1, #T_bd045_row5_col1, #T_bd045_row6_col0, #T_bd045_row7_col1, #T_bd045_row8_col0, #T_bd045_row9_col0 {
+#T_ff8f7_row0_col1, #T_ff8f7_row1_col1, #T_ff8f7_row2_col1, #T_ff8f7_row3_col0, #T_ff8f7_row4_col0, #T_ff8f7_row5_col0, #T_ff8f7_row6_col1, #T_ff8f7_row7_col1, #T_ff8f7_row8_col0, #T_ff8f7_row9_col1 {
   background-color: #fff7fb;
   color: #000000;
 }
 </style>
-<table id="T_bd045">
+<table id="T_ff8f7">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_bd045_level0_col0" class="col_heading level0 col0" >C(sex)[Male]</th>
-      <th id="T_bd045_level0_col1" class="col_heading level0 col1" >C(sex)[Female]</th>
+      <th id="T_ff8f7_level0_col0" class="col_heading level0 col0" >C(sex)[Male]</th>
+      <th id="T_ff8f7_level0_col1" class="col_heading level0 col1" >C(sex)[Female]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_bd045_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_bd045_row0_col0" class="data row0 col0" >1</td>
-      <td id="T_bd045_row0_col1" class="data row0 col1" >0</td>
+      <th id="T_ff8f7_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_ff8f7_row0_col0" class="data row0 col0" >1</td>
+      <td id="T_ff8f7_row0_col1" class="data row0 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_bd045_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_bd045_row1_col0" class="data row1 col0" >0</td>
-      <td id="T_bd045_row1_col1" class="data row1 col1" >1</td>
+      <th id="T_ff8f7_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_ff8f7_row1_col0" class="data row1 col0" >1</td>
+      <td id="T_ff8f7_row1_col1" class="data row1 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_bd045_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_bd045_row2_col0" class="data row2 col0" >0</td>
-      <td id="T_bd045_row2_col1" class="data row2 col1" >1</td>
+      <th id="T_ff8f7_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_ff8f7_row2_col0" class="data row2 col0" >1</td>
+      <td id="T_ff8f7_row2_col1" class="data row2 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_bd045_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_bd045_row3_col0" class="data row3 col0" >1</td>
-      <td id="T_bd045_row3_col1" class="data row3 col1" >0</td>
+      <th id="T_ff8f7_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_ff8f7_row3_col0" class="data row3 col0" >0</td>
+      <td id="T_ff8f7_row3_col1" class="data row3 col1" >1</td>
     </tr>
     <tr>
-      <th id="T_bd045_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_bd045_row4_col0" class="data row4 col0" >1</td>
-      <td id="T_bd045_row4_col1" class="data row4 col1" >0</td>
+      <th id="T_ff8f7_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_ff8f7_row4_col0" class="data row4 col0" >0</td>
+      <td id="T_ff8f7_row4_col1" class="data row4 col1" >1</td>
     </tr>
     <tr>
-      <th id="T_bd045_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_bd045_row5_col0" class="data row5 col0" >1</td>
-      <td id="T_bd045_row5_col1" class="data row5 col1" >0</td>
+      <th id="T_ff8f7_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_ff8f7_row5_col0" class="data row5 col0" >0</td>
+      <td id="T_ff8f7_row5_col1" class="data row5 col1" >1</td>
     </tr>
     <tr>
-      <th id="T_bd045_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_bd045_row6_col0" class="data row6 col0" >0</td>
-      <td id="T_bd045_row6_col1" class="data row6 col1" >1</td>
+      <th id="T_ff8f7_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_ff8f7_row6_col0" class="data row6 col0" >1</td>
+      <td id="T_ff8f7_row6_col1" class="data row6 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_bd045_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_bd045_row7_col0" class="data row7 col0" >1</td>
-      <td id="T_bd045_row7_col1" class="data row7 col1" >0</td>
+      <th id="T_ff8f7_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_ff8f7_row7_col0" class="data row7 col0" >1</td>
+      <td id="T_ff8f7_row7_col1" class="data row7 col1" >0</td>
     </tr>
     <tr>
-      <th id="T_bd045_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_bd045_row8_col0" class="data row8 col0" >0</td>
-      <td id="T_bd045_row8_col1" class="data row8 col1" >1</td>
+      <th id="T_ff8f7_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_ff8f7_row8_col0" class="data row8 col0" >0</td>
+      <td id="T_ff8f7_row8_col1" class="data row8 col1" >1</td>
     </tr>
     <tr>
-      <th id="T_bd045_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_bd045_row9_col0" class="data row9 col0" >0</td>
-      <td id="T_bd045_row9_col1" class="data row9 col1" >1</td>
+      <th id="T_ff8f7_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_ff8f7_row9_col0" class="data row9 col0" >1</td>
+      <td id="T_ff8f7_row9_col1" class="data row9 col1" >0</td>
     </tr>
   </tbody>
 </table>
@@ -1018,23 +1018,23 @@ Notes:
   <tbody>
     <tr>
       <th>Thur</th>
-      <td>2.757308</td>
-      <td>1.259735</td>
+      <td>2.771452</td>
+      <td>1.240223</td>
     </tr>
     <tr>
       <th>Fri</th>
-      <td>2.588182</td>
-      <td>0.924844</td>
+      <td>2.734737</td>
+      <td>1.019577</td>
     </tr>
     <tr>
       <th>Sat</th>
-      <td>2.725313</td>
-      <td>1.396745</td>
+      <td>2.993103</td>
+      <td>1.631014</td>
     </tr>
     <tr>
       <th>Sun</th>
-      <td>2.938065</td>
-      <td>1.242115</td>
+      <td>3.255132</td>
+      <td>1.234880</td>
     </tr>
   </tbody>
 </table>
@@ -1051,27 +1051,27 @@ Notes:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.008
-Model:                            OLS   Adj. R-squared:                 -0.023
-Method:                 Least Squares   F-statistic:                    0.2656
-Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.850
-Time:                        15:29:01   Log-Likelihood:                -163.80
-No. Observations:                 100   AIC:                             335.6
-Df Residuals:                      96   BIC:                             346.0
+Dep. Variable:                    tip   R-squared:                       0.020
+Model:                            OLS   Adj. R-squared:                  0.008
+Method:                 Least Squares   F-statistic:                     1.672
+Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.174
+Time:                        15:31:23   Log-Likelihood:                -422.43
+No. Observations:                 244   AIC:                             852.9
+Df Residuals:                     240   BIC:                             866.8
 Df Model:                           3                                         
 Covariance Type:            nonrobust                                         
 =================================================================================
                     coef    std err          t      P&gt;|t|      [0.025      0.975]
 ---------------------------------------------------------------------------------
-Intercept         2.7573      0.249     11.065      0.000       2.263       3.252
-C(day)[T.Fri]    -0.1691      0.457     -0.370      0.712      -1.076       0.738
-C(day)[T.Sat]    -0.0320      0.335     -0.095      0.924      -0.698       0.634
-C(day)[T.Sun]     0.1808      0.338      0.535      0.594      -0.490       0.851
+Intercept         2.7715      0.175     15.837      0.000       2.427       3.116
+C(day)[T.Fri]    -0.0367      0.361     -0.102      0.919      -0.748       0.675
+C(day)[T.Sat]     0.2217      0.229      0.968      0.334      -0.229       0.673
+C(day)[T.Sun]     0.4837      0.236      2.051      0.041       0.019       0.948
 ==============================================================================
-Omnibus:                       23.855   Durbin-Watson:                   1.756
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               32.303
-Skew:                           1.179   Prob(JB):                     9.67e-08
-Kurtosis:                       4.481   Cond. No.                         4.96
+Omnibus:                       82.801   Durbin-Watson:                   1.932
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              238.276
+Skew:                           1.492   Prob(JB):                     1.82e-52
+Kurtosis:                       6.811   Cond. No.                         5.28
 ==============================================================================
 
 Notes:
@@ -1089,95 +1089,95 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_6b730_row0_col0, #T_6b730_row0_col1, #T_6b730_row1_col0, #T_6b730_row1_col2, #T_6b730_row2_col0, #T_6b730_row2_col2, #T_6b730_row3_col0, #T_6b730_row3_col3, #T_6b730_row4_col0, #T_6b730_row5_col0, #T_6b730_row6_col0, #T_6b730_row6_col2, #T_6b730_row7_col0, #T_6b730_row7_col2, #T_6b730_row8_col0, #T_6b730_row8_col2, #T_6b730_row9_col0 {
+#T_14987_row0_col0, #T_14987_row0_col2, #T_14987_row1_col0, #T_14987_row1_col2, #T_14987_row2_col0, #T_14987_row2_col3, #T_14987_row3_col0, #T_14987_row3_col2, #T_14987_row4_col0, #T_14987_row4_col1, #T_14987_row5_col0, #T_14987_row5_col1, #T_14987_row6_col0, #T_14987_row6_col2, #T_14987_row7_col0, #T_14987_row7_col3, #T_14987_row8_col0, #T_14987_row8_col3, #T_14987_row9_col0, #T_14987_row9_col3 {
   background-color: #023858;
   color: #f1f1f1;
 }
-#T_6b730_row0_col2, #T_6b730_row0_col3, #T_6b730_row1_col1, #T_6b730_row1_col3, #T_6b730_row2_col1, #T_6b730_row2_col3, #T_6b730_row3_col1, #T_6b730_row3_col2, #T_6b730_row4_col1, #T_6b730_row4_col2, #T_6b730_row4_col3, #T_6b730_row5_col1, #T_6b730_row5_col2, #T_6b730_row5_col3, #T_6b730_row6_col1, #T_6b730_row6_col3, #T_6b730_row7_col1, #T_6b730_row7_col3, #T_6b730_row8_col1, #T_6b730_row8_col3, #T_6b730_row9_col1, #T_6b730_row9_col2, #T_6b730_row9_col3 {
+#T_14987_row0_col1, #T_14987_row0_col3, #T_14987_row1_col1, #T_14987_row1_col3, #T_14987_row2_col1, #T_14987_row2_col2, #T_14987_row3_col1, #T_14987_row3_col3, #T_14987_row4_col2, #T_14987_row4_col3, #T_14987_row5_col2, #T_14987_row5_col3, #T_14987_row6_col1, #T_14987_row6_col3, #T_14987_row7_col1, #T_14987_row7_col2, #T_14987_row8_col1, #T_14987_row8_col2, #T_14987_row9_col1, #T_14987_row9_col2 {
   background-color: #fff7fb;
   color: #000000;
 }
 </style>
-<table id="T_6b730">
+<table id="T_14987">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_6b730_level0_col0" class="col_heading level0 col0" >Intercept</th>
-      <th id="T_6b730_level0_col1" class="col_heading level0 col1" >C(day)[T.Fri]</th>
-      <th id="T_6b730_level0_col2" class="col_heading level0 col2" >C(day)[T.Sat]</th>
-      <th id="T_6b730_level0_col3" class="col_heading level0 col3" >C(day)[T.Sun]</th>
+      <th id="T_14987_level0_col0" class="col_heading level0 col0" >Intercept</th>
+      <th id="T_14987_level0_col1" class="col_heading level0 col1" >C(day)[T.Fri]</th>
+      <th id="T_14987_level0_col2" class="col_heading level0 col2" >C(day)[T.Sat]</th>
+      <th id="T_14987_level0_col3" class="col_heading level0 col3" >C(day)[T.Sun]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_6b730_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_6b730_row0_col0" class="data row0 col0" >1</td>
-      <td id="T_6b730_row0_col1" class="data row0 col1" >1</td>
-      <td id="T_6b730_row0_col2" class="data row0 col2" >0</td>
-      <td id="T_6b730_row0_col3" class="data row0 col3" >0</td>
+      <th id="T_14987_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_14987_row0_col0" class="data row0 col0" >1</td>
+      <td id="T_14987_row0_col1" class="data row0 col1" >0</td>
+      <td id="T_14987_row0_col2" class="data row0 col2" >1</td>
+      <td id="T_14987_row0_col3" class="data row0 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_6b730_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_6b730_row1_col0" class="data row1 col0" >1</td>
-      <td id="T_6b730_row1_col1" class="data row1 col1" >0</td>
-      <td id="T_6b730_row1_col2" class="data row1 col2" >1</td>
-      <td id="T_6b730_row1_col3" class="data row1 col3" >0</td>
+      <th id="T_14987_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_14987_row1_col0" class="data row1 col0" >1</td>
+      <td id="T_14987_row1_col1" class="data row1 col1" >0</td>
+      <td id="T_14987_row1_col2" class="data row1 col2" >1</td>
+      <td id="T_14987_row1_col3" class="data row1 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_6b730_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_6b730_row2_col0" class="data row2 col0" >1</td>
-      <td id="T_6b730_row2_col1" class="data row2 col1" >0</td>
-      <td id="T_6b730_row2_col2" class="data row2 col2" >1</td>
-      <td id="T_6b730_row2_col3" class="data row2 col3" >0</td>
+      <th id="T_14987_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_14987_row2_col0" class="data row2 col0" >1</td>
+      <td id="T_14987_row2_col1" class="data row2 col1" >0</td>
+      <td id="T_14987_row2_col2" class="data row2 col2" >0</td>
+      <td id="T_14987_row2_col3" class="data row2 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_6b730_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_6b730_row3_col0" class="data row3 col0" >1</td>
-      <td id="T_6b730_row3_col1" class="data row3 col1" >0</td>
-      <td id="T_6b730_row3_col2" class="data row3 col2" >0</td>
-      <td id="T_6b730_row3_col3" class="data row3 col3" >1</td>
+      <th id="T_14987_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_14987_row3_col0" class="data row3 col0" >1</td>
+      <td id="T_14987_row3_col1" class="data row3 col1" >0</td>
+      <td id="T_14987_row3_col2" class="data row3 col2" >1</td>
+      <td id="T_14987_row3_col3" class="data row3 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_6b730_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_6b730_row4_col0" class="data row4 col0" >1</td>
-      <td id="T_6b730_row4_col1" class="data row4 col1" >0</td>
-      <td id="T_6b730_row4_col2" class="data row4 col2" >0</td>
-      <td id="T_6b730_row4_col3" class="data row4 col3" >0</td>
+      <th id="T_14987_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_14987_row4_col0" class="data row4 col0" >1</td>
+      <td id="T_14987_row4_col1" class="data row4 col1" >1</td>
+      <td id="T_14987_row4_col2" class="data row4 col2" >0</td>
+      <td id="T_14987_row4_col3" class="data row4 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_6b730_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_6b730_row5_col0" class="data row5 col0" >1</td>
-      <td id="T_6b730_row5_col1" class="data row5 col1" >0</td>
-      <td id="T_6b730_row5_col2" class="data row5 col2" >0</td>
-      <td id="T_6b730_row5_col3" class="data row5 col3" >0</td>
+      <th id="T_14987_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_14987_row5_col0" class="data row5 col0" >1</td>
+      <td id="T_14987_row5_col1" class="data row5 col1" >1</td>
+      <td id="T_14987_row5_col2" class="data row5 col2" >0</td>
+      <td id="T_14987_row5_col3" class="data row5 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_6b730_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_6b730_row6_col0" class="data row6 col0" >1</td>
-      <td id="T_6b730_row6_col1" class="data row6 col1" >0</td>
-      <td id="T_6b730_row6_col2" class="data row6 col2" >1</td>
-      <td id="T_6b730_row6_col3" class="data row6 col3" >0</td>
+      <th id="T_14987_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_14987_row6_col0" class="data row6 col0" >1</td>
+      <td id="T_14987_row6_col1" class="data row6 col1" >0</td>
+      <td id="T_14987_row6_col2" class="data row6 col2" >1</td>
+      <td id="T_14987_row6_col3" class="data row6 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_6b730_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_6b730_row7_col0" class="data row7 col0" >1</td>
-      <td id="T_6b730_row7_col1" class="data row7 col1" >0</td>
-      <td id="T_6b730_row7_col2" class="data row7 col2" >1</td>
-      <td id="T_6b730_row7_col3" class="data row7 col3" >0</td>
+      <th id="T_14987_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_14987_row7_col0" class="data row7 col0" >1</td>
+      <td id="T_14987_row7_col1" class="data row7 col1" >0</td>
+      <td id="T_14987_row7_col2" class="data row7 col2" >0</td>
+      <td id="T_14987_row7_col3" class="data row7 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_6b730_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_6b730_row8_col0" class="data row8 col0" >1</td>
-      <td id="T_6b730_row8_col1" class="data row8 col1" >0</td>
-      <td id="T_6b730_row8_col2" class="data row8 col2" >1</td>
-      <td id="T_6b730_row8_col3" class="data row8 col3" >0</td>
+      <th id="T_14987_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_14987_row8_col0" class="data row8 col0" >1</td>
+      <td id="T_14987_row8_col1" class="data row8 col1" >0</td>
+      <td id="T_14987_row8_col2" class="data row8 col2" >0</td>
+      <td id="T_14987_row8_col3" class="data row8 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_6b730_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_6b730_row9_col0" class="data row9 col0" >1</td>
-      <td id="T_6b730_row9_col1" class="data row9 col1" >0</td>
-      <td id="T_6b730_row9_col2" class="data row9 col2" >0</td>
-      <td id="T_6b730_row9_col3" class="data row9 col3" >0</td>
+      <th id="T_14987_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_14987_row9_col0" class="data row9 col0" >1</td>
+      <td id="T_14987_row9_col1" class="data row9 col1" >0</td>
+      <td id="T_14987_row9_col2" class="data row9 col2" >0</td>
+      <td id="T_14987_row9_col3" class="data row9 col3" >1</td>
     </tr>
   </tbody>
 </table>
@@ -1194,27 +1194,27 @@ Notes:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.008
-Model:                            OLS   Adj. R-squared:                 -0.023
-Method:                 Least Squares   F-statistic:                    0.2656
-Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.850
-Time:                        15:29:01   Log-Likelihood:                -163.80
-No. Observations:                 100   AIC:                             335.6
-Df Residuals:                      96   BIC:                             346.0
+Dep. Variable:                    tip   R-squared:                       0.020
+Model:                            OLS   Adj. R-squared:                  0.008
+Method:                 Least Squares   F-statistic:                     1.672
+Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.174
+Time:                        15:31:23   Log-Likelihood:                -422.43
+No. Observations:                 244   AIC:                             852.9
+Df Residuals:                     240   BIC:                             866.8
 Df Model:                           3                                         
 Covariance Type:            nonrobust                                         
 ====================================================================================================
                                        coef    std err          t      P&gt;|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------------------------
-Intercept                            2.9381      0.228     12.874      0.000       2.485       3.391
-C(day, Treatment(&#39;Sun&#39;))[T.Thur]    -0.1808      0.338     -0.535      0.594      -0.851       0.490
-C(day, Treatment(&#39;Sun&#39;))[T.Fri]     -0.3499      0.446     -0.785      0.435      -1.235       0.535
-C(day, Treatment(&#39;Sun&#39;))[T.Sat]     -0.2128      0.320     -0.664      0.508      -0.848       0.423
+Intercept                            3.2551      0.158     20.594      0.000       2.944       3.566
+C(day, Treatment(&#39;Sun&#39;))[T.Thur]    -0.4837      0.236     -2.051      0.041      -0.948      -0.019
+C(day, Treatment(&#39;Sun&#39;))[T.Fri]     -0.5204      0.353     -1.472      0.142      -1.217       0.176
+C(day, Treatment(&#39;Sun&#39;))[T.Sat]     -0.2620      0.216     -1.211      0.227      -0.688       0.164
 ==============================================================================
-Omnibus:                       23.855   Durbin-Watson:                   1.756
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               32.303
-Skew:                           1.179   Prob(JB):                     9.67e-08
-Kurtosis:                       4.481   Cond. No.                         4.62
+Omnibus:                       82.801   Durbin-Watson:                   1.932
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              238.276
+Skew:                           1.492   Prob(JB):                     1.82e-52
+Kurtosis:                       6.811   Cond. No.                         4.93
 ==============================================================================
 
 Notes:
@@ -1232,95 +1232,95 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_348cd_row0_col0, #T_348cd_row0_col2, #T_348cd_row1_col0, #T_348cd_row1_col3, #T_348cd_row2_col0, #T_348cd_row2_col3, #T_348cd_row3_col0, #T_348cd_row4_col0, #T_348cd_row4_col1, #T_348cd_row5_col0, #T_348cd_row5_col1, #T_348cd_row6_col0, #T_348cd_row6_col3, #T_348cd_row7_col0, #T_348cd_row7_col3, #T_348cd_row8_col0, #T_348cd_row8_col3, #T_348cd_row9_col0, #T_348cd_row9_col1 {
+#T_5f71d_row0_col0, #T_5f71d_row0_col3, #T_5f71d_row1_col0, #T_5f71d_row1_col3, #T_5f71d_row2_col0, #T_5f71d_row3_col0, #T_5f71d_row3_col3, #T_5f71d_row4_col0, #T_5f71d_row4_col2, #T_5f71d_row5_col0, #T_5f71d_row5_col2, #T_5f71d_row6_col0, #T_5f71d_row6_col3, #T_5f71d_row7_col0, #T_5f71d_row8_col0, #T_5f71d_row9_col0 {
   background-color: #023858;
   color: #f1f1f1;
 }
-#T_348cd_row0_col1, #T_348cd_row0_col3, #T_348cd_row1_col1, #T_348cd_row1_col2, #T_348cd_row2_col1, #T_348cd_row2_col2, #T_348cd_row3_col1, #T_348cd_row3_col2, #T_348cd_row3_col3, #T_348cd_row4_col2, #T_348cd_row4_col3, #T_348cd_row5_col2, #T_348cd_row5_col3, #T_348cd_row6_col1, #T_348cd_row6_col2, #T_348cd_row7_col1, #T_348cd_row7_col2, #T_348cd_row8_col1, #T_348cd_row8_col2, #T_348cd_row9_col2, #T_348cd_row9_col3 {
+#T_5f71d_row0_col1, #T_5f71d_row0_col2, #T_5f71d_row1_col1, #T_5f71d_row1_col2, #T_5f71d_row2_col1, #T_5f71d_row2_col2, #T_5f71d_row2_col3, #T_5f71d_row3_col1, #T_5f71d_row3_col2, #T_5f71d_row4_col1, #T_5f71d_row4_col3, #T_5f71d_row5_col1, #T_5f71d_row5_col3, #T_5f71d_row6_col1, #T_5f71d_row6_col2, #T_5f71d_row7_col1, #T_5f71d_row7_col2, #T_5f71d_row7_col3, #T_5f71d_row8_col1, #T_5f71d_row8_col2, #T_5f71d_row8_col3, #T_5f71d_row9_col1, #T_5f71d_row9_col2, #T_5f71d_row9_col3 {
   background-color: #fff7fb;
   color: #000000;
 }
 </style>
-<table id="T_348cd">
+<table id="T_5f71d">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_348cd_level0_col0" class="col_heading level0 col0" >Intercept</th>
-      <th id="T_348cd_level0_col1" class="col_heading level0 col1" >C(day, Treatment('Sun'))[T.Thur]</th>
-      <th id="T_348cd_level0_col2" class="col_heading level0 col2" >C(day, Treatment('Sun'))[T.Fri]</th>
-      <th id="T_348cd_level0_col3" class="col_heading level0 col3" >C(day, Treatment('Sun'))[T.Sat]</th>
+      <th id="T_5f71d_level0_col0" class="col_heading level0 col0" >Intercept</th>
+      <th id="T_5f71d_level0_col1" class="col_heading level0 col1" >C(day, Treatment('Sun'))[T.Thur]</th>
+      <th id="T_5f71d_level0_col2" class="col_heading level0 col2" >C(day, Treatment('Sun'))[T.Fri]</th>
+      <th id="T_5f71d_level0_col3" class="col_heading level0 col3" >C(day, Treatment('Sun'))[T.Sat]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_348cd_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_348cd_row0_col0" class="data row0 col0" >1</td>
-      <td id="T_348cd_row0_col1" class="data row0 col1" >0</td>
-      <td id="T_348cd_row0_col2" class="data row0 col2" >1</td>
-      <td id="T_348cd_row0_col3" class="data row0 col3" >0</td>
+      <th id="T_5f71d_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_5f71d_row0_col0" class="data row0 col0" >1</td>
+      <td id="T_5f71d_row0_col1" class="data row0 col1" >0</td>
+      <td id="T_5f71d_row0_col2" class="data row0 col2" >0</td>
+      <td id="T_5f71d_row0_col3" class="data row0 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_348cd_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_348cd_row1_col0" class="data row1 col0" >1</td>
-      <td id="T_348cd_row1_col1" class="data row1 col1" >0</td>
-      <td id="T_348cd_row1_col2" class="data row1 col2" >0</td>
-      <td id="T_348cd_row1_col3" class="data row1 col3" >1</td>
+      <th id="T_5f71d_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_5f71d_row1_col0" class="data row1 col0" >1</td>
+      <td id="T_5f71d_row1_col1" class="data row1 col1" >0</td>
+      <td id="T_5f71d_row1_col2" class="data row1 col2" >0</td>
+      <td id="T_5f71d_row1_col3" class="data row1 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_348cd_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_348cd_row2_col0" class="data row2 col0" >1</td>
-      <td id="T_348cd_row2_col1" class="data row2 col1" >0</td>
-      <td id="T_348cd_row2_col2" class="data row2 col2" >0</td>
-      <td id="T_348cd_row2_col3" class="data row2 col3" >1</td>
+      <th id="T_5f71d_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_5f71d_row2_col0" class="data row2 col0" >1</td>
+      <td id="T_5f71d_row2_col1" class="data row2 col1" >0</td>
+      <td id="T_5f71d_row2_col2" class="data row2 col2" >0</td>
+      <td id="T_5f71d_row2_col3" class="data row2 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_348cd_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_348cd_row3_col0" class="data row3 col0" >1</td>
-      <td id="T_348cd_row3_col1" class="data row3 col1" >0</td>
-      <td id="T_348cd_row3_col2" class="data row3 col2" >0</td>
-      <td id="T_348cd_row3_col3" class="data row3 col3" >0</td>
+      <th id="T_5f71d_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_5f71d_row3_col0" class="data row3 col0" >1</td>
+      <td id="T_5f71d_row3_col1" class="data row3 col1" >0</td>
+      <td id="T_5f71d_row3_col2" class="data row3 col2" >0</td>
+      <td id="T_5f71d_row3_col3" class="data row3 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_348cd_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_348cd_row4_col0" class="data row4 col0" >1</td>
-      <td id="T_348cd_row4_col1" class="data row4 col1" >1</td>
-      <td id="T_348cd_row4_col2" class="data row4 col2" >0</td>
-      <td id="T_348cd_row4_col3" class="data row4 col3" >0</td>
+      <th id="T_5f71d_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_5f71d_row4_col0" class="data row4 col0" >1</td>
+      <td id="T_5f71d_row4_col1" class="data row4 col1" >0</td>
+      <td id="T_5f71d_row4_col2" class="data row4 col2" >1</td>
+      <td id="T_5f71d_row4_col3" class="data row4 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_348cd_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_348cd_row5_col0" class="data row5 col0" >1</td>
-      <td id="T_348cd_row5_col1" class="data row5 col1" >1</td>
-      <td id="T_348cd_row5_col2" class="data row5 col2" >0</td>
-      <td id="T_348cd_row5_col3" class="data row5 col3" >0</td>
+      <th id="T_5f71d_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_5f71d_row5_col0" class="data row5 col0" >1</td>
+      <td id="T_5f71d_row5_col1" class="data row5 col1" >0</td>
+      <td id="T_5f71d_row5_col2" class="data row5 col2" >1</td>
+      <td id="T_5f71d_row5_col3" class="data row5 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_348cd_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_348cd_row6_col0" class="data row6 col0" >1</td>
-      <td id="T_348cd_row6_col1" class="data row6 col1" >0</td>
-      <td id="T_348cd_row6_col2" class="data row6 col2" >0</td>
-      <td id="T_348cd_row6_col3" class="data row6 col3" >1</td>
+      <th id="T_5f71d_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_5f71d_row6_col0" class="data row6 col0" >1</td>
+      <td id="T_5f71d_row6_col1" class="data row6 col1" >0</td>
+      <td id="T_5f71d_row6_col2" class="data row6 col2" >0</td>
+      <td id="T_5f71d_row6_col3" class="data row6 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_348cd_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_348cd_row7_col0" class="data row7 col0" >1</td>
-      <td id="T_348cd_row7_col1" class="data row7 col1" >0</td>
-      <td id="T_348cd_row7_col2" class="data row7 col2" >0</td>
-      <td id="T_348cd_row7_col3" class="data row7 col3" >1</td>
+      <th id="T_5f71d_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_5f71d_row7_col0" class="data row7 col0" >1</td>
+      <td id="T_5f71d_row7_col1" class="data row7 col1" >0</td>
+      <td id="T_5f71d_row7_col2" class="data row7 col2" >0</td>
+      <td id="T_5f71d_row7_col3" class="data row7 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_348cd_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_348cd_row8_col0" class="data row8 col0" >1</td>
-      <td id="T_348cd_row8_col1" class="data row8 col1" >0</td>
-      <td id="T_348cd_row8_col2" class="data row8 col2" >0</td>
-      <td id="T_348cd_row8_col3" class="data row8 col3" >1</td>
+      <th id="T_5f71d_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_5f71d_row8_col0" class="data row8 col0" >1</td>
+      <td id="T_5f71d_row8_col1" class="data row8 col1" >0</td>
+      <td id="T_5f71d_row8_col2" class="data row8 col2" >0</td>
+      <td id="T_5f71d_row8_col3" class="data row8 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_348cd_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_348cd_row9_col0" class="data row9 col0" >1</td>
-      <td id="T_348cd_row9_col1" class="data row9 col1" >1</td>
-      <td id="T_348cd_row9_col2" class="data row9 col2" >0</td>
-      <td id="T_348cd_row9_col3" class="data row9 col3" >0</td>
+      <th id="T_5f71d_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_5f71d_row9_col0" class="data row9 col0" >1</td>
+      <td id="T_5f71d_row9_col1" class="data row9 col1" >0</td>
+      <td id="T_5f71d_row9_col2" class="data row9 col2" >0</td>
+      <td id="T_5f71d_row9_col3" class="data row9 col3" >0</td>
     </tr>
   </tbody>
 </table>
@@ -1337,27 +1337,27 @@ Notes:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.008
-Model:                            OLS   Adj. R-squared:                 -0.023
-Method:                 Least Squares   F-statistic:                    0.2656
-Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.850
-Time:                        15:29:01   Log-Likelihood:                -163.80
-No. Observations:                 100   AIC:                             335.6
-Df Residuals:                      96   BIC:                             346.0
+Dep. Variable:                    tip   R-squared:                       0.020
+Model:                            OLS   Adj. R-squared:                  0.008
+Method:                 Least Squares   F-statistic:                     1.672
+Date:                Sun, 14 Aug 2022   Prob (F-statistic):              0.174
+Time:                        15:31:23   Log-Likelihood:                -422.43
+No. Observations:                 244   AIC:                             852.9
+Df Residuals:                     240   BIC:                             866.8
 Df Model:                           3                                         
 Covariance Type:            nonrobust                                         
 ================================================================================
                    coef    std err          t      P&gt;|t|      [0.025      0.975]
 --------------------------------------------------------------------------------
-C(day)[Thur]     2.7573      0.249     11.065      0.000       2.263       3.252
-C(day)[Fri]      2.5882      0.383      6.756      0.000       1.828       3.349
-C(day)[Sat]      2.7253      0.225     12.133      0.000       2.279       3.171
-C(day)[Sun]      2.9381      0.228     12.874      0.000       2.485       3.391
+C(day)[Thur]     2.7715      0.175     15.837      0.000       2.427       3.116
+C(day)[Fri]      2.7347      0.316      8.651      0.000       2.112       3.357
+C(day)[Sat]      2.9931      0.148     20.261      0.000       2.702       3.284
+C(day)[Sun]      3.2551      0.158     20.594      0.000       2.944       3.566
 ==============================================================================
-Omnibus:                       23.855   Durbin-Watson:                   1.756
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               32.303
-Skew:                           1.179   Prob(JB):                     9.67e-08
-Kurtosis:                       4.481   Cond. No.                         1.71
+Omnibus:                       82.801   Durbin-Watson:                   1.932
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              238.276
+Skew:                           1.492   Prob(JB):                     1.82e-52
+Kurtosis:                       6.811   Cond. No.                         2.14
 ==============================================================================
 
 Notes:
@@ -1375,95 +1375,95 @@ Notes:
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_d9b0d_row0_col0, #T_d9b0d_row0_col2, #T_d9b0d_row0_col3, #T_d9b0d_row1_col0, #T_d9b0d_row1_col1, #T_d9b0d_row1_col3, #T_d9b0d_row2_col0, #T_d9b0d_row2_col1, #T_d9b0d_row2_col3, #T_d9b0d_row3_col0, #T_d9b0d_row3_col1, #T_d9b0d_row3_col2, #T_d9b0d_row4_col1, #T_d9b0d_row4_col2, #T_d9b0d_row4_col3, #T_d9b0d_row5_col1, #T_d9b0d_row5_col2, #T_d9b0d_row5_col3, #T_d9b0d_row6_col0, #T_d9b0d_row6_col1, #T_d9b0d_row6_col3, #T_d9b0d_row7_col0, #T_d9b0d_row7_col1, #T_d9b0d_row7_col3, #T_d9b0d_row8_col0, #T_d9b0d_row8_col1, #T_d9b0d_row8_col3, #T_d9b0d_row9_col1, #T_d9b0d_row9_col2, #T_d9b0d_row9_col3 {
+#T_b3e65_row0_col0, #T_b3e65_row0_col1, #T_b3e65_row0_col3, #T_b3e65_row1_col0, #T_b3e65_row1_col1, #T_b3e65_row1_col3, #T_b3e65_row2_col0, #T_b3e65_row2_col1, #T_b3e65_row2_col2, #T_b3e65_row3_col0, #T_b3e65_row3_col1, #T_b3e65_row3_col3, #T_b3e65_row4_col0, #T_b3e65_row4_col2, #T_b3e65_row4_col3, #T_b3e65_row5_col0, #T_b3e65_row5_col2, #T_b3e65_row5_col3, #T_b3e65_row6_col0, #T_b3e65_row6_col1, #T_b3e65_row6_col3, #T_b3e65_row7_col0, #T_b3e65_row7_col1, #T_b3e65_row7_col2, #T_b3e65_row8_col0, #T_b3e65_row8_col1, #T_b3e65_row8_col2, #T_b3e65_row9_col0, #T_b3e65_row9_col1, #T_b3e65_row9_col2 {
   background-color: #fff7fb;
   color: #000000;
 }
-#T_d9b0d_row0_col1, #T_d9b0d_row1_col2, #T_d9b0d_row2_col2, #T_d9b0d_row3_col3, #T_d9b0d_row4_col0, #T_d9b0d_row5_col0, #T_d9b0d_row6_col2, #T_d9b0d_row7_col2, #T_d9b0d_row8_col2, #T_d9b0d_row9_col0 {
+#T_b3e65_row0_col2, #T_b3e65_row1_col2, #T_b3e65_row2_col3, #T_b3e65_row3_col2, #T_b3e65_row4_col1, #T_b3e65_row5_col1, #T_b3e65_row6_col2, #T_b3e65_row7_col3, #T_b3e65_row8_col3, #T_b3e65_row9_col3 {
   background-color: #023858;
   color: #f1f1f1;
 }
 </style>
-<table id="T_d9b0d">
+<table id="T_b3e65">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_d9b0d_level0_col0" class="col_heading level0 col0" >C(day)[Thur]</th>
-      <th id="T_d9b0d_level0_col1" class="col_heading level0 col1" >C(day)[Fri]</th>
-      <th id="T_d9b0d_level0_col2" class="col_heading level0 col2" >C(day)[Sat]</th>
-      <th id="T_d9b0d_level0_col3" class="col_heading level0 col3" >C(day)[Sun]</th>
+      <th id="T_b3e65_level0_col0" class="col_heading level0 col0" >C(day)[Thur]</th>
+      <th id="T_b3e65_level0_col1" class="col_heading level0 col1" >C(day)[Fri]</th>
+      <th id="T_b3e65_level0_col2" class="col_heading level0 col2" >C(day)[Sat]</th>
+      <th id="T_b3e65_level0_col3" class="col_heading level0 col3" >C(day)[Sun]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_d9b0d_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_d9b0d_row0_col0" class="data row0 col0" >0</td>
-      <td id="T_d9b0d_row0_col1" class="data row0 col1" >1</td>
-      <td id="T_d9b0d_row0_col2" class="data row0 col2" >0</td>
-      <td id="T_d9b0d_row0_col3" class="data row0 col3" >0</td>
+      <th id="T_b3e65_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_b3e65_row0_col0" class="data row0 col0" >0</td>
+      <td id="T_b3e65_row0_col1" class="data row0 col1" >0</td>
+      <td id="T_b3e65_row0_col2" class="data row0 col2" >1</td>
+      <td id="T_b3e65_row0_col3" class="data row0 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_d9b0d_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_d9b0d_row1_col0" class="data row1 col0" >0</td>
-      <td id="T_d9b0d_row1_col1" class="data row1 col1" >0</td>
-      <td id="T_d9b0d_row1_col2" class="data row1 col2" >1</td>
-      <td id="T_d9b0d_row1_col3" class="data row1 col3" >0</td>
+      <th id="T_b3e65_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_b3e65_row1_col0" class="data row1 col0" >0</td>
+      <td id="T_b3e65_row1_col1" class="data row1 col1" >0</td>
+      <td id="T_b3e65_row1_col2" class="data row1 col2" >1</td>
+      <td id="T_b3e65_row1_col3" class="data row1 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_d9b0d_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_d9b0d_row2_col0" class="data row2 col0" >0</td>
-      <td id="T_d9b0d_row2_col1" class="data row2 col1" >0</td>
-      <td id="T_d9b0d_row2_col2" class="data row2 col2" >1</td>
-      <td id="T_d9b0d_row2_col3" class="data row2 col3" >0</td>
+      <th id="T_b3e65_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_b3e65_row2_col0" class="data row2 col0" >0</td>
+      <td id="T_b3e65_row2_col1" class="data row2 col1" >0</td>
+      <td id="T_b3e65_row2_col2" class="data row2 col2" >0</td>
+      <td id="T_b3e65_row2_col3" class="data row2 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_d9b0d_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_d9b0d_row3_col0" class="data row3 col0" >0</td>
-      <td id="T_d9b0d_row3_col1" class="data row3 col1" >0</td>
-      <td id="T_d9b0d_row3_col2" class="data row3 col2" >0</td>
-      <td id="T_d9b0d_row3_col3" class="data row3 col3" >1</td>
+      <th id="T_b3e65_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_b3e65_row3_col0" class="data row3 col0" >0</td>
+      <td id="T_b3e65_row3_col1" class="data row3 col1" >0</td>
+      <td id="T_b3e65_row3_col2" class="data row3 col2" >1</td>
+      <td id="T_b3e65_row3_col3" class="data row3 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_d9b0d_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_d9b0d_row4_col0" class="data row4 col0" >1</td>
-      <td id="T_d9b0d_row4_col1" class="data row4 col1" >0</td>
-      <td id="T_d9b0d_row4_col2" class="data row4 col2" >0</td>
-      <td id="T_d9b0d_row4_col3" class="data row4 col3" >0</td>
+      <th id="T_b3e65_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_b3e65_row4_col0" class="data row4 col0" >0</td>
+      <td id="T_b3e65_row4_col1" class="data row4 col1" >1</td>
+      <td id="T_b3e65_row4_col2" class="data row4 col2" >0</td>
+      <td id="T_b3e65_row4_col3" class="data row4 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_d9b0d_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_d9b0d_row5_col0" class="data row5 col0" >1</td>
-      <td id="T_d9b0d_row5_col1" class="data row5 col1" >0</td>
-      <td id="T_d9b0d_row5_col2" class="data row5 col2" >0</td>
-      <td id="T_d9b0d_row5_col3" class="data row5 col3" >0</td>
+      <th id="T_b3e65_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_b3e65_row5_col0" class="data row5 col0" >0</td>
+      <td id="T_b3e65_row5_col1" class="data row5 col1" >1</td>
+      <td id="T_b3e65_row5_col2" class="data row5 col2" >0</td>
+      <td id="T_b3e65_row5_col3" class="data row5 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_d9b0d_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_d9b0d_row6_col0" class="data row6 col0" >0</td>
-      <td id="T_d9b0d_row6_col1" class="data row6 col1" >0</td>
-      <td id="T_d9b0d_row6_col2" class="data row6 col2" >1</td>
-      <td id="T_d9b0d_row6_col3" class="data row6 col3" >0</td>
+      <th id="T_b3e65_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_b3e65_row6_col0" class="data row6 col0" >0</td>
+      <td id="T_b3e65_row6_col1" class="data row6 col1" >0</td>
+      <td id="T_b3e65_row6_col2" class="data row6 col2" >1</td>
+      <td id="T_b3e65_row6_col3" class="data row6 col3" >0</td>
     </tr>
     <tr>
-      <th id="T_d9b0d_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_d9b0d_row7_col0" class="data row7 col0" >0</td>
-      <td id="T_d9b0d_row7_col1" class="data row7 col1" >0</td>
-      <td id="T_d9b0d_row7_col2" class="data row7 col2" >1</td>
-      <td id="T_d9b0d_row7_col3" class="data row7 col3" >0</td>
+      <th id="T_b3e65_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_b3e65_row7_col0" class="data row7 col0" >0</td>
+      <td id="T_b3e65_row7_col1" class="data row7 col1" >0</td>
+      <td id="T_b3e65_row7_col2" class="data row7 col2" >0</td>
+      <td id="T_b3e65_row7_col3" class="data row7 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_d9b0d_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_d9b0d_row8_col0" class="data row8 col0" >0</td>
-      <td id="T_d9b0d_row8_col1" class="data row8 col1" >0</td>
-      <td id="T_d9b0d_row8_col2" class="data row8 col2" >1</td>
-      <td id="T_d9b0d_row8_col3" class="data row8 col3" >0</td>
+      <th id="T_b3e65_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_b3e65_row8_col0" class="data row8 col0" >0</td>
+      <td id="T_b3e65_row8_col1" class="data row8 col1" >0</td>
+      <td id="T_b3e65_row8_col2" class="data row8 col2" >0</td>
+      <td id="T_b3e65_row8_col3" class="data row8 col3" >1</td>
     </tr>
     <tr>
-      <th id="T_d9b0d_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_d9b0d_row9_col0" class="data row9 col0" >1</td>
-      <td id="T_d9b0d_row9_col1" class="data row9 col1" >0</td>
-      <td id="T_d9b0d_row9_col2" class="data row9 col2" >0</td>
-      <td id="T_d9b0d_row9_col3" class="data row9 col3" >0</td>
+      <th id="T_b3e65_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_b3e65_row9_col0" class="data row9 col0" >0</td>
+      <td id="T_b3e65_row9_col1" class="data row9 col1" >0</td>
+      <td id="T_b3e65_row9_col2" class="data row9 col2" >0</td>
+      <td id="T_b3e65_row9_col3" class="data row9 col3" >1</td>
     </tr>
   </tbody>
 </table>
