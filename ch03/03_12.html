@@ -577,8 +577,8 @@ title="Print to PDF"
 Dep. Variable:                   medv   R-squared:                       0.243
 Model:                            OLS   Adj. R-squared:                  0.240
 Method:                 Least Squares   F-statistic:                     80.79
-Date:                Sat, 13 Aug 2022   Prob (F-statistic):           3.75e-31
-Time:                        16:26:20   Log-Likelihood:                -1769.8
+Date:                Sun, 14 Aug 2022   Prob (F-statistic):           3.75e-31
+Time:                        12:49:02   Log-Likelihood:                -1769.8
 No. Observations:                 506   AIC:                             3546.
 Df Residuals:                     503   BIC:                             3558.
 Df Model:                           2                                         
@@ -617,8 +617,8 @@ Notes:
 Dep. Variable:                   medv   R-squared:                       0.243
 Model:                            OLS   Adj. R-squared:                  0.240
 Method:                 Least Squares   F-statistic:                     80.79
-Date:                Sat, 13 Aug 2022   Prob (F-statistic):           3.75e-31
-Time:                        16:26:20   Log-Likelihood:                -1769.8
+Date:                Sun, 14 Aug 2022   Prob (F-statistic):           3.75e-31
+Time:                        12:49:02   Log-Likelihood:                -1769.8
 No. Observations:                 506   AIC:                             3546.
 Df Residuals:                     503   BIC:                             3558.
 Df Model:                           2                                         
@@ -965,11 +965,12 @@ strong multicollinearity or other numerical problems.
 </section>
 <section id="id3">
 <h2><span class="section-number">3.12.2. </span>다중공선성<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>다음으로 스케일링을 하지 않았을 때 나타난 주의사항에서 언급된 “다중공선성”이란 용어에 대해 설명한다. <b>다중공선성(multi-collinearity)</b>은 독립변수 사이에 강한 상관관계가 있음을 의미한다. 다중공선성은 회귀분석에 다음과 같은 나쁜 영향을 미친다.</p>
+<p>다음으로 스케일링을 하지 않았을 때 나타난 주의사항에서 언급된 “다중공선성”이란 용어에 대해 설명한다. <b>다중공선성(multi-collinearity)</b>은 독립변수 사이에 강한 상관관계가 있음을 의미한다. 다중공선성이 있으면 회귀분석에 다음과 같은 나쁜 영향을 미친다.</p>
 <ul class="simple">
 <li><p>스케일링을 하지 않았을 때처럼 가중치 계산의 수치적 안정성을 악화시킨다.</p></li>
 <li><p>과최적화가 발생했을 때처럼 검증성능을 악화시킨다.</p></li>
 </ul>
+<p>첫번째 단점은 앞에서 예시를 보였으므로 여기에서는 두번째 단점을 보인다. 과최적화가 발생하는 것을 보이기 위해 보스턴 집값 전체 데이터 중 앞부분 250개를 학습 데이터로, 뒷부분 250개를 검증 데이터로 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_train</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">250</span><span class="p">]</span>
@@ -978,12 +979,11 @@ strong multicollinearity or other numerical problems.
 </div>
 </div>
 </div>
+<p>다음과 같은 9개의 독립변수를 사용하여 종속변수 medv를 예측하는 선형회귀분석을 실시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula1</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> \
-    <span class="s2">&quot;scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(tax)&quot;</span> \
-    <span class="s2">&quot;+ C(chas) + scale(black) + scale(zn) + scale(crim) + scale(nox)&quot;</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_names1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="s2">&quot;ptratio&quot;</span><span class="p">,</span> <span class="s2">&quot;dis&quot;</span><span class="p">,</span> <span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;zn&quot;</span><span class="p">,</span> <span class="s2">&quot;crim&quot;</span><span class="p">,</span> <span class="s2">&quot;nox&quot;</span><span class="p">]</span>   
+<span class="n">formula1</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;scale(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_names1</span><span class="p">])</span>
 <span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula1</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
@@ -994,32 +994,31 @@ strong multicollinearity or other numerical problems.
 ==============================================================================
 Dep. Variable:                   medv   R-squared:                       0.844
 Model:                            OLS   Adj. R-squared:                  0.838
-Method:                 Least Squares   F-statistic:                     129.7
-Date:                Sat, 13 Aug 2022   Prob (F-statistic):           1.30e-90
-Time:                        16:26:20   Log-Likelihood:                -653.17
-No. Observations:                 250   AIC:                             1328.
-Df Residuals:                     239   BIC:                             1367.
-Df Model:                          10                                         
+Method:                 Least Squares   F-statistic:                     144.5
+Date:                Sun, 14 Aug 2022   Prob (F-statistic):           1.20e-91
+Time:                        12:49:02   Log-Likelihood:                -653.31
+No. Observations:                 250   AIC:                             1327.
+Df Residuals:                     240   BIC:                             1362.
+Df Model:                           9                                         
 Covariance Type:            nonrobust                                         
 ==================================================================================
                      coef    std err          t      P&gt;|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-Intercept         24.2502      0.223    108.553      0.000      23.810      24.690
-C(chas)[T.1]       0.4225      0.825      0.512      0.609      -1.203       2.048
-scale(lstat)      -1.3636      0.339     -4.023      0.000      -2.031      -0.696
-scale(rm)          5.5519      0.318     17.451      0.000       4.925       6.179
-scale(ptratio)    -1.5624      0.274     -5.703      0.000      -2.102      -1.023
-scale(dis)        -1.6825      0.376     -4.479      0.000      -2.423      -0.942
-scale(tax)        -1.0417      0.255     -4.088      0.000      -1.544      -0.540
-scale(black)       0.7918      0.252      3.141      0.002       0.295       1.288
-scale(zn)          0.6537      0.317      2.060      0.040       0.029       1.279
-scale(crim)        0.8220      0.382      2.152      0.032       0.070       1.574
-scale(nox)        -1.2513      0.482     -2.595      0.010      -2.201      -0.301
+Intercept         24.2840      0.213    113.958      0.000      23.864      24.704
+scale(lstat)      -1.3504      0.337     -4.002      0.000      -2.015      -0.686
+scale(rm)          5.5576      0.317     17.506      0.000       4.932       6.183
+scale(ptratio)    -1.5892      0.269     -5.918      0.000      -2.118      -1.060
+scale(dis)        -1.6921      0.375     -4.517      0.000      -2.430      -0.954
+scale(tax)        -1.0465      0.254     -4.116      0.000      -1.547      -0.546
+scale(black)       0.7963      0.252      3.165      0.002       0.301       1.292
+scale(zn)          0.6384      0.315      2.024      0.044       0.017       1.260
+scale(crim)        0.8249      0.381      2.163      0.032       0.074       1.576
+scale(nox)        -1.2495      0.482     -2.595      0.010      -2.198      -0.301
 ==============================================================================
-Omnibus:                       15.247   Durbin-Watson:                   1.367
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               17.144
-Skew:                           0.528   Prob(JB):                     0.000189
-Kurtosis:                       3.727   Cond. No.                         7.48
+Omnibus:                       14.754   Durbin-Watson:                   1.352
+Prob(Omnibus):                  0.001   Jarque-Bera (JB):               16.402
+Skew:                           0.522   Prob(JB):                     0.000274
+Kurtosis:                       3.697   Cond. No.                         5.33
 ==============================================================================
 
 Notes:
@@ -1028,6 +1027,7 @@ Notes:
 </div>
 </div>
 </div>
+<p>과최적화가 발생하는지 확인하기 위해 학습데이터와 검증데이터를 사용하는 경우의 잔차제곱합을 각각 계산한다. 검증데이터를 사용하면 잔차제곱합이 20배 이상 증가하는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">boston_train</span><span class="o">.</span><span class="n">medv</span>
@@ -1040,16 +1040,127 @@ Notes:
 <span class="n">rss_test1</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_test_pred1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s2">&quot;학습 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형1)&quot;</span><span class="p">],</span> <span class="p">[</span><span class="n">rss_train1</span><span class="p">,</span> <span class="n">rss_test1</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;학습 잔차제곱합&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합&quot;</span><span class="p">],</span> 
+    <span class="p">[</span><span class="n">rss_train1</span><span class="p">,</span> <span class="n">rss_test1</span><span class="p">],</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">rss_train1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rss_test1</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70000</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_12_23_0.png" src="../_images/03_12_23_0.png" />
+<img alt="../_images/03_12_25_0.png" src="../_images/03_12_25_0.png" />
 </div>
 </div>
+<p>이러한 과최적화 현상이 발생하는 이유는 독립변수 사이의 강한 상관관계로 인한 다중공선성 때문이다. 실제로 일부 독립변수들의 상관계수의 절대값을 구하면 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_abs</span> <span class="o">=</span> <span class="n">boston</span><span class="p">[[</span><span class="s2">&quot;dis&quot;</span><span class="p">,</span> <span class="s2">&quot;nox&quot;</span><span class="p">,</span> <span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="s2">&quot;lstat&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
+<span class="n">corr_abs</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_3c9b4_row0_col0, #T_3c9b4_row1_col1, #T_3c9b4_row2_col2, #T_3c9b4_row3_col3 {
+  background-color: #023858;
+  color: #f1f1f1;
+}
+#T_3c9b4_row0_col1 {
+  background-color: #8eb3d5;
+  color: #000000;
+}
+#T_3c9b4_row0_col2, #T_3c9b4_row0_col3, #T_3c9b4_row3_col0, #T_3c9b4_row3_col1 {
+  background-color: #fff7fb;
+  color: #000000;
+}
+#T_3c9b4_row1_col0 {
+  background-color: #60a1ca;
+  color: #f1f1f1;
+}
+#T_3c9b4_row1_col2 {
+  background-color: #c4cbe3;
+  color: #000000;
+}
+#T_3c9b4_row1_col3 {
+  background-color: #dfddec;
+  color: #000000;
+}
+#T_3c9b4_row2_col0 {
+  background-color: #f4edf6;
+  color: #000000;
+}
+#T_3c9b4_row2_col1 {
+  background-color: #dedcec;
+  color: #000000;
+}
+#T_3c9b4_row2_col3 {
+  background-color: #f1ebf5;
+  color: #000000;
+}
+#T_3c9b4_row3_col2 {
+  background-color: #fcf4fa;
+  color: #000000;
+}
+</style>
+<table id="T_3c9b4">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_3c9b4_level0_col0" class="col_heading level0 col0" >dis</th>
+      <th id="T_3c9b4_level0_col1" class="col_heading level0 col1" >nox</th>
+      <th id="T_3c9b4_level0_col2" class="col_heading level0 col2" >tax</th>
+      <th id="T_3c9b4_level0_col3" class="col_heading level0 col3" >lstat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_3c9b4_level0_row0" class="row_heading level0 row0" >dis</th>
+      <td id="T_3c9b4_row0_col0" class="data row0 col0" >1.000000</td>
+      <td id="T_3c9b4_row0_col1" class="data row0 col1" >0.769230</td>
+      <td id="T_3c9b4_row0_col2" class="data row0 col2" >0.534432</td>
+      <td id="T_3c9b4_row0_col3" class="data row0 col3" >0.496996</td>
+    </tr>
+    <tr>
+      <th id="T_3c9b4_level0_row1" class="row_heading level0 row1" >nox</th>
+      <td id="T_3c9b4_row1_col0" class="data row1 col0" >0.769230</td>
+      <td id="T_3c9b4_row1_col1" class="data row1 col1" >1.000000</td>
+      <td id="T_3c9b4_row1_col2" class="data row1 col2" >0.668023</td>
+      <td id="T_3c9b4_row1_col3" class="data row1 col3" >0.590879</td>
+    </tr>
+    <tr>
+      <th id="T_3c9b4_level0_row2" class="row_heading level0 row2" >tax</th>
+      <td id="T_3c9b4_row2_col0" class="data row2 col0" >0.534432</td>
+      <td id="T_3c9b4_row2_col1" class="data row2 col1" >0.668023</td>
+      <td id="T_3c9b4_row2_col2" class="data row2 col2" >1.000000</td>
+      <td id="T_3c9b4_row2_col3" class="data row2 col3" >0.543993</td>
+    </tr>
+    <tr>
+      <th id="T_3c9b4_level0_row3" class="row_heading level0 row3" >lstat</th>
+      <td id="T_3c9b4_row3_col0" class="data row3 col0" >0.496996</td>
+      <td id="T_3c9b4_row3_col1" class="data row3 col1" >0.590879</td>
+      <td id="T_3c9b4_row3_col2" class="data row3 col2" >0.543993</td>
+      <td id="T_3c9b4_row3_col3" class="data row3 col3" >1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>독립변수 사이의 상관관계로 인한 다중공선성 문제를 해결하는 방법으로는 다음 두가지 방법이 있다.</p>
+<ul class="simple">
+<li><p>여러개의 독립변수를 제거하고 이들을 선형조합한 새로운 독립변수 하나를 추가한다.</p></li>
+<li><p>상관관계가 큰 독립변수들을 모형에서 제거한다.</p></li>
+</ul>
+<p>첫번째 방법을 사용하려면 주성분분석(PCA: principal component analysis) 방법으로 알아야 하므로 여기에서는 일단 생략하고 추후 주성분분석을 공부한 뒤에 다시 설명한다.</p>
+<p>두번째 방법을 사용하기 위해서는 어떤 독립변수가 가장 다른 독립변수들과 상관관계가 큰지를 계산해야 한다. 보통은 각각의 독립변수 <span class="math notranslate nohighlight">\(x_k\)</span>에 대한 VIF(variance inflation factor)라는 값을 구해서 사용한다. <span class="math notranslate nohighlight">\(\text{VIF}_k\)</span>는 어떤 독립변수 <span class="math notranslate nohighlight">\(x_k\)</span>를 다른 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_{k-1}, x_{k+1}, \ldots, x_K\)</span>로 선형회귀분석을 했을 때의 성능을 나타내는 지표다. 다음과 같이 정의한다.</p>
+<div class="math notranslate nohighlight">
+\[
+\text{VIF}_k = \dfrac{1}{1-R_k^2}
+\]</div>
+<p>이 식에서 <span class="math notranslate nohighlight">\(R_k\)</span>는 독립변수 <span class="math notranslate nohighlight">\(x_k\)</span>를 다른 독립변수 <span class="math notranslate nohighlight">\(x_1, x_2, \ldots, x_{k-1}, x_{k+1}, \ldots, x_K\)</span>로 선형회귀분석을 했을 때의 결정계수값이다. VIF가 높다는 것은 다른 독립변수를 선형조합하여 해당 독립변수를 잘 추정할 수 있다는 뜻이므로 해당 독립변수가 다른 독립변수와 상관관계가 높다는 것을 의미한다.</p>
+<p>statsmodels 패키지는 VIF를 계산하는 <code class="docutils literal notranslate"><span class="pre">variance_inflation_factor</span></code> 함수를 제공한다. 이 함수를 사용하여 위 모형의 각 독립변수 VIF를 계산하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
@@ -1058,9 +1169,9 @@ Notes:
 <span class="n">X_names</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span>
 
 <span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
+<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
 <span class="n">vif</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_names</span>
-<span class="n">vif</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;VIF Factor&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">vif</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;VIF&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1083,76 +1194,70 @@ Notes:
   <thead>
     <tr style="text-align: right;">
       <th></th>
-      <th>VIF Factor</th>
+      <th>VIF</th>
       <th>features</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th>10</th>
-      <td>5.106064</td>
+      <th>9</th>
+      <td>5.105774</td>
       <td>scale(nox)</td>
     </tr>
     <tr>
-      <th>9</th>
-      <td>3.202863</td>
+      <th>8</th>
+      <td>3.202152</td>
       <td>scale(crim)</td>
     </tr>
     <tr>
-      <th>5</th>
-      <td>3.098666</td>
+      <th>4</th>
+      <td>3.091003</td>
       <td>scale(dis)</td>
     </tr>
     <tr>
-      <th>2</th>
-      <td>2.522302</td>
+      <th>1</th>
+      <td>2.507665</td>
       <td>scale(lstat)</td>
     </tr>
     <tr>
-      <th>3</th>
-      <td>2.222020</td>
+      <th>2</th>
+      <td>2.219342</td>
       <td>scale(rm)</td>
     </tr>
     <tr>
-      <th>8</th>
-      <td>2.209713</td>
+      <th>7</th>
+      <td>2.190215</td>
       <td>scale(zn)</td>
     </tr>
     <tr>
-      <th>4</th>
-      <td>1.647898</td>
+      <th>3</th>
+      <td>1.587904</td>
       <td>scale(ptratio)</td>
     </tr>
     <tr>
-      <th>6</th>
-      <td>1.425651</td>
+      <th>5</th>
+      <td>1.423732</td>
       <td>scale(tax)</td>
     </tr>
     <tr>
-      <th>7</th>
-      <td>1.395356</td>
+      <th>6</th>
+      <td>1.393677</td>
       <td>scale(black)</td>
     </tr>
     <tr>
-      <th>1</th>
-      <td>1.099592</td>
-      <td>C(chas)[T.1]</td>
-    </tr>
-    <tr>
       <th>0</th>
-      <td>1.095617</td>
+      <td>1.000000</td>
       <td>Intercept</td>
     </tr>
   </tbody>
 </table>
 </div></div></div>
 </div>
+<p>일반적으로 VIF값이 5를 넘으면 큰 것으로 간주하여 생략한다. 위 결과로 보아 nox 독립변수가 다른 독립변수와 상관관계가 강하므로 이를 제거하여 새로운 선형회귀분석을 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula2</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> \
-    <span class="s2">&quot;scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(tax)&quot;</span> \
-    <span class="s2">&quot;+ C(chas) + scale(black) + scale(zn) + scale(crim)&quot;</span>
-
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_names2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="s2">&quot;ptratio&quot;</span><span class="p">,</span> <span class="s2">&quot;dis&quot;</span><span class="p">,</span> <span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;zn&quot;</span><span class="p">,</span> <span class="s2">&quot;crim&quot;</span><span class="p">]</span>   
+<span class="n">formula2</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;scale(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_names2</span><span class="p">])</span>
 <span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula2</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
@@ -1162,32 +1267,31 @@ Notes:
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
 Dep. Variable:                   medv   R-squared:                       0.840
-Model:                            OLS   Adj. R-squared:                  0.834
-Method:                 Least Squares   F-statistic:                     140.0
-Date:                Sat, 13 Aug 2022   Prob (F-statistic):           2.89e-90
-Time:                        16:26:20   Log-Likelihood:                -656.65
-No. Observations:                 250   AIC:                             1333.
-Df Residuals:                     240   BIC:                             1369.
-Df Model:                           9                                         
+Model:                            OLS   Adj. R-squared:                  0.835
+Method:                 Least Squares   F-statistic:                     158.0
+Date:                Sun, 14 Aug 2022   Prob (F-statistic):           2.50e-91
+Time:                        12:49:03   Log-Likelihood:                -656.77
+No. Observations:                 250   AIC:                             1332.
+Df Residuals:                     241   BIC:                             1363.
+Df Model:                           8                                         
 Covariance Type:            nonrobust                                         
 ==================================================================================
                      coef    std err          t      P&gt;|t|      [0.025      0.975]
 ----------------------------------------------------------------------------------
-Intercept         24.2515      0.226    107.286      0.000      23.806      24.697
-C(chas)[T.1]       0.4064      0.835      0.487      0.627      -1.238       2.051
-scale(lstat)      -1.5139      0.338     -4.480      0.000      -2.180      -0.848
-scale(rm)          5.6766      0.318     17.839      0.000       5.050       6.304
-scale(ptratio)    -1.3944      0.269     -5.176      0.000      -1.925      -0.864
-scale(dis)        -1.1828      0.326     -3.624      0.000      -1.826      -0.540
-scale(tax)        -1.1461      0.255     -4.501      0.000      -1.648      -0.644
-scale(black)       0.8424      0.254      3.312      0.001       0.341       1.343
-scale(zn)          0.6707      0.321      2.090      0.038       0.038       1.303
-scale(crim)        0.2849      0.325      0.877      0.381      -0.355       0.925
+Intercept         24.2840      0.216    112.626      0.000      23.859      24.709
+scale(lstat)      -1.5010      0.336     -4.463      0.000      -2.164      -0.838
+scale(rm)          5.6819      0.318     17.894      0.000       5.056       6.307
+scale(ptratio)    -1.4204      0.264     -5.388      0.000      -1.940      -0.901
+scale(dis)        -1.1927      0.325     -3.667      0.000      -1.833      -0.552
+scale(tax)        -1.1505      0.254     -4.529      0.000      -1.651      -0.650
+scale(black)       0.8466      0.254      3.336      0.001       0.347       1.347
+scale(zn)          0.6560      0.319      2.056      0.041       0.028       1.284
+scale(crim)        0.2884      0.324      0.890      0.375      -0.350       0.927
 ==============================================================================
-Omnibus:                       19.113   Durbin-Watson:                   1.373
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):               23.813
-Skew:                           0.573   Prob(JB):                     6.75e-06
-Kurtosis:                       3.986   Cond. No.                         6.68
+Omnibus:                       18.746   Durbin-Watson:                   1.360
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):               23.072
+Skew:                           0.570   Prob(JB):                     9.77e-06
+Kurtosis:                       3.956   Cond. No.                         3.75
 ==============================================================================
 
 Notes:
@@ -1196,6 +1300,7 @@ Notes:
 </div>
 </div>
 </div>
+<p>결정계수는 0.844에서 0.840으로 미세하게 줄어들었다. 하지만 검증데이터에 대한 잔차제곱합을 구하면 nox를 포함하는 모형보다 훨씩 작아진 것을 볼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train_pred2</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
@@ -1205,15 +1310,20 @@ Notes:
 <span class="n">rss_test2</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_test_pred2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 
 <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">([</span><span class="s2">&quot;학습 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> <span class="s2">&quot;학습 잔차제곱합 (모형2)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형2)&quot;</span><span class="p">],</span> 
-        <span class="p">[</span><span class="n">rss_train1</span><span class="p">,</span> <span class="n">rss_test1</span><span class="p">,</span> <span class="n">rss_train2</span><span class="p">,</span> <span class="n">rss_test2</span><span class="p">])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60000</span><span class="p">)</span>
+<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
+    <span class="p">[</span><span class="s2">&quot;학습 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> 
+     <span class="s2">&quot;학습 잔차제곱합 (모형2)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형2)&quot;</span><span class="p">],</span> 
+    <span class="p">[</span><span class="n">rss_train1</span><span class="p">,</span> <span class="n">rss_test1</span><span class="p">,</span> <span class="n">rss_train2</span><span class="p">,</span> <span class="n">rss_test2</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">rss_train1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rss_test1</span><span class="p">),</span>
+                    <span class="nb">int</span><span class="p">(</span><span class="n">rss_train2</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rss_test2</span><span class="p">)])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70000</span><span class="p">)</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/03_12_27_0.png" src="../_images/03_12_27_0.png" />
+<img alt="../_images/03_12_33_0.png" src="../_images/03_12_33_0.png" />
 </div>
 </div>
 </section>
@@ -1241,7 +1351,6 @@ x_1 - c x_2 = 0 \;\; \leftrightarrow \;\; x_1 = c x_2
 x_1 + x_2 + x_3 - x_4 = 0 \;\; \leftrightarrow \;\; x_4 = x_1 + x_2 + x_3
 \]</div>
 <p>이 경우에는 <span class="math notranslate nohighlight">\(X^TX\)</span> 행렬의 역행렬이 존재하지 않으므로 수학적으로는 선형회귀분석의 가중치가 존재하지 않는다.</p>
-<p>실제로 보스턴 집값 데이터를 사용하여 위와 같은 경우를 실행해보자. 교차검증을 위해 전체 데이터를 학습 데이터와 검증 데이터로 나눈다.</p>
 </section>
 </section>
 
