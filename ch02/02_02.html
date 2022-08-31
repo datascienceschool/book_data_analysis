@@ -317,6 +317,11 @@ const thebe_selector_output = ".output, .cell_output"
    6. 시계열분석
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch07/07_00.html">
+   7. 비지도학습
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -788,7 +793,7 @@ title="Print to PDF"
 </section>
 <section id="id2">
 <h2><span class="section-number">2.2.2. </span>범주형 데이터의 확률분포 시각화<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<p>범주형 데이터의 경우에는 각각의 값이 나온 횟수를 바차트로 표시하는 카운트플롯을 사용한다. 팁 데이터에서 <code class="docutils literal notranslate"><span class="pre">sex</span></code>, <code class="docutils literal notranslate"><span class="pre">smoker</span></code>, <code class="docutils literal notranslate"><span class="pre">day</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>는 범주형 데이터다.</p>
+<p>범주형 데이터의 경우에는 각각의 값이 나온 횟수를 바차트로 표시하는 카운트플롯을 사용한다. 팁 데이터에서 <code class="docutils literal notranslate"><span class="pre">sex</span></code>, <code class="docutils literal notranslate"><span class="pre">smoker</span></code>, <code class="docutils literal notranslate"><span class="pre">day</span></code>, <code class="docutils literal notranslate"><span class="pre">time</span></code>, <code class="docutils literal notranslate"><span class="pre">size</span></code>는 범주형 데이터다. (<code class="docutils literal notranslate"><span class="pre">size</span></code>의 경우는 관점에 따라 수치형 데이터로도 볼 수 있고 범주형 데이터로도 볼 수 있다. 분석하는 목적과 상황에 따라 다르게 처리한다.)</p>
 <p>seaborn 패키지는 카운트플롯을 그리는 <code class="docutils literal notranslate"><span class="pre">countplot</span></code> 함수를 제공한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -812,13 +817,17 @@ title="Print to PDF"
 <img alt="../_images/02_02_13_0.png" src="../_images/02_02_13_0.png" />
 </div>
 </div>
+<div class="admonition- admonition">
+<p class="admonition-title">연습문제 2-2-1</p>
+<p>tips 데이터셋의 나머지 범주형 데이터에 대해 확률분포를 시각화하라.</p>
+</div>
 </section>
 <section id="id3">
 <h2><span class="section-number">2.2.3. </span>수치형 데이터의 확률분포 시각화<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 <p>수치형 데이터의 경우에는 러그플롯, 히스토그램, 커널밀도추정법 등을 사용한다. 팁 데이터에서 total_bill, tip은 수치형 데이터다.</p>
 <section id="id4">
 <h3><span class="section-number">2.2.3.1. </span>러그플롯<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h3>
-<p>러그플롯은 데이터의 위치를 작은 선분(rug)으로 표시하는 방법이다. seaborn 패키지는 러그플롯을 그리는 <code class="docutils literal notranslate"><span class="pre">rugplot</span></code> 함수를 제공한다.</p>
+<p><b>러그플롯(rug-plot)</b>은 데이터의 위치를 러그(rug)라고 불리는 작은 선분으로 표시하는 방법이다. seaborn 패키지는 러그플롯을 그리는 <code class="docutils literal notranslate"><span class="pre">rugplot</span></code> 함수를 제공한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">rugplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
@@ -827,7 +836,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_18_0.png" src="../_images/02_02_18_0.png" />
+<img alt="../_images/02_02_19_0.png" src="../_images/02_02_19_0.png" />
 </div>
 </div>
 <p>두가지 수치형 데이터의 분포를 동시에 나타낼 수도 있다.</p>
@@ -839,13 +848,13 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_20_0.png" src="../_images/02_02_20_0.png" />
+<img alt="../_images/02_02_21_0.png" src="../_images/02_02_21_0.png" />
 </div>
 </div>
 </section>
 <section id="id5">
 <h3><span class="section-number">2.2.3.2. </span>히스토그램<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h3>
-<p>히스토그램은 수치형 데이터를 그 범위에 따라 분류하여 범주형 데이터로 바꾼 후 카운트플롯을 그린 것이다. seaborn 패키지는 히스토그램을 그리는 <code class="docutils literal notranslate"><span class="pre">histplot</span></code> 함수를 제공한다.</p>
+<p><b>히스토그램(histogram)</b>은 수치형 데이터를 범위에 따라 분류하여 범주형 데이터로 바꾼 후 카운트플롯을 그린 것이다. seaborn 패키지는 히스토그램을 그리는 <code class="docutils literal notranslate"><span class="pre">histplot</span></code> 함수를 제공한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">histplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
@@ -854,7 +863,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_23_0.png" src="../_images/02_02_23_0.png" />
+<img alt="../_images/02_02_24_0.png" src="../_images/02_02_24_0.png" />
 </div>
 </div>
 <p><code class="docutils literal notranslate"><span class="pre">bins</span></code> 인수를 사용하면 사용하는 수치값 범위의 개수를 조정할 수 있다.</p>
@@ -866,19 +875,19 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_25_0.png" src="../_images/02_02_25_0.png" />
+<img alt="../_images/02_02_26_0.png" src="../_images/02_02_26_0.png" />
 </div>
 </div>
 </section>
 <section id="id6">
 <h3><span class="section-number">2.2.3.3. </span>커널밀도추정법<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
-<p>커널밀도추정법은 수치값 하나가 존재하는 위치마다 커널(kernel)이라고 부르는 작은 산봉우리 모양의 함수가 있다고 가정하여 모든 커널을 합친 모양을 보여주는 방법이다. seaborn 패키지는 커널밀도추정법에 의한 확률분포를 그리는 <code class="docutils literal notranslate"><span class="pre">kdeplot</span></code> 함수를 제공한다.</p>
+<p><b>커널밀도추정법(kde: kernel density estimation)</b>은 수치값 하나가 존재하는 위치마다 커널(kernel)이라고 부르는 작은 산봉우리 모양의 함수가 있다고 가정하여 모든 커널을 합친 모양을 보여주는 방법이다. seaborn 패키지는 커널밀도추정법에 의한 확률분포를 그리는 <code class="docutils literal notranslate"><span class="pre">kdeplot</span></code> 함수를 제공한다.</p>
 <p>예를 들어 데이터 값에 <span class="math notranslate nohighlight">\(x_1=0, x_2=10\)</span>, 이렇게 두 수치값이 존재한다고 하자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-<span class="n">d1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">]})</span> 
+<span class="n">d1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;x&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">]})</span>
 <span class="n">d1</span>
 </pre></div>
 </div>
@@ -928,7 +937,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_30_0.png" src="../_images/02_02_30_0.png" />
+<img alt="../_images/02_02_31_0.png" src="../_images/02_02_31_0.png" />
 </div>
 </div>
 <p>이 커널의 폭은 <code class="docutils literal notranslate"><span class="pre">bw_method</span></code> 인수값으로 조정할 수 있다. 예를 들어 커널의 폭을 증가시키면 다음과 같아진다.</p>
@@ -941,7 +950,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_32_0.png" src="../_images/02_02_32_0.png" />
+<img alt="../_images/02_02_33_0.png" src="../_images/02_02_33_0.png" />
 </div>
 </div>
 <div class="cell docutils container">
@@ -953,7 +962,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_33_0.png" src="../_images/02_02_33_0.png" />
+<img alt="../_images/02_02_34_0.png" src="../_images/02_02_34_0.png" />
 </div>
 </div>
 <p>커널의 폭이 더 커지면 두 커널의 합이 하나의 봉우리처럼 보이게 된다.</p>
@@ -966,7 +975,7 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_35_0.png" src="../_images/02_02_35_0.png" />
+<img alt="../_images/02_02_36_0.png" src="../_images/02_02_36_0.png" />
 </div>
 </div>
 <p>사용자가 <code class="docutils literal notranslate"><span class="pre">bw_method</span></code> 인수값을 주지 않으면 자동으로 Scott의 방법이라는 관행적인 방법으로 커널의 폭으르 정해준다.</p>
@@ -979,13 +988,13 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_37_0.png" src="../_images/02_02_37_0.png" />
+<img alt="../_images/02_02_38_0.png" src="../_images/02_02_38_0.png" />
 </div>
 </div>
 </section>
 <section id="id7">
 <h3><span class="section-number">2.2.3.4. </span>박스플롯<a class="headerlink" href="#id7" title="Permalink to this headline">#</a></h3>
-<p>마지막으로 박스플롯(box plot)을 사용해서 수치값 데이터의 분포를 나타내는 방법도 있다. 박스플롯은 박스휘스커플롯(box-whisker plot)이라고도 부르는데 그 모양이 상자와 그 상자에 붙은 수염같다고 해서 이런 이름이 붙었다. 박스플롯을 이해하려면 다음 용어를 알아야 한다.</p>
+<p><b>박스플롯(box plot)</b>을 사용해서 수치값 데이터의 분포를 나타내는 방법도 있다. 박스플롯은 <b>박스-휘스커 플롯(box-whisker plot)</b>이라고도 부르는데 그 모양이 상자와 수염같다고 해서 이런 이름이 붙었다. 박스플롯을 이해하려면 다음 용어를 알아야 한다.</p>
 <ul class="simple">
 <li><p>분위수(quantile)</p></li>
 <li><p>사분위수(quartile)</p></li>
@@ -1124,8 +1133,12 @@ Name: total_bill, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_02_47_0.png" src="../_images/02_02_47_0.png" />
+<img alt="../_images/02_02_48_0.png" src="../_images/02_02_48_0.png" />
 </div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">연습문제 2-2-2</p>
+<p>tips 데이터셋의 나머지 수치형 데이터에 대해 다양한 방법으로 확률분포를 시각화하라.</p>
 </div>
 </section>
 </section>
