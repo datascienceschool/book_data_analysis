@@ -317,6 +317,11 @@ const thebe_selector_output = ".output, .cell_output"
    6. 시계열분석
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch07/07_00.html">
+   7. 비지도학습
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -568,19 +573,27 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">2.3. </span>확률분포모형을 사용한 확률분포추정<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
-<p>앞서 시각적인 방법을 사용한 확률분포추정 방법을 알아보았다. 시각적인 방법을 사용하게되면 직관적이고 수학을 사용할 필요가 없다는 장점이 있지만 이렇게 구한 확률분포가 가장 그럴듯한 확률분포라는 근거를 댈 수 없다는 단점이 있다. 따라서 이제부터는 수학적인 기준에 따라 가장 올바르다고 생각되는 확률분포를 찾는 방법을 설명한다.</p>
+<p>앞 절에서는 시각적인 방법을 사용한 확률분포추정 방법을 알아보았다. 시각적인 방법을 사용하게되면 직관적이고 어려운 수학을 사용할 필요가 없다는 장점이 있지만 다름과 같은 단점도 존재한다.</p>
+<ul class="simple">
+<li><p>확률분포가 그림으로 표시되기 때문에 간결한 정보 형식으로 저장 및 전달하기가 어렵다.</p></li>
+<li><p>수치형 데이터를 위한 히스토그램이나 커널밀도추정법은 사용하는 인수에 따라 그림의 형태가 달라진다.</p></li>
+</ul>
+<p>이 절에서는 수학적인 방법으로 확률분포를 찾는 방법을 설명한다.</p>
 <section id="id2">
 <h2><span class="section-number">2.3.1. </span>모형<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p><b>모형(model)</b>은 현실의 부정확한 존재를 가상의 이상적 존재라고 가정하는 것이다. 예를 들어 다음 그림을 보자.</p>
 <p><img alt="도형의 모형" src="../_images/model01.png" /></p>
 <p>이 그림을 보면 모든 사람이 원, 사각형, 삼각형이라고 할 것이다. 하지만 정확한 원, 사각형, 삼각형은 다음과 같은 이상적이고 완벽한 모양을 가져야 한다.</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02_03_5_0.png" src="../_images/02_03_5_0.png" />
+</div>
 </div>
 <p>사실은 위 그림도 정확한 원, 사각형, 삼각형은 아니다. 수학적인 원, 사각형, 삼각형에서는 선의 두께가 존재하지 않고 0이기 때문이다. 이런 식으로 현실에서는 정확하게 표현되지 않는 현실의 존재를 이상적인 수학적 존재라고 가정하는 것을 모형이라고 한다.</p>
 </section>
 <section id="id3">
 <h2><span class="section-number">2.3.2. </span>확률분포모형<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<p>데이터 분석에서도 모형이 많이 사용된다. 수학적인 확률분포추정을 할 때는 우리가 찾고자 하는 확률변수의 확률분포가 미리 정해놓은 특정한 함수 중 하나라고 가정하는데 이렇게 확률분포의 모양을 미리 함수로 정해놓은 것을 <b>확률분포모형(probability distribution model)</b>이라고 한다.</p>
+<p>데이터 분석에서도 모형이 많이 사용된다. 수학적인 확률분포추정을 할 때는 우리가 찾고자 하는 확률변수의 확률분포함수가 미리 정해놓은 특정한 함수 중 하나라고 가정하는데 이렇게 확률분포의 모양을 미리 함수로 정해놓은 것을 <b>확률분포모형(probability distribution model)</b>이라고 한다.</p>
 <p>수십가지의 다양한 확률분포모형이 존재하지만 그 중 가장 기본적인 확률분포는 다음과 같다.</p>
 <ul class="simple">
 <li><p>범주형 확률분포</p>
@@ -600,12 +613,18 @@ title="Print to PDF"
 </ul>
 <p>다음 그림은 위 기본 확률분포모형의 대략적인 분포 모양을 그린 것이다.</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02_03_10_0.png" src="../_images/02_03_10_0.png" />
+</div>
 </div>
 </section>
 <section id="id4">
 <h2><span class="section-number">2.3.3. </span>확률분포모형과 실제 데이터 값 분포의 관계<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 <p>확률변수가 수학적인 확률분포모형을 가진다고 해도 실제 데이터 값의 분포는 이와 정확히 같지 않을 수 있다.</p>
 <div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/02_03_13_0.png" src="../_images/02_03_13_0.png" />
+</div>
 </div>
 <p>예를 들어 팁 데이터의 total_bill 확률변수가 로그정규분포라는 확률분포모형을 따른다고 가정하자.
 이 때 확률분포함수는 왼쪽 그림과 같은 모양을 가진다. 이 확률분포에서 측정한 실제 데이터의 분포는 이와 유사하지만 오른쪽 그림과 같이 원래의 확률분포함수와 유사하지만 정확하게는 같지 않다.</p>
@@ -633,11 +652,14 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
+<div class="cell_output docutils container">
+<img alt="../_images/02_03_15_0.png" src="../_images/02_03_15_0.png" />
+</div>
 </div>
 </section>
 <section id="id5">
 <h2><span class="section-number">2.3.4. </span>확률분포모형의 수식과 모수<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-<p>확률분포모형의 공통점은 확률질량함수(pmf)나 확률밀도함수(pdf)가 정확한 수식으로 표현된다는 점이다. 이 수식에는 확률변수가 가질 수 있는 값을 나타내는 <span class="math notranslate nohighlight">\(x\)</span>라는 기호이외에 몇가지 상수기호가 있는데 이 상수기호들을 <b>모수(parameter)</b>라고 부른다. 확률분포모형의 가장 큰 특징은 이 모수의 값만 알고 있으면 정확히 같은 확률분포함수를 재현할 수 있다는 점이다.</p>
+<p>확률분포모형의 공통점은 확률질량함수(pmf)나 확률밀도함수(pdf)가 수식으로 표현된다는 점이다. 이 수식에는 확률변수가 가질 수 있는 값을 나타내는 <span class="math notranslate nohighlight">\(x\)</span>라는 변수 이외에 상수(constant)들을 가지는데 이 상수를 <b>모수(parameter)</b>라고 부른다. 확률분포모형의 가장 큰 특징은 모형의 종류와 모수의 값만 알고 있으면 정확히 똑같은 확률분포함수를 재현할 수 있다는 점이다. 따라서 확률분포를 다른 사람에게 전달하거나 저장하기 위한 정보가 간결해진다.</p>
 <p>위에서 제시한 기본 확률분포모형의 수식과 모수를 다시 정리하면 다음과 같다.</p>
 <table class="colwidths-auto table">
 <thead>
@@ -672,8 +694,8 @@ title="Print to PDF"
 </section>
 <section id="id6">
 <h2><span class="section-number">2.3.5. </span>모수추정을 통한 확률분포추정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
-<p>확률분포모형을 사용했을 때 가장 좋은 점은 확률분포함수의 수식이 이미 정해져 있기 때문에 한 두개의 모수값만 알 수 있으면 전체 확률분포를 모두 알 수 있다는 점이다. 따라서 확률분포모형을 사용하는 경우의 확률분포추정은 사실상 <b>모수추정(parameter estimation)</b>이라고 할 수 있다. 이러한 방법을 <b>모수적 확률분포추정(parametric probability distribution estimation)</b>이라고 한다. 모수를 사용하지 않고 확률분포의 모양을 수학적으로 추정하는 <b>비모수적 확률분포추정(non-parametric probability distribution estimation)</b> 방법도 물론 존재한다. 이 방법은 나중에 설명할 것이다. 우선 다음 절부터는 모수추정을 통한 확률분포추정 방법론을 설명한다..</p>
-<p>이제부터는 위에서 설명한 기본 확률분포모형 각각에 대해 자세히 설명하도록 한다.</p>
+<p>앞에서도 이야기했지만 확률분포모형을 사용하는 장점은 확률분포함수의 수식이 이미 정해져 있기 때문에 분포의 종류와 모수값만 알 수 있으면 전체 확률분포를 모두 알 수 있다는 점이다. 따라서 확률분포모형을 사용하는 경우의 확률분포추정은 사실상 <b>모수추정(parameter estimation)</b>이라고 할 수 있다. 이러한 방법을 <b>모수적 확률분포추정(parametric probability distribution estimation)</b>이라고 한다. 모수를 사용하지 않고 확률분포의 모양을 수학적으로 추정하는 <b>비모수적 확률분포추정(non-parametric probability distribution estimation)</b> 방법도 물론 존재한다. 이 방법은 나중에 설명할 것이다. 우선 다음 절부터는 모수추정을 통한 확률분포추정 방법론을 설명한다..</p>
+<p>다음 절부터는 위에서 설명한 기본 확률분포모형 각각에 대해 자세히 설명하도록 한다.</p>
 </section>
 </section>
 
