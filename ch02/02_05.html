@@ -317,6 +317,11 @@ const thebe_selector_output = ".output, .cell_output"
    6. 시계열분석
   </a>
  </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../ch07/07_00.html">
+   7. 비지도학습
+  </a>
+ </li>
 </ul>
 
     </div>
@@ -651,16 +656,19 @@ title="Print to PDF"
 <div class="math notranslate nohighlight">
 \[ x = (x_1, x_2, \ldots, x_K) \]</div>
 <p>으로 풀어써야 한다. 예를 들어 4면체주사위와 같이 <span class="math notranslate nohighlight">\(K=4\)</span>인 카테고리분포는 다음과 같은 값을 가진다고 가정한다.</p>
-<p>\begin{split}
+<div class="math notranslate nohighlight">
+\[\begin{split}
+\begin{split} 
 \begin{align}
 \begin{aligned}
-x = 1  ;; &amp; \rightarrow &amp; ;; x = (1, 0, 0, 0) \
-x = 2  ;; &amp; \rightarrow &amp; ;; x = (0, 1, 0, 0) \
-x = 3  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 1, 0) \
-x = 4  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 1) \
+x = 1  \;\; &amp; \rightarrow &amp; \;\; x = (1, 0, 0, 0) \\
+x = 2  \;\; &amp; \rightarrow &amp; \;\; x = (0, 1, 0, 0) \\
+x = 3  \;\; &amp; \rightarrow &amp; \;\; x = (0, 0, 1, 0) \\
+x = 4  \;\; &amp; \rightarrow &amp; \;\; x = (0, 0, 0, 1) \\
 \end{aligned}
 \end{align}
-\end{split}</p>
+\end{split}
+\end{split}\]</div>
 <p>이렇게 정수 범주값을 0과 1로 이루어진 벡터값으로 바꾸는 작업을 <b>원핫인코딩(one-hot encoding)</b>이라고 한다. 원핫인코딩을 하게되면 카테고리분포의 확률질량함수 <span class="math notranslate nohighlight">\(\text{Cat}\)</span>은 다음과 같이 표시한다.</p>
 <div class="math notranslate nohighlight">
 \[ \text{Cat}(x_1, x_2, \dots, x_K;\mu_1, \dots, \mu_K) \]</div>
@@ -864,6 +872,10 @@ x = 4  ;; &amp; \rightarrow &amp; ;; x = (0, 0, 0, 1) \
 <img alt="../_images/02_05_22_0.png" src="../_images/02_05_22_0.png" />
 </div>
 </div>
+<div class="admonition- admonition">
+<p class="admonition-title">연습문제 2-4-1</p>
+<p>tips 데이터셋의 size 데이터를 범주형 데이터라고 가정하고 확률분포를 시각화하라.</p>
+</div>
 </section>
 <section id="id6">
 <h3><span class="section-number">2.5.1.4. </span>카테고리분포의 모수추정<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h3>
@@ -913,6 +925,10 @@ Name: day, dtype: float64
 </pre></div>
 </div>
 </div>
+</div>
+<div class="admonition- admonition">
+<p class="admonition-title">연습문제 2-4-2</p>
+<p>tips 데이터셋의 size 데이터를 범주형 데이터라고 가정하고 확률분포의 모수를 추정하라.</p>
 </div>
 </section>
 <section id="id7">
@@ -1239,7 +1255,7 @@ Name: day, dtype: float64
 </div>
 </div>
 <div class="cell_output docutils container">
-<img alt="../_images/02_05_48_0.png" src="../_images/02_05_48_0.png" />
+<img alt="../_images/02_05_50_0.png" src="../_images/02_05_50_0.png" />
 </div>
 </div>
 </section>
