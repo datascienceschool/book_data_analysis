@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
+    <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="4. 분류 - 범주형 데이터를 예측한다." href="../ch04/04_00.html" />
@@ -497,12 +499,22 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.13.2. 레벨이 3개 이상인 범주형 독립변수
+   3.13.2. 레벨이 2개인 범주형 독립변수와 수치형 독립변수를 동시에 사용하는 경우
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   3.13.3. 복수의 범주형 독립변수
+   3.13.3. 변수간 상호작용
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.13.4. 레벨이 3개 이상인 범주형 독립변수의 인코딩
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   3.13.5. 복수의 범주형 독립변수가 있는 경우의 인코딩
   </a>
  </li>
 </ul>
@@ -531,12 +543,22 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id3">
-   3.13.2. 레벨이 3개 이상인 범주형 독립변수
+   3.13.2. 레벨이 2개인 범주형 독립변수와 수치형 독립변수를 동시에 사용하는 경우
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   3.13.3. 복수의 범주형 독립변수
+   3.13.3. 변수간 상호작용
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id5">
+   3.13.4. 레벨이 3개 이상인 범주형 독립변수의 인코딩
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id6">
+   3.13.5. 복수의 범주형 독립변수가 있는 경우의 인코딩
   </a>
  </li>
 </ul>
@@ -551,6 +573,8 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.13. </span>범주형 독립변수<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
+<p>이 절에서는 선형회귀분석에 있어서 범주형 독립변수(categorical independent variable)의 사용법을 공부한다.</p>
+<p>예제로는 팁 데이터를 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -645,83 +669,191 @@ title="Print to PDF"
 </div>
 <section id="id2">
 <h2><span class="section-number">3.13.1. </span>레벨이 2개인 범주형 독립변수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/03_13_4_0.png" src="../_images/03_13_4_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
-
-<span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;sex&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;tip&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">]})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead tr th {
-        text-align: left;
-    }
-
-    .dataframe thead tr:last-of-type th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="2" halign="left">tip</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>mean</th>
-      <th>std</th>
-    </tr>
-    <tr>
-      <th>sex</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Male</th>
-      <td>3.089618</td>
-      <td>1.489102</td>
-    </tr>
-    <tr>
-      <th>Female</th>
-      <td>2.833448</td>
-      <td>1.159495</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
+<p>범주형 독립변수가 가질 수 있는 값을 <b>레벨(level)</b>이라고 한다. 우선 가장 간단한 모형으로 레벨이 2개인 범주형 독립변수만을 가지는 선형회귀모형을 살펴보자. 예를 들어 팁 데이터에서 time 변수는 Lunch와 Dinner라는 두가지 레벨을 가지는 독립변수이고 sex 변수도 남성 Male과 Female이라는 두 가지 레벨을 가지는 독립변수다. 우선 time 변수로 팁 데이터를 예측하는 선형회귀모형을 만들어보자.</p>
+<p>단 하나의 범주형 독립변수를 사용할 경우 두 가지 선형회귀모형을 만들어 볼 수 있다. 각각의 모형 문자열은 다음과 같다.</p>
+<ul class="simple">
+<li><p>모형 1 : <code class="docutils literal notranslate"><span class="pre">tip</span> <span class="pre">~</span> <span class="pre">C(time)</span> <span class="pre">+</span> <span class="pre">0</span></code></p></li>
+<li><p>모형 2 : <code class="docutils literal notranslate"><span class="pre">tip</span> <span class="pre">~</span> <span class="pre">C(time)</span></code></p></li>
+</ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-<span class="n">model1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(sex)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
-<span class="n">result1</span> <span class="o">=</span> <span class="n">model1</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">model1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(time) + 0&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(time)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>이 두가지 모형이 각각 어떤 의미인지를 파악하기 위해 각각 범주형 변수의 값(레벨)이 어떤 숫자로 인코딩되는지를 살펴보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+
+<span class="n">X0</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[[</span><span class="s2">&quot;time&quot;</span><span class="p">]]</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model1</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model2</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X0</span><span class="p">,</span> <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;raw&quot;</span><span class="p">,</span> <span class="s2">&quot;model1&quot;</span><span class="p">,</span> <span class="s2">&quot;model2&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><style type="text/css">
+#T_ba630_row0_col1, #T_ba630_row1_col1, #T_ba630_row2_col1, #T_ba630_row3_col1, #T_ba630_row4_col2, #T_ba630_row4_col4, #T_ba630_row5_col1, #T_ba630_row6_col1, #T_ba630_row7_col1, #T_ba630_row8_col1, #T_ba630_row9_col1 {
+  background-color: #fff7fb;
+  color: #000000;
+}
+#T_ba630_row0_col2, #T_ba630_row0_col3, #T_ba630_row0_col4, #T_ba630_row1_col2, #T_ba630_row1_col3, #T_ba630_row1_col4, #T_ba630_row2_col2, #T_ba630_row2_col3, #T_ba630_row2_col4, #T_ba630_row3_col2, #T_ba630_row3_col3, #T_ba630_row3_col4, #T_ba630_row4_col1, #T_ba630_row4_col3, #T_ba630_row5_col2, #T_ba630_row5_col3, #T_ba630_row5_col4, #T_ba630_row6_col2, #T_ba630_row6_col3, #T_ba630_row6_col4, #T_ba630_row7_col2, #T_ba630_row7_col3, #T_ba630_row7_col4, #T_ba630_row8_col2, #T_ba630_row8_col3, #T_ba630_row8_col4, #T_ba630_row9_col2, #T_ba630_row9_col3, #T_ba630_row9_col4 {
+  background-color: #023858;
+  color: #f1f1f1;
+}
+</style>
+<table id="T_ba630">
+  <thead>
+    <tr>
+      <th class="blank level0" >&nbsp;</th>
+      <th id="T_ba630_level0_col0" class="col_heading level0 col0" >raw</th>
+      <th id="T_ba630_level0_col1" class="col_heading level0 col1" colspan="2">model1</th>
+      <th id="T_ba630_level0_col3" class="col_heading level0 col3" colspan="2">model2</th>
+    </tr>
+    <tr>
+      <th class="blank level1" >&nbsp;</th>
+      <th id="T_ba630_level1_col0" class="col_heading level1 col0" >time</th>
+      <th id="T_ba630_level1_col1" class="col_heading level1 col1" >C(time)[Lunch]</th>
+      <th id="T_ba630_level1_col2" class="col_heading level1 col2" >C(time)[Dinner]</th>
+      <th id="T_ba630_level1_col3" class="col_heading level1 col3" >Intercept</th>
+      <th id="T_ba630_level1_col4" class="col_heading level1 col4" >C(time)[T.Dinner]</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th id="T_ba630_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_ba630_row0_col0" class="data row0 col0" >Dinner</td>
+      <td id="T_ba630_row0_col1" class="data row0 col1" >0.000000</td>
+      <td id="T_ba630_row0_col2" class="data row0 col2" >1.000000</td>
+      <td id="T_ba630_row0_col3" class="data row0 col3" >1.000000</td>
+      <td id="T_ba630_row0_col4" class="data row0 col4" >1.000000</td>
+    </tr>
+    <tr>
+      <th id="T_ba630_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_ba630_row1_col0" class="data row1 col0" >Dinner</td>
+      <td id="T_ba630_row1_col1" class="data row1 col1" >0.000000</td>
+      <td id="T_ba630_row1_col2" class="data row1 col2" >1.000000</td>
+      <td id="T_ba630_row1_col3" class="data row1 col3" >1.000000</td>
+      <td id="T_ba630_row1_col4" class="data row1 col4" >1.000000</td>
+    </tr>
+    <tr>
+      <th id="T_ba630_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_ba630_row2_col0" class="data row2 col0" >Dinner</td>
+      <td id="T_ba630_row2_col1" class="data row2 col1" >0.000000</td>
+      <td id="T_ba630_row2_col2" class="data row2 col2" >1.000000</td>
+      <td id="T_ba630_row2_col3" class="data row2 col3" >1.000000</td>
+      <td id="T_ba630_row2_col4" class="data row2 col4" >1.000000</td>
+    </tr>
+    <tr>
+      <th id="T_ba630_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_ba630_row3_col0" class="data row3 col0" >Dinner</td>
+      <td id="T_ba630_row3_col1" class="data row3 col1" >0.000000</td>
+      <td id="T_ba630_row3_col2" class="data row3 col2" >1.000000</td>
+      <td id="T_ba630_row3_col3" class="data row3 col3" >1.000000</td>
+      <td id="T_ba630_row3_col4" class="data row3 col4" >1.000000</td>
+    </tr>
+    <tr>
+      <th id="T_ba630_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_ba630_row4_col0" class="data row4 col0" >Lunch</td>
+      <td id="T_ba630_row4_col1" class="data row4 col1" >1.000000</td>
+      <td id="T_ba630_row4_col2" class="data row4 col2" >0.000000</td>
+      <td id="T_ba630_row4_col3" class="data row4 col3" >1.000000</td>
+      <td id="T_ba630_row4_col4" class="data row4 col4" >0.000000</td>
+    </tr>
+    <tr>
+      <th id="T_ba630_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_ba630_row5_col0" class="data row5 col0" >Dinner</td>
+      <td id="T_ba630_row5_col1" class="data row5 col1" >0.000000</td>
+      <td id="T_ba630_row5_col2" class="data row5 col2" >1.000000</td>
+      <td id="T_ba630_row5_col3" class="data row5 col3" >1.000000</td>
+      <td id="T_ba630_row5_col4" class="data row5 col4" >1.000000</td>
+    </tr>
+    <tr>
+      <th id="T_ba630_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_ba630_row6_col0" class="data row6 col0" >Dinner</td>
+      <td id="T_ba630_row6_col1" class="data row6 col1" >0.000000</td>
+      <td id="T_ba630_row6_col2" class="data row6 col2" >1.000000</td>
+      <td id="T_ba630_row6_col3" class="data row6 col3" >1.000000</td>
+      <td id="T_ba630_row6_col4" class="data row6 col4" >1.000000</td>
+    </tr>
+    <tr>
+      <th id="T_ba630_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_ba630_row7_col0" class="data row7 col0" >Dinner</td>
+      <td id="T_ba630_row7_col1" class="data row7 col1" >0.000000</td>
+      <td id="T_ba630_row7_col2" class="data row7 col2" >1.000000</td>
+      <td id="T_ba630_row7_col3" class="data row7 col3" >1.000000</td>
+      <td id="T_ba630_row7_col4" class="data row7 col4" >1.000000</td>
+    </tr>
+    <tr>
+      <th id="T_ba630_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_ba630_row8_col0" class="data row8 col0" >Dinner</td>
+      <td id="T_ba630_row8_col1" class="data row8 col1" >0.000000</td>
+      <td id="T_ba630_row8_col2" class="data row8 col2" >1.000000</td>
+      <td id="T_ba630_row8_col3" class="data row8 col3" >1.000000</td>
+      <td id="T_ba630_row8_col4" class="data row8 col4" >1.000000</td>
+    </tr>
+    <tr>
+      <th id="T_ba630_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_ba630_row9_col0" class="data row9 col0" >Dinner</td>
+      <td id="T_ba630_row9_col1" class="data row9 col1" >0.000000</td>
+      <td id="T_ba630_row9_col2" class="data row9 col2" >1.000000</td>
+      <td id="T_ba630_row9_col3" class="data row9 col3" >1.000000</td>
+      <td id="T_ba630_row9_col4" class="data row9 col4" >1.000000</td>
+    </tr>
+  </tbody>
+</table>
+</div></div>
+</div>
+<p>모형1에서는 C(time)[Lunch] 와 C(time)[Dinner] 라는 두 개의 변수가 만들어지고 이 값은 각각 다음과 같이 인코딩되었다. 모형2에서는 Intercept 와 C(time)[T.Dinner] 라는 두 개의 변수가 만들어지고 이 값은 각각 다음과 같이 인코딩되었다.</p>
+<p>이렇게 범주형 독립변수를 선형회귀분석에 사용하게 되면 레벨의 개수와 같은 개수의 변수가 만들어지는데 이를 <b>더미변수(dummy variable)</b>라고 한다. 더미변수의 값은 0 또는 1 값만을 가질 수 있다. 더미변수의 값을 정하는 규칙을 더미변수 인코딩(encoding) 규칙이라고 한다.</p>
+<p>모형1에서 더미변수의 값은 다음과 같이 정해진다.</p>
+<ul class="simple">
+<li><p>Lunch -&gt; C(time)[Lunch] = 1, C(time)[T.Dinner] = 0</p></li>
+<li><p>Dinner -&gt; C(time)[Lunch] = 0, C(time)[T.Dinner] = 1</p></li>
+</ul>
+<p>즉 C(time)[Lunch] 변수를 <span class="math notranslate nohighlight">\(d_0\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_0\)</span>, C(time)[T.Dinner] 변수를 <span class="math notranslate nohighlight">\(d_1\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_1\)</span>이라고 하면,</p>
+<p>x = Lunch인 경우</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} = w_0 d_0 + w_1 d_1 = w_0 \cdot 1 + w_1 \cdot 0 = w_0 \]</div>
+<p>x = Dinner인 경우</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} = w_0 d_0 + w_1 d_1 = w_0 \cdot 0 + w_1 \cdot 1 = w_1 \]</div>
+<p>가 된다.</p>
+<p>이 모형의 가중치가 의미하는 바는 다음과 같다.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_0\)</span> : x 값이 Lunch인 경우의 팁의 평균값</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_1\)</span> : x 값이 Dinner인 경우의 팁의 평균값</p></li>
+</ul>
+<p>이러한 더미 인코딩 방식을 <b>전체랭크 인코딩(full-rank encoding)</b>이라고 한다.</p>
+<p>모형2에서는 Intercept 와 C(time)[T.Dinner] 라는 두 개의 변수가 만들어지고 이 값은 각각 다음과 같이 인코딩되었다.</p>
+<ul class="simple">
+<li><p>Lunch -&gt; Intercept = 1, C(time)[T.Dinner] = 0</p></li>
+<li><p>Dinner -&gt; Intercept = 1, C(time)[T.Dinner] = 1</p></li>
+</ul>
+<p>즉 Intercept 변수를 <span class="math notranslate nohighlight">\(d_0\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_0\)</span>, C(time)[T.Dinner] 변수를 <span class="math notranslate nohighlight">\(d_1\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_1\)</span>이라고 하면,</p>
+<p>x = Lunch인 경우</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} = w_0 d_0 + w_1 d_1 = w_0 \cdot 1 + w_1 \cdot 0 = w_0 \]</div>
+<p>x = Dinner인 경우</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} = w_0 d_0 + w_1 d_1 = w_0 \cdot 1 + w_1 \cdot 1 = w_0 + w_1 \]</div>
+<p>가 된다.</p>
+<p>이 모형의 가중치가 의미하는 바는 다음과 같다.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(w_0\)</span> : x 값이 Dinner인 경우의 팁의 평균값</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_1\)</span> : x 값이 Lunch인 경우의 팁이 Dinner의 경우와 얼마나 달라지는 지에 대한 평균값</p></li>
+</ul>
+<p>이러한 더미 인코딩 방식을 <b>축소랭크 인코딩(reduced-rank encoding)</b>이라고 한다.</p>
+<p>그러면 이제 실제로 이 두 가지 모형에 대해 선형회귀분석을 해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span> <span class="o">=</span> <span class="n">model1</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -729,25 +861,25 @@ title="Print to PDF"
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.008
-Model:                            OLS   Adj. R-squared:                  0.004
-Method:                 Least Squares   F-statistic:                     1.926
-Date:                Wed, 17 Aug 2022   Prob (F-statistic):              0.166
-Time:                        19:56:56   Log-Likelihood:                -423.98
-No. Observations:                 244   AIC:                             852.0
-Df Residuals:                     242   BIC:                             859.0
+Dep. Variable:                    tip   R-squared:                       0.015
+Model:                            OLS   Adj. R-squared:                  0.011
+Method:                 Least Squares   F-statistic:                     3.634
+Date:                Wed, 12 Oct 2022   Prob (F-statistic):             0.0578
+Time:                        00:38:47   Log-Likelihood:                -423.13
+No. Observations:                 244   AIC:                             850.3
+Df Residuals:                     242   BIC:                             857.3
 Df Model:                           1                                         
 Covariance Type:            nonrobust                                         
-====================================================================================
-                       coef    std err          t      P&gt;|t|      [0.025      0.975]
-------------------------------------------------------------------------------------
-Intercept            3.0896      0.110     28.032      0.000       2.873       3.307
-C(sex)[T.Female]    -0.2562      0.185     -1.388      0.166      -0.620       0.107
+===================================================================================
+                      coef    std err          t      P&gt;|t|      [0.025      0.975]
+-----------------------------------------------------------------------------------
+C(time)[Lunch]      2.7281      0.167     16.347      0.000       2.399       3.057
+C(time)[Dinner]     3.1027      0.104     29.910      0.000       2.898       3.307
 ==============================================================================
-Omnibus:                       75.995   Durbin-Watson:                   1.922
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              194.975
-Skew:                           1.415   Prob(JB):                     4.59e-43
-Kurtosis:                       6.342   Cond. No.                         2.42
+Omnibus:                       77.962   Durbin-Watson:                   1.934
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              206.982
+Skew:                           1.437   Prob(JB):                     1.13e-45
+Kurtosis:                       6.479   Cond. No.                         1.61
 ==============================================================================
 
 Notes:
@@ -756,99 +888,98 @@ Notes:
 </div>
 </div>
 </div>
+<p>모형1의 결과가 뜻하는 바는 x=Lunch인 경우 팁의 평균값은 약 2.73이고 x=Dinner인 경우 팁의 평균값은 약 3.10이라는 뜻이다. 두 변수에 대한 유의확율이 0에 가까우므로 각각의 경우에 대해 팁이 0일 확률은 거의 없다고 볼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">p</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model1</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">X1</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_html"><style type="text/css">
-#T_16e56_row0_col0, #T_16e56_row1_col0, #T_16e56_row2_col0, #T_16e56_row3_col0, #T_16e56_row3_col1, #T_16e56_row4_col0, #T_16e56_row4_col1, #T_16e56_row5_col0, #T_16e56_row5_col1, #T_16e56_row6_col0, #T_16e56_row7_col0, #T_16e56_row8_col0, #T_16e56_row8_col1, #T_16e56_row9_col0 {
-  background-color: #023858;
-  color: #f1f1f1;
-}
-#T_16e56_row0_col1, #T_16e56_row1_col1, #T_16e56_row2_col1, #T_16e56_row6_col1, #T_16e56_row7_col1, #T_16e56_row9_col1 {
-  background-color: #fff7fb;
-  color: #000000;
-}
-</style>
-<table id="T_16e56">
-  <thead>
-    <tr>
-      <th class="blank level0" >&nbsp;</th>
-      <th id="T_16e56_level0_col0" class="col_heading level0 col0" >Intercept</th>
-      <th id="T_16e56_level0_col1" class="col_heading level0 col1" >C(sex)[T.Female]</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th id="T_16e56_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_16e56_row0_col0" class="data row0 col0" >1</td>
-      <td id="T_16e56_row0_col1" class="data row0 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_16e56_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_16e56_row1_col0" class="data row1 col0" >1</td>
-      <td id="T_16e56_row1_col1" class="data row1 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_16e56_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_16e56_row2_col0" class="data row2 col0" >1</td>
-      <td id="T_16e56_row2_col1" class="data row2 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_16e56_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_16e56_row3_col0" class="data row3 col0" >1</td>
-      <td id="T_16e56_row3_col1" class="data row3 col1" >1</td>
-    </tr>
-    <tr>
-      <th id="T_16e56_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_16e56_row4_col0" class="data row4 col0" >1</td>
-      <td id="T_16e56_row4_col1" class="data row4 col1" >1</td>
-    </tr>
-    <tr>
-      <th id="T_16e56_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_16e56_row5_col0" class="data row5 col0" >1</td>
-      <td id="T_16e56_row5_col1" class="data row5 col1" >1</td>
-    </tr>
-    <tr>
-      <th id="T_16e56_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_16e56_row6_col0" class="data row6 col0" >1</td>
-      <td id="T_16e56_row6_col1" class="data row6 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_16e56_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_16e56_row7_col0" class="data row7 col0" >1</td>
-      <td id="T_16e56_row7_col1" class="data row7 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_16e56_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_16e56_row8_col0" class="data row8 col0" >1</td>
-      <td id="T_16e56_row8_col1" class="data row8 col1" >1</td>
-    </tr>
-    <tr>
-      <th id="T_16e56_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_16e56_row9_col0" class="data row9 col0" >1</td>
-      <td id="T_16e56_row9_col1" class="data row9 col1" >0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    tip   R-squared:                       0.015
+Model:                            OLS   Adj. R-squared:                  0.011
+Method:                 Least Squares   F-statistic:                     3.634
+Date:                Wed, 12 Oct 2022   Prob (F-statistic):             0.0578
+Time:                        00:38:47   Log-Likelihood:                -423.13
+No. Observations:                 244   AIC:                             850.3
+Df Residuals:                     242   BIC:                             857.3
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+=====================================================================================
+                        coef    std err          t      P&gt;|t|      [0.025      0.975]
+-------------------------------------------------------------------------------------
+Intercept             2.7281      0.167     16.347      0.000       2.399       3.057
+C(time)[T.Dinner]     0.3746      0.197      1.906      0.058      -0.012       0.762
+==============================================================================
+Omnibus:                       77.962   Durbin-Watson:                   1.934
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              206.982
+Skew:                           1.437   Prob(JB):                     1.13e-45
+Kurtosis:                       6.479   Cond. No.                         3.56
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
 </div>
+</div>
+</div>
+<p>모형2의 결과가 뜻하는 바는 x=Lunch인 경우 팁의 평균값은 약 2.73이고 x=Dinner인 경우 약 0.375정도 팁이 증가한다는 뜻이다. 이 때 유의확률이 5.8%이므로 만약 유의수준이 10%이면 이 차이는 유의하다고 할 수 있다. 즉, 점심이나 저녁이냐에 따라 팁이 달라진다는 것을 의미한다. 하지만 만약 유의수준이 5% 이하라면 이 변수는 유의하지 않다. 즉 점심이냐 저녁이냐에 따라 팁이 달라진다고 말할 수 없으므로 time 변수는 유의한 선형회귀 독립변수가 될 수 없다.</p>
+<p>축소랭크 인코딩 방식에서 기준이 되는 값은 별도로 지정하지 않으면 레벨값을 알파벳 순서로 정렬하여 가장 첫번째 값이 된다. 만약 기준이 되는 값을 이와 다르게 지정하고 싶다면 다음과 같이 모형 문자열을 만들어야 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(sex) + 0&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
-<span class="n">result2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model2_2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(time, Treatment(&#39;Lunch&#39;))&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<span class="n">result2_2</span> <span class="o">=</span> <span class="n">model2_2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result2_2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                    tip   R-squared:                       0.015
+Model:                            OLS   Adj. R-squared:                  0.011
+Method:                 Least Squares   F-statistic:                     3.634
+Date:                Wed, 12 Oct 2022   Prob (F-statistic):             0.0578
+Time:                        00:38:47   Log-Likelihood:                -423.13
+No. Observations:                 244   AIC:                             850.3
+Df Residuals:                     242   BIC:                             857.3
+Df Model:                           1                                         
+Covariance Type:            nonrobust                                         
+=========================================================================================================
+                                            coef    std err          t      P&gt;|t|      [0.025      0.975]
+---------------------------------------------------------------------------------------------------------
+Intercept                                 2.7281      0.167     16.347      0.000       2.399       3.057
+C(time, Treatment(&#39;Lunch&#39;))[T.Dinner]     0.3746      0.197      1.906      0.058      -0.012       0.762
+==============================================================================
+Omnibus:                       77.962   Durbin-Watson:                   1.934
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              206.982
+Skew:                           1.437   Prob(JB):                     1.13e-45
+Kurtosis:                       6.479   Cond. No.                         3.56
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<p>이번에는 sex라는 독립변수를 사용하여 같은 분석을 해보자.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(sex) + 0&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<span class="n">model4</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(sex)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>분석 결과는 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result3</span> <span class="o">=</span> <span class="n">model3</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result3</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -858,8 +989,8 @@ Notes:
 Dep. Variable:                    tip   R-squared:                       0.008
 Model:                            OLS   Adj. R-squared:                  0.004
 Method:                 Least Squares   F-statistic:                     1.926
-Date:                Wed, 17 Aug 2022   Prob (F-statistic):              0.166
-Time:                        19:56:56   Log-Likelihood:                -423.98
+Date:                Wed, 12 Oct 2022   Prob (F-statistic):              0.166
+Time:                        00:38:47   Log-Likelihood:                -423.98
 No. Observations:                 244   AIC:                             852.0
 Df Residuals:                     242   BIC:                             859.0
 Df Model:                           1                                         
@@ -884,314 +1015,7 @@ Notes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model2</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">X2</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><style type="text/css">
-#T_4f030_row0_col0, #T_4f030_row1_col0, #T_4f030_row2_col0, #T_4f030_row3_col1, #T_4f030_row4_col1, #T_4f030_row5_col1, #T_4f030_row6_col0, #T_4f030_row7_col0, #T_4f030_row8_col1, #T_4f030_row9_col0 {
-  background-color: #023858;
-  color: #f1f1f1;
-}
-#T_4f030_row0_col1, #T_4f030_row1_col1, #T_4f030_row2_col1, #T_4f030_row3_col0, #T_4f030_row4_col0, #T_4f030_row5_col0, #T_4f030_row6_col1, #T_4f030_row7_col1, #T_4f030_row8_col0, #T_4f030_row9_col1 {
-  background-color: #fff7fb;
-  color: #000000;
-}
-</style>
-<table id="T_4f030">
-  <thead>
-    <tr>
-      <th class="blank level0" >&nbsp;</th>
-      <th id="T_4f030_level0_col0" class="col_heading level0 col0" >C(sex)[Male]</th>
-      <th id="T_4f030_level0_col1" class="col_heading level0 col1" >C(sex)[Female]</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th id="T_4f030_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_4f030_row0_col0" class="data row0 col0" >1</td>
-      <td id="T_4f030_row0_col1" class="data row0 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_4f030_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_4f030_row1_col0" class="data row1 col0" >1</td>
-      <td id="T_4f030_row1_col1" class="data row1 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_4f030_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_4f030_row2_col0" class="data row2 col0" >1</td>
-      <td id="T_4f030_row2_col1" class="data row2 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_4f030_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_4f030_row3_col0" class="data row3 col0" >0</td>
-      <td id="T_4f030_row3_col1" class="data row3 col1" >1</td>
-    </tr>
-    <tr>
-      <th id="T_4f030_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_4f030_row4_col0" class="data row4 col0" >0</td>
-      <td id="T_4f030_row4_col1" class="data row4 col1" >1</td>
-    </tr>
-    <tr>
-      <th id="T_4f030_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_4f030_row5_col0" class="data row5 col0" >0</td>
-      <td id="T_4f030_row5_col1" class="data row5 col1" >1</td>
-    </tr>
-    <tr>
-      <th id="T_4f030_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_4f030_row6_col0" class="data row6 col0" >1</td>
-      <td id="T_4f030_row6_col1" class="data row6 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_4f030_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_4f030_row7_col0" class="data row7 col0" >1</td>
-      <td id="T_4f030_row7_col1" class="data row7 col1" >0</td>
-    </tr>
-    <tr>
-      <th id="T_4f030_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_4f030_row8_col0" class="data row8 col0" >0</td>
-      <td id="T_4f030_row8_col1" class="data row8 col1" >1</td>
-    </tr>
-    <tr>
-      <th id="T_4f030_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_4f030_row9_col0" class="data row9 col0" >1</td>
-      <td id="T_4f030_row9_col1" class="data row9 col1" >0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-</section>
-<section id="id3">
-<h2><span class="section-number">3.13.2. </span>레벨이 3개 이상인 범주형 독립변수<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">boxplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">stripplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;0&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/03_13_12_0.png" src="../_images/03_13_12_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">groupby</span><span class="p">(</span><span class="s2">&quot;day&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">agg</span><span class="p">({</span><span class="s2">&quot;tip&quot;</span><span class="p">:</span> <span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">]})</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead tr th {
-        text-align: left;
-    }
-
-    .dataframe thead tr:last-of-type th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr>
-      <th></th>
-      <th colspan="2" halign="left">tip</th>
-    </tr>
-    <tr>
-      <th></th>
-      <th>mean</th>
-      <th>std</th>
-    </tr>
-    <tr>
-      <th>day</th>
-      <th></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>Thur</th>
-      <td>2.771452</td>
-      <td>1.240223</td>
-    </tr>
-    <tr>
-      <th>Fri</th>
-      <td>2.734737</td>
-      <td>1.019577</td>
-    </tr>
-    <tr>
-      <th>Sat</th>
-      <td>2.993103</td>
-      <td>1.631014</td>
-    </tr>
-    <tr>
-      <th>Sun</th>
-      <td>3.255132</td>
-      <td>1.234880</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(day)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
-<span class="n">result3</span> <span class="o">=</span> <span class="n">model3</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result3</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.020
-Model:                            OLS   Adj. R-squared:                  0.008
-Method:                 Least Squares   F-statistic:                     1.672
-Date:                Wed, 17 Aug 2022   Prob (F-statistic):              0.174
-Time:                        19:56:57   Log-Likelihood:                -422.43
-No. Observations:                 244   AIC:                             852.9
-Df Residuals:                     240   BIC:                             866.8
-Df Model:                           3                                         
-Covariance Type:            nonrobust                                         
-=================================================================================
-                    coef    std err          t      P&gt;|t|      [0.025      0.975]
----------------------------------------------------------------------------------
-Intercept         2.7715      0.175     15.837      0.000       2.427       3.116
-C(day)[T.Fri]    -0.0367      0.361     -0.102      0.919      -0.748       0.675
-C(day)[T.Sat]     0.2217      0.229      0.968      0.334      -0.229       0.673
-C(day)[T.Sun]     0.4837      0.236      2.051      0.041       0.019       0.948
-==============================================================================
-Omnibus:                       82.801   Durbin-Watson:                   1.932
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              238.276
-Skew:                           1.492   Prob(JB):                     1.82e-52
-Kurtosis:                       6.811   Cond. No.                         5.28
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X3</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model3</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model3</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">X3</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><style type="text/css">
-#T_f3a28_row0_col0, #T_f3a28_row0_col2, #T_f3a28_row1_col0, #T_f3a28_row1_col2, #T_f3a28_row2_col0, #T_f3a28_row2_col3, #T_f3a28_row3_col0, #T_f3a28_row3_col2, #T_f3a28_row4_col0, #T_f3a28_row4_col1, #T_f3a28_row5_col0, #T_f3a28_row5_col1, #T_f3a28_row6_col0, #T_f3a28_row6_col2, #T_f3a28_row7_col0, #T_f3a28_row7_col3, #T_f3a28_row8_col0, #T_f3a28_row8_col3, #T_f3a28_row9_col0, #T_f3a28_row9_col3 {
-  background-color: #023858;
-  color: #f1f1f1;
-}
-#T_f3a28_row0_col1, #T_f3a28_row0_col3, #T_f3a28_row1_col1, #T_f3a28_row1_col3, #T_f3a28_row2_col1, #T_f3a28_row2_col2, #T_f3a28_row3_col1, #T_f3a28_row3_col3, #T_f3a28_row4_col2, #T_f3a28_row4_col3, #T_f3a28_row5_col2, #T_f3a28_row5_col3, #T_f3a28_row6_col1, #T_f3a28_row6_col3, #T_f3a28_row7_col1, #T_f3a28_row7_col2, #T_f3a28_row8_col1, #T_f3a28_row8_col2, #T_f3a28_row9_col1, #T_f3a28_row9_col2 {
-  background-color: #fff7fb;
-  color: #000000;
-}
-</style>
-<table id="T_f3a28">
-  <thead>
-    <tr>
-      <th class="blank level0" >&nbsp;</th>
-      <th id="T_f3a28_level0_col0" class="col_heading level0 col0" >Intercept</th>
-      <th id="T_f3a28_level0_col1" class="col_heading level0 col1" >C(day)[T.Fri]</th>
-      <th id="T_f3a28_level0_col2" class="col_heading level0 col2" >C(day)[T.Sat]</th>
-      <th id="T_f3a28_level0_col3" class="col_heading level0 col3" >C(day)[T.Sun]</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th id="T_f3a28_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_f3a28_row0_col0" class="data row0 col0" >1</td>
-      <td id="T_f3a28_row0_col1" class="data row0 col1" >0</td>
-      <td id="T_f3a28_row0_col2" class="data row0 col2" >1</td>
-      <td id="T_f3a28_row0_col3" class="data row0 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f3a28_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_f3a28_row1_col0" class="data row1 col0" >1</td>
-      <td id="T_f3a28_row1_col1" class="data row1 col1" >0</td>
-      <td id="T_f3a28_row1_col2" class="data row1 col2" >1</td>
-      <td id="T_f3a28_row1_col3" class="data row1 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f3a28_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_f3a28_row2_col0" class="data row2 col0" >1</td>
-      <td id="T_f3a28_row2_col1" class="data row2 col1" >0</td>
-      <td id="T_f3a28_row2_col2" class="data row2 col2" >0</td>
-      <td id="T_f3a28_row2_col3" class="data row2 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_f3a28_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_f3a28_row3_col0" class="data row3 col0" >1</td>
-      <td id="T_f3a28_row3_col1" class="data row3 col1" >0</td>
-      <td id="T_f3a28_row3_col2" class="data row3 col2" >1</td>
-      <td id="T_f3a28_row3_col3" class="data row3 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f3a28_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_f3a28_row4_col0" class="data row4 col0" >1</td>
-      <td id="T_f3a28_row4_col1" class="data row4 col1" >1</td>
-      <td id="T_f3a28_row4_col2" class="data row4 col2" >0</td>
-      <td id="T_f3a28_row4_col3" class="data row4 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f3a28_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_f3a28_row5_col0" class="data row5 col0" >1</td>
-      <td id="T_f3a28_row5_col1" class="data row5 col1" >1</td>
-      <td id="T_f3a28_row5_col2" class="data row5 col2" >0</td>
-      <td id="T_f3a28_row5_col3" class="data row5 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f3a28_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_f3a28_row6_col0" class="data row6 col0" >1</td>
-      <td id="T_f3a28_row6_col1" class="data row6 col1" >0</td>
-      <td id="T_f3a28_row6_col2" class="data row6 col2" >1</td>
-      <td id="T_f3a28_row6_col3" class="data row6 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f3a28_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_f3a28_row7_col0" class="data row7 col0" >1</td>
-      <td id="T_f3a28_row7_col1" class="data row7 col1" >0</td>
-      <td id="T_f3a28_row7_col2" class="data row7 col2" >0</td>
-      <td id="T_f3a28_row7_col3" class="data row7 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_f3a28_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_f3a28_row8_col0" class="data row8 col0" >1</td>
-      <td id="T_f3a28_row8_col1" class="data row8 col1" >0</td>
-      <td id="T_f3a28_row8_col2" class="data row8 col2" >0</td>
-      <td id="T_f3a28_row8_col3" class="data row8 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_f3a28_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_f3a28_row9_col0" class="data row9 col0" >1</td>
-      <td id="T_f3a28_row9_col1" class="data row9 col1" >0</td>
-      <td id="T_f3a28_row9_col2" class="data row9 col2" >0</td>
-      <td id="T_f3a28_row9_col3" class="data row9 col3" >1</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model4</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(day, Treatment(&#39;Sun&#39;))&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
-<span class="n">result4</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result4</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">result4</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
@@ -1199,27 +1023,25 @@ Notes:
 <div class="cell_output docutils container">
 <div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
 ==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.020
-Model:                            OLS   Adj. R-squared:                  0.008
-Method:                 Least Squares   F-statistic:                     1.672
-Date:                Wed, 17 Aug 2022   Prob (F-statistic):              0.174
-Time:                        19:56:57   Log-Likelihood:                -422.43
-No. Observations:                 244   AIC:                             852.9
-Df Residuals:                     240   BIC:                             866.8
-Df Model:                           3                                         
+Dep. Variable:                    tip   R-squared:                       0.008
+Model:                            OLS   Adj. R-squared:                  0.004
+Method:                 Least Squares   F-statistic:                     1.926
+Date:                Wed, 12 Oct 2022   Prob (F-statistic):              0.166
+Time:                        00:38:47   Log-Likelihood:                -423.98
+No. Observations:                 244   AIC:                             852.0
+Df Residuals:                     242   BIC:                             859.0
+Df Model:                           1                                         
 Covariance Type:            nonrobust                                         
-====================================================================================================
-                                       coef    std err          t      P&gt;|t|      [0.025      0.975]
-----------------------------------------------------------------------------------------------------
-Intercept                            3.2551      0.158     20.594      0.000       2.944       3.566
-C(day, Treatment(&#39;Sun&#39;))[T.Thur]    -0.4837      0.236     -2.051      0.041      -0.948      -0.019
-C(day, Treatment(&#39;Sun&#39;))[T.Fri]     -0.5204      0.353     -1.472      0.142      -1.217       0.176
-C(day, Treatment(&#39;Sun&#39;))[T.Sat]     -0.2620      0.216     -1.211      0.227      -0.688       0.164
+====================================================================================
+                       coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------------
+Intercept            3.0896      0.110     28.032      0.000       2.873       3.307
+C(sex)[T.Female]    -0.2562      0.185     -1.388      0.166      -0.620       0.107
 ==============================================================================
-Omnibus:                       82.801   Durbin-Watson:                   1.932
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              238.276
-Skew:                           1.492   Prob(JB):                     1.82e-52
-Kurtosis:                       6.811   Cond. No.                         4.93
+Omnibus:                       75.995   Durbin-Watson:                   1.922
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              194.975
+Skew:                           1.415   Prob(JB):                     4.59e-43
+Kurtosis:                       6.342   Cond. No.                         2.42
 ==============================================================================
 
 Notes:
@@ -1228,518 +1050,20 @@ Notes:
 </div>
 </div>
 </div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X4</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model4</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model4</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">X4</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><style type="text/css">
-#T_7a54a_row0_col0, #T_7a54a_row0_col3, #T_7a54a_row1_col0, #T_7a54a_row1_col3, #T_7a54a_row2_col0, #T_7a54a_row3_col0, #T_7a54a_row3_col3, #T_7a54a_row4_col0, #T_7a54a_row4_col2, #T_7a54a_row5_col0, #T_7a54a_row5_col2, #T_7a54a_row6_col0, #T_7a54a_row6_col3, #T_7a54a_row7_col0, #T_7a54a_row8_col0, #T_7a54a_row9_col0 {
-  background-color: #023858;
-  color: #f1f1f1;
-}
-#T_7a54a_row0_col1, #T_7a54a_row0_col2, #T_7a54a_row1_col1, #T_7a54a_row1_col2, #T_7a54a_row2_col1, #T_7a54a_row2_col2, #T_7a54a_row2_col3, #T_7a54a_row3_col1, #T_7a54a_row3_col2, #T_7a54a_row4_col1, #T_7a54a_row4_col3, #T_7a54a_row5_col1, #T_7a54a_row5_col3, #T_7a54a_row6_col1, #T_7a54a_row6_col2, #T_7a54a_row7_col1, #T_7a54a_row7_col2, #T_7a54a_row7_col3, #T_7a54a_row8_col1, #T_7a54a_row8_col2, #T_7a54a_row8_col3, #T_7a54a_row9_col1, #T_7a54a_row9_col2, #T_7a54a_row9_col3 {
-  background-color: #fff7fb;
-  color: #000000;
-}
-</style>
-<table id="T_7a54a">
-  <thead>
-    <tr>
-      <th class="blank level0" >&nbsp;</th>
-      <th id="T_7a54a_level0_col0" class="col_heading level0 col0" >Intercept</th>
-      <th id="T_7a54a_level0_col1" class="col_heading level0 col1" >C(day, Treatment('Sun'))[T.Thur]</th>
-      <th id="T_7a54a_level0_col2" class="col_heading level0 col2" >C(day, Treatment('Sun'))[T.Fri]</th>
-      <th id="T_7a54a_level0_col3" class="col_heading level0 col3" >C(day, Treatment('Sun'))[T.Sat]</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th id="T_7a54a_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_7a54a_row0_col0" class="data row0 col0" >1</td>
-      <td id="T_7a54a_row0_col1" class="data row0 col1" >0</td>
-      <td id="T_7a54a_row0_col2" class="data row0 col2" >0</td>
-      <td id="T_7a54a_row0_col3" class="data row0 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_7a54a_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_7a54a_row1_col0" class="data row1 col0" >1</td>
-      <td id="T_7a54a_row1_col1" class="data row1 col1" >0</td>
-      <td id="T_7a54a_row1_col2" class="data row1 col2" >0</td>
-      <td id="T_7a54a_row1_col3" class="data row1 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_7a54a_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_7a54a_row2_col0" class="data row2 col0" >1</td>
-      <td id="T_7a54a_row2_col1" class="data row2 col1" >0</td>
-      <td id="T_7a54a_row2_col2" class="data row2 col2" >0</td>
-      <td id="T_7a54a_row2_col3" class="data row2 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_7a54a_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_7a54a_row3_col0" class="data row3 col0" >1</td>
-      <td id="T_7a54a_row3_col1" class="data row3 col1" >0</td>
-      <td id="T_7a54a_row3_col2" class="data row3 col2" >0</td>
-      <td id="T_7a54a_row3_col3" class="data row3 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_7a54a_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_7a54a_row4_col0" class="data row4 col0" >1</td>
-      <td id="T_7a54a_row4_col1" class="data row4 col1" >0</td>
-      <td id="T_7a54a_row4_col2" class="data row4 col2" >1</td>
-      <td id="T_7a54a_row4_col3" class="data row4 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_7a54a_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_7a54a_row5_col0" class="data row5 col0" >1</td>
-      <td id="T_7a54a_row5_col1" class="data row5 col1" >0</td>
-      <td id="T_7a54a_row5_col2" class="data row5 col2" >1</td>
-      <td id="T_7a54a_row5_col3" class="data row5 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_7a54a_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_7a54a_row6_col0" class="data row6 col0" >1</td>
-      <td id="T_7a54a_row6_col1" class="data row6 col1" >0</td>
-      <td id="T_7a54a_row6_col2" class="data row6 col2" >0</td>
-      <td id="T_7a54a_row6_col3" class="data row6 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_7a54a_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_7a54a_row7_col0" class="data row7 col0" >1</td>
-      <td id="T_7a54a_row7_col1" class="data row7 col1" >0</td>
-      <td id="T_7a54a_row7_col2" class="data row7 col2" >0</td>
-      <td id="T_7a54a_row7_col3" class="data row7 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_7a54a_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_7a54a_row8_col0" class="data row8 col0" >1</td>
-      <td id="T_7a54a_row8_col1" class="data row8 col1" >0</td>
-      <td id="T_7a54a_row8_col2" class="data row8 col2" >0</td>
-      <td id="T_7a54a_row8_col3" class="data row8 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_7a54a_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_7a54a_row9_col0" class="data row9 col0" >1</td>
-      <td id="T_7a54a_row9_col1" class="data row9 col1" >0</td>
-      <td id="T_7a54a_row9_col2" class="data row9 col2" >0</td>
-      <td id="T_7a54a_row9_col3" class="data row9 col3" >0</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model5</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(day) + 0&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
-<span class="n">result5</span> <span class="o">=</span> <span class="n">model5</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result5</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.020
-Model:                            OLS   Adj. R-squared:                  0.008
-Method:                 Least Squares   F-statistic:                     1.672
-Date:                Wed, 17 Aug 2022   Prob (F-statistic):              0.174
-Time:                        19:56:57   Log-Likelihood:                -422.43
-No. Observations:                 244   AIC:                             852.9
-Df Residuals:                     240   BIC:                             866.8
-Df Model:                           3                                         
-Covariance Type:            nonrobust                                         
-================================================================================
-                   coef    std err          t      P&gt;|t|      [0.025      0.975]
---------------------------------------------------------------------------------
-C(day)[Thur]     2.7715      0.175     15.837      0.000       2.427       3.116
-C(day)[Fri]      2.7347      0.316      8.651      0.000       2.112       3.357
-C(day)[Sat]      2.9931      0.148     20.261      0.000       2.702       3.284
-C(day)[Sun]      3.2551      0.158     20.594      0.000       2.944       3.566
-==============================================================================
-Omnibus:                       82.801   Durbin-Watson:                   1.932
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              238.276
-Skew:                           1.492   Prob(JB):                     1.82e-52
-Kurtosis:                       6.811   Cond. No.                         2.14
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X5</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model5</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model5</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">X5</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><style type="text/css">
-#T_f5456_row0_col0, #T_f5456_row0_col1, #T_f5456_row0_col3, #T_f5456_row1_col0, #T_f5456_row1_col1, #T_f5456_row1_col3, #T_f5456_row2_col0, #T_f5456_row2_col1, #T_f5456_row2_col2, #T_f5456_row3_col0, #T_f5456_row3_col1, #T_f5456_row3_col3, #T_f5456_row4_col0, #T_f5456_row4_col2, #T_f5456_row4_col3, #T_f5456_row5_col0, #T_f5456_row5_col2, #T_f5456_row5_col3, #T_f5456_row6_col0, #T_f5456_row6_col1, #T_f5456_row6_col3, #T_f5456_row7_col0, #T_f5456_row7_col1, #T_f5456_row7_col2, #T_f5456_row8_col0, #T_f5456_row8_col1, #T_f5456_row8_col2, #T_f5456_row9_col0, #T_f5456_row9_col1, #T_f5456_row9_col2 {
-  background-color: #fff7fb;
-  color: #000000;
-}
-#T_f5456_row0_col2, #T_f5456_row1_col2, #T_f5456_row2_col3, #T_f5456_row3_col2, #T_f5456_row4_col1, #T_f5456_row5_col1, #T_f5456_row6_col2, #T_f5456_row7_col3, #T_f5456_row8_col3, #T_f5456_row9_col3 {
-  background-color: #023858;
-  color: #f1f1f1;
-}
-</style>
-<table id="T_f5456">
-  <thead>
-    <tr>
-      <th class="blank level0" >&nbsp;</th>
-      <th id="T_f5456_level0_col0" class="col_heading level0 col0" >C(day)[Thur]</th>
-      <th id="T_f5456_level0_col1" class="col_heading level0 col1" >C(day)[Fri]</th>
-      <th id="T_f5456_level0_col2" class="col_heading level0 col2" >C(day)[Sat]</th>
-      <th id="T_f5456_level0_col3" class="col_heading level0 col3" >C(day)[Sun]</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th id="T_f5456_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_f5456_row0_col0" class="data row0 col0" >0</td>
-      <td id="T_f5456_row0_col1" class="data row0 col1" >0</td>
-      <td id="T_f5456_row0_col2" class="data row0 col2" >1</td>
-      <td id="T_f5456_row0_col3" class="data row0 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f5456_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_f5456_row1_col0" class="data row1 col0" >0</td>
-      <td id="T_f5456_row1_col1" class="data row1 col1" >0</td>
-      <td id="T_f5456_row1_col2" class="data row1 col2" >1</td>
-      <td id="T_f5456_row1_col3" class="data row1 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f5456_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_f5456_row2_col0" class="data row2 col0" >0</td>
-      <td id="T_f5456_row2_col1" class="data row2 col1" >0</td>
-      <td id="T_f5456_row2_col2" class="data row2 col2" >0</td>
-      <td id="T_f5456_row2_col3" class="data row2 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_f5456_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_f5456_row3_col0" class="data row3 col0" >0</td>
-      <td id="T_f5456_row3_col1" class="data row3 col1" >0</td>
-      <td id="T_f5456_row3_col2" class="data row3 col2" >1</td>
-      <td id="T_f5456_row3_col3" class="data row3 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f5456_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_f5456_row4_col0" class="data row4 col0" >0</td>
-      <td id="T_f5456_row4_col1" class="data row4 col1" >1</td>
-      <td id="T_f5456_row4_col2" class="data row4 col2" >0</td>
-      <td id="T_f5456_row4_col3" class="data row4 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f5456_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_f5456_row5_col0" class="data row5 col0" >0</td>
-      <td id="T_f5456_row5_col1" class="data row5 col1" >1</td>
-      <td id="T_f5456_row5_col2" class="data row5 col2" >0</td>
-      <td id="T_f5456_row5_col3" class="data row5 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f5456_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_f5456_row6_col0" class="data row6 col0" >0</td>
-      <td id="T_f5456_row6_col1" class="data row6 col1" >0</td>
-      <td id="T_f5456_row6_col2" class="data row6 col2" >1</td>
-      <td id="T_f5456_row6_col3" class="data row6 col3" >0</td>
-    </tr>
-    <tr>
-      <th id="T_f5456_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_f5456_row7_col0" class="data row7 col0" >0</td>
-      <td id="T_f5456_row7_col1" class="data row7 col1" >0</td>
-      <td id="T_f5456_row7_col2" class="data row7 col2" >0</td>
-      <td id="T_f5456_row7_col3" class="data row7 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_f5456_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_f5456_row8_col0" class="data row8 col0" >0</td>
-      <td id="T_f5456_row8_col1" class="data row8 col1" >0</td>
-      <td id="T_f5456_row8_col2" class="data row8 col2" >0</td>
-      <td id="T_f5456_row8_col3" class="data row8 col3" >1</td>
-    </tr>
-    <tr>
-      <th id="T_f5456_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_f5456_row9_col0" class="data row9 col0" >0</td>
-      <td id="T_f5456_row9_col1" class="data row9 col1" >0</td>
-      <td id="T_f5456_row9_col2" class="data row9 col2" >0</td>
-      <td id="T_f5456_row9_col3" class="data row9 col3" >1</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
+<p>모형3의 결과를 보면 남성인 경우 팁의 평균은 3.0896, 여성인 경우 2.8334로 나왔으며 이 값이 0일 가능성은 없다.</p>
+<p>모형4의 결과를 보면 여성인 경우 팁의 평균은 남성의 경우보다 0.2562 정도 감소하지만 유의확률이 16.6%라는 사실에서 이 차이는 유의하지 않다는 것을 알 수 있다. 즉, 성별에 따른 팁의 차이는 없다.</p>
+</section>
+<section id="id3">
+<h2><span class="section-number">3.13.2. </span>레벨이 2개인 범주형 독립변수와 수치형 독립변수를 동시에 사용하는 경우<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id4">
-<h2><span class="section-number">3.13.3. </span>복수의 범주형 독립변수<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">g</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">catplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;day&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> 
-                <span class="n">kind</span><span class="o">=</span><span class="s2">&quot;box&quot;</span><span class="p">,</span> <span class="n">width</span><span class="o">=</span><span class="mf">0.4</span><span class="p">,</span> <span class="n">aspect</span><span class="o">=</span><span class="mi">2</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/03_13_21_0.png" src="../_images/03_13_21_0.png" />
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(sex) + C(time)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
-<span class="n">result2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
-==============================================================================
-Dep. Variable:                    tip   R-squared:                       0.019
-Model:                            OLS   Adj. R-squared:                  0.011
-Method:                 Least Squares   F-statistic:                     2.341
-Date:                Wed, 17 Aug 2022   Prob (F-statistic):             0.0984
-Time:                        20:01:06   Log-Likelihood:                -422.60
-No. Observations:                 244   AIC:                             851.2
-Df Residuals:                     241   BIC:                             861.7
-Df Model:                           2                                         
-Covariance Type:            nonrobust                                         
-=====================================================================================
-                        coef    std err          t      P&gt;|t|      [0.025      0.975]
--------------------------------------------------------------------------------------
-Intercept             2.8271      0.193     14.657      0.000       2.447       3.207
-C(sex)[T.Female]     -0.1923      0.188     -1.023      0.307      -0.562       0.178
-C(time)[T.Dinner]     0.3324      0.201      1.656      0.099      -0.063       0.728
-==============================================================================
-Omnibus:                       75.452   Durbin-Watson:                   1.942
-Prob(Omnibus):                  0.000   Jarque-Bera (JB):              192.983
-Skew:                           1.406   Prob(JB):                     1.24e-42
-Kurtosis:                       6.328   Cond. No.                         4.17
-==============================================================================
-
-Notes:
-[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model2</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
-<span class="n">X2</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><style type="text/css">
-#T_c7fd4_row0_col0, #T_c7fd4_row0_col2, #T_c7fd4_row1_col0, #T_c7fd4_row1_col2, #T_c7fd4_row2_col0, #T_c7fd4_row2_col2, #T_c7fd4_row3_col0, #T_c7fd4_row3_col1, #T_c7fd4_row3_col2, #T_c7fd4_row4_col0, #T_c7fd4_row4_col1, #T_c7fd4_row5_col0, #T_c7fd4_row5_col1, #T_c7fd4_row5_col2, #T_c7fd4_row6_col0, #T_c7fd4_row6_col2, #T_c7fd4_row7_col0, #T_c7fd4_row7_col2, #T_c7fd4_row8_col0, #T_c7fd4_row8_col1, #T_c7fd4_row8_col2, #T_c7fd4_row9_col0, #T_c7fd4_row9_col2, #T_c7fd4_row10_col0, #T_c7fd4_row10_col1, #T_c7fd4_row10_col2, #T_c7fd4_row11_col0, #T_c7fd4_row11_col2, #T_c7fd4_row12_col0, #T_c7fd4_row12_col2, #T_c7fd4_row13_col0, #T_c7fd4_row13_col1, #T_c7fd4_row14_col0, #T_c7fd4_row15_col0, #T_c7fd4_row15_col2, #T_c7fd4_row16_col0, #T_c7fd4_row16_col1, #T_c7fd4_row17_col0, #T_c7fd4_row17_col2, #T_c7fd4_row18_col0, #T_c7fd4_row18_col1, #T_c7fd4_row18_col2, #T_c7fd4_row19_col0, #T_c7fd4_row19_col2, #T_c7fd4_row20_col0, #T_c7fd4_row20_col2, #T_c7fd4_row21_col0, #T_c7fd4_row21_col1, #T_c7fd4_row21_col2, #T_c7fd4_row22_col0, #T_c7fd4_row23_col0, #T_c7fd4_row23_col2, #T_c7fd4_row24_col0, #T_c7fd4_row25_col0, #T_c7fd4_row25_col1, #T_c7fd4_row26_col0, #T_c7fd4_row27_col0, #T_c7fd4_row27_col1, #T_c7fd4_row28_col0, #T_c7fd4_row28_col2, #T_c7fd4_row29_col0, #T_c7fd4_row29_col1, #T_c7fd4_row29_col2 {
-  background-color: #023858;
-  color: #f1f1f1;
-}
-#T_c7fd4_row0_col1, #T_c7fd4_row1_col1, #T_c7fd4_row2_col1, #T_c7fd4_row4_col2, #T_c7fd4_row6_col1, #T_c7fd4_row7_col1, #T_c7fd4_row9_col1, #T_c7fd4_row11_col1, #T_c7fd4_row12_col1, #T_c7fd4_row13_col2, #T_c7fd4_row14_col1, #T_c7fd4_row14_col2, #T_c7fd4_row15_col1, #T_c7fd4_row16_col2, #T_c7fd4_row17_col1, #T_c7fd4_row19_col1, #T_c7fd4_row20_col1, #T_c7fd4_row22_col1, #T_c7fd4_row22_col2, #T_c7fd4_row23_col1, #T_c7fd4_row24_col1, #T_c7fd4_row24_col2, #T_c7fd4_row25_col2, #T_c7fd4_row26_col1, #T_c7fd4_row26_col2, #T_c7fd4_row27_col2, #T_c7fd4_row28_col1 {
-  background-color: #fff7fb;
-  color: #000000;
-}
-</style>
-<table id="T_c7fd4">
-  <thead>
-    <tr>
-      <th class="blank level0" >&nbsp;</th>
-      <th id="T_c7fd4_level0_col0" class="col_heading level0 col0" >Intercept</th>
-      <th id="T_c7fd4_level0_col1" class="col_heading level0 col1" >C(sex)[T.Female]</th>
-      <th id="T_c7fd4_level0_col2" class="col_heading level0 col2" >C(time)[T.Dinner]</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th id="T_c7fd4_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_c7fd4_row0_col0" class="data row0 col0" >1</td>
-      <td id="T_c7fd4_row0_col1" class="data row0 col1" >0</td>
-      <td id="T_c7fd4_row0_col2" class="data row0 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_c7fd4_row1_col0" class="data row1 col0" >1</td>
-      <td id="T_c7fd4_row1_col1" class="data row1 col1" >0</td>
-      <td id="T_c7fd4_row1_col2" class="data row1 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_c7fd4_row2_col0" class="data row2 col0" >1</td>
-      <td id="T_c7fd4_row2_col1" class="data row2 col1" >0</td>
-      <td id="T_c7fd4_row2_col2" class="data row2 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_c7fd4_row3_col0" class="data row3 col0" >1</td>
-      <td id="T_c7fd4_row3_col1" class="data row3 col1" >1</td>
-      <td id="T_c7fd4_row3_col2" class="data row3 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_c7fd4_row4_col0" class="data row4 col0" >1</td>
-      <td id="T_c7fd4_row4_col1" class="data row4 col1" >1</td>
-      <td id="T_c7fd4_row4_col2" class="data row4 col2" >0</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_c7fd4_row5_col0" class="data row5 col0" >1</td>
-      <td id="T_c7fd4_row5_col1" class="data row5 col1" >1</td>
-      <td id="T_c7fd4_row5_col2" class="data row5 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_c7fd4_row6_col0" class="data row6 col0" >1</td>
-      <td id="T_c7fd4_row6_col1" class="data row6 col1" >0</td>
-      <td id="T_c7fd4_row6_col2" class="data row6 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_c7fd4_row7_col0" class="data row7 col0" >1</td>
-      <td id="T_c7fd4_row7_col1" class="data row7 col1" >0</td>
-      <td id="T_c7fd4_row7_col2" class="data row7 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_c7fd4_row8_col0" class="data row8 col0" >1</td>
-      <td id="T_c7fd4_row8_col1" class="data row8 col1" >1</td>
-      <td id="T_c7fd4_row8_col2" class="data row8 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_c7fd4_row9_col0" class="data row9 col0" >1</td>
-      <td id="T_c7fd4_row9_col1" class="data row9 col1" >0</td>
-      <td id="T_c7fd4_row9_col2" class="data row9 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row10" class="row_heading level0 row10" >10</th>
-      <td id="T_c7fd4_row10_col0" class="data row10 col0" >1</td>
-      <td id="T_c7fd4_row10_col1" class="data row10 col1" >1</td>
-      <td id="T_c7fd4_row10_col2" class="data row10 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row11" class="row_heading level0 row11" >11</th>
-      <td id="T_c7fd4_row11_col0" class="data row11 col0" >1</td>
-      <td id="T_c7fd4_row11_col1" class="data row11 col1" >0</td>
-      <td id="T_c7fd4_row11_col2" class="data row11 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row12" class="row_heading level0 row12" >12</th>
-      <td id="T_c7fd4_row12_col0" class="data row12 col0" >1</td>
-      <td id="T_c7fd4_row12_col1" class="data row12 col1" >0</td>
-      <td id="T_c7fd4_row12_col2" class="data row12 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row13" class="row_heading level0 row13" >13</th>
-      <td id="T_c7fd4_row13_col0" class="data row13 col0" >1</td>
-      <td id="T_c7fd4_row13_col1" class="data row13 col1" >1</td>
-      <td id="T_c7fd4_row13_col2" class="data row13 col2" >0</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row14" class="row_heading level0 row14" >14</th>
-      <td id="T_c7fd4_row14_col0" class="data row14 col0" >1</td>
-      <td id="T_c7fd4_row14_col1" class="data row14 col1" >0</td>
-      <td id="T_c7fd4_row14_col2" class="data row14 col2" >0</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row15" class="row_heading level0 row15" >15</th>
-      <td id="T_c7fd4_row15_col0" class="data row15 col0" >1</td>
-      <td id="T_c7fd4_row15_col1" class="data row15 col1" >0</td>
-      <td id="T_c7fd4_row15_col2" class="data row15 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row16" class="row_heading level0 row16" >16</th>
-      <td id="T_c7fd4_row16_col0" class="data row16 col0" >1</td>
-      <td id="T_c7fd4_row16_col1" class="data row16 col1" >1</td>
-      <td id="T_c7fd4_row16_col2" class="data row16 col2" >0</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row17" class="row_heading level0 row17" >17</th>
-      <td id="T_c7fd4_row17_col0" class="data row17 col0" >1</td>
-      <td id="T_c7fd4_row17_col1" class="data row17 col1" >0</td>
-      <td id="T_c7fd4_row17_col2" class="data row17 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row18" class="row_heading level0 row18" >18</th>
-      <td id="T_c7fd4_row18_col0" class="data row18 col0" >1</td>
-      <td id="T_c7fd4_row18_col1" class="data row18 col1" >1</td>
-      <td id="T_c7fd4_row18_col2" class="data row18 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row19" class="row_heading level0 row19" >19</th>
-      <td id="T_c7fd4_row19_col0" class="data row19 col0" >1</td>
-      <td id="T_c7fd4_row19_col1" class="data row19 col1" >0</td>
-      <td id="T_c7fd4_row19_col2" class="data row19 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row20" class="row_heading level0 row20" >20</th>
-      <td id="T_c7fd4_row20_col0" class="data row20 col0" >1</td>
-      <td id="T_c7fd4_row20_col1" class="data row20 col1" >0</td>
-      <td id="T_c7fd4_row20_col2" class="data row20 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row21" class="row_heading level0 row21" >21</th>
-      <td id="T_c7fd4_row21_col0" class="data row21 col0" >1</td>
-      <td id="T_c7fd4_row21_col1" class="data row21 col1" >1</td>
-      <td id="T_c7fd4_row21_col2" class="data row21 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row22" class="row_heading level0 row22" >22</th>
-      <td id="T_c7fd4_row22_col0" class="data row22 col0" >1</td>
-      <td id="T_c7fd4_row22_col1" class="data row22 col1" >0</td>
-      <td id="T_c7fd4_row22_col2" class="data row22 col2" >0</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row23" class="row_heading level0 row23" >23</th>
-      <td id="T_c7fd4_row23_col0" class="data row23 col0" >1</td>
-      <td id="T_c7fd4_row23_col1" class="data row23 col1" >0</td>
-      <td id="T_c7fd4_row23_col2" class="data row23 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row24" class="row_heading level0 row24" >24</th>
-      <td id="T_c7fd4_row24_col0" class="data row24 col0" >1</td>
-      <td id="T_c7fd4_row24_col1" class="data row24 col1" >0</td>
-      <td id="T_c7fd4_row24_col2" class="data row24 col2" >0</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row25" class="row_heading level0 row25" >25</th>
-      <td id="T_c7fd4_row25_col0" class="data row25 col0" >1</td>
-      <td id="T_c7fd4_row25_col1" class="data row25 col1" >1</td>
-      <td id="T_c7fd4_row25_col2" class="data row25 col2" >0</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row26" class="row_heading level0 row26" >26</th>
-      <td id="T_c7fd4_row26_col0" class="data row26 col0" >1</td>
-      <td id="T_c7fd4_row26_col1" class="data row26 col1" >0</td>
-      <td id="T_c7fd4_row26_col2" class="data row26 col2" >0</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row27" class="row_heading level0 row27" >27</th>
-      <td id="T_c7fd4_row27_col0" class="data row27 col0" >1</td>
-      <td id="T_c7fd4_row27_col1" class="data row27 col1" >1</td>
-      <td id="T_c7fd4_row27_col2" class="data row27 col2" >0</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row28" class="row_heading level0 row28" >28</th>
-      <td id="T_c7fd4_row28_col0" class="data row28 col0" >1</td>
-      <td id="T_c7fd4_row28_col1" class="data row28 col1" >0</td>
-      <td id="T_c7fd4_row28_col2" class="data row28 col2" >1</td>
-    </tr>
-    <tr>
-      <th id="T_c7fd4_level0_row29" class="row_heading level0 row29" >29</th>
-      <td id="T_c7fd4_row29_col0" class="data row29 col0" >1</td>
-      <td id="T_c7fd4_row29_col1" class="data row29 col1" >1</td>
-      <td id="T_c7fd4_row29_col2" class="data row29 col2" >1</td>
-    </tr>
-  </tbody>
-</table>
-</div></div>
-</div>
+<h2><span class="section-number">3.13.3. </span>변수간 상호작용<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="id5">
+<h2><span class="section-number">3.13.4. </span>레벨이 3개 이상인 범주형 독립변수의 인코딩<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
+</section>
+<section id="id6">
+<h2><span class="section-number">3.13.5. </span>복수의 범주형 독립변수가 있는 경우의 인코딩<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
