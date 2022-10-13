@@ -504,17 +504,12 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   3.13.3. 변수간 상호작용
+   3.13.3. 레벨이 3개 이상인 범주형 독립변수의 인코딩
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   3.13.4. 레벨이 3개 이상인 범주형 독립변수의 인코딩
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id6">
-   3.13.5. 복수의 범주형 독립변수가 있는 경우의 인코딩
+   3.13.4. 복수의 범주형 독립변수가 있는 경우의 인코딩
   </a>
  </li>
 </ul>
@@ -548,17 +543,12 @@ title="Print to PDF"
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id4">
-   3.13.3. 변수간 상호작용
+   3.13.3. 레벨이 3개 이상인 범주형 독립변수의 인코딩
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#id5">
-   3.13.4. 레벨이 3개 이상인 범주형 독립변수의 인코딩
-  </a>
- </li>
- <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#id6">
-   3.13.5. 복수의 범주형 독립변수가 있는 경우의 인코딩
+   3.13.4. 복수의 범주형 독립변수가 있는 경우의 인코딩
   </a>
  </li>
 </ul>
@@ -574,7 +564,7 @@ title="Print to PDF"
   <section class="tex2jax_ignore mathjax_ignore" id="id1">
 <h1><span class="section-number">3.13. </span>범주형 독립변수<a class="headerlink" href="#id1" title="Permalink to this headline">#</a></h1>
 <p>이 절에서는 선형회귀분석에 있어서 범주형 독립변수(categorical independent variable)의 사용법을 공부한다.</p>
-<p>예제로는 팁 데이터를 사용한다.</p>
+<p>예제로는 팁 데이터와 보스턴 집값 데이터를 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
@@ -667,6 +657,140 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">boston</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>crim</th>
+      <th>zn</th>
+      <th>indus</th>
+      <th>chas</th>
+      <th>nox</th>
+      <th>rm</th>
+      <th>age</th>
+      <th>dis</th>
+      <th>rad</th>
+      <th>tax</th>
+      <th>ptratio</th>
+      <th>black</th>
+      <th>lstat</th>
+      <th>medv</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.00632</td>
+      <td>18.0</td>
+      <td>2.31</td>
+      <td>0</td>
+      <td>0.538</td>
+      <td>6.575</td>
+      <td>65.2</td>
+      <td>4.0900</td>
+      <td>1</td>
+      <td>296</td>
+      <td>15.3</td>
+      <td>396.90</td>
+      <td>4.98</td>
+      <td>24.0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.02731</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>6.421</td>
+      <td>78.9</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>396.90</td>
+      <td>9.14</td>
+      <td>21.6</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.02729</td>
+      <td>0.0</td>
+      <td>7.07</td>
+      <td>0</td>
+      <td>0.469</td>
+      <td>7.185</td>
+      <td>61.1</td>
+      <td>4.9671</td>
+      <td>2</td>
+      <td>242</td>
+      <td>17.8</td>
+      <td>392.83</td>
+      <td>4.03</td>
+      <td>34.7</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.03237</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>6.998</td>
+      <td>45.8</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>394.63</td>
+      <td>2.94</td>
+      <td>33.4</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.06905</td>
+      <td>0.0</td>
+      <td>2.18</td>
+      <td>0</td>
+      <td>0.458</td>
+      <td>7.147</td>
+      <td>54.2</td>
+      <td>6.0622</td>
+      <td>3</td>
+      <td>222</td>
+      <td>18.7</td>
+      <td>396.90</td>
+      <td>5.33</td>
+      <td>36.2</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
 <section id="id2">
 <h2><span class="section-number">3.13.1. </span>레벨이 2개인 범주형 독립변수<a class="headerlink" href="#id2" title="Permalink to this headline">#</a></h2>
 <p>범주형 독립변수가 가질 수 있는 값을 <b>레벨(level)</b>이라고 한다. 우선 가장 간단한 모형으로 레벨이 2개인 범주형 독립변수만을 가지는 선형회귀모형을 살펴보자. 예를 들어 팁 데이터에서 time 변수는 Lunch와 Dinner라는 두가지 레벨을 가지는 독립변수이고 sex 변수도 남성 Male과 Female이라는 두 가지 레벨을 가지는 독립변수다. 우선 time 변수로 팁 데이터를 예측하는 선형회귀모형을 만들어보자.</p>
@@ -677,9 +801,7 @@ title="Print to PDF"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
-
-<span class="n">model1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(time) + 0&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(time) + 0&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
 <span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(time)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
 </pre></div>
 </div>
@@ -699,112 +821,112 @@ title="Print to PDF"
 </div>
 <div class="cell_output docutils container">
 <div class="output text_html"><style type="text/css">
-#T_7cfed_row0_col1, #T_7cfed_row1_col1, #T_7cfed_row2_col1, #T_7cfed_row3_col1, #T_7cfed_row4_col2, #T_7cfed_row4_col4, #T_7cfed_row5_col1, #T_7cfed_row6_col1, #T_7cfed_row7_col1, #T_7cfed_row8_col1, #T_7cfed_row9_col1 {
+#T_dfc77_row0_col1, #T_dfc77_row1_col1, #T_dfc77_row2_col1, #T_dfc77_row3_col1, #T_dfc77_row4_col2, #T_dfc77_row4_col4, #T_dfc77_row5_col1, #T_dfc77_row6_col1, #T_dfc77_row7_col1, #T_dfc77_row8_col1, #T_dfc77_row9_col1 {
   background-color: #fff7fb;
   color: #000000;
 }
-#T_7cfed_row0_col2, #T_7cfed_row0_col3, #T_7cfed_row0_col4, #T_7cfed_row1_col2, #T_7cfed_row1_col3, #T_7cfed_row1_col4, #T_7cfed_row2_col2, #T_7cfed_row2_col3, #T_7cfed_row2_col4, #T_7cfed_row3_col2, #T_7cfed_row3_col3, #T_7cfed_row3_col4, #T_7cfed_row4_col1, #T_7cfed_row4_col3, #T_7cfed_row5_col2, #T_7cfed_row5_col3, #T_7cfed_row5_col4, #T_7cfed_row6_col2, #T_7cfed_row6_col3, #T_7cfed_row6_col4, #T_7cfed_row7_col2, #T_7cfed_row7_col3, #T_7cfed_row7_col4, #T_7cfed_row8_col2, #T_7cfed_row8_col3, #T_7cfed_row8_col4, #T_7cfed_row9_col2, #T_7cfed_row9_col3, #T_7cfed_row9_col4 {
+#T_dfc77_row0_col2, #T_dfc77_row0_col3, #T_dfc77_row0_col4, #T_dfc77_row1_col2, #T_dfc77_row1_col3, #T_dfc77_row1_col4, #T_dfc77_row2_col2, #T_dfc77_row2_col3, #T_dfc77_row2_col4, #T_dfc77_row3_col2, #T_dfc77_row3_col3, #T_dfc77_row3_col4, #T_dfc77_row4_col1, #T_dfc77_row4_col3, #T_dfc77_row5_col2, #T_dfc77_row5_col3, #T_dfc77_row5_col4, #T_dfc77_row6_col2, #T_dfc77_row6_col3, #T_dfc77_row6_col4, #T_dfc77_row7_col2, #T_dfc77_row7_col3, #T_dfc77_row7_col4, #T_dfc77_row8_col2, #T_dfc77_row8_col3, #T_dfc77_row8_col4, #T_dfc77_row9_col2, #T_dfc77_row9_col3, #T_dfc77_row9_col4 {
   background-color: #023858;
   color: #f1f1f1;
 }
 </style>
-<table id="T_7cfed">
+<table id="T_dfc77">
   <thead>
     <tr>
       <th class="blank level0" >&nbsp;</th>
-      <th id="T_7cfed_level0_col0" class="col_heading level0 col0" >raw</th>
-      <th id="T_7cfed_level0_col1" class="col_heading level0 col1" colspan="2">model1</th>
-      <th id="T_7cfed_level0_col3" class="col_heading level0 col3" colspan="2">model2</th>
+      <th id="T_dfc77_level0_col0" class="col_heading level0 col0" >raw</th>
+      <th id="T_dfc77_level0_col1" class="col_heading level0 col1" colspan="2">model1</th>
+      <th id="T_dfc77_level0_col3" class="col_heading level0 col3" colspan="2">model2</th>
     </tr>
     <tr>
       <th class="blank level1" >&nbsp;</th>
-      <th id="T_7cfed_level1_col0" class="col_heading level1 col0" >time</th>
-      <th id="T_7cfed_level1_col1" class="col_heading level1 col1" >C(time)[Lunch]</th>
-      <th id="T_7cfed_level1_col2" class="col_heading level1 col2" >C(time)[Dinner]</th>
-      <th id="T_7cfed_level1_col3" class="col_heading level1 col3" >Intercept</th>
-      <th id="T_7cfed_level1_col4" class="col_heading level1 col4" >C(time)[T.Dinner]</th>
+      <th id="T_dfc77_level1_col0" class="col_heading level1 col0" >time</th>
+      <th id="T_dfc77_level1_col1" class="col_heading level1 col1" >C(time)[Lunch]</th>
+      <th id="T_dfc77_level1_col2" class="col_heading level1 col2" >C(time)[Dinner]</th>
+      <th id="T_dfc77_level1_col3" class="col_heading level1 col3" >Intercept</th>
+      <th id="T_dfc77_level1_col4" class="col_heading level1 col4" >C(time)[T.Dinner]</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <th id="T_7cfed_level0_row0" class="row_heading level0 row0" >0</th>
-      <td id="T_7cfed_row0_col0" class="data row0 col0" >Dinner</td>
-      <td id="T_7cfed_row0_col1" class="data row0 col1" >0.000000</td>
-      <td id="T_7cfed_row0_col2" class="data row0 col2" >1.000000</td>
-      <td id="T_7cfed_row0_col3" class="data row0 col3" >1.000000</td>
-      <td id="T_7cfed_row0_col4" class="data row0 col4" >1.000000</td>
+      <th id="T_dfc77_level0_row0" class="row_heading level0 row0" >0</th>
+      <td id="T_dfc77_row0_col0" class="data row0 col0" >Dinner</td>
+      <td id="T_dfc77_row0_col1" class="data row0 col1" >0.000000</td>
+      <td id="T_dfc77_row0_col2" class="data row0 col2" >1.000000</td>
+      <td id="T_dfc77_row0_col3" class="data row0 col3" >1.000000</td>
+      <td id="T_dfc77_row0_col4" class="data row0 col4" >1.000000</td>
     </tr>
     <tr>
-      <th id="T_7cfed_level0_row1" class="row_heading level0 row1" >1</th>
-      <td id="T_7cfed_row1_col0" class="data row1 col0" >Dinner</td>
-      <td id="T_7cfed_row1_col1" class="data row1 col1" >0.000000</td>
-      <td id="T_7cfed_row1_col2" class="data row1 col2" >1.000000</td>
-      <td id="T_7cfed_row1_col3" class="data row1 col3" >1.000000</td>
-      <td id="T_7cfed_row1_col4" class="data row1 col4" >1.000000</td>
+      <th id="T_dfc77_level0_row1" class="row_heading level0 row1" >1</th>
+      <td id="T_dfc77_row1_col0" class="data row1 col0" >Dinner</td>
+      <td id="T_dfc77_row1_col1" class="data row1 col1" >0.000000</td>
+      <td id="T_dfc77_row1_col2" class="data row1 col2" >1.000000</td>
+      <td id="T_dfc77_row1_col3" class="data row1 col3" >1.000000</td>
+      <td id="T_dfc77_row1_col4" class="data row1 col4" >1.000000</td>
     </tr>
     <tr>
-      <th id="T_7cfed_level0_row2" class="row_heading level0 row2" >2</th>
-      <td id="T_7cfed_row2_col0" class="data row2 col0" >Dinner</td>
-      <td id="T_7cfed_row2_col1" class="data row2 col1" >0.000000</td>
-      <td id="T_7cfed_row2_col2" class="data row2 col2" >1.000000</td>
-      <td id="T_7cfed_row2_col3" class="data row2 col3" >1.000000</td>
-      <td id="T_7cfed_row2_col4" class="data row2 col4" >1.000000</td>
+      <th id="T_dfc77_level0_row2" class="row_heading level0 row2" >2</th>
+      <td id="T_dfc77_row2_col0" class="data row2 col0" >Dinner</td>
+      <td id="T_dfc77_row2_col1" class="data row2 col1" >0.000000</td>
+      <td id="T_dfc77_row2_col2" class="data row2 col2" >1.000000</td>
+      <td id="T_dfc77_row2_col3" class="data row2 col3" >1.000000</td>
+      <td id="T_dfc77_row2_col4" class="data row2 col4" >1.000000</td>
     </tr>
     <tr>
-      <th id="T_7cfed_level0_row3" class="row_heading level0 row3" >3</th>
-      <td id="T_7cfed_row3_col0" class="data row3 col0" >Dinner</td>
-      <td id="T_7cfed_row3_col1" class="data row3 col1" >0.000000</td>
-      <td id="T_7cfed_row3_col2" class="data row3 col2" >1.000000</td>
-      <td id="T_7cfed_row3_col3" class="data row3 col3" >1.000000</td>
-      <td id="T_7cfed_row3_col4" class="data row3 col4" >1.000000</td>
+      <th id="T_dfc77_level0_row3" class="row_heading level0 row3" >3</th>
+      <td id="T_dfc77_row3_col0" class="data row3 col0" >Dinner</td>
+      <td id="T_dfc77_row3_col1" class="data row3 col1" >0.000000</td>
+      <td id="T_dfc77_row3_col2" class="data row3 col2" >1.000000</td>
+      <td id="T_dfc77_row3_col3" class="data row3 col3" >1.000000</td>
+      <td id="T_dfc77_row3_col4" class="data row3 col4" >1.000000</td>
     </tr>
     <tr>
-      <th id="T_7cfed_level0_row4" class="row_heading level0 row4" >4</th>
-      <td id="T_7cfed_row4_col0" class="data row4 col0" >Lunch</td>
-      <td id="T_7cfed_row4_col1" class="data row4 col1" >1.000000</td>
-      <td id="T_7cfed_row4_col2" class="data row4 col2" >0.000000</td>
-      <td id="T_7cfed_row4_col3" class="data row4 col3" >1.000000</td>
-      <td id="T_7cfed_row4_col4" class="data row4 col4" >0.000000</td>
+      <th id="T_dfc77_level0_row4" class="row_heading level0 row4" >4</th>
+      <td id="T_dfc77_row4_col0" class="data row4 col0" >Lunch</td>
+      <td id="T_dfc77_row4_col1" class="data row4 col1" >1.000000</td>
+      <td id="T_dfc77_row4_col2" class="data row4 col2" >0.000000</td>
+      <td id="T_dfc77_row4_col3" class="data row4 col3" >1.000000</td>
+      <td id="T_dfc77_row4_col4" class="data row4 col4" >0.000000</td>
     </tr>
     <tr>
-      <th id="T_7cfed_level0_row5" class="row_heading level0 row5" >5</th>
-      <td id="T_7cfed_row5_col0" class="data row5 col0" >Dinner</td>
-      <td id="T_7cfed_row5_col1" class="data row5 col1" >0.000000</td>
-      <td id="T_7cfed_row5_col2" class="data row5 col2" >1.000000</td>
-      <td id="T_7cfed_row5_col3" class="data row5 col3" >1.000000</td>
-      <td id="T_7cfed_row5_col4" class="data row5 col4" >1.000000</td>
+      <th id="T_dfc77_level0_row5" class="row_heading level0 row5" >5</th>
+      <td id="T_dfc77_row5_col0" class="data row5 col0" >Dinner</td>
+      <td id="T_dfc77_row5_col1" class="data row5 col1" >0.000000</td>
+      <td id="T_dfc77_row5_col2" class="data row5 col2" >1.000000</td>
+      <td id="T_dfc77_row5_col3" class="data row5 col3" >1.000000</td>
+      <td id="T_dfc77_row5_col4" class="data row5 col4" >1.000000</td>
     </tr>
     <tr>
-      <th id="T_7cfed_level0_row6" class="row_heading level0 row6" >6</th>
-      <td id="T_7cfed_row6_col0" class="data row6 col0" >Dinner</td>
-      <td id="T_7cfed_row6_col1" class="data row6 col1" >0.000000</td>
-      <td id="T_7cfed_row6_col2" class="data row6 col2" >1.000000</td>
-      <td id="T_7cfed_row6_col3" class="data row6 col3" >1.000000</td>
-      <td id="T_7cfed_row6_col4" class="data row6 col4" >1.000000</td>
+      <th id="T_dfc77_level0_row6" class="row_heading level0 row6" >6</th>
+      <td id="T_dfc77_row6_col0" class="data row6 col0" >Dinner</td>
+      <td id="T_dfc77_row6_col1" class="data row6 col1" >0.000000</td>
+      <td id="T_dfc77_row6_col2" class="data row6 col2" >1.000000</td>
+      <td id="T_dfc77_row6_col3" class="data row6 col3" >1.000000</td>
+      <td id="T_dfc77_row6_col4" class="data row6 col4" >1.000000</td>
     </tr>
     <tr>
-      <th id="T_7cfed_level0_row7" class="row_heading level0 row7" >7</th>
-      <td id="T_7cfed_row7_col0" class="data row7 col0" >Dinner</td>
-      <td id="T_7cfed_row7_col1" class="data row7 col1" >0.000000</td>
-      <td id="T_7cfed_row7_col2" class="data row7 col2" >1.000000</td>
-      <td id="T_7cfed_row7_col3" class="data row7 col3" >1.000000</td>
-      <td id="T_7cfed_row7_col4" class="data row7 col4" >1.000000</td>
+      <th id="T_dfc77_level0_row7" class="row_heading level0 row7" >7</th>
+      <td id="T_dfc77_row7_col0" class="data row7 col0" >Dinner</td>
+      <td id="T_dfc77_row7_col1" class="data row7 col1" >0.000000</td>
+      <td id="T_dfc77_row7_col2" class="data row7 col2" >1.000000</td>
+      <td id="T_dfc77_row7_col3" class="data row7 col3" >1.000000</td>
+      <td id="T_dfc77_row7_col4" class="data row7 col4" >1.000000</td>
     </tr>
     <tr>
-      <th id="T_7cfed_level0_row8" class="row_heading level0 row8" >8</th>
-      <td id="T_7cfed_row8_col0" class="data row8 col0" >Dinner</td>
-      <td id="T_7cfed_row8_col1" class="data row8 col1" >0.000000</td>
-      <td id="T_7cfed_row8_col2" class="data row8 col2" >1.000000</td>
-      <td id="T_7cfed_row8_col3" class="data row8 col3" >1.000000</td>
-      <td id="T_7cfed_row8_col4" class="data row8 col4" >1.000000</td>
+      <th id="T_dfc77_level0_row8" class="row_heading level0 row8" >8</th>
+      <td id="T_dfc77_row8_col0" class="data row8 col0" >Dinner</td>
+      <td id="T_dfc77_row8_col1" class="data row8 col1" >0.000000</td>
+      <td id="T_dfc77_row8_col2" class="data row8 col2" >1.000000</td>
+      <td id="T_dfc77_row8_col3" class="data row8 col3" >1.000000</td>
+      <td id="T_dfc77_row8_col4" class="data row8 col4" >1.000000</td>
     </tr>
     <tr>
-      <th id="T_7cfed_level0_row9" class="row_heading level0 row9" >9</th>
-      <td id="T_7cfed_row9_col0" class="data row9 col0" >Dinner</td>
-      <td id="T_7cfed_row9_col1" class="data row9 col1" >0.000000</td>
-      <td id="T_7cfed_row9_col2" class="data row9 col2" >1.000000</td>
-      <td id="T_7cfed_row9_col3" class="data row9 col3" >1.000000</td>
-      <td id="T_7cfed_row9_col4" class="data row9 col4" >1.000000</td>
+      <th id="T_dfc77_level0_row9" class="row_heading level0 row9" >9</th>
+      <td id="T_dfc77_row9_col0" class="data row9 col0" >Dinner</td>
+      <td id="T_dfc77_row9_col1" class="data row9 col1" >0.000000</td>
+      <td id="T_dfc77_row9_col2" class="data row9 col2" >1.000000</td>
+      <td id="T_dfc77_row9_col3" class="data row9 col3" >1.000000</td>
+      <td id="T_dfc77_row9_col4" class="data row9 col4" >1.000000</td>
     </tr>
   </tbody>
 </table>
@@ -817,18 +939,18 @@ title="Print to PDF"
 <li><p>Lunch -&gt; C(time)[Lunch] = 1, C(time)[T.Dinner] = 0</p></li>
 <li><p>Dinner -&gt; C(time)[Lunch] = 0, C(time)[T.Dinner] = 1</p></li>
 </ul>
-<p>즉 C(time)[Lunch] 변수를 <span class="math notranslate nohighlight">\(d_0\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_0\)</span>, C(time)[T.Dinner] 변수를 <span class="math notranslate nohighlight">\(d_1\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_1\)</span>이라고 하면,</p>
+<p>즉 C(time)[Lunch] 변수를 <span class="math notranslate nohighlight">\(d_L\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_L\)</span>, C(time)[T.Dinner] 변수를 <span class="math notranslate nohighlight">\(d_D\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_D\)</span>이라고 하면,</p>
 <p>x = Lunch인 경우</p>
 <div class="math notranslate nohighlight">
-\[ \hat{y} = w_0 d_0 + w_1 d_1 = w_0 \cdot 1 + w_1 \cdot 0 = w_0 \]</div>
+\[ \hat{y} = w_L \cdot d_L + w_D \cdot d_D = w_L \cdot 1 + w_D \cdot 0 = w_L \]</div>
 <p>x = Dinner인 경우</p>
 <div class="math notranslate nohighlight">
-\[ \hat{y} = w_0 d_0 + w_1 d_1 = w_0 \cdot 0 + w_1 \cdot 1 = w_1 \]</div>
+\[ \hat{y} = w_L \cdot d_L + w_D \cdot d_D = w_L \cdot 0 + w_D \cdot 1 = w_D \]</div>
 <p>가 된다.</p>
-<p>이 모형의 가중치가 의미하는 바는 다음과 같다.</p>
+<p>따라서 이 모형의 가중치가 의미하는 바는 다음과 같다.</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(w_0\)</span> : x 값이 Lunch인 경우의 팁의 평균값</p></li>
-<li><p><span class="math notranslate nohighlight">\(w_1\)</span> : x 값이 Dinner인 경우의 팁의 평균값</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_L\)</span> : x 값이 Lunch인 경우의 팁의 평균값</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_D\)</span> : x 값이 Dinner인 경우의 팁의 평균값</p></li>
 </ul>
 <p>이러한 더미 인코딩 방식을 <b>전체랭크 인코딩(full-rank encoding)</b>이라고 한다.</p>
 <p>모형2에서는 Intercept 와 C(time)[T.Dinner] 라는 두 개의 변수가 만들어지고 이 값은 각각 다음과 같이 인코딩되었다.</p>
@@ -836,18 +958,18 @@ title="Print to PDF"
 <li><p>Lunch -&gt; Intercept = 1, C(time)[T.Dinner] = 0</p></li>
 <li><p>Dinner -&gt; Intercept = 1, C(time)[T.Dinner] = 1</p></li>
 </ul>
-<p>즉 Intercept 변수를 <span class="math notranslate nohighlight">\(d_0\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_0\)</span>, C(time)[T.Dinner] 변수를 <span class="math notranslate nohighlight">\(d_1\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_1\)</span>이라고 하면,</p>
+<p>즉 Intercept 변수를 <span class="math notranslate nohighlight">\(d_L\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_L\)</span>, C(time)[T.Dinner] 변수를 <span class="math notranslate nohighlight">\(d_{D-L}\)</span>, 그 가중치를 <span class="math notranslate nohighlight">\(w_{D-L}\)</span>이라고 하면,</p>
 <p>x = Lunch인 경우</p>
 <div class="math notranslate nohighlight">
-\[ \hat{y} = w_0 d_0 + w_1 d_1 = w_0 \cdot 1 + w_1 \cdot 0 = w_0 \]</div>
+\[ \hat{y} = w_L \cdot d_L + w_{D-L} \cdot d_{D-L} = w_L \cdot 1 + w_D \cdot 0 = w_L \]</div>
 <p>x = Dinner인 경우</p>
 <div class="math notranslate nohighlight">
-\[ \hat{y} = w_0 d_0 + w_1 d_1 = w_0 \cdot 1 + w_1 \cdot 1 = w_0 + w_1 \]</div>
+\[ \hat{y} = w_L \cdot d_L + w_{D-L} \cdot d_{D-L} = w_L \cdot 1 + w_D \cdot 1 = w_L + w_{D-L} \]</div>
 <p>가 된다.</p>
 <p>이 모형의 가중치가 의미하는 바는 다음과 같다.</p>
 <ul class="simple">
-<li><p><span class="math notranslate nohighlight">\(w_0\)</span> : x 값이 Lunch인 경우의 팁의 평균값</p></li>
-<li><p><span class="math notranslate nohighlight">\(w_1\)</span> : x 값이 Dinner인 경우의 팁이 Lunch의 경우와 얼마나 달라지는지에 대한 평균값</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_L\)</span> : x 값이 Lunch인 경우의 팁의 평균값</p></li>
+<li><p><span class="math notranslate nohighlight">\(w_{D-L}\)</span> : x 값이 Dinner인 경우의 팁이 Lunch의 경우와 얼마나 달라지는지에 대한 평균값</p></li>
 </ul>
 <p>이러한 더미 인코딩 방식을 <b>축소랭크 인코딩(reduced-rank encoding)</b>이라고 한다.</p>
 <p>그러면 이제 실제로 이 두 가지 모형에 대해 선형회귀분석을 해보자.</p>
@@ -864,8 +986,8 @@ title="Print to PDF"
 Dep. Variable:                    tip   R-squared:                       0.015
 Model:                            OLS   Adj. R-squared:                  0.011
 Method:                 Least Squares   F-statistic:                     3.634
-Date:                Wed, 12 Oct 2022   Prob (F-statistic):             0.0578
-Time:                        00:51:28   Log-Likelihood:                -423.13
+Date:                Thu, 13 Oct 2022   Prob (F-statistic):             0.0578
+Time:                        00:37:23   Log-Likelihood:                -423.13
 No. Observations:                 244   AIC:                             850.3
 Df Residuals:                     242   BIC:                             857.3
 Df Model:                           1                                         
@@ -902,8 +1024,8 @@ Notes:
 Dep. Variable:                    tip   R-squared:                       0.015
 Model:                            OLS   Adj. R-squared:                  0.011
 Method:                 Least Squares   F-statistic:                     3.634
-Date:                Wed, 12 Oct 2022   Prob (F-statistic):             0.0578
-Time:                        00:51:28   Log-Likelihood:                -423.13
+Date:                Thu, 13 Oct 2022   Prob (F-statistic):             0.0578
+Time:                        00:37:24   Log-Likelihood:                -423.13
 No. Observations:                 244   AIC:                             850.3
 Df Residuals:                     242   BIC:                             857.3
 Df Model:                           1                                         
@@ -942,8 +1064,8 @@ Notes:
 Dep. Variable:                    tip   R-squared:                       0.015
 Model:                            OLS   Adj. R-squared:                  0.011
 Method:                 Least Squares   F-statistic:                     3.634
-Date:                Wed, 12 Oct 2022   Prob (F-statistic):             0.0578
-Time:                        00:51:28   Log-Likelihood:                -423.13
+Date:                Thu, 13 Oct 2022   Prob (F-statistic):             0.0578
+Time:                        00:37:24   Log-Likelihood:                -423.13
 No. Observations:                 244   AIC:                             850.3
 Df Residuals:                     242   BIC:                             857.3
 Df Model:                           1                                         
@@ -989,8 +1111,8 @@ Notes:
 Dep. Variable:                    tip   R-squared:                       0.008
 Model:                            OLS   Adj. R-squared:                  0.004
 Method:                 Least Squares   F-statistic:                     1.926
-Date:                Wed, 12 Oct 2022   Prob (F-statistic):              0.166
-Time:                        00:51:28   Log-Likelihood:                -423.98
+Date:                Thu, 13 Oct 2022   Prob (F-statistic):              0.166
+Time:                        00:37:24   Log-Likelihood:                -423.98
 No. Observations:                 244   AIC:                             852.0
 Df Residuals:                     242   BIC:                             859.0
 Df Model:                           1                                         
@@ -1026,8 +1148,8 @@ Notes:
 Dep. Variable:                    tip   R-squared:                       0.008
 Model:                            OLS   Adj. R-squared:                  0.004
 Method:                 Least Squares   F-statistic:                     1.926
-Date:                Wed, 12 Oct 2022   Prob (F-statistic):              0.166
-Time:                        00:51:28   Log-Likelihood:                -423.98
+Date:                Thu, 13 Oct 2022   Prob (F-statistic):              0.166
+Time:                        00:37:24   Log-Likelihood:                -423.98
 No. Observations:                 244   AIC:                             852.0
 Df Residuals:                     242   BIC:                             859.0
 Df Model:                           1                                         
@@ -1055,15 +1177,143 @@ Notes:
 </section>
 <section id="id3">
 <h2><span class="section-number">3.13.2. </span>레벨이 2개인 범주형 독립변수와 수치형 독립변수를 동시에 사용하는 경우<a class="headerlink" href="#id3" title="Permalink to this headline">#</a></h2>
+<p>다음으로 레벨이 2개인 범주형 독립변수와 수치형 독립변수를 동시에 사용하는 경우를 살펴보자. 이번에는 보스턴 집값 데이터를 예제 데이터로 사용한다. 보스턴 집값 데이터에서 chas 데이터는 레벨이 0과 1, 2개인 범주형 독립변수이고 rm 데이터는 수치형 데이터이다. chas, rm 데이터를 동시에 독립변수로 사용하는 선형회귀분석 모형은 아까와 같이 두 가지를 만들 수 있다.</p>
+<ul class="simple">
+<li><p><span class="math notranslate nohighlight">\(y\)</span> = medv</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_1\)</span> = chas</p></li>
+<li><p><span class="math notranslate nohighlight">\(x_2\)</span> = rm</p></li>
+</ul>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model5</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ C(chas) + scale(rm) + 0&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
+<span class="n">model6</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ C(chas) + scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>전체랭크모형의 경우 범주형 독립변수 chas가 <span class="math notranslate nohighlight">\(d_{1,0}\)</span>, <span class="math notranslate nohighlight">\(d_{1,1}\)</span> 라는 두 개의 더미변수로 나뉘어진다.</p>
+<ul class="simple">
+<li><p>chas = 0 인 경우, <span class="math notranslate nohighlight">\(d_{1,0}=1\)</span>, <span class="math notranslate nohighlight">\(d_{1,1}=0\)</span></p></li>
+<li><p>chas = 1 인 경우, <span class="math notranslate nohighlight">\(d_{1,0}=0\)</span>, <span class="math notranslate nohighlight">\(d_{1,1}=1\)</span></p></li>
+</ul>
+<p>예측식은 다음과 같아진다.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} = w_{1,0} \cdot d_{1,0} + w_{1,1} \cdot d_{1,1} + w_2 \cdot x_2 \]</div>
+<p>따라서 chas = 0 인 경우</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} =  w_{1,0} \cdot d_{1,0} + w_{1,1} \cdot d_{1,1} + w_2 \cdot x_2 =  w_{1,0} \cdot 1 + w_{1,1} \cdot 0 + w_2 \cdot x_2 = w_{1,0} + w_2 \cdot x_2 \]</div>
+<p>chas = 1 인 경우</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} =  w_{1,0} \cdot d_{1,0} + w_{1,1} \cdot d_{1,1} + w_2 \cdot x_2 =  w_{1,0} \cdot 0 + w_{1,1} \cdot 1 + w_2 \cdot x_2 = w_{1,1} + w_2 \cdot x_2 \]</div>
+<p>가 되어 x의 값에 따라 y절편이 달라지는 1차 모형이 된다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/03_13_27_0.png" src="../_images/03_13_27_0.png" />
+</div>
+</div>
+<p>전체랭크모형의 경우 범주형 독립변수 chas가 <span class="math notranslate nohighlight">\(d_{1,0}\)</span>, <span class="math notranslate nohighlight">\(d_{1,1-0}\)</span> 라는 두 개의 더미변수로 나뉘어진다.</p>
+<ul class="simple">
+<li><p>chas = 0 인 경우, <span class="math notranslate nohighlight">\(d_{1,0}=1\)</span>, <span class="math notranslate nohighlight">\(d_{1,1-0}=0\)</span></p></li>
+<li><p>chas = 1 인 경우, <span class="math notranslate nohighlight">\(d_{1,0}=1\)</span>, <span class="math notranslate nohighlight">\(d_{1,1-0}=1\)</span></p></li>
+</ul>
+<p>예측식은 아까와 동일하다.</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} = w_{1,0} \cdot d_{1,0} + w_{1,1} \cdot d_{1,1} + w_2 \cdot x_2 \]</div>
+<p>chas = 0 인 경우</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} =  w_{1,0} \cdot d_{1,0} + w_{1,1} \cdot d_{1,1} + w_2 \cdot x_2 =  w_{1,0} \cdot 1 + w_{1,1} \cdot 0 + w_2 \cdot x_2 = w_{1,0} + w_2 \cdot x_2 \]</div>
+<p>chas = 1 인 경우</p>
+<div class="math notranslate nohighlight">
+\[ \hat{y} =  w_{1,0} \cdot d_{1,0} + w_{1,1} \cdot d_{1,1} + w_2 \cdot x_2 =  w_{1,0} \cdot 1 + w_{1,1} \cdot 1 + w_2 \cdot x_2 = w_{1,0} + w_{1,1-0} + w_2 \cdot x_2 \]</div>
+<p>으로 chas = 0 인 경우 y 절편이 <span class="math notranslate nohighlight">\( w_{1,0}\)</span>, chas = 0 인 경우 y 절편이 <span class="math notranslate nohighlight">\(w_{1,0} + w_{1,1-0}\)</span> 인 1차 식이 된다.</p>
+<div class="cell tag_remove-input docutils container">
+<div class="cell_output docutils container">
+<img alt="../_images/03_13_29_0.png" src="../_images/03_13_29_0.png" />
+</div>
+</div>
+<p>선형회귀 분석결과는 다음과 같다.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result5</span> <span class="o">=</span> <span class="n">model5</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result5</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.496
+Model:                            OLS   Adj. R-squared:                  0.494
+Method:                 Least Squares   F-statistic:                     247.6
+Date:                Thu, 13 Oct 2022   Prob (F-statistic):           1.36e-75
+Time:                        00:37:29   Log-Likelihood:                -1666.8
+No. Observations:                 506   AIC:                             3340.
+Df Residuals:                     503   BIC:                             3352.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+==============================================================================
+                 coef    std err          t      P&gt;|t|      [0.025      0.975]
+------------------------------------------------------------------------------
+C(chas)[0]    22.2504      0.301     73.799      0.000      21.658      22.843
+C(chas)[1]    26.3330      1.110     23.723      0.000      24.152      28.514
+scale(rm)      6.2944      0.292     21.555      0.000       5.721       6.868
+==============================================================================
+Omnibus:                       92.470   Durbin-Watson:                   0.753
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              572.587
+Skew:                           0.619   Prob(JB):                    4.62e-125
+Kurtosis:                       8.062   Cond. No.                         3.83
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result6</span> <span class="o">=</span> <span class="n">model6</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result6</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>                            OLS Regression Results                            
+==============================================================================
+Dep. Variable:                   medv   R-squared:                       0.496
+Model:                            OLS   Adj. R-squared:                  0.494
+Method:                 Least Squares   F-statistic:                     247.6
+Date:                Thu, 13 Oct 2022   Prob (F-statistic):           1.36e-75
+Time:                        00:37:29   Log-Likelihood:                -1666.8
+No. Observations:                 506   AIC:                             3340.
+Df Residuals:                     503   BIC:                             3352.
+Df Model:                           2                                         
+Covariance Type:            nonrobust                                         
+================================================================================
+                   coef    std err          t      P&gt;|t|      [0.025      0.975]
+--------------------------------------------------------------------------------
+Intercept       22.2504      0.301     73.799      0.000      21.658      22.843
+C(chas)[T.1]     4.0825      1.151      3.547      0.000       1.821       6.344
+scale(rm)        6.2944      0.292     21.555      0.000       5.721       6.868
+==============================================================================
+Omnibus:                       92.470   Durbin-Watson:                   0.753
+Prob(Omnibus):                  0.000   Jarque-Bera (JB):              572.587
+Skew:                           0.619   Prob(JB):                    4.62e-125
+Kurtosis:                       8.062   Cond. No.                         3.98
+==============================================================================
+
+Notes:
+[1] Standard Errors assume that the covariance matrix of the errors is correctly specified.
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 <section id="id4">
-<h2><span class="section-number">3.13.3. </span>변수간 상호작용<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.13.3. </span>레벨이 3개 이상인 범주형 독립변수의 인코딩<a class="headerlink" href="#id4" title="Permalink to this headline">#</a></h2>
 </section>
 <section id="id5">
-<h2><span class="section-number">3.13.4. </span>레벨이 3개 이상인 범주형 독립변수의 인코딩<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
-</section>
-<section id="id6">
-<h2><span class="section-number">3.13.5. </span>복수의 범주형 독립변수가 있는 경우의 인코딩<a class="headerlink" href="#id6" title="Permalink to this headline">#</a></h2>
+<h2><span class="section-number">3.13.4. </span>복수의 범주형 독립변수가 있는 경우의 인코딩<a class="headerlink" href="#id5" title="Permalink to this headline">#</a></h2>
 </section>
 </section>
 
