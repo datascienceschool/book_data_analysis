@@ -87,6 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.10. 모형진단과 다항회귀" href="03_10.html" />
@@ -567,10 +569,10 @@ title="Print to PDF"
 <p>예제로는 보스턴 집값을 rm 독립변수를 사용하여 선형회귀분석한 결과를 사용한다. 다만 여기에서는 전체 데이터를 다 사용하는 것이 아니라 일부(20개) 데이터 레코드만을 사용하여 회귀분석을 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
 
-<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
-<span class="n">boston20</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">345</span><span class="p">:</span><span class="mi">365</span><span class="p">]</span>  <span class="c1"># 일부 데이터만 사용</span>
+boston = sm.datasets.get_rdataset(&quot;Boston&quot;, &quot;MASS&quot;).data
+boston20 = boston.iloc[345:365]  # 일부 데이터만 사용
 </pre></div>
 </div>
 </div>
@@ -578,9 +580,9 @@ title="Print to PDF"
 <p>다음은 이 데이터를 사용한 회귀분석 결과다. 결정계수 성능이 0.192로 낮고 rm 독립변수에 대한 가중치 유의확률도 5.4%로 높은 편이다. 즉, 회귀분석 결과가 좋지 않다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model20</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston20</span><span class="p">)</span>
-<span class="n">result20</span> <span class="o">=</span> <span class="n">model20</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result20</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model20 = sm.OLS.from_formula(&quot;medv ~ scale(rm)&quot;, boston20)
+result20 = model20.fit()
+print(result20.summary())
 </pre></div>
 </div>
 </div>
@@ -617,14 +619,14 @@ Notes:
 <p>seaborn 패키지의 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수로 선형회귀분석 결과를 그림으로 그리면 다음 그림과 같다. 이 그림에서는 데이터 레코드 각각에 대해 데이터 번호를 붙어서 표시하였다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import seaborn as sns
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">boston20</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rm</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;아웃라이어를 제거하기 전의 회귀분석 결과&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.figure(figsize=(12, 8))
+sns.regplot(x=&quot;rm&quot;, y=&quot;medv&quot;, data=boston20)
+for i, r in boston20.iterrows():
+    plt.annotate(i, (r.rm + 0.03, r.medv + 0.3))
+plt.title(&quot;아웃라이어를 제거하기 전의 회귀분석 결과&quot;)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -673,12 +675,12 @@ h_i = H_{ii}
 <p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">OLSInfluence</span></code> 클래스 객체로 <code class="docutils literal notranslate"><span class="pre">hat_matrix_diag</span></code> 속성에 레버리지 값을 저장하고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
 
-<span class="n">influence20</span> <span class="o">=</span> <span class="n">result20</span><span class="o">.</span><span class="n">get_influence</span><span class="p">()</span>
-<span class="n">leverage20</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;leverage&quot;</span><span class="p">:</span> <span class="n">influence20</span><span class="o">.</span><span class="n">hat_matrix_diag</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">boston20</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
-<span class="n">leverage20</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
+influence20 = result20.get_influence()
+leverage20 = pd.DataFrame(
+    {&quot;leverage&quot;: influence20.hat_matrix_diag}, index=boston20.index)
+leverage20.style.bar()
 </pre></div>
 </div>
 </div>
@@ -852,7 +854,7 @@ h_i = H_{ii}
 <p>모두 0 부터 1 사이의 값이라는 것을 알 수 있다. 전체 레버리지의 합을 구하면 위에서 이야기한 대로 2가 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">leverage20</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>leverage20.sum()
 </pre></div>
 </div>
 </div>
@@ -866,14 +868,14 @@ dtype: float64
 <p>위에서 예제로 사용한 선형회귀분석에서 개별 데이터의 레버리지 크기를 점의 크기로 표시하면 다음과 같아진다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">rid</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">boston20</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rm</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span>
-                <span class="n">s</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">leverage20</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">rid</span><span class="p">]</span> <span class="o">*</span> <span class="mi">5000</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">rid</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rm</span> <span class="o">+</span> <span class="mf">0.03</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;레버리지 표시&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(12, 8))
+sns.regplot(x=&quot;rm&quot;, y=&quot;medv&quot;, data=boston20)
+for rid, r in boston20.iterrows():
+    plt.scatter(r.rm, r.medv, marker=&quot;o&quot;, alpha=0.5, c=&quot;g&quot;,
+                s=np.round(leverage20.loc[rid] * 5000))
+    plt.annotate(rid, (r.rm + 0.03, r.medv + 0.3))
+plt.title(&quot;레버리지 표시&quot;)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -885,10 +887,10 @@ dtype: float64
 <p>우리가 사용하는 예제에서 레버리지가 가장 작은 데이터는 357번 데이터이고 레버리지가 가장 큰 데이터는 364번 데이터다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx_all</span> <span class="o">=</span> <span class="n">leverage20</span><span class="o">.</span><span class="n">index</span>
-<span class="n">idx_min</span> <span class="o">=</span> <span class="n">idx_all</span><span class="p">[</span><span class="n">leverage20</span><span class="o">.</span><span class="n">leverage</span><span class="o">.</span><span class="n">argmin</span><span class="p">()]</span>
-<span class="n">idx_max</span> <span class="o">=</span> <span class="n">idx_all</span><span class="p">[</span><span class="n">leverage20</span><span class="o">.</span><span class="n">leverage</span><span class="o">.</span><span class="n">argmax</span><span class="p">()]</span>
-<span class="n">idx_min</span><span class="p">,</span> <span class="n">idx_max</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>idx_all = leverage20.index
+idx_min = idx_all[leverage20.leverage.argmin()]
+idx_max = idx_all[leverage20.leverage.argmax()]
+idx_min, idx_max
 </pre></div>
 </div>
 </div>
@@ -901,15 +903,15 @@ dtype: float64
 <p>이 두가지 데이터를 각각 제외하고 다시 선형회귀분석을 해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ids_min</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">boston20</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
-<span class="n">ids_max</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">boston20</span><span class="o">.</span><span class="n">index</span><span class="o">.</span><span class="n">copy</span><span class="p">())</span>
-<span class="n">ids_min</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">idx_min</span><span class="p">)</span>
-<span class="n">ids_max</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">idx_max</span><span class="p">)</span>
-<span class="n">boston20min</span> <span class="o">=</span> <span class="n">boston20</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ids_min</span><span class="p">]</span>
-<span class="n">boston20max</span> <span class="o">=</span> <span class="n">boston20</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">ids_max</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>ids_min = list(boston20.index.copy())
+ids_max = list(boston20.index.copy())
+ids_min.remove(idx_min)
+ids_max.remove(idx_max)
+boston20min = boston20.loc[ids_min]
+boston20max = boston20.loc[ids_max]
 
-<span class="n">result20min</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston20min</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="n">result20max</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston20max</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+result20min = sm.OLS.from_formula(&quot;medv ~ scale(rm)&quot;, boston20min).fit()
+result20max = sm.OLS.from_formula(&quot;medv ~ scale(rm)&quot;, boston20max).fit()
 </pre></div>
 </div>
 </div>
@@ -917,13 +919,13 @@ dtype: float64
 <p>선형회귀분석 결과인 가중치를 비교하면 레버리지가 작은 데이터를 제외하였을 경우에는 가중치에 큰 차이가 없지만 레버리지가 큰 데이터를 제외한 경우에는 가중치가 많이 달라지는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">(</span>
-    <span class="p">[</span>
-        <span class="n">result20</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;전체 데이터 사용&quot;</span><span class="p">),</span>
-        <span class="n">result20min</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;가장 레버러지가 작은 데이터 제외&quot;</span><span class="p">),</span>
-        <span class="n">result20max</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">rename</span><span class="p">(</span><span class="s2">&quot;가장 레버러지가 큰 데이터 제외&quot;</span><span class="p">),</span>
-    <span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span>
-<span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pd.concat(
+    [
+        result20.params.rename(&quot;전체 데이터 사용&quot;),
+        result20min.params.rename(&quot;가장 레버러지가 작은 데이터 제외&quot;),
+        result20max.params.rename(&quot;가장 레버러지가 큰 데이터 제외&quot;),
+    ], axis=1
+)
 </pre></div>
 </div>
 </div>
@@ -971,20 +973,20 @@ dtype: float64
 <p>예측 직선을 그림으로 표시하면 더 알기쉽다. 레버리지가 큰 데이터를 제외하였을 때 기울기가 크게 달라지는 것을 볼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span> <span class="mi">4</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">121</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;전체 데이터 사용&quot;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20min</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;가장 레버러지가 작은 데이터 제외&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">38</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">122</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;전체 데이터 사용&quot;</span><span class="p">)</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">truncate</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20max</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;가장 레버러지가 큰 데이터 제외&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span> <span class="mf">7.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">38</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(14, 4))
+plt.subplot(121)
+sns.regplot(x=&quot;rm&quot;, y=&quot;medv&quot;, ci=None, truncate=False, data=boston20, label=&quot;전체 데이터 사용&quot;)
+sns.regplot(x=&quot;rm&quot;, y=&quot;medv&quot;, ci=None, truncate=False, data=boston20min, label=&quot;가장 레버러지가 작은 데이터 제외&quot;)
+plt.xlim(5, 7.5)
+plt.ylim(12, 38)
+plt.legend()
+plt.subplot(122)
+sns.regplot(x=&quot;rm&quot;, y=&quot;medv&quot;, ci=None, truncate=False, data=boston20, label=&quot;전체 데이터 사용&quot;)
+sns.regplot(x=&quot;rm&quot;, y=&quot;medv&quot;, ci=None, truncate=False, data=boston20max, label=&quot;가장 레버러지가 큰 데이터 제외&quot;)
+plt.xlim(5, 7.5)
+plt.ylim(12, 38)
+plt.legend()
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -1039,8 +1041,8 @@ r_i = \dfrac{e_i}{\hat{\sigma}\sqrt{1 - h_i}}
 <p>영향도 객체는 <code class="docutils literal notranslate"><span class="pre">resid_studentized</span></code> 또는 <code class="docutils literal notranslate"><span class="pre">resid_studentized_internal</span></code> 속성에 스튜던트화 잔차를 가지고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_stu20</span> <span class="o">=</span> <span class="n">influence20</span><span class="o">.</span><span class="n">resid_studentized</span>
-<span class="n">resid_stu20</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>resid_stu20 = influence20.resid_studentized
+resid_stu20
 </pre></div>
 </div>
 </div>
@@ -1055,11 +1057,11 @@ r_i = \dfrac{e_i}{\hat{\sigma}\sqrt{1 - h_i}}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">idx_all</span><span class="p">,</span> <span class="n">resid_stu20</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">idx_all</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;스튜던트화 잔차&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(figsize=(12, 3))
+ax.stem(idx_all, resid_stu20)
+ax.set_xticks(idx_all)
+plt.title(&quot;스튜던트화 잔차&quot;)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -1075,8 +1077,8 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 <p>statsmodels 패키지에서 외부 스튜던트화 잔차를 계산할 때 LOO를 위해 실제로 데이터 개수만큼 선형회귀를 반복하지는 않고 수학적으로 유도된 수식을 이용하여 외부 스튜던트화 잔차를 계산한다. 외부 스튜던트화 잔차는 곧 설명할 아웃라이어 검출에 사용된다. 영향도 객체는 <code class="docutils literal notranslate"><span class="pre">resid_studentized_external</span></code> 속성에 외부 스튜던트화 잔차를 가지고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_stu_ext20</span> <span class="o">=</span> <span class="n">influence20</span><span class="o">.</span><span class="n">resid_studentized_external</span>
-<span class="n">resid_stu_ext20</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>resid_stu_ext20 = influence20.resid_studentized_external
+resid_stu_ext20
 </pre></div>
 </div>
 </div>
@@ -1097,7 +1099,7 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 <p><code class="docutils literal notranslate"><span class="pre">outlier_test</span></code> 메서드를 호출하면 다음과 같은 데이터프레임을 출력한다. 결과 데이터프레임에서 <code class="docutils literal notranslate"><span class="pre">bonf(p)</span></code> 열이 본페로니 수정 유의확률이다. 아웃라이어 검정은 “아웃라이어가 아니다”라는 귀무가설을 사용하므로 유의확률이 작은 데이터가 아웃라이어가 된다. 364번 데이터의 유의확률이 5% 미만이므로 이 데이터가 아웃라이어가 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result20</span><span class="o">.</span><span class="n">outlier_test</span><span class="p">()</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;bonf(p)&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result20.outlier_test().style.bar(subset=[&quot;bonf(p)&quot;])
 </pre></div>
 </div>
 </div>
@@ -1260,12 +1262,12 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 <p>이 예제에서는 아웃라이어를 제외해보기로 한다. 아웃라이어를 제외한 회귀분석 결과가 다음과 같아진다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston20max</span><span class="p">)</span>
-<span class="k">for</span> <span class="n">i</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">boston20max</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">i</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">rm</span> <span class="o">+</span> <span class="mf">0.01</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">medv</span> <span class="o">+</span> <span class="mf">0.3</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;아웃라이어를 제거한 후의 회귀분석 결과&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(12, 8))
+sns.regplot(x=&quot;rm&quot;, y=&quot;medv&quot;, data=boston20max)
+for i, r in boston20max.iterrows():
+    plt.annotate(i, (r.rm + 0.01, r.medv + 0.3))
+plt.title(&quot;아웃라이어를 제거한 후의 회귀분석 결과&quot;)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -1275,7 +1277,7 @@ t_i = \dfrac{y_i - \hat{y}_{(i)}}{\hat{\sigma}_{(i)}}
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result20max</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(result20max.summary())
 </pre></div>
 </div>
 </div>
@@ -1321,8 +1323,8 @@ Notes:
 <p>영향도 객체는 쿡 거리를 <code class="docutils literal notranslate"><span class="pre">cooks_distance</span></code> 속성에 저장한다. 이 때 쿡 거리와 함께 아웃라이어 검정(outlier test)을 위한 유의확률도 같이 저장한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cook</span><span class="p">,</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="n">influence20</span><span class="o">.</span><span class="n">cooks_distance</span>
-<span class="n">cook</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>cook, pvalues = influence20.cooks_distance
+cook
 </pre></div>
 </div>
 </div>
@@ -1339,11 +1341,11 @@ Notes:
 <p>쿡 거리를 플롯으로 표시하면 364번 데이터의 잔차가 다른 데이터에 비해 훨씬 크다는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">idx_all</span><span class="p">,</span> <span class="n">cook</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">idx_all</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;쿡 거리&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(figsize=(12, 3))
+ax.stem(idx_all, cook)
+ax.set_xticks(idx_all)
+plt.title(&quot;쿡 거리&quot;)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -1354,9 +1356,9 @@ Notes:
 <p>statsmodels 패키지는 각 데이터의 외부 스튜던트 잔차와 레버리지, 쿡 거리를 동시에 시각화하는 <code class="docutils literal notranslate"><span class="pre">influence_plot</span></code> 함수도 제공한다. 이 함수는 각 데이터 레코드의 외부 스튜던트 잔차를 y축에, 레버리지를 x축에 표시한다. 쿡 거리는 데이터 포인트의 원형 크기로 표시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">influence_plot</span><span class="p">(</span><span class="n">result20</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(figsize=(12, 8))
+sm.graphics.influence_plot(result20, ax=ax)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -1372,8 +1374,8 @@ Notes:
 <p>dffits 값은 영향도 객체의 <code class="docutils literal notranslate"><span class="pre">dffits</span></code> 속성에 저장되어 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dffits</span><span class="p">,</span> <span class="n">pvalues</span> <span class="o">=</span> <span class="n">influence20</span><span class="o">.</span><span class="n">dffits</span>
-<span class="n">dffits</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dffits, pvalues = influence20.dffits
+dffits
 </pre></div>
 </div>
 </div>
@@ -1389,11 +1391,11 @@ Notes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">stem</span><span class="p">(</span><span class="n">idx_all</span><span class="p">,</span> <span class="n">dffits</span><span class="p">)</span>
-<span class="n">ax</span><span class="o">.</span><span class="n">set_xticks</span><span class="p">(</span><span class="n">idx_all</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;dffits&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(figsize=(12, 3))
+ax.stem(idx_all, dffits)
+ax.set_xticks(idx_all)
+plt.title(&quot;dffits&quot;)
+plt.show()
 </pre></div>
 </div>
 </div>

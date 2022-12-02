@@ -85,6 +85,8 @@ const thebe_selector_input = "pre"
 const thebe_selector_output = ".output, .cell_output"
 </script>
     <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3. 회귀분석 - 수치형 데이터를 예측한다." href="../ch03/03_00.html" />
@@ -631,10 +633,10 @@ title="Print to PDF"
 <p>지금까지 많이 살펴보았던 팁 데이터에 대해 탐색적 데이터 분석을 하면 다음과 같은 결과를 얻을 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import seaborn as sns
 
-<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
-<span class="n">tips</span>
+tips = sns.load_dataset(&quot;tips&quot;)
+tips
 </pre></div>
 </div>
 </div>
@@ -787,7 +789,7 @@ title="Print to PDF"
 <p>데이터프레임에 포함된 데이터의 개수는 <code class="docutils literal notranslate"><span class="pre">len</span></code> 함수로 구한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>len(tips)
 </pre></div>
 </div>
 </div>
@@ -800,7 +802,7 @@ title="Print to PDF"
 <p>열 별로 각각 데이터의 개수를 셀 때는 <code class="docutils literal notranslate"><span class="pre">count</span></code> 메서드를 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">count</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tips.count()
 </pre></div>
 </div>
 </div>
@@ -820,7 +822,7 @@ dtype: int64
 <p><code class="docutils literal notranslate"><span class="pre">info</span></code> 메서드를 사용할 수도 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">info</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tips.info()
 </pre></div>
 </div>
 </div>
@@ -849,7 +851,7 @@ memory usage: 7.4 KB
 <p>데이터의 유형은 일차적으로 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">dtypes</span></code> 속성으로 파악할 수 있다. float 타입이면 수치형이고 category 타입이면 범주형이다. 다만 숫자임에도 불구하고 문자열로 되어 category 타입으로 나타내는 경우도 있기 때문에 주의를 요한다. int 타입일 경우에는 일반적으로 수치형으로 보지만 경우에 따라서는 범주형으로 취급할 수도 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">dtypes</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tips.dtypes
 </pre></div>
 </div>
 </div>
@@ -873,7 +875,7 @@ dtype: object
 <p>수치형 데이터의 개수나 평균, 최대/최소값 등은 pandas 데이터프레임의 <code class="docutils literal notranslate"><span class="pre">describe</span></code> 메서드로 얻을 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tips.describe()
 </pre></div>
 </div>
 </div>
@@ -960,7 +962,7 @@ dtype: object
 <p>범주형 데이터가 가질 수 있는 값의 종류와 범위를 구하려면 해당 열의 <code class="docutils literal notranslate"><span class="pre">describe</span></code> 및 <code class="docutils literal notranslate"><span class="pre">unique</span></code> 메서드를 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tips.sex.describe()
 </pre></div>
 </div>
 </div>
@@ -976,7 +978,7 @@ Name: sex, dtype: object
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tips.sex.unique()
 </pre></div>
 </div>
 </div>
@@ -993,10 +995,10 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 <p>데이터의 누락을 알아보기 위해서는 missingno 패키지를 사용한다. 만약 누락된 데이터가 있다면 <code class="docutils literal notranslate"><span class="pre">bar</span></code> 함수를 사용했을 때 해당 개수가 표시된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">missingno</span> <span class="k">as</span> <span class="nn">msno</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import missingno as msno
 
-<span class="n">msno</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">tips</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+msno.bar(tips)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -1021,12 +1023,12 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 사용방법은 다음과 같다. 여기에서는 예로 total_bill 데이터만 살펴본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">distfit</span> <span class="kn">import</span> <span class="n">distfit</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from distfit import distfit
 
-<span class="n">dist</span> <span class="o">=</span> <span class="n">distfit</span><span class="p">(</span><span class="n">distr</span><span class="o">=</span><span class="s1">&#39;popular&#39;</span><span class="p">)</span>
+dist = distfit(distr=&#39;popular&#39;)
 
-<span class="n">result</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="p">)</span>
-<span class="n">result</span><span class="p">[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
+result = dist.fit_transform(tips.total_bill)
+result[&quot;model&quot;]
 </pre></div>
 </div>
 </div>
@@ -1065,7 +1067,7 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 <p>이 결과에서 total_bill 데이터는 genextreme 이라는 분포를 따르는 것으로 나타났다. 이 분포는 “일반화 극단값 분포”라는 확률분포다. <code class="docutils literal notranslate"><span class="pre">summary</span></code> 속성값에는 각 후보 확률분포에 대한 추정 오차값(score)과 모수값이 들어있다. 오차값이 적을수록 해당 확률분포일 가능성이 높다. 다음 결과에서 로그정규분포는 일반화 극단값 분포과 비슷한 오차를 가지고 있는 것을 알 수 있다. 따라서 total_bill은 로그정규분포라고 볼 수도 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">dist</span><span class="o">.</span><span class="n">summary</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(dist.summary)
 </pre></div>
 </div>
 </div>
@@ -1102,8 +1104,8 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 <p><code class="docutils literal notranslate"><span class="pre">plot_summary</span></code> 메서드를 사용하면 후보 확률분포들의 오차를 플롯으로 그려준다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dist</span><span class="o">.</span><span class="n">plot_summary</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dist.plot_summary()
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -1117,10 +1119,10 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 <p>seaborn 패키지의 <code class="docutils literal notranslate"><span class="pre">distplot</span></code> 함수를 이용하여 로그정규분포로 추정한 결과를 비교하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">lognorm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.stats import lognorm
 
-<span class="n">sns</span><span class="o">.</span><span class="n">distplot</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="p">,</span> <span class="n">fit</span><span class="o">=</span><span class="n">lognorm</span><span class="p">,</span> <span class="n">kde</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+sns.distplot(tips.total_bill, fit=lognorm, kde=False)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -1135,9 +1137,9 @@ Categories (2, object): [&#39;Male&#39;, &#39;Female&#39;]
 <p>pandas_profiling 패키지를 사용하면 확률분포 추정을 제외한 대부분을 작업을 자동으로 해준다. 사용법은 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">pandas_profiling</span> <span class="kn">import</span> <span class="n">ProfileReport</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from pandas_profiling import ProfileReport
 
-<span class="n">ProfileReport</span><span class="p">(</span><span class="n">tips</span><span class="p">,</span> <span class="n">progress_bar</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">minimal</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span> <span class="n">html</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;navbar_show&quot;</span><span class="p">:</span> <span class="kc">False</span><span class="p">})</span>
+ProfileReport(tips, progress_bar=False, minimal=True, html={&quot;navbar_show&quot;: False})
 </pre></div>
 </div>
 </div>

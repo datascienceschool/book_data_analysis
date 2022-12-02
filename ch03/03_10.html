@@ -87,6 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.11. 과최적화와 정규화" href="03_11.html" />
@@ -560,12 +562,12 @@ title="Print to PDF"
 <p>보스턴 집값 데이터의 일부를 lstat과 rm 두가지 독립변수로 선형회귀분석한 결과를 이용하여 예를 들어보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
 
-<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">100</span><span class="p">]</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(lstat) + scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+boston = sm.datasets.get_rdataset(&quot;Boston&quot;, &quot;MASS&quot;).data.iloc[:100]
+model = sm.OLS.from_formula(&quot;medv ~ scale(lstat) + scale(rm)&quot;, boston)
+result = model.fit()
+print(result.summary())
 </pre></div>
 </div>
 </div>
@@ -603,16 +605,16 @@ Notes:
 <p>예를 들어 x축을 첫번째 독립변수인 lstat으로, y축을 종속변수인 medv로 놓고 2차원 평면에 데이터(o)와 예측값(x)을 그리면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">lstat</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">medv</span>
-<span class="n">y_hat</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">fittedvalues</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = boston.lstat
+y = boston.medv
+y_hat = result.fittedvalues
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;o&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;원 데이터&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">marker</span><span class="o">=</span><span class="s2">&quot;x&quot;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;예측값&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;다중회귀분석 결과를 2차원에 표시한 경우&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.figure(figsize=(10, 8))
+plt.scatter(x, y, marker=&quot;o&quot;, label=&quot;원 데이터&quot;)
+plt.scatter(x, y_hat, marker=&quot;x&quot;, label=&quot;예측값&quot;)
+plt.legend()
+plt.title(&quot;다중회귀분석 결과를 2차원에 표시한 경우&quot;)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -623,9 +625,9 @@ Notes:
 <p>statsmodels 패키지가 제공하는 <code class="docutils literal notranslate"><span class="pre">plot_fit</span></code> 함수를 사용하면 좀 더 쉽게 그릴 수 있다. 이 때는 각 데이터에 대한 개별 잔차의 표준편차를 바(bar)로 표시해 준다. 개별 잔차의 표준편차보다도 바깥에 있는 데이터는 아웃라이어일 가능성이 높다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_fit</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(figsize=(10, 8))
+sm.graphics.plot_fit(result, &quot;scale(lstat)&quot;, ax=ax)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -654,9 +656,9 @@ Notes:
 <p>statsmodels 패키지는 CCPR 시각화를 위한 <code class="docutils literal notranslate"><span class="pre">plot_ccpr</span></code> 함수를 제공한다. 사용법은 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_ccpr</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(figsize=(10, 8))
+sm.graphics.plot_ccpr(result, &quot;scale(lstat)&quot;, ax=ax)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -682,10 +684,10 @@ Notes:
 <p>함수를 실행하면 x축에는 잔차 <span class="math notranslate nohighlight">\(x_k^{\ast}\)</span>를, y축에는 잔차 <span class="math notranslate nohighlight">\(y_k^{\ast}\)</span>를 스케터플롯으로 그리고 가중치 <span class="math notranslate nohighlight">\(\hat{w}_k\)</span>를 사용한 선형회귀 결과를 직선으로 표시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_partregress</span><span class="p">(</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">,</span> <span class="p">[</span><span class="s2">&quot;scale(rm)&quot;</span><span class="p">],</span> <span class="n">boston</span><span class="p">,</span>
-                             <span class="n">obs_labels</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">ax</span><span class="o">=</span><span class="n">ax</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(figsize=(10, 8))
+sm.graphics.plot_partregress(&quot;medv&quot;, &quot;scale(lstat)&quot;, [&quot;scale(rm)&quot;], boston,
+                             obs_labels=False, ax=ax)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -699,10 +701,10 @@ Notes:
 <p><code class="docutils literal notranslate"><span class="pre">plot_regress_exog</span></code> 함수를 이용하면 CCPR과 부분회귀 결과를 동시에 그릴 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-<span class="n">sm</span><span class="o">.</span><span class="n">graphics</span><span class="o">.</span><span class="n">plot_regress_exog</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">,</span> <span class="n">fig</span><span class="o">=</span><span class="n">f</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>f, ax = plt.subplots(figsize=(10, 8))
+sm.graphics.plot_regress_exog(result, &quot;scale(lstat)&quot;, fig=f)
+plt.tight_layout()
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -764,21 +766,21 @@ Notes:
 안타깝게도 statsmodels 패키지는 잔차플롯만 그리는 함수도 없다. 따라서 잔차플롯만 그리고 싶을 때는 저자가 만든 다음 코드를 사용한다. 이 잔차플롯에서 파란색 곡선은 독립변수의 변화에 따른 잔차의 평균값을 표시한 것이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">resid_plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="n">exo_name</span><span class="p">):</span>
-    <span class="n">id_x</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span><span class="o">.</span><span class="n">index</span><span class="p">(</span><span class="n">exo_name</span><span class="p">)</span>
-    <span class="n">x</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">[:,</span> <span class="n">id_x</span><span class="p">]</span>
-    <span class="n">r</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">resid</span>
-    <span class="n">l</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">nonparametric</span><span class="o">.</span><span class="n">lowess</span><span class="p">(</span><span class="n">r</span><span class="p">,</span> <span class="n">x</span><span class="p">,</span> <span class="n">frac</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def resid_plot(result, exo_name):
+    id_x = result.model.exog_names.index(exo_name)
+    x = result.model.exog[:, id_x]
+    r = result.resid
+    l = sm.nonparametric.lowess(r, x, frac=0.3)
 
-    <span class="n">f</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">l</span><span class="p">[:,</span> <span class="mi">0</span><span class="p">],</span> <span class="n">l</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">],</span> <span class="n">lw</span><span class="o">=</span><span class="mi">5</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.8</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">axhline</span><span class="p">(</span><span class="n">y</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">10</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span>
-    <span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;잔차플롯: 독립변수=</span><span class="si">{</span><span class="n">exo_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+    f, ax = plt.subplots(figsize=(10, 8))
+    plt.scatter(x, r, c=&quot;r&quot;, alpha=0.5)
+    plt.plot(l[:, 0], l[:, 1], lw=5, alpha=0.8)
+    plt.axhline(y=0, color=&#39;black&#39;)
+    plt.ylim(-10, 10)
+    plt.title(f&quot;잔차플롯: 독립변수={exo_name}&quot;)
 
-<span class="n">resid_plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+resid_plot(result, &quot;scale(lstat)&quot;)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -789,7 +791,7 @@ Notes:
 <p>잔차 평균이 독립변수와 관계없이 0이 되려면 잔차플롯에서 푸른 곡선이 y=0 에 해당하는 평평한 직선이어야 한다. 그러나 독립변수와 잔차의 관계를 보면 독립변수 값이 너무 작거나 커지면 잔차의 값이 양의 방향으로 증가하는 것을 볼 수 있다. rm 독립변수에 대해 잔차플롯을 그려도 비슷한 현상이 발생한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>resid_plot(result, &quot;scale(rm)&quot;)
 </pre></div>
 </div>
 </div>
@@ -805,7 +807,7 @@ Notes:
 <p>이 검정들의 귀무가설은 등분산성이므로 유의확률이 큰 경우에는 등분산성이고 유의확률이 작으면 이분산성이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.diagnostic</span> <span class="kn">import</span> <span class="n">het_breuschpagan</span><span class="p">,</span> <span class="n">het_white</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from statsmodels.stats.diagnostic import het_breuschpagan, het_white
 </pre></div>
 </div>
 </div>
@@ -820,7 +822,7 @@ Notes:
 <p>두번째와 4번째의 유의확률의 값이 크면 등분산성이다. 우리가 사용한 예제에서는 이분산성이 존재하는 것을 확인할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>het_breuschpagan(result.resid, model.exog)
 </pre></div>
 </div>
 </div>
@@ -835,7 +837,7 @@ Notes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">het_white</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>het_white(result.resid, model.exog)
 </pre></div>
 </div>
 </div>
@@ -884,10 +886,10 @@ y = w_0 + w_1 x + w_2 x^2 +  + w_3 x^3 \cdots + w_L x^L + \varepsilon
 <p>예제로 사용한 보스턴 집값 분석에서 rm과 lstat의 2차항을 추가하여 분석하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula2</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(lstat) + scale(rm) + scale(I(lstat**2)) + scale(I(rm**2))&quot;</span>
-<span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula2</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
-<span class="n">result2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>formula2 = &quot;medv ~ scale(lstat) + scale(rm) + scale(I(lstat**2)) + scale(I(rm**2))&quot;
+model2 = sm.OLS.from_formula(formula2, boston)
+result2 = model2.fit()
+print(result2.summary())
 </pre></div>
 </div>
 </div>
@@ -928,7 +930,7 @@ Notes:
 <p>잔차플롯을 그려보면 잔차의 평균이 앞의 모형보다 0에 더 가까운 형태로 개선되었다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(lstat)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>resid_plot(result2, &quot;scale(lstat)&quot;)
 </pre></div>
 </div>
 </div>
@@ -938,7 +940,7 @@ Notes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(rm)&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>resid_plot(result2, &quot;scale(rm)&quot;)
 </pre></div>
 </div>
 </div>
@@ -948,7 +950,7 @@ Notes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(I(lstat ** 2))&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>resid_plot(result2, &quot;scale(I(lstat ** 2))&quot;)
 </pre></div>
 </div>
 </div>
@@ -958,7 +960,7 @@ Notes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">resid_plot</span><span class="p">(</span><span class="n">result2</span><span class="p">,</span> <span class="s2">&quot;scale(I(rm ** 2))&quot;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>resid_plot(result2, &quot;scale(I(rm ** 2))&quot;)
 </pre></div>
 </div>
 </div>
@@ -969,7 +971,7 @@ Notes:
 <p>이분산성 검정을 한 결과도 유의확률이 1% 이상으로 증가하여 유의수준이 1%이면 검정을 통과하여 등분산성을 보이게 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">het_breuschpagan</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>het_breuschpagan(result2.resid, model2.exog)
 </pre></div>
 </div>
 </div>
@@ -984,7 +986,7 @@ Notes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">het_white</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">resid</span><span class="p">,</span> <span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>het_white(result2.resid, model2.exog)
 </pre></div>
 </div>
 </div>

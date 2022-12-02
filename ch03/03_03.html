@@ -87,6 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.4. 최소자승법" href="03_04.html" />
@@ -685,10 +687,10 @@ title="Print to PDF"
 <p>이 과정은 원래 현실세계에서 데이터를 수집하는 과정이 필요하지만 여기에서는</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import seaborn as sns
 
-<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
-<span class="n">tips</span>
+tips = sns.load_dataset(&quot;tips&quot;)
+tips
 </pre></div>
 </div>
 </div>
@@ -923,8 +925,8 @@ y = X w
 <p>팁 데이터에 대해서는 <span class="math notranslate nohighlight">\(y, X\)</span>를 다음과 같이 구한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">&quot;tip&quot;</span><span class="p">]</span>
-<span class="n">y</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y = tips[&quot;tip&quot;]
+y
 </pre></div>
 </div>
 </div>
@@ -947,8 +949,8 @@ Name: tip, Length: 244, dtype: float64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[[</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="s2">&quot;sex&quot;</span><span class="p">]]</span>
-<span class="n">X</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>X = tips[[&quot;total_bill&quot;, &quot;size&quot;, &quot;sex&quot;]]
+X
 </pre></div>
 </div>
 </div>
@@ -1119,9 +1121,9 @@ w_0 \\ w_1 \\ w_2 \\ \vdots \\ w_K
 <p>statsmodels 패키지의 <code class="docutils literal notranslate"><span class="pre">add_constant</span></code> 함수를 사용하면 쉽게 상수항 추가를 할 수 있다. 하지만 다음 소절에서 설명할 patsy 패키지를 사용하면 상수항 추가와 범주값 처리를 쉽게 할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
 
-<span class="n">sm</span><span class="o">.</span><span class="n">add_constant</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
+sm.add_constant(X)
 </pre></div>
 </div>
 </div>
@@ -1246,7 +1248,7 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 <p>patsy 패키지의 <code class="docutils literal notranslate"><span class="pre">dmatrix</span></code> 함수를 사용하면 이러한 범주값 인코딩을 쉽게 할 수 있다. dmatrix라는 이름은 설계행렬(design matrix)의 축약어로부터 왔다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrix</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from patsy import dmatrix
 </pre></div>
 </div>
 </div>
@@ -1264,7 +1266,7 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 <p>이 때 독립변수행렬은 다음과 같이 얻을 수 있다. 결과는 <code class="docutils literal notranslate"><span class="pre">DesignMatrix</span></code> 클래스의 인스턴스가 된다. 또한 상수항은 <code class="docutils literal notranslate"><span class="pre">Intercept</span></code> 라는 이름으로 자동으로 추가된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;total_bill + size&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dmatrix(&quot;total_bill + size&quot;, tips)
 </pre></div>
 </div>
 </div>
@@ -1318,7 +1320,7 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 <p><code class="docutils literal notranslate"><span class="pre">dmatrix</span></code> 함수를 사용하면 문자열로 구성된 데이터 열은 자동으로 범주형 값으로 간주하여 인코딩을 해준다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;total_bill + size + sex&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dmatrix(&quot;total_bill + size + sex&quot;, tips)
 </pre></div>
 </div>
 </div>
@@ -1372,7 +1374,7 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;total_bill + size + C(sex)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>dmatrix(&quot;total_bill + size + C(sex)&quot;, tips)
 </pre></div>
 </div>
 </div>
@@ -1430,7 +1432,7 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 <p>예를 들어 팁 데이터의 경우 total_bill의 현재 평균과 표준편차는 약 19.786과 약 8.9다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="o">.</span><span class="n">mean</span><span class="p">(),</span> <span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tips.total_bill.mean(), tips.total_bill.std()
 </pre></div>
 </div>
 </div>
@@ -1443,8 +1445,8 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 <p>데이터의 평균이 0이 되고 표준편차가 1이 되도록 조정하려면 모든 total_bill 데이터 값에서 원래 평균인 19.786을 빼고 원래 표준편차인 8.9로 나누면 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">scaled_total_bill</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">-</span> <span class="mf">19.786</span><span class="p">)</span><span class="o">/</span> <span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
-<span class="n">scaled_total_bill</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span><span class="o">.</span><span class="n">round</span><span class="p">(),</span> <span class="n">scaled_total_bill</span><span class="o">.</span><span class="n">std</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>scaled_total_bill = (tips.total_bill - 19.786)/ tips.total_bill.std()
+scaled_total_bill.mean().round(), scaled_total_bill.std()
 </pre></div>
 </div>
 </div>
@@ -1460,8 +1462,8 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">X</span> <span class="o">=</span> <span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;scale(total_bill) + scale(size) + C(sex)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
-<span class="n">X</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>X = dmatrix(&quot;scale(total_bill) + scale(size) + C(sex)&quot;, tips)
+X
 </pre></div>
 </div>
 </div>
@@ -1515,13 +1517,13 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 <p>예를 들어 다음과 같은 새로운 데이터가 있다고 가정하자. 19.786 + 8.9이라는 값은 평균인 19.786을 빼고 표준편차인 8.9로 나누면 약 1.0이 된다. 같은 방법으로 19.786은 0, 19.786 - 8.9은 -1이 될 것이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
 
-<span class="n">tips_new</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span>
-    <span class="p">{</span><span class="s2">&quot;total_bill&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mf">19.786</span> <span class="o">+</span> <span class="mf">8.9</span><span class="p">,</span> <span class="mf">19.786</span><span class="p">,</span> <span class="mf">19.786</span> <span class="o">-</span> <span class="mf">8.9</span><span class="p">],</span> 
-     <span class="s2">&quot;size&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">],</span> 
-     <span class="s2">&quot;sex&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;Female&quot;</span><span class="p">,</span> <span class="s2">&quot;Male&quot;</span><span class="p">,</span> <span class="s2">&quot;Female&quot;</span><span class="p">]})</span>
-<span class="n">tips_new</span>
+tips_new = pd.DataFrame(
+    {&quot;total_bill&quot;: [19.786 + 8.9, 19.786, 19.786 - 8.9], 
+     &quot;size&quot;: [3, 4, 5], 
+     &quot;sex&quot;: [&quot;Female&quot;, &quot;Male&quot;, &quot;Female&quot;]})
+tips_new
 </pre></div>
 </div>
 </div>
@@ -1575,9 +1577,9 @@ y = w_0 + w_1 \cdot x_1 + w_2 \cdot x_2 + \cdots + w_K \cdot x_K
 <p>patsy 패키지의 <code class="docutils literal notranslate"><span class="pre">build_design_matrices</span></code> 함수와 <code class="docutils literal notranslate"><span class="pre">design_info</span></code> 속성을 사용하면 과거의 스케일링 정보를 사용하여 새 데이터를 스케일링한 결과를 얻을 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">build_design_matrices</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from patsy import build_design_matrices
 
-<span class="n">build_design_matrices</span><span class="p">([</span><span class="n">X</span><span class="o">.</span><span class="n">design_info</span><span class="p">],</span> <span class="n">tips_new</span><span class="p">)</span>
+build_design_matrices([X.design_info], tips_new)
 </pre></div>
 </div>
 </div>

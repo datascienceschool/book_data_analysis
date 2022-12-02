@@ -87,6 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.9. 레버리지와 아웃라이어" href="03_09.html" />
@@ -549,13 +551,13 @@ title="Print to PDF"
 <p>예제 회귀분석모형으로 보스턴 집값 데이터를 lstat 독립변수로 예측하는 간단한 모형을 사용하여 설명한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
 
-<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+boston = sm.datasets.get_rdataset(&quot;Boston&quot;, &quot;MASS&quot;).data
 
-<span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(lstat)&quot;</span>
-<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
-<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+formula = &quot;medv ~ scale(lstat)&quot;
+model = sm.OLS.from_formula(formula, boston)
+result = model.fit()
 </pre></div>
 </div>
 </div>
@@ -563,10 +565,10 @@ title="Print to PDF"
 <p>선형회귀분석 결과 객체는 종속변수를 예측하는 <code class="docutils literal notranslate"><span class="pre">get_prediction</span></code> 메서드를 제공한다. <code class="docutils literal notranslate"><span class="pre">get_prediction</span></code> 메서드의 입력값으로는 독립변수 값이 있는 pands 데이터프레임을 넣어야 한다. lstat의 값이 각각 5, 6, 7인 경우의 집값을 예측해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
 
-<span class="n">X_new</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;lstat&quot;</span><span class="p">:</span> <span class="p">[</span><span class="mi">5</span><span class="p">,</span> <span class="mi">6</span><span class="p">,</span> <span class="mi">7</span><span class="p">]})</span>
-<span class="n">X_new</span>
+X_new = pd.DataFrame({&quot;lstat&quot;: [5, 6, 7]})
+X_new
 </pre></div>
 </div>
 </div>
@@ -612,8 +614,8 @@ title="Print to PDF"
 <p>이 독립변수 데이터를 넣어서 <code class="docutils literal notranslate"><span class="pre">get_prediction</span></code> 메서드를 호출하면 예측 객체가 나온다. 예측 객체는 <code class="docutils literal notranslate"><span class="pre">PredictionResults</span></code> 클래스 객체다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_result</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">X_new</span><span class="p">)</span>
-<span class="n">pred_result</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pred_result = result.get_prediction(X_new)
+pred_result
 </pre></div>
 </div>
 </div>
@@ -626,8 +628,8 @@ title="Print to PDF"
 <p>이 예측 객체의 <code class="docutils literal notranslate"><span class="pre">summary_frame</span></code> 메서드를 호출하면 예측 결과를 데이터프레임으로 출력한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pred</span> <span class="o">=</span> <span class="n">pred_result</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">()</span>
-<span class="n">df_pred</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df_pred = pred_result.summary_frame()
+df_pred
 </pre></div>
 </div>
 </div>
@@ -694,7 +696,7 @@ title="Print to PDF"
 <p>회귀분석 결과 객체는 <code class="docutils literal notranslate"><span class="pre">get_prediction</span></code> 메서드 이외에도 <code class="docutils literal notranslate"><span class="pre">predict</span></code> 메서드도 지원한다. <code class="docutils literal notranslate"><span class="pre">predict</span></code> 메서드를 사용하면 <code class="docutils literal notranslate"><span class="pre">summary_frame</span></code> 결과의 <code class="docutils literal notranslate"><span class="pre">mean</span></code> 열에 해당하는 예측값만 나온다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">predict</span><span class="p">(</span><span class="n">boston</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result.predict(boston)
 </pre></div>
 </div>
 </div>
@@ -719,9 +721,9 @@ Length: 506, dtype: float64
 <p>다음은 표본 내 예측을 하는 코드다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pred_result_insample</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston</span><span class="p">)</span>
-<span class="n">df_pred_insample</span> <span class="o">=</span> <span class="n">pred_result_insample</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">()</span>
-<span class="n">df_pred_insample</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pred_result_insample = result.get_prediction(boston)
+df_pred_insample = pred_result_insample.summary_frame()
+df_pred_insample
 </pre></div>
 </div>
 </div>
@@ -860,7 +862,7 @@ Length: 506, dtype: float64
 <p>사실 표본 내 예측값은 분석결과 객체 내부에 <code class="docutils literal notranslate"><span class="pre">fittedvalues</span></code> 속성으로 이미 계산되어 있으므로 이렇게 계산할 필요는 없다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">fittedvalues</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result.fittedvalues
 </pre></div>
 </div>
 </div>
@@ -906,23 +908,23 @@ Length: 506, dtype: float64
 <p>그림으로 표시하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">lstat</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
-<span class="n">idx</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">lstat</span><span class="o">.</span><span class="n">sort_values</span><span class="p">()</span><span class="o">.</span><span class="n">index</span>
-<span class="n">y</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">medv</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span>
-<span class="n">y_hat</span> <span class="o">=</span> <span class="n">df_pred_insample</span><span class="p">[</span><span class="s2">&quot;mean&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
-<span class="n">y_m_upper</span> <span class="o">=</span> <span class="n">df_pred_insample</span><span class="p">[</span><span class="s2">&quot;mean_ci_upper&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
-<span class="n">y_m_lower</span> <span class="o">=</span> <span class="n">df_pred_insample</span><span class="p">[</span><span class="s2">&quot;mean_ci_lower&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
-<span class="n">y_o_upper</span> <span class="o">=</span> <span class="n">df_pred_insample</span><span class="p">[</span><span class="s2">&quot;obs_ci_upper&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
-<span class="n">y_o_lower</span> <span class="o">=</span> <span class="n">df_pred_insample</span><span class="p">[</span><span class="s2">&quot;obs_ci_lower&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x = boston.lstat.sort_values().values
+idx = boston.lstat.sort_values().index
+y = boston.medv[idx]
+y_hat = df_pred_insample[&quot;mean&quot;][idx]
+y_m_upper = df_pred_insample[&quot;mean_ci_upper&quot;][idx]
+y_m_lower = df_pred_insample[&quot;mean_ci_lower&quot;][idx]
+y_o_upper = df_pred_insample[&quot;obs_ci_upper&quot;][idx]
+y_o_lower = df_pred_insample[&quot;obs_ci_lower&quot;][idx]
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;예측값&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_o_upper</span><span class="p">,</span> <span class="n">y_o_lower</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;평균 예측신뢰구간&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_m_upper</span><span class="p">,</span> <span class="n">y_m_lower</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;관측 예측신뢰구간&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">55</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.figure(figsize=(12, 12))
+plt.scatter(x, y, alpha=0.5)
+plt.plot(x, y_hat, c=&quot;r&quot;, lw=1, label=&quot;예측값&quot;)
+plt.fill_between(x, y_o_upper, y_o_lower, color=&quot;g&quot;, alpha=0.5, label=&quot;평균 예측신뢰구간&quot;)
+plt.fill_between(x, y_m_upper, y_m_lower, color=&quot;b&quot;, alpha=0.5, label=&quot;관측 예측신뢰구간&quot;)
+plt.ylim(-5, 55)
+plt.legend()
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -933,10 +935,10 @@ Length: 506, dtype: float64
 <p>seaborn 패키지의 <code class="docutils literal notranslate"><span class="pre">regplot</span></code> 함수를 사용하면 더 간단하게 평균 예측신뢰구간을 그릴 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
-<span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">boston</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">55</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.figure(figsize=(12, 12))
+sns.regplot(x=&quot;lstat&quot;, y=&quot;medv&quot;, data=boston)
+plt.ylim(-5, 55)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -948,21 +950,21 @@ Length: 506, dtype: float64
 <p>다음 그림은 99% 확률 예측신뢰구간을 그린 것이다. 확률이 높아진 만큼 이를 맞추기 위해 범위가 넓어진 것을 확인할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pred_insample2</span> <span class="o">=</span> <span class="n">pred_result_insample</span><span class="o">.</span><span class="n">summary_frame</span><span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="mf">0.99</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df_pred_insample2 = pred_result_insample.summary_frame(1 - 0.99)
 
-<span class="n">y_m_upper</span> <span class="o">=</span> <span class="n">df_pred_insample2</span><span class="p">[</span><span class="s2">&quot;mean_ci_upper&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
-<span class="n">y_m_lower</span> <span class="o">=</span> <span class="n">df_pred_insample2</span><span class="p">[</span><span class="s2">&quot;mean_ci_lower&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
-<span class="n">y_o_upper</span> <span class="o">=</span> <span class="n">df_pred_insample2</span><span class="p">[</span><span class="s2">&quot;obs_ci_upper&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
-<span class="n">y_o_lower</span> <span class="o">=</span> <span class="n">df_pred_insample2</span><span class="p">[</span><span class="s2">&quot;obs_ci_lower&quot;</span><span class="p">][</span><span class="n">idx</span><span class="p">]</span>
+y_m_upper = df_pred_insample2[&quot;mean_ci_upper&quot;][idx]
+y_m_lower = df_pred_insample2[&quot;mean_ci_lower&quot;][idx]
+y_o_upper = df_pred_insample2[&quot;obs_ci_upper&quot;][idx]
+y_o_lower = df_pred_insample2[&quot;obs_ci_lower&quot;][idx]
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">12</span><span class="p">))</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_hat</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="n">lw</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;예측값&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_o_upper</span><span class="p">,</span> <span class="n">y_o_lower</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;g&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;평균 예측신뢰구간&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">fill_between</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">y_m_upper</span><span class="p">,</span> <span class="n">y_m_lower</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;b&quot;</span><span class="p">,</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.5</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;관측 예측신뢰구간&quot;</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="o">-</span><span class="mi">5</span><span class="p">,</span> <span class="mi">55</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.figure(figsize=(12, 12))
+plt.scatter(x, y, alpha=0.5)
+plt.plot(x, y_hat, c=&quot;r&quot;, lw=1, label=&quot;예측값&quot;)
+plt.fill_between(x, y_o_upper, y_o_lower, color=&quot;g&quot;, alpha=0.5, label=&quot;평균 예측신뢰구간&quot;)
+plt.fill_between(x, y_m_upper, y_m_lower, color=&quot;b&quot;, alpha=0.5, label=&quot;관측 예측신뢰구간&quot;)
+plt.ylim(-5, 55)
+plt.legend()
+plt.show()
 </pre></div>
 </div>
 </div>

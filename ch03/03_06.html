@@ -87,6 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.7. 모형 선택" href="03_07.html" />
@@ -557,10 +559,10 @@ title="Print to PDF"
 <p>예제 데이터로는 상관관계를 설명할 때 사용하였던 보스턴 집값 데이터를 사용한다. 보스턴 집값 데이터는 13개의 독립변수를 이용하여 medv라는 종속변수를 예측한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
 
-<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
-<span class="n">boston</span>
+boston = sm.datasets.get_rdataset(&quot;Boston&quot;, &quot;MASS&quot;).data
+boston
 </pre></div>
 </div>
 </div>
@@ -799,10 +801,10 @@ title="Print to PDF"
 <p>선형회귀분석은 다음 코드로 실시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
 
-<span class="n">model1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(crim)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
-<span class="n">result1</span> <span class="o">=</span> <span class="n">model1</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+model1 = sm.OLS.from_formula(&quot;medv ~ scale(crim)&quot;, boston)
+result1 = model1.fit()
 </pre></div>
 </div>
 </div>
@@ -814,8 +816,8 @@ title="Print to PDF"
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(zn)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
-<span class="n">result2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model2 = sm.OLS.from_formula(&quot;medv ~ scale(zn)&quot;, boston)
+result2 = model2.fit()
 </pre></div>
 </div>
 </div>
@@ -823,7 +825,7 @@ title="Print to PDF"
 <p>이 두가지의 선형회귀분석 모형 중 어느 것이 더 나은 모형일까? 가장 먼저 생각할 수 있는 방법은 잔차제곱합 RSS(Residual Sum of Squares) 수치를 비교하는 것이다. 잔차제곱합은 결과요약에 나타나지 않고 결과 객체의 <code class="docutils literal notranslate"><span class="pre">ssr</span></code> 속성에 저장되어 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">ssr</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">ssr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1.ssr, result2.ssr
 </pre></div>
 </div>
 </div>
@@ -837,9 +839,9 @@ title="Print to PDF"
 <p>그런데 만약 비교 대상이 되는 선형회귀분석에서 사용한 데이터의 개수가 다르면 문제가 발생한다. 잔차제곱합은 각 데이터에 대해 발생한 잔차 제곱의 합이므로 데이터의 개수가 늘어나면 증가하고 데이터의 개수가 적어지면 감소한다. 예를 들어 zn 데이터 중 일부가 누락되어가 잘못된 값이 들어가 있어서 zn 데이터를 독립변수로 사용하는 선형회귀분석에서는 데이터의 일부만 사용할 수 있다고 가정하고 다시 계산해보자. 여기에서는 데이터의 절반만 사용해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ scale(zn)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="nb">len</span><span class="p">(</span><span class="n">boston</span><span class="p">)</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span>
-<span class="n">result3</span> <span class="o">=</span> <span class="n">model3</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="n">result3</span><span class="o">.</span><span class="n">ssr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model3 = sm.OLS.from_formula(&quot;medv ~ scale(zn)&quot;, boston.iloc[:len(boston)//2])
+result3 = model3.fit()
+result3.ssr
 </pre></div>
 </div>
 </div>
@@ -910,7 +912,7 @@ R^2 = \dfrac{\text{ESS}}{\text{TSS}}
 <p>crim 독립변수를 사용한 회귀분석의 경우 각각의 값을 구하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">centered_tss</span><span class="p">,</span> <span class="n">result1</span><span class="o">.</span><span class="n">ssr</span><span class="p">,</span> <span class="n">result1</span><span class="o">.</span><span class="n">ess</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1.centered_tss, result1.ssr, result1.ess
 </pre></div>
 </div>
 </div>
@@ -923,7 +925,7 @@ R^2 = \dfrac{\text{ESS}}{\text{TSS}}
 <p>RSS와 ESS를 더하면 TSS와 같아지는 것을 확인할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">ssr</span> <span class="o">+</span> <span class="n">result1</span><span class="o">.</span><span class="n">ess</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1.ssr + result1.ess
 </pre></div>
 </div>
 </div>
@@ -936,7 +938,7 @@ R^2 = \dfrac{\text{ESS}}{\text{TSS}}
 <p>결정계수는 분석결과 요약에도 표시된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(result1.summary())
 </pre></div>
 </div>
 </div>
@@ -979,7 +981,7 @@ Notes:
 <p>결정계수를 사용하여 crim 독립변수를 사용한 회귀분석과 zn 독립변수를 사용한 회귀분석의 성능을 비교하면 crim 독립변수를 사용한 첫번째 모형의 성능이 더 우수한 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">rsquared</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">rsquared</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1.rsquared, result2.rsquared
 </pre></div>
 </div>
 </div>
@@ -992,11 +994,11 @@ Notes:
 <p>참고로 결정계수의 수학기호가 <span class="math notranslate nohighlight">\(R^2\)</span>인 이유는 결정계수값이 종속변수의 원 데이터 값과 예측값 사이의 상관계수(<span class="math notranslate nohighlight">\(\rho\)</span>)의 제곱과 같은 값이기 때문이다. 실제로 계산해 보면 같은 값이 나온다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.stats import pearsonr
 
-<span class="n">r1</span> <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">endog</span><span class="p">,</span> <span class="n">result1</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">r2</span> <span class="o">=</span> <span class="n">pearsonr</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">endog</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">fittedvalues</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
-<span class="n">r1</span> <span class="o">**</span> <span class="mi">2</span><span class="p">,</span> <span class="n">r2</span> <span class="o">**</span> <span class="mi">2</span>
+r1 = pearsonr(result1.model.endog, result1.fittedvalues)[0]
+r2 = pearsonr(result2.model.endog, result2.fittedvalues)[0]
+r1 ** 2, r2 ** 2
 </pre></div>
 </div>
 </div>
@@ -1029,7 +1031,7 @@ H_0 : R^2 = 0
 <p>RSS/ESS 값과 F-검정의 유의확률은 각각 회귀분석 결과 객체의 <code class="docutils literal notranslate"><span class="pre">fvalue</span></code>, <code class="docutils literal notranslate"><span class="pre">f_pvalue</span></code> 속성에 저장되어 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">fvalue</span><span class="p">,</span> <span class="n">result1</span><span class="o">.</span><span class="n">f_pvalue</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1.fvalue, result1.f_pvalue
 </pre></div>
 </div>
 </div>
@@ -1051,7 +1053,7 @@ H_0 : R^2 = 0
 <p>F-검정을 사용하여 crim 독립변수를 사용한 회귀분석과 zn 독립변수를 사용한 회귀분석의 성능을 비교하면 결정계수를 사용하였을 때와 마찬가지로 crim 독립변수를 사용한 첫번째 모형의 성능이 더 우수한 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">fvalue</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">fvalue</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1.fvalue, result2.fvalue
 </pre></div>
 </div>
 </div>
@@ -1063,7 +1065,7 @@ H_0 : R^2 = 0
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">f_pvalue</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">f_pvalue</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1.f_pvalue, result2.f_pvalue
 </pre></div>
 </div>
 </div>
@@ -1096,7 +1098,7 @@ H_0 : R^2 = 0
 <p>분석결과 객체는 <code class="docutils literal notranslate"><span class="pre">llf</span></code> 속성에 로그가능도 값을 저장하고 있다. 로그가능도를 사용하여 crim 독립변수를 사용한 회귀분석과 zn 독립변수를 사용한 회귀분석의 성능을 비교하면 마찬가지로 crim 독립변수를 사용한 첫번째 모형의 성능이 더 우수한 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span><span class="o">.</span><span class="n">llf</span><span class="p">,</span> <span class="n">result2</span><span class="o">.</span><span class="n">llf</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1.llf, result2.llf
 </pre></div>
 </div>
 </div>

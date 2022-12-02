@@ -87,6 +87,8 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <script>window.MathJax = {"options": {"processHtmlClass": "tex2jax_process|mathjax_process|math|output_area"}}</script>
     <script defer="defer" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+    <script>mermaid.initialize({startOnLoad:true});</script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="3.13. 범주형 독립변수" href="03_13.html" />
@@ -560,9 +562,9 @@ title="Print to PDF"
 <p>예제로 보스턴 집값 medv 를 두개의 독립변수 tax, nox 로 선형회귀분석을 해본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
 
-<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+boston = sm.datasets.get_rdataset(&quot;Boston&quot;, &quot;MASS&quot;).data
 </pre></div>
 </div>
 </div>
@@ -570,9 +572,9 @@ title="Print to PDF"
 <p>우선 스케일링을 한 회귀분석 결과는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula_scaled</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(tax) + scale(nox)&quot;</span>
-<span class="n">result_scaled</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_scaled</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result_scaled</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>formula_scaled = &quot;medv ~ scale(tax) + scale(nox)&quot;
+result_scaled = sm.OLS.from_formula(formula_scaled, boston).fit()
+print(result_scaled.summary())
 </pre></div>
 </div>
 </div>
@@ -610,9 +612,9 @@ Notes:
 <p>이번에는 스케일링을 하지 않는 결과를 살펴보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula_notscaled</span> <span class="o">=</span> <span class="s2">&quot;medv ~ tax + nox&quot;</span>
-<span class="n">result_notscaled</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_notscaled</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result_notscaled</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>formula_notscaled = &quot;medv ~ tax + nox&quot;
+result_notscaled = sm.OLS.from_formula(formula_notscaled, boston).fit()
+print(result_notscaled.summary())
 </pre></div>
 </div>
 </div>
@@ -696,15 +698,15 @@ strong multicollinearity or other numerical problems.
 <p>예시를 위해 우리가 가진 보스턴 집값 데이터에 일부러 어느정도 노이즈 오차를 추가해 보았다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.random</span> <span class="kn">import</span> <span class="n">seed</span><span class="p">,</span> <span class="n">rand</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from numpy.random import seed, rand
 
-<span class="n">boston_nox_tax</span> <span class="o">=</span> <span class="n">boston</span><span class="p">[[</span><span class="s2">&quot;nox&quot;</span><span class="p">,</span> <span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="s2">&quot;medv&quot;</span><span class="p">]]</span>
-<span class="n">boston_noise</span> <span class="o">=</span> <span class="n">boston_nox_tax</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
-<span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
-<span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;tax&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;tax&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boston_nox_tax</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.01</span>
-<span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;nox&quot;</span><span class="p">]</span> <span class="o">+=</span> <span class="n">boston_noise</span><span class="p">[</span><span class="s2">&quot;nox&quot;</span><span class="p">]</span> <span class="o">*</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">rand</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">boston_nox_tax</span><span class="p">))</span> <span class="o">*</span> <span class="mf">0.01</span>
+boston_nox_tax = boston[[&quot;nox&quot;, &quot;tax&quot;, &quot;medv&quot;]]
+boston_noise = boston_nox_tax.copy()
+seed(0)
+boston_noise[&quot;tax&quot;] += boston_noise[&quot;tax&quot;] * np.random.rand(len(boston_nox_tax)) * 0.01
+boston_noise[&quot;nox&quot;] += boston_noise[&quot;nox&quot;] * np.random.rand(len(boston_nox_tax)) * 0.01
 
-<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">boston_nox_tax</span><span class="p">,</span> <span class="n">boston_noise</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;원본&quot;</span><span class="p">,</span> <span class="s2">&quot;노이즈 오차 추가&quot;</span><span class="p">])</span>
+pd.concat([boston_nox_tax, boston_noise], axis=1, keys=[&quot;원본&quot;, &quot;노이즈 오차 추가&quot;])
 </pre></div>
 </div>
 </div>
@@ -848,8 +850,8 @@ strong multicollinearity or other numerical problems.
 <p>이렇게 오차를 추가한 값으로 다시 선형회귀분석을 하여 가중치가 얼마나 달라지는지 살펴보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result_scaled_noise</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_scaled</span><span class="p">,</span> <span class="n">boston_noise</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="n">result_notscaled_noise</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_notscaled</span><span class="p">,</span> <span class="n">boston_noise</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result_scaled_noise = sm.OLS.from_formula(formula_scaled, boston_noise).fit()
+result_notscaled_noise = sm.OLS.from_formula(formula_notscaled, boston_noise).fit()
 </pre></div>
 </div>
 </div>
@@ -857,9 +859,9 @@ strong multicollinearity or other numerical problems.
 <p>스케일링을 한 경우에는 tax, nox의 가중치가 각각 5%, -6% 정도 변화하였다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">error_scaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">result_scaled</span><span class="o">.</span><span class="n">params</span> <span class="o">-</span> <span class="n">result_scaled_noise</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="o">/</span> <span class="n">result_scaled</span><span class="o">.</span><span class="n">params</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">result_scaled</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">result_scaled_noise</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">error_scaled</span><span class="p">],</span> 
-          <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;원본 데이터를 사용한 경우&quot;</span><span class="p">,</span> <span class="s2">&quot;노이즈 오차가 있는 경우&quot;</span><span class="p">,</span> <span class="s2">&quot;가중치 오류(%)&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>error_scaled = (result_scaled.params - result_scaled_noise.params) / result_scaled.params * 100
+pd.concat([result_scaled.params, result_scaled_noise.params, error_scaled], 
+          axis=1, keys=[&quot;원본 데이터를 사용한 경우&quot;, &quot;노이즈 오차가 있는 경우&quot;, &quot;가중치 오류(%)&quot;])
 </pre></div>
 </div>
 </div>
@@ -913,9 +915,9 @@ strong multicollinearity or other numerical problems.
 <p>하지만 스케일링을 하지 않은 경우에는 tax, nox의 가중치가 각각 59%, 45% 정도 변화하였다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">error_notscaled</span> <span class="o">=</span> <span class="p">(</span><span class="n">result_notscaled</span><span class="o">.</span><span class="n">params</span> <span class="o">-</span> <span class="n">result_notscaled_noise</span><span class="o">.</span><span class="n">params</span><span class="p">)</span> <span class="o">/</span> <span class="n">result_notscaled</span><span class="o">.</span><span class="n">params</span> <span class="o">*</span> <span class="mi">100</span>
-<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">result_notscaled</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">result_notscaled_noise</span><span class="o">.</span><span class="n">params</span><span class="p">,</span> <span class="n">error_notscaled</span><span class="p">],</span> 
-          <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;원본 데이터를 사용한 경우&quot;</span><span class="p">,</span> <span class="s2">&quot;노이즈 오차가 있는 경우&quot;</span><span class="p">,</span> <span class="s2">&quot;가중치 오류(%)&quot;</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>error_notscaled = (result_notscaled.params - result_notscaled_noise.params) / result_notscaled.params * 100
+pd.concat([result_notscaled.params, result_notscaled_noise.params, error_notscaled], 
+          axis=1, keys=[&quot;원본 데이터를 사용한 경우&quot;, &quot;노이즈 오차가 있는 경우&quot;, &quot;가중치 오류(%)&quot;])
 </pre></div>
 </div>
 </div>
@@ -978,8 +980,8 @@ strong multicollinearity or other numerical problems.
 <p>첫번째 단점은 앞에서 예시를 보였으므로 여기에서는 두번째 단점을 보인다. 과최적화가 발생하는 것을 보이기 위해 보스턴 집값 전체 데이터 중 앞부분 250개를 학습 데이터로, 뒷부분 250개를 검증 데이터로 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boston_train</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">250</span><span class="p">]</span>
-<span class="n">boston_test</span> <span class="o">=</span> <span class="n">boston</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">250</span><span class="p">:</span><span class="mi">500</span><span class="p">]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>boston_train = boston.iloc[:250]
+boston_test = boston.iloc[250:500]
 </pre></div>
 </div>
 </div>
@@ -987,10 +989,10 @@ strong multicollinearity or other numerical problems.
 <p>다음과 같은 9개의 독립변수를 사용하여 종속변수 medv를 예측하는 선형회귀분석을 실시한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_names1</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="s2">&quot;ptratio&quot;</span><span class="p">,</span> <span class="s2">&quot;dis&quot;</span><span class="p">,</span> <span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;zn&quot;</span><span class="p">,</span> <span class="s2">&quot;crim&quot;</span><span class="p">,</span> <span class="s2">&quot;nox&quot;</span><span class="p">]</span>   
-<span class="n">formula1</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;scale(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_names1</span><span class="p">])</span>
-<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula1</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x_names1 = [&quot;lstat&quot;, &quot;rm&quot;, &quot;ptratio&quot;, &quot;dis&quot;, &quot;tax&quot;, &quot;black&quot;, &quot;zn&quot;, &quot;crim&quot;, &quot;nox&quot;]   
+formula1 = &quot;medv ~ &quot; + &quot; + &quot;.join([f&quot;scale({x})&quot; for x in x_names1])
+result1 = sm.OLS.from_formula(formula1, boston_train).fit()
+print(result1.summary())
 </pre></div>
 </div>
 </div>
@@ -1035,23 +1037,23 @@ Notes:
 <p>과최적화가 발생하는지 확인하기 위해 학습데이터와 검증데이터를 사용하는 경우의 잔차제곱합을 각각 계산한다. 검증데이터를 사용하면 잔차제곱합이 20배 이상 증가하는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train</span> <span class="o">=</span> <span class="n">boston_train</span><span class="o">.</span><span class="n">medv</span>
-<span class="n">y_test</span> <span class="o">=</span> <span class="n">boston_test</span><span class="o">.</span><span class="n">medv</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y_train = boston_train.medv
+y_test = boston_test.medv
 
-<span class="n">y_train_pred1</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
-<span class="n">y_test_pred1</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_test</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
+y_train_pred1 = result1.get_prediction(boston_train).predicted_mean
+y_test_pred1 = result1.get_prediction(boston_test).predicted_mean
 
-<span class="n">rss_train1</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_train</span> <span class="o">-</span> <span class="n">y_train_pred1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">rss_test1</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_test_pred1</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+rss_train1 = ((y_train - y_train_pred1) ** 2).sum()
+rss_test1 = ((y_test - y_test_pred1) ** 2).sum()
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
-    <span class="p">[</span><span class="s2">&quot;학습 잔차제곱합&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합&quot;</span><span class="p">],</span> 
-    <span class="p">[</span><span class="n">rss_train1</span><span class="p">,</span> <span class="n">rss_test1</span><span class="p">],</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">rss_train1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rss_test1</span><span class="p">)])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.figure(figsize=(6, 6))
+bar = plt.bar(
+    [&quot;학습 잔차제곱합&quot;, &quot;검증 잔차제곱합&quot;], 
+    [rss_train1, rss_test1],
+)
+plt.bar_label(bar, [int(rss_train1), int(rss_test1)])
+plt.ylim(0, 70000)
+plt.show()
 </pre></div>
 </div>
 </div>
@@ -1062,8 +1064,8 @@ Notes:
 <p>이러한 과최적화 현상이 발생하는 이유는 독립변수 사이의 강한 상관관계로 인한 다중공선성 때문이다. 실제로 일부 독립변수들의 상관계수의 절대값을 구하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">corr_abs</span> <span class="o">=</span> <span class="n">boston</span><span class="p">[[</span><span class="s2">&quot;dis&quot;</span><span class="p">,</span> <span class="s2">&quot;nox&quot;</span><span class="p">,</span> <span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="s2">&quot;lstat&quot;</span><span class="p">]]</span><span class="o">.</span><span class="n">corr</span><span class="p">()</span><span class="o">.</span><span class="n">abs</span><span class="p">()</span>
-<span class="n">corr_abs</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>corr_abs = boston[[&quot;dis&quot;, &quot;nox&quot;, &quot;tax&quot;, &quot;lstat&quot;]].corr().abs()
+corr_abs.style.background_gradient()
 </pre></div>
 </div>
 </div>
@@ -1168,15 +1170,15 @@ Notes:
 <p>statsmodels 패키지는 VIF를 계산하는 <code class="docutils literal notranslate"><span class="pre">variance_inflation_factor</span></code> 함수를 제공한다. 이 함수를 사용하여 위 모형의 각 독립변수 VIF를 계산하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.outliers_influence</span> <span class="kn">import</span> <span class="n">variance_inflation_factor</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from statsmodels.stats.outliers_influence import variance_inflation_factor
 
-<span class="n">X</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog</span>
-<span class="n">X_names</span> <span class="o">=</span> <span class="n">result1</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span>
+X = result1.model.exog
+X_names = result1.model.exog_names
 
-<span class="n">vif</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">()</span>
-<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;VIF&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="n">variance_inflation_factor</span><span class="p">(</span><span class="n">X</span><span class="p">,</span> <span class="n">i</span><span class="p">)</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="mi">1</span><span class="p">])]</span>
-<span class="n">vif</span><span class="p">[</span><span class="s2">&quot;features&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">X_names</span>
-<span class="n">vif</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;VIF&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+vif = pd.DataFrame()
+vif[&quot;VIF&quot;] = [variance_inflation_factor(X, i) for i in range(X.shape[1])]
+vif[&quot;features&quot;] = X_names
+vif.sort_values(&quot;VIF&quot;, ascending=False)
 </pre></div>
 </div>
 </div>
@@ -1261,10 +1263,10 @@ Notes:
 <p>일반적으로 VIF값이 5를 넘으면 큰 것으로 간주하여 생략한다. 위 결과로 보아 nox 독립변수가 다른 독립변수와 상관관계가 강하므로 이를 제거하여 새로운 선형회귀분석을 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x_names2</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;lstat&quot;</span><span class="p">,</span> <span class="s2">&quot;rm&quot;</span><span class="p">,</span> <span class="s2">&quot;ptratio&quot;</span><span class="p">,</span> <span class="s2">&quot;dis&quot;</span><span class="p">,</span> <span class="s2">&quot;tax&quot;</span><span class="p">,</span> <span class="s2">&quot;black&quot;</span><span class="p">,</span> <span class="s2">&quot;zn&quot;</span><span class="p">,</span> <span class="s2">&quot;crim&quot;</span><span class="p">]</span>   
-<span class="n">formula2</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> <span class="o">+</span> <span class="s2">&quot; + &quot;</span><span class="o">.</span><span class="n">join</span><span class="p">([</span><span class="sa">f</span><span class="s2">&quot;scale(</span><span class="si">{</span><span class="n">x</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">x_names2</span><span class="p">])</span>
-<span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula2</span><span class="p">,</span> <span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x_names2 = [&quot;lstat&quot;, &quot;rm&quot;, &quot;ptratio&quot;, &quot;dis&quot;, &quot;tax&quot;, &quot;black&quot;, &quot;zn&quot;, &quot;crim&quot;]   
+formula2 = &quot;medv ~ &quot; + &quot; + &quot;.join([f&quot;scale({x})&quot; for x in x_names2])
+result2 = sm.OLS.from_formula(formula2, boston_train).fit()
+print(result2.summary())
 </pre></div>
 </div>
 </div>
@@ -1308,22 +1310,22 @@ Notes:
 <p>결정계수는 0.844에서 0.840으로 미세하게 줄어들었다. 하지만 검증데이터에 대한 잔차제곱합을 구하면 nox를 포함하는 모형보다 훨씩 작아진 것을 볼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_train_pred2</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_train</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
-<span class="n">y_test_pred2</span> <span class="o">=</span> <span class="n">result2</span><span class="o">.</span><span class="n">get_prediction</span><span class="p">(</span><span class="n">boston_test</span><span class="p">)</span><span class="o">.</span><span class="n">predicted_mean</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y_train_pred2 = result2.get_prediction(boston_train).predicted_mean
+y_test_pred2 = result2.get_prediction(boston_test).predicted_mean
 
-<span class="n">rss_train2</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_train</span> <span class="o">-</span> <span class="n">y_train_pred2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
-<span class="n">rss_test2</span> <span class="o">=</span> <span class="p">((</span><span class="n">y_test</span> <span class="o">-</span> <span class="n">y_test_pred2</span><span class="p">)</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+rss_train2 = ((y_train - y_train_pred2) ** 2).sum()
+rss_test2 = ((y_test - y_test_pred2) ** 2).sum()
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">6</span><span class="p">))</span>
-<span class="n">bar</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span>
-    <span class="p">[</span><span class="s2">&quot;학습 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형1)&quot;</span><span class="p">,</span> 
-     <span class="s2">&quot;학습 잔차제곱합 (모형2)&quot;</span><span class="p">,</span> <span class="s2">&quot;검증 잔차제곱합 (모형2)&quot;</span><span class="p">],</span> 
-    <span class="p">[</span><span class="n">rss_train1</span><span class="p">,</span> <span class="n">rss_test1</span><span class="p">,</span> <span class="n">rss_train2</span><span class="p">,</span> <span class="n">rss_test2</span><span class="p">]</span>
-<span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">bar_label</span><span class="p">(</span><span class="n">bar</span><span class="p">,</span> <span class="p">[</span><span class="nb">int</span><span class="p">(</span><span class="n">rss_train1</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rss_test1</span><span class="p">),</span>
-                    <span class="nb">int</span><span class="p">(</span><span class="n">rss_train2</span><span class="p">),</span> <span class="nb">int</span><span class="p">(</span><span class="n">rss_test2</span><span class="p">)])</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">ylim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">70000</span><span class="p">)</span>
-<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+plt.figure(figsize=(12, 6))
+bar = plt.bar(
+    [&quot;학습 잔차제곱합 (모형1)&quot;, &quot;검증 잔차제곱합 (모형1)&quot;, 
+     &quot;학습 잔차제곱합 (모형2)&quot;, &quot;검증 잔차제곱합 (모형2)&quot;], 
+    [rss_train1, rss_test1, rss_train2, rss_test2]
+)
+plt.bar_label(bar, [int(rss_train1), int(rss_test1),
+                    int(rss_train2), int(rss_test2)])
+plt.ylim(0, 70000)
+plt.show()
 </pre></div>
 </div>
 </div>
