@@ -40,3 +40,7 @@ html:
     hypothesis: true
     utterances:
       repo: "datascienceschool/book_data_analysis"
+
+sphinx:
+  extra_extensions:
+  - sphinxcontrib.mermaid
