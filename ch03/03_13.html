@@ -569,10 +569,10 @@ title="Print to PDF"
 <p>예제로는 팁 데이터와 보스턴 집값 데이터를 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import seaborn as sns
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-tips = sns.load_dataset(&quot;tips&quot;).sample(frac=1, random_state=0).reset_index(drop=True)
-tips.head()
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sample</span><span class="p">(</span><span class="n">frac</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="mi">0</span><span class="p">)</span><span class="o">.</span><span class="n">reset_index</span><span class="p">(</span><span class="n">drop</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+<span class="n">tips</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -661,10 +661,10 @@ tips.head()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-boston = sm.datasets.get_rdataset(&quot;Boston&quot;, &quot;MASS&quot;).data
-boston.head()
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">boston</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -803,8 +803,8 @@ boston.head()
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model1 = sm.OLS.from_formula(&quot;tip ~ C(time) + 0&quot;, tips)
-model2 = sm.OLS.from_formula(&quot;tip ~ C(time)&quot;, tips)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(time) + 0&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<span class="n">model2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(time)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -812,12 +812,12 @@ model2 = sm.OLS.from_formula(&quot;tip ~ C(time)&quot;, tips)
 <p>이 두가지 모형이 각각 어떤 의미인지를 파악하기 위해 각각 범주형 변수의 값(레벨)이 어떤 숫자로 인코딩되는지를 살펴보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-X0 = tips[[&quot;time&quot;]]
-X1 = pd.DataFrame(model1.exog, columns=model1.exog_names).head(10).astype(int)
-X2 = pd.DataFrame(model2.exog, columns=model2.exog_names).head(10).astype(int)
-pd.concat([X0, X1, X2], axis=1, keys=[&quot;raw&quot;, &quot;model1&quot;, &quot;model2&quot;]).head(10).style.background_gradient(vmin=0, vmax=1)
+<span class="n">X0</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[[</span><span class="s2">&quot;time&quot;</span><span class="p">]]</span>
+<span class="n">X1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model1</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model1</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">X2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">model2</span><span class="o">.</span><span class="n">exog</span><span class="p">,</span> <span class="n">columns</span><span class="o">=</span><span class="n">model2</span><span class="o">.</span><span class="n">exog_names</span><span class="p">)</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">concat</span><span class="p">([</span><span class="n">X0</span><span class="p">,</span> <span class="n">X1</span><span class="p">,</span> <span class="n">X2</span><span class="p">],</span> <span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">keys</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;raw&quot;</span><span class="p">,</span> <span class="s2">&quot;model1&quot;</span><span class="p">,</span> <span class="s2">&quot;model2&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">background_gradient</span><span class="p">(</span><span class="n">vmin</span><span class="o">=</span><span class="mi">0</span><span class="p">,</span> <span class="n">vmax</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -977,8 +977,8 @@ pd.concat([X0, X1, X2], axis=1, keys=[&quot;raw&quot;, &quot;model1&quot;, &quot
 <p>그러면 이제 실제로 이 두 가지 모형에 대해 선형회귀분석을 해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result1 = model1.fit()
-print(result1.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result1</span> <span class="o">=</span> <span class="n">model1</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result1</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1015,8 +1015,8 @@ Notes:
 <p>모형1의 결과가 뜻하는 바는 x=Lunch인 경우 팁의 평균값은 약 2.73이고 x=Dinner인 경우 팁의 평균값은 약 3.10이라는 뜻이다. 두 변수에 대한 유의확율이 0에 가까우므로 각각의 경우에 대해 팁이 0일 확률은 거의 없다고 볼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result2 = model2.fit()
-print(result2.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result2</span> <span class="o">=</span> <span class="n">model2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1054,9 +1054,9 @@ Notes:
 <p>축소랭크 인코딩 방식에서 기준이 되는 값은 별도로 지정하지 않으면 레벨값을 알파벳 순서로 정렬하여 가장 마지막 값이 된다. 만약 기준이 되는 값을 이와 다르게 지정하고 싶다면 다음과 같이 모형 문자열을 만들어야 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model2_2 = sm.OLS.from_formula(&quot;tip ~ C(time, Treatment(reference=&#39;Dinner&#39;))&quot;, tips)
-result2_2 = model2_2.fit()
-print(result2_2.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model2_2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(time, Treatment(reference=&#39;Dinner&#39;))&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<span class="n">result2_2</span> <span class="o">=</span> <span class="n">model2_2</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result2_2</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1093,8 +1093,8 @@ Notes:
 <p>이번에는 sex라는 독립변수를 사용하여 같은 분석을 해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model3 = sm.OLS.from_formula(&quot;tip ~ C(sex) + 0&quot;, tips)
-model4 = sm.OLS.from_formula(&quot;tip ~ C(sex)&quot;, tips)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model3</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(sex) + 0&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<span class="n">model4</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ C(sex)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1102,8 +1102,8 @@ model4 = sm.OLS.from_formula(&quot;tip ~ C(sex)&quot;, tips)
 <p>분석 결과는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result3 = model3.fit()
-print(result3.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result3</span> <span class="o">=</span> <span class="n">model3</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result3</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1139,8 +1139,8 @@ Notes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result4 = model4.fit()
-print(result4.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result4</span> <span class="o">=</span> <span class="n">model4</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result4</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1187,8 +1187,8 @@ Notes:
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model5 = sm.OLS.from_formula(&quot;medv ~ C(chas) + scale(rm) + 0&quot;, boston)
-model6 = sm.OLS.from_formula(&quot;medv ~ C(chas) + scale(rm)&quot;, boston)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model5</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ C(chas) + scale(rm) + 0&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
+<span class="n">model6</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;medv ~ C(chas) + scale(rm)&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1236,8 +1236,8 @@ model6 = sm.OLS.from_formula(&quot;medv ~ C(chas) + scale(rm)&quot;, boston)
 <p>선형회귀 분석결과는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result5 = model5.fit()
-print(result5.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result5</span> <span class="o">=</span> <span class="n">model5</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result5</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -1274,8 +1274,8 @@ Notes:
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result6 = model6.fit()
-print(result6.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result6</span> <span class="o">=</span> <span class="n">model6</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result6</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>

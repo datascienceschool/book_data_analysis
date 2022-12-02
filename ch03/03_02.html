@@ -624,12 +624,12 @@ title="Print to PDF"
 <p>서로 상관관계가 있는 두가지 데이터가 있으면 한가지 데이터의 값으로부터 다른 하나의 데이터 값을 대략적이나마 유추할 수 있다. 예를 들어 팁데이터에서 총 지불금액 total_bill과 팁 금액 tip은 다음과 같이 하나가 증가하면 다른 하나도 증가하는 양의 상관관계가 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import seaborn as sns
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
 
-tips = sns.load_dataset(&quot;tips&quot;)
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
 
-sns.scatterplot(x=&quot;total_bill&quot;, y=&quot;tip&quot;, data=tips)
-plt.show()
+<span class="n">sns</span><span class="o">.</span><span class="n">scatterplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -645,9 +645,9 @@ plt.show()
 <p>이 식에서 tip 데이터 변수를 <span class="math notranslate nohighlight">\(\widehat{\text{tip}}\)</span>이라고 표시한 이유는 이 직선의 방정식으로 계산한 값은 정확한 tip 값과는 다르기 때문이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.regplot(x=&quot;total_bill&quot;, y=&quot;tip&quot;, data=tips, 
-            ci=None, line_kws={&quot;color&quot;: &quot;r&quot;, &quot;lw&quot;: 10, &quot;alpha&quot;: 0.5})
-plt.show()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;total_bill&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">,</span> 
+            <span class="n">ci</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="n">line_kws</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;color&quot;</span><span class="p">:</span> <span class="s2">&quot;r&quot;</span><span class="p">,</span> <span class="s2">&quot;lw&quot;</span><span class="p">:</span> <span class="mi">10</span><span class="p">,</span> <span class="s2">&quot;alpha&quot;</span><span class="p">:</span> <span class="mf">0.5</span><span class="p">})</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -658,10 +658,10 @@ plt.show()
 <p>statsmodels 패키지를 사용하면 이 직선의 방정식에 들어가는 계수 <span class="math notranslate nohighlight">\(w_0\)</span>, <span class="math notranslate nohighlight">\(w_1\)</span> 값을 알아낼 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-result1 = sm.OLS.from_formula(&quot;tip ~ total_bill&quot;, tips).fit()
-result1.params
+<span class="n">result1</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result1</span><span class="o">.</span><span class="n">params</span>
 </pre></div>
 </div>
 </div>
@@ -682,8 +682,8 @@ dtype: float64
 <p>위 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def reg1(total_bill):
-    return 0.9203 + 0.1050 * total_bill
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reg1</span><span class="p">(</span><span class="n">total_bill</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.9203</span> <span class="o">+</span> <span class="mf">0.1050</span> <span class="o">*</span> <span class="n">total_bill</span>
 </pre></div>
 </div>
 </div>
@@ -691,7 +691,7 @@ dtype: float64
 <p>예를 들어 total_bill의 값이 30달러이면 방정식으로부터 tip 금액은 약 4.07달러가 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>reg1(30)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg1</span><span class="p">(</span><span class="mi">30</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -704,8 +704,8 @@ dtype: float64
 <p>실제로 total_bill이 30달러 근처(29달러 이상 31달러 이하)인 경우의 데이터를 모아서 보면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tip_totalbill30 = tips[(tips.total_bill &gt;= 29) &amp; (tips.total_bill &lt;= 31)].tip
-tip_totalbill30
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_totalbill30</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">&gt;=</span> <span class="mi">29</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">&lt;=</span> <span class="mi">31</span><span class="p">)]</span><span class="o">.</span><span class="n">tip</span>
+<span class="n">tip_totalbill30</span>
 </pre></div>
 </div>
 </div>
@@ -726,7 +726,7 @@ Name: tip, dtype: float64
 <p>이 데이터의 평균은 4.13달러다. 우리가 위 방정식으로부터 계산한 값과 유사한 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tip_totalbill30.mean()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_totalbill30</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -745,9 +745,9 @@ Name: tip, dtype: float64
 예를 들어 size와 tip도 서로 약간의 상관관계를 가지고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.stats import pearsonr
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">pearsonr</span>
 
-pearsonr(tips[&quot;size&quot;], tips[&quot;tip&quot;])
+<span class="n">pearsonr</span><span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">],</span> <span class="n">tips</span><span class="p">[</span><span class="s2">&quot;tip&quot;</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -759,8 +759,8 @@ pearsonr(tips[&quot;size&quot;], tips[&quot;tip&quot;])
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.regplot(x=&quot;size&quot;, y=&quot;tip&quot;, data=tips)
-plt.show()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">regplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;size&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;tip&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -776,8 +776,8 @@ plt.show()
 <p>위 방정식의 계수 <span class="math notranslate nohighlight">\(w_0, w_1, w_2\)</span>는 다음과 같이 계산한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result2 = sm.OLS.from_formula(&quot;tip ~ total_bill + size&quot;, tips).fit()
-result2.params
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result2</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ total_bill + size&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result2</span><span class="o">.</span><span class="n">params</span>
 </pre></div>
 </div>
 </div>
@@ -799,8 +799,8 @@ dtype: float64
 <p>이 함수를 파이썬 함수로 정의하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>def reg2(total_bill, size):
-    return 0.6689 + 0.0927 * total_bill + 0.1926 * size
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">reg2</span><span class="p">(</span><span class="n">total_bill</span><span class="p">,</span> <span class="n">size</span><span class="p">):</span>
+    <span class="k">return</span> <span class="mf">0.6689</span> <span class="o">+</span> <span class="mf">0.0927</span> <span class="o">*</span> <span class="n">total_bill</span> <span class="o">+</span> <span class="mf">0.1926</span> <span class="o">*</span> <span class="n">size</span>
 </pre></div>
 </div>
 </div>
@@ -808,7 +808,7 @@ dtype: float64
 <p>이 함수를 이용하여 total_bill=30, size=4 인 경우 즉, 4인 고객이 30달러를 지불하는 경우의 팁을 계산하면 4.22달러다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>reg2(30, 4)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">reg2</span><span class="p">(</span><span class="mi">30</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -821,9 +821,9 @@ dtype: float64
 <p>실제로 해당 경우의 데이터를 구하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>idx = (tips.total_bill &gt;= 29) &amp; (tips.total_bill &lt;= 31) &amp; (tips[&quot;size&quot;] == 4)
-tip_totalbill30size4 = tips[idx].tip
-tip_totalbill30size4
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">idx</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">&gt;=</span> <span class="mi">29</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span> <span class="o">&lt;=</span> <span class="mi">31</span><span class="p">)</span> <span class="o">&amp;</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;size&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">tip_totalbill30size4</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span><span class="o">.</span><span class="n">tip</span>
+<span class="n">tip_totalbill30size4</span>
 </pre></div>
 </div>
 </div>
@@ -839,7 +839,7 @@ Name: tip, dtype: float64
 <p>평균값은 4.59달러로 우리가 계산한 4.22달러와 비슷하다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tip_totalbill30size4.mean()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tip_totalbill30size4</span><span class="o">.</span><span class="n">mean</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -901,8 +901,8 @@ Name: tip, dtype: float64
 <p>위에서 보인 첫번째 회귀분석 예에서 잔차제곱합을 구해보자. 우선 회귀분석 함수에서 <span class="math notranslate nohighlight">\(\hat{y}\)</span>를 구하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y_hat = reg1(tips.total_bill)
-y_hat
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y_hat</span> <span class="o">=</span> <span class="n">reg1</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">total_bill</span><span class="p">)</span>
+<span class="n">y_hat</span>
 </pre></div>
 </div>
 </div>
@@ -926,8 +926,8 @@ Name: total_bill, Length: 244, dtype: float64
 <p>원래의 tip 값에서 이 값을 빼면 잔차 <span class="math notranslate nohighlight">\(e\)</span>를 구할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>e = tips.tip - y_hat
-e
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">e</span> <span class="o">=</span> <span class="n">tips</span><span class="o">.</span><span class="n">tip</span> <span class="o">-</span> <span class="n">y_hat</span>
+<span class="n">e</span>
 </pre></div>
 </div>
 </div>
@@ -951,7 +951,7 @@ Length: 244, dtype: float64
 <p>이 잔차들을 제곱하여 합한 잔차제곱합 RSS를 구하면 약 252.7888이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>(e ** 2).sum()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">e</span> <span class="o">**</span> <span class="mi">2</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>

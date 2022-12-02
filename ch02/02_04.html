@@ -710,11 +710,11 @@ title="Print to PDF"
 <p>scipy 패키지의 stats 서브패키지는 베르누이분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">bernoulli</span></code> 클래스를 제공한다. 우선 다음과 같이 모수를 지정한 클래스 인스턴스를 만든다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.stats import bernoulli
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">bernoulli</span>
 
-mu = 0.5
-x = bernoulli(p=mu)
-x
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">bernoulli</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -727,7 +727,7 @@ x
 <p><code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메서드를 사용하면 확률질량함수를 계산할 수 있다. 인수로는 확률변수가 가질 수 있는 값 즉, 0과 1을 넣는다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>x.pmf([0, 1])
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">x</span><span class="o">.</span><span class="n">pmf</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">])</span>
 </pre></div>
 </div>
 </div>
@@ -740,12 +740,12 @@ x
 <p><code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하면 시뮬레이션을 통해 표본을 측정할 수 있다. 인수로는 시뮬레이션 즉, 표본 개수를 넣는다. <code class="docutils literal notranslate"><span class="pre">np.random.seed</span></code> 명령은 시뮬레이션의 시드값을 설정하기 위한 것이다. 시드값이 같으면 시뮬레이션 값은 항상 동일한 값이 나온다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import numpy as np
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-np.random.seed(0)
+<span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">seed</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 
-samples = x.rvs(10)
-samples
+<span class="n">samples</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+<span class="n">samples</span>
 </pre></div>
 </div>
 </div>
@@ -757,11 +757,11 @@ samples
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import seaborn as sns
-import matplotlib.pylab as plt
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pylab</span> <span class="k">as</span> <span class="nn">plt</span>
 
-sns.countplot(samples);
-plt.show()
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">samples</span><span class="p">);</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -778,10 +778,10 @@ plt.show()
 <p>sex 데이터의 확률분포는 다음과 같이 시각화할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tips = sns.load_dataset(&quot;tips&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
 
-sns.countplot(x=&quot;sex&quot;, data=tips)
-plt.show()
+<span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;sex&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">tips</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -799,9 +799,9 @@ plt.show()
 <p>실제로 sex 데이터의 모수를 추정해보자. 여기에서는 남자(Male)인 경우를 <span class="math notranslate nohighlight">\(x=1\)</span>인 경우라고 가정한다. 다음 코드로 <span class="math notranslate nohighlight">\(N_1=157, N_0=87\)</span>이라는 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vc = (tips[&quot;sex&quot;] == &quot;Male&quot;).value_counts()
-N1, N0 = vc[True], vc[False]
-N1, N0
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vc</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">N1</span><span class="p">,</span> <span class="n">N0</span> <span class="o">=</span> <span class="n">vc</span><span class="p">[</span><span class="kc">True</span><span class="p">],</span> <span class="n">vc</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span>
+<span class="n">N1</span><span class="p">,</span> <span class="n">N0</span>
 </pre></div>
 </div>
 </div>
@@ -814,8 +814,8 @@ N1, N0
 <p>따라서 모수의 추정치는 약 0.6434426229508197가 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mu_hat = N1 / (N1 + N0)
-mu_hat
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu_hat</span> <span class="o">=</span> <span class="n">N1</span> <span class="o">/</span> <span class="p">(</span><span class="n">N1</span> <span class="o">+</span> <span class="n">N0</span><span class="p">)</span>
+<span class="n">mu_hat</span>
 </pre></div>
 </div>
 </div>
@@ -828,7 +828,7 @@ mu_hat
 <p><code class="docutils literal notranslate"><span class="pre">normalize</span></code> 인수를 <code class="docutils literal notranslate"><span class="pre">True</span></code> 값으로 하면 한번에 계산할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>tips.sex.value_counts(normalize=True)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="o">.</span><span class="n">value_counts</span><span class="p">(</span><span class="n">normalize</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -858,9 +858,9 @@ Name: sex, dtype: float64
 <p>첫번째 질문에 대한 답은 당연히 “아니다(No)”이다. 예를 들어 우리가 측정한 데이터의 개수가 달라지면 이 모수 추정치는 달라진다. 만약 데이터가 10개밖에 없다면 모수의 추정치는 다음과 같이 0.8이 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>vc = (tips[&quot;sex&quot;][:10] == &quot;Male&quot;).value_counts()
-N1, N0 = vc[True], vc[False]
-N1 / (N1 + N0)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">vc</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">][:</span><span class="mi">10</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">N1</span><span class="p">,</span> <span class="n">N0</span> <span class="o">=</span> <span class="n">vc</span><span class="p">[</span><span class="kc">True</span><span class="p">],</span> <span class="n">vc</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span>
+<span class="n">N1</span> <span class="o">/</span> <span class="p">(</span><span class="n">N1</span> <span class="o">+</span> <span class="n">N0</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -881,13 +881,13 @@ N1 / (N1 + N0)
 <p>이 방법으로 sex 데이터의 모수의 5% 유의수준 신뢰구간을 구하면 다음과 같이 0.5833428537739491 ~ 0.7035423921276902 구간이 나온다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from statsmodels.stats.proportion import proportion_confint
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">statsmodels.stats.proportion</span> <span class="kn">import</span> <span class="n">proportion_confint</span>
 
-vc = (tips[&quot;sex&quot;] == &quot;Male&quot;).value_counts()
-N1, N0 = vc[True], vc[False]
+<span class="n">vc</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">value_counts</span><span class="p">()</span>
+<span class="n">N1</span><span class="p">,</span> <span class="n">N0</span> <span class="o">=</span> <span class="n">vc</span><span class="p">[</span><span class="kc">True</span><span class="p">],</span> <span class="n">vc</span><span class="p">[</span><span class="kc">False</span><span class="p">]</span>
 
-ci1, ci2 = proportion_confint(N1, N0 + N1)
-ci1, ci2
+<span class="n">ci1</span><span class="p">,</span> <span class="n">ci2</span> <span class="o">=</span> <span class="n">proportion_confint</span><span class="p">(</span><span class="n">N1</span><span class="p">,</span> <span class="n">N0</span> <span class="o">+</span> <span class="n">N1</span><span class="p">)</span>
+<span class="n">ci1</span><span class="p">,</span> <span class="n">ci2</span>
 </pre></div>
 </div>
 </div>
@@ -934,8 +934,8 @@ ci1, ci2
 \[ H_0: \mu = 0.5 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>bernouilli_samples = (tips[&quot;sex&quot;] == &quot;Male&quot;).astype(int).values
-bernouilli_samples
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">bernouilli_samples</span> <span class="o">=</span> <span class="p">(</span><span class="n">tips</span><span class="p">[</span><span class="s2">&quot;sex&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">astype</span><span class="p">(</span><span class="nb">int</span><span class="p">)</span><span class="o">.</span><span class="n">values</span>
+<span class="n">bernouilli_samples</span>
 </pre></div>
 </div>
 </div>
@@ -958,10 +958,10 @@ bernouilli_samples
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.stats import binomtest
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binomtest</span>
 
-result = binomtest(sum(bernouilli_samples), n=len(bernouilli_samples))
-result.pvalue
+<span class="n">result</span> <span class="o">=</span> <span class="n">binomtest</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">bernouilli_samples</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">bernouilli_samples</span><span class="p">))</span>
+<span class="n">result</span><span class="o">.</span><span class="n">pvalue</span>
 </pre></div>
 </div>
 </div>
@@ -977,8 +977,8 @@ result.pvalue
 \[ H_0: \mu = 0.6 \]</div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result = binomtest(sum(bernouilli_samples), n=len(bernouilli_samples), p=0.6)
-result.pvalue
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">binomtest</span><span class="p">(</span><span class="nb">sum</span><span class="p">(</span><span class="n">bernouilli_samples</span><span class="p">),</span> <span class="n">n</span><span class="o">=</span><span class="nb">len</span><span class="p">(</span><span class="n">bernouilli_samples</span><span class="p">),</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.6</span><span class="p">)</span>
+<span class="n">result</span><span class="o">.</span><span class="n">pvalue</span>
 </pre></div>
 </div>
 </div>
@@ -1010,21 +1010,21 @@ result.pvalue
 <p>위에서 설명한 scipy의 확률변수 시뮬레이션 기능을 통해 <span class="math notranslate nohighlight">\(N=10, \mu=0.5\)</span>인 이항분포의 표본 5개를 구해보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>mu = 0.5
-x = bernoulli(p=mu)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mu</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">bernoulli</span><span class="p">(</span><span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
 
-binomial_samples = []
-for i in range(5):
-    print(f&quot;{i + 1}회 이항시도:&quot;)
-    bernouilli_samples = x.rvs(10)
-    binomial_sample = bernouilli_samples.sum()
-    binomial_samples.append(binomial_sample)
-    print(&quot;10회를 시행한 베르누이 샘플 =&quot;, bernouilli_samples)
-    print(&quot;베르누이 샘플 10개 중 1이 나온 횟수 =&quot;, binomial_sample)
-    print(&quot;-&quot; * 80)
+<span class="n">binomial_samples</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">5</span><span class="p">):</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">i</span> <span class="o">+</span> <span class="mi">1</span><span class="si">}</span><span class="s2">회 이항시도:&quot;</span><span class="p">)</span>
+    <span class="n">bernouilli_samples</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span>
+    <span class="n">binomial_sample</span> <span class="o">=</span> <span class="n">bernouilli_samples</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
+    <span class="n">binomial_samples</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">binomial_sample</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;10회를 시행한 베르누이 샘플 =&quot;</span><span class="p">,</span> <span class="n">bernouilli_samples</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;베르누이 샘플 10개 중 1이 나온 횟수 =&quot;</span><span class="p">,</span> <span class="n">binomial_sample</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;-&quot;</span> <span class="o">*</span> <span class="mi">80</span><span class="p">)</span>
 
-print(&quot;결론:&quot;)    
-print(&quot;이항분포 표본 =&quot;, binomial_samples)
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;결론:&quot;</span><span class="p">)</span>    
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;이항분포 표본 =&quot;</span><span class="p">,</span> <span class="n">binomial_samples</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1079,12 +1079,12 @@ N! = N\cdot (N-1) \cdots 2 \cdot 1
 <p>scipy 패키지의 stats 서브패키지는 이항분포를 시뮬레이션할 수 있는 <code class="docutils literal notranslate"><span class="pre">binom</span></code> 클래스를 제공한다. 사용방법은 앞에서 설명한 베르누이분포 시뮬레이션 클래스와 같다. 우선 시행횟수</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from scipy.stats import binom
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">scipy.stats</span> <span class="kn">import</span> <span class="n">binom</span>
 
-N = 10
-mu = 0.5
-x = binom(n=N, p=mu)
-x
+<span class="n">N</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.5</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">x</span>
 </pre></div>
 </div>
 </div>
@@ -1097,9 +1097,9 @@ x
 <p><code class="docutils literal notranslate"><span class="pre">pmf</span></code> 메서드를 사용하면 확률질량함수를 계산할 수 있다. 인수로는 확률변수가 가질 수 있는 값 즉, 0부터 <span class="math notranslate nohighlight">\(N\)</span>까지의 정수값을 넣는다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>xx = np.arange(11)
-p = x.pmf(xx)
-p
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="mi">11</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+<span class="n">p</span>
 </pre></div>
 </div>
 </div>
@@ -1114,9 +1114,9 @@ p
 <p>이 값을 그려보면 위에서 그린 것과 같은 모양이 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.bar(xx, p)
-plt.title(&quot;이항분포 확률질량함수 (N=10, $\mu$=0.5)&quot;)
-plt.show()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;이항분포 확률질량함수 (N=10, $\mu$=0.5)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1127,25 +1127,25 @@ plt.show()
 <p>모수값이 0.5이므로 10번 동전을 던졌을 때 1이 나오는 횟수는 위 그래프에서처럼 5번의 경우가 확률이 가장 높다. 만약 모수값이 0.5보다 작거나 커지면 이항분포의 모습은 다음과 같이 변한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>plt.subplot(221)
-plt.bar(xx, binom(n=N, p=0.1).pmf(xx))
-plt.title(&quot;$\mu=0.1$&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">221</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$\mu=0.1$&quot;</span><span class="p">)</span>
 
-plt.subplot(222)
-plt.bar(xx, binom(n=N, p=0.3).pmf(xx))
-plt.title(&quot;$\mu=0.3$&quot;)
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">222</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.3</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$\mu=0.3$&quot;</span><span class="p">)</span>
 
-plt.subplot(223)
-plt.bar(xx, binom(n=N, p=0.7).pmf(xx))
-plt.title(&quot;$\mu=0.7$&quot;)
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">223</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.7</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$\mu=0.7$&quot;</span><span class="p">)</span>
 
-plt.subplot(224)
-plt.bar(xx, binom(n=N, p=0.9).pmf(xx))
-plt.title(&quot;$\mu=0.9$&quot;)
+<span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">224</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="mf">0.9</span><span class="p">)</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xx</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$\mu=0.9$&quot;</span><span class="p">)</span>
 
-plt.suptitle(&quot;여러가지 모수값에 대한 이항분포&quot;)
-plt.tight_layout()
-plt.show()
+<span class="n">plt</span><span class="o">.</span><span class="n">suptitle</span><span class="p">(</span><span class="s2">&quot;여러가지 모수값에 대한 이항분포&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1156,8 +1156,8 @@ plt.show()
 <p><code class="docutils literal notranslate"><span class="pre">rvs</span></code> 메서드를 사용하면 시뮬레이션을 통해 표본을 측정할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>binomial_samples = x.rvs(100)
-binomial_samples
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">binomial_samples</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">rvs</span><span class="p">(</span><span class="mi">100</span><span class="p">)</span>
+<span class="n">binomial_samples</span>
 </pre></div>
 </div>
 </div>
@@ -1174,7 +1174,7 @@ binomial_samples
 <p>numpy 패키지의 <code class="docutils literal notranslate"><span class="pre">bincount</span></code> 함수를 사용하면 이항함수 표본에서 각 값이 나온 횟수를 카운트할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>np.bincount(binomial_samples, minlength=N + 1)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">binomial_samples</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1187,16 +1187,16 @@ binomial_samples
 <p>이론적인 확률질량함수와 시뮬레이션 결과를 비교하면 다음 그림과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-y = np.bincount(binomial_samples, minlength=N + 1) / float(len(binomial_samples))
-df = pd.DataFrame({&quot;이론&quot;: p, &quot;시뮬레이션&quot;: y}).stack()
-df = df.reset_index()
-df.columns = [&quot;표본값&quot;, &quot;유형&quot;, &quot;비율&quot;]
-df.pivot(&quot;표본값&quot;, &quot;유형&quot;, &quot;비율&quot;)
-sns.barplot(x=&quot;표본값&quot;, y=&quot;비율&quot;, hue=&quot;유형&quot;, data=df)
-plt.title(&quot;이항분포의 이론적 분포와 시뮬레이션 분포&quot;)
-plt.show()
+<span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">binomial_samples</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">binomial_samples</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;이론&quot;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s2">&quot;시뮬레이션&quot;</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="s2">&quot;비율&quot;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="s2">&quot;비율&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;비율&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;이항분포의 이론적 분포와 시뮬레이션 분포&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1219,7 +1219,7 @@ plt.show()
 <p>식당 팁 데이터에서 sex 필드 데이터는 베르누이분포를 따르는 확률변수의 표본이라고 하였다. sex 필드 데이터의 레코드는 전체가 244개이므로 전체 sex 필드 데이터에서 sex = “Male”인 레코드의 수는 <span class="math notranslate nohighlight">\(N=244\)</span>인 이항분포를 따르는 확률변수의 표본이 된다. 표본값은 157이다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>len(tips), (tips.sex == &quot;Male&quot;).sum()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">),</span> <span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1232,8 +1232,8 @@ plt.show()
 <p>만약 sex 필드 데이터를 4개씩 묶어서 4개 중 sex = “Male”인 레코드의 개수를 센다면 이는 <span class="math notranslate nohighlight">\(N=4\)</span>인 이항분포를 따르는 확률변수의 표본이라고 할 수 있다. 이 경우 표본값은 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sex_counts = list(map(lambda x: (x == &quot;Male&quot;).sum(), np.array_split(tips.sex, len(tips.sex) / 4)))
-pd.Series(sex_counts)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sex_counts</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)))</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">Series</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1256,9 +1256,9 @@ Length: 61, dtype: int64
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>sns.countplot(sex_counts)
-plt.title(&quot;4개 팀 중 &#39;sex=Male&#39;인 경우의 수&quot;)
-plt.show()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">sns</span><span class="o">.</span><span class="n">countplot</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;4개 팀 중 &#39;sex=Male&#39;인 경우의 수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1269,14 +1269,14 @@ plt.show()
 <p>위에서 sex 데이터의 베르누이모수는 약 0.643이라고 추정하였다. 이 모수값은 이항분포에도 그대로 적용되므로 <span class="math notranslate nohighlight">\(N=4, \mu=0.643\)</span>인 이항분포의 확률질량함수를 그리면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>N = 4
-mu = 0.643
-x = binom(n=N, p=mu)
-xx = np.arange(N + 1)
-p = x.pmf(xx)
-plt.bar(xx, p)
-plt.title(&quot;$N=4, \mu=0.643$인 이항분포의 확률질량함수&quot;)
-plt.show()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">mu</span> <span class="o">=</span> <span class="mf">0.643</span>
+<span class="n">x</span> <span class="o">=</span> <span class="n">binom</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="n">N</span><span class="p">,</span> <span class="n">p</span><span class="o">=</span><span class="n">mu</span><span class="p">)</span>
+<span class="n">xx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>
+<span class="n">p</span> <span class="o">=</span> <span class="n">x</span><span class="o">.</span><span class="n">pmf</span><span class="p">(</span><span class="n">xx</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">bar</span><span class="p">(</span><span class="n">xx</span><span class="p">,</span> <span class="n">p</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;$N=4, \mu=0.643$인 이항분포의 확률질량함수&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1287,7 +1287,7 @@ plt.show()
 <p>두 그래프를 비교하면 아래와 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>p
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">p</span>
 </pre></div>
 </div>
 </div>
@@ -1299,14 +1299,14 @@ plt.show()
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>y = np.bincount(sex_counts, minlength=N + 1) / float(len(sex_counts))
-df = pd.DataFrame({&quot;이론&quot;: p, &quot;시뮬레이션&quot;: y}).stack()
-df = df.reset_index()
-df.columns = [&quot;표본값&quot;, &quot;유형&quot;, &quot;비율&quot;]
-df.pivot(&quot;표본값&quot;, &quot;유형&quot;, &quot;비율&quot;)
-sns.barplot(x=&quot;표본값&quot;, y=&quot;비율&quot;, hue=&quot;유형&quot;, data=df)
-plt.title(&quot;이항분포의 이론적 분포와 시뮬레이션 분포&quot;)
-plt.show()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">y</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">bincount</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">,</span> <span class="n">minlength</span><span class="o">=</span><span class="n">N</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span> <span class="o">/</span> <span class="nb">float</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">))</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;이론&quot;</span><span class="p">:</span> <span class="n">p</span><span class="p">,</span> <span class="s2">&quot;시뮬레이션&quot;</span><span class="p">:</span> <span class="n">y</span><span class="p">})</span><span class="o">.</span><span class="n">stack</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">reset_index</span><span class="p">()</span>
+<span class="n">df</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="s2">&quot;비율&quot;</span><span class="p">]</span>
+<span class="n">df</span><span class="o">.</span><span class="n">pivot</span><span class="p">(</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="s2">&quot;비율&quot;</span><span class="p">)</span>
+<span class="n">sns</span><span class="o">.</span><span class="n">barplot</span><span class="p">(</span><span class="n">x</span><span class="o">=</span><span class="s2">&quot;표본값&quot;</span><span class="p">,</span> <span class="n">y</span><span class="o">=</span><span class="s2">&quot;비율&quot;</span><span class="p">,</span> <span class="n">hue</span><span class="o">=</span><span class="s2">&quot;유형&quot;</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="n">df</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">title</span><span class="p">(</span><span class="s2">&quot;이항분포의 이론적 분포와 시뮬레이션 분포&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1337,7 +1337,7 @@ plt.show()
 <p>만약 sex 데이터에서 전체 레코드 중 남성의 수를 <span class="math notranslate nohighlight">\(N=244\)</span>인 이항분포의 표본으로 본다면 모수는 다음과 같이 추정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>(tips.sex == &quot;Male&quot;).sum() / len(tips)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">()</span> <span class="o">/</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1350,12 +1350,12 @@ plt.show()
 <p>만약 sex 데이터를 4개의 레코드씩 묶어서 각 그룹의 남성 수를 <span class="math notranslate nohighlight">\(N=4\)</span>인 이항분포의 표본으로 본다면 모수는 다음과 같이 추정한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>groups = np.array_split(tips.sex, len(tips.sex) / 4)
-M = len(groups)
-N = 4
-y_i = list(map(lambda x: (x == &quot;Male&quot;).sum(), groups))
-sum_y_i = np.sum(y_i)
-sum_y_i / (M * N)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">groups</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array_split</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">tips</span><span class="o">.</span><span class="n">sex</span><span class="p">)</span> <span class="o">/</span> <span class="mi">4</span><span class="p">)</span>
+<span class="n">M</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">groups</span><span class="p">)</span>
+<span class="n">N</span> <span class="o">=</span> <span class="mi">4</span>
+<span class="n">y_i</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">map</span><span class="p">(</span><span class="k">lambda</span> <span class="n">x</span><span class="p">:</span> <span class="p">(</span><span class="n">x</span> <span class="o">==</span> <span class="s2">&quot;Male&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">sum</span><span class="p">(),</span> <span class="n">groups</span><span class="p">))</span>
+<span class="n">sum_y_i</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">y_i</span><span class="p">)</span>
+<span class="n">sum_y_i</span> <span class="o">/</span> <span class="p">(</span><span class="n">M</span> <span class="o">*</span> <span class="n">N</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1380,10 +1380,10 @@ sum_y_i / (M * N)
 <p>사용방법은 다음 코드와 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from distfit import distfit
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">distfit</span> <span class="kn">import</span> <span class="n">distfit</span>
 
-dist = distfit(method=&#39;discrete&#39;, distr=&quot;binom&quot;)
-model = dist.fit_transform(np.array(sex_counts))[&quot;model&quot;]
+<span class="n">dist</span> <span class="o">=</span> <span class="n">distfit</span><span class="p">(</span><span class="n">method</span><span class="o">=</span><span class="s1">&#39;discrete&#39;</span><span class="p">,</span> <span class="n">distr</span><span class="o">=</span><span class="s2">&quot;binom&quot;</span><span class="p">)</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">dist</span><span class="o">.</span><span class="n">fit_transform</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">(</span><span class="n">sex_counts</span><span class="p">))[</span><span class="s2">&quot;model&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1400,7 +1400,7 @@ model = dist.fit_transform(np.array(sex_counts))[&quot;model&quot;]
 <p>계산결과인 model 객체는 파이썬 dict 타입 객체다. <code class="docutils literal notranslate"><span class="pre">n</span></code>, <code class="docutils literal notranslate"><span class="pre">p</span></code> 키에는 각각 <span class="math notranslate nohighlight">\(N\)</span>, <span class="math notranslate nohighlight">\(\mu\)</span> 추정치가 들어있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model[&quot;n&quot;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;n&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1412,7 +1412,7 @@ model = dist.fit_transform(np.array(sex_counts))[&quot;model&quot;]
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model[&quot;p&quot;]
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="p">[</span><span class="s2">&quot;p&quot;</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>

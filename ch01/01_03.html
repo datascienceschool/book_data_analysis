@@ -565,7 +565,7 @@ title="Print to PDF"
 <p>pandas 패키지는 인터넷에 있는 각종 파일을 읽어 데이터프레임 형식으로 바꿀 수 있는 명령어를 제공한다. pandas 패키지는 보통 <code class="docutils literal notranslate"><span class="pre">pd</span></code> 라는 별칭으로 임포트한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 </pre></div>
 </div>
 </div>
@@ -576,7 +576,7 @@ title="Print to PDF"
 </ul>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pd.read_csv(&quot;https://vincentarelbundock.github.io/Rdatasets/csv/AER/Affairs.csv&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;https://vincentarelbundock.github.io/Rdatasets/csv/AER/Affairs.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -771,16 +771,16 @@ title="Print to PDF"
 <p>이 경우에는 <code class="docutils literal notranslate"><span class="pre">read_csv</span></code> 명령을 사용하기 전에 다음 코드를 실행하면 된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import ssl
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">ssl</span>
 
-ssl._create_default_https_context = ssl._create_unverified_context
+<span class="n">ssl</span><span class="o">.</span><span class="n">_create_default_https_context</span> <span class="o">=</span> <span class="n">ssl</span><span class="o">.</span><span class="n">_create_unverified_context</span>
 </pre></div>
 </div>
 </div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>pd.read_csv(&quot;http://www.stern.nyu.edu/~wgreene/Text/Edition7/TableF1-1.csv&quot;)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s2">&quot;http://www.stern.nyu.edu/~wgreene/Text/Edition7/TableF1-1.csv&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -886,7 +886,7 @@ ssl._create_default_https_context = ssl._create_unverified_context
 <p>실제로 데이터를 가져오는 명령은 다음과 같다. 일단 <code class="docutils literal notranslate"><span class="pre">sm</span></code>이라는 별칭으로 statsmodels 패키지의 api 서브패키지를 임포트한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 </pre></div>
 </div>
 </div>
@@ -894,8 +894,8 @@ ssl._create_default_https_context = ssl._create_unverified_context
 <p>다음으로 sm.datasets 서브패키지에 있는 <code class="docutils literal notranslate"><span class="pre">get_rdataset</span></code> 명령을 수행한다. 이 때 데이터 “Item” 이름과 “Package” 이름을 인수로 넣어준다. “Item”이 “Package”보다 앞에 온다는 점에 주의하라. 예를 들어 위에서 말한 “AER” 패키지의 “ArgentinalCPI” 데이터를 가져오려면 다음과 같이 주피터랩에 입력하면 된다. 데이터는 pandas의 데이터프레임 형식으로 출력된다. 이 명령은 인터넷에서 데이터를 가져오는 명령이므로 컴퓨터가 인터넷에 연결되어 있어야 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df = sm.datasets.get_rdataset(&quot;ArgentinaCPI&quot;, &quot;AER&quot;).data
-df
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;ArgentinaCPI&quot;</span><span class="p">,</span> <span class="s2">&quot;AER&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">df</span>
 </pre></div>
 </div>
 </div>
@@ -1013,9 +1013,9 @@ df
 <p>예를 들어 네이버 금융 데이터에서 삼성전자(종목코드 005930)의 2019년 9월 10일부터 10월 9일까지의 데이터를 받으려면 다음 명령을 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas_datareader.data as web
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas_datareader.data</span> <span class="k">as</span> <span class="nn">web</span>
 
-web.DataReader(&#39;005930&#39;, &#39;naver&#39;, start=&#39;2019-09-10&#39;, end=&#39;2019-10-09&#39;)
+<span class="n">web</span><span class="o">.</span><span class="n">DataReader</span><span class="p">(</span><span class="s1">&#39;005930&#39;</span><span class="p">,</span> <span class="s1">&#39;naver&#39;</span><span class="p">,</span> <span class="n">start</span><span class="o">=</span><span class="s1">&#39;2019-09-10&#39;</span><span class="p">,</span> <span class="n">end</span><span class="o">=</span><span class="s1">&#39;2019-10-09&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>

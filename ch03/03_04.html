@@ -640,13 +640,13 @@ X^TX \hat{w} = X^T y
 <p>여기에서는 팁 데이터에 대해 앞 절에서 준비한 데이터를 사용한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import seaborn as sns
-from patsy import dmatrix
-import numpy as np
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">seaborn</span> <span class="k">as</span> <span class="nn">sns</span>
+<span class="kn">from</span> <span class="nn">patsy</span> <span class="kn">import</span> <span class="n">dmatrix</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
 
-tips = sns.load_dataset(&quot;tips&quot;)
-X = np.asarray(dmatrix(&quot;scale(total_bill) + scale(size) + C(sex)&quot;, tips))
-y = tips[&quot;tip&quot;].values.reshape(-1, 1)
+<span class="n">tips</span> <span class="o">=</span> <span class="n">sns</span><span class="o">.</span><span class="n">load_dataset</span><span class="p">(</span><span class="s2">&quot;tips&quot;</span><span class="p">)</span>
+<span class="n">X</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">dmatrix</span><span class="p">(</span><span class="s2">&quot;scale(total_bill) + scale(size) + C(sex)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">))</span>
+<span class="n">y</span> <span class="o">=</span> <span class="n">tips</span><span class="p">[</span><span class="s2">&quot;tip&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">values</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -660,10 +660,10 @@ y = tips[&quot;tip&quot;].values.reshape(-1, 1)
 <p>을 다음과 같이 적용한다. 이 코드에서 numpy 패캐지의 linalg 서브패키지가 제공하는 역행렬 계산함수 <code class="docutils literal notranslate"><span class="pre">inv</span></code>를 사용하였다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>from numpy.linalg import inv
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">numpy.linalg</span> <span class="kn">import</span> <span class="n">inv</span>
 
-hat_w = inv(X.T @ X) @ X.T @ y
-hat_w
+<span class="n">hat_w</span> <span class="o">=</span> <span class="n">inv</span><span class="p">(</span><span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">X</span><span class="p">)</span> <span class="o">@</span> <span class="n">X</span><span class="o">.</span><span class="n">T</span> <span class="o">@</span> <span class="n">y</span>
+<span class="n">hat_w</span>
 </pre></div>
 </div>
 </div>
@@ -679,7 +679,7 @@ hat_w
 <p>이 값을 사용하여 예측치 <span class="math notranslate nohighlight">\(\hat{y}\)</span>를 다음과 같이 계산한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>hat_y = X @ hat_w
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">hat_y</span> <span class="o">=</span> <span class="n">X</span> <span class="o">@</span> <span class="n">hat_w</span>
 </pre></div>
 </div>
 </div>
@@ -687,11 +687,11 @@ hat_w
 <p>이 값을 원래의 데이터와 비교해하여 잔차를 구해보자</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-e = y - hat_y
-df_result = pd.DataFrame({&quot;y&quot;: y.flatten(), &quot;hat_y&quot;: hat_y.flatten(), &quot;e&quot;: e.flatten()})
-df_result
+<span class="n">e</span> <span class="o">=</span> <span class="n">y</span> <span class="o">-</span> <span class="n">hat_y</span>
+<span class="n">df_result</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;y&quot;</span><span class="p">:</span> <span class="n">y</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s2">&quot;hat_y&quot;</span><span class="p">:</span> <span class="n">hat_y</span><span class="o">.</span><span class="n">flatten</span><span class="p">(),</span> <span class="s2">&quot;e&quot;</span><span class="p">:</span> <span class="n">e</span><span class="o">.</span><span class="n">flatten</span><span class="p">()})</span>
+<span class="n">df_result</span>
 </pre></div>
 </div>
 </div>
@@ -794,7 +794,7 @@ df_result
 <p>잔차에 대한 서술적 통계를 계산하면 평균오차는 0에 가깝지만 최대오차는 약 4달러인 것을 알 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df_result.e.describe()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_result</span><span class="o">.</span><span class="n">e</span><span class="o">.</span><span class="n">describe</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -820,10 +820,10 @@ Name: e, dtype: float64
 <p>우선 <code class="docutils literal notranslate"><span class="pre">X</span></code>, <code class="docutils literal notranslate"><span class="pre">y</span></code> 데이터를 사용하여 <code class="docutils literal notranslate"><span class="pre">OLS</span></code> 클래스 객체를 만든다. 이 때 데이터의 순서에 주의하라. <code class="docutils literal notranslate"><span class="pre">OLS</span></code> 클래스 객체를 모형(model) 객체라고도 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-model = sm.OLS(y, X)
-model
+<span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="n">X</span><span class="p">)</span>
+<span class="n">model</span>
 </pre></div>
 </div>
 </div>
@@ -836,7 +836,7 @@ model
 <p>모형 객체는 선형회귀 분석에 필요한 다양한 정보를 속성으로 가지고 있다. 예를 들어 종속변수와 독립변수는 각각 <code class="docutils literal notranslate"><span class="pre">endog_names</span></code>, <code class="docutils literal notranslate"><span class="pre">exog_names</span></code> 속성에 저장된다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model.endog_names
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">endog_names</span>
 </pre></div>
 </div>
 </div>
@@ -848,7 +848,7 @@ model
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model.exog_names
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span>
 </pre></div>
 </div>
 </div>
@@ -861,8 +861,8 @@ model
 <p>다음으로 <code class="docutils literal notranslate"><span class="pre">fit</span></code> 메서드를 실행하여 분석결과 객체를 만든다. 이 객체는 <code class="docutils literal notranslate"><span class="pre">OLSResults</span></code> 클래스 객체다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result = model.fit()
-result
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="n">result</span>
 </pre></div>
 </div>
 </div>
@@ -875,7 +875,7 @@ result
 <p>분석결과 객체의 <code class="docutils literal notranslate"><span class="pre">summary</span></code> 메서드를 사용하면 가중치를 포함한 분석결과요약을 출력할 수 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>print(result.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
@@ -950,7 +950,7 @@ Notes:
 <p>result 객체는 가중치를 포함한 다양한 정보를 내포하고 있다. 예를 들어 가중치 값은 <code class="docutils literal notranslate"><span class="pre">params</span></code> 속성에 들어있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result.params
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">params</span>
 </pre></div>
 </div>
 </div>
@@ -963,7 +963,7 @@ Notes:
 <p>또한 분석에 사용한 모형 객체도 <code class="docutils literal notranslate"><span class="pre">model</span></code> 속성에 포함하고 있다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result.model
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span><span class="o">.</span><span class="n">model</span>
 </pre></div>
 </div>
 </div>
@@ -983,9 +983,9 @@ Notes:
 이 때 모형 문자열은 앞절에서 설명한 것과 비슷하지만 왼쪽에 종속변수 이름과 <code class="docutils literal notranslate"><span class="pre">~</span></code> 기호를 추가해주어야 한다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>model = sm.OLS.from_formula(&quot;tip ~ scale(total_bill) + scale(size) + C(sex)&quot;, tips)
-result = model.fit()
-print(result.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">model</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="s2">&quot;tip ~ scale(total_bill) + scale(size) + C(sex)&quot;</span><span class="p">,</span> <span class="n">tips</span><span class="p">)</span>
+<span class="n">result</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>

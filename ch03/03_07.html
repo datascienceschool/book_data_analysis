@@ -515,10 +515,10 @@ title="Print to PDF"
 <p>이 절에서는 보스턴 집값 데이터를 예제 데이터로 사용한다</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-boston = sm.datasets.get_rdataset(&quot;Boston&quot;, &quot;MASS&quot;).data
-boston
+<span class="n">boston</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">datasets</span><span class="o">.</span><span class="n">get_rdataset</span><span class="p">(</span><span class="s2">&quot;Boston&quot;</span><span class="p">,</span> <span class="s2">&quot;MASS&quot;</span><span class="p">)</span><span class="o">.</span><span class="n">data</span>
+<span class="n">boston</span>
 </pre></div>
 </div>
 </div>
@@ -753,16 +753,16 @@ boston
 <p>일단 하나의 독립변수만 사용한 모형을 비교해보자. 보스턴 집값 데이터에는 13개의 독립변수가 있으므로 13개의 모형이 만들어진다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import statsmodels.api as sm
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">statsmodels.api</span> <span class="k">as</span> <span class="nn">sm</span>
 
-# 종속변수 medv를 제외한 독립변수 리스트
-var_names = list(filter(lambda n: n != &quot;medv&quot;, boston.columns)) 
-models_1 = {}
-for n in var_names:
-    name_n = f&quot;model_1_{n}&quot;
-    # chas 변수는 범주형 변수이므로 scale이 아닌 C 연산을 사용
-    formula_n = &quot;medv ~ C(chas) &quot; if n == &quot;chas&quot; else f&quot;medv ~ scale({n}) &quot;
-    models_1[name_n] = sm.OLS.from_formula(formula_n, boston)
+<span class="c1"># 종속변수 medv를 제외한 독립변수 리스트</span>
+<span class="n">var_names</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">!=</span> <span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span> 
+<span class="n">models_1</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">var_names</span><span class="p">:</span>
+    <span class="n">name_n</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model_1_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="c1"># chas 변수는 범주형 변수이므로 scale이 아닌 C 연산을 사용</span>
+    <span class="n">formula_n</span> <span class="o">=</span> <span class="s2">&quot;medv ~ C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
+    <span class="n">models_1</span><span class="p">[</span><span class="n">name_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_n</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -770,9 +770,9 @@ for n in var_names:
 <p>이 모형들에 대해 회귀분석을 실시하여 결과 객체를 얻는다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>results_1 = {}
-for model_name, model in models_1.items():
-    results_1[model_name] = model.fit()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">results_1</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models_1</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">results_1</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -780,13 +780,13 @@ for model_name, model in models_1.items():
 <p>회귀분석 성능은 결정계수 <span class="math notranslate nohighlight">\(R^2\)</span>로 대표되는 예측성능만 고려하기로 한다. 위에서 구한 13가지 모형의 결정계수와 유의확률을 구하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>import pandas as pd
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
 
-df_1 = pd.DataFrame({
-  &quot;r2&quot;: {n: r.rsquared for n, r in results_1.items()},
-  &quot;pv&quot;: {n: r.pvalues[r.model.exog_names[-1]] for n, r in results_1.items()},
-})
-df_1.sort_values(&quot;r2&quot;, ascending=False)
+<span class="n">df_1</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+  <span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_1</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+  <span class="s2">&quot;pv&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">pvalues</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_1</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+<span class="p">})</span>
+<span class="n">df_1</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -887,23 +887,23 @@ df_1.sort_values(&quot;r2&quot;, ascending=False)
 <p>다음으로는 여기에 12가지 독립변수를 차례대로 추가하여 성능을 살펴본다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>var_names.remove(&quot;lstat&quot;)  # 선택된 독립변수 lstat 제외
-formula_1 = &quot;medv ~ scale(lstat) &quot;  # 선택된 모형 문자열
-models_2 = {}
-for n in var_names:
-    name_n = f&quot;model_2_{n}&quot;
-    formula_n = formula_1 + &quot; + C(chas) &quot; if n == &quot;chas&quot; else formula_1 + f&quot; + scale({n}) &quot;
-    models_2[name_n] = sm.OLS.from_formula(formula_n, boston)
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">var_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="s2">&quot;lstat&quot;</span><span class="p">)</span>  <span class="c1"># 선택된 독립변수 lstat 제외</span>
+<span class="n">formula_1</span> <span class="o">=</span> <span class="s2">&quot;medv ~ scale(lstat) &quot;</span>  <span class="c1"># 선택된 모형 문자열</span>
+<span class="n">models_2</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">var_names</span><span class="p">:</span>
+    <span class="n">name_n</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;model_2_</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span>
+    <span class="n">formula_n</span> <span class="o">=</span> <span class="n">formula_1</span> <span class="o">+</span> <span class="s2">&quot; + C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="n">formula_1</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; + scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
+    <span class="n">models_2</span><span class="p">[</span><span class="n">name_n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_n</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span>
 
-results_2 = {}
-for model_name, model in models_2.items():
-    results_2[model_name] = model.fit()
+<span class="n">results_2</span> <span class="o">=</span> <span class="p">{}</span>
+<span class="k">for</span> <span class="n">model_name</span><span class="p">,</span> <span class="n">model</span> <span class="ow">in</span> <span class="n">models_2</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">results_2</span><span class="p">[</span><span class="n">model_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">model</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
 
-df_2 = pd.DataFrame({
-    &quot;r2&quot;: {n: r.rsquared for n, r in results_2.items()},
-    &quot;pv&quot;: {n: r.pvalues[r.model.exog_names[-1]] for n, r in results_2.items()},
-})
-df_2.sort_values(&quot;r2&quot;, ascending=False)
+<span class="n">df_2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+    <span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_2</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+    <span class="s2">&quot;pv&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">pvalues</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_2</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+<span class="p">})</span>
+<span class="n">df_2</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
@@ -1000,35 +1000,35 @@ df_2.sort_values(&quot;r2&quot;, ascending=False)
 <p>다음 코드는 13개까지 이러한 전체 과정을 반복하는 작업을 자동화하는 파이썬 코드다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>%%time
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="o">%%time</span>
 
-var_names_all = list(filter(lambda n: n != &quot;medv&quot;, boston.columns))
-var_names = var_names_all.copy()
-sel_ns = []
-formulas = []
-r2s = []
-pvs = []
-for k in range(len(var_names_all)):
-    results_k = {}
-    for n in var_names:
-        if k == 0:
-            formula_k_n = &quot;medv ~ C(chas) &quot; if n == &quot;chas&quot; else f&quot;medv ~ scale({n}) &quot;
-        else:
-            formula_k_n = formula_k + &quot; + C(chas) &quot; if n == &quot;chas&quot; else formula_k + f&quot; + scale({n}) &quot;
-        results_k[n] = sm.OLS.from_formula(formula_k_n, boston).fit()
-    df = pd.DataFrame({
-        &quot;r2&quot;: {n: r.rsquared_adj for n, r in results_k.items()},
-        &quot;pv&quot;: {n: r.pvalues[r.model.exog_names[-1]] for n, r in results_k.items()},
-    }).sort_values(&quot;r2&quot;, ascending=False)
-    sel_n = df.index[0]
-    op = &quot;C&quot; if sel_n == &quot;chas&quot; else &quot;scale&quot;
-    formula_k = f&quot;medv ~ scale({sel_n})&quot; if k == 0 else formula_k + f&quot; + {op}({sel_n})&quot;
-    sel_ns.append(sel_n)
-    formulas.append(formula_k)
-    r2s.append(df[&quot;r2&quot;].iloc[0])
-    pvs.append(df[&quot;pv&quot;].iloc[0])
-    var_names.remove(sel_n)
-last_result = results_k[sel_n]
+<span class="n">var_names_all</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">n</span><span class="p">:</span> <span class="n">n</span> <span class="o">!=</span> <span class="s2">&quot;medv&quot;</span><span class="p">,</span> <span class="n">boston</span><span class="o">.</span><span class="n">columns</span><span class="p">))</span>
+<span class="n">var_names</span> <span class="o">=</span> <span class="n">var_names_all</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+<span class="n">sel_ns</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">formulas</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">r2s</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="n">pvs</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">k</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">var_names_all</span><span class="p">)):</span>
+    <span class="n">results_k</span> <span class="o">=</span> <span class="p">{}</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">var_names</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="n">formula_k_n</span> <span class="o">=</span> <span class="s2">&quot;medv ~ C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="n">formula_k_n</span> <span class="o">=</span> <span class="n">formula_k</span> <span class="o">+</span> <span class="s2">&quot; + C(chas) &quot;</span> <span class="k">if</span> <span class="n">n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="n">formula_k</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; + scale(</span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">) &quot;</span>
+        <span class="n">results_k</span><span class="p">[</span><span class="n">n</span><span class="p">]</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula_k_n</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+    <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span>
+        <span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">rsquared_adj</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_k</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+        <span class="s2">&quot;pv&quot;</span><span class="p">:</span> <span class="p">{</span><span class="n">n</span><span class="p">:</span> <span class="n">r</span><span class="o">.</span><span class="n">pvalues</span><span class="p">[</span><span class="n">r</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">exog_names</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]]</span> <span class="k">for</span> <span class="n">n</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">results_k</span><span class="o">.</span><span class="n">items</span><span class="p">()},</span>
+    <span class="p">})</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;r2&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+    <span class="n">sel_n</span> <span class="o">=</span> <span class="n">df</span><span class="o">.</span><span class="n">index</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+    <span class="n">op</span> <span class="o">=</span> <span class="s2">&quot;C&quot;</span> <span class="k">if</span> <span class="n">sel_n</span> <span class="o">==</span> <span class="s2">&quot;chas&quot;</span> <span class="k">else</span> <span class="s2">&quot;scale&quot;</span>
+    <span class="n">formula_k</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;medv ~ scale(</span><span class="si">{</span><span class="n">sel_n</span><span class="si">}</span><span class="s2">)&quot;</span> <span class="k">if</span> <span class="n">k</span> <span class="o">==</span> <span class="mi">0</span> <span class="k">else</span> <span class="n">formula_k</span> <span class="o">+</span> <span class="sa">f</span><span class="s2">&quot; + </span><span class="si">{</span><span class="n">op</span><span class="si">}</span><span class="s2">(</span><span class="si">{</span><span class="n">sel_n</span><span class="si">}</span><span class="s2">)&quot;</span>
+    <span class="n">sel_ns</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">sel_n</span><span class="p">)</span>
+    <span class="n">formulas</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">formula_k</span><span class="p">)</span>
+    <span class="n">r2s</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;r2&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">pvs</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">df</span><span class="p">[</span><span class="s2">&quot;pv&quot;</span><span class="p">]</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="mi">0</span><span class="p">])</span>
+    <span class="n">var_names</span><span class="o">.</span><span class="n">remove</span><span class="p">(</span><span class="n">sel_n</span><span class="p">)</span>
+<span class="n">last_result</span> <span class="o">=</span> <span class="n">results_k</span><span class="p">[</span><span class="n">sel_n</span><span class="p">]</span>
 </pre></div>
 </div>
 </div>
@@ -1042,7 +1042,7 @@ Wall time: 3.25 s
 <p>최종적으로 선택된 모형은 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>last_result.model.formula
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">last_result</span><span class="o">.</span><span class="n">model</span><span class="o">.</span><span class="n">formula</span>
 </pre></div>
 </div>
 </div>
@@ -1055,8 +1055,8 @@ Wall time: 3.25 s
 <p>독립변수가 추가되면서 결정계수가 어떻게 변하였는지를 정리하면 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df_r2 = pd.DataFrame({&quot;r2&quot;: r2s}, index=sel_ns)
-df_r2.style.bar()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_r2</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;r2&quot;</span><span class="p">:</span> <span class="n">r2s</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
+<span class="n">df_r2</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1190,8 +1190,8 @@ R^2_{Xz} = R^2_{X} + (1-R^2_{X})r^2_{yz}
 <p>이제는 선택된 독립변수들의 유의확률을 살펴보자.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>df_pv = pd.DataFrame({&quot;pv&quot;: pvs}, index=sel_ns)
-df_pv.style.bar()
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">df_pv</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">({</span><span class="s2">&quot;pv&quot;</span><span class="p">:</span> <span class="n">pvs</span><span class="p">},</span> <span class="n">index</span><span class="o">=</span><span class="n">sel_ns</span><span class="p">)</span>
+<span class="n">df_pv</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">bar</span><span class="p">()</span>
 </pre></div>
 </div>
 </div>
@@ -1293,9 +1293,9 @@ df_pv.style.bar()
 <p>유의수준을 5%라고 정하였을 때 indus와 age는 유의확률이 유의수준보다 크기 때문에 이 두 변수는 추가하면 안된다. 따라서 최종적으로 우리가 선택할 모형은 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>formula = &quot;medv ~ &quot; \
-    &quot;scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(nox)&quot; \
-    &quot;+ C(chas) + scale(black) + scale(zn) + scale(crim) + scale(rad) + scale(tax)&quot;
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">formula</span> <span class="o">=</span> <span class="s2">&quot;medv ~ &quot;</span> \
+    <span class="s2">&quot;scale(lstat) + scale(rm) + scale(ptratio) + scale(dis) + scale(nox)&quot;</span> \
+    <span class="s2">&quot;+ C(chas) + scale(black) + scale(zn) + scale(crim) + scale(rad) + scale(tax)&quot;</span>
 </pre></div>
 </div>
 </div>
@@ -1303,8 +1303,8 @@ df_pv.style.bar()
 <p>이 모형의 회귀분석 결과는 다음과 같다.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span>result = sm.OLS.from_formula(formula, boston).fit()
-print(result.summary())
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">result</span> <span class="o">=</span> <span class="n">sm</span><span class="o">.</span><span class="n">OLS</span><span class="o">.</span><span class="n">from_formula</span><span class="p">(</span><span class="n">formula</span><span class="p">,</span> <span class="n">boston</span><span class="p">)</span><span class="o">.</span><span class="n">fit</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">result</span><span class="o">.</span><span class="n">summary</span><span class="p">())</span>
 </pre></div>
 </div>
 </div>
